@@ -1,0 +1,20 @@
+{
+  "background": {
+    "primary": {
+      "$type": "color",
+      "$value": "{color.ivory}"
+    }
+  },
+
+  "text": {
+    "primary": {
+      "$type": "color",
+      "$value": "{color.ink}"
+    },
+
+    "accent": {
+      "$type": "color",
+      "$value": "{color.lavender}"
+    }
+  }
+}

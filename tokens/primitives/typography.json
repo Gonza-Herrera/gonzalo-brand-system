@@ -1,0 +1,32 @@
+{
+  "fontFamily": {
+    "primary": {
+      "$type": "fontFamily",
+      "$value": "Inter"
+    },
+
+    "secondary": {
+      "$type": "fontFamily",
+      "$value": "Manrope"
+    }
+  },
+
+  "fontSize": {
+    "hero": {
+      "$type": "dimension",
+      "$value": "64"
+    },
+
+    "h1": {
+      "$value": "48"
+    },
+
+    "h2": {
+      "$value": "32"
+    },
+
+    "body": {
+      "$value": "18"
+    }
+  }
+}

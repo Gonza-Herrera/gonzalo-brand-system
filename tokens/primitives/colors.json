@@ -1,0 +1,24 @@
+{
+  "color": {
+    "ivory": {
+      "$type": "color",
+      "$value": "#F7F4F1"
+    },
+    "lavender": {
+      "$type": "color",
+      "$value": "#CBB9E8"
+    },
+    "peach": {
+      "$type": "color",
+      "$value": "#F4B7A8"
+    },
+    "cloudBlue": {
+      "$type": "color",
+      "$value": "#A9C9F5"
+    },
+    "ink": {
+      "$type": "color",
+      "$value": "#101828"
+    }
+  }
+}

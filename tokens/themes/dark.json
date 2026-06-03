@@ -1,0 +1,48 @@
+{
+  "theme": {
+    "name": "dark"
+  },
+
+  "background": {
+    "primary": {
+      "$type": "color",
+      "$value": "#111827"
+    },
+
+    "secondary": {
+      "$type": "color",
+      "$value": "#1F2937"
+    }
+  },
+
+  "text": {
+    "primary": {
+      "$type": "color",
+      "$value": "#F9FAFB"
+    },
+
+    "secondary": {
+      "$type": "color",
+      "$value": "#D1D5DB"
+    },
+
+    "accent": {
+      "$type": "color",
+      "$value": "#CBB9E8"
+    }
+  },
+
+  "border": {
+    "default": {
+      "$type": "color",
+      "$value": "#374151"
+    }
+  },
+
+  "surface": {
+    "card": {
+      "$type": "color",
+      "$value": "#1F2937"
+    }
+  }
+}

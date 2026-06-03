@@ -1,0 +1,48 @@
+{
+  "theme": {
+    "name": "light"
+  },
+
+  "background": {
+    "primary": {
+      "$type": "color",
+      "$value": "#F7F4F1"
+    },
+
+    "secondary": {
+      "$type": "color",
+      "$value": "#FFFFFF"
+    }
+  },
+
+  "text": {
+    "primary": {
+      "$type": "color",
+      "$value": "#101828"
+    },
+
+    "secondary": {
+      "$type": "color",
+      "$value": "#475467"
+    },
+
+    "accent": {
+      "$type": "color",
+      "$value": "#CBB9E8"
+    }
+  },
+
+  "border": {
+    "default": {
+      "$type": "color",
+      "$value": "#E4E7EC"
+    }
+  },
+
+  "surface": {
+    "card": {
+      "$type": "color",
+      "$value": "#FFFFFF"
+    }
+  }
+}
