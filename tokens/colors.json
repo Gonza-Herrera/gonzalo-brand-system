@@ -1,0 +1,14 @@
+{
+  "primary": {
+    "ivory": "#F7F4F1",
+    "lavender": "#CBB9E8",
+    "peach": "#F4B7A8",
+    "cloudBlue": "#A9C9F5",
+    "ink": "#101828"
+  },
+  "secondary": {
+    "mint": "#A8E6CF",
+    "sand": "#FCD5CE",
+    "sky": "#7FD8F7"
+  }
+}
