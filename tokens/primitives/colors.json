@@ -19,6 +19,14 @@
     "ink": {
       "$type": "color",
       "$value": "#101828"
+    },
+    "mint": {
+      "$type": "color",
+      "$value": "#A8E6CF"
+    },
+    "white": {
+      "$type": "color",
+      "$value": "#FFFFFF"
     }
   }
 }

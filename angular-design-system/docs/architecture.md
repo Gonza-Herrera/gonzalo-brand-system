@@ -1,65 +1,74 @@
 # Foundations architecture
 
-## Source of truth
+## Source of truth and generated output
 
-The repository-level `tokens/` directory defines the official primitives,
-semantic aliases and light/dark theme values. The `design/` documentation
-defines the intended visual character and usage.
+The repository-level `tokens/` directory is the only editable token source.
+`scripts/tokens.mjs` validates the JSON and deterministically generates the
+library SCSS token and theme files.
 
-The library SCSS is the runtime delivery layer. It maps source tokens to
-namespaced custom properties instead of introducing a second token model.
-There is intentionally no copied `tokens/` directory inside this workspace.
+```text
+Repository JSON
+      ↓ validate and generate
+SCSS primitives + semantic contract + themes
+      ↓ package
+Consumer applications and future components
+```
+
+The generated files contain a header stating that they must not be edited
+manually. `npm run tokens:check` compares their exact contents with current JSON
+and runs before builds and tests.
+
+## Style responsibilities
+
+```text
+styles/
+├── tokens/        generated primitives, typography and semantic contract
+├── themes/        generated light and dark mappings
+├── foundations/   opt-in reset, base styles and utilities
+├── _mixins.scss   reusable SCSS behavior
+├── foundations.scss
+└── index.scss
+```
+
+`gh-design-system/styles` is intentionally non-invasive: it exposes variables
+and theme selectors without resetting the consumer application.
+
+`gh-design-system/styles/foundations` is opt-in and applies the safe reset,
+global typography, semantic body colors, focus-visible behavior and
+reduced-motion handling.
 
 ## Library boundaries
 
-### `components/`
+- `components/`: future standalone UI primitives with stable APIs and tests.
+- `patterns/`: proven compositions of public components.
+- `styles/`: tokens, themes, foundations and mixins.
+- `theming/`: Angular APIs for explicit theme state and persistence.
 
-Standalone, reusable Angular UI primitives. A component belongs here only when
-it has a stable public API, accessibility behavior, tests and token-only visual
-styling.
-
-### `patterns/`
-
-Compositions of public components that solve a repeated product interaction or
-layout problem. Patterns must not reach into component internals.
-
-### `styles/`
-
-Primitive variables, semantic theme mappings, global base styles and SCSS
-mixins. CSS custom properties are prefixed with `--gh-` to avoid collisions in
-consumer applications.
-
-### `theming/`
-
-Strongly typed Angular APIs for applying theme state. This layer owns document
-attribute and persistence behavior; visual values remain in SCSS.
-
-## Token layers
-
-```text
-Repository JSON and design docs
-            ↓
-SCSS primitive custom properties
-            ↓
-Light/dark semantic custom properties
-            ↓
-Components, patterns and showcase
-```
-
-Components must consume semantic properties for color and surfaces. Primitive
-palette values are reserved for documentation, data visualization and approved
-brand expressions.
+Future components must consume semantic color, surface, border, action, focus
+and shadow variables. Primitive colors are limited to controlled brand
+expressions; geometry may use spacing and radius primitives.
 
 ## Showcase boundary
 
-The showcase is a standalone Angular application and a consumer of the
-library. It can contain documentation-specific layouts, but it must not become
-the source of reusable design-system behavior.
+The showcase imports the built package through the public `gh-design-system`
+entry points. PR 2 includes only a smoke test for semantic background, text,
+surface, borders, shadows and theme switching. The full foundations catalogue
+is intentionally deferred to PR 3.
 
 ## Testing strategy
 
-- Library unit tests cover public Angular behavior such as theme state.
-- Showcase unit tests cover documentation rendering and theme integration.
-- Production builds validate Angular compilation and SCSS packaging.
-- Accessibility automation and visual regression testing are recommended for
-  the first component PR.
+- Token validation checks JSON syntax, duplicate keys, names, references,
+  cycles and theme coverage.
+- Token synchronization checks generated SCSS deterministically.
+- Library unit tests cover theme state.
+- Showcase unit tests cover public-package integration and explicit switching.
+- Production builds validate SCSS packaging and strict Angular compilation.
+
+## Build-cache trade-off
+
+Angular's persistent disk cache is disabled in `angular.json`. On the current
+Node 22 and macOS environment, its native LMDB dependency reproducibly aborts
+with a double-free after repeated application builds. Disabling only this cache
+keeps builds deterministic and stable at the cost of slightly slower
+incremental compilation. Re-evaluate the setting after upgrading the Angular
+builder or Node runtime.

@@ -3,18 +3,110 @@
     "primary": {
       "$type": "color",
       "$value": "{color.ivory}"
+    },
+    "secondary": {
+      "$type": "color",
+      "$value": "{color.white}"
+    },
+    "subtle": {
+      "$type": "color",
+      "$value": "color-mix(in srgb, {color.lavender} 12%, {color.ivory})"
     }
   },
-
+  "surface": {
+    "primary": {
+      "$type": "color",
+      "$value": "{color.white}"
+    },
+    "secondary": {
+      "$type": "color",
+      "$value": "color-mix(in srgb, {color.lavender} 8%, {color.white})"
+    },
+    "elevated": {
+      "$type": "color",
+      "$value": "{color.white}"
+    }
+  },
   "text": {
     "primary": {
       "$type": "color",
       "$value": "{color.ink}"
     },
-
+    "secondary": {
+      "$type": "color",
+      "$value": "#475467"
+    },
+    "muted": {
+      "$type": "color",
+      "$value": "#667085"
+    },
+    "inverse": {
+      "$type": "color",
+      "$value": "{color.ivory}"
+    },
     "accent": {
       "$type": "color",
+      "$value": "color-mix(in srgb, {color.lavender} 48%, {color.ink})"
+    }
+  },
+  "border": {
+    "default": {
+      "$type": "color",
+      "$value": "#E4E7EC"
+    },
+    "subtle": {
+      "$type": "color",
+      "$value": "color-mix(in srgb, {color.ink} 8%, transparent)"
+    },
+    "strong": {
+      "$type": "color",
+      "$value": "color-mix(in srgb, {color.ink} 24%, transparent)"
+    }
+  },
+  "action": {
+    "primary": {
+      "background": {
+        "$type": "color",
+        "$value": "{color.lavender}"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{color.ink}"
+      },
+      "hover": {
+        "$type": "color",
+        "$value": "{color.cloudBlue}"
+      }
+    }
+  },
+  "focus": {
+    "ring": {
+      "$type": "color",
+      "$value": "color-mix(in srgb, {color.cloudBlue} 52%, {color.ink})"
+    }
+  },
+  "selection": {
+    "background": {
+      "$type": "color",
       "$value": "{color.lavender}"
+    },
+    "text": {
+      "$type": "color",
+      "$value": "{color.ink}"
+    }
+  },
+  "shadow": {
+    "small": {
+      "$type": "shadow",
+      "$value": "{shadowPrimitive.small}"
+    },
+    "medium": {
+      "$type": "shadow",
+      "$value": "{shadowPrimitive.medium}"
+    },
+    "large": {
+      "$type": "shadow",
+      "$value": "{shadowPrimitive.large}"
     }
   }
 }

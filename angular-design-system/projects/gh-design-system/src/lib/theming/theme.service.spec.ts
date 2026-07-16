@@ -33,4 +33,13 @@ describe('GhThemeService', () => {
 
     expect(service.theme()).toBe('dark');
   });
+
+  it('prioritizes a stored explicit preference', () => {
+    localStorage.setItem(GH_THEME_STORAGE_KEY, 'dark');
+
+    const service = TestBed.inject(GhThemeService);
+
+    expect(service.theme()).toBe('dark');
+    expect(document.documentElement.getAttribute(GH_THEME_ATTRIBUTE)).toBe('dark');
+  });
 });

@@ -2,47 +2,114 @@
   "theme": {
     "name": "dark"
   },
-
   "background": {
     "primary": {
       "$type": "color",
       "$value": "#111827"
     },
-
     "secondary": {
       "$type": "color",
       "$value": "#1F2937"
+    },
+    "subtle": {
+      "$type": "color",
+      "$value": "color-mix(in srgb, #111827 88%, {color.lavender})"
     }
   },
-
+  "surface": {
+    "primary": {
+      "$type": "color",
+      "$value": "#1F2937"
+    },
+    "secondary": {
+      "$type": "color",
+      "$value": "#263244"
+    },
+    "elevated": {
+      "$type": "color",
+      "$value": "#2B374A"
+    }
+  },
   "text": {
     "primary": {
       "$type": "color",
       "$value": "#F9FAFB"
     },
-
     "secondary": {
       "$type": "color",
       "$value": "#D1D5DB"
     },
-
+    "muted": {
+      "$type": "color",
+      "$value": "#9CA3AF"
+    },
+    "inverse": {
+      "$type": "color",
+      "$value": "{color.ink}"
+    },
     "accent": {
       "$type": "color",
-      "$value": "#CBB9E8"
+      "$value": "{color.lavender}"
     }
   },
-
   "border": {
     "default": {
       "$type": "color",
       "$value": "#374151"
+    },
+    "subtle": {
+      "$type": "color",
+      "$value": "rgb(209 213 219 / 12%)"
+    },
+    "strong": {
+      "$type": "color",
+      "$value": "rgb(209 213 219 / 28%)"
     }
   },
-
-  "surface": {
-    "card": {
+  "action": {
+    "primary": {
+      "background": {
+        "$type": "color",
+        "$value": "{color.lavender}"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{color.ink}"
+      },
+      "hover": {
+        "$type": "color",
+        "$value": "{color.cloudBlue}"
+      }
+    }
+  },
+  "focus": {
+    "ring": {
       "$type": "color",
-      "$value": "#1F2937"
+      "$value": "{color.cloudBlue}"
+    }
+  },
+  "selection": {
+    "background": {
+      "$type": "color",
+      "$value": "{color.lavender}"
+    },
+    "text": {
+      "$type": "color",
+      "$value": "{color.ink}"
+    }
+  },
+  "shadow": {
+    "small": {
+      "$type": "shadow",
+      "$value": "0 2px 8px rgb(0 0 0 / 24%)"
+    },
+    "medium": {
+      "$type": "shadow",
+      "$value": "0 8px 24px rgb(0 0 0 / 32%)"
+    },
+    "large": {
+      "$type": "shadow",
+      "$value": "0 16px 48px rgb(0 0 0 / 40%)"
     }
   }
 }
