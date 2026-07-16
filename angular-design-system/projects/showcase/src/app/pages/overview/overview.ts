@@ -34,7 +34,7 @@ export class OverviewPage {
     },
     {
       area: 'Components',
-      description: 'Button is available; additional primitives will arrive incrementally.',
+      description: 'Button, Badge and Tag are available; additional primitives will follow.',
       status: 'In progress',
     },
     {

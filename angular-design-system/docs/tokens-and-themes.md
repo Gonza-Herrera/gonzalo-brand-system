@@ -39,6 +39,12 @@ Example:
 - Danger action: `--gh-action-danger-background`, `text`, `hover`, `active`,
   `border`
 - Disabled action: `--gh-action-disabled-background`, `text`, `border`
+- Status roles: `--gh-status-{variant}-background`, `text`, `border`,
+  `solid-background`, `solid-text` for neutral, info, success, warning, danger
+  and accent
+- Tag interaction roles: `--gh-tag-{variant}-hover`, `active`,
+  `selected-background`, `selected-text`, `selected-border`, `remove-hover`
+  for neutral, accent and info
 - Focus: `--gh-focus-ring`
 - Selection: `--gh-selection-background`, `text`
 - Elevation: `--gh-shadow-sm`, `md`, `lg`
@@ -108,5 +114,6 @@ Primary and secondary text values are based on the established high-contrast
 neutral values. Accent text, focus and subtle surfaces use `color-mix()` to
 derive accessible brand-aware values without inventing a separate palette.
 Button text/background pairs were selected for strong contrast in both themes;
-automated WCAG contrast regression testing remains recommended as the component
-catalogue grows.
+status and Tag pairs follow the same high-contrast approach. Automated WCAG
+contrast regression testing remains recommended as the component catalogue
+grows.

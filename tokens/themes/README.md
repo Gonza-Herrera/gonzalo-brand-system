@@ -38,3 +38,7 @@ query to resolve the active theme without a competing explicit selector.
 Public components consume semantic variables and work in both themes. Button
 action roles include primary, secondary, ghost, danger and disabled mappings,
 with hover and active values where interaction requires them.
+
+Badge uses neutral, info, success, warning, danger and accent status families.
+Tag reuses those base status roles and adds variant-specific hover, active,
+selected and remove-hover values.

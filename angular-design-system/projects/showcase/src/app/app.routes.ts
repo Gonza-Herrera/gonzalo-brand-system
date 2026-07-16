@@ -38,6 +38,16 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/buttons/buttons').then((module) => module.ButtonsPage),
   },
   {
+    path: 'badges',
+    title: 'Badges · Gonzalo Herrera Design System',
+    loadComponent: () => import('./pages/badges/badges').then((module) => module.BadgesPage),
+  },
+  {
+    path: 'tags',
+    title: 'Tags · Gonzalo Herrera Design System',
+    loadComponent: () => import('./pages/tags/tags').then((module) => module.TagsPage),
+  },
+  {
     path: '**',
     redirectTo: '',
   },

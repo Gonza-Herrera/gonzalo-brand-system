@@ -22,20 +22,18 @@ Public package and documentation routes
 
 ```text
 components/
-└── button/
-    ├── button.component.ts
-    ├── button.component.html
-    ├── button.component.scss
-    ├── button.component.spec.ts
-    ├── button.types.ts
-    └── README.md
+├── badge/
+├── button/
+└── tag/
 ```
 
 Public components are standalone, strictly typed, SSR-safe and exported only
 through `src/public-api.ts`. Each component owns encapsulated styles and
 colocated behavioral tests. Button keeps native form semantics by rendering a
 real `<button>` and relying on the native bubbling `click` event rather than a
-redundant Angular output.
+redundant Angular output. Badge remains non-interactive. Tag selects between
+static, selectable and removable native semantics without combining those
+responsibilities.
 
 ## Library style responsibilities
 
@@ -71,7 +69,9 @@ app/
 │   ├── spacing/
 │   ├── radii/
 │   ├── shadows/
-│   └── buttons/
+│   ├── buttons/
+│   ├── badges/
+│   └── tags/
 └── shared/
     ├── components/
     ├── data/
@@ -109,6 +109,10 @@ The showcase theme toggle is an internal consumer of this public service.
 - Library tests cover explicit, stored, system and SSR theme behavior.
 - Button tests cover projection, typed inputs, native form behavior, disabled
   and accessible loading states.
+- Badge tests protect non-interactive semantics, variants, appearances, sizes
+  and indicator projection.
+- Tag tests cover static, native selectable and accessible removable behavior,
+  including disabled and event propagation.
 - Showcase tests cover all routes, active navigation, wildcard redirect,
   mobile menu behavior, accessible theme selection and public component
   integration.

@@ -1,0 +1,114 @@
+<article class="page">
+  <header class="page-header">
+    <p>Component · Status</p>
+    <h1>Badge</h1>
+    <p>
+      Badges communicate short, non-interactive status, category and count information without
+      competing with primary actions.
+    </p>
+  </header>
+
+  <showcase-documentation-section
+    sectionId="badge-variants"
+    eyebrow="Variants"
+    title="Semantic meaning before decoration"
+    description="Labels provide the meaning; color reinforces it across light and dark themes."
+  >
+    <div class="variant-grid">
+      @for (item of variants; track item.variant) {
+        <article class="demo-item">
+          <div class="demo-item__preview">
+            <gh-badge [variant]="item.variant">{{ item.label }}</gh-badge>
+          </div>
+          <div>
+            <h3>{{ item.label }}</h3>
+            <p>{{ item.description }}</p>
+            <code>variant="{{ item.variant }}"</code>
+          </div>
+        </article>
+      }
+    </div>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="badge-appearances"
+    eyebrow="Appearances"
+    title="Soft by default, solid when emphasis is justified"
+    description="Solid badges remain intentionally compact and should be used more sparingly."
+  >
+    <div class="appearance-grid">
+      @for (appearance of appearances; track appearance) {
+        <article class="appearance-row">
+          <div>
+            <h3>{{ appearance === 'soft' ? 'Soft' : 'Solid' }}</h3>
+            <code>appearance="{{ appearance }}"</code>
+          </div>
+          <div>
+            @for (item of variants; track item.variant) {
+              <gh-badge [variant]="item.variant" [appearance]="appearance">
+                {{ item.label }}
+              </gh-badge>
+            }
+          </div>
+        </article>
+      }
+    </div>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="badge-sizes"
+    eyebrow="Sizes"
+    title="Two compact densities"
+    description="Badges remain visually secondary even when repeated in dense interfaces."
+  >
+    <div class="size-examples">
+      @for (size of sizes; track size) {
+        <div>
+          <gh-badge variant="accent" [size]="size">{{
+            size === 'sm' ? 'Small' : 'Medium'
+          }}</gh-badge>
+          <code>size="{{ size }}"</code>
+        </div>
+      }
+    </div>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="badge-content"
+    eyebrow="Content"
+    title="Status, category, count and indicator"
+    description="The optional start slot accepts a lightweight decorative indicator; the text remains the source of meaning."
+  >
+    <div class="content-examples">
+      <gh-badge>New</gh-badge>
+      <gh-badge variant="neutral">3</gh-badge>
+      <gh-badge variant="accent">Angular</gh-badge>
+      <gh-badge variant="success">
+        <svg
+          ghBadgeIconStart
+          width="1em"
+          height="1em"
+          viewBox="0 0 16 16"
+          fill="currentColor"
+          aria-hidden="true"
+        >
+          <circle cx="8" cy="8" r="4" />
+        </svg>
+        Ready
+      </gh-badge>
+      <gh-badge variant="warning" appearance="solid" rounded="default"> Review required </gh-badge>
+    </div>
+  </showcase-documentation-section>
+
+  <section class="code-examples" aria-labelledby="badge-code-examples">
+    <header>
+      <p>Implementation</p>
+      <h2 id="badge-code-examples">Public API examples</h2>
+    </header>
+    <div>
+      <showcase-code-preview label="Success status" [code]="successExample" />
+      <showcase-code-preview label="Solid accent category" [code]="accentExample" />
+      <showcase-code-preview label="Numeric count" [code]="countExample" />
+    </div>
+  </section>
+</article>

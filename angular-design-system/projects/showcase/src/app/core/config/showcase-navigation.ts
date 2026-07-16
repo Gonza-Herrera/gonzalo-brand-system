@@ -37,4 +37,14 @@ export const SHOWCASE_NAVIGATION: readonly ShowcaseNavigationItem[] = [
     path: '/buttons',
     description: 'Action variants, states and usage',
   },
+  {
+    label: 'Badges',
+    path: '/badges',
+    description: 'Status, categories and counts',
+  },
+  {
+    label: 'Tags',
+    path: '/tags',
+    description: 'Metadata, selection and removal',
+  },
 ];

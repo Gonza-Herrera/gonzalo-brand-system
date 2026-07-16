@@ -1,0 +1,96 @@
+@use '../../shared/styles/documentation' as documentation;
+
+.page {
+  @include documentation.page;
+}
+
+.page-header {
+  @include documentation.page-header;
+}
+
+.demo-surface {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--gh-space-md);
+  min-height: var(--gh-space-section);
+  padding: var(--gh-space-lg);
+  border: var(--gh-border-width-default) solid var(--gh-border-default);
+  border-radius: var(--gh-radius-lg);
+  background: var(--gh-surface-primary);
+  box-shadow: var(--gh-shadow-sm);
+
+  p {
+    margin: 0;
+    color: var(--gh-text-secondary);
+  }
+}
+
+.size-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--gh-space-md);
+
+  article {
+    display: grid;
+    gap: var(--gh-space-md);
+    padding: var(--gh-space-lg);
+    border: var(--gh-border-width-default) solid var(--gh-border-default);
+    border-radius: var(--gh-radius-lg);
+    background: var(--gh-surface-primary);
+  }
+
+  article > div {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--gh-space-sm);
+  }
+
+  code {
+    color: var(--gh-text-muted);
+    font-size: var(--gh-font-size-caption);
+  }
+}
+
+.code-examples {
+  display: grid;
+  gap: var(--gh-space-lg);
+
+  > header {
+    display: grid;
+    gap: var(--gh-space-xs);
+
+    p,
+    h2 {
+      margin: 0;
+    }
+
+    p {
+      color: var(--gh-text-accent);
+      font-size: var(--gh-font-size-label);
+      font-weight: var(--gh-font-weight-bold);
+      letter-spacing: var(--gh-letter-spacing-wide);
+      text-transform: uppercase;
+    }
+  }
+
+  > div {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--gh-space-md);
+  }
+}
+
+@media (max-width: 64rem) {
+  .code-examples > div {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 42rem) {
+  .size-grid,
+  .code-examples > div {
+    grid-template-columns: 1fr;
+  }
+}
