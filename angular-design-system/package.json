@@ -1,0 +1,41 @@
+{
+  "name": "angular-design-system",
+  "version": "0.1.0",
+  "scripts": {
+    "ng": "ng",
+    "prestart": "npm run build:library",
+    "start": "ng serve showcase",
+    "build": "npm run build:library && npm run build:showcase",
+    "build:library": "ng build gh-design-system",
+    "build:showcase": "ng build showcase",
+    "watch:library": "ng build gh-design-system --watch --configuration development",
+    "watch:showcase": "ng build showcase --watch --configuration development",
+    "pretest": "npm run build:library",
+    "test": "ng test gh-design-system --watch=false && ng test showcase --watch=false"
+  },
+  "private": true,
+  "packageManager": "npm@10.9.3",
+  "engines": {
+    "node": "^20.19.0 || ^22.12.0 || >=24.0.0"
+  },
+  "dependencies": {
+    "@angular/common": "^21.2.0",
+    "@angular/compiler": "^21.2.0",
+    "@angular/core": "^21.2.0",
+    "@angular/forms": "^21.2.0",
+    "@angular/platform-browser": "^21.2.0",
+    "@angular/router": "^21.2.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular/build": "^21.2.19",
+    "@angular/cli": "^21.2.19",
+    "@angular/compiler-cli": "^21.2.0",
+    "jsdom": "^28.0.0",
+    "ng-packagr": "^21.2.0",
+    "prettier": "^3.8.1",
+    "typescript": "~5.9.2",
+    "vitest": "^4.0.8"
+  }
+}

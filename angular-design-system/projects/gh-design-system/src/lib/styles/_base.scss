@@ -1,0 +1,65 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 20rem;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: var(--gh-color-background-primary);
+  color: var(--gh-color-text-primary);
+  font-family: var(--gh-font-family-primary);
+  font-size: var(--gh-font-size-body);
+  font-weight: var(--gh-font-weight-regular);
+  line-height: var(--gh-line-height-body);
+  text-rendering: optimizelegibility;
+  -webkit-font-smoothing: antialiased;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: var(--gh-color-selection);
+  color: var(--gh-color-ink);
+}
+
+:focus-visible {
+  outline: 3px solid var(--gh-color-focus-ring);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
