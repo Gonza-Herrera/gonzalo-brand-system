@@ -1,0 +1,23 @@
+@mixin card {
+  border: 1px solid var(--gh-color-border-default);
+  border-radius: var(--gh-radius-lg);
+  background: var(--gh-color-surface-card);
+  box-shadow: var(--gh-shadow-sm);
+}
+
+@mixin section {
+  padding-block: var(--gh-space-section);
+}
+
+@mixin container {
+  width: min(calc(100% - (var(--gh-space-lg) * 2)), var(--gh-layout-container-max));
+  margin-inline: auto;
+}
+
+@mixin gradient-primary {
+  background: var(--gh-gradient-brand);
+}
+
+@mixin gradient-technology {
+  background: var(--gh-gradient-technology);
+}
