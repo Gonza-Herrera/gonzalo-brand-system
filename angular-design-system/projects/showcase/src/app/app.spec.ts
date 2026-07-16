@@ -21,7 +21,7 @@ describe('App routing', () => {
     localStorage.removeItem(GH_THEME_STORAGE_KEY);
   });
 
-  it('renders every foundation route with a page heading', async () => {
+  it('renders every documentation route with a page heading', async () => {
     const fixture = TestBed.createComponent(App);
     const router = TestBed.inject(Router);
     const expectedHeadings = new Map([
@@ -32,6 +32,8 @@ describe('App routing', () => {
       ['/radii', 'Border radius system'],
       ['/shadows', 'Elevation and shadows'],
       ['/buttons', 'Button'],
+      ['/badges', 'Badge'],
+      ['/tags', 'Tag'],
     ]);
 
     fixture.detectChanges();

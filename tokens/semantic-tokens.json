@@ -159,6 +159,220 @@
       }
     }
   },
+  "status": {
+    "neutral": {
+      "background": {
+        "$type": "color",
+        "$value": "#F2F4F7"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "#344054"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "#D0D5DD"
+      },
+      "solidBackground": {
+        "$type": "color",
+        "$value": "#344054"
+      },
+      "solidText": {
+        "$type": "color",
+        "$value": "{color.white}"
+      }
+    },
+    "info": {
+      "background": {
+        "$type": "color",
+        "$value": "#EFF8FF"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "#175CD3"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "#B2DDFF"
+      },
+      "solidBackground": {
+        "$type": "color",
+        "$value": "#175CD3"
+      },
+      "solidText": {
+        "$type": "color",
+        "$value": "{color.white}"
+      }
+    },
+    "success": {
+      "background": {
+        "$type": "color",
+        "$value": "#ECFDF3"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "#027A48"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "#ABEFC6"
+      },
+      "solidBackground": {
+        "$type": "color",
+        "$value": "#027A48"
+      },
+      "solidText": {
+        "$type": "color",
+        "$value": "{color.white}"
+      }
+    },
+    "warning": {
+      "background": {
+        "$type": "color",
+        "$value": "#FFFAEB"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "#B54708"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "#FEDF89"
+      },
+      "solidBackground": {
+        "$type": "color",
+        "$value": "#B54708"
+      },
+      "solidText": {
+        "$type": "color",
+        "$value": "{color.white}"
+      }
+    },
+    "danger": {
+      "background": {
+        "$type": "color",
+        "$value": "#FEF3F2"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "#B42318"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "#FECDCA"
+      },
+      "solidBackground": {
+        "$type": "color",
+        "$value": "#B42318"
+      },
+      "solidText": {
+        "$type": "color",
+        "$value": "{color.white}"
+      }
+    },
+    "accent": {
+      "background": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {color.lavender} 36%, {color.white})"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{color.ink}"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{color.lavender}"
+      },
+      "solidBackground": {
+        "$type": "color",
+        "$value": "{color.lavender}"
+      },
+      "solidText": {
+        "$type": "color",
+        "$value": "{color.ink}"
+      }
+    }
+  },
+  "tag": {
+    "neutral": {
+      "hover": {
+        "$type": "color",
+        "$value": "#EAECF0"
+      },
+      "active": {
+        "$type": "color",
+        "$value": "#D0D5DD"
+      },
+      "selectedBackground": {
+        "$type": "color",
+        "$value": "#344054"
+      },
+      "selectedText": {
+        "$type": "color",
+        "$value": "{color.white}"
+      },
+      "selectedBorder": {
+        "$type": "color",
+        "$value": "#344054"
+      },
+      "removeHover": {
+        "$type": "color",
+        "$value": "rgb(52 64 84 / 12%)"
+      }
+    },
+    "accent": {
+      "hover": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {color.lavender} 48%, {color.white})"
+      },
+      "active": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {color.lavender} 64%, {color.white})"
+      },
+      "selectedBackground": {
+        "$type": "color",
+        "$value": "{color.lavender}"
+      },
+      "selectedText": {
+        "$type": "color",
+        "$value": "{color.ink}"
+      },
+      "selectedBorder": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {color.lavender} 72%, {color.ink})"
+      },
+      "removeHover": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {color.lavender} 28%, transparent)"
+      }
+    },
+    "info": {
+      "hover": {
+        "$type": "color",
+        "$value": "#D1E9FF"
+      },
+      "active": {
+        "$type": "color",
+        "$value": "#B2DDFF"
+      },
+      "selectedBackground": {
+        "$type": "color",
+        "$value": "#175CD3"
+      },
+      "selectedText": {
+        "$type": "color",
+        "$value": "{color.white}"
+      },
+      "selectedBorder": {
+        "$type": "color",
+        "$value": "#175CD3"
+      },
+      "removeHover": {
+        "$type": "color",
+        "$value": "rgb(23 92 211 / 12%)"
+      }
+    }
+  },
   "focus": {
     "ring": {
       "$type": "color",

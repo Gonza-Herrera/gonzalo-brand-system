@@ -1,0 +1,42 @@
+<ng-template #tagContent>
+  <span class="gh-tag__content">
+    <ng-content />
+  </span>
+</ng-template>
+
+@switch (mode()) {
+  @case ('selectable') {
+    <button
+      [class]="tagClasses()"
+      type="button"
+      [disabled]="disabled()"
+      [attr.aria-label]="ariaLabel()"
+      [attr.aria-pressed]="selected()"
+      (click)="toggleSelected()"
+    >
+      <ng-container [ngTemplateOutlet]="tagContent" />
+    </button>
+  }
+
+  @case ('removable') {
+    <span [class]="tagClasses()" [attr.aria-disabled]="disabled() ? 'true' : null">
+      <ng-container [ngTemplateOutlet]="tagContent" />
+
+      <button
+        class="gh-tag__remove"
+        type="button"
+        [disabled]="disabled()"
+        [attr.aria-label]="removeAriaLabel()"
+        (click)="remove($event)"
+      >
+        <span aria-hidden="true">×</span>
+      </button>
+    </span>
+  }
+
+  @default {
+    <span [class]="tagClasses()">
+      <ng-container [ngTemplateOutlet]="tagContent" />
+    </span>
+  }
+}

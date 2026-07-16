@@ -1,0 +1,114 @@
+<article class="page">
+  <header class="page-header">
+    <p>Component · Metadata</p>
+    <h1>Tag</h1>
+    <p>
+      Tags describe metadata and filters. Their native semantics change only when selection or
+      removal introduces real interaction.
+    </p>
+  </header>
+
+  <showcase-documentation-section
+    sectionId="tag-static"
+    eyebrow="Static"
+    title="Informative labels without false affordance"
+    description="Static tags render spans and never simulate button behavior."
+  >
+    <div class="demo-surface">
+      @for (item of variants; track item.variant) {
+        <gh-tag [variant]="item.variant">{{ item.label }}</gh-tag>
+      }
+    </div>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="tag-selectable"
+    eyebrow="Selectable"
+    title="Controlled selection with native buttons"
+    description="Selectable tags expose aria-pressed and emit the next value through selectedChange."
+  >
+    <div class="demo-surface">
+      <gh-tag
+        mode="selectable"
+        variant="accent"
+        [selected]="angularSelected()"
+        (selectedChange)="angularSelected.set($event)"
+      >
+        Angular
+      </gh-tag>
+
+      <gh-tag
+        mode="selectable"
+        [selected]="leadershipSelected()"
+        (selectedChange)="leadershipSelected.set($event)"
+      >
+        Leadership
+      </gh-tag>
+
+      <gh-tag mode="selectable" variant="info" disabled>Disabled</gh-tag>
+    </div>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="tag-removable"
+    eyebrow="Removable"
+    title="A focused removal action"
+    description="The internal remove button stops propagation, uses a specific accessible label and emits only removed."
+  >
+    <div class="demo-surface" aria-live="polite">
+      @for (filter of removableFilters(); track filter) {
+        <gh-tag
+          mode="removable"
+          variant="info"
+          [ariaLabel]="'Remove ' + filter + ' filter'"
+          (removed)="removeFilter(filter)"
+        >
+          {{ filter }}
+        </gh-tag>
+      } @empty {
+        <p>All example filters were removed.</p>
+      }
+
+      <gh-tag mode="removable" ariaLabel="Remove unavailable filter" disabled> Unavailable </gh-tag>
+    </div>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="tag-sizes"
+    eyebrow="Sizes"
+    title="Compact static labels and usable controls"
+    description="Interactive tags preserve larger native hit areas than their static equivalents."
+  >
+    <div class="size-grid">
+      @for (size of sizes; track size) {
+        <article>
+          <div>
+            <gh-tag [size]="size">Static</gh-tag>
+            <gh-tag mode="selectable" variant="accent" [size]="size">Selectable</gh-tag>
+            <gh-tag
+              mode="removable"
+              variant="info"
+              [size]="size"
+              [ariaLabel]="'Remove ' + size + ' example'"
+            >
+              Removable
+            </gh-tag>
+          </div>
+          <code>size="{{ size }}"</code>
+        </article>
+      }
+    </div>
+  </showcase-documentation-section>
+
+  <section class="code-examples" aria-labelledby="tag-code-examples">
+    <header>
+      <p>Implementation</p>
+      <h2 id="tag-code-examples">Public API examples</h2>
+    </header>
+    <div>
+      <showcase-code-preview label="Static tag" [code]="staticExample" />
+      <showcase-code-preview label="Selectable tag" [code]="selectableExample" />
+      <showcase-code-preview label="Removable tag" [code]="removableExample" />
+    </div>
+  </section>
+</article>

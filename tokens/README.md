@@ -53,3 +53,7 @@ showcase data cannot be merged accidentally.
 `motion.json` currently defines the minimal timing contract required by public
 interactive components: fast state transitions, a slow loading cycle and the
 standard easing curve.
+
+The semantic contract includes action roles, six status families for Badge and
+three interactive Tag families. Theme files must provide complete coverage for
+every semantic path.

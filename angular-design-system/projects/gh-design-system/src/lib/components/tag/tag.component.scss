@@ -1,0 +1,159 @@
+:host {
+  display: inline-block;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+.gh-tag {
+  --gh-tag-min-height: calc(var(--gh-space-xl) + var(--gh-space-sm));
+  --gh-tag-padding-inline: calc(var(--gh-space-sm) + var(--gh-space-xs));
+  --gh-tag-remove-size: var(--gh-space-xl);
+
+  display: inline-flex;
+  min-height: var(--gh-tag-min-height);
+  max-width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gh-space-xs);
+  padding: var(--gh-space-xs) var(--gh-tag-padding-inline);
+  border: var(--gh-border-width-default) solid var(--gh-tag-border);
+  border-radius: var(--gh-radius-pill);
+  background: var(--gh-tag-background);
+  color: var(--gh-tag-text);
+  font-family: var(--gh-font-family-body);
+  font-size: var(--gh-font-size-label);
+  font-weight: var(--gh-font-weight-medium);
+  line-height: var(--gh-line-height-heading);
+  white-space: nowrap;
+  transition:
+    background-color var(--gh-motion-duration-fast) var(--gh-motion-easing-standard),
+    border-color var(--gh-motion-duration-fast) var(--gh-motion-easing-standard),
+    color var(--gh-motion-duration-fast) var(--gh-motion-easing-standard);
+}
+
+button.gh-tag {
+  appearance: none;
+  cursor: pointer;
+}
+
+button.gh-tag:focus-visible,
+.gh-tag__remove:focus-visible {
+  outline: var(--gh-border-width-focus) solid var(--gh-focus-ring);
+  outline-offset: var(--gh-space-xs);
+}
+
+button.gh-tag:not(:disabled):hover {
+  background: var(--gh-tag-hover);
+}
+
+button.gh-tag:not(:disabled):active {
+  background: var(--gh-tag-active);
+}
+
+.gh-tag--selected {
+  border-color: var(--gh-tag-selected-border);
+  background: var(--gh-tag-selected-background);
+  color: var(--gh-tag-selected-text);
+}
+
+.gh-tag--selected:not(:disabled):hover,
+.gh-tag--selected:not(:disabled):active {
+  background: var(--gh-tag-selected-background);
+}
+
+.gh-tag--disabled,
+button.gh-tag:disabled {
+  border-color: var(--gh-action-disabled-border);
+  background: var(--gh-action-disabled-background);
+  color: var(--gh-action-disabled-text);
+  cursor: not-allowed;
+}
+
+.gh-tag--neutral {
+  --gh-tag-background: var(--gh-status-neutral-background);
+  --gh-tag-text: var(--gh-status-neutral-text);
+  --gh-tag-border: var(--gh-status-neutral-border);
+  --gh-tag-hover: var(--gh-tag-neutral-hover);
+  --gh-tag-active: var(--gh-tag-neutral-active);
+  --gh-tag-selected-background: var(--gh-tag-neutral-selected-background);
+  --gh-tag-selected-text: var(--gh-tag-neutral-selected-text);
+  --gh-tag-selected-border: var(--gh-tag-neutral-selected-border);
+  --gh-tag-remove-hover: var(--gh-tag-neutral-remove-hover);
+}
+
+.gh-tag--accent {
+  --gh-tag-background: var(--gh-status-accent-background);
+  --gh-tag-text: var(--gh-status-accent-text);
+  --gh-tag-border: var(--gh-status-accent-border);
+  --gh-tag-hover: var(--gh-tag-accent-hover);
+  --gh-tag-active: var(--gh-tag-accent-active);
+  --gh-tag-selected-background: var(--gh-tag-accent-selected-background);
+  --gh-tag-selected-text: var(--gh-tag-accent-selected-text);
+  --gh-tag-selected-border: var(--gh-tag-accent-selected-border);
+  --gh-tag-remove-hover: var(--gh-tag-accent-remove-hover);
+}
+
+.gh-tag--info {
+  --gh-tag-background: var(--gh-status-info-background);
+  --gh-tag-text: var(--gh-status-info-text);
+  --gh-tag-border: var(--gh-status-info-border);
+  --gh-tag-hover: var(--gh-tag-info-hover);
+  --gh-tag-active: var(--gh-tag-info-active);
+  --gh-tag-selected-background: var(--gh-tag-info-selected-background);
+  --gh-tag-selected-text: var(--gh-tag-info-selected-text);
+  --gh-tag-selected-border: var(--gh-tag-info-selected-border);
+  --gh-tag-remove-hover: var(--gh-tag-info-remove-hover);
+}
+
+.gh-tag--sm {
+  --gh-tag-min-height: var(--gh-space-xl);
+  --gh-tag-padding-inline: var(--gh-space-sm);
+  --gh-tag-remove-size: calc(var(--gh-space-md) + var(--gh-space-sm));
+
+  font-size: var(--gh-font-size-caption);
+}
+
+.gh-tag--static.gh-tag--md {
+  min-height: var(--gh-space-xl);
+}
+
+.gh-tag--static.gh-tag--sm {
+  min-height: calc(var(--gh-space-md) + var(--gh-space-sm));
+  padding-block: 0;
+}
+
+.gh-tag--removable {
+  padding-right: var(--gh-space-xs);
+}
+
+.gh-tag__content {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.gh-tag__remove {
+  display: inline-grid;
+  width: var(--gh-tag-remove-size);
+  height: var(--gh-tag-remove-size);
+  flex: 0 0 var(--gh-tag-remove-size);
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: var(--gh-radius-pill);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: var(--gh-line-height-tight);
+  cursor: pointer;
+  transition: background-color var(--gh-motion-duration-fast) var(--gh-motion-easing-standard);
+}
+
+.gh-tag__remove:not(:disabled):hover {
+  background: var(--gh-tag-remove-hover);
+}
+
+.gh-tag__remove:disabled {
+  color: var(--gh-action-disabled-text);
+  cursor: not-allowed;
+}

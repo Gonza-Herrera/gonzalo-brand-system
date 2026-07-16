@@ -6,6 +6,15 @@ System.
 ## Public Angular API
 
 - `GhThemeService`
+- `GhBadgeComponent`
+- `GhBadgeVariant`
+- `GhBadgeSize`
+- `GhBadgeAppearance`
+- `GhBadgeRounded`
+- `GH_BADGE_VARIANTS`
+- `GH_BADGE_SIZES`
+- `GH_BADGE_APPEARANCES`
+- `GH_BADGE_ROUNDED_OPTIONS`
 - `GhButtonComponent`
 - `GhButtonVariant`
 - `GhButtonSize`
@@ -13,6 +22,13 @@ System.
 - `GH_BUTTON_VARIANTS`
 - `GH_BUTTON_SIZES`
 - `GH_BUTTON_TYPES`
+- `GhTagComponent`
+- `GhTagMode`
+- `GhTagVariant`
+- `GhTagSize`
+- `GH_TAG_MODES`
+- `GH_TAG_VARIANTS`
+- `GH_TAG_SIZES`
 - `GhTheme`
 - `GhThemePreference`
 - `GH_THEMES`
@@ -68,6 +84,26 @@ and full-width states; and start/end icon projection. See
 [`src/lib/components/button/README.md`](src/lib/components/button/README.md)
 for its complete API and accessibility guidance.
 
-Semantic tokens such as `--gh-text-primary`, `--gh-surface-primary`,
-`--gh-action-primary-background` and `--gh-focus-ring` are the supported
-styling contract for public components.
+## Badge and Tag
+
+```ts
+import { GhBadgeComponent, GhTagComponent } from 'gh-design-system';
+```
+
+```html
+<gh-badge variant="success">Ready</gh-badge>
+
+<gh-tag mode="selectable" [selected]="selected()" (selectedChange)="selected.set($event)">
+  Angular
+</gh-tag>
+```
+
+Badge is always non-interactive. Tag renders a span in static mode, a native
+button in selectable mode and a dedicated accessible removal button in
+removable mode. See the component-specific
+[`Badge`](src/lib/components/badge/README.md) and
+[`Tag`](src/lib/components/tag/README.md) documentation.
+
+Semantic tokens such as `--gh-text-primary`, `--gh-action-primary-background`,
+`--gh-status-success-background`, `--gh-tag-accent-selected-background` and
+`--gh-focus-ring` are the supported styling contract for public components.

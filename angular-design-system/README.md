@@ -2,9 +2,9 @@
 
 Official Angular workspace for the Gonzalo Herrera Design System.
 
-This release provides a reusable Angular library, the first public Button
-component, a routed standalone showcase, token-driven SCSS,
-light/dark/system theming and unit-test configuration.
+This release provides a reusable Angular library with Button, Badge and Tag, a
+routed standalone showcase, token-driven SCSS, light/dark/system theming and
+unit-test configuration.
 
 ## Requirements
 
@@ -25,7 +25,9 @@ angular-design-system/
 │   │   └── src/
 │   │       ├── lib/
 │   │       │   ├── components/
-│   │       │   │   └── button/
+│   │       │   │   ├── badge/
+│   │       │   │   ├── button/
+│   │       │   │   └── tag/
 │   │       │   ├── patterns/
 │   │       │   ├── styles/
 │   │       │   └── theming/
@@ -163,6 +165,28 @@ Supported public types are `GhButtonVariant`, `GhButtonSize` and
 disabled, loading, full-width and start/end icon content. Icon-only buttons
 must provide `aria-label`.
 
+## Badge and Tag components
+
+```ts
+import { GhBadgeComponent, GhTagComponent } from 'gh-design-system';
+```
+
+```html
+<gh-badge variant="success">Ready</gh-badge>
+
+<gh-tag>Angular</gh-tag>
+
+<gh-tag mode="selectable" [selected]="selected()" (selectedChange)="selected.set($event)">
+  Leadership
+</gh-tag>
+
+<gh-tag mode="removable" ariaLabel="Remove AI filter" (removed)="removeFilter()"> AI </gh-tag>
+```
+
+Badge supports six semantic variants, soft/solid appearance and small/medium
+sizes while remaining non-interactive. Tag supports mutually exclusive static,
+selectable and removable modes, three variants and two sizes.
+
 ## Theme consumption
 
 Themes use the `data-theme` attribute on the root document element:
@@ -216,6 +240,8 @@ Import public TypeScript APIs from `gh-design-system`.
 | `/radii`      | Border radii                  |
 | `/shadows`    | Theme-aware elevation         |
 | `/buttons`    | Public Button component       |
+| `/badges`     | Public Badge component        |
+| `/tags`       | Public Tag component          |
 
 The shell provides a desktop sidebar, accessible mobile menu, active route
 state and the Light/Dark/System selector.
@@ -233,7 +259,7 @@ They must not be exported from the library public API.
 
 ## Scope
 
-This release is deliberately limited to foundations and Button:
+This release is deliberately limited to foundations, Button, Badge and Tag:
 
 - Primitive and semantic CSS custom properties
 - Light and dark themes
@@ -242,9 +268,11 @@ This release is deliberately limited to foundations and Button:
 - A strongly typed, SSR-safe Angular theme service
 - A routed, responsive and accessible foundations showcase
 - A standalone, accessible and token-driven public Button component
+- Non-interactive Badge status and category labels
+- Static, selectable and removable Tag behavior
 
-Badge, Tag, Card, Hero and other product components are deferred to later work.
+Card, Hero and other product components are deferred to later work.
 See [the architecture notes](docs/architecture.md), [tokens and themes
 guide](docs/tokens-and-themes.md) and
-[Button documentation](projects/gh-design-system/src/lib/components/button/README.md)
+[component documentation](projects/gh-design-system/src/lib/components/README.md)
 for contribution boundaries.
