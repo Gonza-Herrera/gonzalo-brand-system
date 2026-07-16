@@ -56,8 +56,18 @@ Priority:
 3. Light default
 
 The existing `GhThemeService` applies the same attribute and persists explicit
-preferences. Persistence remains a convenience from PR 1; semantic styling
-does not depend on Angular or local storage.
+preferences. It also supports `system`, removes the explicit attribute in that
+mode and reacts to operating-system changes through `matchMedia`.
+
+```ts
+themeService.setTheme('light');
+themeService.setTheme('dark');
+themeService.setTheme('system');
+```
+
+`preference` exposes the selected option and `resolvedTheme` exposes the
+effective light or dark result. On the server the initial result is
+predictably light and no browser API is accessed.
 
 ## Typography
 
@@ -76,12 +86,13 @@ npm run tokens:check
 ```
 
 The generator uses TypeScript already present in the workspace and adds no
-token-framework dependency.
+token-framework dependency. It also generates the typed token catalogue used
+by showcase pages.
 
 ## Contrast note
 
 Primary and secondary text values are based on the established high-contrast
 neutral values. Accent text, focus and subtle surfaces use `color-mix()` to
 derive accessible brand-aware values without inventing a separate palette.
-Automated WCAG contrast regression testing is recommended for PR 3, especially
-before these derived values are used in interactive product components.
+Automated WCAG contrast regression testing remains recommended before these
+derived values are used in public interactive components.

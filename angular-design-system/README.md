@@ -2,9 +2,9 @@
 
 Official Angular workspace for the Gonzalo Herrera Design System.
 
-This foundations release provides a reusable Angular library, a standalone
-showcase application, token-driven SCSS, light and dark themes, and unit-test
-configuration. It intentionally contains no product components.
+This foundations release provides a reusable Angular library, a routed
+standalone showcase, token-driven SCSS, light/dark/system theming and unit-test
+configuration. It intentionally contains no public product components.
 
 ## Requirements
 
@@ -30,7 +30,11 @@ angular-design-system/
 │   │       │   └── theming/
 │   │       └── public-api.ts
 │   └── showcase/
-│       └── src/
+│       └── src/app/
+│           ├── core/
+│           ├── layout/
+│           ├── pages/
+│           └── shared/
 └── README.md
 ```
 
@@ -43,6 +47,12 @@ npm start
 ```
 
 Open `http://localhost:4200`.
+
+Equivalent Angular CLI command:
+
+```bash
+ng serve showcase
+```
 
 `npm start` builds the library first, then serves the showcase. When actively
 editing TypeScript in the library, run `npm run watch:library` in a second
@@ -62,6 +72,8 @@ npm run build:library
 npm run build:showcase
 npm run watch:library
 npm run watch:showcase
+ng build gh-design-system
+ng build showcase
 ```
 
 The production library output is written to `dist/gh-design-system`. The
@@ -108,8 +120,8 @@ Reusable SCSS mixins are available separately:
 }
 ```
 
-The SCSS under `styles/tokens/` and `styles/themes/` is generated from the
-repository-level JSON:
+The SCSS under `styles/tokens/`, `styles/themes/` and the typed showcase token
+catalogue are generated from repository-level JSON:
 
 ```bash
 npm run tokens:validate
@@ -134,11 +146,15 @@ import { GhThemeService } from 'gh-design-system';
 
 const themeService = inject(GhThemeService);
 themeService.setTheme('dark');
-themeService.toggleTheme();
+themeService.setTheme('system');
+
+themeService.preference();
+themeService.resolvedTheme();
 ```
 
-The service persists explicit preferences in local storage. If no explicit
-preference exists, the CSS foundations respect `prefers-color-scheme`.
+The service persists `light`, `dark` or `system` in local storage. In system
+mode it removes the explicit attribute and reacts to
+`prefers-color-scheme`. Browser access is guarded for SSR.
 
 Theme priority is explicit user preference, then system preference, then light
 as the default.
@@ -157,6 +173,31 @@ Then add `@use 'gh-design-system/styles';` and, if desired,
 `@use 'gh-design-system/styles/foundations';` to the consumer's global SCSS.
 Import public TypeScript APIs from `gh-design-system`.
 
+## Showcase routes
+
+| Route         | Documentation                 |
+| ------------- | ----------------------------- |
+| `/`           | Overview and system status    |
+| `/colors`     | Primitive and semantic colors |
+| `/typography` | Families and type scale       |
+| `/spacing`    | Spacing scale                 |
+| `/radii`      | Border radii                  |
+| `/shadows`    | Theme-aware elevation         |
+
+The shell provides a desktop sidebar, accessible mobile menu, active route
+state and the Light/Dark/System selector.
+
+## Adding a showcase page
+
+1. Create a standalone component under `projects/showcase/src/app/pages/`.
+2. Add a lazy route in `app.routes.ts`.
+3. Add one navigation entry to `SHOWCASE_NAVIGATION`.
+4. Consume public design-system variables and shared documentation components.
+5. Add behavioral tests for routing or interaction where they provide value.
+
+Components under `showcase/src/app/shared` and `layout` are documentation-only.
+They must not be exported from the library public API.
+
 ## Scope
 
 This release is deliberately limited to foundations:
@@ -165,8 +206,8 @@ This release is deliberately limited to foundations:
 - Light and dark themes
 - Opt-in global foundations and reusable SCSS mixins
 - Deterministic JSON validation and SCSS generation
-- A strongly typed Angular theme service
-- A minimal standalone integration showcase
+- A strongly typed, SSR-safe Angular theme service
+- A routed, responsive and accessible foundations showcase
 
 Button, Card, Hero and other product components are deferred to later work.
 See [the architecture notes](docs/architecture.md) and

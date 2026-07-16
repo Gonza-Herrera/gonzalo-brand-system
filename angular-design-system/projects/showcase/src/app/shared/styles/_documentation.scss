@@ -1,0 +1,56 @@
+@mixin page {
+  display: grid;
+  gap: var(--gh-space-section);
+  width: min(100%, var(--gh-layout-container-max));
+  margin-inline: auto;
+}
+
+@mixin page-header {
+  display: grid;
+  gap: var(--gh-space-md);
+  max-width: var(--gh-layout-reading-max);
+
+  h1,
+  p {
+    margin: 0;
+  }
+
+  h1 {
+    font-size: clamp(var(--gh-font-size-h2), 7vw, var(--gh-font-size-h1));
+    letter-spacing: var(--gh-letter-spacing-display);
+    line-height: var(--gh-line-height-tight);
+  }
+
+  > p:first-child {
+    color: var(--gh-text-accent);
+    font-size: var(--gh-font-size-label);
+    font-weight: var(--gh-font-weight-bold);
+    letter-spacing: var(--gh-letter-spacing-wide);
+    text-transform: uppercase;
+  }
+
+  > p:last-child {
+    color: var(--gh-text-secondary);
+  }
+}
+
+@mixin token-meta {
+  display: grid;
+  gap: var(--gh-space-xs);
+  min-width: 0;
+
+  strong {
+    line-height: var(--gh-line-height-heading);
+  }
+
+  span,
+  code {
+    color: var(--gh-text-muted);
+    font-size: var(--gh-font-size-caption);
+  }
+
+  code {
+    overflow-wrap: anywhere;
+    font-family: ui-monospace, 'SFMono-Regular', consolas, monospace;
+  }
+}

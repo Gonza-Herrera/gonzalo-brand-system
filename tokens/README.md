@@ -27,6 +27,11 @@ The Angular library SCSS files under
 `angular-design-system/projects/gh-design-system/src/lib/styles/tokens/` and
 `styles/themes/` are generated artifacts. Do not edit them manually.
 
+The showcase token catalogue at
+`angular-design-system/projects/showcase/src/app/shared/data/foundation-tokens.generated.ts`
+is generated from the same source, so displayed names, variables and technical
+values cannot drift from the library.
+
 ## Validation and generation
 
 From `angular-design-system/`:
@@ -41,5 +46,5 @@ Validation rejects invalid JSON, duplicate object keys, duplicate token paths,
 missing references, circular references, unpredictable names and incomplete
 dark-theme coverage.
 
-The build and test scripts run `tokens:check` so stale generated SCSS cannot be
-merged accidentally.
+The build and test scripts run `tokens:check` so stale generated SCSS or
+showcase data cannot be merged accidentally.

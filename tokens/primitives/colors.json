@@ -24,6 +24,14 @@
       "$type": "color",
       "$value": "#A8E6CF"
     },
+    "sand": {
+      "$type": "color",
+      "$value": "#FCD5CE"
+    },
+    "sky": {
+      "$type": "color",
+      "$value": "#7FD8F7"
+    },
     "white": {
       "$type": "color",
       "$value": "#FFFFFF"

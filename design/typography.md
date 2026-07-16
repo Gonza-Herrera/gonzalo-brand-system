@@ -1,16 +1,16 @@
 # Typography
 
-## Primary
-
-Inter
-
-## Secondary
+## Display and Headings
 
 Manrope
 
+## Interface and Body
+
+Inter
+
 ## Fallback
 
-SF Pro Display
+system-ui, SF Pro Display, sans-serif
 
 ## Principles
 
@@ -18,3 +18,4 @@ SF Pro Display
 - High readability
 - Generous whitespace
 - Clear hierarchy
+- Resilient system fallbacks

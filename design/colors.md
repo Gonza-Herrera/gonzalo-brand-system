@@ -22,6 +22,14 @@ Deep Ink
 Mint
 #A8E6CF
 
+## Secondary Palette
+
+Warm Sand
+#FCD5CE
+
+Sky
+#7FD8F7
+
 ## Usage
 
 Lavender = AI
@@ -33,3 +41,5 @@ Blue = Technology
 Ink = Typography
 
 Ivory = Background
+
+Mint, Warm Sand and Sky = Supporting brand expressions

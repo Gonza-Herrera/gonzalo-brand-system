@@ -26,11 +26,19 @@
       "$type": "dimension",
       "$value": "1.5rem"
     },
+    "bodyLarge": {
+      "$type": "dimension",
+      "$value": "1.25rem"
+    },
     "body": {
       "$type": "dimension",
       "$value": "1.125rem"
     },
     "caption": {
+      "$type": "dimension",
+      "$value": "0.875rem"
+    },
+    "label": {
       "$type": "dimension",
       "$value": "0.875rem"
     }
@@ -68,6 +76,10 @@
     }
   },
   "letterSpacing": {
+    "normal": {
+      "$type": "dimension",
+      "$value": "0em"
+    },
     "tight": {
       "$type": "dimension",
       "$value": "-0.025em"

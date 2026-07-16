@@ -1,0 +1,34 @@
+<article class="page">
+  <header class="page-header">
+    <p>Foundation · Radii</p>
+    <h1>Border radius system</h1>
+    <p>
+      Soft geometry makes technical interfaces feel approachable while keeping surfaces precise and
+      composed.
+    </p>
+  </header>
+
+  <showcase-documentation-section
+    sectionId="radius-scale"
+    eyebrow="Scale"
+    title="Soft, predictable shapes"
+    description="Each example combines the official radius with semantic surface, border and shadow tokens."
+  >
+    <div class="radius-grid">
+      @for (radius of radiusTokens; track radius.tokenPath) {
+        <article class="radius-token" [style.--preview-radius]="radius.cssValue">
+          <div class="radius-token__preview" aria-hidden="true">
+            <span></span>
+          </div>
+          <div class="token-meta">
+            <strong>{{ radius.name }}</strong>
+            <code>{{ radius.cssVariable }}</code>
+            <span>{{ radius.value }}</span>
+          </div>
+        </article>
+      }
+    </div>
+  </showcase-documentation-section>
+
+  <showcase-code-preview label="Radius token usage" [code]="codeExample" />
+</article>

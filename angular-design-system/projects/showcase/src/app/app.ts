@@ -1,18 +1,12 @@
-import { Component, inject } from '@angular/core';
-import { GhThemeService } from 'gh-design-system';
+import { Component } from '@angular/core';
+
+import { ShowcaseShell } from './layout/showcase-shell/showcase-shell';
 
 @Component({
   selector: 'app-root',
   standalone: true,
+  imports: [ShowcaseShell],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
-export class App {
-  private readonly themeService = inject(GhThemeService);
-
-  protected readonly activeTheme = this.themeService.theme;
-
-  protected toggleTheme(): void {
-    this.themeService.toggleTheme();
-  }
-}
+export class App {}

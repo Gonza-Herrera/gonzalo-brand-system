@@ -1,0 +1,23 @@
+<header class="header">
+  <a class="brand" routerLink="/" aria-label="Gonzalo Herrera Design System overview">
+    <span class="brand__mark" aria-hidden="true">GH</span>
+    <span>
+      <strong>Gonzalo Herrera</strong>
+      <small>Design System</small>
+    </span>
+  </a>
+
+  <div class="header__actions">
+    <showcase-theme-toggle />
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-controls="showcase-navigation"
+      [attr.aria-expanded]="menuOpen()"
+      [attr.aria-label]="menuOpen() ? 'Close navigation' : 'Open navigation'"
+      (click)="menuToggled.emit()"
+    >
+      <span aria-hidden="true">{{ menuOpen() ? '×' : '☰' }}</span>
+    </button>
+  </div>
+</header>

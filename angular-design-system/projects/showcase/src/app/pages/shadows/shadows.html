@@ -1,0 +1,34 @@
+<article class="page">
+  <header class="page-header">
+    <p>Foundation · Elevation</p>
+    <h1>Elevation and shadows</h1>
+    <p>
+      Three restrained elevation levels separate surfaces without adding visual noise. Their values
+      adapt automatically between light and dark themes.
+    </p>
+  </header>
+
+  <showcase-documentation-section
+    sectionId="shadow-scale"
+    eyebrow="Scale"
+    title="Subtle, theme-aware depth"
+    description="Technical values below reference the light primitive; the semantic CSS variables provide the correct active-theme shadow."
+  >
+    <div class="shadow-grid">
+      @for (shadow of shadowTokens; track shadow.tokenPath) {
+        <article class="shadow-token" [style.--preview-shadow]="shadow.cssValue">
+          <div class="shadow-token__preview">
+            <span>Surface</span>
+          </div>
+          <div class="token-meta">
+            <strong>{{ shadow.name }}</strong>
+            <code>{{ shadow.cssVariable }}</code>
+            <span>{{ shadow.value }}</span>
+          </div>
+        </article>
+      }
+    </div>
+  </showcase-documentation-section>
+
+  <showcase-code-preview label="Shadow token usage" [code]="codeExample" />
+</article>
