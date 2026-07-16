@@ -1,10 +1,18 @@
 # gh-design-system
 
-Reusable Angular and SCSS foundations for the Gonzalo Herrera Design System.
+Reusable Angular components and SCSS foundations for the Gonzalo Herrera Design
+System.
 
 ## Public Angular API
 
 - `GhThemeService`
+- `GhButtonComponent`
+- `GhButtonVariant`
+- `GhButtonSize`
+- `GhButtonType`
+- `GH_BUTTON_VARIANTS`
+- `GH_BUTTON_SIZES`
+- `GH_BUTTON_TYPES`
 - `GhTheme`
 - `GhThemePreference`
 - `GH_THEMES`
@@ -44,8 +52,22 @@ Apply `data-theme="light"` or `data-theme="dark"` to the document root, or use
 The service exposes `preference` and `resolvedTheme` signals, persists the
 selected preference and avoids browser-only APIs during SSR.
 
-Semantic tokens such as `--gh-text-primary`, `--gh-surface-primary` and
-`--gh-border-default` are the supported styling contract for future
-components.
+## Button
 
-No visual Angular components are published in this release.
+```ts
+import { GhButtonComponent } from 'gh-design-system';
+```
+
+```html
+<gh-button variant="secondary" size="lg">View project</gh-button>
+```
+
+The standalone component supports primary, secondary, ghost and danger
+variants; small, medium and large sizes; native form types; disabled, loading
+and full-width states; and start/end icon projection. See
+[`src/lib/components/button/README.md`](src/lib/components/button/README.md)
+for its complete API and accessibility guidance.
+
+Semantic tokens such as `--gh-text-primary`, `--gh-surface-primary`,
+`--gh-action-primary-background` and `--gh-focus-ring` are the supported
+styling contract for public components.

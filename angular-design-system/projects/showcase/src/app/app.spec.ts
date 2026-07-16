@@ -31,6 +31,7 @@ describe('App routing', () => {
       ['/spacing', 'Spacing system'],
       ['/radii', 'Border radius system'],
       ['/shadows', 'Elevation and shadows'],
+      ['/buttons', 'Button'],
     ]);
 
     fixture.detectChanges();

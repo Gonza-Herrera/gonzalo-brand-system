@@ -32,4 +32,9 @@ export const SHOWCASE_NAVIGATION: readonly ShowcaseNavigationItem[] = [
     path: '/shadows',
     description: 'Theme-aware elevation',
   },
+  {
+    label: 'Buttons',
+    path: '/buttons',
+    description: 'Action variants, states and usage',
+  },
 ];

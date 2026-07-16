@@ -79,6 +79,86 @@
       "hover": {
         "$type": "color",
         "$value": "{color.cloudBlue}"
+      },
+      "active": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {color.lavender} 82%, {color.ink})"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {color.lavender} 72%, {color.ink})"
+      }
+    },
+    "secondary": {
+      "background": {
+        "$type": "color",
+        "$value": "#1F2937"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "#F9FAFB"
+      },
+      "hover": {
+        "$type": "color",
+        "$value": "#263244"
+      },
+      "active": {
+        "$type": "color",
+        "$value": "#2B374A"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "#4B5563"
+      }
+    },
+    "ghost": {
+      "text": {
+        "$type": "color",
+        "$value": "#F9FAFB"
+      },
+      "hover": {
+        "$type": "color",
+        "$value": "rgb(249 250 251 / 10%)"
+      },
+      "active": {
+        "$type": "color",
+        "$value": "rgb(249 250 251 / 16%)"
+      }
+    },
+    "danger": {
+      "background": {
+        "$type": "color",
+        "$value": "#B42318"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{color.white}"
+      },
+      "hover": {
+        "$type": "color",
+        "$value": "#912018"
+      },
+      "active": {
+        "$type": "color",
+        "$value": "#7A271A"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "#912018"
+      }
+    },
+    "disabled": {
+      "background": {
+        "$type": "color",
+        "$value": "#374151"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "#D1D5DB"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "#4B5563"
       }
     }
   },

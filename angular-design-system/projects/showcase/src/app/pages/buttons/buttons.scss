@@ -1,0 +1,175 @@
+@use '../../shared/styles/documentation' as documentation;
+
+.page {
+  @include documentation.page;
+}
+
+.page-header {
+  @include documentation.page-header;
+}
+
+.demo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gh-space-md);
+}
+
+.demo-grid--variants {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.demo-item {
+  overflow: hidden;
+  border: var(--gh-border-width-default) solid var(--gh-border-default);
+  border-radius: var(--gh-radius-lg);
+  background: var(--gh-surface-primary);
+  box-shadow: var(--gh-shadow-sm);
+
+  > div:last-child {
+    display: grid;
+    gap: var(--gh-space-xs);
+    padding: var(--gh-space-md);
+  }
+
+  h3,
+  p {
+    margin: 0;
+  }
+
+  p,
+  code {
+    color: var(--gh-text-muted);
+    font-size: var(--gh-font-size-caption);
+  }
+}
+
+.demo-item__preview {
+  display: grid;
+  min-height: var(--gh-space-section);
+  place-items: center;
+  padding: var(--gh-space-lg);
+  border-bottom: var(--gh-border-width-default) solid var(--gh-border-subtle);
+  background: var(--gh-background-subtle);
+}
+
+.full-width-example {
+  display: grid;
+  gap: var(--gh-space-sm);
+  margin-top: var(--gh-space-lg);
+  padding: var(--gh-space-lg);
+  border: var(--gh-border-width-default) solid var(--gh-border-default);
+  border-radius: var(--gh-radius-lg);
+  background: var(--gh-surface-primary);
+
+  p {
+    margin: 0;
+    color: var(--gh-text-muted);
+    font-size: var(--gh-font-size-caption);
+    font-weight: var(--gh-font-weight-semibold);
+  }
+}
+
+.content-examples,
+.form-example__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--gh-space-md);
+}
+
+.accessibility-note {
+  margin: var(--gh-space-md) 0 0;
+  color: var(--gh-text-secondary);
+}
+
+.form-example {
+  display: grid;
+  gap: var(--gh-space-md);
+  max-width: var(--gh-layout-reading-max);
+  padding: var(--gh-space-lg);
+  border: var(--gh-border-width-default) solid var(--gh-border-default);
+  border-radius: var(--gh-radius-lg);
+  background: var(--gh-surface-primary);
+  box-shadow: var(--gh-shadow-sm);
+
+  label {
+    font-size: var(--gh-font-size-label);
+    font-weight: var(--gh-font-weight-semibold);
+  }
+
+  input {
+    width: 100%;
+    min-height: var(--gh-space-2xl);
+    padding: var(--gh-space-sm) var(--gh-space-md);
+    border: var(--gh-border-width-default) solid var(--gh-border-default);
+    border-radius: var(--gh-radius-md);
+    background: var(--gh-background-primary);
+    color: var(--gh-text-primary);
+    font: inherit;
+  }
+
+  input:focus-visible {
+    outline: var(--gh-border-width-focus) solid var(--gh-focus-ring);
+    outline-offset: var(--gh-space-xs);
+  }
+
+  > p {
+    margin: 0;
+    color: var(--gh-text-secondary);
+  }
+}
+
+.code-examples {
+  display: grid;
+  gap: var(--gh-space-lg);
+
+  > header {
+    display: grid;
+    gap: var(--gh-space-xs);
+
+    p,
+    h2 {
+      margin: 0;
+    }
+
+    p {
+      color: var(--gh-text-accent);
+      font-size: var(--gh-font-size-label);
+      font-weight: var(--gh-font-weight-bold);
+      letter-spacing: var(--gh-letter-spacing-wide);
+      text-transform: uppercase;
+    }
+  }
+
+  > div {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--gh-space-md);
+  }
+}
+
+@media (max-width: 64rem) {
+  .demo-grid,
+  .demo-grid--variants {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 42rem) {
+  .demo-grid,
+  .demo-grid--variants,
+  .code-examples > div {
+    grid-template-columns: 1fr;
+  }
+
+  .content-examples,
+  .form-example__actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .content-examples gh-button,
+  .form-example__actions gh-button {
+    width: 100%;
+  }
+}

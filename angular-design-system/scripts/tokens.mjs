@@ -21,6 +21,7 @@ const primitiveFiles = [
   'layout.json',
   'shadows.json',
   'typography.json',
+  'motion.json',
 ];
 
 const typographyCategories = new Set([
@@ -49,6 +50,24 @@ const requiredSemanticPaths = [
   'action.primary.background',
   'action.primary.text',
   'action.primary.hover',
+  'action.primary.active',
+  'action.primary.border',
+  'action.secondary.background',
+  'action.secondary.text',
+  'action.secondary.hover',
+  'action.secondary.active',
+  'action.secondary.border',
+  'action.ghost.text',
+  'action.ghost.hover',
+  'action.ghost.active',
+  'action.danger.background',
+  'action.danger.text',
+  'action.danger.hover',
+  'action.danger.active',
+  'action.danger.border',
+  'action.disabled.background',
+  'action.disabled.text',
+  'action.disabled.border',
   'focus.ring',
   'selection.background',
   'selection.text',
@@ -60,7 +79,9 @@ const requiredSemanticPaths = [
 const referencePattern = /\{([^{}]+)\}/g;
 const supportedTokenTypes = new Set([
   'color',
+  'cubicBezier',
   'dimension',
+  'duration',
   'fontFamily',
   'fontWeight',
   'number',

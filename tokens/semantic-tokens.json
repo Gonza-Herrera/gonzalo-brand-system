@@ -76,6 +76,86 @@
       "hover": {
         "$type": "color",
         "$value": "{color.cloudBlue}"
+      },
+      "active": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {color.lavender} 82%, {color.ink})"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {color.lavender} 72%, {color.ink})"
+      }
+    },
+    "secondary": {
+      "background": {
+        "$type": "color",
+        "$value": "{color.white}"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{color.ink}"
+      },
+      "hover": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {color.lavender} 12%, {color.white})"
+      },
+      "active": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {color.lavender} 20%, {color.white})"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {color.ink} 20%, transparent)"
+      }
+    },
+    "ghost": {
+      "text": {
+        "$type": "color",
+        "$value": "{color.ink}"
+      },
+      "hover": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {color.lavender} 14%, transparent)"
+      },
+      "active": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {color.lavender} 24%, transparent)"
+      }
+    },
+    "danger": {
+      "background": {
+        "$type": "color",
+        "$value": "#B42318"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{color.white}"
+      },
+      "hover": {
+        "$type": "color",
+        "$value": "#912018"
+      },
+      "active": {
+        "$type": "color",
+        "$value": "#7A271A"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "#912018"
+      }
+    },
+    "disabled": {
+      "background": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {color.ink} 8%, {color.white})"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "#667085"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "#D0D5DD"
       }
     }
   },

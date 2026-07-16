@@ -11,14 +11,14 @@ describe('ShowcaseShell', () => {
     }).compileComponents();
   });
 
-  it('renders the foundation navigation', () => {
+  it('renders the design system navigation', () => {
     const fixture = TestBed.createComponent(ShowcaseShell);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(compiled.querySelectorAll('nav[aria-label="Foundation documentation"] a')).toHaveLength(
-      6,
-    );
+    expect(
+      compiled.querySelectorAll('nav[aria-label="Design system documentation"] a'),
+    ).toHaveLength(7);
     expect(compiled.querySelector('.skip-link')?.getAttribute('href')).toBe('#showcase-content');
   });
 
