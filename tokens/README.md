@@ -10,6 +10,7 @@ tokens/
 │   ├── borders.json
 │   ├── colors.json
 │   ├── layout.json
+│   ├── motion.json
 │   ├── radii.json
 │   ├── shadows.json
 │   ├── spacing.json
@@ -48,3 +49,7 @@ dark-theme coverage.
 
 The build and test scripts run `tokens:check` so stale generated SCSS or
 showcase data cannot be merged accidentally.
+
+`motion.json` currently defines the minimal timing contract required by public
+interactive components: fast state transitions, a slow loading cycle and the
+standard easing curve.

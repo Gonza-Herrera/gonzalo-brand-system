@@ -31,13 +31,26 @@ Example:
 - Surface: `--gh-surface-primary`, `secondary`, `elevated`
 - Text: `--gh-text-primary`, `secondary`, `muted`, `inverse`, `accent`
 - Border: `--gh-border-default`, `subtle`, `strong`
-- Primary action: `--gh-action-primary-background`, `text`, `hover`
+- Primary action: `--gh-action-primary-background`, `text`, `hover`, `active`,
+  `border`
+- Secondary action: `--gh-action-secondary-background`, `text`, `hover`,
+  `active`, `border`
+- Ghost action: `--gh-action-ghost-text`, `hover`, `active`
+- Danger action: `--gh-action-danger-background`, `text`, `hover`, `active`,
+  `border`
+- Disabled action: `--gh-action-disabled-background`, `text`, `border`
 - Focus: `--gh-focus-ring`
 - Selection: `--gh-selection-background`, `text`
 - Elevation: `--gh-shadow-sm`, `md`, `lg`
 
 Future components must not redefine these variables locally without a
 documented product-level reason.
+
+Primitive motion variables provide a minimal shared interaction rhythm:
+
+- `--gh-motion-duration-fast`
+- `--gh-motion-duration-slow`
+- `--gh-motion-easing-standard`
 
 ## Theme application
 
@@ -94,5 +107,6 @@ by showcase pages.
 Primary and secondary text values are based on the established high-contrast
 neutral values. Accent text, focus and subtle surfaces use `color-mix()` to
 derive accessible brand-aware values without inventing a separate palette.
-Automated WCAG contrast regression testing remains recommended before these
-derived values are used in public interactive components.
+Button text/background pairs were selected for strong contrast in both themes;
+automated WCAG contrast regression testing remains recommended as the component
+catalogue grows.

@@ -2,9 +2,9 @@
 
 Official Angular workspace for the Gonzalo Herrera Design System.
 
-This foundations release provides a reusable Angular library, a routed
-standalone showcase, token-driven SCSS, light/dark/system theming and unit-test
-configuration. It intentionally contains no public product components.
+This release provides a reusable Angular library, the first public Button
+component, a routed standalone showcase, token-driven SCSS,
+light/dark/system theming and unit-test configuration.
 
 ## Requirements
 
@@ -25,6 +25,7 @@ angular-design-system/
 │   │   └── src/
 │   │       ├── lib/
 │   │       │   ├── components/
+│   │       │   │   └── button/
 │   │       │   ├── patterns/
 │   │       │   ├── styles/
 │   │       │   └── theming/
@@ -131,6 +132,37 @@ npm run tokens:check
 
 Generated files must never be edited manually.
 
+The token contract includes semantic action roles for primary, secondary,
+ghost, danger and disabled states, plus minimal motion duration and easing
+variables for interactive components.
+
+## Button component
+
+Import the standalone component from the package root:
+
+```ts
+import { GhButtonComponent } from 'gh-design-system';
+
+@Component({
+  standalone: true,
+  imports: [GhButtonComponent],
+})
+export class ExampleComponent {}
+```
+
+```html
+<gh-button>Save changes</gh-button>
+
+<gh-button variant="secondary" size="lg"> View project </gh-button>
+
+<gh-button type="submit" [loading]="isSaving()"> Save </gh-button>
+```
+
+Supported public types are `GhButtonVariant`, `GhButtonSize` and
+`GhButtonType`. The native button defaults to `type="button"` and supports
+disabled, loading, full-width and start/end icon content. Icon-only buttons
+must provide `aria-label`.
+
 ## Theme consumption
 
 Themes use the `data-theme` attribute on the root document element:
@@ -183,6 +215,7 @@ Import public TypeScript APIs from `gh-design-system`.
 | `/spacing`    | Spacing scale                 |
 | `/radii`      | Border radii                  |
 | `/shadows`    | Theme-aware elevation         |
+| `/buttons`    | Public Button component       |
 
 The shell provides a desktop sidebar, accessible mobile menu, active route
 state and the Light/Dark/System selector.
@@ -200,7 +233,7 @@ They must not be exported from the library public API.
 
 ## Scope
 
-This release is deliberately limited to foundations:
+This release is deliberately limited to foundations and Button:
 
 - Primitive and semantic CSS custom properties
 - Light and dark themes
@@ -208,8 +241,10 @@ This release is deliberately limited to foundations:
 - Deterministic JSON validation and SCSS generation
 - A strongly typed, SSR-safe Angular theme service
 - A routed, responsive and accessible foundations showcase
+- A standalone, accessible and token-driven public Button component
 
-Button, Card, Hero and other product components are deferred to later work.
-See [the architecture notes](docs/architecture.md) and
-[tokens and themes guide](docs/tokens-and-themes.md) for contribution
-boundaries.
+Badge, Tag, Card, Hero and other product components are deferred to later work.
+See [the architecture notes](docs/architecture.md), [tokens and themes
+guide](docs/tokens-and-themes.md) and
+[Button documentation](projects/gh-design-system/src/lib/components/button/README.md)
+for contribution boundaries.

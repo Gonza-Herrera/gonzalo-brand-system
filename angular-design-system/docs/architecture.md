@@ -18,6 +18,25 @@ Public package and documentation routes
 
 `npm run tokens:check` runs before builds and tests.
 
+## Library component responsibilities
+
+```text
+components/
+└── button/
+    ├── button.component.ts
+    ├── button.component.html
+    ├── button.component.scss
+    ├── button.component.spec.ts
+    ├── button.types.ts
+    └── README.md
+```
+
+Public components are standalone, strictly typed, SSR-safe and exported only
+through `src/public-api.ts`. Each component owns encapsulated styles and
+colocated behavioral tests. Button keeps native form semantics by rendering a
+real `<button>` and relying on the native bubbling `click` event rather than a
+redundant Angular output.
+
 ## Library style responsibilities
 
 ```text
@@ -51,7 +70,8 @@ app/
 │   ├── typography/
 │   ├── spacing/
 │   ├── radii/
-│   └── shadows/
+│   ├── shadows/
+│   └── buttons/
 └── shared/
     ├── components/
     ├── data/
@@ -87,8 +107,11 @@ The showcase theme toggle is an internal consumer of this public service.
 - Token validation checks syntax, duplicate keys, names, references, cycles and
   theme coverage.
 - Library tests cover explicit, stored, system and SSR theme behavior.
+- Button tests cover projection, typed inputs, native form behavior, disabled
+  and accessible loading states.
 - Showcase tests cover all routes, active navigation, wildcard redirect,
-  mobile menu behavior and accessible theme selection.
+  mobile menu behavior, accessible theme selection and public component
+  integration.
 - Production builds validate strict templates, lazy routes and public SCSS
   packaging.
 

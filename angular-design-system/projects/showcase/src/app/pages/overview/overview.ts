@@ -34,8 +34,8 @@ export class OverviewPage {
     },
     {
       area: 'Components',
-      description: 'Standalone Angular primitives will arrive incrementally.',
-      status: 'Planned',
+      description: 'Button is available; additional primitives will arrive incrementally.',
+      status: 'In progress',
     },
     {
       area: 'Patterns',

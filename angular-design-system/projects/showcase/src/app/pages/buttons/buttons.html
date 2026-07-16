@@ -1,0 +1,194 @@
+<article class="page">
+  <header class="page-header">
+    <p>Component · Actions</p>
+    <h1>Button</h1>
+    <p>
+      The first public Angular component establishes a native, accessible and token-driven action
+      primitive for interfaces and forms.
+    </p>
+  </header>
+
+  <showcase-documentation-section
+    sectionId="button-variants"
+    eyebrow="Variants"
+    title="A clear hierarchy for every action"
+    description="Use one primary action per section. Secondary and ghost reduce emphasis; danger remains reserved for destructive decisions."
+  >
+    <div class="demo-grid demo-grid--variants">
+      @for (item of variants; track item.variant) {
+        <article class="demo-item">
+          <div class="demo-item__preview">
+            <gh-button [variant]="item.variant">{{ item.label }} action</gh-button>
+          </div>
+          <div>
+            <h3>{{ item.label }}</h3>
+            <p>{{ item.description }}</p>
+            <code>variant="{{ item.variant }}"</code>
+          </div>
+        </article>
+      }
+    </div>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="button-sizes"
+    eyebrow="Sizes"
+    title="Three deliberate control densities"
+    description="Each size adjusts minimum height, horizontal space, label scale, icon size and loading indicator."
+  >
+    <div class="demo-grid">
+      @for (item of sizes; track item.size) {
+        <article class="demo-item">
+          <div class="demo-item__preview">
+            <gh-button [size]="item.size">{{ item.label }} button</gh-button>
+          </div>
+          <div>
+            <h3>{{ item.label }}</h3>
+            <p>{{ item.description }}</p>
+            <code>size="{{ item.size }}"</code>
+          </div>
+        </article>
+      }
+    </div>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="button-states"
+    eyebrow="States"
+    title="Predictable feedback without layout shifts"
+    description="Hover and active states are interactive. Disabled and loading use distinct semantic tokens and block native activation."
+  >
+    <div class="demo-grid demo-grid--states">
+      <article class="demo-item">
+        <div class="demo-item__preview">
+          <gh-button>Default</gh-button>
+        </div>
+        <div>
+          <h3>Default and interactive</h3>
+          <p>Hover, press and focus this real button to inspect feedback.</p>
+        </div>
+      </article>
+
+      <article class="demo-item">
+        <div class="demo-item__preview">
+          <gh-button disabled>Unavailable</gh-button>
+        </div>
+        <div>
+          <h3>Disabled</h3>
+          <p>Uses the native disabled attribute and remains visually legible.</p>
+        </div>
+      </article>
+
+      <article class="demo-item">
+        <div class="demo-item__preview">
+          <gh-button loading>Save changes</gh-button>
+        </div>
+        <div>
+          <h3>Loading</h3>
+          <p>Preserves label width, disables activation and exposes <code>aria-busy</code>.</p>
+        </div>
+      </article>
+    </div>
+
+    <div class="full-width-example">
+      <p>Full width</p>
+      <gh-button fullWidth>Continue to project</gh-button>
+    </div>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="button-content"
+    eyebrow="Content"
+    title="Text and lightweight icon projection"
+    description="Decorative icons use start and end projection selectors. Icon-only actions require an accessible label."
+  >
+    <div class="content-examples">
+      <gh-button>Text only</gh-button>
+
+      <gh-button variant="secondary">
+        <svg
+          ghButtonIconStart
+          width="1em"
+          height="1em"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          aria-hidden="true"
+        >
+          <path d="M12 5v14M5 12h14" />
+        </svg>
+        Add project
+      </gh-button>
+
+      <gh-button variant="secondary">
+        View project
+        <svg
+          ghButtonIconEnd
+          width="1em"
+          height="1em"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          aria-hidden="true"
+        >
+          <path d="m9 18 6-6-6-6" />
+        </svg>
+      </gh-button>
+
+      <gh-button variant="ghost" aria-label="Add project">
+        <svg
+          ghButtonIconStart
+          width="1em"
+          height="1em"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          aria-hidden="true"
+        >
+          <path d="M12 5v14M5 12h14" />
+        </svg>
+      </gh-button>
+    </div>
+
+    <p class="accessibility-note">
+      Icon-only example: the projected SVG is decorative and the native button receives
+      <code>aria-label="Add project"</code>.
+    </p>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="button-form"
+    eyebrow="Forms"
+    title="Native submit and reset behavior"
+    description="The default type is button. Submit and reset are explicit inputs, preserving predictable Angular form behavior."
+  >
+    <form class="form-example" (submit)="handleSubmit($event)" (reset)="handleReset()">
+      <label for="project-name">Project name</label>
+      <input id="project-name" name="projectName" value="Design System" required />
+
+      <div class="form-example__actions">
+        <gh-button type="submit">Submit form</gh-button>
+        <gh-button type="reset" variant="ghost">Reset</gh-button>
+      </div>
+
+      <p aria-live="polite">{{ formStatus() }}</p>
+    </form>
+  </showcase-documentation-section>
+
+  <section class="code-examples" aria-labelledby="button-code-examples">
+    <header>
+      <p>Implementation</p>
+      <h2 id="button-code-examples">Public API examples</h2>
+    </header>
+
+    <div>
+      <showcase-code-preview label="Basic button" [code]="basicExample" />
+      <showcase-code-preview label="Variant and size" [code]="variantExample" />
+      <showcase-code-preview label="Loading submit button" [code]="loadingExample" />
+      <showcase-code-preview label="Accessible icon-only button" [code]="iconExample" />
+    </div>
+  </section>
+</article>

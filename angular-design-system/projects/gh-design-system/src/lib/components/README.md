@@ -1,7 +1,12 @@
 # Components
 
-Reusable standalone Angular components will live here.
+Reusable standalone Angular components live in dedicated feature directories.
 
-The foundations release intentionally contains no product components. Each
-future component should own its public API, template, SCSS, tests and
-accessibility documentation in a dedicated feature directory.
+## Available
+
+- `button/`: public native-button wrapper with variants, sizes, form behavior,
+  loading state, icon projection, tests and accessibility documentation.
+
+Each component owns its public API, template, encapsulated SCSS, colocated
+tests and component-specific README. Internal showcase components remain in the
+application and are never added here.

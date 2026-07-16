@@ -1,0 +1,25 @@
+<button
+  [class]="buttonClasses()"
+  [type]="type()"
+  [disabled]="interactionDisabled()"
+  [attr.aria-label]="ariaLabel()"
+  [attr.aria-busy]="loading() ? 'true' : null"
+>
+  <span class="gh-button__content" [class.gh-button__content--loading]="loading()">
+    <span class="gh-button__icon gh-button__icon--start" aria-hidden="true">
+      <ng-content select="[ghButtonIconStart]" />
+    </span>
+
+    <span class="gh-button__label">
+      <ng-content />
+    </span>
+
+    <span class="gh-button__icon gh-button__icon--end" aria-hidden="true">
+      <ng-content select="[ghButtonIconEnd]" />
+    </span>
+  </span>
+
+  @if (loading()) {
+    <span class="gh-button__spinner" aria-hidden="true"></span>
+  }
+</button>
