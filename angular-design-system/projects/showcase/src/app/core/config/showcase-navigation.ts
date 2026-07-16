@@ -47,4 +47,9 @@ export const SHOWCASE_NAVIGATION: readonly ShowcaseNavigationItem[] = [
     path: '/tags',
     description: 'Metadata, selection and removal',
   },
+  {
+    label: 'Cards',
+    path: '/cards',
+    description: 'Content surfaces and typed compositions',
+  },
 ];

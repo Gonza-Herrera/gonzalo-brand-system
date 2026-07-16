@@ -34,6 +34,7 @@ describe('App routing', () => {
       ['/buttons', 'Button'],
       ['/badges', 'Badge'],
       ['/tags', 'Tag'],
+      ['/cards', 'Card family'],
     ]);
 
     fixture.detectChanges();

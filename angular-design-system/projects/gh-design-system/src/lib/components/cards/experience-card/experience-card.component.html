@@ -1,0 +1,71 @@
+<gh-card
+  [variant]="highlighted() ? 'elevated' : 'outlined'"
+  padding="md"
+  radius="lg"
+  fullHeight
+  [ariaLabel]="experience().role + ' at ' + experience().company"
+>
+  <header ghCardHeader class="experience-card__header">
+    <div class="experience-card__identity">
+      @if (experience().companyLogoSrc) {
+        <div class="experience-card__logo">
+          <img
+            [src]="experience().companyLogoSrc"
+            [alt]="experience().companyLogoAlt ?? ''"
+            loading="lazy"
+          />
+        </div>
+      }
+
+      <div>
+        <h2>{{ experience().role }}</h2>
+        <p class="experience-card__company">{{ experience().company }}</p>
+        <p class="experience-card__period">{{ period() }}</p>
+      </div>
+    </div>
+
+    @if (experience().current || experience().location || workModeLabel()) {
+      <div class="experience-card__metadata">
+        @if (experience().current) {
+          <gh-badge variant="success">{{ experience().currentLabel ?? 'Current' }}</gh-badge>
+        }
+        @if (workModeLabel()) {
+          <gh-badge variant="info">{{ workModeLabel() }}</gh-badge>
+        }
+        @if (experience().location) {
+          <span>{{ experience().location }}</span>
+        }
+      </div>
+    }
+  </header>
+
+  <div ghCardContent class="experience-card__content">
+    @if (experience().description) {
+      <p>{{ experience().description }}</p>
+    }
+
+    @if (experience().achievements?.length) {
+      <section aria-label="Key achievements">
+        <h3>Key achievements</h3>
+        <ul>
+          @for (achievement of experience().achievements; track achievement) {
+            <li>{{ achievement }}</li>
+          }
+        </ul>
+      </section>
+    }
+  </div>
+
+  @if (experience().technologies?.length) {
+    <footer ghCardFooter class="experience-card__technologies">
+      <h3>Technologies</h3>
+      <ul>
+        @for (technology of experience().technologies; track technology) {
+          <li>
+            <gh-tag size="sm">{{ technology }}</gh-tag>
+          </li>
+        }
+      </ul>
+    </footer>
+  }
+</gh-card>

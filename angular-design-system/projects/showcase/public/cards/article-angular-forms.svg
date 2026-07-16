@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title description">
+  <title id="title">Abstract Angular forms illustration</title>
+  <desc id="description">Soft lavender and cloud blue interface panels on an ivory background.</desc>
+  <rect width="1200" height="675" fill="#F7F4F1"/>
+  <circle cx="1040" cy="100" r="220" fill="#CBB9E8" opacity=".55"/>
+  <circle cx="160" cy="620" r="260" fill="#A9C9F5" opacity=".45"/>
+  <rect x="210" y="120" width="780" height="435" rx="48" fill="#FFFFFF" stroke="#101828" stroke-opacity=".12" stroke-width="4"/>
+  <rect x="285" y="205" width="310" height="34" rx="17" fill="#101828" opacity=".88"/>
+  <rect x="285" y="282" width="630" height="64" rx="20" fill="#F7F4F1" stroke="#CBB9E8" stroke-width="4"/>
+  <rect x="285" y="382" width="420" height="64" rx="20" fill="#F7F4F1" stroke="#A9C9F5" stroke-width="4"/>
+  <rect x="745" y="382" width="170" height="64" rx="32" fill="#CBB9E8"/>
+</svg>

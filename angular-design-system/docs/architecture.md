@@ -24,6 +24,11 @@ Public package and documentation routes
 components/
 ├── badge/
 ├── button/
+├── cards/
+│   ├── card/
+│   ├── article-card/
+│   ├── experience-card/
+│   └── project-card/
 └── tag/
 ```
 
@@ -33,7 +38,8 @@ colocated behavioral tests. Button keeps native form semantics by rendering a
 real `<button>` and relying on the native bubbling `click` event rather than a
 redundant Angular output. Badge remains non-interactive. Tag selects between
 static, selectable and removable native semantics without combining those
-responsibilities.
+responsibilities. Specialized Cards compose the foundational Card, Badge and
+Tag rather than using Angular class inheritance.
 
 ## Library style responsibilities
 
@@ -71,7 +77,8 @@ app/
 │   ├── shadows/
 │   ├── buttons/
 │   ├── badges/
-│   └── tags/
+│   ├── tags/
+│   └── cards/
 └── shared/
     ├── components/
     ├── data/
@@ -113,6 +120,10 @@ The showcase theme toggle is an internal consumer of this public service.
   and indicator projection.
 - Tag tests cover static, native selectable and accessible removable behavior,
   including disabled and event propagation.
+- Card tests cover projection, visual variants and non-interactive base
+  semantics.
+- Specialized Card tests cover native navigation, optional media, semantic
+  lists, typed models and composition with Badge and Tag.
 - Showcase tests cover all routes, active navigation, wildcard redirect,
   mobile menu behavior, accessible theme selection and public component
   integration.

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title description">
+  <title id="title">Design system component illustration</title>
+  <desc id="description">A structured collection of pastel interface components.</desc>
+  <rect width="1200" height="675" fill="#101828"/>
+  <rect x="96" y="84" width="1008" height="507" rx="52" fill="#1F2937" stroke="#CBB9E8" stroke-opacity=".55" stroke-width="4"/>
+  <rect x="160" y="150" width="320" height="108" rx="28" fill="#CBB9E8"/>
+  <rect x="520" y="150" width="220" height="108" rx="28" fill="#F4B7A8"/>
+  <rect x="780" y="150" width="260" height="108" rx="54" fill="#A8E6CF"/>
+  <rect x="160" y="306" width="500" height="218" rx="36" fill="#F7F4F1"/>
+  <rect x="704" y="306" width="336" height="74" rx="24" fill="#A9C9F5"/>
+  <rect x="704" y="414" width="336" height="110" rx="28" fill="#FCD5CE"/>
+</svg>
