@@ -45,6 +45,9 @@ Example:
 - Tag interaction roles: `--gh-tag-{variant}-hover`, `active`,
   `selected-background`, `selected-text`, `selected-border`, `remove-hover`
   for neutral, accent and info
+- Card roles: `--gh-card-background`, `background-subtle`, `background-glass`,
+  `border`, `border-glass`, `border-hover`, `border-selected`,
+  `background-selected`, `shadow`, `shadow-hover`, `glass-blur`
 - Focus: `--gh-focus-ring`
 - Selection: `--gh-selection-background`, `text`
 - Elevation: `--gh-shadow-sm`, `md`, `lg`

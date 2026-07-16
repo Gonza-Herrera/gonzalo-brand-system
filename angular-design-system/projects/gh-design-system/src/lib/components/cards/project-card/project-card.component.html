@@ -1,0 +1,65 @@
+<gh-card
+  [variant]="project().featured ? 'elevated' : 'outlined'"
+  padding="none"
+  radius="lg"
+  [interactive]="hasLinks()"
+  fullHeight
+  [ariaLabel]="'Project: ' + project().title"
+>
+  <div
+    class="project-card__layout"
+    [class.project-card__layout--horizontal]="orientation() === 'horizontal'"
+  >
+    @if (project().imageSrc) {
+      <div class="project-card__media">
+        <img [src]="project().imageSrc" [alt]="project().imageAlt ?? ''" loading="lazy" />
+      </div>
+    }
+
+    <div class="project-card__body">
+      <header class="project-card__header">
+        @if (statusPresentation() || project().featured) {
+          <div class="project-card__badges">
+            @if (statusPresentation(); as status) {
+              <gh-badge [variant]="status.variant">
+                {{ project().statusLabel ?? status.label }}
+              </gh-badge>
+            }
+            @if (project().featured) {
+              <gh-badge variant="accent" appearance="solid">Featured</gh-badge>
+            }
+          </div>
+        }
+
+        <h2>{{ project().title }}</h2>
+      </header>
+
+      <p class="project-card__description">{{ project().description }}</p>
+
+      @if (project().technologies?.length) {
+        <ul class="project-card__technologies" aria-label="Technologies">
+          @for (technology of project().technologies; track technology) {
+            <li>
+              <gh-tag size="sm">{{ technology }}</gh-tag>
+            </li>
+          }
+        </ul>
+      }
+
+      @if (hasLinks()) {
+        <nav class="project-card__actions" aria-label="Project links">
+          @if (project().projectUrl) {
+            <a [href]="project().projectUrl">
+              {{ project().projectLinkLabel ?? 'View project' }}
+            </a>
+          }
+          @if (project().repositoryUrl) {
+            <a [href]="project().repositoryUrl">
+              {{ project().repositoryLinkLabel ?? 'View repository' }}
+            </a>
+          }
+        </nav>
+      }
+    </div>
+  </div>
+</gh-card>

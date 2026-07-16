@@ -1,0 +1,59 @@
+<gh-card
+  [variant]="article().featured ? 'elevated' : 'outlined'"
+  padding="md"
+  radius="lg"
+  interactive
+  fullHeight
+  [ariaLabel]="'Article: ' + article().title"
+>
+  @if (article().imageSrc) {
+    <div ghCardMedia class="article-card__media">
+      <img [src]="article().imageSrc" [alt]="article().imageAlt ?? ''" loading="lazy" />
+    </div>
+  }
+
+  <header ghCardHeader class="article-card__header">
+    @if (article().category || article().featured) {
+      <div class="article-card__badges">
+        @if (article().category) {
+          <gh-badge variant="accent">{{ article().category }}</gh-badge>
+        }
+        @if (article().featured) {
+          <gh-badge variant="info" appearance="solid">Featured</gh-badge>
+        }
+      </div>
+    }
+
+    <h2>
+      <a
+        [href]="article().href"
+        [attr.target]="article().external ? '_blank' : null"
+        [attr.rel]="article().external ? 'noopener noreferrer' : null"
+        [attr.aria-label]="externalAriaLabel()"
+      >
+        {{ article().title }}
+      </a>
+    </h2>
+  </header>
+
+  @if (article().excerpt) {
+    <p ghCardContent class="article-card__excerpt">{{ article().excerpt }}</p>
+  }
+
+  <footer ghCardFooter class="article-card__footer">
+    @if (article().publishedAt || article().readingTime) {
+      <div class="article-card__metadata">
+        @if (article().publishedAt) {
+          <time>{{ article().publishedAt }}</time>
+        }
+        @if (article().readingTime) {
+          <span>{{ article().readingTime }}</span>
+        }
+      </div>
+    }
+
+    <span class="article-card__cta" aria-hidden="true">
+      {{ article().linkLabel ?? 'Read article' }} →
+    </span>
+  </footer>
+</gh-card>

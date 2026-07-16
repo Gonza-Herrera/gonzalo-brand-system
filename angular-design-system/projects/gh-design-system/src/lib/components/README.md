@@ -7,6 +7,8 @@ Reusable standalone Angular components live in dedicated feature directories.
 - `badge/`: non-interactive status, category and count labels.
 - `button/`: public native-button wrapper with variants, sizes, form behavior,
   loading state, icon projection, tests and accessibility documentation.
+- `cards/`: foundational Card plus typed Article, Experience and Project
+  compositions.
 - `tag/`: static metadata, selectable filters and accessible removal behavior.
 
 Each component owns its public API, template, encapsulated SCSS, colocated

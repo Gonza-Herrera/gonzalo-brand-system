@@ -2,9 +2,9 @@
 
 Official Angular workspace for the Gonzalo Herrera Design System.
 
-This release provides a reusable Angular library with Button, Badge and Tag, a
-routed standalone showcase, token-driven SCSS, light/dark/system theming and
-unit-test configuration.
+This release provides a reusable Angular library with Button, Badge, Tag and a
+four-component Card family, plus a routed standalone showcase, token-driven
+SCSS, light/dark/system theming and unit-test configuration.
 
 ## Requirements
 
@@ -27,6 +27,7 @@ angular-design-system/
 │   │       │   ├── components/
 │   │       │   │   ├── badge/
 │   │       │   │   ├── button/
+│   │       │   │   ├── cards/
 │   │       │   │   └── tag/
 │   │       │   ├── patterns/
 │   │       │   ├── styles/
@@ -187,6 +188,32 @@ Badge supports six semantic variants, soft/solid appearance and small/medium
 sizes while remaining non-interactive. Tag supports mutually exclusive static,
 selectable and removable modes, three variants and two sizes.
 
+## Card family
+
+```ts
+import {
+  GhArticleCardComponent,
+  GhCardComponent,
+  GhExperienceCardComponent,
+  GhProjectCardComponent,
+} from 'gh-design-system';
+```
+
+```html
+<gh-card variant="elevated">
+  <div ghCardHeader><h2>Engineering Leadership</h2></div>
+  <div ghCardContent><p>Helping teams build better software.</p></div>
+</gh-card>
+
+<gh-article-card [article]="article" />
+<gh-experience-card [experience]="experience" />
+<gh-project-card [project]="project" orientation="horizontal" />
+```
+
+The foundational Card controls surface, padding, radius and visual states.
+Article, Experience and Project Cards use typed models, semantic HTML, native
+links and existing public Badge/Tag components.
+
 ## Theme consumption
 
 Themes use the `data-theme` attribute on the root document element:
@@ -242,6 +269,7 @@ Import public TypeScript APIs from `gh-design-system`.
 | `/buttons`    | Public Button component       |
 | `/badges`     | Public Badge component        |
 | `/tags`       | Public Tag component          |
+| `/cards`      | Public Card family            |
 
 The shell provides a desktop sidebar, accessible mobile menu, active route
 state and the Light/Dark/System selector.
@@ -259,7 +287,8 @@ They must not be exported from the library public API.
 
 ## Scope
 
-This release is deliberately limited to foundations, Button, Badge and Tag:
+This release is deliberately limited to foundations, Button, Badge, Tag and
+Cards:
 
 - Primitive and semantic CSS custom properties
 - Light and dark themes
@@ -270,8 +299,10 @@ This release is deliberately limited to foundations, Button, Badge and Tag:
 - A standalone, accessible and token-driven public Button component
 - Non-interactive Badge status and category labels
 - Static, selectable and removable Tag behavior
+- Foundational, Article, Experience and Project Cards
 
-Card, Hero and other product components are deferred to later work.
+Layout primitives, Hero and other product components are deferred to later
+work.
 See [the architecture notes](docs/architecture.md), [tokens and themes
 guide](docs/tokens-and-themes.md) and
 [component documentation](projects/gh-design-system/src/lib/components/README.md)

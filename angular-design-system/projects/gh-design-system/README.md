@@ -22,6 +22,25 @@ System.
 - `GH_BUTTON_VARIANTS`
 - `GH_BUTTON_SIZES`
 - `GH_BUTTON_TYPES`
+- `GhCardComponent`
+- `GhCardVariant`
+- `GhCardPadding`
+- `GhCardRadius`
+- `GH_CARD_VARIANTS`
+- `GH_CARD_PADDINGS`
+- `GH_CARD_RADII`
+- `GhArticleCardComponent`
+- `GhArticleCardData`
+- `GhExperienceCardComponent`
+- `GhExperienceCardData`
+- `GhExperienceWorkMode`
+- `GH_EXPERIENCE_WORK_MODES`
+- `GhProjectCardComponent`
+- `GhProjectCardData`
+- `GhProjectCardOrientation`
+- `GhProjectStatus`
+- `GH_PROJECT_CARD_ORIENTATIONS`
+- `GH_PROJECT_STATUSES`
 - `GhTagComponent`
 - `GhTagMode`
 - `GhTagVariant`
@@ -104,6 +123,23 @@ removable mode. See the component-specific
 [`Badge`](src/lib/components/badge/README.md) and
 [`Tag`](src/lib/components/tag/README.md) documentation.
 
+## Card family
+
+```ts
+import {
+  GhArticleCardComponent,
+  GhCardComponent,
+  GhExperienceCardComponent,
+  GhProjectCardComponent,
+} from 'gh-design-system';
+```
+
+`GhCardComponent` owns shared surface, spacing, radius, elevation and visual
+states. Specialized Cards consume typed data models and compose Badge and Tag
+without class inheritance. See the [`Card family`](src/lib/components/cards)
+documentation.
+
 Semantic tokens such as `--gh-text-primary`, `--gh-action-primary-background`,
 `--gh-status-success-background`, `--gh-tag-accent-selected-background` and
-`--gh-focus-ring` are the supported styling contract for public components.
+`--gh-card-border-selected` are the supported styling contract for public
+components.

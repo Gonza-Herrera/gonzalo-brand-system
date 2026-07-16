@@ -24,7 +24,8 @@ Nothing in this project is part of the public `gh-design-system` API.
 Pages such as `/buttons` must import the real component from the package rather
 than recreating it with showcase-only markup.
 
-Current public component routes are `/buttons`, `/badges` and `/tags`.
+Current public component routes are `/buttons`, `/badges`, `/tags` and
+`/cards`.
 
 ## Run
 
