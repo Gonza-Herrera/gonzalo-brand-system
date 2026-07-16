@@ -1,0 +1,91 @@
+<article class="page">
+  <header class="page-header">
+    <p>Foundation · Color</p>
+    <h1>Color system</h1>
+    <p>
+      A calm pastel palette communicates AI, human leadership and technology, while semantic colors
+      preserve intent across light and dark themes.
+    </p>
+  </header>
+
+  <showcase-documentation-section
+    sectionId="primitive-colors"
+    eyebrow="Primitives"
+    title="Official palette"
+    description="Primitive colors are source values. Product interfaces should prefer semantic variables whenever a purpose-specific token exists."
+  >
+    <div class="color-grid">
+      @for (color of brandColors; track color.tokenPath) {
+        <article class="color-swatch">
+          <div
+            class="color-swatch__preview"
+            [style.--preview-color]="color.cssValue"
+            aria-hidden="true"
+          ></div>
+          <div class="token-meta">
+            <strong>{{ color.name }}</strong>
+            <code>{{ color.cssVariable }}</code>
+            <span>{{ color.value }}</span>
+          </div>
+        </article>
+      }
+    </div>
+
+    <div class="supporting-colors">
+      <h3>Supporting neutral</h3>
+      @for (color of supportingColors; track color.tokenPath) {
+        <article class="supporting-color">
+          <span [style.--preview-color]="color.cssValue" aria-hidden="true"></span>
+          <div class="token-meta">
+            <strong>{{ color.name }}</strong>
+            <code>{{ color.cssVariable }}</code>
+            <small>{{ color.value }}</small>
+          </div>
+        </article>
+      }
+    </div>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="semantic-colors"
+    eyebrow="Semantic roles"
+    title="Purpose over pigment"
+    description="These previews update with the active theme. Their names describe usage rather than a specific palette value."
+  >
+    <div class="semantic-grid">
+      @for (color of semanticColors; track color.cssVariable) {
+        <article class="semantic-color">
+          <div class="semantic-color__preview">
+            @switch (color.kind) {
+              @case ('text') {
+                <span [style.color]="color.cssValue">Aa</span>
+              }
+              @case ('border') {
+                <span class="semantic-color__border" [style.border-color]="color.cssValue"></span>
+              }
+              @case ('focus') {
+                <span class="semantic-color__focus" [style.outline-color]="color.cssValue">
+                  Focus
+                </span>
+              }
+              @case ('action') {
+                <span class="semantic-color__action" [style.background]="color.cssValue">
+                  Action
+                </span>
+              }
+              @default {
+                <span class="semantic-color__background" [style.background]="color.cssValue"></span>
+              }
+            }
+          </div>
+          <div class="token-meta">
+            <strong>{{ color.name }}</strong>
+            <code>{{ color.cssVariable }}</code>
+          </div>
+        </article>
+      }
+    </div>
+  </showcase-documentation-section>
+
+  <showcase-code-preview label="Semantic color usage" [code]="codeExample" />
+</article>

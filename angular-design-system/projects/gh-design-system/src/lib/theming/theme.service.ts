@@ -1,72 +1,101 @@
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
-import { inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
+import { computed, DestroyRef, inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
 
-import { GH_THEME_ATTRIBUTE, GH_THEME_STORAGE_KEY, type GhTheme, isGhTheme } from './theme';
+import {
+  GH_THEME_ATTRIBUTE,
+  GH_THEME_STORAGE_KEY,
+  type GhTheme,
+  type GhThemePreference,
+  isGhThemePreference,
+} from './theme';
+
+const DARK_MODE_QUERY = '(prefers-color-scheme: dark)';
 
 @Injectable({ providedIn: 'root' })
 export class GhThemeService {
   private readonly document = inject(DOCUMENT);
   private readonly platformId = inject(PLATFORM_ID);
+  private readonly destroyRef = inject(DestroyRef);
   private readonly isBrowser = isPlatformBrowser(this.platformId);
-  private readonly activeTheme = signal<GhTheme>('light');
+  private readonly selectedPreference = signal<GhThemePreference>('system');
+  private readonly systemTheme = signal<GhTheme>('light');
 
-  readonly theme = this.activeTheme.asReadonly();
+  readonly preference = this.selectedPreference.asReadonly();
+  readonly resolvedTheme = computed<GhTheme>(() => {
+    const preference = this.preference();
+    return preference === 'system' ? this.systemTheme() : preference;
+  });
+
+  // Backward-compatible alias retained for existing consumers.
+  readonly theme = this.resolvedTheme;
 
   constructor() {
-    this.applyTheme(this.resolveInitialTheme(), false);
+    if (!this.isBrowser) {
+      return;
+    }
+
+    this.observeSystemTheme();
+    this.applyPreference(this.readStoredPreference() ?? 'system', false);
   }
 
-  setTheme(theme: GhTheme): void {
-    this.applyTheme(theme, true);
+  setTheme(preference: GhThemePreference): void {
+    this.applyPreference(preference, true);
   }
 
   toggleTheme(): void {
-    this.setTheme(this.theme() === 'light' ? 'dark' : 'light');
+    this.setTheme(this.resolvedTheme() === 'light' ? 'dark' : 'light');
   }
 
-  private resolveInitialTheme(): GhTheme {
-    if (!this.isBrowser) {
-      return 'light';
+  private observeSystemTheme(): void {
+    const mediaQuery = this.document.defaultView?.matchMedia?.(DARK_MODE_QUERY);
+
+    if (!mediaQuery) {
+      return;
     }
 
-    const storedTheme = this.readStoredTheme();
+    this.systemTheme.set(mediaQuery.matches ? 'dark' : 'light');
 
-    if (storedTheme) {
-      return storedTheme;
-    }
+    const handleChange = (event: MediaQueryListEvent): void => {
+      this.systemTheme.set(event.matches ? 'dark' : 'light');
+    };
 
-    return this.document.defaultView?.matchMedia?.('(prefers-color-scheme: dark)').matches
-      ? 'dark'
-      : 'light';
+    mediaQuery.addEventListener('change', handleChange);
+    this.destroyRef.onDestroy(() => {
+      mediaQuery.removeEventListener('change', handleChange);
+    });
   }
 
-  private applyTheme(theme: GhTheme, persist: boolean): void {
-    this.activeTheme.set(theme);
+  private applyPreference(preference: GhThemePreference, persist: boolean): void {
+    this.selectedPreference.set(preference);
 
     if (!this.isBrowser) {
       return;
     }
 
-    this.document.documentElement.setAttribute(GH_THEME_ATTRIBUTE, theme);
+    if (preference === 'system') {
+      this.document.documentElement.removeAttribute(GH_THEME_ATTRIBUTE);
+    } else {
+      this.document.documentElement.setAttribute(GH_THEME_ATTRIBUTE, preference);
+    }
 
     if (persist) {
-      this.storeTheme(theme);
+      this.storePreference(preference);
     }
   }
 
-  private readStoredTheme(): GhTheme | null {
+  private readStoredPreference(): GhThemePreference | null {
     try {
       const value = this.document.defaultView?.localStorage.getItem(GH_THEME_STORAGE_KEY);
 
-      return isGhTheme(value) ? value : null;
+      return isGhThemePreference(value) ? value : null;
     } catch {
       return null;
     }
   }
 
-  private storeTheme(theme: GhTheme): void {
+  private storePreference(preference: GhThemePreference): void {
     try {
-      this.document.defaultView?.localStorage.setItem(GH_THEME_STORAGE_KEY, theme);
+      this.document.defaultView?.localStorage.setItem(GH_THEME_STORAGE_KEY, preference);
     } catch {
       // Storage can be unavailable in privacy-focused browsing contexts.
     }

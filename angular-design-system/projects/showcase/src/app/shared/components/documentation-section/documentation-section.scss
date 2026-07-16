@@ -1,0 +1,33 @@
+.documentation-section {
+  display: grid;
+  gap: var(--gh-space-xl);
+
+  > header {
+    display: grid;
+    gap: var(--gh-space-xs);
+    max-width: var(--gh-layout-reading-max);
+  }
+
+  p,
+  h2 {
+    margin: 0;
+  }
+
+  p {
+    color: var(--gh-text-accent);
+    font-size: var(--gh-font-size-label);
+    font-weight: var(--gh-font-weight-bold);
+    letter-spacing: var(--gh-letter-spacing-wide);
+    text-transform: uppercase;
+  }
+
+  h2 {
+    font-size: var(--gh-font-size-h2);
+    letter-spacing: var(--gh-letter-spacing-tight);
+    line-height: var(--gh-line-height-heading);
+  }
+
+  header div {
+    color: var(--gh-text-secondary);
+  }
+}

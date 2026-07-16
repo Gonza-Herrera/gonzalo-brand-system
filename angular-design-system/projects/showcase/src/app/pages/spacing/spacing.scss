@@ -1,0 +1,56 @@
+@use '../../shared/styles/documentation' as documentation;
+
+.page {
+  @include documentation.page;
+}
+
+.page-header {
+  @include documentation.page-header;
+}
+
+.spacing-list {
+  display: grid;
+  gap: var(--gh-space-sm);
+}
+
+.spacing-token {
+  display: grid;
+  grid-template-columns: minmax(11rem, 0.34fr) minmax(0, 1fr);
+  align-items: center;
+  overflow: hidden;
+  border: var(--gh-border-width-default) solid var(--gh-border-default);
+  border-radius: var(--gh-radius-lg);
+  background: var(--gh-surface-primary);
+}
+
+.token-meta {
+  @include documentation.token-meta;
+  align-self: stretch;
+  padding: var(--gh-space-md);
+  border-right: var(--gh-border-width-default) solid var(--gh-border-subtle);
+}
+
+.spacing-token__track {
+  padding: var(--gh-space-lg);
+  overflow: hidden;
+}
+
+.spacing-token__track span {
+  display: block;
+  width: min(var(--preview-space), 100%);
+  min-width: var(--gh-space-xs);
+  height: var(--gh-space-lg);
+  border-radius: var(--gh-radius-pill);
+  background: var(--gh-action-primary-background);
+}
+
+@media (max-width: 42rem) {
+  .spacing-token {
+    grid-template-columns: 1fr;
+  }
+
+  .token-meta {
+    border-right: 0;
+    border-bottom: var(--gh-border-width-default) solid var(--gh-border-subtle);
+  }
+}

@@ -32,4 +32,7 @@ Priority:
 2. `prefers-color-scheme` when no explicit attribute exists.
 3. Light theme as the CSS default.
 
+Selecting the `system` preference removes `data-theme`, allowing the media
+query to resolve the active theme without a competing explicit selector.
+
 Future components must consume semantic variables and work in both themes.

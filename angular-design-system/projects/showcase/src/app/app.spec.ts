@@ -1,15 +1,18 @@
 import { TestBed } from '@angular/core/testing';
-import { GH_THEME_ATTRIBUTE, GH_THEME_STORAGE_KEY, GhThemeService } from 'gh-design-system';
+import { provideRouter, Router } from '@angular/router';
+import { GH_THEME_ATTRIBUTE, GH_THEME_STORAGE_KEY } from 'gh-design-system';
 
 import { App } from './app';
+import { routes } from './app.routes';
 
-describe('App', () => {
+describe('App routing', () => {
   beforeEach(async () => {
     document.documentElement.removeAttribute(GH_THEME_ATTRIBUTE);
     localStorage.removeItem(GH_THEME_STORAGE_KEY);
 
     await TestBed.configureTestingModule({
       imports: [App],
+      providers: [provideRouter(routes)],
     }).compileComponents();
   });
 
@@ -18,26 +21,55 @@ describe('App', () => {
     localStorage.removeItem(GH_THEME_STORAGE_KEY);
   });
 
-  it('renders the minimal semantic token validation', () => {
+  it('renders every foundation route with a page heading', async () => {
     const fixture = TestBed.createComponent(App);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
+    const router = TestBed.inject(Router);
+    const expectedHeadings = new Map([
+      ['/', 'Foundations for calm, intelligent interfaces.'],
+      ['/colors', 'Color system'],
+      ['/typography', 'Typography system'],
+      ['/spacing', 'Spacing system'],
+      ['/radii', 'Border radius system'],
+      ['/shadows', 'Elevation and shadows'],
+    ]);
 
-    expect(compiled.querySelector('h1')?.textContent).toContain('Semantic foundations');
-    expect(compiled.querySelector('.surface-example')).toBeTruthy();
-    expect(compiled.querySelectorAll('.shadow-sample')).toHaveLength(3);
+    fixture.detectChanges();
+
+    for (const [path, heading] of expectedHeadings) {
+      await router.navigateByUrl(path);
+      await fixture.whenStable();
+      fixture.detectChanges();
+
+      const compiled = fixture.nativeElement as HTMLElement;
+      expect(compiled.querySelector('h1')?.textContent).toContain(heading);
+    }
   });
 
-  it('switches between explicit light and dark themes', () => {
+  it('marks the active navigation item with aria-current', async () => {
     const fixture = TestBed.createComponent(App);
-    const themeService = TestBed.inject(GhThemeService);
-    const compiled = fixture.nativeElement as HTMLElement;
+    const router = TestBed.inject(Router);
 
-    themeService.setTheme('light');
     fixture.detectChanges();
-    compiled.querySelector<HTMLButtonElement>('.theme-toggle')?.click();
+    await router.navigateByUrl('/colors');
+    await fixture.whenStable();
+    fixture.detectChanges();
 
-    expect(themeService.theme()).toBe('dark');
-    expect(document.documentElement.getAttribute(GH_THEME_ATTRIBUTE)).toBe('dark');
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('a[aria-current="page"]')?.textContent).toContain('Colors');
+  });
+
+  it('redirects unknown routes to overview', async () => {
+    const fixture = TestBed.createComponent(App);
+    const router = TestBed.inject(Router);
+
+    fixture.detectChanges();
+    await router.navigateByUrl('/missing-foundation');
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    expect(router.url).toBe('/');
+    expect((fixture.nativeElement as HTMLElement).querySelector('h1')?.textContent).toContain(
+      'Foundations for calm',
+    );
   });
 });

@@ -1,24 +1,24 @@
-# Foundations architecture
+# Design-system architecture
 
 ## Source of truth and generated output
 
 The repository-level `tokens/` directory is the only editable token source.
-`scripts/tokens.mjs` validates the JSON and deterministically generates the
-library SCSS token and theme files.
+`scripts/tokens.mjs` validates JSON and deterministically generates:
+
+- Library SCSS primitives, typography, semantic contract and themes.
+- Typed foundation data consumed by the showcase catalogue.
 
 ```text
 Repository JSON
       ↓ validate and generate
-SCSS primitives + semantic contract + themes
-      ↓ package
-Consumer applications and future components
+Library SCSS + showcase TypeScript data
+      ↓
+Public package and documentation routes
 ```
 
-The generated files contain a header stating that they must not be edited
-manually. `npm run tokens:check` compares their exact contents with current JSON
-and runs before builds and tests.
+`npm run tokens:check` runs before builds and tests.
 
-## Style responsibilities
+## Library style responsibilities
 
 ```text
 styles/
@@ -30,45 +30,70 @@ styles/
 └── index.scss
 ```
 
-`gh-design-system/styles` is intentionally non-invasive: it exposes variables
-and theme selectors without resetting the consumer application.
+`gh-design-system/styles` exposes variables and themes without resetting the
+consumer. `gh-design-system/styles/foundations` applies the safe opt-in reset
+and accessible global base styles.
 
-`gh-design-system/styles/foundations` is opt-in and applies the safe reset,
-global typography, semantic body colors, focus-visible behavior and
-reduced-motion handling.
+## Showcase architecture
 
-## Library boundaries
+```text
+app/
+├── core/
+│   ├── config/
+│   └── models/
+├── layout/
+│   ├── showcase-header/
+│   ├── showcase-shell/
+│   └── showcase-sidebar/
+├── pages/
+│   ├── overview/
+│   ├── colors/
+│   ├── typography/
+│   ├── spacing/
+│   ├── radii/
+│   └── shadows/
+└── shared/
+    ├── components/
+    ├── data/
+    └── styles/
+```
 
-- `components/`: future standalone UI primitives with stable APIs and tests.
-- `patterns/`: proven compositions of public components.
-- `styles/`: tokens, themes, foundations and mixins.
-- `theming/`: Angular APIs for explicit theme state and persistence.
+Pages are lazy-loaded standalone components. Navigation configuration is
+centralized. Shared documentation components remain private to the showcase
+and are never exported from `gh-design-system`.
 
-Future components must consume semantic color, surface, border, action, focus
-and shadow variables. Primitive colors are limited to controlled brand
-expressions; geometry may use spacing and radius primitives.
+The showcase imports the built package through:
 
-## Showcase boundary
+```scss
+@use 'gh-design-system/styles';
+@use 'gh-design-system/styles/foundations';
+```
 
-The showcase imports the built package through the public `gh-design-system`
-entry points. PR 2 includes only a smoke test for semantic background, text,
-surface, borders, shadows and theme switching. The full foundations catalogue
-is intentionally deferred to PR 3.
+## Theme architecture
+
+`GhThemeService` owns the framework-level behavior and supports `light`,
+`dark` and `system`.
+
+- `preference`: the stored user selection.
+- `resolvedTheme`: the effective light or dark theme.
+- Explicit preferences apply `data-theme`.
+- System preference removes the attribute and follows `matchMedia`.
+- Browser APIs are guarded for SSR.
+
+The showcase theme toggle is an internal consumer of this public service.
 
 ## Testing strategy
 
-- Token validation checks JSON syntax, duplicate keys, names, references,
-  cycles and theme coverage.
-- Token synchronization checks generated SCSS deterministically.
-- Library unit tests cover theme state.
-- Showcase unit tests cover public-package integration and explicit switching.
-- Production builds validate SCSS packaging and strict Angular compilation.
+- Token validation checks syntax, duplicate keys, names, references, cycles and
+  theme coverage.
+- Library tests cover explicit, stored, system and SSR theme behavior.
+- Showcase tests cover all routes, active navigation, wildcard redirect,
+  mobile menu behavior and accessible theme selection.
+- Production builds validate strict templates, lazy routes and public SCSS
+  packaging.
 
 ## Build-cache trade-off
 
-Angular's persistent disk cache is disabled in `angular.json`. On the current
-Node 22 and macOS environment, its native LMDB dependency reproducibly aborts
-with a double-free after repeated application builds. Disabling only this cache
-keeps builds deterministic and stable at the cost of slightly slower
-incremental compilation. Re-evaluate the setting after upgrading the Angular
-builder or Node runtime.
+Angular's persistent disk cache remains disabled. Its native LMDB dependency
+reproducibly aborts with a double-free on the current Node 22/macOS
+environment. Re-evaluate after upgrading the Angular builder or Node runtime.

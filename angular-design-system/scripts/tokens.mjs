@@ -8,6 +8,10 @@ const workspaceRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)),
 const repositoryRoot = path.resolve(workspaceRoot, '..');
 const tokensRoot = path.join(repositoryRoot, 'tokens');
 const stylesRoot = path.join(workspaceRoot, 'projects/gh-design-system/src/lib/styles');
+const showcaseDataFile = path.join(
+  workspaceRoot,
+  'projects/showcase/src/app/shared/data/foundation-tokens.generated.ts',
+);
 
 const primitiveFiles = [
   'colors.json',
@@ -523,6 +527,223 @@ function renderThemeFile(themeName, tokens, primitiveTokens) {
   return lines.join('\n');
 }
 
+function getToken(tokens, tokenPath) {
+  const token = tokens.get(tokenPath);
+
+  if (!token) {
+    throw new TokenValidationError(`Required showcase token ${tokenPath} is missing`);
+  }
+
+  return token;
+}
+
+function tokenId(tokenPath) {
+  return tokenPath.split('.').at(-1);
+}
+
+function renderGeneratedArray(name, items) {
+  return [
+    `export const ${name} = [`,
+    ...items.flatMap((item) => [
+      '  {',
+      ...Object.entries(item).map(([key, value]) => `    ${key}: ${toTypeScriptLiteral(value)},`),
+      '  },',
+    ]),
+    '] as const;',
+    '',
+  ];
+}
+
+function toTypeScriptLiteral(value) {
+  if (typeof value === 'string') {
+    return `'${value.replaceAll('\\', '\\\\').replaceAll("'", "\\'")}'`;
+  }
+
+  return JSON.stringify(value);
+}
+
+function renderShowcaseTokenData(tokens) {
+  const colorLabels = {
+    cloudBlue: 'Cloud Blue',
+    ink: 'Deep Ink',
+    ivory: 'Ivory',
+    lavender: 'Lavender Mist',
+    mint: 'Mint',
+    peach: 'Soft Peach',
+    sand: 'Warm Sand',
+    sky: 'Sky',
+    white: 'White',
+  };
+  const colorTokens = [...tokens.primitiveTokens.values()]
+    .filter((token) => token.path.startsWith('color.'))
+    .map((token) => {
+      const id = tokenId(token.path);
+      return {
+        id,
+        name: colorLabels[id] ?? id,
+        tokenPath: token.path,
+        cssVariable: primitiveCssName(token.path),
+        cssValue: `var(${primitiveCssName(token.path)})`,
+        value: token.value,
+        category: id === 'white' ? 'supporting' : 'brand',
+      };
+    });
+  const spacingTokens = [...tokens.primitiveTokens.values()]
+    .filter((token) => token.path.startsWith('spacing.'))
+    .map((token) => ({
+      id: tokenId(token.path),
+      name: `space-${tokenId(token.path)}`,
+      tokenPath: token.path,
+      cssVariable: primitiveCssName(token.path),
+      cssValue: `var(${primitiveCssName(token.path)})`,
+      value: token.value,
+    }));
+  const radiusTokens = [...tokens.primitiveTokens.values()]
+    .filter((token) => token.path.startsWith('radius.'))
+    .map((token) => ({
+      id: tokenId(token.path),
+      name: `radius-${tokenId(token.path)}`,
+      tokenPath: token.path,
+      cssVariable: primitiveCssName(token.path),
+      cssValue: `var(${primitiveCssName(token.path)})`,
+      value: token.value,
+    }));
+  const shadowTokens = ['small', 'medium', 'large'].map((scale) => {
+    const primitive = getToken(tokens.primitiveTokens, `shadowPrimitive.${scale}`);
+    const semanticPath = `shadow.${scale}`;
+    const cssVariable = semanticCssName(semanticPath);
+
+    return {
+      id: compactScaleName(scale),
+      name: `shadow-${compactScaleName(scale)}`,
+      tokenPath: semanticPath,
+      cssVariable,
+      cssValue: `var(${cssVariable})`,
+      value: primitive.value,
+    };
+  });
+  const typographyRoles = [
+    {
+      id: 'hero',
+      name: 'Display / Hero',
+      sample: 'Think bigger. Build smarter.',
+      family: 'fontFamily.display',
+      size: 'fontSize.hero',
+      weight: 'fontWeight.semibold',
+      lineHeight: 'lineHeight.tight',
+      letterSpacing: 'letterSpacing.display',
+    },
+    {
+      id: 'h1',
+      name: 'Heading 1',
+      sample: 'Engineering with clarity.',
+      family: 'fontFamily.display',
+      size: 'fontSize.h1',
+      weight: 'fontWeight.semibold',
+      lineHeight: 'lineHeight.heading',
+      letterSpacing: 'letterSpacing.display',
+    },
+    {
+      id: 'h2',
+      name: 'Heading 2',
+      sample: 'Calm technology.',
+      family: 'fontFamily.display',
+      size: 'fontSize.h2',
+      weight: 'fontWeight.semibold',
+      lineHeight: 'lineHeight.heading',
+      letterSpacing: 'letterSpacing.tight',
+    },
+    {
+      id: 'h3',
+      name: 'Heading 3',
+      sample: 'Modern engineering.',
+      family: 'fontFamily.display',
+      size: 'fontSize.h3',
+      weight: 'fontWeight.semibold',
+      lineHeight: 'lineHeight.heading',
+      letterSpacing: 'letterSpacing.tight',
+    },
+    {
+      id: 'bodyLarge',
+      name: 'Body Large',
+      sample: 'Helping teams build better software through engineering, leadership and AI.',
+      family: 'fontFamily.body',
+      size: 'fontSize.bodyLarge',
+      weight: 'fontWeight.regular',
+      lineHeight: 'lineHeight.body',
+      letterSpacing: 'letterSpacing.normal',
+    },
+    {
+      id: 'body',
+      name: 'Body',
+      sample: 'Helping teams build better software through engineering, leadership and AI.',
+      family: 'fontFamily.body',
+      size: 'fontSize.body',
+      weight: 'fontWeight.regular',
+      lineHeight: 'lineHeight.body',
+      letterSpacing: 'letterSpacing.normal',
+    },
+    {
+      id: 'caption',
+      name: 'Caption',
+      sample: 'Frontend Tech Lead & AI-Augmented Engineer',
+      family: 'fontFamily.body',
+      size: 'fontSize.caption',
+      weight: 'fontWeight.regular',
+      lineHeight: 'lineHeight.body',
+      letterSpacing: 'letterSpacing.normal',
+    },
+    {
+      id: 'label',
+      name: 'Label',
+      sample: 'DESIGN SYSTEM',
+      family: 'fontFamily.body',
+      size: 'fontSize.label',
+      weight: 'fontWeight.semibold',
+      lineHeight: 'lineHeight.heading',
+      letterSpacing: 'letterSpacing.wide',
+    },
+  ];
+  const typographyTokens = typographyRoles.map((role) => {
+    const family = getToken(tokens.primitiveTokens, role.family);
+    const size = getToken(tokens.primitiveTokens, role.size);
+    const weight = getToken(tokens.primitiveTokens, role.weight);
+    const lineHeight = getToken(tokens.primitiveTokens, role.lineHeight);
+    const letterSpacing = getToken(tokens.primitiveTokens, role.letterSpacing);
+
+    return {
+      id: role.id,
+      name: role.name,
+      sample: role.sample,
+      familyVariable: primitiveCssName(family.path),
+      familyCssValue: `var(${primitiveCssName(family.path)})`,
+      familyValue: family.value,
+      sizeVariable: primitiveCssName(size.path),
+      sizeCssValue: `var(${primitiveCssName(size.path)})`,
+      sizeValue: size.value,
+      weightVariable: primitiveCssName(weight.path),
+      weightCssValue: `var(${primitiveCssName(weight.path)})`,
+      weightValue: String(weight.value),
+      lineHeightVariable: primitiveCssName(lineHeight.path),
+      lineHeightCssValue: `var(${primitiveCssName(lineHeight.path)})`,
+      lineHeightValue: String(lineHeight.value),
+      letterSpacingVariable: primitiveCssName(letterSpacing.path),
+      letterSpacingCssValue: `var(${primitiveCssName(letterSpacing.path)})`,
+      letterSpacingValue: letterSpacing.value,
+    };
+  });
+
+  return [
+    '// Generated by scripts/tokens.mjs from /tokens. Do not edit manually.',
+    '',
+    ...renderGeneratedArray('PRIMITIVE_COLOR_TOKENS', colorTokens),
+    ...renderGeneratedArray('TYPOGRAPHY_TOKENS', typographyTokens),
+    ...renderGeneratedArray('SPACING_TOKENS', spacingTokens),
+    ...renderGeneratedArray('RADIUS_TOKENS', radiusTokens),
+    ...renderGeneratedArray('SHADOW_TOKENS', shadowTokens),
+  ].join('\n');
+}
+
 async function loadAndValidateTokens() {
   const primitiveTokens = new Map();
 
@@ -568,6 +789,7 @@ function getGeneratedFiles(tokens) {
       path.join(stylesRoot, 'themes/_dark-theme.scss'),
       renderThemeFile('dark', tokens.darkTokens, tokens.primitiveTokens),
     ],
+    [showcaseDataFile, renderShowcaseTokenData(tokens)],
   ]);
 }
 
@@ -611,7 +833,7 @@ async function main() {
 
   if (command === 'generate') {
     await generate(generatedFiles);
-    console.log(`Generated ${generatedFiles.size} SCSS token files.`);
+    console.log(`Generated ${generatedFiles.size} derived token files.`);
     return;
   }
 
@@ -626,7 +848,7 @@ async function main() {
 
   if (command === 'check') {
     await checkGeneratedFiles(generatedFiles);
-    console.log('Token JSON and generated SCSS are valid and synchronized.');
+    console.log('Token JSON and generated token files are valid and synchronized.');
     return;
   }
 

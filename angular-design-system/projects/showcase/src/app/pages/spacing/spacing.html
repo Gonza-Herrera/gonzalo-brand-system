@@ -1,0 +1,34 @@
+<article class="page">
+  <header class="page-header">
+    <p>Foundation · Spacing</p>
+    <h1>Spacing system</h1>
+    <p>
+      A compact base scale supports interface density while the section token preserves the generous
+      whitespace central to the brand.
+    </p>
+  </header>
+
+  <showcase-documentation-section
+    sectionId="spacing-scale"
+    eyebrow="Scale"
+    title="Consistent visual rhythm"
+    description="Bars are proportional to the real CSS variables and capped by their container to remain usable on small screens."
+  >
+    <div class="spacing-list">
+      @for (space of spacingTokens; track space.tokenPath) {
+        <article class="spacing-token" [style.--preview-space]="space.cssValue">
+          <div class="token-meta">
+            <strong>{{ space.name }}</strong>
+            <code>{{ space.cssVariable }}</code>
+            <span>{{ space.value }}</span>
+          </div>
+          <div class="spacing-token__track" aria-hidden="true">
+            <span></span>
+          </div>
+        </article>
+      }
+    </div>
+  </showcase-documentation-section>
+
+  <showcase-code-preview label="Spacing token usage" [code]="codeExample" />
+</article>

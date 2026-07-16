@@ -1,0 +1,27 @@
+.code-preview {
+  margin: 0;
+  overflow: hidden;
+  border: var(--gh-border-width-default) solid var(--gh-border-default);
+  border-radius: var(--gh-radius-lg);
+  background: var(--gh-background-secondary);
+  box-shadow: var(--gh-shadow-sm);
+
+  figcaption {
+    padding: var(--gh-space-sm) var(--gh-space-md);
+    border-bottom: var(--gh-border-width-default) solid var(--gh-border-subtle);
+    color: var(--gh-text-muted);
+    font-size: var(--gh-font-size-caption);
+    font-weight: var(--gh-font-weight-semibold);
+  }
+
+  pre {
+    margin: 0;
+    padding: var(--gh-space-lg);
+    overflow-x: auto;
+    background: var(--gh-surface-elevated);
+    color: var(--gh-text-primary);
+    font-family: ui-monospace, 'SFMono-Regular', consolas, monospace;
+    font-size: var(--gh-font-size-caption);
+    line-height: var(--gh-line-height-body);
+  }
+}

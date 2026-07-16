@@ -1,0 +1,5 @@
+dist/
+node_modules/
+projects/gh-design-system/src/lib/styles/themes/
+projects/gh-design-system/src/lib/styles/tokens/
+projects/showcase/src/app/shared/data/foundation-tokens.generated.ts

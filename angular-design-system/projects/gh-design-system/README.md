@@ -6,10 +6,13 @@ Reusable Angular and SCSS foundations for the Gonzalo Herrera Design System.
 
 - `GhThemeService`
 - `GhTheme`
+- `GhThemePreference`
 - `GH_THEMES`
+- `GH_THEME_PREFERENCES`
 - `GH_THEME_ATTRIBUTE`
 - `GH_THEME_STORAGE_KEY`
 - `isGhTheme`
+- `isGhThemePreference`
 
 ## Public SCSS API
 
@@ -36,7 +39,10 @@ The package build includes all three entry points as SCSS assets.
 ## Theming
 
 Apply `data-theme="light"` or `data-theme="dark"` to the document root, or use
-`GhThemeService` to apply and persist the preference.
+`GhThemeService` to manage `light`, `dark` and `system` preferences.
+
+The service exposes `preference` and `resolvedTheme` signals, persists the
+selected preference and avoids browser-only APIs during SSR.
 
 Semantic tokens such as `--gh-text-primary`, `--gh-surface-primary` and
 `--gh-border-default` are the supported styling contract for future
