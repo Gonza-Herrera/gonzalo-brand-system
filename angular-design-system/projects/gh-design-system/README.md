@@ -2,7 +2,7 @@
 
 Reusable Angular and SCSS foundations for the Gonzalo Herrera Design System.
 
-## Public API
+## Public Angular API
 
 - `GhThemeService`
 - `GhTheme`
@@ -11,33 +11,35 @@ Reusable Angular and SCSS foundations for the Gonzalo Herrera Design System.
 - `GH_THEME_STORAGE_KEY`
 - `isGhTheme`
 
-## Global styles
+## Public SCSS API
+
+Load tokens and themes:
 
 ```scss
 @use 'gh-design-system/styles';
 ```
 
-The stylesheet exposes namespaced primitive tokens and theme-aware semantic
-tokens. Consumer components should use semantic custom properties whenever
-possible.
+Opt into safe global foundations:
 
-## Mixins
+```scss
+@use 'gh-design-system/styles/foundations';
+```
+
+Load reusable mixins:
 
 ```scss
 @use 'gh-design-system/styles/mixins' as gh;
 ```
 
-Available foundation mixins:
-
-- `gh.card`
-- `gh.section`
-- `gh.container`
-- `gh.gradient-primary`
-- `gh.gradient-technology`
+The package build includes all three entry points as SCSS assets.
 
 ## Theming
 
-Apply `data-gh-theme="light"` or `data-gh-theme="dark"` to the document root,
-or use `GhThemeService` to apply and persist the preference.
+Apply `data-theme="light"` or `data-theme="dark"` to the document root, or use
+`GhThemeService` to apply and persist the preference.
 
-No visual Angular components are published in the foundations release.
+Semantic tokens such as `--gh-text-primary`, `--gh-surface-primary` and
+`--gh-border-default` are the supported styling contract for future
+components.
+
+No visual Angular components are published in this release.

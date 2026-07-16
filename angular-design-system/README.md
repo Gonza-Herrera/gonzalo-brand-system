@@ -73,17 +73,16 @@ The repository-level [`/tokens`](../tokens) directory remains the source of
 truth. The library's SCSS maps those primitive and theme definitions to
 namespaced CSS custom properties.
 
-Workspace projects load the library source through the configured SCSS include
-path:
-
-```scss
-@use 'styles/index';
-```
-
-Installed consumers use the package export:
+The showcase and installed consumers use the same package export:
 
 ```scss
 @use 'gh-design-system/styles';
+```
+
+Global reset and base styles are deliberately opt-in:
+
+```scss
+@use 'gh-design-system/styles/foundations';
 ```
 
 Components and applications should prefer semantic properties:
@@ -91,10 +90,10 @@ Components and applications should prefer semantic properties:
 ```scss
 .example {
   padding: var(--gh-space-md);
-  border: 1px solid var(--gh-color-border-default);
+  border: var(--gh-border-width-default) solid var(--gh-border-default);
   border-radius: var(--gh-radius-lg);
-  background: var(--gh-color-surface-card);
-  color: var(--gh-color-text-primary);
+  background: var(--gh-surface-primary);
+  color: var(--gh-text-primary);
   box-shadow: var(--gh-shadow-sm);
 }
 ```
@@ -105,16 +104,27 @@ Reusable SCSS mixins are available separately:
 @use 'gh-design-system/styles/mixins' as gh;
 
 .example {
-  @include gh.card;
+  @include gh.surface;
 }
 ```
 
+The SCSS under `styles/tokens/` and `styles/themes/` is generated from the
+repository-level JSON:
+
+```bash
+npm run tokens:validate
+npm run tokens:generate
+npm run tokens:check
+```
+
+Generated files must never be edited manually.
+
 ## Theme consumption
 
-Themes use the `data-gh-theme` attribute on the root document element:
+Themes use the `data-theme` attribute on the root document element:
 
 ```html
-<html data-gh-theme="dark"></html>
+<html data-theme="dark"></html>
 ```
 
 Angular applications can use the exported service:
@@ -130,6 +140,9 @@ themeService.toggleTheme();
 The service persists explicit preferences in local storage. If no explicit
 preference exists, the CSS foundations respect `prefers-color-scheme`.
 
+Theme priority is explicit user preference, then system preference, then light
+as the default.
+
 ## Consuming a local build
 
 Build the library and install its output into another Angular project:
@@ -140,8 +153,9 @@ cd ../consumer-app
 npm install ../gonzalo-brand-system/angular-design-system/dist/gh-design-system
 ```
 
-Then add `@use 'gh-design-system/styles';` to the consumer's global SCSS and
-import public TypeScript APIs from `gh-design-system`.
+Then add `@use 'gh-design-system/styles';` and, if desired,
+`@use 'gh-design-system/styles/foundations';` to the consumer's global SCSS.
+Import public TypeScript APIs from `gh-design-system`.
 
 ## Scope
 
@@ -149,9 +163,12 @@ This release is deliberately limited to foundations:
 
 - Primitive and semantic CSS custom properties
 - Light and dark themes
-- Global base styles and reusable SCSS mixins
+- Opt-in global foundations and reusable SCSS mixins
+- Deterministic JSON validation and SCSS generation
 - A strongly typed Angular theme service
-- A standalone documentation showcase
+- A minimal standalone integration showcase
 
 Button, Card, Hero and other product components are deferred to later work.
-See [the architecture notes](docs/architecture.md) for contribution boundaries.
+See [the architecture notes](docs/architecture.md) and
+[tokens and themes guide](docs/tokens-and-themes.md) for contribution
+boundaries.

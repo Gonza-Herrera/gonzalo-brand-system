@@ -1,4 +1,4 @@
-export const GH_THEME_ATTRIBUTE = 'data-gh-theme';
+export const GH_THEME_ATTRIBUTE = 'data-theme';
 export const GH_THEME_STORAGE_KEY = 'gh-design-system-theme';
 
 export const GH_THEMES = ['light', 'dark'] as const;

@@ -1,197 +1,73 @@
-<a class="skip-link" href="#foundations">Skip to foundations</a>
+<a class="skip-link" href="#token-validation">Skip to token validation</a>
 
-<div class="showcase-shell" id="top">
-  <header class="hero">
-    <div class="container">
-      <nav class="navigation" aria-label="Showcase navigation">
-        <a class="brand" href="#top" aria-label="Gonzalo Herrera Design System">
-          <span class="brand__mark" aria-hidden="true">GH</span>
-          <span>
-            <strong>Design System</strong>
-            <small>Foundations 0.1</small>
-          </span>
-        </a>
-
-        <button
-          class="theme-toggle"
-          type="button"
-          [attr.aria-label]="
-            activeTheme() === 'light' ? 'Switch to dark theme' : 'Switch to light theme'
-          "
-          [attr.aria-pressed]="activeTheme() === 'dark'"
-          (click)="toggleTheme()"
-        >
-          <span class="theme-toggle__icon" aria-hidden="true">
-            {{ activeTheme() === 'light' ? '☼' : '◐' }}
-          </span>
-          <span>{{ activeTheme() === 'light' ? 'Light' : 'Dark' }}</span>
-        </button>
-      </nav>
-
-      <div class="hero__content">
-        <p class="eyebrow">Gonzalo Herrera · Official foundations</p>
-        <h1>A calm foundation for building smarter interfaces.</h1>
-        <p class="hero__description">
-          Token-driven color, type, spacing, radius and elevation foundations for accessible Angular
-          experiences.
-        </p>
-        <div class="hero__principles" aria-label="Visual direction">
-          <span>70% Apple</span>
-          <span>20% Linear</span>
-          <span>10% Vercel</span>
-        </div>
-      </div>
+<main class="showcase" id="token-validation">
+  <header class="intro">
+    <div>
+      <p class="eyebrow">PR 2 · Tokens and themes</p>
+      <h1>Semantic foundations, ready for Angular.</h1>
+      <p class="intro__description">
+        This focused page verifies the public style package, semantic colors, typography, borders,
+        elevation and explicit light or dark themes.
+      </p>
     </div>
+
+    <button
+      class="theme-toggle"
+      type="button"
+      [attr.aria-label]="
+        activeTheme() === 'light' ? 'Switch to dark theme' : 'Switch to light theme'
+      "
+      [attr.aria-pressed]="activeTheme() === 'dark'"
+      (click)="toggleTheme()"
+    >
+      <span aria-hidden="true">{{ activeTheme() === 'light' ? '☼' : '◐' }}</span>
+      {{ activeTheme() === 'light' ? 'Light theme' : 'Dark theme' }}
+    </button>
   </header>
 
-  <main class="foundations" id="foundations">
-    <section class="foundation-section" aria-labelledby="colors-heading">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">01 · Color</p>
-          <h2 id="colors-heading">Official palette</h2>
-        </div>
-        <p>
-          Soft pastels express AI, leadership and technology while Deep Ink anchors readable
-          content.
-        </p>
-      </div>
-
-      <div class="color-grid">
-        @for (color of colorTokens; track color.cssVariable) {
-          <article class="color-card">
-            <div
-              class="color-card__swatch"
-              [style.--token-color]="color.cssValue"
-              aria-hidden="true"
-            ></div>
-            <div class="token-meta">
-              <strong>{{ color.label }}</strong>
-              <span>{{ color.value }}</span>
-              <code>{{ color.cssVariable }}</code>
-            </div>
-          </article>
-        }
-      </div>
-    </section>
-
-    <section class="foundation-section" aria-labelledby="typography-heading">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">02 · Typography</p>
-          <h2 id="typography-heading">Clear hierarchy</h2>
-        </div>
-        <p>
-          Inter leads the system, with Manrope available for secondary brand expression and system
-          fallbacks for resilient rendering.
-        </p>
-      </div>
-
-      <div class="typography-list">
-        @for (type of typographyTokens; track type.cssVariable) {
-          <article class="typography-row">
-            <div class="token-meta">
-              <strong>{{ type.label }}</strong>
-              <span>{{ type.value }}</span>
-              <code>{{ type.cssVariable }}</code>
-            </div>
-            <p class="typography-row__sample" [style.--token-font-size]="type.cssValue">
-              {{ type.sample }}
-            </p>
-          </article>
-        }
-      </div>
-    </section>
-
-    <section class="foundation-section" aria-labelledby="spacing-heading">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">03 · Spacing</p>
-          <h2 id="spacing-heading">Generous rhythm</h2>
-        </div>
-        <p>
-          A compact base scale supports dense UI while the section token preserves the brand's
-          signature whitespace.
-        </p>
-      </div>
-
-      <div class="spacing-list">
-        @for (space of spacingTokens; track space.cssVariable) {
-          <article class="spacing-row">
-            <div class="token-meta">
-              <strong>{{ space.label }}</strong>
-              <span>{{ space.value }}</span>
-              <code>{{ space.cssVariable }}</code>
-            </div>
-            <div class="spacing-row__track" aria-hidden="true">
-              <span class="spacing-row__bar" [style.--token-space]="space.cssValue"></span>
-            </div>
-          </article>
-        }
-      </div>
-    </section>
-
-    <div class="foundation-pair">
-      <section class="foundation-section" aria-labelledby="radius-heading">
-        <div class="section-heading section-heading--stacked">
-          <div>
-            <p class="eyebrow">04 · Radius</p>
-            <h2 id="radius-heading">Soft geometry</h2>
-          </div>
-          <p>Rounded forms keep technical surfaces calm and approachable.</p>
-        </div>
-
-        <div class="radius-grid">
-          @for (radius of radiusTokens; track radius.cssVariable) {
-            <article class="radius-card">
-              <div
-                class="radius-card__preview"
-                [style.--token-radius]="radius.cssValue"
-                aria-hidden="true"
-              ></div>
-              <div class="token-meta">
-                <strong>{{ radius.label }}</strong>
-                <span>{{ radius.value }}</span>
-                <code>{{ radius.cssVariable }}</code>
-              </div>
-            </article>
-          }
-        </div>
-      </section>
-
-      <section class="foundation-section" aria-labelledby="shadows-heading">
-        <div class="section-heading section-heading--stacked">
-          <div>
-            <p class="eyebrow">05 · Elevation</p>
-            <h2 id="shadows-heading">Subtle depth</h2>
-          </div>
-          <p>Low-contrast shadows separate surfaces without visual noise.</p>
-        </div>
-
-        <div class="shadow-grid">
-          @for (shadow of shadowTokens; track shadow.cssVariable) {
-            <article class="shadow-card">
-              <div
-                class="shadow-card__preview"
-                [style.--token-shadow]="shadow.cssValue"
-                aria-hidden="true"
-              ></div>
-              <div class="token-meta">
-                <strong>{{ shadow.label }}</strong>
-                <span>{{ shadow.value }}</span>
-                <code>{{ shadow.cssVariable }}</code>
-              </div>
-            </article>
-          }
-        </div>
-      </section>
+  <section class="validation-section" aria-labelledby="surface-heading">
+    <div class="section-heading">
+      <p class="eyebrow">Semantic surface</p>
+      <h2 id="surface-heading">Purpose-driven variables</h2>
     </div>
-  </main>
 
-  <footer class="footer">
-    <div class="container footer__content">
-      <p>Gonzalo Herrera Design System</p>
-      <p>Think bigger. Build smarter.</p>
+    <div class="surface-example">
+      <p class="surface-example__label">Surface primary</p>
+      <h3>Readable in both themes</h3>
+      <p>
+        The page background, primary and secondary text, surface fill, border and focus ring all
+        come from semantic CSS custom properties.
+      </p>
+      <div class="border-example">
+        <span>Default border</span>
+        <span>Strong border</span>
+      </div>
     </div>
-  </footer>
-</div>
+  </section>
+
+  <section class="validation-section" aria-labelledby="elevation-heading">
+    <div class="section-heading">
+      <p class="eyebrow">Theme-aware elevation</p>
+      <h2 id="elevation-heading">Three semantic shadows</h2>
+    </div>
+
+    <div class="shadow-grid">
+      <article class="shadow-sample shadow-sample--sm">
+        <strong>Small</strong>
+        <code>--gh-shadow-sm</code>
+      </article>
+      <article class="shadow-sample shadow-sample--md">
+        <strong>Medium</strong>
+        <code>--gh-shadow-md</code>
+      </article>
+      <article class="shadow-sample shadow-sample--lg">
+        <strong>Large</strong>
+        <code>--gh-shadow-lg</code>
+      </article>
+    </div>
+  </section>
+
+  <p class="theme-status" aria-live="polite">
+    Active theme: <strong>{{ activeTheme() }}</strong>
+  </p>
+</main>

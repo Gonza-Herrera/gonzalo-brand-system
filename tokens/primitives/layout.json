@@ -1,0 +1,12 @@
+{
+  "layout": {
+    "containerMax": {
+      "$type": "dimension",
+      "$value": "75rem"
+    },
+    "readingMax": {
+      "$type": "dimension",
+      "$value": "48rem"
+    }
+  }
+}

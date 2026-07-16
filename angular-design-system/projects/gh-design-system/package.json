@@ -12,11 +12,15 @@
     "./styles": {
       "sass": "./styles/index.scss"
     },
+    "./styles/foundations": {
+      "sass": "./styles/foundations.scss"
+    },
     "./styles/mixins": {
       "sass": "./styles/_mixins.scss"
     }
   },
   "sideEffects": [
-    "./styles/index.scss"
+    "./styles/index.scss",
+    "./styles/foundations.scss"
   ]
 }
