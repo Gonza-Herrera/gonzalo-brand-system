@@ -1,0 +1,81 @@
+@mixin gaps($selector) {
+  #{$selector}--gap-none {
+    gap: var(--gh-space-none);
+  }
+
+  #{$selector}--gap-xs {
+    gap: var(--gh-space-xs);
+  }
+
+  #{$selector}--gap-sm {
+    gap: var(--gh-space-sm);
+  }
+
+  #{$selector}--gap-md {
+    gap: var(--gh-space-md);
+  }
+
+  #{$selector}--gap-lg {
+    gap: var(--gh-space-lg);
+  }
+
+  #{$selector}--gap-xl {
+    gap: var(--gh-space-xl);
+  }
+
+  #{$selector}--gap-2xl {
+    gap: var(--gh-space-2xl);
+  }
+}
+
+@mixin standard-alignments($selector) {
+  #{$selector}--align-stretch {
+    align-items: stretch;
+  }
+
+  #{$selector}--align-start {
+    align-items: flex-start;
+  }
+
+  #{$selector}--align-center {
+    align-items: center;
+  }
+
+  #{$selector}--align-end {
+    align-items: flex-end;
+  }
+}
+
+@mixin inline-alignments($selector) {
+  @include standard-alignments($selector);
+
+  #{$selector}--align-baseline {
+    align-items: baseline;
+  }
+}
+
+@mixin standard-justifications($selector) {
+  #{$selector}--justify-start {
+    justify-content: flex-start;
+  }
+
+  #{$selector}--justify-center {
+    justify-content: center;
+  }
+
+  #{$selector}--justify-end {
+    justify-content: flex-end;
+  }
+
+  #{$selector}--justify-between {
+    justify-content: space-between;
+  }
+}
+
+@mixin inline-justifications($selector) {
+  @include standard-justifications($selector);
+
+  #{$selector}--justify-around {
+    justify-content: space-around;
+  }
+}

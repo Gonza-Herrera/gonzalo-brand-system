@@ -18,7 +18,8 @@ describe('ShowcaseShell', () => {
 
     expect(
       compiled.querySelectorAll('nav[aria-label="Design system documentation"] a'),
-    ).toHaveLength(10);
+    ).toHaveLength(11);
+    expect(compiled.querySelector('a[href="/layout"]')?.textContent).toContain('Layout');
     expect(compiled.querySelector('.skip-link')?.getAttribute('href')).toBe('#showcase-content');
   });
 

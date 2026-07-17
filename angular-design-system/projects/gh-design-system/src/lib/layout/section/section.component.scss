@@ -1,0 +1,47 @@
+:host {
+  display: block;
+}
+
+.gh-section {
+  width: 100%;
+}
+
+.gh-section--spacing-none {
+  padding-block: var(--gh-space-none);
+}
+
+.gh-section--spacing-sm {
+  padding-block: var(--gh-section-padding-sm);
+}
+
+.gh-section--spacing-md {
+  padding-block: var(--gh-section-padding-md);
+}
+
+.gh-section--spacing-lg {
+  padding-block: var(--gh-section-padding-lg);
+}
+
+.gh-section--surface-transparent {
+  background: transparent;
+}
+
+.gh-section--surface-primary {
+  background: var(--gh-surface-primary);
+}
+
+.gh-section--surface-secondary {
+  background: var(--gh-surface-secondary);
+}
+
+.gh-section--surface-subtle {
+  background: var(--gh-background-subtle);
+}
+
+.gh-section--surface-accent {
+  background: var(--gh-status-accent-background);
+}
+
+.gh-section--full-height {
+  min-height: 100svh;
+}

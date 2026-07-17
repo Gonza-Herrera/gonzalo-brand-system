@@ -1,0 +1,13 @@
+@use '../layout-mixins' as layout;
+
+.gh-cluster {
+  display: flex;
+  max-width: 100%;
+  width: fit-content;
+  min-width: 0;
+  flex-wrap: wrap;
+}
+
+@include layout.gaps('.gh-cluster');
+@include layout.inline-alignments('.gh-cluster');
+@include layout.inline-justifications('.gh-cluster');

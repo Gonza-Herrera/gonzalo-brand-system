@@ -33,6 +33,11 @@ export const SHOWCASE_NAVIGATION: readonly ShowcaseNavigationItem[] = [
     description: 'Theme-aware elevation',
   },
   {
+    label: 'Layout',
+    path: '/layout',
+    description: 'Responsive composition primitives',
+  },
+  {
     label: 'Buttons',
     path: '/buttons',
     description: 'Action variants, states and usage',

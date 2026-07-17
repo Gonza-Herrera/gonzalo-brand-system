@@ -1,0 +1,21 @@
+@use '../layout-mixins' as layout;
+
+.gh-inline {
+  display: flex;
+  max-width: 100%;
+  width: fit-content;
+  min-width: 0;
+  flex-direction: row;
+}
+
+.gh-inline--wrap {
+  flex-wrap: wrap;
+}
+
+.gh-inline--full-width {
+  width: 100%;
+}
+
+@include layout.gaps('.gh-inline');
+@include layout.inline-alignments('.gh-inline');
+@include layout.inline-justifications('.gh-inline');
