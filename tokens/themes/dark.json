@@ -422,6 +422,28 @@
       "$value": "{spacing.md}"
     }
   },
+  "pattern": {
+    "accentGradient": {
+      "$type": "color",
+      "$value": "linear-gradient(135deg, color-mix(in srgb, #111827 86%, {color.lavender}), color-mix(in srgb, #111827 90%, {color.cloudBlue}) 52%, color-mix(in srgb, #111827 91%, {color.peach}))"
+    },
+    "navigationBackground": {
+      "$type": "color",
+      "$value": "rgb(17 24 39 / 92%)"
+    },
+    "navigationBorder": {
+      "$type": "color",
+      "$value": "rgb(209 213 219 / 16%)"
+    },
+    "footerBackground": {
+      "$type": "color",
+      "$value": "color-mix(in srgb, #111827 94%, {color.lavender})"
+    },
+    "timelineConnector": {
+      "$type": "color",
+      "$value": "{color.lavender}"
+    }
+  },
   "focus": {
     "ring": {
       "$type": "color",

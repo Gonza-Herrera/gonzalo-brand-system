@@ -1,0 +1,59 @@
+<gh-section
+  class="gh-hero__section"
+  spacing="lg"
+  surface="transparent"
+  [fullHeight]="minHeight() === 'screen'"
+>
+  <gh-container size="wide">
+    <div class="gh-hero__layout">
+      <gh-stack class="gh-hero__content" gap="lg">
+        <gh-stack gap="sm">
+          @if (eyebrow()) {
+            <p class="gh-hero__eyebrow">{{ eyebrow() }}</p>
+          }
+
+          @if (headingLevel() === 1) {
+            <h1 class="gh-hero__title">{{ title() }}</h1>
+          } @else {
+            <h2 class="gh-hero__title">{{ title() }}</h2>
+          }
+
+          @if (description()) {
+            <p class="gh-hero__description">{{ description() }}</p>
+          }
+        </gh-stack>
+
+        @if (actions().length) {
+          <gh-inline
+            class="gh-hero__actions"
+            gap="sm"
+            [justify]="alignment() === 'center' ? 'center' : 'start'"
+          >
+            @for (action of actions(); track action.label + (action.href ?? '')) {
+              @if (action.href) {
+                <a
+                  class="gh-pattern-action gh-pattern-action--{{ action.variant ?? 'primary' }}"
+                  [href]="action.href"
+                  [attr.aria-label]="action.ariaLabel ?? null"
+                  [attr.target]="action.external ? '_blank' : null"
+                  [attr.rel]="action.external ? 'noopener noreferrer' : null"
+                >
+                  {{ action.label }}
+                  @if (action.external) {
+                    <span class="gh-visually-hidden"> ({{ externalLinkLabel() }})</span>
+                  }
+                </a>
+              }
+            }
+          </gh-inline>
+        }
+      </gh-stack>
+
+      @if (layout() !== 'content-only' && visual()) {
+        <div class="gh-hero__visual">
+          <ng-content select="[ghHeroVisual]" />
+        </div>
+      }
+    </div>
+  </gh-container>
+</gh-section>

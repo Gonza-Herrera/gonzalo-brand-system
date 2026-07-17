@@ -9,7 +9,7 @@ Design System.
 - Visual documentation for published components.
 - Light, dark and system-theme validation.
 - Responsive and accessibility reference implementation.
-- Documentation host for future public components and patterns.
+- Documentation host for public components and Brand Patterns.
 
 ## Structure
 
@@ -25,10 +25,13 @@ Pages such as `/buttons` must import the real component from the package rather
 than recreating it with showcase-only markup.
 
 Current public documentation routes include `/layout`, `/buttons`, `/badges`,
-`/tags` and `/cards`.
+`/tags`, `/cards` and `/patterns`.
 
 The Layout page exercises all seven public primitives, including real Project
 Cards inside Grid and real Tags and Badges inside Cluster.
+
+The Patterns page exercises all eight Brand Patterns in isolation and includes
+a composed personal-landing demonstration built from the public package API.
 
 ## Run
 

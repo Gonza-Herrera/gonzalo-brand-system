@@ -1,0 +1,65 @@
+@use '../../styles/tokens/breakpoints' as breakpoints;
+@use '../pattern-foundations' as pattern;
+
+:host {
+  display: block;
+  min-width: 0;
+}
+
+.gh-section-heading__layout {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: var(--gh-space-lg);
+}
+
+.gh-section-heading__content {
+  max-width: var(--gh-layout-reading-max);
+}
+
+:host.gh-section-heading--center .gh-section-heading__layout {
+  align-items: center;
+  text-align: center;
+}
+
+.gh-section-heading__eyebrow {
+  @include pattern.eyebrow;
+}
+
+.gh-section-heading h2,
+.gh-section-heading h3,
+.gh-section-heading h4 {
+  @include pattern.heading;
+}
+
+.gh-section-heading h2 {
+  font-size: var(--gh-font-size-h2);
+}
+
+.gh-section-heading h3 {
+  font-size: var(--gh-font-size-h3);
+}
+
+.gh-section-heading h4 {
+  font-size: var(--gh-font-size-body-large);
+}
+
+.gh-section-heading__description {
+  @include pattern.description;
+}
+
+.gh-section-heading__action:empty {
+  display: none;
+}
+
+.gh-section-heading__action {
+  flex: none;
+}
+
+@media (min-width: breakpoints.$gh-breakpoint-md) {
+  :host.gh-section-heading--start .gh-section-heading__layout {
+    flex-direction: row;
+    align-items: end;
+    justify-content: space-between;
+  }
+}

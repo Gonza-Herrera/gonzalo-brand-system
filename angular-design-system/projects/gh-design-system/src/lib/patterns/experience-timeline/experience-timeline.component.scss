@@ -1,0 +1,55 @@
+:host {
+  display: block;
+  min-width: 0;
+}
+
+.gh-experience-timeline__list {
+  display: grid;
+  min-width: 0;
+  gap: var(--gh-space-xl);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gh-experience-timeline__list > li {
+  position: relative;
+  min-width: 0;
+}
+
+:host.gh-experience-timeline--compact .gh-experience-timeline__list {
+  gap: var(--gh-space-md);
+}
+
+:host.gh-experience-timeline--connector .gh-experience-timeline__list > li {
+  padding-left: var(--gh-space-xl);
+}
+
+:host.gh-experience-timeline--connector .gh-experience-timeline__list > li::before {
+  position: absolute;
+  top: var(--gh-space-lg);
+  left: 0;
+  z-index: 1;
+  width: var(--gh-space-sm);
+  height: var(--gh-space-sm);
+  border: var(--gh-border-width-default) solid var(--gh-pattern-timeline-connector);
+  border-radius: var(--gh-radius-pill);
+  background: var(--gh-background-primary);
+  content: '';
+}
+
+:host.gh-experience-timeline--connector .gh-experience-timeline__list > li:not(:last-child)::after {
+  position: absolute;
+  top: calc(var(--gh-space-lg) + var(--gh-space-sm));
+  bottom: calc(var(--gh-space-xl) * -1);
+  left: calc(var(--gh-space-sm) / 2 - var(--gh-border-width-default) / 2);
+  width: var(--gh-border-width-default);
+  background: var(--gh-pattern-timeline-connector);
+  content: '';
+}
+
+:host.gh-experience-timeline--compact.gh-experience-timeline--connector
+  .gh-experience-timeline__list
+  > li:not(:last-child)::after {
+  bottom: calc(var(--gh-space-md) * -1);
+}

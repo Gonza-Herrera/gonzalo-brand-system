@@ -65,3 +65,7 @@ every semantic path.
 
 Card roles define shared surface, border, selected, elevation and restrained
 glass treatment values for the complete Card family.
+
+Brand Pattern roles centralize the single restrained accent gradient plus
+navigation, footer and timeline colors. Hero, Content Highlight and Contact
+Callout share the gradient rather than defining independent decorative values.

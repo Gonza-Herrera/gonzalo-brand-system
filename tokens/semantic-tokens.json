@@ -419,6 +419,28 @@
       "$value": "{spacing.md}"
     }
   },
+  "pattern": {
+    "accentGradient": {
+      "$type": "color",
+      "$value": "linear-gradient(135deg, color-mix(in srgb, {color.lavender} 24%, {color.ivory}), color-mix(in srgb, {color.cloudBlue} 18%, {color.ivory}) 52%, color-mix(in srgb, {color.peach} 16%, {color.ivory}))"
+    },
+    "navigationBackground": {
+      "$type": "color",
+      "$value": "color-mix(in srgb, {color.ivory} 92%, transparent)"
+    },
+    "navigationBorder": {
+      "$type": "color",
+      "$value": "color-mix(in srgb, {color.ink} 10%, transparent)"
+    },
+    "footerBackground": {
+      "$type": "color",
+      "$value": "color-mix(in srgb, {color.lavender} 7%, {color.ivory})"
+    },
+    "timelineConnector": {
+      "$type": "color",
+      "$value": "color-mix(in srgb, {color.lavender} 58%, {color.ink})"
+    }
+  },
   "focus": {
     "ring": {
       "$type": "color",

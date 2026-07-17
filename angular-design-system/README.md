@@ -3,9 +3,9 @@
 Official Angular workspace for the Gonzalo Herrera Design System.
 
 This release provides a reusable Angular library with Button, Badge, Tag, a
-four-component Card family and seven Layout Primitives, plus a routed
-standalone showcase, token-driven SCSS, light/dark/system theming and unit-test
-configuration.
+four-component Card family, seven Layout Primitives and eight Brand Patterns,
+plus a routed standalone showcase, token-driven SCSS, light/dark/system theming
+and unit-test configuration.
 
 ## Requirements
 
@@ -39,6 +39,14 @@ angular-design-system/
 │   │       │   │   ├── section/
 │   │       │   │   └── stack/
 │   │       │   ├── patterns/
+│   │       │   │   ├── hero/
+│   │       │   │   ├── navigation/
+│   │       │   │   ├── footer/
+│   │       │   │   ├── section-heading/
+│   │       │   │   ├── feature-grid/
+│   │       │   │   ├── experience-timeline/
+│   │       │   │   ├── content-highlight/
+│   │       │   │   └── contact-callout/
 │   │       │   ├── styles/
 │   │       │   └── theming/
 │   │       └── public-api.ts
@@ -256,6 +264,27 @@ Layout APIs accept only typed variants. Responsive behavior uses CSS, fluid
 tokens and generated shared Sass breakpoints; no primitive reads the viewport
 or accesses browser globals.
 
+## Brand Patterns
+
+```ts
+import {
+  GhContactCalloutComponent,
+  GhContentHighlightComponent,
+  GhExperienceTimelineComponent,
+  GhFeatureGridComponent,
+  GhFooterComponent,
+  GhHeroComponent,
+  GhNavigationComponent,
+  GhSectionHeadingComponent,
+} from 'gh-design-system';
+```
+
+Hero, Navigation, Footer, Section Heading, Feature Grid, Experience Timeline,
+Content Highlight and Contact Callout compose the existing public components
+and Layout Primitives into configurable page structures. Navigation remains
+native-link based, mobile state uses Signals, responsive behavior is CSS-only
+and all pattern content remains consumer-owned.
+
 ## Theme consumption
 
 Themes use the `data-theme` attribute on the root document element:
@@ -313,6 +342,7 @@ Import public TypeScript APIs from `gh-design-system`.
 | `/badges`     | Public Badge component        |
 | `/tags`       | Public Tag component          |
 | `/cards`      | Public Card family            |
+| `/patterns`   | Public Brand Patterns         |
 
 The shell provides a desktop sidebar, accessible mobile menu, active route
 state and the Light/Dark/System selector.
@@ -331,7 +361,7 @@ They must not be exported from the library public API.
 ## Scope
 
 This release is deliberately limited to foundations, Button, Badge, Tag,
-Cards and Layout Primitives:
+Cards, Layout Primitives and Brand Patterns:
 
 - Primitive and semantic CSS custom properties
 - Light and dark themes
@@ -344,8 +374,9 @@ Cards and Layout Primitives:
 - Static, selectable and removable Tag behavior
 - Foundational, Article, Experience and Project Cards
 - Container, Section, Stack, Inline, Grid, Cluster and Divider composition
+- Hero, Navigation, Footer, Section Heading, Feature Grid, Experience Timeline,
+  Content Highlight and Contact Callout
 
-Hero, Navbar, Footer and other Brand Patterns are deferred to later work.
 See [the architecture notes](docs/architecture.md), [tokens and themes
 guide](docs/tokens-and-themes.md) and
 [component documentation](projects/gh-design-system/src/lib/components/README.md)

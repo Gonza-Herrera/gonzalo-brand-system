@@ -39,6 +39,16 @@ layout/
 ├── inline/
 ├── section/
 └── stack/
+
+patterns/
+├── hero/
+├── navigation/
+├── footer/
+├── section-heading/
+├── feature-grid/
+├── experience-timeline/
+├── content-highlight/
+└── contact-callout/
 ```
 
 Public components are standalone, strictly typed, SSR-safe and exported only
@@ -56,6 +66,13 @@ extra wrapper. Section renders a real `<section>`. Divider chooses decorative
 markup, native `<hr>` or explicit vertical separator semantics. Responsive
 behavior is CSS-only and fixed Grid variants share breakpoints generated from
 the repository token source.
+
+Brand Patterns are standalone, configurable compositions. Hero and Contact
+Callout compose Section, Container, Stack and Inline; Navigation and Footer use
+Container; Feature Grid delegates to Grid and Card; Experience Timeline reuses
+Experience Card; Content Highlight composes Card, Badge, Tag, Stack and Cluster.
+Patterns contain no business logic, personal copy, router dependency or
+viewport JavaScript.
 
 ## Library style responsibilities
 
@@ -95,7 +112,8 @@ app/
 │   ├── buttons/
 │   ├── badges/
 │   ├── tags/
-│   └── cards/
+│   ├── cards/
+│   └── patterns/
 └── shared/
     ├── components/
     ├── data/
@@ -143,9 +161,13 @@ The showcase theme toggle is an internal consumer of this public service.
   lists, typed models and composition with Badge and Tag.
 - Layout tests cover typed host classes, content projection, semantic Section
   and Divider markup, wrapping defaults and responsive Grid variants.
+- Pattern tests cover semantic native links, mobile Navigation state, heading
+  levels, optional content, external-link safety, public composition and empty
+  collections.
 - Showcase tests cover all routes, active navigation, wildcard redirect,
   mobile menu behavior, accessible theme selection, public component
-  integration and real Card/Tag/Badge composition within Layout Primitives.
+  integration, real Card/Tag/Badge composition within Layout Primitives and the
+  complete Brand Patterns landing demonstration.
 - Production builds validate strict templates, lazy routes and public SCSS
   packaging.
 

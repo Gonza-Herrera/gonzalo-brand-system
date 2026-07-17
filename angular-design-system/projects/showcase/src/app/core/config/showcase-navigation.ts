@@ -57,4 +57,9 @@ export const SHOWCASE_NAVIGATION: readonly ShowcaseNavigationItem[] = [
     path: '/cards',
     description: 'Content surfaces and typed compositions',
   },
+  {
+    label: 'Patterns',
+    path: '/patterns',
+    description: 'Page-ready brand compositions',
+  },
 ];

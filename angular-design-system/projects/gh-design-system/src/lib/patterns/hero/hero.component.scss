@@ -1,0 +1,104 @@
+@use '../../styles/tokens/breakpoints' as breakpoints;
+@use '../pattern-foundations' as pattern;
+
+:host {
+  display: block;
+  min-width: 0;
+}
+
+.gh-hero__section {
+  overflow: hidden;
+}
+
+:host.gh-hero--surface-default .gh-hero__section {
+  background: var(--gh-background-primary);
+}
+
+:host.gh-hero--surface-subtle .gh-hero__section {
+  background: var(--gh-background-subtle);
+}
+
+:host.gh-hero--surface-gradient .gh-hero__section {
+  background: var(--gh-pattern-accent-gradient);
+}
+
+:host.gh-hero--surface-glass .gh-hero__section {
+  border-block: var(--gh-border-width-default) solid var(--gh-card-border-glass);
+  background: var(--gh-card-background-glass);
+  -webkit-backdrop-filter: blur(var(--gh-card-glass-blur));
+  backdrop-filter: blur(var(--gh-card-glass-blur));
+}
+
+.gh-hero__layout {
+  display: grid;
+  min-width: 0;
+  gap: var(--gh-space-2xl);
+  align-items: center;
+}
+
+.gh-hero__content {
+  min-width: 0;
+}
+
+:host.gh-hero--align-center .gh-hero__content {
+  align-items: center;
+  text-align: center;
+}
+
+:host.gh-hero--layout-content-only .gh-hero__content,
+:host.gh-hero--layout-centered .gh-hero__content {
+  width: min(100%, var(--gh-container-lg));
+  margin-inline: auto;
+}
+
+:host.gh-hero--layout-centered .gh-hero__content {
+  align-items: center;
+  text-align: center;
+}
+
+.gh-hero__eyebrow {
+  @include pattern.eyebrow;
+}
+
+.gh-hero__title {
+  @include pattern.heading;
+
+  font-size: clamp(var(--gh-font-size-h1), 9vw, var(--gh-font-size-hero));
+}
+
+.gh-hero__description {
+  @include pattern.description;
+
+  max-width: var(--gh-layout-reading-max);
+}
+
+.gh-hero__actions {
+  width: 100%;
+}
+
+.gh-pattern-action {
+  @include pattern.action-link;
+}
+
+@include pattern.action-variants('.gh-pattern-action');
+
+.gh-visually-hidden {
+  @include pattern.visually-hidden;
+}
+
+.gh-hero__visual {
+  overflow: hidden;
+  min-width: 0;
+  max-width: 100%;
+}
+
+:host.gh-hero--layout-centered .gh-hero__visual {
+  width: min(100%, var(--gh-container-lg));
+  margin-inline: auto;
+}
+
+@media (min-width: breakpoints.$gh-breakpoint-md) {
+  :host.gh-hero--layout-split .gh-hero__layout {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  }
+}

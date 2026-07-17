@@ -1,0 +1,112 @@
+@use '../../styles/tokens/breakpoints' as breakpoints;
+@use '../pattern-foundations' as pattern;
+
+:host {
+  display: block;
+  min-width: 0;
+}
+
+.gh-footer {
+  padding-block: var(--gh-section-padding-lg);
+  border-top: var(--gh-border-width-default) solid var(--gh-border-subtle);
+  background: var(--gh-pattern-footer-background);
+  color: var(--gh-text-primary);
+}
+
+.gh-footer__main {
+  display: grid;
+  min-width: 0;
+  gap: var(--gh-space-2xl);
+}
+
+.gh-footer__identity {
+  max-width: var(--gh-container-sm);
+}
+
+.gh-footer__brand {
+  font-family: var(--gh-font-family-display);
+  font-size: var(--gh-font-size-h3);
+  line-height: var(--gh-line-height-heading);
+}
+
+.gh-footer p,
+.gh-footer h2 {
+  margin: 0;
+}
+
+.gh-footer__identity > p {
+  color: var(--gh-text-secondary);
+}
+
+.gh-footer__tagline {
+  color: var(--gh-text-primary) !important;
+  font-weight: var(--gh-font-weight-semibold);
+}
+
+.gh-footer__social:empty,
+.gh-footer__bottom-content:empty {
+  display: none;
+}
+
+.gh-footer__groups nav {
+  min-width: 0;
+}
+
+.gh-footer__groups h2 {
+  margin-bottom: var(--gh-space-md);
+  font-size: var(--gh-font-size-label);
+  font-weight: var(--gh-font-weight-bold);
+  letter-spacing: var(--gh-letter-spacing-wide);
+  text-transform: uppercase;
+}
+
+.gh-footer__groups ul {
+  display: grid;
+  gap: var(--gh-space-sm);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gh-footer a {
+  border-radius: var(--gh-radius-sm);
+  color: var(--gh-text-secondary);
+  overflow-wrap: anywhere;
+  text-decoration-thickness: var(--gh-border-width-default);
+  text-underline-offset: var(--gh-space-xs);
+
+  &:hover {
+    color: var(--gh-text-primary);
+  }
+
+  &:focus-visible {
+    outline: var(--gh-border-width-focus) solid var(--gh-focus-ring);
+    outline-offset: var(--gh-border-width-focus);
+  }
+}
+
+.gh-footer__bottom {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gh-space-md);
+  padding-top: var(--gh-space-lg);
+  border-top: var(--gh-border-width-default) solid var(--gh-border-subtle);
+  color: var(--gh-text-muted);
+  font-size: var(--gh-font-size-caption);
+}
+
+.gh-visually-hidden {
+  @include pattern.visually-hidden;
+}
+
+@media (min-width: breakpoints.$gh-breakpoint-md) {
+  .gh-footer__main {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+  }
+
+  .gh-footer__bottom {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

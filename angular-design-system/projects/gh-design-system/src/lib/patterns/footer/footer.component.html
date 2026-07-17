@@ -1,0 +1,59 @@
+<footer class="gh-footer">
+  <gh-container size="wide">
+    <gh-stack gap="xl">
+      <div class="gh-footer__main">
+        <gh-stack class="gh-footer__identity" gap="sm">
+          <strong class="gh-footer__brand">{{ brand() }}</strong>
+
+          @if (description()) {
+            <p>{{ description() }}</p>
+          }
+
+          @if (showTagline() && tagline()) {
+            <p class="gh-footer__tagline">{{ tagline() }}</p>
+          }
+
+          <div class="gh-footer__social">
+            <ng-content select="[ghFooterSocial]" />
+          </div>
+        </gh-stack>
+
+        @if (linkGroups().length) {
+          <gh-grid class="gh-footer__groups" columns="auto" minItemSize="sm" gap="lg">
+            @for (group of linkGroups(); track group.title) {
+              <nav [attr.aria-label]="group.title">
+                <h2>{{ group.title }}</h2>
+                <ul>
+                  @for (link of group.links; track link.href + link.label) {
+                    <li>
+                      <a
+                        [href]="link.href"
+                        [attr.aria-label]="link.ariaLabel ?? null"
+                        [attr.target]="link.external ? '_blank' : null"
+                        [attr.rel]="link.external ? 'noopener noreferrer' : null"
+                      >
+                        {{ link.label }}
+                        @if (link.external) {
+                          <span class="gh-visually-hidden"> ({{ externalLinkLabel() }})</span>
+                        }
+                      </a>
+                    </li>
+                  }
+                </ul>
+              </nav>
+            }
+          </gh-grid>
+        }
+      </div>
+
+      <div class="gh-footer__bottom">
+        @if (copyright()) {
+          <p>{{ copyright() }}</p>
+        }
+        <div class="gh-footer__bottom-content">
+          <ng-content select="[ghFooterBottom]" />
+        </div>
+      </div>
+    </gh-stack>
+  </gh-container>
+</footer>

@@ -28,5 +28,23 @@ export * from './lib/layout/cluster/cluster.component';
 export * from './lib/layout/cluster/cluster.types';
 export * from './lib/layout/divider/divider.component';
 export * from './lib/layout/divider/divider.types';
+
+export * from './lib/patterns/hero/hero.component';
+export * from './lib/patterns/hero/hero.types';
+export * from './lib/patterns/navigation/navigation.component';
+export * from './lib/patterns/navigation/navigation.types';
+export * from './lib/patterns/footer/footer.component';
+export * from './lib/patterns/footer/footer.types';
+export * from './lib/patterns/section-heading/section-heading.component';
+export * from './lib/patterns/section-heading/section-heading.types';
+export * from './lib/patterns/feature-grid/feature-grid.component';
+export * from './lib/patterns/feature-grid/feature-grid.types';
+export * from './lib/patterns/experience-timeline/experience-timeline.component';
+export * from './lib/patterns/experience-timeline/experience-timeline.types';
+export * from './lib/patterns/content-highlight/content-highlight.component';
+export * from './lib/patterns/content-highlight/content-highlight.types';
+export * from './lib/patterns/contact-callout/contact-callout.component';
+export * from './lib/patterns/contact-callout/contact-callout.types';
+
 export * from './lib/theming/theme';
 export * from './lib/theming/theme.service';

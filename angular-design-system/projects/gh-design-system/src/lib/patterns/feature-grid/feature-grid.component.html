@@ -1,0 +1,71 @@
+<gh-grid [columns]="columns()" minItemSize="md" gap="lg">
+  @for (feature of features(); track feature.title + (feature.href ?? '')) {
+    @if (variant() === 'cards') {
+      <gh-card
+        [interactive]="!!feature.href"
+        [ariaLabel]="feature.title"
+        variant="outlined"
+        fullHeight
+      >
+        <div ghCardContent>
+          <gh-stack gap="md">
+            @if (feature.iconLabel) {
+              <span class="gh-feature-grid__icon" aria-hidden="true">{{ feature.iconLabel }}</span>
+            }
+            <gh-stack gap="xs">
+              @if (feature.eyebrow) {
+                <p class="gh-feature-grid__eyebrow">{{ feature.eyebrow }}</p>
+              }
+              <h3>{{ feature.title }}</h3>
+              <p class="gh-feature-grid__description">{{ feature.description }}</p>
+            </gh-stack>
+          </gh-stack>
+        </div>
+
+        @if (feature.href) {
+          <div ghCardFooter>
+            <a
+              class="gh-feature-grid__link"
+              [href]="feature.href"
+              [attr.target]="feature.external ? '_blank' : null"
+              [attr.rel]="feature.external ? 'noopener noreferrer' : null"
+            >
+              <span>{{ feature.title }}</span>
+              <span aria-hidden="true">→</span>
+              @if (feature.external) {
+                <span class="gh-visually-hidden"> ({{ externalLinkLabel() }})</span>
+              }
+            </a>
+          </div>
+        }
+      </gh-card>
+    } @else {
+      <article class="gh-feature-grid__minimal-item">
+        <gh-stack gap="sm">
+          @if (feature.iconLabel) {
+            <span class="gh-feature-grid__icon" aria-hidden="true">{{ feature.iconLabel }}</span>
+          }
+          @if (feature.eyebrow) {
+            <p class="gh-feature-grid__eyebrow">{{ feature.eyebrow }}</p>
+          }
+          <h3>{{ feature.title }}</h3>
+          <p class="gh-feature-grid__description">{{ feature.description }}</p>
+          @if (feature.href) {
+            <a
+              class="gh-feature-grid__link"
+              [href]="feature.href"
+              [attr.target]="feature.external ? '_blank' : null"
+              [attr.rel]="feature.external ? 'noopener noreferrer' : null"
+            >
+              <span>{{ feature.title }}</span>
+              <span aria-hidden="true">→</span>
+              @if (feature.external) {
+                <span class="gh-visually-hidden"> ({{ externalLinkLabel() }})</span>
+              }
+            </a>
+          }
+        </gh-stack>
+      </article>
+    }
+  }
+</gh-grid>
