@@ -1,0 +1,16 @@
+html,
+body,
+app-root {
+  min-height: 100%;
+}
+
+body {
+  min-width: 20rem;
+  overflow-x: clip;
+}
+
+app-root {
+  display: block;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
