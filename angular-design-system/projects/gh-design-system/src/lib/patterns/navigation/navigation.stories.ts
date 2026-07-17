@@ -57,6 +57,20 @@ export const WithProjectedControls: Story = {
     `,
   }),
 };
+export const TabletWithProjectedControls: Story = {
+  ...WithProjectedControls,
+  globals: { viewport: { value: 'tablet768', isRotated: false } },
+  play: async ({ canvas }) => {
+    const openButton = canvas.getByRole('button', { name: 'Open navigation menu' });
+    await expect(openButton).toBeVisible();
+    await expect(openButton).toHaveAttribute('aria-expanded', 'false');
+    await userEvent.click(openButton);
+    await expect(canvas.getByRole('button', { name: 'Close navigation menu' })).toHaveAttribute(
+      'aria-expanded',
+      'true',
+    );
+  },
+};
 export const MobileMenu: Story = {
   globals: { viewport: { value: 'mobile375', isRotated: false } },
   play: async ({ canvas }) => {

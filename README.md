@@ -26,7 +26,7 @@ angular-design-system/  Angular library, Portfolio, Showcase, Storybook, tests, 
 `angular-design-system/` contains three Angular projects and complementary development surfaces:
 
 - `gh-design-system` — the reusable standalone-component library and public SCSS entrypoints.
-- `portfolio` — the SSR-enabled public production application and home of real website content.
+- `portfolio` — the bilingual SSR-enabled public production application and home of real website content.
 - `showcase` — a routed integration application demonstrating full pages, navigation, and realistic composition.
 - Storybook — the primary isolated visual/API reference for foundations, variants, states, Controls, accessibility checks, interaction tests, and responsive inspection.
 - Component READMEs — focused API and implementation notes colocated with source.
@@ -69,6 +69,12 @@ Run the public Portfolio foundation:
 ```bash
 npm run start:portfolio
 ```
+
+Portfolio supports English and Spanish through localized routes such as `/en/projects` and
+`/es/projects`. Its global shell composes the public Navigation and Footer patterns, includes
+language and Light/Dark/System selectors, and keeps the URL locale authoritative for SSR and
+hydration. See the [Portfolio guide](angular-design-system/projects/portfolio/README.md) and
+[internationalization contract](angular-design-system/docs/portfolio-internationalization.md).
 
 ## Build and tests
 

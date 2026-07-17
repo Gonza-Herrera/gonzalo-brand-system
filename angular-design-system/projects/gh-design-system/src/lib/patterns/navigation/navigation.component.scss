@@ -141,7 +141,7 @@
   @include pattern.visually-hidden;
 }
 
-@media (min-width: breakpoints.$gh-breakpoint-md) {
+@media (min-width: breakpoints.$gh-breakpoint-lg) {
   .gh-navigation__bar {
     display: flex;
   }

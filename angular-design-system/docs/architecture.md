@@ -120,47 +120,88 @@ and accessible global base styles.
 
 Portfolio is a separate Angular application because the public website has
 different responsibilities from the internal integration Showcase. It owns
-real content, routing, SSR, hydration and future SEO, internationalization,
-analytics and deployment concerns. Showcase remains free to prioritize
-technical examples and maintainer workflows.
+real bilingual content, localized routing, SSR, hydration and future SEO,
+analytics and deployment concerns. Showcase remains free to prioritize technical
+examples and maintainer workflows.
 
 ```text
 portfolio/src/app/
 ├── app.component.*          minimal root RouterOutlet
-├── core/config/             stable site metadata
+├── core/
+│   ├── config/              non-translatable site and locale configuration
+│   ├── routing/             locale guard, URL helpers and title strategy
+│   └── services/            locale Signal and safe preference storage
 ├── content/
 │   ├── models/              readonly content contracts
-│   ├── en/                  active minimal English copy
-│   └── es/                  initial Spanish identity boundary
+│   ├── en/                  complete English shell and placeholder copy
+│   ├── es/                  equivalent Spanish structure
+│   └── registry             typed locale-to-content mapping
 ├── layout/
-│   └── portfolio-shell/     skip link and semantic landmarks
+│   └── portfolio-shell/     global Navigation, main and Footer
 ├── pages/                   lazy standalone route components
-├── shared/                  app-private reuse after demand exists
+├── shared/                  app-private language and theme controls
 └── styles/                  minimal app-level layout contract
 ```
 
-`AppComponent` only renders the root `RouterOutlet`.
-`PortfolioShellComponent` is the parent route and owns the header,
-`main#main-content`, footer, skip link and full-height frame. Home, About,
-Experience, Projects, Content, Contact and Not Found load through
-`loadComponent`; the fallback stays inside the shell.
+`AppComponent` only renders the root `RouterOutlet`. The `:locale` parent route
+validates `en` or `es` before rendering `PortfolioShellComponent`. The shell
+owns the localized skip link, public `GhNavigationComponent`,
+`main#main-content`, public `GhFooterComponent` and the full-height frame. Home,
+About, Experience, Projects, Content, Contact and Not Found load through
+`loadComponent`; the localized fallback stays inside the shell.
 
-Route metadata uses Angular's built-in title strategy for SSR-compatible page
-titles. Content is compile-time, typed TypeScript and remains separate from
-templates; there is no CMS, HTTP content loader or state manager. English is
-active and localization mechanics are deferred to PR 11.
+```text
+Localized route
+    ↓
+Locale validation
+    ↓
+Locale Service
+    ↓
+Typed content registry
+    ↓
+Portfolio Shell
+    ↓
+Localized page
+```
+
+The locale prefix is the source of truth. `/` and known unlocalized routes
+redirect to English. An invalid prefix falls back to `en` while preserving the
+remaining path. The route guard activates `PortfolioLocaleService`, which
+updates the locale Signal, selects compile-time content and sets `<html lang>`
+on server and browser documents. A safe, app-specific storage service records
+manual language choices but never overrides an explicit URL.
+
+Stable route `pageId` metadata feeds `PortfolioTitleStrategy`, which applies
+the matching localized title and basic description. Content remains typed
+TypeScript, separate from templates and structurally equivalent across both
+locales; there is no CMS, HTTP loader, translation dependency or state manager.
 
 Portfolio consumes TypeScript only from `gh-design-system` and Sass only from
 the public `styles` and `styles/foundations` exports. The application
-initializer instantiates the library's SSR-safe `GhThemeService`, preserving
-light, dark and system behavior without duplicating browser or storage logic.
-The visual theme control is deferred to PR 11.
+initializer instantiates the library's SSR-safe `GhThemeService`. The
+app-private Theme Switcher binds localized labels to the public light, dark and
+system contract without duplicating browser or storage logic.
+
+```text
+Theme preference
+    ↓
+Theme Service
+    ↓
+Resolved light/dark theme
+    ↓
+Design System tokens
+```
+
+The Language Switcher is also app-private because it owns Portfolio route
+semantics. It preserves the current path, query and fragment while replacing
+the locale prefix. These routing and preference controls are not exported by
+the Design System.
 
 The official Angular SSR builder produces browser and Express server bundles.
 `provideClientHydration(withEventReplay())` hydrates server HTML, while all
-routes currently use server rendering. No environment files were introduced:
-the workspace has no existing environment convention and no production URL is
-approved.
+routes use server rendering. URL-first locale resolution keeps server and
+first-client content deterministic. No environment files were introduced: the
+workspace has no existing environment convention and no production URL is approved.
 
 ## Showcase architecture
 
@@ -244,8 +285,9 @@ will progressively replace placeholders with real localized experiences.
 - Browser APIs are guarded for SSR.
 
 The showcase theme toggle is an internal consumer of this public service.
-Portfolio initializes the same service with its default `system` preference but
-does not yet expose a visual selector.
+Portfolio exposes an app-private select using the same public service. Locale
+selection and theme selection persist independently; only locale remains part
+of the route.
 
 ## Testing strategy
 
@@ -271,8 +313,10 @@ does not yet expose a visual selector.
   mobile menu behavior, accessible theme selection, public component
   integration, real Card/Tag/Badge composition within Layout Primitives and the
   complete Brand Patterns landing demonstration.
-- Portfolio tests cover its minimal root, semantic shell, public-package layout
-  integration, every lazy route, headings, Not Found link and route titles.
+- Portfolio tests cover its minimal root, bilingual shell, public Navigation
+  and Footer integration, all localized lazy routes, redirects, invalid-locale
+  fallback, exact active state, content parity, locale storage, both switchers,
+  localized Not Found, document language, titles and basic descriptions.
 - Portfolio's production build validates server rendering, hydration wiring,
   direct lazy-route compatibility and separate route chunks.
 - Storybook build-time checks compile every public story and MDX page against

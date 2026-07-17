@@ -45,7 +45,9 @@ The projection markers are `ghNavigationLogo`, `ghNavigationActions` and `ghNavi
 - The consumer determines the active item; active links expose `aria-current="page"` and a non-color underline.
 - The mobile menu uses a real button, Signals, `aria-expanded` and `aria-controls`.
 - Selecting an item closes the mobile menu. Escape closes it and returns focus to the toggle.
-- Desktop/mobile switching is CSS-only; the initial Signal state is closed and deterministic.
+- Desktop/mobile switching is CSS-only. The collapsible layout remains active through tablet widths,
+  and the horizontal layout starts at the shared `lg` (1024px) breakpoint so projected controls and
+  longer localized labels have enough room. The initial Signal state is closed and deterministic.
 - External links receive `target="_blank"`, `rel="noopener noreferrer"` and accessible context.
 - Sticky and transparent presentation remain optional and token-driven.
 

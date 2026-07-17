@@ -4,8 +4,8 @@ Official Angular workspace for the Gonzalo Herrera Design System.
 
 This workspace provides a reusable Angular library with Button, Badge, Tag, a
 four-component Card family, seven Layout Primitives and eight Brand Patterns,
-plus Storybook, a routed standalone Showcase, an SSR-enabled Portfolio
-foundation, token-driven SCSS, light/dark/system theming, unit tests,
+plus Storybook, a routed standalone Showcase, a bilingual SSR-enabled Portfolio,
+token-driven SCSS, light/dark/system theming, unit tests,
 accessibility checks and targeted interaction tests.
 
 ## Requirements
@@ -99,15 +99,18 @@ ng serve showcase
 editing TypeScript in the library, run `npm run watch:library` in a second
 terminal so the showcase receives rebuilt library output.
 
-Run the public Portfolio foundation separately:
+Run the public Portfolio separately:
 
 ```bash
 npm run start:portfolio
 ```
 
-Portfolio uses lazy standalone pages, the public Design System package, SSR and
-client hydration. See [`projects/portfolio/README.md`](projects/portfolio/README.md)
-for its architecture and current scope.
+Portfolio uses `/en/...` and `/es/...` routes, lazy standalone pages, the public
+Navigation and Footer patterns, language and theme selectors, SSR and client
+hydration. For example, use `/en/projects` or `/es/projects`. See
+[`projects/portfolio/README.md`](projects/portfolio/README.md) for its architecture
+and [`docs/portfolio-internationalization.md`](docs/portfolio-internationalization.md)
+for the locale contract.
 
 Run Storybook for isolated visual and API documentation:
 
