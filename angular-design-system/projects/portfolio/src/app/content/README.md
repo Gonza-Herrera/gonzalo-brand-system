@@ -1,8 +1,9 @@
 # Content
 
-Portfolio copy is typed and kept separate from page templates. English is the active language for
-this foundation and provides the minimal identity and placeholder page content. Spanish currently
-contains identity copy only to establish the future boundary without creating a translation system.
+Portfolio copy is typed and kept separate from page templates. English and Spanish implement the
+same `PortfolioSiteContent` structure, including identity, shell, navigation, footer, placeholder
+pages, Not Found and metadata. Stable IDs and paths remain locale-independent.
 
-PR 11 will define locale selection, localized routes and complete language parity. Content remains
-compile-time TypeScript for now: there is no HTTP-loaded JSON, CMS, Markdown parser or backend.
+`portfolio-content.registry.ts` selects content by validated route locale. Compile-time contracts and
+parity tests prevent either locale from drifting. There is no HTTP-loaded JSON, external translation
+library, CMS, Markdown parser or backend.

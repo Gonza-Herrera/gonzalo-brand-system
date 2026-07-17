@@ -1,19 +1,35 @@
-<a class="skip-link" href="#main-content">Skip to main content</a>
+<a class="skip-link" href="#main-content">
+  {{ content().shell.accessibility.skipToContent }}
+</a>
 
 <div class="portfolio-shell">
-  <header class="portfolio-shell__header">
-    <gh-container size="xl">
-      <span>Portfolio navigation placeholder</span>
-    </gh-container>
-  </header>
+  <gh-navigation
+    [brand]="content().shell.brand.name"
+    [brandHref]="homeUrl()"
+    [items]="navigationItems()"
+    [menuLabel]="content().shell.navigation.openMenuLabel"
+    [closeMenuLabel]="content().shell.navigation.closeMenuLabel"
+    [navigationLabel]="content().shell.navigation.label"
+    [externalLinkLabel]="content().shell.navigation.externalLinkLabel"
+    [showThemeControl]="true"
+    menuId="portfolio-navigation-menu"
+    [sticky]="true"
+  >
+    <app-language-switcher ghNavigationActions />
+    <app-theme-switcher ghNavigationThemeControl />
+  </gh-navigation>
 
   <main id="main-content" class="portfolio-shell__main" tabindex="-1">
     <router-outlet />
   </main>
 
-  <footer class="portfolio-shell__footer">
-    <gh-container size="xl">
-      <span>Portfolio footer placeholder</span>
-    </gh-container>
-  </footer>
+  <gh-footer
+    [brand]="content().identity.name"
+    [description]="content().shell.footer.description"
+    [linkGroups]="footerGroups()"
+    [copyright]="content().shell.footer.copyright"
+    [tagline]="content().identity.tagline"
+    [externalLinkLabel]="content().shell.navigation.externalLinkLabel"
+    [showTagline]="true"
+  />
 </div>
