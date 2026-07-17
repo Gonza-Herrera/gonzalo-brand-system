@@ -1,0 +1,15 @@
+<nav class="language-switcher" [attr.aria-label]="label()">
+  @for (option of options(); track option.locale) {
+    <a
+      [routerLink]="option.href"
+      [attr.hreflang]="option.locale"
+      [attr.lang]="option.locale"
+      [attr.aria-label]="option.label"
+      [attr.aria-current]="locale() === option.locale ? 'page' : null"
+      [attr.title]="option.label"
+      (click)="rememberLocale(option.locale)"
+    >
+      {{ option.shortLabel }}
+    </a>
+  }
+</nav>

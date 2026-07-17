@@ -1,14 +1,11 @@
 # Portfolio
 
-`portfolio` is the production application foundation for Gonzalo Herrera's public professional
-website. It is intentionally separate from the technical Showcase and isolated Storybook docs:
+`portfolio` is Gonzalo Herrera's bilingual, SSR-enabled public website application. It is separate
+from the technical Showcase and Storybook documentation: Portfolio owns real content, localized
+routing and product concerns; Showcase validates integration; Storybook documents reusable APIs.
 
-- Portfolio owns public routing, real content, SSR, future SEO and deployment concerns.
-- Showcase validates complex Design System integration for maintainers.
-- Storybook documents foundations and public UI APIs in isolation.
-
-This foundation does not implement the final page designs, navigation, footer, localization or
-theme controls.
+The current release establishes the global shell, routing and internationalization foundation. The
+final content and page compositions are intentionally scheduled for later PRs.
 
 ## Run, build and test
 
@@ -18,109 +15,159 @@ From `angular-design-system/`:
 npm run start:portfolio
 npm run build:portfolio
 npm run test:portfolio
-```
-
-The focused scripts validate tokens and build `gh-design-system` before Portfolio when needed.
-The application is served at `http://localhost:4200` by default.
-
-The production build includes browser and server bundles with hydration:
-
-```bash
 npm run build:ssr:portfolio
-npm run serve:ssr:portfolio
 ```
 
-Build before running the SSR server. Its default address is `http://localhost:4000`; the official
-Angular server reads `PORT` when the host provides one.
+The development server uses `http://localhost:4200`. The production build emits browser and server
+bundles with hydration. After building, `npm run serve:ssr:portfolio` serves them at
+`http://localhost:4000` by default and respects the host-provided `PORT` variable.
 
-## Routes
+## Localized routes
 
-All public pages are standalone and lazy-loaded below `PortfolioShellComponent`:
+English (`en`) is the default locale and Spanish (`es`) is the only other supported locale. Every
+public page has both route variants:
+
+| Page       | English          | Spanish          |
+| ---------- | ---------------- | ---------------- |
+| Home       | `/en`            | `/es`            |
+| About      | `/en/about`      | `/es/about`      |
+| Experience | `/en/experience` | `/es/experience` |
+| Projects   | `/en/projects`   | `/es/projects`   |
+| Content    | `/en/content`    | `/es/content`    |
+| Contact    | `/en/contact`    | `/es/contact`    |
+| Not Found  | `/en/**`         | `/es/**`         |
+
+Routing is deterministic and safe for direct SSR requests:
+
+- `/` redirects to `/en`.
+- Known legacy paths such as `/about` and `/projects` redirect to their English equivalents.
+- An invalid locale keeps the remaining path and falls back to English: `/fr/about` becomes
+  `/en/about`.
+- Unknown pages under a valid locale render the localized 404 inside the shared shell.
+
+The locale prefix in the URL is the source of truth. A stored preference never overrides an
+explicit URL, which prevents the server from rendering English and the client immediately replacing
+it with Spanish during hydration.
+
+## Routing and content flow
 
 ```text
-/             Home
-/about        About
-/experience   Experience
-/projects     Projects
-/content      Content
-/contact      Contact
-/**           Not Found
+Localized URL
+    ↓
+portfolioLocaleGuard validates and activates the prefix
+    ↓
+PortfolioLocaleService updates its Signal and <html lang>
+    ↓
+Typed content registry selects EN_SITE_CONTENT or ES_SITE_CONTENT
+    ↓
+PortfolioShellComponent and the lazy page render localized content
 ```
 
-The 404 page remains inside the shell so it receives the same skip link, landmarks and full-height
-layout as known routes. Angular's route `title` metadata produces the base title `Gonzalo Herrera`
-and page titles such as `About | Gonzalo Herrera`. The document head contains one minimal global
-description; complete SEO belongs to PR 18.
+`AppComponent` contains only the root `RouterOutlet`. The localized parent route renders
+`PortfolioShellComponent`; its standalone child pages are lazy-loaded with `loadComponent`. Stable
+`pageId` route data selects localized title and description metadata through
+`PortfolioTitleStrategy`.
 
-## Architecture
+## Typed content
+
+All copy is compile-time TypeScript under `src/app/content/`:
 
 ```text
-src/app/
-├── core/                 Stable application configuration
-├── content/              Typed, presentation-independent copy
-│   ├── models/
-│   ├── en/
-│   └── es/
-├── layout/
-│   └── portfolio-shell/  Skip link and semantic page frame
-├── pages/                Lazy standalone route components
-├── shared/               Reserved for proven app-private reuse
-└── styles/               Minimal application-level layout contract
+content/
+├── models/                         shared readonly contracts and stable IDs
+├── en/site-content.ts              complete English structure
+├── es/site-content.ts              equivalent Spanish structure
+└── portfolio-content.registry.ts   locale-to-content registry
 ```
 
-`AppComponent` renders only the root `RouterOutlet`. The shell owns header, main and footer
-landmarks while individual pages own their single `h1`. No page imports source files from the
-library.
+There is no translation dependency, HTTP-loaded JSON, CMS, Markdown parser or application state
+library. Both locale objects use `satisfies PortfolioSiteContent`, and parity tests protect their
+page, navigation and shell structure.
 
-## Design System and themes
+### Add or edit a translation
 
-TypeScript consumers import only from the package root:
+1. Add the key to the relevant contract under `content/models/` if it does not exist.
+2. Add the same structural key to both `en/site-content.ts` and `es/site-content.ts`.
+3. Keep route IDs and navigation IDs stable; translate only user-facing values.
+4. Run `npm run test:portfolio` to validate parity and completeness.
 
-```ts
-import { GhContainerComponent, GhSectionComponent, GhStackComponent } from 'gh-design-system';
-```
+To add a future locale, extend `PORTFOLIO_LOCALES`, provide a complete
+`PortfolioSiteContent` object, register it in `portfolio-content.registry.ts`, and add routing,
+switcher and SSR tests. No locale beyond `en` and `es` is currently supported.
 
-Global SCSS loads the two stable package exports:
+### Add a page
 
-```scss
-@use 'gh-design-system/styles';
-@use 'gh-design-system/styles/foundations';
-```
+1. Add its stable ID and locale-independent path to `page-content.model.ts`.
+2. Add structurally equivalent content and metadata to both locale files.
+3. Create a lazy standalone page under `pages/` that reads from `PortfolioLocaleService`.
+4. Add the localized child route and its `pageId` in `app.routes.ts`.
+5. If it belongs in global navigation, add the same ID to both localized navigation arrays.
+6. Cover both route variants, active state and metadata in routing tests.
 
-The application initializes the public, SSR-safe `GhThemeService`. Its initial `system` preference
-resolves light or dark without duplicating browser APIs, storage logic, token values or theme
-styles. A visible light/dark/system control is deferred to PR 11.
+Internal links should keep the current locale. Use `createLocalizedPath(locale, pageId)` for a known
+page and `PortfolioLocaleService.buildLocalizedUrl(locale, currentUrl)` when preserving the current
+path while changing locale.
 
-## Content strategy
+## Global shell
 
-`content/models` defines readonly identity and page contracts. English contains the minimal active
-identity and placeholder copy. Spanish currently establishes identity copy only; PR 11 will add
-locale selection, localized routes and complete parity. Content is compile-time TypeScript—there is
-no CMS, HTTP-loaded JSON, Markdown engine or global state.
+The shell composes only public Design System APIs:
 
-## SSR and environments
+- `gh-navigation` renders the brand, localized native links, exact active-page state, mobile menu,
+  language actions and theme control.
+- `gh-footer` renders localized identity, primary links, tagline and a static copyright.
+- `LanguageSwitcherComponent` uses accessible EN/ES links and preserves the current path, query and
+  fragment. A manual choice is stored under `gh-portfolio-locale` when browser storage is available.
+- `ThemeSwitcherComponent` controls the public `GhThemeService` with Light, Dark and System options.
+  The Design System owns `data-theme`, system preference observation and safe persistence.
 
-SSR uses the official Angular application builder, `@angular/ssr`, an Express server entry and
-`provideClientHydration(withEventReplay())`. Every route currently uses server rendering, including
-direct requests to lazy pages and the Not Found view. Application code has no direct access to
-`window`, `document`, storage or media queries.
+LinkedIn, GitHub and email URLs are not present in the repository's approved source data. The
+central `PORTFOLIO_CONFIG.urls` fields therefore remain empty and the footer does not publish fake
+links. Add verified URLs there before exposing a social group.
 
-The existing workspace had no Angular environment-file convention, and no production domain is
-approved, so this project does not introduce speculative `environment.ts` files or a `siteUrl`.
-Runtime server port configuration uses the generated `PORT` environment variable.
+## URL, locale and content
 
-## Accessibility and responsive foundation
+- **URL** is durable navigation state and determines the locale on direct load, refresh, history and
+  SSR.
+- **Locale Signal** is the in-memory projection of that validated URL prefix.
+- **Content** is selected from the typed registry using that Signal.
+- **Stored preference** records a manual choice for future product decisions but is deliberately not
+  allowed to contradict the current URL.
 
-- The skip link is the first focusable element and targets `main#main-content`.
-- Header, main and footer landmarks have logical DOM order.
-- Every route renders exactly one visible `h1`.
-- Not Found uses a native link for navigation.
-- Focus, contrast and themes use public Design System foundations.
-- Container gutters and CSS-only flex layout support 320px through wide desktop sizes.
-- The shell clips accidental horizontal overflow and keeps the footer at the bottom with short copy.
+`PortfolioLocaleStorageService` guards browser access, validates values and tolerates unavailable
+storage. It is intentionally small and portfolio-specific.
 
-## Next step
+## Accessibility and responsive behavior
 
-PR 11 should replace the shell placeholders with the public navigation and footer patterns, add an
-accessible light/dark/system control, introduce English/Spanish routing, and define focus behavior
-for client-side navigation without implementing the final Home content.
+- The localized skip link is the first focusable element and targets `main#main-content`.
+- Header, navigation, main and footer use semantic landmarks and native links.
+- Each route owns exactly one visible `h1`.
+- Exact active navigation uses `aria-current="page"`; the language switcher separately marks the
+  current locale.
+- After client-side route changes, focus moves to the main content unless a fragment target was
+  requested. Initial rendering is not disrupted.
+- The Design System navigation owns Escape handling, focus return and responsive mobile state.
+- Token-based CSS supports 320px through wide desktop layouts without viewport JavaScript.
+
+## SSR, hydration and persistence
+
+The route guard runs for server and browser navigation. It activates content and sets the Angular
+`DOCUMENT` root language before the localized shell renders. English is used for `/` and invalid
+locales on both platforms, so server HTML and the first client render agree. Browser globals and
+storage are only accessed behind platform guards or the SSR-safe Design System service.
+
+Theme defaults to `system` during SSR. A stored explicit theme is applied by `GhThemeService` in the
+browser; there is no speculative inline pre-bootstrap script, so a brief theme transition can still
+occur on a cold load. This avoids unsafe script duplication while preserving hydration-safe Angular
+content.
+
+## Current limits
+
+- Page bodies are localized placeholders, not final Portfolio experiences.
+- Only English and Spanish are implemented.
+- Social URLs await verified source data.
+- Canonical URLs, complete `hreflang`, Open Graph, sitemap, structured data and production domain
+  configuration belong to PR 18.
+- No analytics, CMS, backend, contact form or deployment is included.
+
+See [Portfolio internationalization](../../docs/portfolio-internationalization.md) for the detailed
+locale contract and [architecture](../../docs/architecture.md) for workspace boundaries.

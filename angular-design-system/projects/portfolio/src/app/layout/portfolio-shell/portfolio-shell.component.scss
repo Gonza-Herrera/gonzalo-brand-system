@@ -31,23 +31,12 @@
   flex-direction: column;
 }
 
-.portfolio-shell__header,
-.portfolio-shell__footer {
+gh-navigation,
+gh-footer {
   flex: none;
-  padding-block: var(--gh-space-md);
-  color: var(--gh-text-secondary);
-  font-size: var(--gh-font-size-caption);
-}
-
-.portfolio-shell__header {
-  border-bottom: var(--gh-border-width-default) solid var(--gh-border-subtle);
 }
 
 .portfolio-shell__main {
   min-width: 0;
   flex: 1;
-}
-
-.portfolio-shell__footer {
-  border-top: var(--gh-border-width-default) solid var(--gh-border-subtle);
 }

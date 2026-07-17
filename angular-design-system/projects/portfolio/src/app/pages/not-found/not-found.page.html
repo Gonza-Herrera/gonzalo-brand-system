@@ -1,10 +1,11 @@
 <gh-section spacing="lg">
   <gh-container size="sm">
     <gh-stack gap="md" align="start">
-      <p class="not-found__code" aria-hidden="true">{{ content.eyebrow }}</p>
-      <h1>{{ content.title }}</h1>
-      <p>{{ content.description }}</p>
-      <a class="not-found__link" href="/">Return home</a>
+      <p class="not-found__code" aria-hidden="true">{{ content().eyebrow }}</p>
+      <h1>{{ content().title }}</h1>
+      <p>{{ content().description }}</p>
+      <p>{{ content().stage }}</p>
+      <a class="not-found__link" [href]="homeUrl()">{{ content().actionLabel }}</a>
     </gh-stack>
   </gh-container>
 </gh-section>

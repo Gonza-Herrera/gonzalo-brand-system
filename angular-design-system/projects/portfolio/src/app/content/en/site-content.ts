@@ -1,52 +1,113 @@
 import type { PortfolioSiteContent } from '../models/site-content.model';
 
-export const EN_SITE_CONTENT: PortfolioSiteContent = {
+export const EN_SITE_CONTENT = {
   identity: {
     name: 'Gonzalo Herrera',
     role: 'Frontend Tech Lead & AI-Augmented Engineer',
     tagline: 'Think bigger. Build smarter.',
     description: 'Helping teams build better software through engineering, leadership and AI.',
   },
+  shell: {
+    accessibility: {
+      skipToContent: 'Skip to main content',
+    },
+    brand: {
+      name: 'Gonzalo Herrera',
+      role: 'Frontend Tech Lead & AI-Augmented Engineer',
+      homeAriaLabel: 'Gonzalo Herrera, home',
+    },
+    navigation: {
+      label: 'Primary navigation',
+      openMenuLabel: 'Open navigation menu',
+      closeMenuLabel: 'Close navigation menu',
+      externalLinkLabel: 'opens in a new tab',
+      items: [
+        { id: 'home', label: 'Home', path: '' },
+        { id: 'about', label: 'About', path: 'about' },
+        { id: 'experience', label: 'Experience', path: 'experience' },
+        { id: 'projects', label: 'Projects', path: 'projects' },
+        { id: 'content', label: 'Content', path: 'content' },
+        { id: 'contact', label: 'Contact', path: 'contact' },
+      ],
+    },
+    language: {
+      label: 'Language',
+      englishLabel: 'English',
+      spanishLabel: 'Spanish',
+    },
+    theme: {
+      label: 'Theme',
+      lightLabel: 'Light',
+      darkLabel: 'Dark',
+      systemLabel: 'System',
+    },
+    footer: {
+      description: 'Helping teams build better software through engineering, leadership and AI.',
+      navigationLabel: 'Footer navigation',
+      socialLabel: 'Social links',
+      copyright: '© 2026 Gonzalo Herrera. All rights reserved.',
+    },
+  },
   pages: {
     home: {
       eyebrow: 'Portfolio foundation',
       title: 'Gonzalo Herrera',
-      description: 'The production application foundation is ready for the future home experience.',
+      description: 'Frontend Tech Lead & AI-Augmented Engineer',
+      stage: 'The complete Home experience will be delivered in PR 12.',
+      metaTitle: 'Home',
+      metaDescription:
+        'Gonzalo Herrera is a Frontend Tech Lead and AI-Augmented Engineer helping teams build better software.',
     },
     about: {
       eyebrow: 'About',
       title: 'Professional story',
-      description:
-        'This page will introduce the experience, values and perspective behind the work.',
+      description: 'Professional story, engineering principles and leadership approach.',
+      stage: 'The complete About page will be delivered in PR 13.',
+      metaTitle: 'About',
+      metaDescription:
+        "Learn about Gonzalo Herrera's professional story, engineering principles and leadership approach.",
     },
     experience: {
       eyebrow: 'Experience',
       title: 'Engineering and leadership experience',
-      description:
-        'This page will present roles, outcomes and the teams supported throughout the career journey.',
+      description: 'Roles, outcomes and teams supported throughout a frontend career.',
+      stage: 'The complete Experience page will be delivered in PR 14.',
+      metaTitle: 'Experience',
+      metaDescription: "Explore Gonzalo Herrera's engineering and leadership experience.",
     },
     projects: {
       eyebrow: 'Projects',
       title: 'Selected projects and case studies',
-      description:
-        'This page will document representative product work, decisions and measurable outcomes.',
+      description: 'Representative product work, technical decisions and measurable outcomes.',
+      stage: 'Projects and case studies will be delivered in PR 15.',
+      metaTitle: 'Projects',
+      metaDescription: "Explore Gonzalo Herrera's selected engineering projects and case studies.",
     },
     content: {
       eyebrow: 'Content',
       title: 'Articles, talks and practical insights',
-      description:
-        'This page will collect educational material about frontend engineering, leadership and AI.',
+      description: 'Frontend engineering, leadership and AI knowledge shared in practical formats.',
+      stage: 'The complete Content hub will be delivered in PR 16.',
+      metaTitle: 'Content',
+      metaDescription:
+        'Articles and practical insights about frontend engineering, leadership and AI.',
     },
     contact: {
       eyebrow: 'Contact',
       title: 'Start a thoughtful conversation',
-      description:
-        'This page will provide clear ways to discuss engineering, leadership and collaboration.',
+      description: 'A future place to discuss engineering, leadership and collaboration.',
+      stage: 'The complete Contact experience will be delivered in PR 17.',
+      metaTitle: 'Contact',
+      metaDescription: 'Contact Gonzalo Herrera about engineering, leadership and collaboration.',
     },
-    notFound: {
+    'not-found': {
       eyebrow: '404',
       title: 'Page not found',
-      description: 'The page you are looking for does not exist or has moved.',
+      description: 'The page you are looking for does not exist or may have moved.',
+      stage: 'Use the link below to continue browsing the portfolio.',
+      metaTitle: 'Page not found',
+      metaDescription: 'The requested portfolio page could not be found.',
+      actionLabel: 'Back to home',
     },
   },
-};
+} as const satisfies PortfolioSiteContent;

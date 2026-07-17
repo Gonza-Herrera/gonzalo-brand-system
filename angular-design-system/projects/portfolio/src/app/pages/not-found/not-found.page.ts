@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { GhContainerComponent, GhSectionComponent, GhStackComponent } from 'gh-design-system';
 
-import { EN_SITE_CONTENT } from '../../content/en/site-content';
+import { createLocalizedPath } from '../../core/routing/portfolio-route.utils';
+import { PortfolioLocaleService } from '../../core/services/portfolio-locale.service';
 
 @Component({
   selector: 'app-not-found-page',
@@ -12,5 +13,10 @@ import { EN_SITE_CONTENT } from '../../content/en/site-content';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NotFoundPage {
-  protected readonly content = EN_SITE_CONTENT.pages.notFound;
+  private readonly localeService = inject(PortfolioLocaleService);
+
+  protected readonly content = computed(() => this.localeService.content().pages['not-found']);
+  protected readonly homeUrl = computed(() =>
+    createLocalizedPath(this.localeService.locale(), 'home'),
+  );
 }

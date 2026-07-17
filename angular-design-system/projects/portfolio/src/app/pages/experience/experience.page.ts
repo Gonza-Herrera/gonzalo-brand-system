@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { GhContainerComponent, GhSectionComponent, GhStackComponent } from 'gh-design-system';
 
-import { EN_SITE_CONTENT } from '../../content/en/site-content';
+import { PortfolioLocaleService } from '../../core/services/portfolio-locale.service';
 
 @Component({
   selector: 'app-experience-page',
@@ -11,5 +11,6 @@ import { EN_SITE_CONTENT } from '../../content/en/site-content';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ExperiencePage {
-  protected readonly content = EN_SITE_CONTENT.pages.experience;
+  private readonly localeService = inject(PortfolioLocaleService);
+  protected readonly content = computed(() => this.localeService.content().pages.experience);
 }
