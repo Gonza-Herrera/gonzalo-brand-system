@@ -32,6 +32,55 @@
           "options": {
             "tsConfig": "projects/gh-design-system/tsconfig.spec.json"
           }
+        },
+        "storybook": {
+          "builder": "@storybook/angular:start-storybook",
+          "options": {
+            "configDir": ".storybook",
+            "tsConfig": ".storybook/tsconfig.json",
+            "port": 6006,
+            "compodoc": true,
+            "styles": [
+              "projects/gh-design-system/src/lib/styles/index.scss",
+              "projects/gh-design-system/src/lib/styles/foundations.scss",
+              ".storybook/storybook.scss"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["dist"]
+            },
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/showcase/public",
+                "output": "/"
+              }
+            ]
+          }
+        },
+        "build-storybook": {
+          "builder": "@storybook/angular:build-storybook",
+          "options": {
+            "configDir": ".storybook",
+            "tsConfig": ".storybook/tsconfig.json",
+            "outputDir": "storybook-static",
+            "compodoc": true,
+            "sourceMap": false,
+            "styles": [
+              "projects/gh-design-system/src/lib/styles/index.scss",
+              "projects/gh-design-system/src/lib/styles/foundations.scss",
+              ".storybook/storybook.scss"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["dist"]
+            },
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/showcase/public",
+                "output": "/"
+              }
+            ]
+          }
         }
       }
     },

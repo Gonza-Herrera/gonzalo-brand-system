@@ -1,0 +1,89 @@
+#storybook-root {
+  min-height: 100%;
+}
+
+.sb-show-main,
+.docs-story {
+  background: var(--gh-background-primary);
+  color: var(--gh-text-primary);
+}
+
+.gh-story-frame {
+  inline-size: min(100%, 72rem);
+  margin-inline: auto;
+}
+
+.gh-story-surface {
+  padding: var(--gh-space-lg);
+  border: var(--gh-border-width-default) solid var(--gh-border-subtle);
+  border-radius: var(--gh-radius-lg);
+  background: var(--gh-background-secondary);
+}
+
+.gh-story-swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: var(--gh-space-md);
+}
+
+.gh-story-swatch {
+  overflow: hidden;
+  border: var(--gh-border-width-default) solid var(--gh-border-subtle);
+  border-radius: var(--gh-radius-md);
+  background: var(--gh-background-primary);
+}
+
+.gh-story-swatch__sample {
+  min-block-size: 5rem;
+  background: var(--gh-story-value);
+}
+
+.gh-story-swatch__label {
+  display: grid;
+  gap: var(--gh-space-xs);
+  padding: var(--gh-space-md);
+}
+
+.gh-story-swatch__label code,
+.gh-story-token code {
+  color: var(--gh-text-secondary);
+  font-size: var(--gh-font-size-caption);
+}
+
+.gh-story-token-list {
+  display: grid;
+  gap: var(--gh-space-md);
+}
+
+.gh-story-token {
+  display: grid;
+  grid-template-columns: minmax(9rem, 1fr) minmax(8rem, 2fr);
+  align-items: center;
+  gap: var(--gh-space-md);
+}
+
+.gh-story-token__sample {
+  inline-size: var(--gh-story-value);
+  min-inline-size: 1px;
+  block-size: var(--gh-space-lg);
+  border-radius: var(--gh-radius-sm);
+  background: var(--gh-action-primary-background);
+}
+
+.gh-story-layout-item {
+  min-block-size: 4rem;
+  padding: var(--gh-space-md);
+  border: var(--gh-border-width-default) solid var(--gh-border-default);
+  border-radius: var(--gh-radius-md);
+  background: var(--gh-background-secondary);
+}
+
+.gh-story-hero-visual {
+  display: grid;
+  min-block-size: 16rem;
+  place-items: center;
+  border: var(--gh-border-width-default) solid var(--gh-border-subtle);
+  border-radius: var(--gh-radius-xl);
+  background: var(--gh-pattern-accent-gradient);
+  color: var(--gh-text-secondary);
+}

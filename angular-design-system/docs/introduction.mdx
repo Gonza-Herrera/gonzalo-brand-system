@@ -1,0 +1,47 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Introduction" />
+
+# GH Design System
+
+**Think bigger. Build smarter.**
+
+A reusable Angular Design System focused on engineering clarity, accessibility, composition, and brand consistency. It translates the Gonzalo Herrera brand foundations into typed standalone components, responsive layout primitives, and configurable portfolio patterns.
+
+## Principles
+
+- **Clarity over novelty:** public APIs and visual hierarchy should be easy to understand.
+- **Composition over inheritance:** Components, Layout Primitives, and Patterns combine through explicit standalone imports.
+- **Semantic tokens over fixed appearance:** the same intent works across light and dark themes.
+- **Native behavior first:** HTML semantics, keyboard behavior, and visible focus belong in the component contract.
+- **Consumer-owned content:** components accept configurable content and do not embed private or application-specific data.
+
+## System structure
+
+Design Tokens feed Themes and Foundations. Those support Components, which combine with Layout Primitives into Brand Patterns. Storybook documents every public layer in isolation; Showcase and consuming applications validate full integration.
+
+## What you can inspect here
+
+- **Foundations** documents primitive and semantic tokens, typography, spacing, radii, shadows, and themes.
+- **Components** covers every public UI component and its relevant visual states.
+- **Layout** demonstrates the responsive composition primitives.
+- **Patterns** documents complete brand patterns such as Hero, Navigation, and Footer.
+- **Compositions** combines those public APIs into realistic portfolio sections.
+
+Use the toolbar to switch between light and dark themes and to preview each story at 320, 375, 768, 1024, or 1440 pixels. The Accessibility panel runs automated checks without globally disabling rules.
+
+## Current status
+
+The public library includes Button, Badge, Tag, four Card components, seven Layout Primitives, and eight Brand Patterns. The system is actively evolving and is not currently published to a public package registry.
+
+## Start locally
+
+```bash
+cd angular-design-system
+npm install
+npm run storybook
+```
+
+Local consumers build `dist/gh-design-system`, install that generated package directory, import standalone APIs from `gh-design-system`, and load the public `gh-design-system/styles` SCSS entrypoint.
+
+For complete installation, style entrypoints, theming, contribution, and verification commands, continue with the repository README and `docs/getting-started.md`. No public Showcase URL is documented yet; run `npm start` locally for the integration application.

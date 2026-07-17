@@ -1,5 +1,27 @@
 # Design-system architecture
 
+## System layers
+
+```text
+Design Tokens
+    ↓
+Themes and Foundations
+    ↓
+Components
+    ↓
+Layout Primitives
+    ↓
+Brand Patterns
+    ↓
+Storybook / Showcase / Consumer Applications
+```
+
+Tokens and themes establish the shared contract. Components own focused UI
+semantics. Layout Primitives compose spatial relationships. Brand Patterns
+combine those public APIs into configurable page structures. Storybook
+documents those layers in isolation; Showcase and consumer applications prove
+their behavior in routed, realistic integration.
+
 ## Source of truth and generated output
 
 The repository-level `tokens/` directory is the only editable token source.
@@ -59,6 +81,10 @@ redundant Angular output. Badge remains non-interactive. Tag selects between
 static, selectable and removable native semantics without combining those
 responsibilities. Specialized Cards compose the foundational Card, Badge and
 Tag rather than using Angular class inheritance.
+
+Visual families use composition and shared tokens, not Angular class
+inheritance. This keeps standalone imports explicit and prevents component
+lifecycle or private implementation from becoming an accidental contract.
 
 Layout Primitives are standalone and presentational. Container, Stack, Inline,
 Grid and Cluster apply layout directly to their custom-element host to avoid an
@@ -131,6 +157,32 @@ The showcase imports the built package through:
 @use 'gh-design-system/styles/foundations';
 ```
 
+## Storybook architecture
+
+```text
+.storybook/                 framework, global themes, viewports and addons
+stories/foundations/        central token references
+stories/compositions/       small public-API integration examples
+stories/shared/             deterministic demonstration data
+src/lib/**/*.stories.ts     colocated component, layout and pattern stories
+docs/introduction.mdx       Storybook landing page
+```
+
+Storybook builds the library first and imports components from the generated
+public package, matching an external consumer. The Angular builder loads the
+real public style entrypoints and reuses the Showcase public asset directory;
+tokens and images are not copied into Storybook.
+
+The global theme decorator applies the same `data-theme` attribute as the
+library. Neutral viewports cover 320, 375, 768, 1024 and 1440 pixels. Compodoc
+feeds Angular inputs and outputs to Autodocs. The accessibility addon is
+configured to surface failures, and small `play` functions cover only
+high-value interactions.
+
+Storybook is the canonical isolated visual/API reference. Showcase remains
+the routed integration demonstration and landing application; neither surface
+is intended to duplicate the other completely.
+
 ## Theme architecture
 
 `GhThemeService` owns the framework-level behavior and supports `light`,
@@ -168,6 +220,9 @@ The showcase theme toggle is an internal consumer of this public service.
   mobile menu behavior, accessible theme selection, public component
   integration, real Card/Tag/Badge composition within Layout Primitives and the
   complete Brand Patterns landing demonstration.
+- Storybook build-time checks compile every public story and MDX page against
+  the same styles and assets as consumers. Its test runner executes targeted
+  interactions and story-level accessibility checks against a running server.
 - Production builds validate strict templates, lazy routes and public SCSS
   packaging.
 

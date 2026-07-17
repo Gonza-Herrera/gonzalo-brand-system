@@ -2,10 +2,11 @@
 
 Official Angular workspace for the Gonzalo Herrera Design System.
 
-This release provides a reusable Angular library with Button, Badge, Tag, a
+This workspace provides a reusable Angular library with Button, Badge, Tag, a
 four-component Card family, seven Layout Primitives and eight Brand Patterns,
-plus a routed standalone showcase, token-driven SCSS, light/dark/system theming
-and unit-test configuration.
+plus Storybook, a routed standalone Showcase, token-driven SCSS,
+light/dark/system theming, unit tests, accessibility checks and targeted
+interaction tests.
 
 ## Requirements
 
@@ -19,7 +20,14 @@ compatible with the repository's Node.js 22.18 runtime.
 
 ```text
 angular-design-system/
+├── .storybook/
+│   ├── main.ts
+│   ├── preview.ts
+│   └── manager.ts
 ├── docs/
+│   ├── getting-started.md
+│   ├── theming.md
+│   ├── accessibility.md
 │   └── architecture.md
 ├── projects/
 │   ├── gh-design-system/
@@ -56,6 +64,10 @@ angular-design-system/
 │           ├── layout/
 │           ├── pages/
 │           └── shared/
+├── stories/
+│   ├── foundations/
+│   ├── compositions/
+│   └── shared/
 └── README.md
 ```
 
@@ -79,11 +91,21 @@ ng serve showcase
 editing TypeScript in the library, run `npm run watch:library` in a second
 terminal so the showcase receives rebuilt library output.
 
+Run Storybook for isolated visual and API documentation:
+
+```bash
+npm run storybook
+```
+
+Open `http://localhost:6006`. This script also validates tokens and builds the
+library before starting Storybook.
+
 ## Build and test
 
 ```bash
 npm run build
 npm test -- --watch=false
+npm run build-storybook
 ```
 
 Useful focused commands:
@@ -97,6 +119,12 @@ ng build gh-design-system
 ng build showcase
 ```
 
+Run Storybook interactions and accessibility checks against a running server:
+
+```bash
+npm run test-storybook
+```
+
 The production library output is written to `dist/gh-design-system`. The
 showcase output is written to `dist/showcase`.
 
@@ -106,7 +134,7 @@ The repository-level [`/tokens`](../tokens) directory remains the source of
 truth. The library's SCSS maps those primitive and theme definitions to
 namespaced CSS custom properties.
 
-The showcase and installed consumers use the same package export:
+Storybook, Showcase and installed consumers use the same package export:
 
 ```scss
 @use 'gh-design-system/styles';
@@ -377,7 +405,8 @@ Cards, Layout Primitives and Brand Patterns:
 - Hero, Navigation, Footer, Section Heading, Feature Grid, Experience Timeline,
   Content Highlight and Contact Callout
 
-See [the architecture notes](docs/architecture.md), [tokens and themes
-guide](docs/tokens-and-themes.md) and
+See [Getting Started](docs/getting-started.md), [the architecture
+notes](docs/architecture.md), [theming](docs/theming.md),
+[accessibility](docs/accessibility.md), [the token reference](docs/tokens-and-themes.md) and
 [component documentation](projects/gh-design-system/src/lib/components/README.md)
 for contribution boundaries.

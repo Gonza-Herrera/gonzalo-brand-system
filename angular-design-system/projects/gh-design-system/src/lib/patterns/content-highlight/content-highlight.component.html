@@ -27,7 +27,7 @@
       </gh-stack>
 
       @if (content().tags?.length) {
-        <gh-cluster gap="sm" [attr.aria-label]="tagsLabel()">
+        <gh-cluster gap="sm" role="group" [attr.aria-label]="tagsLabel()">
           @for (tag of content().tags; track tag) {
             <gh-tag size="sm">{{ tag }}</gh-tag>
           }

@@ -35,6 +35,9 @@ describe('GhContentHighlightComponent', () => {
     expect(element.querySelector('h3')?.textContent).toContain('Reactive Forms');
     expect(element.querySelector('img')?.alt).toBe('Abstract form controls');
     expect(element.querySelectorAll('gh-tag')).toHaveLength(2);
+    expect(element.querySelector('gh-cluster[role="group"]')?.getAttribute('aria-label')).toBe(
+      'Content tags',
+    );
     expect(link?.target).toBe('_blank');
     expect(link?.rel).toBe('noopener noreferrer');
     expect(element.classList).toContain('gh-content-highlight--surface-gradient');
