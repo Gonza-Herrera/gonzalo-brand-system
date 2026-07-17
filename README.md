@@ -18,14 +18,15 @@ ai/                     AI collaboration context and project conventions
 linkedin/               LinkedIn content and profile guidance
 website/                Website content and product direction
 assets/                 Shared brand assets
-angular-design-system/  Angular library, Showcase, Storybook, tests, and docs
+angular-design-system/  Angular library, Portfolio, Showcase, Storybook, tests, and docs
 ```
 
 ## Angular Design System
 
-`angular-design-system/` contains two Angular projects and two complementary documentation surfaces:
+`angular-design-system/` contains three Angular projects and complementary development surfaces:
 
 - `gh-design-system` — the reusable standalone-component library and public SCSS entrypoints.
+- `portfolio` — the SSR-enabled public production application and home of real website content.
 - `showcase` — a routed integration application demonstrating full pages, navigation, and realistic composition.
 - Storybook — the primary isolated visual/API reference for foundations, variants, states, Controls, accessibility checks, interaction tests, and responsive inspection.
 - Component READMEs — focused API and implementation notes colocated with source.
@@ -63,6 +64,12 @@ npm start
 
 `npm start` checks generated tokens, builds the library, and serves the Showcase. The equivalent focused command is `ng serve showcase` after building the library.
 
+Run the public Portfolio foundation:
+
+```bash
+npm run start:portfolio
+```
+
 ## Build and tests
 
 ```bash
@@ -76,9 +83,14 @@ Focused commands:
 ```bash
 ng build gh-design-system
 ng build showcase
+ng build portfolio
 ng test gh-design-system --watch=false
 ng test showcase --watch=false
+npm run test:portfolio
 ```
+
+The focused Portfolio commands are `npm run build:portfolio`, `npm run test:portfolio`, and
+`npm run build:ssr:portfolio`. Its browser and server bundles are generated together.
 
 Storybook interaction and accessibility tests run against a live Storybook instance:
 
@@ -130,6 +142,7 @@ Angular consumers can use `GhThemeService` for `light`, `dark`, or `system` pref
 - This README explains repository scope and the fastest paths to development.
 - Storybook is the canonical visual and component API explorer.
 - Showcase validates end-to-end integration, routing, and full compositions.
+- Portfolio owns the public website, typed content, SSR, routing and future product concerns.
 - [`angular-design-system/docs/`](angular-design-system/docs/) contains installation, architecture, theming, accessibility, contribution, and release guidance.
 - Colocated component READMEs document focused behavior and implementation boundaries.
 

@@ -13,14 +13,14 @@ Layout Primitives
     ↓
 Brand Patterns
     ↓
-Storybook / Showcase / Consumer Applications
+Portfolio / Showcase / Consumer Applications
 ```
 
 Tokens and themes establish the shared contract. Components own focused UI
 semantics. Layout Primitives compose spatial relationships. Brand Patterns
-combine those public APIs into configurable page structures. Storybook
-documents those layers in isolation; Showcase and consumer applications prove
-their behavior in routed, realistic integration.
+combine those public APIs into configurable page structures. Portfolio is the
+public product; Showcase and consumer applications prove routed integration;
+Storybook documents every reusable layer in isolation.
 
 ## Source of truth and generated output
 
@@ -116,6 +116,52 @@ styles/
 consumer. `gh-design-system/styles/foundations` applies the safe opt-in reset
 and accessible global base styles.
 
+## Portfolio architecture
+
+Portfolio is a separate Angular application because the public website has
+different responsibilities from the internal integration Showcase. It owns
+real content, routing, SSR, hydration and future SEO, internationalization,
+analytics and deployment concerns. Showcase remains free to prioritize
+technical examples and maintainer workflows.
+
+```text
+portfolio/src/app/
+├── app.component.*          minimal root RouterOutlet
+├── core/config/             stable site metadata
+├── content/
+│   ├── models/              readonly content contracts
+│   ├── en/                  active minimal English copy
+│   └── es/                  initial Spanish identity boundary
+├── layout/
+│   └── portfolio-shell/     skip link and semantic landmarks
+├── pages/                   lazy standalone route components
+├── shared/                  app-private reuse after demand exists
+└── styles/                  minimal app-level layout contract
+```
+
+`AppComponent` only renders the root `RouterOutlet`.
+`PortfolioShellComponent` is the parent route and owns the header,
+`main#main-content`, footer, skip link and full-height frame. Home, About,
+Experience, Projects, Content, Contact and Not Found load through
+`loadComponent`; the fallback stays inside the shell.
+
+Route metadata uses Angular's built-in title strategy for SSR-compatible page
+titles. Content is compile-time, typed TypeScript and remains separate from
+templates; there is no CMS, HTTP content loader or state manager. English is
+active and localization mechanics are deferred to PR 11.
+
+Portfolio consumes TypeScript only from `gh-design-system` and Sass only from
+the public `styles` and `styles/foundations` exports. The application
+initializer instantiates the library's SSR-safe `GhThemeService`, preserving
+light, dark and system behavior without duplicating browser or storage logic.
+The visual theme control is deferred to PR 11.
+
+The official Angular SSR builder produces browser and Express server bundles.
+`provideClientHydration(withEventReplay())` hydrates server HTML, while all
+routes currently use server rendering. No environment files were introduced:
+the workspace has no existing environment convention and no production URL is
+approved.
+
 ## Showcase architecture
 
 ```text
@@ -183,6 +229,9 @@ Storybook is the canonical isolated visual/API reference. Showcase remains
 the routed integration demonstration and landing application; neither surface
 is intended to duplicate the other completely.
 
+Portfolio is not a third documentation surface. It is the public product and
+will progressively replace placeholders with real localized experiences.
+
 ## Theme architecture
 
 `GhThemeService` owns the framework-level behavior and supports `light`,
@@ -195,6 +244,8 @@ is intended to duplicate the other completely.
 - Browser APIs are guarded for SSR.
 
 The showcase theme toggle is an internal consumer of this public service.
+Portfolio initializes the same service with its default `system` preference but
+does not yet expose a visual selector.
 
 ## Testing strategy
 
@@ -220,6 +271,10 @@ The showcase theme toggle is an internal consumer of this public service.
   mobile menu behavior, accessible theme selection, public component
   integration, real Card/Tag/Badge composition within Layout Primitives and the
   complete Brand Patterns landing demonstration.
+- Portfolio tests cover its minimal root, semantic shell, public-package layout
+  integration, every lazy route, headings, Not Found link and route titles.
+- Portfolio's production build validates server rendering, hydration wiring,
+  direct lazy-route compatibility and separate route chunks.
 - Storybook build-time checks compile every public story and MDX page against
   the same styles and assets as consumers. Its test runner executes targeted
   interactions and story-level accessibility checks against a running server.

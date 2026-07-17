@@ -4,9 +4,9 @@ Official Angular workspace for the Gonzalo Herrera Design System.
 
 This workspace provides a reusable Angular library with Button, Badge, Tag, a
 four-component Card family, seven Layout Primitives and eight Brand Patterns,
-plus Storybook, a routed standalone Showcase, token-driven SCSS,
-light/dark/system theming, unit tests, accessibility checks and targeted
-interaction tests.
+plus Storybook, a routed standalone Showcase, an SSR-enabled Portfolio
+foundation, token-driven SCSS, light/dark/system theming, unit tests,
+accessibility checks and targeted interaction tests.
 
 ## Requirements
 
@@ -58,12 +58,20 @@ angular-design-system/
 │   │       │   ├── styles/
 │   │       │   └── theming/
 │   │       └── public-api.ts
-│   └── showcase/
+│   ├── showcase/
+│   │   └── src/app/
+│   │       ├── core/
+│   │       ├── layout/
+│   │       ├── pages/
+│   │       └── shared/
+│   └── portfolio/
 │       └── src/app/
+│           ├── content/
 │           ├── core/
 │           ├── layout/
 │           ├── pages/
-│           └── shared/
+│           ├── shared/
+│           └── styles/
 ├── stories/
 │   ├── foundations/
 │   ├── compositions/
@@ -91,6 +99,16 @@ ng serve showcase
 editing TypeScript in the library, run `npm run watch:library` in a second
 terminal so the showcase receives rebuilt library output.
 
+Run the public Portfolio foundation separately:
+
+```bash
+npm run start:portfolio
+```
+
+Portfolio uses lazy standalone pages, the public Design System package, SSR and
+client hydration. See [`projects/portfolio/README.md`](projects/portfolio/README.md)
+for its architecture and current scope.
+
 Run Storybook for isolated visual and API documentation:
 
 ```bash
@@ -113,6 +131,9 @@ Useful focused commands:
 ```bash
 npm run build:library
 npm run build:showcase
+npm run build:portfolio
+npm run build:ssr:portfolio
+npm run test:portfolio
 npm run watch:library
 npm run watch:showcase
 ng build gh-design-system
