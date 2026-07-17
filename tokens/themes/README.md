@@ -42,3 +42,6 @@ with hover and active values where interaction requires them.
 Badge uses neutral, info, success, warning, danger and accent status families.
 Tag reuses those base status roles and adds variant-specific hover, active,
 selected and remove-hover values.
+
+Card roles adapt backgrounds, borders, elevation, selection and glass
+translucency independently for each theme.

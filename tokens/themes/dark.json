@@ -376,6 +376,52 @@
       }
     }
   },
+  "card": {
+    "background": {
+      "$type": "color",
+      "$value": "#1F2937"
+    },
+    "backgroundSubtle": {
+      "$type": "color",
+      "$value": "#263244"
+    },
+    "backgroundGlass": {
+      "$type": "color",
+      "$value": "rgb(31 41 55 / 78%)"
+    },
+    "border": {
+      "$type": "color",
+      "$value": "#374151"
+    },
+    "borderGlass": {
+      "$type": "color",
+      "$value": "rgb(209 213 219 / 28%)"
+    },
+    "borderHover": {
+      "$type": "color",
+      "$value": "{color.lavender}"
+    },
+    "borderSelected": {
+      "$type": "color",
+      "$value": "{color.cloudBlue}"
+    },
+    "backgroundSelected": {
+      "$type": "color",
+      "$value": "rgb(169 201 245 / 12%)"
+    },
+    "shadow": {
+      "$type": "shadow",
+      "$value": "0 2px 8px rgb(0 0 0 / 24%)"
+    },
+    "shadowHover": {
+      "$type": "shadow",
+      "$value": "0 8px 24px rgb(0 0 0 / 32%)"
+    },
+    "glassBlur": {
+      "$type": "dimension",
+      "$value": "{spacing.md}"
+    }
+  },
   "focus": {
     "ring": {
       "$type": "color",

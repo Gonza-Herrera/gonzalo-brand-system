@@ -373,6 +373,52 @@
       }
     }
   },
+  "card": {
+    "background": {
+      "$type": "color",
+      "$value": "{color.white}"
+    },
+    "backgroundSubtle": {
+      "$type": "color",
+      "$value": "color-mix(in srgb, {color.lavender} 8%, {color.white})"
+    },
+    "backgroundGlass": {
+      "$type": "color",
+      "$value": "color-mix(in srgb, {color.white} 76%, transparent)"
+    },
+    "border": {
+      "$type": "color",
+      "$value": "#E4E7EC"
+    },
+    "borderGlass": {
+      "$type": "color",
+      "$value": "color-mix(in srgb, {color.ink} 12%, transparent)"
+    },
+    "borderHover": {
+      "$type": "color",
+      "$value": "color-mix(in srgb, {color.lavender} 62%, {color.ink})"
+    },
+    "borderSelected": {
+      "$type": "color",
+      "$value": "color-mix(in srgb, {color.lavender} 72%, {color.ink})"
+    },
+    "backgroundSelected": {
+      "$type": "color",
+      "$value": "color-mix(in srgb, {color.lavender} 12%, {color.white})"
+    },
+    "shadow": {
+      "$type": "shadow",
+      "$value": "{shadowPrimitive.small}"
+    },
+    "shadowHover": {
+      "$type": "shadow",
+      "$value": "{shadowPrimitive.medium}"
+    },
+    "glassBlur": {
+      "$type": "dimension",
+      "$value": "{spacing.md}"
+    }
+  },
   "focus": {
     "ring": {
       "$type": "color",

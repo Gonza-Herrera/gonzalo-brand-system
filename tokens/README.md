@@ -54,6 +54,14 @@ showcase data cannot be merged accidentally.
 interactive components: fast state transitions, a slow loading cycle and the
 standard easing curve.
 
+`layout.json` defines public Container widths, responsive gutters, Section
+padding, Grid minimum item sizes and the shared responsive breakpoints. The
+generator publishes both CSS custom properties and a Sass breakpoint partial,
+because custom properties cannot be evaluated inside media-query conditions.
+
 The semantic contract includes action roles, six status families for Badge and
 three interactive Tag families. Theme files must provide complete coverage for
 every semantic path.
+
+Card roles define shared surface, border, selected, elevation and restrained
+glass treatment values for the complete Card family.
