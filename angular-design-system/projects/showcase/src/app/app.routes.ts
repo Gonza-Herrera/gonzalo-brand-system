@@ -58,6 +58,11 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/cards/cards').then((module) => module.CardsPage),
   },
   {
+    path: 'patterns',
+    title: 'Patterns · Gonzalo Herrera Design System',
+    loadComponent: () => import('./pages/patterns/patterns').then((module) => module.PatternsPage),
+  },
+  {
     path: '**',
     redirectTo: '',
   },

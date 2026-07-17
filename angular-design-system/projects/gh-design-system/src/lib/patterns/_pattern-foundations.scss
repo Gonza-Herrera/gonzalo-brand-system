@@ -1,0 +1,108 @@
+@mixin eyebrow {
+  margin: 0;
+  color: var(--gh-text-accent);
+  font-size: var(--gh-font-size-label);
+  font-weight: var(--gh-font-weight-bold);
+  letter-spacing: var(--gh-letter-spacing-wide);
+  line-height: var(--gh-line-height-heading);
+  text-transform: uppercase;
+}
+
+@mixin heading {
+  margin: 0;
+  color: var(--gh-text-primary);
+  font-family: var(--gh-font-family-display);
+  letter-spacing: var(--gh-letter-spacing-display);
+  line-height: var(--gh-line-height-tight);
+  overflow-wrap: anywhere;
+}
+
+@mixin description {
+  margin: 0;
+  color: var(--gh-text-secondary);
+  font-size: var(--gh-font-size-body-large);
+  line-height: var(--gh-line-height-body);
+}
+
+@mixin action-link {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  padding: var(--gh-space-sm) var(--gh-space-md);
+  border: var(--gh-border-width-default) solid transparent;
+  border-radius: var(--gh-radius-md);
+  font-size: var(--gh-font-size-label);
+  font-weight: var(--gh-font-weight-semibold);
+  line-height: var(--gh-line-height-heading);
+  text-align: center;
+  text-decoration: none;
+  transition:
+    background-color var(--gh-motion-duration-fast) var(--gh-motion-easing-standard),
+    border-color var(--gh-motion-duration-fast) var(--gh-motion-easing-standard),
+    color var(--gh-motion-duration-fast) var(--gh-motion-easing-standard);
+
+  &:focus-visible {
+    outline: var(--gh-border-width-focus) solid var(--gh-focus-ring);
+    outline-offset: var(--gh-border-width-focus);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+@mixin action-variants($selector) {
+  #{$selector}--primary {
+    border-color: var(--gh-action-primary-border);
+    background: var(--gh-action-primary-background);
+    color: var(--gh-action-primary-text);
+
+    &:hover {
+      background: var(--gh-action-primary-hover);
+    }
+
+    &:active {
+      background: var(--gh-action-primary-active);
+    }
+  }
+
+  #{$selector}--secondary {
+    border-color: var(--gh-action-secondary-border);
+    background: var(--gh-action-secondary-background);
+    color: var(--gh-action-secondary-text);
+
+    &:hover {
+      background: var(--gh-action-secondary-hover);
+    }
+
+    &:active {
+      background: var(--gh-action-secondary-active);
+    }
+  }
+
+  #{$selector}--ghost {
+    color: var(--gh-action-ghost-text);
+
+    &:hover {
+      background: var(--gh-action-ghost-hover);
+    }
+
+    &:active {
+      background: var(--gh-action-ghost-active);
+    }
+  }
+}
+
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

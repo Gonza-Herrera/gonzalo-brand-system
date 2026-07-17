@@ -45,3 +45,6 @@ selected and remove-hover values.
 
 Card roles adapt backgrounds, borders, elevation, selection and glass
 translucency independently for each theme.
+
+Brand Pattern roles adapt the shared accent gradient, navigation chrome,
+footer surface and timeline connector for both themes.

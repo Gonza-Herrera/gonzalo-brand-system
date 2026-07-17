@@ -72,6 +72,15 @@ System.
 - `GhDividerStyle`
 - `GhDividerTone`
 - `GhLayoutGap`
+- `GhHeroComponent` and `GhHeroVisualDirective`
+- `GhNavigationComponent`
+- `GhFooterComponent`
+- `GhSectionHeadingComponent`
+- `GhFeatureGridComponent`
+- `GhExperienceTimelineComponent`
+- `GhContentHighlightComponent`
+- `GhContactCalloutComponent`
+- Brand Pattern data models and controlled variant types
 - `GhTheme`
 - `GhThemePreference`
 - `GH_THEMES`
@@ -187,3 +196,24 @@ vertical and horizontal flow, responsive grids, wrapping clusters and
 accessible separators. They use public layout and spacing tokens, contain no
 browser measurement logic and preserve projected DOM order. See the
 [`layout`](src/lib/layout) documentation for component-level APIs and guidance.
+
+## Brand Patterns
+
+```ts
+import {
+  GhContactCalloutComponent,
+  GhContentHighlightComponent,
+  GhExperienceTimelineComponent,
+  GhFeatureGridComponent,
+  GhFooterComponent,
+  GhHeroComponent,
+  GhNavigationComponent,
+  GhSectionHeadingComponent,
+} from 'gh-design-system';
+```
+
+The eight standalone patterns provide page-ready composition without embedding
+personal content or application routing. They reuse public Layout Primitives,
+Card, Badge, Tag and Experience Card, keep navigation as native links, and use
+CSS-only responsive behavior. See the [`patterns`](src/lib/patterns) catalogue
+and the colocated README for each public API.

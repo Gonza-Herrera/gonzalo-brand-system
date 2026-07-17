@@ -48,6 +48,9 @@ Example:
 - Card roles: `--gh-card-background`, `background-subtle`, `background-glass`,
   `border`, `border-glass`, `border-hover`, `border-selected`,
   `background-selected`, `shadow`, `shadow-hover`, `glass-blur`
+- Brand Pattern roles: `--gh-pattern-accent-gradient`,
+  `navigation-background`, `navigation-border`, `footer-background` and
+  `timeline-connector`
 - Focus: `--gh-focus-ring`
 - Selection: `--gh-selection-background`, `text`
 - Elevation: `--gh-shadow-sm`, `md`, `lg`

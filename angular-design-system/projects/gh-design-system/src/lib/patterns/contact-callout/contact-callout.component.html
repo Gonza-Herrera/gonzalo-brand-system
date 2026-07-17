@@ -1,0 +1,42 @@
+<gh-section class="gh-contact-callout__section" spacing="lg" surface="transparent">
+  <gh-container size="lg">
+    <gh-stack
+      class="gh-contact-callout__content"
+      gap="lg"
+      [align]="alignment() === 'center' ? 'center' : 'start'"
+    >
+      <gh-stack gap="sm" [align]="alignment() === 'center' ? 'center' : 'start'">
+        @if (eyebrow()) {
+          <p class="gh-contact-callout__eyebrow">{{ eyebrow() }}</p>
+        }
+        <h2>{{ title() }}</h2>
+        @if (description()) {
+          <p class="gh-contact-callout__description">{{ description() }}</p>
+        }
+      </gh-stack>
+
+      @if (actions().length) {
+        <gh-inline
+          class="gh-contact-callout__actions"
+          gap="sm"
+          [justify]="alignment() === 'center' ? 'center' : 'start'"
+        >
+          @for (action of actions(); track action.href + action.label) {
+            <a
+              class="gh-pattern-action gh-pattern-action--{{ action.variant ?? 'primary' }}"
+              [href]="action.href"
+              [attr.aria-label]="action.ariaLabel ?? null"
+              [attr.target]="action.external ? '_blank' : null"
+              [attr.rel]="action.external ? 'noopener noreferrer' : null"
+            >
+              {{ action.label }}
+              @if (action.external) {
+                <span class="gh-visually-hidden"> ({{ externalLinkLabel() }})</span>
+              }
+            </a>
+          }
+        </gh-inline>
+      }
+    </gh-stack>
+  </gh-container>
+</gh-section>

@@ -1,0 +1,111 @@
+@use '../../styles/tokens/breakpoints' as breakpoints;
+@use '../pattern-foundations' as pattern;
+
+:host {
+  display: block;
+  min-width: 0;
+}
+
+:host.gh-content-highlight--surface-accent {
+  --gh-card-background: var(--gh-status-accent-background);
+  --gh-card-border: var(--gh-status-accent-border);
+}
+
+:host.gh-content-highlight--surface-gradient {
+  --gh-card-background: var(--gh-pattern-accent-gradient);
+  --gh-card-border: var(--gh-border-subtle);
+}
+
+.gh-content-highlight__layout {
+  display: grid;
+  min-width: 0;
+}
+
+.gh-content-highlight__media {
+  overflow: hidden;
+  min-width: 0;
+  min-height: 12rem;
+  background: var(--gh-background-subtle);
+}
+
+.gh-content-highlight__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: 24rem;
+  object-fit: cover;
+}
+
+.gh-content-highlight__content {
+  min-width: 0;
+  justify-content: center;
+  padding: clamp(var(--gh-space-lg), 5vw, var(--gh-space-2xl));
+}
+
+.gh-content-highlight__eyebrow {
+  color: var(--gh-text-muted);
+  font-size: var(--gh-font-size-caption);
+  font-weight: var(--gh-font-weight-semibold);
+}
+
+.gh-content-highlight h2,
+.gh-content-highlight h3,
+.gh-content-highlight p {
+  margin: 0;
+}
+
+.gh-content-highlight h2,
+.gh-content-highlight h3 {
+  color: var(--gh-text-primary);
+  font-family: var(--gh-font-family-display);
+  line-height: var(--gh-line-height-heading);
+  overflow-wrap: anywhere;
+}
+
+.gh-content-highlight h2 {
+  font-size: var(--gh-font-size-h2);
+}
+
+.gh-content-highlight h3 {
+  font-size: var(--gh-font-size-h3);
+}
+
+.gh-content-highlight p {
+  color: var(--gh-text-secondary);
+  line-height: var(--gh-line-height-body);
+}
+
+.gh-content-highlight__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gh-space-sm);
+  width: fit-content;
+  border-radius: var(--gh-radius-sm);
+  color: var(--gh-text-accent);
+  font-weight: var(--gh-font-weight-semibold);
+  overflow-wrap: anywhere;
+  text-underline-offset: var(--gh-space-xs);
+
+  &:hover {
+    color: var(--gh-text-primary);
+  }
+
+  &:focus-visible {
+    outline: var(--gh-border-width-focus) solid var(--gh-focus-ring);
+    outline-offset: var(--gh-border-width-focus);
+  }
+}
+
+.gh-visually-hidden {
+  @include pattern.visually-hidden;
+}
+
+@media (min-width: breakpoints.$gh-breakpoint-md) {
+  :host.gh-content-highlight--horizontal .gh-content-highlight__layout {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  }
+
+  :host.gh-content-highlight--horizontal .gh-content-highlight__media img {
+    max-height: none;
+  }
+}

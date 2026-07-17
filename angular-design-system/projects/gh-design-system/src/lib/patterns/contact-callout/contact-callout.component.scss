@@ -1,0 +1,60 @@
+@use '../pattern-foundations' as pattern;
+
+:host {
+  display: block;
+  min-width: 0;
+}
+
+.gh-contact-callout__section {
+  border-block: var(--gh-border-width-default) solid var(--gh-border-subtle);
+}
+
+:host.gh-contact-callout--subtle .gh-contact-callout__section {
+  background: var(--gh-background-subtle);
+}
+
+:host.gh-contact-callout--accent .gh-contact-callout__section {
+  background: var(--gh-status-accent-background);
+}
+
+:host.gh-contact-callout--gradient .gh-contact-callout__section {
+  background: var(--gh-pattern-accent-gradient);
+}
+
+.gh-contact-callout__content {
+  min-width: 0;
+}
+
+:host.gh-contact-callout--center .gh-contact-callout__content {
+  text-align: center;
+}
+
+.gh-contact-callout__eyebrow {
+  @include pattern.eyebrow;
+}
+
+.gh-contact-callout h2 {
+  @include pattern.heading;
+
+  font-size: clamp(var(--gh-font-size-h2), 6vw, var(--gh-font-size-h1));
+}
+
+.gh-contact-callout__description {
+  @include pattern.description;
+
+  max-width: var(--gh-layout-reading-max);
+}
+
+.gh-contact-callout__actions {
+  width: 100%;
+}
+
+.gh-pattern-action {
+  @include pattern.action-link;
+}
+
+@include pattern.action-variants('.gh-pattern-action');
+
+.gh-visually-hidden {
+  @include pattern.visually-hidden;
+}
