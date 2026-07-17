@@ -15,6 +15,18 @@ import { GhProjectCardComponent, type GhProjectCardData } from 'gh-design-system
 <gh-project-card [project]="project" orientation="horizontal" />
 ```
 
+## Public inputs
+
+| Input               | Type                         | Default           |
+| ------------------- | ---------------------------- | ----------------- |
+| `project`           | `GhProjectCardData`          | required          |
+| `orientation`       | `'vertical' \| 'horizontal'` | `'vertical'`      |
+| `headingLevel`      | `2 \| 3`                     | `2`               |
+| `ariaLabel`         | `string \| undefined`        | generated English |
+| `featuredLabel`     | `string`                     | `'Featured'`      |
+| `technologiesLabel` | `string`                     | `'Technologies'`  |
+| `linksLabel`        | `string`                     | `'Project links'` |
+
 ## Model
 
 `GhProjectCardData` includes:
@@ -59,7 +71,10 @@ regions. Consumers control alternative text.
 ## Accessibility
 
 - The Card root remains an article.
-- Title and description are visible text.
+- Title and description are visible text. Consumers set `[headingLevel]="3"` when the Card is nested
+  below a section `h2`.
 - Action navigation has an accessible label.
 - Links are never nested with buttons.
 - Status meaning is not communicated by color alone.
+- Consumer-provided labels localize the Card name, featured badge, technology list and link
+  navigation without changing the project model.

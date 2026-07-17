@@ -13,8 +13,11 @@ const meta: Meta<GhProjectCardComponent> = {
       },
     },
   },
-  args: { project: STORY_PROJECT, orientation: 'vertical' },
-  argTypes: { orientation: { control: 'select', options: ['vertical', 'horizontal'] } },
+  args: { project: STORY_PROJECT, orientation: 'vertical', headingLevel: 2 },
+  argTypes: {
+    orientation: { control: 'select', options: ['vertical', 'horizontal'] },
+    headingLevel: { control: 'inline-radio', options: [2, 3] },
+  },
 };
 
 export default meta;
@@ -55,5 +58,20 @@ export const ManyTechnologies: Story = {
         'Accessibility',
       ],
     },
+  },
+};
+export const SpanishNestedSection: Story = {
+  args: {
+    project: {
+      ...STORY_PROJECT,
+      description:
+        'Un Design System reutilizable en Angular basado en tokens, accesibilidad y composición.',
+      statusLabel: 'En desarrollo',
+    },
+    headingLevel: 3,
+    ariaLabel: 'Proyecto: Angular Design System',
+    featuredLabel: 'Destacado',
+    technologiesLabel: 'Tecnologías',
+    linksLabel: 'Enlaces del proyecto',
   },
 };

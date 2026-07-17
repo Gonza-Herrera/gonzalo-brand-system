@@ -6,6 +6,7 @@ import { GhTagComponent } from '../../tag/tag.component';
 import { GhCardComponent } from '../card/card.component';
 import type {
   GhProjectCardData,
+  GhProjectCardHeadingLevel,
   GhProjectCardOrientation,
   GhProjectStatus,
 } from './project-card.types';
@@ -30,6 +31,11 @@ const PROJECT_STATUS_PRESENTATION: Readonly<
 export class GhProjectCardComponent {
   readonly project = input.required<GhProjectCardData>();
   readonly orientation = input<GhProjectCardOrientation>('vertical');
+  readonly headingLevel = input<GhProjectCardHeadingLevel>(2);
+  readonly ariaLabel = input<string | undefined>(undefined);
+  readonly featuredLabel = input('Featured');
+  readonly technologiesLabel = input('Technologies');
+  readonly linksLabel = input('Project links');
 
   protected readonly hasLinks = computed(() =>
     Boolean(this.project().projectUrl || this.project().repositoryUrl),
@@ -38,4 +44,7 @@ export class GhProjectCardComponent {
     const status = this.project().status;
     return status ? PROJECT_STATUS_PRESENTATION[status] : undefined;
   });
+  protected readonly cardAriaLabel = computed(
+    () => this.ariaLabel() ?? `Project: ${this.project().title}`,
+  );
 }
