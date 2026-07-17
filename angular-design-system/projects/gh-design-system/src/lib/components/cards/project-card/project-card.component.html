@@ -4,7 +4,7 @@
   radius="lg"
   [interactive]="hasLinks()"
   fullHeight
-  [ariaLabel]="'Project: ' + project().title"
+  [ariaLabel]="cardAriaLabel()"
 >
   <div
     class="project-card__layout"
@@ -26,18 +26,22 @@
               </gh-badge>
             }
             @if (project().featured) {
-              <gh-badge variant="accent" appearance="solid">Featured</gh-badge>
+              <gh-badge variant="accent" appearance="solid">{{ featuredLabel() }}</gh-badge>
             }
           </div>
         }
 
-        <h2>{{ project().title }}</h2>
+        @if (headingLevel() === 2) {
+          <h2>{{ project().title }}</h2>
+        } @else {
+          <h3>{{ project().title }}</h3>
+        }
       </header>
 
       <p class="project-card__description">{{ project().description }}</p>
 
       @if (project().technologies?.length) {
-        <ul class="project-card__technologies" aria-label="Technologies">
+        <ul class="project-card__technologies" [attr.aria-label]="technologiesLabel()">
           @for (technology of project().technologies; track technology) {
             <li>
               <gh-tag size="sm">{{ technology }}</gh-tag>
@@ -47,7 +51,7 @@
       }
 
       @if (hasLinks()) {
-        <nav class="project-card__actions" aria-label="Project links">
+        <nav class="project-card__actions" [attr.aria-label]="linksLabel()">
           @if (project().projectUrl) {
             <a [href]="project().projectUrl">
               {{ project().projectLinkLabel ?? 'View project' }}

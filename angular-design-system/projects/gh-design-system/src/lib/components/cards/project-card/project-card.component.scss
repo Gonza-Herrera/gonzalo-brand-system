@@ -39,7 +39,8 @@ gh-card {
   display: grid;
   gap: var(--gh-space-md);
 
-  h2 {
+  h2,
+  h3 {
     @include card.heading;
   }
 }

@@ -1,4 +1,5 @@
 import type { PortfolioSiteContent } from '../models/site-content.model';
+import { EN_HOME_CONTENT } from './home.content';
 
 export const EN_SITE_CONTENT = {
   identity: {
@@ -49,15 +50,7 @@ export const EN_SITE_CONTENT = {
     },
   },
   pages: {
-    home: {
-      eyebrow: 'Portfolio foundation',
-      title: 'Gonzalo Herrera',
-      description: 'Frontend Tech Lead & AI-Augmented Engineer',
-      stage: 'The complete Home experience will be delivered in PR 12.',
-      metaTitle: 'Home',
-      metaDescription:
-        'Gonzalo Herrera is a Frontend Tech Lead and AI-Augmented Engineer helping teams build better software.',
-    },
+    home: EN_HOME_CONTENT,
     about: {
       eyebrow: 'About',
       title: 'Professional story',

@@ -1,11 +1,21 @@
-<gh-section spacing="lg">
-  <gh-container size="xl">
-    <gh-stack gap="md" align="start">
-      <p>{{ content().eyebrow }}</p>
-      <h1>{{ content().title }}</h1>
-      <p>{{ identity().role }}</p>
-      <p>{{ identity().tagline }}</p>
-      <p>{{ content().stage }}</p>
-    </gh-stack>
-  </gh-container>
-</gh-section>
+<app-home-hero
+  [content]="content().hero"
+  [locale]="locale()"
+  [externalLinkLabel]="externalLinkLabel()"
+/>
+<app-home-expertise-section
+  [content]="content().expertise"
+  [externalLinkLabel]="externalLinkLabel()"
+/>
+<app-home-selected-projects-section [content]="content().selectedProjects" [locale]="locale()" />
+<app-home-experience-preview-section [content]="content().experience" [locale]="locale()" />
+<app-home-featured-content-section
+  [content]="content().featuredContent"
+  [locale]="locale()"
+  [externalLinkLabel]="externalLinkLabel()"
+/>
+<app-home-contact-section
+  [content]="content().contact"
+  [locale]="locale()"
+  [externalLinkLabel]="externalLinkLabel()"
+/>

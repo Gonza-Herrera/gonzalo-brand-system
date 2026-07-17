@@ -1,10 +1,11 @@
 import type { PortfolioSiteContent } from '../models/site-content.model';
+import { ES_HOME_CONTENT } from './home.content';
 
 export const ES_SITE_CONTENT = {
   identity: {
     name: 'Gonzalo Herrera',
     role: 'Frontend Tech Lead & AI-Augmented Engineer',
-    tagline: 'Pensá en grande. Construí de forma inteligente.',
+    tagline: 'Think bigger. Build smarter.',
     description:
       'Ayudo a equipos a construir mejor software mediante ingeniería, liderazgo e inteligencia artificial.',
   },
@@ -51,15 +52,7 @@ export const ES_SITE_CONTENT = {
     },
   },
   pages: {
-    home: {
-      eyebrow: 'Base del portfolio',
-      title: 'Gonzalo Herrera',
-      description: 'Frontend Tech Lead & AI-Augmented Engineer',
-      stage: 'La experiencia completa de Inicio se implementará en el PR 12.',
-      metaTitle: 'Inicio',
-      metaDescription:
-        'Gonzalo Herrera es Frontend Tech Lead y AI-Augmented Engineer y ayuda a equipos a construir mejor software.',
-    },
+    home: ES_HOME_CONTENT,
     about: {
       eyebrow: 'Sobre mí',
       title: 'Historia profesional',

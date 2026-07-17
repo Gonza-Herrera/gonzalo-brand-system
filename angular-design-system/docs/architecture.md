@@ -133,7 +133,7 @@ portfolio/src/app/
 │   └── services/            locale Signal and safe preference storage
 ├── content/
 │   ├── models/              readonly content contracts
-│   ├── en/                  complete English shell and placeholder copy
+│   ├── en/                  English shell, complete Home and placeholder copy
 │   ├── es/                  equivalent Spanish structure
 │   └── registry             typed locale-to-content mapping
 ├── layout/
@@ -175,6 +175,38 @@ Stable route `pageId` metadata feeds `PortfolioTitleStrategy`, which applies
 the matching localized title and basic description. Content remains typed
 TypeScript, separate from templates and structurally equivalent across both
 locales; there is no CMS, HTTP loader, translation dependency or state manager.
+
+Home is the first complete product page. Its runtime flow remains explicit and
+deterministic:
+
+```text
+Localized route (/en or /es)
+    ↓
+PortfolioLocaleService
+    ↓
+Localized Home content (EN_HOME_CONTENT or ES_HOME_CONTENT)
+    ↓
+Home Page composition and app-private sections
+    ↓
+Public Brand Patterns
+    ↓
+Public Layout Primitives and Components
+    ↓
+Design Tokens and Themes
+```
+
+`HomePage` only orchestrates Hero, Expertise, Selected Projects, Experience
+Preview, Featured Content and Contact Callout sections. The section components
+adapt typed content and localized links to public pattern inputs. They do not
+duplicate general-purpose cards or layout behavior. The only library extension
+needed by Home is a backwards-compatible Project Card heading-level and label
+contract, which preserves correct `h2`/`h3` hierarchy and allows accessible
+strings to be localized.
+
+Home source data is intentionally conservative: project concepts are labelled,
+unverified professional history is represented by a localized empty state, and
+unverified social or publication URLs are omitted. This constraint belongs to
+the content layer rather than the reusable patterns.
 
 Portfolio consumes TypeScript only from `gh-design-system` and Sass only from
 the public `styles` and `styles/foundations` exports. The application
@@ -314,9 +346,11 @@ of the route.
   integration, real Card/Tag/Badge composition within Layout Primitives and the
   complete Brand Patterns landing demonstration.
 - Portfolio tests cover its minimal root, bilingual shell, public Navigation
-  and Footer integration, all localized lazy routes, redirects, invalid-locale
-  fallback, exact active state, content parity, locale storage, both switchers,
-  localized Not Found, document language, titles and basic descriptions.
+  and Footer integration, the complete bilingual Home composition, its six
+  section adapters, localized Home links, all localized lazy routes, redirects,
+  invalid-locale fallback, exact active state, content parity, locale storage,
+  both switchers, localized Not Found, document language, titles and basic
+  descriptions.
 - Portfolio's production build validates server rendering, hydration wiring,
   direct lazy-route compatibility and separate route chunks.
 - Storybook build-time checks compile every public story and MDX page against

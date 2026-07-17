@@ -1,0 +1,26 @@
+<gh-section id="experience" spacing="lg" surface="transparent">
+  <gh-container size="lg">
+    <gh-stack gap="xl">
+      <gh-section-heading
+        [eyebrow]="content().eyebrow"
+        [title]="content().title"
+        [description]="content().description"
+        [headingLevel]="2"
+      >
+        <a ghSectionHeadingAction class="home-section-action" [href]="viewAllAction().href">
+          {{ viewAllAction().label }}
+        </a>
+      </gh-section-heading>
+
+      <gh-experience-timeline
+        [experiences]="content().items"
+        orientation="compact"
+        [showConnector]="content().items.length > 1"
+      />
+
+      @if (content().items.length === 0) {
+        <p class="home-experience__notice">{{ content().verificationNotice }}</p>
+      }
+    </gh-stack>
+  </gh-container>
+</gh-section>
