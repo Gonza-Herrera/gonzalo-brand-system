@@ -42,7 +42,7 @@ The pattern composes `gh-card`, `gh-badge`, `gh-tag`, `gh-stack` and `gh-cluster
 - Horizontal content becomes a single column below the medium breakpoint.
 - Images are optional, lazy loaded and fluid; consumers must provide meaningful alt text unless the image is decorative.
 - The Card is not itself clickable, preventing invalid nested interactions.
-- Tags remain non-interactive metadata. External links use safe attributes and accessible context.
+- Tags remain non-interactive metadata and are exposed as a named group. External links use safe attributes and accessible context.
 - Accent and gradient surfaces use shared semantic roles in both themes.
 
 ## Internationalization and SSR
