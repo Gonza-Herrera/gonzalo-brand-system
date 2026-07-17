@@ -61,6 +61,20 @@ Primitive motion variables provide a minimal shared interaction rhythm:
 - `--gh-motion-duration-slow`
 - `--gh-motion-easing-standard`
 
+Layout primitives use the following generated geometry contract:
+
+- `--gh-space-none` and the existing spacing scale for component gaps.
+- `--gh-container-{sm|md|lg|xl|wide}` for maximum widths.
+- `--gh-container-gutter-{sm|md|lg}` for fluid horizontal gutters.
+- `--gh-section-padding-{sm|md|lg}` for fluid vertical rhythm.
+- `--gh-grid-min-{sm|md|lg}` for auto-fit item constraints.
+- `--gh-breakpoint-{sm|md|lg}` as documented CSS values.
+
+Because CSS custom properties cannot be evaluated in media-query conditions,
+the same breakpoint source generates `styles/tokens/_breakpoints.scss`. Grid
+uses those Sass variables internally; breakpoint values are never duplicated
+inside components.
+
 ## Theme application
 
 ```html

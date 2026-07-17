@@ -1,0 +1,247 @@
+<article class="page">
+  <header class="page-header">
+    <p>Foundations · Composition</p>
+    <h1>Layout primitives</h1>
+    <p>
+      Seven small, token-driven primitives for semantic sections, consistent widths, spacing and
+      responsive content composition.
+    </p>
+  </header>
+
+  <showcase-documentation-section
+    sectionId="layout-container"
+    eyebrow="Container"
+    title="Consistent content widths and responsive gutters"
+    description="Each boundary uses the public Container component; wide variants remain constrained by the showcase content area."
+  >
+    <gh-stack gap="md">
+      @for (size of containerSizes; track size) {
+        <div class="demo-stage container-stage">
+          <span class="demo-label">size="{{ size }}"</span>
+          <gh-container [size]="size">
+            <div class="container-content">{{ size }} container</div>
+          </gh-container>
+        </div>
+      }
+    </gh-stack>
+
+    <gh-grid [columns]="2" minItemSize="sm" gap="md">
+      @for (gutter of containerGutters; track gutter) {
+        <div class="demo-stage container-stage">
+          <span class="demo-label">gutters="{{ gutter }}"</span>
+          <gh-container size="full" [gutters]="gutter">
+            <div class="container-content">Responsive {{ gutter }} gutters</div>
+          </gh-container>
+        </div>
+      }
+    </gh-grid>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="layout-section"
+    eyebrow="Section"
+    title="Semantic rhythm and theme-aware surfaces"
+    description="Section renders a real section element and never inserts a Container implicitly."
+  >
+    <gh-grid [columns]="2" minItemSize="sm" gap="md">
+      @for (spacing of sectionSpacings; track spacing) {
+        <div class="demo-stage section-stage">
+          <gh-section [spacing]="spacing" surface="transparent">
+            <div class="section-content">spacing="{{ spacing }}"</div>
+          </gh-section>
+        </div>
+      }
+    </gh-grid>
+
+    <gh-grid [columns]="2" minItemSize="sm" gap="md">
+      @for (surface of sectionSurfaces; track surface) {
+        <div class="demo-stage section-stage">
+          <gh-section spacing="sm" [surface]="surface">
+            <div class="section-content">surface="{{ surface }}"</div>
+          </gh-section>
+        </div>
+      }
+    </gh-grid>
+
+    <details class="full-height-details">
+      <summary>Preview fullHeight behavior</summary>
+      <gh-section spacing="md" surface="subtle" fullHeight>
+        <gh-container size="sm">
+          <gh-stack align="center" gap="sm">
+            <strong>100svh minimum height</strong>
+            <span>Content can still grow without a fixed height.</span>
+          </gh-stack>
+        </gh-container>
+      </gh-section>
+    </details>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="layout-stack"
+    eyebrow="Stack"
+    title="Vertical flow without child margins"
+    description="Gap, alignment, justification and optional wrapping remain a small, closed API."
+  >
+    <gh-grid columns="auto" minItemSize="sm" gap="md">
+      @for (gap of layoutGaps; track gap) {
+        <gh-card padding="sm" variant="subtle">
+          <gh-stack [gap]="gap">
+            <span class="demo-label">gap="{{ gap }}"</span>
+            <span class="layout-item">First</span>
+            <span class="layout-item">Second</span>
+          </gh-stack>
+        </gh-card>
+      }
+    </gh-grid>
+
+    <gh-grid [columns]="3" minItemSize="sm" gap="md">
+      <gh-card padding="sm">
+        <gh-stack align="start" gap="sm">
+          <strong>Start aligned</strong>
+          <span class="layout-item layout-item--short">Intrinsic width</span>
+        </gh-stack>
+      </gh-card>
+      <gh-card padding="sm">
+        <gh-stack align="center" gap="sm">
+          <strong>Center aligned</strong>
+          <span class="layout-item layout-item--short">Intrinsic width</span>
+        </gh-stack>
+      </gh-card>
+      <gh-card padding="sm">
+        <gh-stack class="justified-stack" justify="between" gap="sm">
+          <strong>Space between</strong>
+          <span class="layout-item">Second edge</span>
+        </gh-stack>
+      </gh-card>
+    </gh-grid>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="layout-inline"
+    eyebrow="Inline"
+    title="Actions and metadata that wrap safely"
+    description="Inline stays intrinsic by default and expands only when fullWidth is requested."
+  >
+    <gh-stack gap="lg">
+      <div class="demo-stage padded-stage">
+        <gh-inline gap="sm" align="center">
+          <gh-badge variant="accent">Angular</gh-badge>
+          <span>6 min read</span>
+          <span>Updated July 2026</span>
+        </gh-inline>
+      </div>
+
+      <div class="demo-stage padded-stage">
+        <gh-inline gap="sm" align="center" justify="between" fullWidth>
+          <strong>Full-width actions</strong>
+          <gh-inline gap="sm">
+            <gh-button variant="ghost" size="sm">Cancel</gh-button>
+            <gh-button size="sm">Continue</gh-button>
+          </gh-inline>
+        </gh-inline>
+      </div>
+
+      <div class="demo-stage padded-stage narrow-stage">
+        <gh-inline gap="md" align="baseline">
+          <strong>Baseline</strong>
+          <span>Wrapping metadata</span>
+          <gh-badge variant="info">Responsive</gh-badge>
+          <span>No horizontal overflow</span>
+        </gh-inline>
+      </div>
+    </gh-stack>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="layout-grid"
+    eyebrow="Grid"
+    title="Responsive collections with real Cards"
+    description="Auto-fit respects tokenized minimum item widths; fixed columns progressively collapse on smaller viewports."
+  >
+    <gh-stack gap="xl">
+      <div>
+        <h3>Auto-fit Project Cards</h3>
+        <gh-grid columns="auto" minItemSize="md" gap="lg">
+          @for (project of projects; track project.title) {
+            <gh-project-card [project]="project" />
+          }
+        </gh-grid>
+      </div>
+
+      @for (columns of fixedColumns; track columns) {
+        <div>
+          <h3>{{ columns }} fixed column{{ columns === 1 ? '' : 's' }}</h3>
+          <gh-grid [columns]="columns" minItemSize="sm" gap="sm">
+            @for (item of gridItems; track item) {
+              <gh-card padding="sm" variant="subtle">
+                <strong>{{ item }}</strong>
+              </gh-card>
+            }
+          </gh-grid>
+        </div>
+      }
+    </gh-stack>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="layout-cluster"
+    eyebrow="Cluster"
+    title="Fluid groups of Tags and Badges"
+    description="Cluster always wraps and shares the Inline alignment and justification contract."
+  >
+    <div class="demo-stage padded-stage narrow-stage">
+      <gh-cluster gap="sm">
+        @for (technology of technologies; track technology) {
+          <gh-tag>{{ technology }}</gh-tag>
+        }
+      </gh-cluster>
+    </div>
+
+    <div class="demo-stage padded-stage">
+      <gh-cluster gap="sm" align="center">
+        <gh-badge variant="success">Available</gh-badge>
+        <gh-badge variant="info">Remote</gh-badge>
+        <gh-badge variant="accent">Design Systems</gh-badge>
+        <gh-tag variant="accent">Angular</gh-tag>
+      </gh-cluster>
+    </div>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="layout-divider"
+    eyebrow="Divider"
+    title="Decorative and semantic separation"
+    description="Tone uses semantic borders; semantic vertical separators expose aria-orientation."
+  >
+    <gh-stack gap="lg">
+      @for (tone of dividerTones; track tone) {
+        <gh-stack gap="sm">
+          <span class="demo-label">tone="{{ tone }}"</span>
+          <gh-divider [tone]="tone" />
+          <gh-divider [tone]="tone" [style]="'dashed'" />
+        </gh-stack>
+      }
+
+      <gh-inline class="vertical-divider-row" gap="lg" align="stretch">
+        <span>Leadership</span>
+        <gh-divider orientation="vertical" tone="default" [decorative]="false" />
+        <span>Engineering</span>
+        <gh-divider orientation="vertical" [style]="'dashed'" tone="strong" />
+        <span>AI</span>
+      </gh-inline>
+    </gh-stack>
+  </showcase-documentation-section>
+
+  <section class="code-examples" aria-labelledby="layout-code-examples">
+    <header>
+      <p>Implementation</p>
+      <h2 id="layout-code-examples">Composition examples</h2>
+    </header>
+    <gh-grid [columns]="2" minItemSize="md" gap="md">
+      <showcase-code-preview label="Container + Section" [code]="sectionContainerExample" />
+      <showcase-code-preview label="Stack" [code]="stackExample" />
+      <showcase-code-preview label="Grid" [code]="gridExample" />
+      <showcase-code-preview label="Cluster" [code]="clusterExample" />
+    </gh-grid>
+  </section>
+</article>

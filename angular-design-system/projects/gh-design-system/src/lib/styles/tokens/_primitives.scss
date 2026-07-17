@@ -12,6 +12,7 @@
   --gh-color-white: #FFFFFF;
 
   /* spacing */
+  --gh-space-none: 0;
   --gh-space-xs: 0.25rem;
   --gh-space-sm: 0.5rem;
   --gh-space-md: 1rem;
@@ -34,6 +35,33 @@
   /* layout */
   --gh-layout-container-max: 75rem;
   --gh-layout-reading-max: 48rem;
+
+  /* container */
+  --gh-container-sm: 40rem;
+  --gh-container-md: 48rem;
+  --gh-container-lg: 64rem;
+  --gh-container-xl: 75rem;
+  --gh-container-wide: 90rem;
+
+  /* container-gutter */
+  --gh-container-gutter-sm: clamp(var(--gh-space-sm), 2vw, var(--gh-space-md));
+  --gh-container-gutter-md: clamp(var(--gh-space-md), 4vw, var(--gh-space-xl));
+  --gh-container-gutter-lg: clamp(var(--gh-space-lg), 5vw, var(--gh-space-2xl));
+
+  /* section-padding */
+  --gh-section-padding-sm: clamp(var(--gh-space-lg), 4vw, var(--gh-space-xl));
+  --gh-section-padding-md: clamp(var(--gh-space-xl), 6vw, var(--gh-space-2xl));
+  --gh-section-padding-lg: clamp(var(--gh-space-2xl), 8vw, var(--gh-space-section));
+
+  /* grid-min */
+  --gh-grid-min-sm: 12rem;
+  --gh-grid-min-md: 18rem;
+  --gh-grid-min-lg: 24rem;
+
+  /* breakpoint */
+  --gh-breakpoint-sm: 36rem;
+  --gh-breakpoint-md: 48rem;
+  --gh-breakpoint-lg: 64rem;
 
   /* shadow-primitive */
   --gh-shadow-primitive-sm: 0 2px 8px rgb(16 24 40 / 8%);

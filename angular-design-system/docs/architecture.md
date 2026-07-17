@@ -30,6 +30,15 @@ components/
 │   ├── experience-card/
 │   └── project-card/
 └── tag/
+
+layout/
+├── cluster/
+├── container/
+├── divider/
+├── grid/
+├── inline/
+├── section/
+└── stack/
 ```
 
 Public components are standalone, strictly typed, SSR-safe and exported only
@@ -40,6 +49,13 @@ redundant Angular output. Badge remains non-interactive. Tag selects between
 static, selectable and removable native semantics without combining those
 responsibilities. Specialized Cards compose the foundational Card, Badge and
 Tag rather than using Angular class inheritance.
+
+Layout Primitives are standalone and presentational. Container, Stack, Inline,
+Grid and Cluster apply layout directly to their custom-element host to avoid an
+extra wrapper. Section renders a real `<section>`. Divider chooses decorative
+markup, native `<hr>` or explicit vertical separator semantics. Responsive
+behavior is CSS-only and fixed Grid variants share breakpoints generated from
+the repository token source.
 
 ## Library style responsibilities
 
@@ -75,6 +91,7 @@ app/
 │   ├── spacing/
 │   ├── radii/
 │   ├── shadows/
+│   ├── layout/
 │   ├── buttons/
 │   ├── badges/
 │   ├── tags/
@@ -124,9 +141,11 @@ The showcase theme toggle is an internal consumer of this public service.
   semantics.
 - Specialized Card tests cover native navigation, optional media, semantic
   lists, typed models and composition with Badge and Tag.
+- Layout tests cover typed host classes, content projection, semantic Section
+  and Divider markup, wrapping defaults and responsive Grid variants.
 - Showcase tests cover all routes, active navigation, wildcard redirect,
-  mobile menu behavior, accessible theme selection and public component
-  integration.
+  mobile menu behavior, accessible theme selection, public component
+  integration and real Card/Tag/Badge composition within Layout Primitives.
 - Production builds validate strict templates, lazy routes and public SCSS
   packaging.
 

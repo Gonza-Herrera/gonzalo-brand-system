@@ -38,6 +38,11 @@ export class OverviewPage {
       status: 'In progress',
     },
     {
+      area: 'Layout',
+      description: 'Seven responsive composition primitives are available.',
+      status: 'Ready',
+    },
+    {
       area: 'Patterns',
       description: 'Reusable compositions will follow proven components.',
       status: 'Planned',

@@ -1,0 +1,46 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+:host(.gh-divider-host--vertical) {
+  align-self: stretch;
+  width: auto;
+}
+
+.gh-divider {
+  box-sizing: border-box;
+  margin: 0;
+  border: 0;
+}
+
+.gh-divider--horizontal {
+  width: 100%;
+  border-top: var(--gh-border-width-default) var(--gh-divider-style) var(--gh-divider-color);
+}
+
+.gh-divider--vertical {
+  width: var(--gh-border-width-default);
+  height: 100%;
+  border-left: var(--gh-border-width-default) var(--gh-divider-style) var(--gh-divider-color);
+}
+
+.gh-divider--solid {
+  --gh-divider-style: solid;
+}
+
+.gh-divider--dashed {
+  --gh-divider-style: dashed;
+}
+
+.gh-divider--subtle {
+  --gh-divider-color: var(--gh-border-subtle);
+}
+
+.gh-divider--default {
+  --gh-divider-color: var(--gh-border-default);
+}
+
+.gh-divider--strong {
+  --gh-divider-color: var(--gh-border-strong);
+}

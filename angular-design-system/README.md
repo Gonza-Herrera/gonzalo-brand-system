@@ -2,9 +2,10 @@
 
 Official Angular workspace for the Gonzalo Herrera Design System.
 
-This release provides a reusable Angular library with Button, Badge, Tag and a
-four-component Card family, plus a routed standalone showcase, token-driven
-SCSS, light/dark/system theming and unit-test configuration.
+This release provides a reusable Angular library with Button, Badge, Tag, a
+four-component Card family and seven Layout Primitives, plus a routed
+standalone showcase, token-driven SCSS, light/dark/system theming and unit-test
+configuration.
 
 ## Requirements
 
@@ -29,6 +30,14 @@ angular-design-system/
 │   │       │   │   ├── button/
 │   │       │   │   ├── cards/
 │   │       │   │   └── tag/
+│   │       │   ├── layout/
+│   │       │   │   ├── cluster/
+│   │       │   │   ├── container/
+│   │       │   │   ├── divider/
+│   │       │   │   ├── grid/
+│   │       │   │   ├── inline/
+│   │       │   │   ├── section/
+│   │       │   │   └── stack/
 │   │       │   ├── patterns/
 │   │       │   ├── styles/
 │   │       │   └── theming/
@@ -214,6 +223,39 @@ The foundational Card controls surface, padding, radius and visual states.
 Article, Experience and Project Cards use typed models, semantic HTML, native
 links and existing public Badge/Tag components.
 
+## Layout primitives
+
+```ts
+import {
+  GhClusterComponent,
+  GhContainerComponent,
+  GhDividerComponent,
+  GhGridComponent,
+  GhInlineComponent,
+  GhSectionComponent,
+  GhStackComponent,
+} from 'gh-design-system';
+```
+
+```html
+<gh-section spacing="lg" surface="subtle">
+  <gh-container size="xl">
+    <gh-stack gap="lg">
+      <h2>Projects</h2>
+      <gh-grid columns="auto" minItemSize="md">
+        @for (project of projects; track project.title) {
+        <gh-project-card [project]="project" />
+        }
+      </gh-grid>
+    </gh-stack>
+  </gh-container>
+</gh-section>
+```
+
+Layout APIs accept only typed variants. Responsive behavior uses CSS, fluid
+tokens and generated shared Sass breakpoints; no primitive reads the viewport
+or accesses browser globals.
+
 ## Theme consumption
 
 Themes use the `data-theme` attribute on the root document element:
@@ -266,6 +308,7 @@ Import public TypeScript APIs from `gh-design-system`.
 | `/spacing`    | Spacing scale                 |
 | `/radii`      | Border radii                  |
 | `/shadows`    | Theme-aware elevation         |
+| `/layout`     | Public Layout Primitives      |
 | `/buttons`    | Public Button component       |
 | `/badges`     | Public Badge component        |
 | `/tags`       | Public Tag component          |
@@ -287,8 +330,8 @@ They must not be exported from the library public API.
 
 ## Scope
 
-This release is deliberately limited to foundations, Button, Badge, Tag and
-Cards:
+This release is deliberately limited to foundations, Button, Badge, Tag,
+Cards and Layout Primitives:
 
 - Primitive and semantic CSS custom properties
 - Light and dark themes
@@ -300,9 +343,9 @@ Cards:
 - Non-interactive Badge status and category labels
 - Static, selectable and removable Tag behavior
 - Foundational, Article, Experience and Project Cards
+- Container, Section, Stack, Inline, Grid, Cluster and Divider composition
 
-Layout primitives, Hero and other product components are deferred to later
-work.
+Hero, Navbar, Footer and other Brand Patterns are deferred to later work.
 See [the architecture notes](docs/architecture.md), [tokens and themes
 guide](docs/tokens-and-themes.md) and
 [component documentation](projects/gh-design-system/src/lib/components/README.md)

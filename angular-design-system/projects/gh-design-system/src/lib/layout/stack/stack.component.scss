@@ -1,0 +1,15 @@
+@use '../layout-mixins' as layout;
+
+.gh-stack {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.gh-stack--wrap {
+  flex-wrap: wrap;
+}
+
+@include layout.gaps('.gh-stack');
+@include layout.standard-alignments('.gh-stack');
+@include layout.standard-justifications('.gh-stack');

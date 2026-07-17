@@ -33,6 +33,11 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/shadows/shadows').then((module) => module.ShadowsPage),
   },
   {
+    path: 'layout',
+    title: 'Layout · Gonzalo Herrera Design System',
+    loadComponent: () => import('./pages/layout/layout').then((module) => module.LayoutPage),
+  },
+  {
     path: 'buttons',
     title: 'Button · Gonzalo Herrera Design System',
     loadComponent: () => import('./pages/buttons/buttons').then((module) => module.ButtonsPage),

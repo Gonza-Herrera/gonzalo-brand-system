@@ -48,6 +48,30 @@ System.
 - `GH_TAG_MODES`
 - `GH_TAG_VARIANTS`
 - `GH_TAG_SIZES`
+- `GhContainerComponent`
+- `GhContainerSize`
+- `GhContainerGutters`
+- `GhSectionComponent`
+- `GhSectionSpacing`
+- `GhSectionSurface`
+- `GhStackComponent`
+- `GhStackAlign`
+- `GhStackJustify`
+- `GhInlineComponent`
+- `GhInlineAlign`
+- `GhInlineJustify`
+- `GhGridComponent`
+- `GhGridColumns`
+- `GhGridMinItemSize`
+- `GhGridAlign`
+- `GhClusterComponent`
+- `GhClusterAlign`
+- `GhClusterJustify`
+- `GhDividerComponent`
+- `GhDividerOrientation`
+- `GhDividerStyle`
+- `GhDividerTone`
+- `GhLayoutGap`
 - `GhTheme`
 - `GhThemePreference`
 - `GH_THEMES`
@@ -143,3 +167,23 @@ Semantic tokens such as `--gh-text-primary`, `--gh-action-primary-background`,
 `--gh-status-success-background`, `--gh-tag-accent-selected-background` and
 `--gh-card-border-selected` are the supported styling contract for public
 components.
+
+## Layout primitives
+
+```ts
+import {
+  GhClusterComponent,
+  GhContainerComponent,
+  GhDividerComponent,
+  GhGridComponent,
+  GhInlineComponent,
+  GhSectionComponent,
+  GhStackComponent,
+} from 'gh-design-system';
+```
+
+The seven primitives provide constrained widths, semantic section rhythm,
+vertical and horizontal flow, responsive grids, wrapping clusters and
+accessible separators. They use public layout and spacing tokens, contain no
+browser measurement logic and preserve projected DOM order. See the
+[`layout`](src/lib/layout) documentation for component-level APIs and guidance.

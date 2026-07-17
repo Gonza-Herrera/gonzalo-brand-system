@@ -249,6 +249,14 @@ export const TYPOGRAPHY_TOKENS = [
 
 export const SPACING_TOKENS = [
   {
+    id: 'none',
+    name: 'space-none',
+    tokenPath: 'spacing.none',
+    cssVariable: '--gh-space-none',
+    cssValue: 'var(--gh-space-none)',
+    value: '0',
+  },
+  {
     id: 'xs',
     name: 'space-xs',
     tokenPath: 'spacing.xs',
