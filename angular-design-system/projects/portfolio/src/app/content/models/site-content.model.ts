@@ -1,4 +1,5 @@
-import type { PortfolioPageContent, PortfolioPageId } from './page-content.model';
+import type { PortfolioHomeContent } from './home-content.model';
+import type { PortfolioPageContent } from './page-content.model';
 import type { PortfolioShellContent } from './shell-content.model';
 
 export interface PortfolioIdentityContent {
@@ -8,8 +9,18 @@ export interface PortfolioIdentityContent {
   readonly description: string;
 }
 
+export interface PortfolioPagesContent {
+  readonly home: PortfolioHomeContent;
+  readonly about: PortfolioPageContent;
+  readonly experience: PortfolioPageContent;
+  readonly projects: PortfolioPageContent;
+  readonly content: PortfolioPageContent;
+  readonly contact: PortfolioPageContent;
+  readonly 'not-found': PortfolioPageContent;
+}
+
 export interface PortfolioSiteContent {
   readonly identity: PortfolioIdentityContent;
   readonly shell: PortfolioShellContent;
-  readonly pages: Readonly<Record<PortfolioPageId, PortfolioPageContent>>;
+  readonly pages: PortfolioPagesContent;
 }

@@ -1,0 +1,29 @@
+<gh-section id="projects" spacing="lg" surface="subtle">
+  <gh-container size="xl">
+    <gh-stack gap="xl">
+      <gh-section-heading
+        [eyebrow]="content().eyebrow"
+        [title]="content().title"
+        [description]="content().description"
+        [headingLevel]="2"
+      >
+        <a ghSectionHeadingAction class="home-section-action" [href]="viewAllAction().href">
+          {{ viewAllAction().label }}
+        </a>
+      </gh-section-heading>
+
+      <gh-grid [columns]="2" minItemSize="md" gap="lg">
+        @for (project of projects(); track content().items[$index].id) {
+          <gh-project-card
+            [project]="project"
+            [ariaLabel]="content().cardLabels.projectPrefix + ': ' + project.title"
+            [featuredLabel]="content().cardLabels.featured"
+            [technologiesLabel]="content().cardLabels.technologies"
+            [linksLabel]="content().cardLabels.links"
+            [headingLevel]="3"
+          />
+        }
+      </gh-grid>
+    </gh-stack>
+  </gh-container>
+</gh-section>

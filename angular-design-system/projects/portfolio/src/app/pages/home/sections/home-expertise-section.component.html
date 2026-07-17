@@ -1,0 +1,18 @@
+<gh-section id="expertise" spacing="lg" surface="transparent">
+  <gh-container size="xl">
+    <gh-stack gap="xl">
+      <gh-section-heading
+        [eyebrow]="content().eyebrow"
+        [title]="content().title"
+        [description]="content().description"
+        [headingLevel]="2"
+      />
+      <gh-feature-grid
+        [features]="content().items"
+        [externalLinkLabel]="externalLinkLabel()"
+        [columns]="3"
+        variant="cards"
+      />
+    </gh-stack>
+  </gh-container>
+</gh-section>

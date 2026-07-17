@@ -30,13 +30,17 @@ export const PORTFOLIO_PAGE_PATHS = {
   contact: 'contact',
 } as const satisfies Readonly<Record<PortfolioNavigationPageId, PortfolioPagePath>>;
 
-export interface PortfolioPageContent {
+export interface PortfolioPageMetadata {
+  readonly metaTitle: string;
+  readonly metaDescription: string;
+  readonly metaTitleIsAbsolute?: boolean;
+}
+
+export interface PortfolioPageContent extends PortfolioPageMetadata {
   readonly eyebrow: string;
   readonly title: string;
   readonly description: string;
   readonly stage: string;
-  readonly metaTitle: string;
-  readonly metaDescription: string;
   readonly actionLabel?: string;
 }
 

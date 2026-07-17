@@ -16,7 +16,11 @@ export class PortfolioTitleStrategy extends TitleStrategy {
     const pageId = this.findPageId(snapshot);
     const pageContent = this.localeService.content().pages[pageId];
 
-    this.title.setTitle(`${pageContent.metaTitle} | ${PORTFOLIO_CONFIG.identity.name}`);
+    this.title.setTitle(
+      pageContent.metaTitleIsAbsolute
+        ? pageContent.metaTitle
+        : `${pageContent.metaTitle} | ${PORTFOLIO_CONFIG.identity.name}`,
+    );
     this.meta.updateTag({ name: 'description', content: pageContent.metaDescription });
   }
 

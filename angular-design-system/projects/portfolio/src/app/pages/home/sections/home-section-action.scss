@@ -1,0 +1,15 @@
+:host {
+  display: block;
+  min-width: 0;
+}
+
+.home-section-action {
+  color: var(--gh-text-accent);
+  font-weight: var(--gh-font-weight-semibold);
+  text-decoration-thickness: var(--gh-border-width-default);
+  text-underline-offset: var(--gh-space-xs);
+}
+
+.home-section-action:hover {
+  color: var(--gh-text-primary);
+}

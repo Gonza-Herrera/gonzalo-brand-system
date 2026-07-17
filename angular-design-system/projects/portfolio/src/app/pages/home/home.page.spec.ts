@@ -1,18 +1,45 @@
 import { TestBed } from '@angular/core/testing';
 
+import { PortfolioLocaleService } from '../../core/services/portfolio-locale.service';
 import { HomePage } from './home.page';
 
 describe('HomePage', () => {
-  it('renders one semantic heading through public Design System layout APIs', async () => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({ imports: [HomePage] }).compileComponents();
+  });
+
+  it('composes the complete English Home from public Design System patterns', () => {
     const fixture = TestBed.createComponent(HomePage);
     fixture.detectChanges();
 
     const element = fixture.nativeElement as HTMLElement;
     expect(element.querySelectorAll('h1')).toHaveLength(1);
-    expect(element.querySelector('h1')?.textContent).toContain('Gonzalo Herrera');
-    expect(element.querySelector('gh-section section')).not.toBeNull();
-    expect(element.querySelector('gh-container')).not.toBeNull();
-    expect(element.querySelector('gh-stack')).not.toBeNull();
+    expect(element.querySelector('h1')?.textContent).toContain('Think bigger. Build smarter.');
+    expect(element.querySelector('gh-hero')).not.toBeNull();
+    expect(element.querySelector('gh-feature-grid')).not.toBeNull();
+    expect(element.querySelectorAll('gh-project-card')).toHaveLength(4);
+    expect(element.querySelector('gh-experience-timeline')).not.toBeNull();
+    expect(element.querySelector('gh-content-highlight')).not.toBeNull();
+    expect(element.querySelector('gh-contact-callout')).not.toBeNull();
+    expect(element.querySelector<HTMLAnchorElement>('a[href="/en/projects"]')).not.toBeNull();
+    expect(element.textContent).toContain('AI Code Review Assistant');
+    expect(element.textContent).toContain('Concept');
+  });
+
+  it('reacts to locale changes with structural and link parity', () => {
+    const localeService = TestBed.inject(PortfolioLocaleService);
+    const fixture = TestBed.createComponent(HomePage);
+    fixture.detectChanges();
+
+    localeService.activateLocale('es');
+    fixture.detectChanges();
+
+    const element = fixture.nativeElement as HTMLElement;
+    expect(element.querySelectorAll('h1')).toHaveLength(1);
+    expect(element.textContent).toContain('Qué ayudo a mejorar en los equipos');
+    expect(element.textContent).toContain('Concepto');
+    expect(element.querySelectorAll('gh-project-card')).toHaveLength(4);
+    expect(element.querySelector<HTMLAnchorElement>('a[href="/es/projects"]')).not.toBeNull();
+    expect(element.querySelector<HTMLAnchorElement>('a[href="/es/contact"]')).not.toBeNull();
   });
 });

@@ -1,0 +1,13 @@
+:host {
+  display: block;
+  min-width: 0;
+}
+
+.home-experience__notice {
+  max-width: var(--gh-layout-reading-max);
+  padding: var(--gh-space-md);
+  margin: 0;
+  border-inline-start: var(--gh-border-width-focus) solid var(--gh-text-accent);
+  color: var(--gh-text-secondary);
+  background: var(--gh-background-subtle);
+}

@@ -50,7 +50,7 @@ describe('Portfolio routing', () => {
     fixture.detectChanges();
 
     const pages = [
-      { path: '', en: 'Gonzalo Herrera', es: 'Gonzalo Herrera' },
+      { path: '', en: 'Think bigger. Build smarter.', es: 'Think bigger. Build smarter.' },
       { path: '/about', en: 'Professional story', es: 'Historia profesional' },
       {
         path: '/experience',
@@ -158,6 +158,16 @@ describe('Portfolio routing', () => {
     const title = TestBed.inject(Title);
     const meta = TestBed.inject(Meta);
     fixture.detectChanges();
+
+    await router.navigateByUrl('/en');
+    await fixture.whenStable();
+    expect(title.getTitle()).toBe('Gonzalo Herrera | Frontend Tech Lead & AI-Augmented Engineer');
+    expect(meta.getTag('name="description"')?.content).toContain('Angular architecture');
+
+    await router.navigateByUrl('/es');
+    await fixture.whenStable();
+    expect(title.getTitle()).toBe('Gonzalo Herrera | Frontend Tech Lead & AI-Augmented Engineer');
+    expect(meta.getTag('name="description"')?.content).toContain('arquitectura Angular');
 
     await router.navigateByUrl('/en/about');
     await fixture.whenStable();
