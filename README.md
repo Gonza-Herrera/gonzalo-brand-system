@@ -64,7 +64,7 @@ npm start
 
 `npm start` checks generated tokens, builds the library, and serves the Showcase. The equivalent focused command is `ng serve showcase` after building the library.
 
-Run the public Portfolio foundation:
+Run the public Portfolio:
 
 ```bash
 npm run start:portfolio
@@ -73,7 +73,8 @@ npm run start:portfolio
 Portfolio supports English and Spanish through localized routes such as `/en/projects` and
 `/es/projects`. Its global shell composes the public Navigation and Footer patterns, includes
 language and Light/Dark/System selectors, and keeps the URL locale authoritative for SSR and
-hydration. See the [Portfolio guide](angular-design-system/projects/portfolio/README.md) and
+hydration. Home and About are complete; the localized About routes are `/en/about` and `/es/about`.
+See the [Portfolio guide](angular-design-system/projects/portfolio/README.md) and
 [internationalization contract](angular-design-system/docs/portfolio-internationalization.md).
 
 ## Build and tests

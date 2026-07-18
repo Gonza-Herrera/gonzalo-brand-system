@@ -133,7 +133,7 @@ portfolio/src/app/
 │   └── services/            locale Signal and safe preference storage
 ├── content/
 │   ├── models/              readonly content contracts
-│   ├── en/                  English shell, complete Home and placeholder copy
+│   ├── en/                  English shell, complete Home/About and placeholder copy
 │   ├── es/                  equivalent Spanish structure
 │   └── registry             typed locale-to-content mapping
 ├── layout/
@@ -208,6 +208,31 @@ unverified professional history is represented by a localized empty state, and
 unverified social or publication URLs are omitted. This constraint belongs to
 the content layer rather than the reusable patterns.
 
+About follows the same typed-content boundary with a deeper editorial composition:
+
+```text
+Localized About content (EN_ABOUT_CONTENT or ES_ABOUT_CONTENT)
+    ↓
+PortfolioLocaleService
+    ↓
+About Page composition and app-private sections
+    ↓
+Public Brand Patterns and Layout Primitives
+    ↓
+Design Tokens and Themes
+```
+
+`AboutPage` orchestrates Hero, Professional Story, Engineering Philosophy, Leadership,
+AI-Augmented Engineering, Core Principles, Technical Focus, Working Style and Contact. A shared
+app-private feature-section adapter covers structurally identical content blocks; distinct sections
+remain separate when they own narrative paragraphs, derived localized links or technical Tags.
+Stable IDs keep EN/ES collections aligned while all visible text remains in locale modules.
+
+About does not extend the public Design System. Its local styles are limited to reading measure and
+editorial composition, and every visual value consumes the existing semantic token contract. The
+absence of browser APIs, runtime IDs and dynamic ordering keeps direct `/en/about` and `/es/about`
+SSR output deterministic.
+
 Portfolio consumes TypeScript only from `gh-design-system` and Sass only from
 the public `styles` and `styles/foundations` exports. The application
 initializer instantiates the library's SSR-safe `GhThemeService`. The
@@ -233,7 +258,9 @@ The official Angular SSR builder produces browser and Express server bundles.
 `provideClientHydration(withEventReplay())` hydrates server HTML, while all
 routes use server rendering. URL-first locale resolution keeps server and
 first-client content deterministic. No environment files were introduced: the
-workspace has no existing environment convention and no production URL is approved.
+workspace has no existing environment convention and no production URL is approved. The build
+security allowlist contains only `localhost` and `127.0.0.1`, which enables real local SSR checks
+without disabling Angular's host validation; deployment must add the approved production hostname.
 
 ## Showcase architecture
 
@@ -346,11 +373,10 @@ of the route.
   integration, real Card/Tag/Badge composition within Layout Primitives and the
   complete Brand Patterns landing demonstration.
 - Portfolio tests cover its minimal root, bilingual shell, public Navigation
-  and Footer integration, the complete bilingual Home composition, its six
-  section adapters, localized Home links, all localized lazy routes, redirects,
-  invalid-locale fallback, exact active state, content parity, locale storage,
-  both switchers, localized Not Found, document language, titles and basic
-  descriptions.
+  and Footer integration, the complete bilingual Home and About compositions,
+  section adapters, localized links, stable About IDs and translations, all localized lazy routes,
+  redirects, invalid-locale fallback, exact active state, content parity, locale storage, both
+  switchers, localized Not Found, document language, titles and basic descriptions.
 - Portfolio's production build validates server rendering, hydration wiring,
   direct lazy-route compatibility and separate route chunks.
 - Storybook build-time checks compile every public story and MDX page against
