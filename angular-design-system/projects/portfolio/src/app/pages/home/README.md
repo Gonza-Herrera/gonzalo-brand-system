@@ -14,7 +14,7 @@ HomePage
 ```
 
 The section components own mapping from Portfolio content to public Design System pattern inputs;
-they do not own editorial copy. `home-link.utils.ts` is the single adapter for locale-aware internal
+they do not own editorial copy. `portfolio-link.utils.ts` is the shared adapter for locale-aware internal
 links and explicitly external URLs.
 
 ## Content and hierarchy
@@ -44,7 +44,7 @@ tokens. No viewport JavaScript, timers or random output participate in SSR or hy
 
 `home.page.spec.ts` protects the integrated EN/ES composition, single `h1`, localized links and
 reactive locale changes. `sections/home-sections.spec.ts` covers each section's public pattern,
-heading hierarchy and honest empty states. `home-link.utils.spec.ts` covers internal and external
+heading hierarchy and honest empty states. `portfolio-link.utils.spec.ts` covers internal and external
 link mapping.
 
 ## Editing Home

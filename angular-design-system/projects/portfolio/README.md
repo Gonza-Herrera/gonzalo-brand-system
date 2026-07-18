@@ -4,9 +4,9 @@
 from the technical Showcase and Storybook documentation: Portfolio owns real content, localized
 routing and product concerns; Showcase validates integration; Storybook documents reusable APIs.
 
-The current release adds the complete Portfolio Home to the global shell, routing and
-internationalization foundation. About, Experience, Projects, Content and Contact remain localized
-route placeholders for their dedicated follow-up PRs.
+The current release includes the complete Portfolio Home and About experiences on top of the global
+shell, routing and internationalization foundation. Experience, Projects, Content and Contact remain
+localized route placeholders for their dedicated follow-up PRs.
 
 ## Run, build and test
 
@@ -22,6 +22,10 @@ npm run build:ssr:portfolio
 The development server uses `http://localhost:4200`. The production build emits browser and server
 bundles with hydration. After building, `npm run serve:ssr:portfolio` serves them at
 `http://localhost:4000` by default and respects the host-provided `PORT` variable.
+
+The SSR host allowlist includes only `localhost` and `127.0.0.1` for local verification. Add the
+approved production hostname to `security.allowedHosts` as part of deployment configuration; do not
+disable Angular's host validation.
 
 ## Localized routes
 
@@ -77,7 +81,9 @@ All copy is compile-time TypeScript under `src/app/content/`:
 content/
 ├── models/                         shared readonly contracts and stable IDs
 ├── en/home.content.ts              complete English Home
+├── en/about.content.ts             complete English About
 ├── es/home.content.ts              equivalent Spanish Home
+├── es/about.content.ts             equivalent Spanish About
 ├── en/site-content.ts              English shell and page registry
 ├── es/site-content.ts              Spanish shell and page registry
 └── portfolio-content.registry.ts   locale-to-content registry
@@ -127,8 +133,31 @@ The page composes only public Brand Patterns and Layout Primitives. Its six app-
 components map typed product content to those APIs; the templates do not contain long editorial
 strings. See [Home architecture](src/app/pages/home/README.md).
 
-The next product milestone is PR 13 — About Page. It should replace only the localized About
-placeholder and reuse the same typed-content, locale-link and public-pattern boundaries.
+## About page
+
+`/en/about` and `/es/about` render a shared nine-section structure with localized content:
+
+1. About Hero.
+2. Professional Story with an Experience transition.
+3. Engineering Philosophy.
+4. Leadership Approach.
+5. AI-Augmented Engineering.
+6. Core Principles.
+7. Technical Focus.
+8. Working Style.
+9. Contact Callout.
+
+The page reuses Hero, Section Heading, Feature Grid and Contact Callout Brand Patterns plus public
+Container, Section, Stack, Grid, Cluster, Card and Tag APIs. Its content models use stable IDs and
+parity tests across locales. All internal actions are resolved from `pageId` through the shared
+locale-link helper.
+
+No portrait, employer history, dates, metrics or external profile links are shown because no
+approved source for those values exists in the repository. See the
+[About architecture](src/app/pages/about/README.md) for maintenance and content rules.
+
+The next product milestone is PR 14 — Experience Page. It should add the verified professional
+timeline without duplicating About's qualitative narrative.
 
 ## Global shell
 
@@ -184,12 +213,14 @@ content.
 
 ## Current limits
 
-- Home is complete; the other page bodies remain localized placeholders.
+- Home and About are complete; Experience, Projects, Content and Contact remain localized
+  placeholders.
 - Only English and Spanish are implemented.
 - Experience details await a verified source and are intentionally not invented on Home.
 - Social URLs await verified source data.
 - Canonical URLs, complete `hreflang`, Open Graph, sitemap, structured data and production domain
   configuration belong to PR 18.
+- The production SSR hostname must be approved and added to the host allowlist before deployment.
 - No analytics, CMS, backend, contact form or deployment is included.
 
 See [Portfolio internationalization](../../docs/portfolio-internationalization.md) for the detailed

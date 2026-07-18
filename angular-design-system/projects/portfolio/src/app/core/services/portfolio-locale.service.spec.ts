@@ -31,7 +31,9 @@ describe('PortfolioLocaleService', () => {
 
     expect(service.activateLocale('es')).toBe(true);
     expect(service.locale()).toBe('es');
-    expect(service.content().pages.about.title).toBe('Historia profesional');
+    expect(service.content().pages.about.hero.title).toBe(
+      'Ingeniería, liderazgo y mejores formas de construir software.',
+    );
     expect(document.documentElement.lang).toBe('es');
     expect(service.activateLocale('fr')).toBe(false);
     expect(service.locale()).toBe('es');

@@ -5,8 +5,8 @@ import {
   PORTFOLIO_EXPERTISE_IDS,
   PORTFOLIO_HERO_HIGHLIGHT_IDS,
   PORTFOLIO_PROJECT_IDS,
-  type PortfolioLinkContent,
 } from './models/home-content.model';
+import type { PortfolioLinkContent } from './models/link-content.model';
 import { PORTFOLIO_NAVIGATION_PAGE_IDS, PORTFOLIO_PAGE_IDS } from './models/page-content.model';
 import { PORTFOLIO_LOCALES } from './models/portfolio-locale.type';
 
@@ -62,7 +62,9 @@ describe('Portfolio content registry', () => {
       expect(JSON.stringify(home)).not.toContain('example.com');
     }
 
-    expect(PORTFOLIO_CONTENT.en.pages.about.title).not.toBe(PORTFOLIO_CONTENT.es.pages.about.title);
+    expect(PORTFOLIO_CONTENT.en.pages.about.hero.title).not.toBe(
+      PORTFOLIO_CONTENT.es.pages.about.hero.title,
+    );
     expect(PORTFOLIO_CONTENT.en.pages.home.featuredContent.item.id).toBe(
       PORTFOLIO_CONTENT.es.pages.home.featuredContent.item.id,
     );

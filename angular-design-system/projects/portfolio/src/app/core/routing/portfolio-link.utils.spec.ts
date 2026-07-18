@@ -1,7 +1,7 @@
-import type { PortfolioLinkContent } from '../../content/models/home-content.model';
-import { resolvePortfolioAction, resolvePortfolioHref } from './home-link.utils';
+import type { PortfolioLinkContent } from '../../content/models/link-content.model';
+import { resolvePortfolioAction, resolvePortfolioHref } from './portfolio-link.utils';
 
-describe('Home link utilities', () => {
+describe('Portfolio link utilities', () => {
   it('creates locale-aware internal links from page IDs', () => {
     const link = { label: 'Projects', pageId: 'projects' } satisfies PortfolioLinkContent;
 

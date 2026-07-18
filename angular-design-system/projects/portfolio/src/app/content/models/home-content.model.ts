@@ -3,13 +3,12 @@ import type {
   GhContentHighlightTypeLabels,
   GhExperienceCardData,
   GhFeatureItem,
-  GhHeroAction,
   GhProjectCardData,
   GhProjectStatus,
 } from 'gh-design-system';
 
+import type { PortfolioLinkContent } from './link-content.model';
 import type { PortfolioPageMetadata } from './page-content.model';
-import type { PortfolioNavigationPageId } from './page-content.model';
 
 export const PORTFOLIO_HERO_HIGHLIGHT_IDS = [
   'frontend-engineering',
@@ -36,27 +35,6 @@ export const PORTFOLIO_PROJECT_IDS = [
 export type PortfolioHeroHighlightId = (typeof PORTFOLIO_HERO_HIGHLIGHT_IDS)[number];
 export type PortfolioExpertiseId = (typeof PORTFOLIO_EXPERTISE_IDS)[number];
 export type PortfolioProjectId = (typeof PORTFOLIO_PROJECT_IDS)[number];
-export type PortfolioActionVariant = NonNullable<GhHeroAction['variant']>;
-
-interface PortfolioLinkBase {
-  readonly label: string;
-  readonly variant?: PortfolioActionVariant;
-  readonly ariaLabel?: string;
-}
-
-export type PortfolioLinkContent = PortfolioLinkBase &
-  (
-    | {
-        readonly pageId: PortfolioNavigationPageId;
-        readonly href?: never;
-        readonly external?: false;
-      }
-    | {
-        readonly href: string;
-        readonly external: true;
-        readonly pageId?: never;
-      }
-  );
 
 export interface PortfolioHighlightContent {
   readonly id: PortfolioHeroHighlightId;

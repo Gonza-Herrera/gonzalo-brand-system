@@ -1,4 +1,5 @@
 import type { PortfolioSiteContent } from '../models/site-content.model';
+import { EN_ABOUT_CONTENT } from './about.content';
 import { EN_HOME_CONTENT } from './home.content';
 
 export const EN_SITE_CONTENT = {
@@ -51,15 +52,7 @@ export const EN_SITE_CONTENT = {
   },
   pages: {
     home: EN_HOME_CONTENT,
-    about: {
-      eyebrow: 'About',
-      title: 'Professional story',
-      description: 'Professional story, engineering principles and leadership approach.',
-      stage: 'The complete About page will be delivered in PR 13.',
-      metaTitle: 'About',
-      metaDescription:
-        "Learn about Gonzalo Herrera's professional story, engineering principles and leadership approach.",
-    },
+    about: EN_ABOUT_CONTENT,
     experience: {
       eyebrow: 'Experience',
       title: 'Engineering and leadership experience',

@@ -1,4 +1,5 @@
 import type { PortfolioSiteContent } from '../models/site-content.model';
+import { ES_ABOUT_CONTENT } from './about.content';
 import { ES_HOME_CONTENT } from './home.content';
 
 export const ES_SITE_CONTENT = {
@@ -53,15 +54,7 @@ export const ES_SITE_CONTENT = {
   },
   pages: {
     home: ES_HOME_CONTENT,
-    about: {
-      eyebrow: 'Sobre mí',
-      title: 'Historia profesional',
-      description: 'Historia profesional, principios de ingeniería y enfoque de liderazgo.',
-      stage: 'La página completa Sobre mí se implementará en el PR 13.',
-      metaTitle: 'Sobre mí',
-      metaDescription:
-        'Conocé la historia profesional, los principios de ingeniería y el enfoque de liderazgo de Gonzalo Herrera.',
-    },
+    about: ES_ABOUT_CONTENT,
     experience: {
       eyebrow: 'Experiencia',
       title: 'Experiencia en ingeniería y liderazgo',

@@ -1,8 +1,9 @@
 # Content
 
 Portfolio copy is typed and kept separate from page templates. English and Spanish implement the
-same `PortfolioSiteContent` structure, including identity, shell, navigation, footer, Home, future
-page placeholders, Not Found and metadata. Stable IDs and paths remain locale-independent.
+same `PortfolioSiteContent` structure, including identity, shell, navigation, footer, complete Home
+and About pages, future page placeholders, Not Found and metadata. Stable IDs and paths remain
+locale-independent.
 
 `portfolio-content.registry.ts` selects content by validated route locale. Compile-time contracts and
 parity tests prevent either locale from drifting. There is no HTTP-loaded JSON, external translation
@@ -22,9 +23,33 @@ objects reference those modules. The contract covers:
 - one featured content item and localized type labels;
 - the Contact Callout.
 
-Internal links store a stable `pageId`, never a hand-built locale URL. `home-link.utils.ts` resolves
+Internal links store a stable `pageId`, never a hand-built locale URL. `portfolio-link.utils.ts` resolves
 that ID for the active locale at the page boundary. External links require both an explicit `href`
 and `external: true`.
+
+## About content
+
+About has its own `PortfolioAboutContent` contract and locale modules at `en/about.content.ts` and
+`es/about.content.ts`. It contains Hero, Professional Story, Engineering Philosophy, Leadership,
+AI-Augmented Engineering, Core Principles, Technical Focus, Working Style and Contact content.
+
+Every collection uses non-translatable IDs declared in `about-content.model.ts`. English and Spanish
+must keep the same IDs, order, section structure, paragraph counts and action destinations. Translate
+labels and explanations, never IDs. Content tests verify this parity, reject duplicate IDs,
+percentages, empty technology names, placeholder domains and PR copy.
+
+Technical focus is deliberately grouped by context. Add a technology only when an approved
+repository source supports it, keep it in one group, and do not express proficiency as a percentage,
+rank or unverified expertise claim. Professional history remains qualitative until companies, roles,
+dates and outcomes have a verified source.
+
+To change a principle or technical group:
+
+1. Update the corresponding stable ID tuple only if the underlying concept changes.
+2. Apply the same ID and position in both locale modules.
+3. Keep the copy useful and equivalent rather than mechanically literal.
+4. Update tests when the intentional contract changes.
+5. Run `npm run test:portfolio`.
 
 ## Data integrity
 
@@ -33,8 +58,8 @@ metrics, publication status, email addresses or social URLs. Concepts must use t
 status and say that they are concepts in their descriptions. When source data is missing, keep the
 typed empty state and a `TODO(content)` beside the owning collection.
 
-The registry tests protect stable ID order, required counts, valid project statuses, localized link
-targets, metadata completeness and the absence of placeholder domains.
+The registry and page-specific tests protect stable ID order, required counts, valid project
+statuses, localized link targets, metadata completeness and the absence of placeholder domains.
 
 ### Add a selected project
 

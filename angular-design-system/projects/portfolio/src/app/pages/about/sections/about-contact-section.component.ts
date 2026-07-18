@@ -1,19 +1,19 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { GhContactCalloutComponent } from 'gh-design-system';
 
-import type { PortfolioHomeContactContent } from '../../../content/models/home-content.model';
+import type { PortfolioAboutContactContent } from '../../../content/models/about-content.model';
 import type { PortfolioLocale } from '../../../content/models/portfolio-locale.type';
 import { resolvePortfolioAction } from '../../../core/routing/portfolio-link.utils';
 
 @Component({
-  selector: 'app-home-contact-section',
+  selector: 'app-about-contact-section',
   standalone: true,
   imports: [GhContactCalloutComponent],
-  templateUrl: './home-contact-section.component.html',
+  templateUrl: './about-contact-section.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeContactSectionComponent {
-  readonly content = input.required<PortfolioHomeContactContent>();
+export class AboutContactSectionComponent {
+  readonly content = input.required<PortfolioAboutContactContent>();
   readonly locale = input.required<PortfolioLocale>();
   readonly externalLinkLabel = input.required<string>();
 
