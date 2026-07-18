@@ -3,7 +3,7 @@ import { GhHeroComponent, GhHeroVisualDirective } from 'gh-design-system';
 
 import type { PortfolioHomeHeroContent } from '../../../content/models/home-content.model';
 import type { PortfolioLocale } from '../../../content/models/portfolio-locale.type';
-import { resolvePortfolioAction } from '../home-link.utils';
+import { resolvePortfolioAction } from '../../../core/routing/portfolio-link.utils';
 
 @Component({
   selector: 'app-home-hero',

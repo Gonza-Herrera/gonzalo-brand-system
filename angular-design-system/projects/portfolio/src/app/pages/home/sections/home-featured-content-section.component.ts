@@ -10,7 +10,7 @@ import {
 
 import type { PortfolioFeaturedContent } from '../../../content/models/home-content.model';
 import type { PortfolioLocale } from '../../../content/models/portfolio-locale.type';
-import { resolvePortfolioHref } from '../home-link.utils';
+import { resolvePortfolioHref } from '../../../core/routing/portfolio-link.utils';
 
 @Component({
   selector: 'app-home-featured-content-section',

@@ -1,0 +1,23 @@
+<gh-section id="ai-augmented-engineering" spacing="lg" surface="accent">
+  <gh-container size="xl">
+    <gh-stack gap="xl">
+      <gh-section-heading
+        [eyebrow]="content().eyebrow"
+        [title]="content().title"
+        [description]="content().description"
+        [headingLevel]="2"
+      />
+      <p class="about-ai__supporting-text">{{ content().supportingText }}</p>
+      <gh-feature-grid
+        [features]="content().useCases"
+        [externalLinkLabel]="externalLinkLabel()"
+        [columns]="3"
+        variant="cards"
+      />
+      <gh-card class="about-ai__principle" variant="elevated" padding="lg">
+        <p ghCardHeader>{{ content().principleLabel }}</p>
+        <h3 ghCardContent>{{ content().principle }}</h3>
+      </gh-card>
+    </gh-stack>
+  </gh-container>
+</gh-section>

@@ -1,10 +1,48 @@
-<gh-section spacing="lg">
-  <gh-container size="xl">
-    <gh-stack gap="md" align="start">
-      <p>{{ content().eyebrow }}</p>
-      <h1>{{ content().title }}</h1>
-      <p>{{ content().description }}</p>
-      <p>{{ content().stage }}</p>
-    </gh-stack>
-  </gh-container>
-</gh-section>
+<app-about-hero [content]="content().hero" />
+
+<app-about-story-section [content]="content().story" [locale]="locale()" />
+
+<app-about-feature-section
+  sectionId="engineering-philosophy"
+  [content]="content().philosophy"
+  [externalLinkLabel]="externalLinkLabel()"
+  surface="subtle"
+  variant="cards"
+  [columns]="3"
+/>
+
+<app-about-leadership-section
+  [content]="content().leadership"
+  [externalLinkLabel]="externalLinkLabel()"
+/>
+
+<app-about-ai-section
+  [content]="content().aiEngineering"
+  [externalLinkLabel]="externalLinkLabel()"
+/>
+
+<app-about-feature-section
+  sectionId="core-principles"
+  [content]="content().principles"
+  [externalLinkLabel]="externalLinkLabel()"
+  surface="transparent"
+  variant="minimal"
+  [columns]="3"
+/>
+
+<app-about-technical-focus-section [content]="content().technicalFocus" />
+
+<app-about-feature-section
+  sectionId="working-style"
+  [content]="content().workingStyle"
+  [externalLinkLabel]="externalLinkLabel()"
+  surface="transparent"
+  variant="cards"
+  [columns]="3"
+/>
+
+<app-about-contact-section
+  [content]="content().contact"
+  [locale]="locale()"
+  [externalLinkLabel]="externalLinkLabel()"
+/>

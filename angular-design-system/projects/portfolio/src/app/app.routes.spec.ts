@@ -51,7 +51,11 @@ describe('Portfolio routing', () => {
 
     const pages = [
       { path: '', en: 'Think bigger. Build smarter.', es: 'Think bigger. Build smarter.' },
-      { path: '/about', en: 'Professional story', es: 'Historia profesional' },
+      {
+        path: '/about',
+        en: 'Engineering, leadership and better ways of building software.',
+        es: 'Ingeniería, liderazgo y mejores formas de construir software.',
+      },
       {
         path: '/experience',
         en: 'Engineering and leadership experience',
@@ -123,7 +127,7 @@ describe('Portfolio routing', () => {
     expect(router.url).toBe('/en/about');
     expect(document.documentElement.lang).toBe('en');
     expect((fixture.nativeElement as HTMLElement).querySelector('h1')?.textContent).toContain(
-      'Professional story',
+      'Engineering, leadership and better ways of building software.',
     );
   });
 
@@ -172,12 +176,16 @@ describe('Portfolio routing', () => {
     await router.navigateByUrl('/en/about');
     await fixture.whenStable();
     expect(title.getTitle()).toBe('About | Gonzalo Herrera');
-    expect(meta.getTag('name="description"')?.content).toContain('professional story');
+    expect(meta.getTag('name="description"')?.content).toBe(
+      'Learn about Gonzalo Herrera’s approach to frontend engineering, technical leadership, Angular architecture and AI-augmented software development.',
+    );
 
     await router.navigateByUrl('/es/about');
     await fixture.whenStable();
     expect(title.getTitle()).toBe('Sobre mí | Gonzalo Herrera');
-    expect(meta.getTag('name="description"')?.content).toContain('historia profesional');
+    expect(meta.getTag('name="description"')?.content).toBe(
+      'Conoce el enfoque de Gonzalo Herrera sobre ingeniería frontend, liderazgo técnico, arquitectura Angular y desarrollo de software asistido por IA.',
+    );
     expect(document.head.querySelectorAll('meta[name="description"]')).toHaveLength(1);
 
     await router.navigateByUrl('/es/unknown');

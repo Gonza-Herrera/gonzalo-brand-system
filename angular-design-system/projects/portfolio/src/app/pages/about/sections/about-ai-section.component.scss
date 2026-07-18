@@ -1,0 +1,34 @@
+:host {
+  display: block;
+}
+
+.about-ai__supporting-text,
+.about-ai__principle {
+  max-width: var(--gh-layout-reading-max);
+}
+
+.about-ai__supporting-text {
+  margin: 0;
+  color: var(--gh-text-secondary);
+  line-height: var(--gh-line-height-body);
+}
+
+.about-ai__principle p,
+.about-ai__principle h3 {
+  margin: 0;
+}
+
+.about-ai__principle p {
+  color: var(--gh-text-muted);
+  font-size: var(--gh-font-size-caption);
+  font-weight: var(--gh-font-weight-semibold);
+  letter-spacing: var(--gh-letter-spacing-wide);
+  text-transform: uppercase;
+}
+
+.about-ai__principle h3 {
+  color: var(--gh-text-primary);
+  font-family: var(--gh-font-family-display);
+  font-size: var(--gh-font-size-h3);
+  line-height: var(--gh-line-height-heading);
+}

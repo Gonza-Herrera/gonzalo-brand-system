@@ -1,0 +1,32 @@
+<gh-section id="professional-story" spacing="lg" surface="transparent">
+  <gh-container size="xl">
+    <gh-stack gap="xl">
+      <gh-section-heading
+        [eyebrow]="content().eyebrow"
+        [title]="content().title"
+        [headingLevel]="2"
+      >
+        <a ghSectionHeadingAction class="about-story__action" [href]="experienceAction().href">
+          {{ experienceAction().label }}
+        </a>
+      </gh-section-heading>
+
+      <gh-stack class="about-story__copy" gap="md">
+        @for (paragraph of content().paragraphs; track paragraph) {
+          <p>{{ paragraph }}</p>
+        }
+      </gh-stack>
+
+      @if (content().highlights.length > 0) {
+        <gh-grid [columns]="2" minItemSize="md" gap="lg">
+          @for (highlight of content().highlights; track highlight.id) {
+            <gh-card fullHeight padding="lg">
+              <h3 ghCardHeader>{{ highlight.label }}</h3>
+              <p ghCardContent>{{ highlight.description }}</p>
+            </gh-card>
+          }
+        </gh-grid>
+      }
+    </gh-stack>
+  </gh-container>
+</gh-section>

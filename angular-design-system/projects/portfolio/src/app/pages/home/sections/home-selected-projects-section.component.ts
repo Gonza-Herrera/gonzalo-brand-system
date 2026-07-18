@@ -11,7 +11,10 @@ import {
 
 import type { PortfolioSelectedProjectsContent } from '../../../content/models/home-content.model';
 import type { PortfolioLocale } from '../../../content/models/portfolio-locale.type';
-import { resolvePortfolioAction, resolvePortfolioHref } from '../home-link.utils';
+import {
+  resolvePortfolioAction,
+  resolvePortfolioHref,
+} from '../../../core/routing/portfolio-link.utils';
 
 @Component({
   selector: 'app-home-selected-projects-section',

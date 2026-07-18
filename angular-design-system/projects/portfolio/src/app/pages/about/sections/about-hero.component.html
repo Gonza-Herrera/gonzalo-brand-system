@@ -1,0 +1,19 @@
+<gh-hero
+  [eyebrow]="content().eyebrow"
+  [title]="content().title"
+  [description]="content().description"
+  [headingLevel]="1"
+  layout="split"
+  surface="gradient"
+  minHeight="auto"
+>
+  <aside ghHeroVisual class="about-hero__visual" [attr.aria-label]="content().visualLabel">
+    <p class="about-hero__role">{{ content().role }}</p>
+    <p class="about-hero__summary">{{ content().secondaryText }}</p>
+    <ul class="about-hero__focuses">
+      @for (focus of content().focuses; track focus.id) {
+        <li>{{ focus.label }}</li>
+      }
+    </ul>
+  </aside>
+</gh-hero>

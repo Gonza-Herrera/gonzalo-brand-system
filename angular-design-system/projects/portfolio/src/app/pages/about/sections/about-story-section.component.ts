@@ -1,35 +1,37 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import {
+  GhCardComponent,
   GhContainerComponent,
-  GhExperienceTimelineComponent,
+  GhGridComponent,
   GhSectionComponent,
   GhSectionHeadingComponent,
   GhStackComponent,
 } from 'gh-design-system';
 
-import type { PortfolioExperiencePreviewContent } from '../../../content/models/home-content.model';
+import type { PortfolioProfessionalStoryContent } from '../../../content/models/about-content.model';
 import type { PortfolioLocale } from '../../../content/models/portfolio-locale.type';
 import { resolvePortfolioAction } from '../../../core/routing/portfolio-link.utils';
 
 @Component({
-  selector: 'app-home-experience-preview-section',
+  selector: 'app-about-story-section',
   standalone: true,
   imports: [
+    GhCardComponent,
     GhContainerComponent,
-    GhExperienceTimelineComponent,
+    GhGridComponent,
     GhSectionComponent,
     GhSectionHeadingComponent,
     GhStackComponent,
   ],
-  templateUrl: './home-experience-preview-section.component.html',
-  styleUrls: ['./home-experience-preview-section.component.scss', './home-section-action.scss'],
+  templateUrl: './about-story-section.component.html',
+  styleUrl: './about-story-section.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeExperiencePreviewSectionComponent {
-  readonly content = input.required<PortfolioExperiencePreviewContent>();
+export class AboutStorySectionComponent {
+  readonly content = input.required<PortfolioProfessionalStoryContent>();
   readonly locale = input.required<PortfolioLocale>();
 
-  protected readonly viewAllAction = computed(() =>
-    resolvePortfolioAction(this.locale(), this.content().viewAllAction),
+  protected readonly experienceAction = computed(() =>
+    resolvePortfolioAction(this.locale(), this.content().experienceAction),
   );
 }

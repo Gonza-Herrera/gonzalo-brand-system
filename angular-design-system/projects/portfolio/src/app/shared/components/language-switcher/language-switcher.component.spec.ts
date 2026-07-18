@@ -16,6 +16,7 @@ const testRoutes: Routes = [
     canActivate: [portfolioLocaleGuard],
     children: [
       { path: '', pathMatch: 'full', component: EmptyRouteComponent },
+      { path: 'about', component: EmptyRouteComponent },
       { path: 'projects', component: EmptyRouteComponent },
     ],
   },
@@ -61,7 +62,7 @@ describe('LanguageSwitcherComponent', () => {
     const localeService = TestBed.inject(PortfolioLocaleService);
     fixture.detectChanges();
 
-    await router.navigateByUrl('/en/projects');
+    await router.navigateByUrl('/en/about');
     await fixture.whenStable();
     fixture.detectChanges();
 
@@ -72,7 +73,7 @@ describe('LanguageSwitcherComponent', () => {
     await fixture.whenStable();
     fixture.detectChanges();
 
-    expect(router.url).toBe('/es/projects');
+    expect(router.url).toBe('/es/about');
     expect(localeService.locale()).toBe('es');
     expect(localeService.storedLocale()).toBe('es');
     const currentSpanishLink = (

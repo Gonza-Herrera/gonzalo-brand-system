@@ -1,8 +1,8 @@
 import type { GhHeroAction } from 'gh-design-system';
 
-import type { PortfolioLinkContent } from '../../content/models/home-content.model';
+import type { PortfolioLinkContent } from '../../content/models/link-content.model';
 import type { PortfolioLocale } from '../../content/models/portfolio-locale.type';
-import { createLocalizedPath } from '../../core/routing/portfolio-route.utils';
+import { createLocalizedPath } from './portfolio-route.utils';
 
 export interface ResolvedPortfolioAction extends GhHeroAction {
   readonly href: string;
