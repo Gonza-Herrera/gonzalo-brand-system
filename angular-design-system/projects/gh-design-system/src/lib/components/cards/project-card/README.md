@@ -32,9 +32,11 @@ import { GhProjectCardComponent, type GhProjectCardData } from 'gh-design-system
 `GhProjectCardData` includes:
 
 - Required title and description.
+- Optional visible category label.
 - Readonly technologies.
-- Optional image and alternative text.
+- Optional image, alternative text and intrinsic dimensions.
 - Project and repository URLs.
+- Optional external-link flags for safe new-tab behavior.
 - Optional localized link labels.
 - Typed status and optional status label.
 - Featured state.
@@ -51,7 +53,9 @@ changing content order.
 
 ## Links
 
-Project and repository actions are native anchors. The component does not use
+Project and repository actions are native anchors. Set `projectExternal` or `repositoryExternal`
+for verified external destinations; the component then adds `_blank` with
+`rel="noopener noreferrer"`. The component does not use
 `GhButtonComponent` because Button currently renders only a native button and
 must not simulate navigation.
 
@@ -60,13 +64,14 @@ disabled in that case.
 
 ## Status and technologies
 
-Status reuses `GhBadgeComponent` with visible text. Technologies reuse static
-`GhTagComponent` instances and wrap responsively.
+Status and the optional category reuse `GhBadgeComponent` with visible text. Technologies reuse
+static `GhTagComponent` instances and wrap responsively.
 
 ## Images
 
-Images are optional, lazy-loaded and contained by stable responsive media
-regions. Consumers control alternative text.
+Images are optional, lazy-loaded and contained by stable responsive media regions. Consumers control
+alternative text and should provide `imageWidth` plus `imageHeight` to reserve the correct aspect
+ratio. The Card remains complete without media.
 
 ## Accessibility
 

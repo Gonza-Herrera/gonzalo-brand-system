@@ -14,11 +14,15 @@ export const STORY_PROJECT: GhProjectCardData = {
   title: 'GH Design System',
   description:
     'A token-driven Angular library for building accessible, responsive portfolio experiences.',
+  category: 'Design System',
   technologies: ['Angular', 'TypeScript', 'Sass', 'Storybook'],
   imageSrc: '/cards/project-design-system.svg',
   imageAlt: 'Abstract pastel shapes representing a design system',
+  imageWidth: 1200,
+  imageHeight: 675,
   projectUrl: '#project',
   repositoryUrl: 'https://github.com/',
+  repositoryExternal: true,
   status: 'completed',
   featured: true,
 };

@@ -62,6 +62,17 @@ The selected language is marked with `aria-current="page"`. Clicking a language 
 choice under `gh-portfolio-locale` when local storage is available, but the resulting URL remains the
 source of truth. Storage failures are ignored safely.
 
+Project slugs are stable route segments and are preserved in the same way:
+
+```text
+/en/projects/angular-design-system
+    ↓ select ES
+/es/projects/angular-design-system
+```
+
+EN/ES project-content validation requires slug parity, so a language change cannot intentionally
+target a missing localized project.
+
 ## Content structure and parity
 
 `PortfolioSiteContent` is the shared readonly contract. English and Spanish each provide a complete
@@ -98,6 +109,11 @@ localized title and description without duplicating description tags.
 
 The switcher exposes `hreflang` on its direct alternatives, but complete SEO work—canonical URLs,
 document-level alternate links, Open Graph, sitemap and structured data—is owned by PR 18.
+
+Project Detail is the one route whose basic metadata is selected by both `pageId` and `slug`. The
+central title strategy resolves the active locale's typed project title and short description; an
+unknown slug receives localized Project Not Found metadata without adding duplicate description
+tags.
 
 ## SSR and hydration implications
 

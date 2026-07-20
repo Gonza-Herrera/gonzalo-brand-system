@@ -9,11 +9,16 @@ export type GhProjectCardHeadingLevel = (typeof GH_PROJECT_CARD_HEADING_LEVELS)[
 export interface GhProjectCardData {
   readonly title: string;
   readonly description: string;
+  readonly category?: string;
   readonly technologies?: readonly string[];
   readonly imageSrc?: string;
   readonly imageAlt?: string;
+  readonly imageWidth?: number;
+  readonly imageHeight?: number;
   readonly projectUrl?: string;
   readonly repositoryUrl?: string;
+  readonly projectExternal?: boolean;
+  readonly repositoryExternal?: boolean;
   readonly projectLinkLabel?: string;
   readonly repositoryLinkLabel?: string;
   readonly status?: GhProjectStatus;

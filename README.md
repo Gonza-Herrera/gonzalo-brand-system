@@ -73,7 +73,8 @@ npm run start:portfolio
 Portfolio supports English and Spanish through localized routes such as `/en/projects` and
 `/es/projects`. Its global shell composes the public Navigation and Footer patterns, includes
 language and Light/Dark/System selectors, and keeps the URL locale authoritative for SSR and
-hydration. Home and About are complete; the localized About routes are `/en/about` and `/es/about`.
+hydration. Home, About, Experience and Projects are complete; Angular Design System has the first
+full bilingual Case Study at `/en/projects/angular-design-system` and its Spanish equivalent.
 See the [Portfolio guide](angular-design-system/projects/portfolio/README.md) and
 [internationalization contract](angular-design-system/docs/portfolio-internationalization.md).
 

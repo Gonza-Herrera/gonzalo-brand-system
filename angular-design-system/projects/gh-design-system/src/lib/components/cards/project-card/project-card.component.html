@@ -12,18 +12,27 @@
   >
     @if (project().imageSrc) {
       <div class="project-card__media">
-        <img [src]="project().imageSrc" [alt]="project().imageAlt ?? ''" loading="lazy" />
+        <img
+          [src]="project().imageSrc"
+          [alt]="project().imageAlt ?? ''"
+          [attr.width]="project().imageWidth ?? null"
+          [attr.height]="project().imageHeight ?? null"
+          loading="lazy"
+        />
       </div>
     }
 
     <div class="project-card__body">
       <header class="project-card__header">
-        @if (statusPresentation() || project().featured) {
+        @if (statusPresentation() || project().category || project().featured) {
           <div class="project-card__badges">
             @if (statusPresentation(); as status) {
               <gh-badge [variant]="status.variant">
                 {{ project().statusLabel ?? status.label }}
               </gh-badge>
+            }
+            @if (project().category) {
+              <gh-badge variant="neutral">{{ project().category }}</gh-badge>
             }
             @if (project().featured) {
               <gh-badge variant="accent" appearance="solid">{{ featuredLabel() }}</gh-badge>
@@ -53,12 +62,20 @@
       @if (hasLinks()) {
         <nav class="project-card__actions" [attr.aria-label]="linksLabel()">
           @if (project().projectUrl) {
-            <a [href]="project().projectUrl">
+            <a
+              [href]="project().projectUrl"
+              [attr.target]="project().projectExternal ? '_blank' : null"
+              [attr.rel]="project().projectExternal ? 'noopener noreferrer' : null"
+            >
               {{ project().projectLinkLabel ?? 'View project' }}
             </a>
           }
           @if (project().repositoryUrl) {
-            <a [href]="project().repositoryUrl">
+            <a
+              [href]="project().repositoryUrl"
+              [attr.target]="project().repositoryExternal ? '_blank' : null"
+              [attr.rel]="project().repositoryExternal ? 'noopener noreferrer' : null"
+            >
               {{ project().repositoryLinkLabel ?? 'View repository' }}
             </a>
           }

@@ -133,8 +133,8 @@ portfolio/src/app/
 │   └── services/            locale Signal and safe preference storage
 ├── content/
 │   ├── models/              readonly content contracts
-│   ├── en/                  English shell, complete Home/About/Experience and placeholder copy
-│   ├── es/                  equivalent Spanish structure
+│   ├── en/                  English shell, complete Home/About/Experience/Projects and placeholders
+│   ├── es/                  equivalent Spanish structure and Case Study
 │   └── registry             typed locale-to-content mapping
 ├── layout/
 │   └── portfolio-shell/     global Navigation, main and Footer
@@ -269,6 +269,55 @@ under a section `h2` can expose role headings as `h3`.
 Experience local styles are limited to editorial measure, Hero composition and token-based layout.
 Signals, pure mapping and the absence of browser APIs, generated IDs or dynamic dates keep direct
 `/en/experience` and `/es/experience` SSR output deterministic.
+
+Projects introduces a canonical localized project registry shared with Home:
+
+```text
+Localized project registry
+    ↓
+Project selectors and pure Project Card mapper
+    ├──→ Featured projects selector → Home preview
+    ↓
+Projects Grid
+    ↓
+Localized /projects/:slug route
+    ↓
+Project Detail resolver
+    ↓
+Case Study composition or concept overview
+    ↓
+Related Projects and Contact
+```
+
+Stable IDs, untranslated slugs, status/category values and editorial order live in the typed project
+model. English and Spanish registries keep structural parity while localizing all visible labels and
+narrative content. `selectFeaturedProjects` supplies Home with the same project object references;
+`selectRelatedProjects` ranks deterministic category/technology overlap; `mapProjectToCard` emits a
+localized detail URL only when the case study is available.
+
+The detail route is lazy loaded and receives `slug` through Angular's component input binding. The
+URL remains authoritative for locale and project identity, so the existing Language Switcher keeps
+the slug automatically. `PortfolioTitleStrategy` resolves localized project metadata and an explicit
+invalid-slug fallback without page-level Title or Meta services.
+
+Angular Design System is the only complete Case Study supported by repository evidence. The other
+three entries remain concepts and render a reduced overview when their stable URL is entered
+manually. The catalogue does not link to those incomplete details, publish unverified external URLs
+or render empty editorial sections. No filter is present because four items remain directly
+scannable.
+
+Project Detail explicitly composes typed Summary, Context, Problem, Goals, Constraints, Role,
+Approach, Architecture, Decisions, Implementation, Challenges, Results, Lessons and Next Steps. A
+small reusable text/list section covers the repeated editorial shape; the application does not use
+dynamic components, `any` or a generic CMS renderer. Architecture and approach diagrams use
+semantic ordered lists and token-driven CSS rather than a runtime diagram library.
+
+Projects required one backwards-compatible Design System extension: `GhProjectCardData.category`
+is an optional visible Badge, intrinsic image dimensions reserve media space, and explicit
+project/repository external flags provide safe new-tab attributes. Routing, locale, content,
+metadata and case-study structure remain Portfolio responsibilities. Pure transforms, authored order
+and the absence of browser globals, dynamic dates or random values keep `/en/projects`,
+`/es/projects` and all detail variants deterministic for SSR and hydration.
 
 Portfolio consumes TypeScript only from `gh-design-system` and Sass only from
 the public `styles` and `styles/foundations` exports. The application
@@ -410,9 +459,10 @@ of the route.
   integration, real Card/Tag/Badge composition within Layout Primitives and the
   complete Brand Patterns landing demonstration.
 - Portfolio tests cover its minimal root, bilingual shell, public Navigation
-  and Footer integration, the complete bilingual Home, About and Experience compositions,
+  and Footer integration, the complete bilingual Home, About, Experience and Projects compositions,
   section adapters, localized links, stable About/Experience IDs and translations, Experience
-  mapping and Home-preview consistency, all localized lazy routes,
+  mapping, project selection/mapping, Home-preview consistency, Project Detail and invalid slugs,
+  all localized lazy routes,
   redirects, invalid-locale fallback, exact active state, content parity, locale storage, both
   switchers, localized Not Found, document language, titles and basic descriptions.
 - Portfolio's production build validates server rendering, hydration wiring,

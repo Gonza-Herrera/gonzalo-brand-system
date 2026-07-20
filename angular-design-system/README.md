@@ -112,6 +112,11 @@ hydration. For example, use `/en/projects` or `/es/projects`. See
 and [`docs/portfolio-internationalization.md`](docs/portfolio-internationalization.md)
 for the locale contract.
 
+Projects includes stable localized detail routes such as
+`/en/projects/angular-design-system` and `/es/projects/angular-design-system`. The canonical typed
+project registry also drives Home's featured preview, and unknown slugs render an explicit localized
+Project Not Found state.
+
 Run Storybook for isolated visual and API documentation:
 
 ```bash

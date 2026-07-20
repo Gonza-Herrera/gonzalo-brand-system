@@ -9,7 +9,8 @@ const meta: Meta<GhProjectCardComponent> = {
   parameters: {
     docs: {
       description: {
-        component: 'Portfolio project summary with media, status, technologies, and safe links.',
+        component:
+          'Portfolio project summary with media, category, status, technologies, and safe links.',
       },
     },
   },
