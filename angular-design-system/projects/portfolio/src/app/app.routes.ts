@@ -42,9 +42,23 @@ export const routes: Routes = [
       },
       {
         path: 'projects',
-        data: { pageId: 'projects' },
-        loadComponent: () =>
-          import('./pages/projects/projects.page').then((module) => module.ProjectsPage),
+        children: [
+          {
+            path: '',
+            pathMatch: 'full',
+            data: { pageId: 'projects' },
+            loadComponent: () =>
+              import('./pages/projects/projects.page').then((module) => module.ProjectsPage),
+          },
+          {
+            path: ':slug',
+            data: { pageId: 'projects', projectDetail: true },
+            loadComponent: () =>
+              import('./pages/projects/project-detail/project-detail.page').then(
+                (module) => module.ProjectDetailPage,
+              ),
+          },
+        ],
       },
       {
         path: 'content',

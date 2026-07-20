@@ -2,8 +2,8 @@
 
 Portfolio copy is typed and kept separate from page templates. English and Spanish implement the
 same `PortfolioSiteContent` structure, including identity, shell, navigation, footer, complete Home,
-About and Experience pages, future page placeholders, Not Found and metadata. Stable IDs and paths remain
-locale-independent.
+About, Experience and Projects pages, future page placeholders, Project Not Found, global Not Found
+and metadata. Stable IDs, slugs and paths remain locale-independent.
 
 `portfolio-content.registry.ts` selects content by validated route locale. Compile-time contracts and
 parity tests prevent either locale from drifting. There is no HTTP-loaded JSON, external translation
@@ -86,6 +86,39 @@ The current canonical collections are intentionally empty because the repository
 contain an approved employer, role and date source. The localized verification notice is the real
 empty state, not a fictional placeholder. See the [Experience page guide](../pages/experience/README.md).
 
+## Projects content
+
+Projects has a canonical localized registry in `en/projects.content.ts` and
+`es/projects.content.ts`. `projects-content.model.ts` owns stable IDs, stable slugs, status and
+category unions, optional verified links/images and the typed case-study structure. Both locale
+collections contain the same four projects in the same editorial order.
+
+Home does not maintain project preview records. It applies `selectFeaturedProjects` to each locale's
+canonical registry, then uses the same `project-card.mapper.ts` as the Projects catalogue. The
+mapper emits a localized Case Study link only when `caseStudy.available` is true. The current Home
+preview therefore contains the Angular Design System and shares its exact status, description and
+technology data with Projects.
+
+Project IDs and slugs are:
+
+- `angular-design-system`
+- `ai-code-review-assistant`
+- `angular-accelerator-kit`
+- `ai-toolkit-for-developers`
+
+Current statuses are `in-progress` for Angular Design System and `concept` for the other entries.
+Current categories are `design-system`, `ai-engineering`, `angular` and `developer-tools`. Values
+are locale-independent; labels are localized. Links must have a real approved destination, images
+must reference an existing local asset with dimensions and localized alt text, and technologies
+must be supported by the repository.
+
+Only Angular Design System currently has `caseStudy.available: true`. Its EN/ES structure includes
+Summary, Context, Problem, Goals, Constraints, Role, Approach, Architecture, Decisions,
+Implementation, Challenges, Results, Lessons and Next Steps with stable nested IDs. Other project
+routes render concise concept overviews without fabricated implementation detail. See the
+[Projects guide](../pages/projects/README.md) and
+[case-study guidelines](../../../../../docs/portfolio-case-studies.md).
+
 ## Data integrity
 
 Content must come from an approved repository source. Do not invent companies, roles, dates,
@@ -93,16 +126,20 @@ metrics, publication status, email addresses or social URLs. Concepts must use t
 status and say that they are concepts in their descriptions. When source data is missing, keep the
 typed empty state and a source note beside the owning collection.
 
-The registry and page-specific tests protect stable ID order, required counts, valid project
-statuses, localized link targets, metadata completeness and the absence of placeholder domains.
+The registry and page-specific tests protect stable ID/slug order, required counts, valid project
+statuses and categories, localized link targets, case-study parity, metadata completeness and the
+absence of placeholder domains.
 
 ### Add a selected project
 
-1. Add one locale-independent ID to `PORTFOLIO_PROJECT_IDS`.
-2. Add the same ID at the same position in both Home locale files.
-3. Localize title, description, status label and link label while keeping the typed status stable.
-4. Include technologies and URLs only when the repository provides a reliable source.
-5. Run Portfolio content and section tests.
+1. Add one locale-independent ID and slug to the stable tuples in `projects-content.model.ts`.
+2. Add the same project at the same editorial position in both Projects locale files.
+3. Localize title, description, status label, category label and case-study copy while keeping
+   identity, status and category values stable.
+4. Include technologies, URLs and images only when the repository provides a reliable source.
+5. Set `featured: true` to derive the Home preview; never add a duplicate Home record.
+6. Enable a Case Study only when its complete structure is defensible in both locales.
+7. Run Portfolio content, selector, mapper, page, routing, metadata and SSR tests.
 
 ### Change featured content
 

@@ -3,7 +3,9 @@ import {
   mapPortfolioExperiencesToTimeline,
   selectFeaturedExperiences,
 } from '../utils/experience-card.mapper';
+import { selectFeaturedProjects } from '../utils/project-selectors';
 import { EN_EXPERIENCE_CONTENT } from './experience.content';
+import { EN_PROJECTS_CONTENT } from './projects.content';
 
 export const EN_HOME_CONTENT = {
   metaTitle: 'Gonzalo Herrera | Frontend Tech Lead & AI-Augmented Engineer',
@@ -100,44 +102,10 @@ export const EN_HOME_CONTENT = {
       featured: 'Featured',
       technologies: 'Technologies',
       links: 'Project links',
+      caseStudy: 'View case study',
+      repository: 'View repository',
     },
-    items: [
-      {
-        id: 'angular-design-system',
-        title: 'Angular Design System',
-        description:
-          'A reusable Angular Design System built around design tokens, accessibility, composition and brand consistency.',
-        status: 'in-progress',
-        statusLabel: 'In progress',
-        technologies: ['Angular', 'TypeScript', 'SCSS', 'Storybook', 'Design Tokens'],
-        featured: true,
-      },
-      {
-        id: 'ai-code-review-assistant',
-        title: 'AI Code Review Assistant',
-        description:
-          'A concept for reviewing pull requests against engineering standards and project-specific guidelines.',
-        status: 'concept',
-        statusLabel: 'Concept',
-      },
-      {
-        id: 'angular-accelerator-kit',
-        title: 'Angular Accelerator Kit',
-        description:
-          'A practical starter-kit concept for consistent Angular foundations, architecture and development standards.',
-        status: 'concept',
-        statusLabel: 'Concept',
-        technologies: ['Angular', 'TypeScript'],
-      },
-      {
-        id: 'ai-toolkit-for-developers',
-        title: 'AI Toolkit for Developers',
-        description:
-          'A concept for curating prompts, workflows and reusable resources for AI-augmented software development.',
-        status: 'concept',
-        statusLabel: 'Concept',
-      },
-    ],
+    items: selectFeaturedProjects(EN_PROJECTS_CONTENT.items),
   },
   experience: {
     eyebrow: 'Experience preview',

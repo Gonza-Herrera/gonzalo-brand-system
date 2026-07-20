@@ -2,6 +2,7 @@ import type { PortfolioSiteContent } from '../models/site-content.model';
 import { EN_ABOUT_CONTENT } from './about.content';
 import { EN_EXPERIENCE_CONTENT } from './experience.content';
 import { EN_HOME_CONTENT } from './home.content';
+import { EN_PROJECTS_CONTENT } from './projects.content';
 
 export const EN_SITE_CONTENT = {
   identity: {
@@ -55,14 +56,7 @@ export const EN_SITE_CONTENT = {
     home: EN_HOME_CONTENT,
     about: EN_ABOUT_CONTENT,
     experience: EN_EXPERIENCE_CONTENT,
-    projects: {
-      eyebrow: 'Projects',
-      title: 'Selected projects and case studies',
-      description: 'Representative product work, technical decisions and measurable outcomes.',
-      stage: 'Projects and case studies will be delivered in PR 15.',
-      metaTitle: 'Projects',
-      metaDescription: "Explore Gonzalo Herrera's selected engineering projects and case studies.",
-    },
+    projects: EN_PROJECTS_CONTENT,
     content: {
       eyebrow: 'Content',
       title: 'Articles, talks and practical insights',

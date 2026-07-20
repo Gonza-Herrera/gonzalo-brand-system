@@ -1,0 +1,27 @@
+<gh-section [id]="content().id" spacing="lg" [surface]="surface()">
+  <gh-container size="lg">
+    <gh-stack gap="lg">
+      <gh-section-heading
+        [title]="content().title"
+        [description]="content().description"
+        [headingLevel]="2"
+      />
+
+      @if (content().paragraphs?.length) {
+        <div class="project-text-section__copy">
+          @for (paragraph of content().paragraphs; track paragraph) {
+            <p>{{ paragraph }}</p>
+          }
+        </div>
+      }
+
+      @if (content().items?.length) {
+        <ul class="project-text-section__list">
+          @for (item of content().items; track item) {
+            <li>{{ item }}</li>
+          }
+        </ul>
+      }
+    </gh-stack>
+  </gh-container>
+</gh-section>

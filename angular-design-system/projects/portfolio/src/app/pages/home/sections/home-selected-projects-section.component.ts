@@ -6,15 +6,12 @@ import {
   GhSectionComponent,
   GhSectionHeadingComponent,
   GhStackComponent,
-  type GhProjectCardData,
 } from 'gh-design-system';
 
 import type { PortfolioSelectedProjectsContent } from '../../../content/models/home-content.model';
 import type { PortfolioLocale } from '../../../content/models/portfolio-locale.type';
-import {
-  resolvePortfolioAction,
-  resolvePortfolioHref,
-} from '../../../core/routing/portfolio-link.utils';
+import { mapProjectToCard } from '../../../content/utils/project-card.mapper';
+import { resolvePortfolioAction } from '../../../core/routing/portfolio-link.utils';
 
 @Component({
   selector: 'app-home-selected-projects-section',
@@ -39,17 +36,8 @@ export class HomeSelectedProjectsSectionComponent {
     resolvePortfolioAction(this.locale(), this.content().viewAllAction),
   );
   protected readonly projects = computed(() =>
-    this.content().items.map((item): GhProjectCardData => {
-      const { id: _id, projectLink, repositoryLink, ...project } = item;
-      return {
-        ...project,
-        projectUrl: projectLink ? resolvePortfolioHref(this.locale(), projectLink) : undefined,
-        projectLinkLabel: projectLink?.label,
-        repositoryUrl: repositoryLink
-          ? resolvePortfolioHref(this.locale(), repositoryLink)
-          : undefined,
-        repositoryLinkLabel: repositoryLink?.label,
-      };
-    }),
+    this.content().items.map((item) =>
+      mapProjectToCard(item, this.locale(), this.content().cardLabels),
+    ),
   );
 }

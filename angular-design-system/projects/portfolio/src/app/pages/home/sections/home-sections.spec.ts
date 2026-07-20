@@ -52,12 +52,15 @@ describe('Home sections', () => {
     fixture.detectChanges();
 
     const element = fixture.nativeElement as HTMLElement;
-    expect(element.querySelectorAll('gh-project-card')).toHaveLength(4);
-    expect(element.querySelectorAll('gh-project-card h3')).toHaveLength(4);
+    expect(element.querySelectorAll('gh-project-card')).toHaveLength(1);
+    expect(element.querySelectorAll('gh-project-card h3')).toHaveLength(1);
     expect(element.querySelector('gh-project-card article')?.getAttribute('aria-label')).toBe(
       'Proyecto: Angular Design System',
     );
     expect(element.querySelector<HTMLAnchorElement>('a[href="/es/projects"]')).not.toBeNull();
+    expect(
+      element.querySelector<HTMLAnchorElement>('a[href="/es/projects/angular-design-system"]'),
+    ).not.toBeNull();
     expect(element.textContent).toContain('Destacado');
   });
 
