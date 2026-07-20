@@ -66,14 +66,18 @@ export function getPageIdFromUrl(url: string): PortfolioPageId {
     return 'home';
   }
 
+  const pagePath = pageSegments[0];
+  const pageId = PORTFOLIO_NAVIGATION_PAGE_IDS.find((candidatePageId) => {
+    return PORTFOLIO_PAGE_PATHS[candidatePageId] === pagePath;
+  });
+
+  if (pageId === 'projects' && pageSegments.length === 2) {
+    return 'projects';
+  }
+
   if (pageSegments.length > 1) {
     return 'not-found';
   }
 
-  const pagePath = pageSegments[0];
-  return (
-    PORTFOLIO_NAVIGATION_PAGE_IDS.find((pageId) => {
-      return PORTFOLIO_PAGE_PATHS[pageId] === pagePath;
-    }) ?? 'not-found'
-  );
+  return pageId ?? 'not-found';
 }

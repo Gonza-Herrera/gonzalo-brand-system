@@ -4,12 +4,11 @@ import type {
   GhExperienceCardData,
   GhExperienceCardLabels,
   GhFeatureItem,
-  GhProjectCardData,
-  GhProjectStatus,
 } from 'gh-design-system';
 
 import type { PortfolioLinkContent } from './link-content.model';
 import type { PortfolioPageMetadata } from './page-content.model';
+import type { PortfolioProjectCardLabels, PortfolioProjectContent } from './projects-content.model';
 
 export const PORTFOLIO_HERO_HIGHLIGHT_IDS = [
   'frontend-engineering',
@@ -26,16 +25,8 @@ export const PORTFOLIO_EXPERTISE_IDS = [
   'mentoring-code-quality',
 ] as const;
 
-export const PORTFOLIO_PROJECT_IDS = [
-  'angular-design-system',
-  'ai-code-review-assistant',
-  'angular-accelerator-kit',
-  'ai-toolkit-for-developers',
-] as const;
-
 export type PortfolioHeroHighlightId = (typeof PORTFOLIO_HERO_HIGHLIGHT_IDS)[number];
 export type PortfolioExpertiseId = (typeof PORTFOLIO_EXPERTISE_IDS)[number];
-export type PortfolioProjectId = (typeof PORTFOLIO_PROJECT_IDS)[number];
 
 export interface PortfolioHighlightContent {
   readonly id: PortfolioHeroHighlightId;
@@ -65,36 +56,13 @@ export interface PortfolioHomeExpertiseContent {
   readonly items: readonly PortfolioExpertiseItemContent[];
 }
 
-export interface PortfolioProjectPreviewContent extends Omit<
-  GhProjectCardData,
-  | 'projectUrl'
-  | 'repositoryUrl'
-  | 'projectLinkLabel'
-  | 'repositoryLinkLabel'
-  | 'status'
-  | 'statusLabel'
-> {
-  readonly id: PortfolioProjectId;
-  readonly status: GhProjectStatus;
-  readonly statusLabel: string;
-  readonly projectLink?: PortfolioLinkContent;
-  readonly repositoryLink?: PortfolioLinkContent;
-}
-
-export interface PortfolioProjectCardLabels {
-  readonly projectPrefix: string;
-  readonly featured: string;
-  readonly technologies: string;
-  readonly links: string;
-}
-
 export interface PortfolioSelectedProjectsContent {
   readonly eyebrow: string;
   readonly title: string;
   readonly description: string;
   readonly viewAllAction: PortfolioLinkContent;
   readonly cardLabels: PortfolioProjectCardLabels;
-  readonly items: readonly PortfolioProjectPreviewContent[];
+  readonly items: readonly PortfolioProjectContent[];
 }
 
 export interface PortfolioExperiencePreviewItem extends GhExperienceCardData {

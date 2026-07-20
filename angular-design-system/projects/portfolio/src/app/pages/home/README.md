@@ -24,8 +24,9 @@ links and explicitly external URLs.
 - Stable IDs identify highlights, expertise areas and projects across locales.
 - Hero owns the page's only `h1`; section headings use `h2`; nested Project Cards and the Content
   Highlight use `h3`.
-- Project concepts are visibly labelled as concepts. The Angular Design System is labelled as work
-  in progress.
+- Home derives featured projects from the canonical Projects registry. The Angular Design System is
+  currently the only featured item, is labelled as work in progress and links to its localized Case
+  Study. The remaining concepts stay available in the full Projects catalogue.
 - No company, role or date source is approved yet. Experience therefore renders the public timeline
   with an empty collection and a localized verification notice instead of fabricated history.
 - Featured content links to the localized internal Content preview until a verified publication URL
@@ -51,9 +52,10 @@ link mapping.
 
 - To add or reorder expertise, use a stable ID in `PORTFOLIO_EXPERTISE_IDS`, then make the same
   ordered edit in both locale files. Keep the grid to six focused summary items.
-- To add or change a selected project, update `PORTFOLIO_PROJECT_IDS` and both locale collections.
-  Use a public `GhProjectStatus`, add only verified technologies and provide a link only when its
-  destination is real. Full detail and case-study behavior belongs to the Projects page.
+- To add or change a selected project, update the canonical EN/ES Projects registries and set
+  `featured: true`. Home applies `selectFeaturedProjects` and the shared Project Card mapper, so it
+  must never own a duplicate record. Use a public `GhProjectStatus`, add only verified technologies
+  and provide links only when their destinations are real.
 - To change featured content, keep the same item ID across locales and select either a localized
   internal `pageId` or a verified explicit external URL. Never use a placeholder publication URL.
 - To publish experience, add verified records to the canonical EN/ES Experience collections. Home
@@ -67,6 +69,5 @@ accessible label instead of `aria-hidden`. Status badges supplement visible stat
 does not depend on color. No image is used, so no unapproved portrait or missing alternative text is
 introduced.
 
-Home remains a strategic preview. Final Projects, Content and Contact pages, project details, case
-studies, complete SEO, analytics and forms are outside this page. PR 15 should implement Projects
-and Case Studies without expanding Home into a catalogue.
+Home remains a strategic preview. The full Projects catalogue and Case Study now live under their
+localized routes; Content, Contact, complete SEO, analytics and forms remain outside this page.

@@ -4,9 +4,10 @@
 from the technical Showcase and Storybook documentation: Portfolio owns real content, localized
 routing and product concerns; Showcase validates integration; Storybook documents reusable APIs.
 
-The current release includes the complete Portfolio Home, About and Experience pages on top of the
-global shell, routing and internationalization foundation. Projects, Content and Contact remain
-localized route placeholders for their dedicated follow-up PRs.
+The current release includes complete Portfolio Home, About, Experience and Projects pages plus the
+first full bilingual Case Study on top of the global shell, routing and internationalization
+foundation. Content and Contact remain localized route placeholders for their dedicated follow-up
+PRs.
 
 ## Run, build and test
 
@@ -32,15 +33,16 @@ disable Angular's host validation.
 English (`en`) is the default locale and Spanish (`es`) is the only other supported locale. Every
 public page has both route variants:
 
-| Page       | English          | Spanish          |
-| ---------- | ---------------- | ---------------- |
-| Home       | `/en`            | `/es`            |
-| About      | `/en/about`      | `/es/about`      |
-| Experience | `/en/experience` | `/es/experience` |
-| Projects   | `/en/projects`   | `/es/projects`   |
-| Content    | `/en/content`    | `/es/content`    |
-| Contact    | `/en/contact`    | `/es/contact`    |
-| Not Found  | `/en/**`         | `/es/**`         |
+| Page           | English              | Spanish              |
+| -------------- | -------------------- | -------------------- |
+| Home           | `/en`                | `/es`                |
+| About          | `/en/about`          | `/es/about`          |
+| Experience     | `/en/experience`     | `/es/experience`     |
+| Projects       | `/en/projects`       | `/es/projects`       |
+| Project detail | `/en/projects/:slug` | `/es/projects/:slug` |
+| Content        | `/en/content`        | `/es/content`        |
+| Contact        | `/en/contact`        | `/es/contact`        |
+| Not Found      | `/en/**`             | `/es/**`             |
 
 Routing is deterministic and safe for direct SSR requests:
 
@@ -71,7 +73,8 @@ PortfolioShellComponent and the lazy page render localized content
 `AppComponent` contains only the root `RouterOutlet`. The localized parent route renders
 `PortfolioShellComponent`; its standalone child pages are lazy-loaded with `loadComponent`. Stable
 `pageId` route data selects localized title and description metadata through
-`PortfolioTitleStrategy`.
+`PortfolioTitleStrategy`. Project detail additionally resolves the stable slug to localized title
+and description metadata, including an explicit invalid-slug result.
 
 ## Typed content
 
@@ -83,10 +86,14 @@ content/
 ├── en/home.content.ts              complete English Home
 ├── en/about.content.ts             complete English About
 ├── en/experience.content.ts        complete English Experience
+├── en/projects.content.ts          English project registry and Case Study
 ├── es/home.content.ts              equivalent Spanish Home
 ├── es/about.content.ts             equivalent Spanish About
 ├── es/experience.content.ts        equivalent Spanish Experience
+├── es/projects.content.ts          equivalent Spanish project registry and Case Study
 ├── utils/experience-card.mapper.ts shared pure Timeline and preview adapters
+├── utils/project-card.mapper.ts    shared pure Project Card adapter
+├── utils/project-selectors.ts      ordering, featured, related and slug helpers
 ├── en/site-content.ts              English shell and page registry
 ├── es/site-content.ts              Spanish shell and page registry
 └── portfolio-content.registry.ts   locale-to-content registry
@@ -127,7 +134,8 @@ path while changing locale.
 1. Hero with the official tagline, role, value proposition and two internal actions.
 2. Expertise with six areas spanning frontend, leadership, Angular, AI, developer experience and
    mentoring.
-3. Selected Projects with the Angular Design System plus three explicitly labelled concepts.
+3. Selected Projects derived from the canonical registry; Angular Design System is currently the
+   only featured item and links to its localized Case Study.
 4. Experience Preview derived from the full Experience source, with a verified-data empty state.
 5. Featured Content with an internal editorial preview.
 6. Contact Callout with the verified internal Contact route.
@@ -147,8 +155,7 @@ strings. See [Home architecture](src/app/pages/home/README.md).
 5. AI-Augmented Engineering.
 6. Core Principles.
 7. Technical Focus.
-8. Working Style.
-9. Contact Callout.
+8. Contact Callout.
 
 The page reuses Hero, Section Heading, Feature Grid and Contact Callout Brand Patterns plus public
 Container, Section, Stack, Grid, Cluster, Card and Tag APIs. Its content models use stable IDs and
@@ -183,8 +190,39 @@ Qualitative career content is rendered from approved brand and technical sources
 dates, role-specific responsibilities, achievements, technologies, current status and logos remain
 omitted rather than invented. See the [Experience architecture](src/app/pages/experience/README.md).
 
-The next product milestone is PR 15 — Projects and Case Studies. It should turn verified selected
-work into full bilingual project narratives without duplicating Home previews.
+## Projects and Case Studies
+
+`/en/projects` and `/es/projects` render the same four-entry editorial catalogue in stable `order`:
+
+1. `angular-design-system` — in progress; complete bilingual Case Study.
+2. `ai-code-review-assistant` — concept; concise overview only.
+3. `angular-accelerator-kit` — concept; concise overview only.
+4. `ai-toolkit-for-developers` — concept; concise overview only.
+
+The canonical localized registry owns IDs, slugs, status/category values, visible labels,
+technologies, optional links/images and case-study data. Pure selectors derive the editorial grid,
+related projects and the Home featured preview. A pure mapper adapts those records to the public
+`GhProjectCardData` API and exposes a localized detail link only for an available Case Study.
+
+Project Detail is a lazy route. Angular Design System renders Summary, Context, Problem, Goals,
+Constraints, Role, Approach, Architecture, Key Decisions, Implementation, Challenges, Results,
+Lessons, Next Steps, Related Projects and Contact. Empty optional values are not rendered. Valid
+concept slugs render an honest reduced overview, while an invalid slug renders localized Project
+Not Found content inside the shell without redirecting.
+
+Projects composes public Hero, Section Heading, Project Card, Card, Badge, Tag, Contact Callout and
+Layout APIs. The library gained only optional backwards-compatible Project Card category, intrinsic
+image dimensions and safe external-link fields; all case-study composition remains
+Portfolio-specific. The four-project catalogue does not include filters because the added control
+would not improve scanning at its current size.
+
+No project screenshot, client, date, metric, live demo or external repository link is published.
+Those fields remain absent because the approved content source does not substantiate them. See the
+[Projects architecture](src/app/pages/projects/README.md) and
+[case-study content rules](../../docs/portfolio-case-studies.md).
+
+The next product milestone is PR 16 — Content Hub. It should preserve the same typed, localized and
+evidence-based content boundary without introducing a CMS prematurely.
 
 ## Global shell
 
@@ -240,8 +278,10 @@ content.
 
 ## Current limits
 
-- Home, About and Experience are complete; Projects, Content and Contact remain localized
+- Home, About, Experience and Projects are complete; Content and Contact remain localized
   placeholders.
+- Angular Design System is the only complete Case Study; the other project entries remain explicitly
+  labelled concepts until implementation evidence exists.
 - Only English and Spanish are implemented.
 - Employer history awaits a verified source and is intentionally not invented on Experience or Home.
 - Social URLs await verified source data.

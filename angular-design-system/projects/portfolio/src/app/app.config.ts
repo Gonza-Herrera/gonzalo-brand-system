@@ -5,7 +5,12 @@ import {
   provideBrowserGlobalErrorListeners,
 } from '@angular/core';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
-import { provideRouter, TitleStrategy, withInMemoryScrolling } from '@angular/router';
+import {
+  provideRouter,
+  TitleStrategy,
+  withComponentInputBinding,
+  withInMemoryScrolling,
+} from '@angular/router';
 import { GhThemeService } from 'gh-design-system';
 
 import { routes } from './app.routes';
@@ -20,6 +25,7 @@ export const appConfig: ApplicationConfig = {
         anchorScrolling: 'enabled',
         scrollPositionRestoration: 'enabled',
       }),
+      withComponentInputBinding(),
     ),
     provideClientHydration(withEventReplay()),
     { provide: TitleStrategy, useClass: PortfolioTitleStrategy },

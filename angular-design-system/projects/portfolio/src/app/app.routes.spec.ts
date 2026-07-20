@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { Meta, Title } from '@angular/platform-browser';
-import { provideRouter, Router, TitleStrategy } from '@angular/router';
+import { provideRouter, Router, TitleStrategy, withComponentInputBinding } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { routes } from './app.routes';
@@ -13,7 +13,7 @@ describe('Portfolio routing', () => {
     await TestBed.configureTestingModule({
       imports: [AppComponent],
       providers: [
-        provideRouter(routes),
+        provideRouter(routes, withComponentInputBinding()),
         { provide: TitleStrategy, useClass: PortfolioTitleStrategy },
       ],
     }).compileComponents();
@@ -63,8 +63,8 @@ describe('Portfolio routing', () => {
       },
       {
         path: '/projects',
-        en: 'Selected projects and case studies',
-        es: 'Proyectos y casos de estudio seleccionados',
+        en: 'Building systems, tools and ideas for better software development.',
+        es: 'Construyendo sistemas, herramientas e ideas para desarrollar mejor software.',
       },
       {
         path: '/content',
@@ -113,6 +113,44 @@ describe('Portfolio routing', () => {
       'Página no encontrada',
     );
     expect(document.documentElement.lang).toBe('es');
+  });
+
+  it('lazy-loads localized project details and keeps Projects active', async () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const router = TestBed.inject(Router);
+    fixture.detectChanges();
+
+    for (const locale of ['en', 'es'] as const) {
+      await router.navigateByUrl(`/${locale}/projects/angular-design-system`);
+      await fixture.whenStable();
+      fixture.detectChanges();
+
+      const element = fixture.nativeElement as HTMLElement;
+      expect(element.querySelectorAll('h1')).toHaveLength(1);
+      expect(element.querySelector('h1')?.textContent).toContain('Angular Design System');
+      expect(
+        element.querySelector<HTMLAnchorElement>(`a[href="/${locale}/projects"]`),
+      ).not.toBeNull();
+      expect(
+        element.querySelectorAll('gh-navigation .gh-navigation__link[aria-current="page"]'),
+      ).toHaveLength(1);
+      expect(document.documentElement.lang).toBe(locale);
+    }
+  });
+
+  it('renders localized project-not-found content without redirecting', async () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const router = TestBed.inject(Router);
+    fixture.detectChanges();
+
+    await router.navigateByUrl('/es/projects/unknown-project');
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    expect(router.url).toBe('/es/projects/unknown-project');
+    expect((fixture.nativeElement as HTMLElement).querySelector('h1')?.textContent).toContain(
+      'Proyecto no encontrado',
+    );
   });
 
   it('falls back from an invalid locale while preserving the remaining route', async () => {
@@ -212,6 +250,41 @@ describe('Portfolio routing', () => {
     expect(meta.getTag('name="description"')?.content).toBe(
       'Conoce la experiencia de Gonzalo Herrera en ingeniería frontend, arquitectura Angular, liderazgo técnico y desarrollo de software asistido por IA.',
     );
+
+    await router.navigateByUrl('/en/projects');
+    await fixture.whenStable();
+    expect(title.getTitle()).toBe('Projects | Gonzalo Herrera');
+    expect(meta.getTag('name="description"')?.content).toBe(
+      'Explore projects by Gonzalo Herrera focused on Angular, design systems, developer experience and AI-augmented software engineering.',
+    );
+
+    await router.navigateByUrl('/es/projects');
+    await fixture.whenStable();
+    expect(title.getTitle()).toBe('Proyectos | Gonzalo Herrera');
+
+    await router.navigateByUrl('/en/projects/angular-design-system');
+    await fixture.whenStable();
+    expect(title.getTitle()).toBe('Angular Design System | Gonzalo Herrera');
+    expect(meta.getTag('name="description"')?.content).toContain(
+      'A reusable Angular Design System',
+    );
+
+    await router.navigateByUrl('/es/projects/angular-design-system');
+    await fixture.whenStable();
+    expect(title.getTitle()).toBe('Angular Design System | Gonzalo Herrera');
+    expect(meta.getTag('name="description"')?.content).toContain('Un Design System reutilizable');
+
+    await router.navigateByUrl('/en/projects/unknown-project');
+    await fixture.whenStable();
+    expect(title.getTitle()).toBe('Project not found | Gonzalo Herrera');
+    expect(meta.getTag('name="description"')?.content).toBe(
+      'The requested portfolio project could not be found.',
+    );
+
+    await router.navigateByUrl('/es/projects/unknown-project');
+    await fixture.whenStable();
+    expect(title.getTitle()).toBe('Proyecto no encontrado | Gonzalo Herrera');
+    expect(document.head.querySelectorAll('meta[name="description"]')).toHaveLength(1);
 
     await router.navigateByUrl('/es/unknown');
     await fixture.whenStable();

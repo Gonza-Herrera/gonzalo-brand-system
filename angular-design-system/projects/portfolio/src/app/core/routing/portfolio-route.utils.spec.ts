@@ -31,7 +31,9 @@ describe('Portfolio route utilities', () => {
     expect(getPageIdFromUrl('/en')).toBe('home');
     expect(getPageIdFromUrl('/es/about')).toBe('about');
     expect(getPageIdFromUrl('/en/projects')).toBe('projects');
-    expect(getPageIdFromUrl('/en/projects/unknown')).toBe('not-found');
+    expect(getPageIdFromUrl('/en/projects/angular-design-system')).toBe('projects');
+    expect(getPageIdFromUrl('/en/projects/unknown')).toBe('projects');
+    expect(getPageIdFromUrl('/en/projects/unknown/more')).toBe('not-found');
     expect(getPageIdFromUrl('/es/unknown')).toBe('not-found');
   });
 });

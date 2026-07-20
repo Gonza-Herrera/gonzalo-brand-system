@@ -94,6 +94,6 @@ localized routes remain stable.
 ## Limits and next milestone
 
 Employment records remain the one intentional content gap until an approved CV or equivalent source
-is added. Projects, case studies, advanced SEO, analytics and contact behavior are outside this page.
-PR 15 should implement Projects and Case Studies using verified project data and preserve the same
-typed, locale-aware content boundary.
+is added. Projects and the first Case Study now use the same typed, locale-aware content boundary;
+advanced SEO, analytics and contact behavior remain outside this page. PR 16 should implement the
+Content Hub without duplicating Experience data.

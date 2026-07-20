@@ -1,14 +1,11 @@
 import { GH_PROJECT_STATUSES } from 'gh-design-system';
 
 import { PORTFOLIO_CONTENT, getPortfolioContent } from './portfolio-content.registry';
-import {
-  PORTFOLIO_EXPERTISE_IDS,
-  PORTFOLIO_HERO_HIGHLIGHT_IDS,
-  PORTFOLIO_PROJECT_IDS,
-} from './models/home-content.model';
+import { PORTFOLIO_EXPERTISE_IDS, PORTFOLIO_HERO_HIGHLIGHT_IDS } from './models/home-content.model';
 import type { PortfolioLinkContent } from './models/link-content.model';
 import { PORTFOLIO_NAVIGATION_PAGE_IDS, PORTFOLIO_PAGE_IDS } from './models/page-content.model';
 import { PORTFOLIO_LOCALES } from './models/portfolio-locale.type';
+import { PORTFOLIO_PROJECT_IDS } from './models/projects-content.model';
 
 describe('Portfolio content registry', () => {
   it('keeps English and Spanish structurally complete and aligned', () => {
@@ -34,9 +31,11 @@ describe('Portfolio content registry', () => {
       expect(home.hero.title.length).toBeGreaterThan(0);
       expect(home.hero.highlights.map((item) => item.id)).toEqual(PORTFOLIO_HERO_HIGHLIGHT_IDS);
       expect(home.expertise.items.map((item) => item.id)).toEqual(PORTFOLIO_EXPERTISE_IDS);
-      expect(home.selectedProjects.items.map((item) => item.id)).toEqual(PORTFOLIO_PROJECT_IDS);
+      expect(content.pages.projects.items.map((item) => item.id)).toEqual(PORTFOLIO_PROJECT_IDS);
+      expect(home.selectedProjects.items.map((item) => item.id)).toEqual(['angular-design-system']);
       expect(home.expertise.items).toHaveLength(6);
-      expect(home.selectedProjects.items).toHaveLength(4);
+      expect(home.selectedProjects.items).toHaveLength(1);
+      expect(home.selectedProjects.items[0]).toBe(content.pages.projects.items[0]);
       expect(home.experience.items.length).toBeLessThanOrEqual(3);
       expect(home.selectedProjects.items.every((project) => project.statusLabel.length > 0)).toBe(
         true,

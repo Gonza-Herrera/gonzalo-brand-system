@@ -19,6 +19,7 @@ const testRoutes: Routes = [
       { path: 'about', component: EmptyRouteComponent },
       { path: 'experience', component: EmptyRouteComponent },
       { path: 'projects', component: EmptyRouteComponent },
+      { path: 'projects/:slug', component: EmptyRouteComponent },
     ],
   },
 ];
@@ -111,5 +112,20 @@ describe('LanguageSwitcherComponent', () => {
       'a[hreflang="es"]',
     );
     expect(spanishLink?.getAttribute('href')).toBe('/es/experience');
+  });
+
+  it('preserves a stable project slug when changing language', async () => {
+    const fixture = TestBed.createComponent(LanguageSwitcherComponent);
+    const router = TestBed.inject(Router);
+    fixture.detectChanges();
+
+    await router.navigateByUrl('/en/projects/angular-design-system');
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    const spanishLink = (fixture.nativeElement as HTMLElement).querySelector<HTMLAnchorElement>(
+      'a[hreflang="es"]',
+    );
+    expect(spanishLink?.getAttribute('href')).toBe('/es/projects/angular-design-system');
   });
 });

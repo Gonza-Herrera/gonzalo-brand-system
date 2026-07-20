@@ -2,6 +2,7 @@ import type { PortfolioSiteContent } from '../models/site-content.model';
 import { ES_ABOUT_CONTENT } from './about.content';
 import { ES_EXPERIENCE_CONTENT } from './experience.content';
 import { ES_HOME_CONTENT } from './home.content';
+import { ES_PROJECTS_CONTENT } from './projects.content';
 
 export const ES_SITE_CONTENT = {
   identity: {
@@ -57,14 +58,7 @@ export const ES_SITE_CONTENT = {
     home: ES_HOME_CONTENT,
     about: ES_ABOUT_CONTENT,
     experience: ES_EXPERIENCE_CONTENT,
-    projects: {
-      eyebrow: 'Proyectos',
-      title: 'Proyectos y casos de estudio seleccionados',
-      description: 'Trabajo de producto, decisiones técnicas y resultados representativos.',
-      stage: 'Los proyectos y casos de estudio se implementarán en el PR 15.',
-      metaTitle: 'Proyectos',
-      metaDescription: 'Explorá proyectos de ingeniería y casos de estudio de Gonzalo Herrera.',
-    },
+    projects: ES_PROJECTS_CONTENT,
     content: {
       eyebrow: 'Contenido',
       title: 'Artículos, charlas e ideas prácticas',
