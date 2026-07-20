@@ -1,4 +1,8 @@
-export type { GhExperienceCardData } from '../../components/cards/experience-card/experience-card.types';
+export type {
+  GhExperienceCardData,
+  GhExperienceCardHeadingLevel,
+  GhExperienceCardLabels,
+} from '../../components/cards/experience-card/experience-card.types';
 
 export const GH_EXPERIENCE_TIMELINE_ORIENTATIONS = ['vertical', 'compact'] as const;
 

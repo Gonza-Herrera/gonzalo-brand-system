@@ -3,7 +3,13 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
 import { GhBadgeComponent } from '../../badge/badge.component';
 import { GhTagComponent } from '../../tag/tag.component';
 import { GhCardComponent } from '../card/card.component';
-import type { GhExperienceCardData, GhExperienceWorkMode } from './experience-card.types';
+import {
+  GH_EXPERIENCE_CARD_DEFAULT_LABELS,
+  type GhExperienceCardData,
+  type GhExperienceCardHeadingLevel,
+  type GhExperienceCardLabels,
+  type GhExperienceWorkMode,
+} from './experience-card.types';
 
 const WORK_MODE_LABELS: Readonly<Record<GhExperienceWorkMode, string>> = {
   remote: 'Remote',
@@ -22,7 +28,12 @@ const WORK_MODE_LABELS: Readonly<Record<GhExperienceWorkMode, string>> = {
 export class GhExperienceCardComponent {
   readonly experience = input.required<GhExperienceCardData>();
   readonly highlighted = input(false);
+  readonly headingLevel = input<GhExperienceCardHeadingLevel>(2);
+  readonly labels = input<GhExperienceCardLabels>(GH_EXPERIENCE_CARD_DEFAULT_LABELS);
 
+  protected readonly ariaLabel = computed(
+    () => `${this.experience().role} ${this.labels().at} ${this.experience().company}`,
+  );
   protected readonly period = computed(() => {
     const experience = this.experience();
     return experience.endDate

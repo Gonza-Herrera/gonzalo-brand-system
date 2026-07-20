@@ -1,0 +1,21 @@
+<gh-section [id]="sectionId()" spacing="lg" [surface]="surface()">
+  <gh-container size="xl">
+    <gh-stack gap="xl">
+      <gh-section-heading
+        [eyebrow]="content().eyebrow"
+        [title]="content().title"
+        [description]="content().description"
+        [headingLevel]="2"
+      />
+
+      @if (content().items.length > 0) {
+        <gh-feature-grid
+          [features]="content().items"
+          [externalLinkLabel]="externalLinkLabel()"
+          [columns]="3"
+          variant="cards"
+        />
+      }
+    </gh-stack>
+  </gh-container>
+</gh-section>

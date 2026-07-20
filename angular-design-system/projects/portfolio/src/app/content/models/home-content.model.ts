@@ -2,6 +2,7 @@ import type {
   GhContentHighlightData,
   GhContentHighlightTypeLabels,
   GhExperienceCardData,
+  GhExperienceCardLabels,
   GhFeatureItem,
   GhProjectCardData,
   GhProjectStatus,
@@ -106,6 +107,7 @@ export interface PortfolioExperiencePreviewContent {
   readonly description: string;
   readonly verificationNotice: string;
   readonly viewAllAction: PortfolioLinkContent;
+  readonly cardLabels: GhExperienceCardLabels;
   readonly items: readonly PortfolioExperiencePreviewItem[];
 }
 

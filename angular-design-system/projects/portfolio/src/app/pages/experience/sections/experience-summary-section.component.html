@@ -1,0 +1,30 @@
+<gh-section id="career-summary" spacing="lg" surface="transparent">
+  <gh-container size="xl">
+    <gh-stack gap="xl">
+      <gh-section-heading
+        [eyebrow]="content().eyebrow"
+        [title]="content().title"
+        [headingLevel]="2"
+      />
+
+      <gh-stack class="experience-summary__copy" gap="md">
+        @for (paragraph of content().paragraphs; track paragraph) {
+          <p>{{ paragraph }}</p>
+        }
+      </gh-stack>
+
+      @if (content().focusAreas.length > 0) {
+        <gh-cluster
+          class="experience-summary__focuses"
+          role="list"
+          gap="sm"
+          [attr.aria-label]="content().focusAreasLabel"
+        >
+          @for (focusArea of content().focusAreas; track focusArea) {
+            <gh-tag role="listitem">{{ focusArea }}</gh-tag>
+          }
+        </gh-cluster>
+      }
+    </gh-stack>
+  </gh-container>
+</gh-section>

@@ -1,7 +1,12 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 import { GhExperienceCardComponent } from '../../components/cards/experience-card/experience-card.component';
-import type { GhExperienceCardData } from '../../components/cards/experience-card/experience-card.types';
+import {
+  GH_EXPERIENCE_CARD_DEFAULT_LABELS,
+  type GhExperienceCardData,
+  type GhExperienceCardHeadingLevel,
+  type GhExperienceCardLabels,
+} from '../../components/cards/experience-card/experience-card.types';
 import type { GhExperienceTimelineOrientation } from './experience-timeline.types';
 
 @Component({
@@ -22,4 +27,6 @@ export class GhExperienceTimelineComponent {
   readonly experiences = input.required<readonly GhExperienceCardData[]>();
   readonly orientation = input<GhExperienceTimelineOrientation>('vertical');
   readonly showConnector = input(true, { transform: booleanAttribute });
+  readonly cardHeadingLevel = input<GhExperienceCardHeadingLevel>(2);
+  readonly cardLabels = input<GhExperienceCardLabels>(GH_EXPERIENCE_CARD_DEFAULT_LABELS);
 }

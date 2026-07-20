@@ -14,11 +14,13 @@ import { GhExperienceTimelineComponent, type GhExperienceCardData } from 'gh-des
 
 ## Public API
 
-| Input           | Type                              | Default      |
-| --------------- | --------------------------------- | ------------ |
-| `experiences`   | `readonly GhExperienceCardData[]` | required     |
-| `orientation`   | `'vertical' \| 'compact'`         | `'vertical'` |
-| `showConnector` | `boolean`                         | `true`       |
+| Input              | Type                              | Default      |
+| ------------------ | --------------------------------- | ------------ |
+| `experiences`      | `readonly GhExperienceCardData[]` | required     |
+| `orientation`      | `'vertical' \| 'compact'`         | `'vertical'` |
+| `showConnector`    | `boolean`                         | `true`       |
+| `cardHeadingLevel` | `2 \| 3`                          | `2`          |
+| `cardLabels`       | `GhExperienceCardLabels`          | English      |
 
 There are no outputs or content slots.
 
@@ -41,7 +43,7 @@ The pattern renders an `ol`; each `li` contains a real `gh-experience-card`. Cur
 
 ## Internationalization and SSR
 
-Pass preformatted dates and localized `currentLabel` and `workModeLabel` through `GhExperienceCardData`. The component contains no browser APIs, generated dates or locale logic and is safe for SSR/hydration.
+Pass preformatted dates and localized `currentLabel` and `workModeLabel` through `GhExperienceCardData`. Pass localized internal headings through `cardLabels`; use `cardHeadingLevel="3"` when the Timeline sits below a page section `h2`. The component contains no browser APIs, generated dates or locale logic and is safe for SSR/hydration.
 
 ## Do / Don't / Limitations
 

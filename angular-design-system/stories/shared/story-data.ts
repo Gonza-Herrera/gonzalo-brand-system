@@ -46,6 +46,10 @@ export const STORY_EXPERIENCE: GhExperienceCardData = {
   workMode: 'remote',
   description:
     'Leading design-system architecture and accessible product experiences across Angular applications.',
+  responsibilities: [
+    'Shape reusable Angular foundations with product and engineering teams.',
+    'Review implementation decisions for maintainability and accessibility.',
+  ],
   achievements: [
     'Reduced duplicated UI code through composable primitives.',
     'Introduced automated accessibility checks in the delivery workflow.',

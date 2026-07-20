@@ -133,7 +133,7 @@ portfolio/src/app/
 │   └── services/            locale Signal and safe preference storage
 ├── content/
 │   ├── models/              readonly content contracts
-│   ├── en/                  English shell, complete Home/About and placeholder copy
+│   ├── en/                  English shell, complete Home/About/Experience and placeholder copy
 │   ├── es/                  equivalent Spanish structure
 │   └── registry             typed locale-to-content mapping
 ├── layout/
@@ -232,6 +232,43 @@ About does not extend the public Design System. Its local styles are limited to 
 editorial composition, and every visual value consumes the existing semantic token contract. The
 absence of browser APIs, runtime IDs and dynamic ordering keeps direct `/en/about` and `/es/about`
 SSR output deterministic.
+
+Experience adds a typed editorial adapter between localized professional content and the reusable
+Timeline/Card contract:
+
+```text
+Localized Experience content
+    ↓
+PortfolioLocaleService
+    ↓
+Pure Experience Card mapper
+    ↓
+Experience Timeline and Cards
+    ↓
+Home preview selector (first three, source order)
+    ↓
+Portfolio Experience and Home pages
+```
+
+`ExperiencePage` orchestrates Hero, Career Summary, Professional Timeline, Leadership Impact, Ways
+of Working, Capabilities, Career Direction and Contact. Stable IDs maintain EN/ES parity. The
+Timeline consumes dates exactly as authored and owns the semantic ordered list; no page code parses,
+sorts or calculates tenure.
+
+Home imports the same locale-specific professional collection and derives its preview through
+`selectFeaturedExperiences`. This keeps IDs, order and claims consistent without a second source of
+truth. The collections are currently empty because the repository has no approved employer, role or
+date source; both pages render localized verification copy instead of fictional records.
+
+Experience required one minimal backwards-compatible public-library extension:
+`GhExperienceCardData` now accepts responsibilities and a stable optional ID, while Card/Timeline
+accept localized internal labels and a `2 | 3` Card heading level. English defaults preserve existing
+consumers. Responsibilities and achievements remain separate semantic lists, and a Timeline placed
+under a section `h2` can expose role headings as `h3`.
+
+Experience local styles are limited to editorial measure, Hero composition and token-based layout.
+Signals, pure mapping and the absence of browser APIs, generated IDs or dynamic dates keep direct
+`/en/experience` and `/es/experience` SSR output deterministic.
 
 Portfolio consumes TypeScript only from `gh-design-system` and Sass only from
 the public `styles` and `styles/foundations` exports. The application
@@ -373,8 +410,9 @@ of the route.
   integration, real Card/Tag/Badge composition within Layout Primitives and the
   complete Brand Patterns landing demonstration.
 - Portfolio tests cover its minimal root, bilingual shell, public Navigation
-  and Footer integration, the complete bilingual Home and About compositions,
-  section adapters, localized links, stable About IDs and translations, all localized lazy routes,
+  and Footer integration, the complete bilingual Home, About and Experience compositions,
+  section adapters, localized links, stable About/Experience IDs and translations, Experience
+  mapping and Home-preview consistency, all localized lazy routes,
   redirects, invalid-locale fallback, exact active state, content parity, locale storage, both
   switchers, localized Not Found, document language, titles and basic descriptions.
 - Portfolio's production build validates server rendering, hydration wiring,

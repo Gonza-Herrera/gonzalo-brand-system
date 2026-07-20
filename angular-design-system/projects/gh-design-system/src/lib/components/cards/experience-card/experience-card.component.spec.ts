@@ -2,14 +2,28 @@ import { Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 
 import { GhExperienceCardComponent } from './experience-card.component';
-import type { GhExperienceCardData } from './experience-card.types';
+import {
+  GH_EXPERIENCE_CARD_DEFAULT_LABELS,
+  type GhExperienceCardData,
+  type GhExperienceCardHeadingLevel,
+  type GhExperienceCardLabels,
+} from './experience-card.types';
 
 @Component({
   standalone: true,
   imports: [GhExperienceCardComponent],
-  template: `<gh-experience-card [experience]="experience()" [highlighted]="true" />`,
+  template: `
+    <gh-experience-card
+      [experience]="experience()"
+      [highlighted]="true"
+      [headingLevel]="headingLevel()"
+      [labels]="labels()"
+    />
+  `,
 })
 class ExperienceCardTestHost {
+  readonly headingLevel = signal<GhExperienceCardHeadingLevel>(2);
+  readonly labels = signal<GhExperienceCardLabels>(GH_EXPERIENCE_CARD_DEFAULT_LABELS);
   readonly experience = signal<GhExperienceCardData>({
     role: 'Frontend Tech Lead',
     company: 'Demonstration Company',
@@ -19,6 +33,7 @@ class ExperienceCardTestHost {
     location: 'Argentina',
     workMode: 'remote',
     description: 'Demonstration content for leadership and frontend architecture.',
+    responsibilities: ['Build reusable components', 'Review pull requests'],
     achievements: ['Improved delivery clarity', 'Mentored frontend engineers'],
     technologies: ['Angular', 'Leadership', 'AI'],
     companyLogoSrc: '/company-logo.png',
@@ -51,7 +66,9 @@ describe('GhExperienceCardComponent', () => {
     expect(element.querySelector('.gh-badge--success')?.textContent).toContain('Current');
     expect(element.querySelector('.gh-badge--info')?.textContent).toContain('Remote');
     expect(element.querySelector('.experience-card__metadata')?.textContent).toContain('Argentina');
-    expect(element.querySelectorAll('.experience-card__content li')).toHaveLength(2);
+    expect(element.querySelectorAll('.experience-card__content li')).toHaveLength(4);
+    expect(element.textContent).toContain('Responsibilities');
+    expect(element.textContent).toContain('Key achievements');
     expect(element.querySelectorAll('gh-tag')).toHaveLength(3);
     expect(image?.getAttribute('loading')).toBe('lazy');
     expect(image?.alt).toBe('Demonstration Company logo');
@@ -74,5 +91,27 @@ describe('GhExperienceCardComponent', () => {
     expect(element.querySelector('.experience-card__content section')).toBeNull();
     expect(element.querySelector('.experience-card__technologies')).toBeNull();
     expect(element.querySelector('.experience-card__period')?.textContent).toContain('2021 — 2024');
+  });
+
+  it('localizes internal labels, aria copy and nested heading levels', () => {
+    const fixture = TestBed.createComponent(ExperienceCardTestHost);
+    fixture.componentInstance.headingLevel.set(3);
+    fixture.componentInstance.labels.set({
+      at: 'en',
+      responsibilities: 'Responsabilidades',
+      achievements: 'Aportes destacados',
+      technologies: 'Tecnologías',
+    });
+    fixture.detectChanges();
+
+    const element = fixture.nativeElement as HTMLElement;
+    expect(element.querySelector('h2')).toBeNull();
+    expect(element.querySelector('h3')?.textContent).toContain('Frontend Tech Lead');
+    expect(
+      [...element.querySelectorAll('h4')].map((heading) => heading.textContent?.trim()),
+    ).toEqual(['Responsabilidades', 'Aportes destacados', 'Tecnologías']);
+    expect(element.querySelector('article')?.getAttribute('aria-label')).toBe(
+      'Frontend Tech Lead en Demonstration Company',
+    );
   });
 });

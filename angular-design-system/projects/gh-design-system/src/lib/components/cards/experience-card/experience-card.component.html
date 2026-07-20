@@ -3,7 +3,7 @@
   padding="md"
   radius="lg"
   fullHeight
-  [ariaLabel]="experience().role + ' at ' + experience().company"
+  [ariaLabel]="ariaLabel()"
 >
   <header ghCardHeader class="experience-card__header">
     <div class="experience-card__identity">
@@ -18,7 +18,11 @@
       }
 
       <div>
-        <h2>{{ experience().role }}</h2>
+        @if (headingLevel() === 2) {
+          <h2>{{ experience().role }}</h2>
+        } @else {
+          <h3>{{ experience().role }}</h3>
+        }
         <p class="experience-card__company">{{ experience().company }}</p>
         <p class="experience-card__period">{{ period() }}</p>
       </div>
@@ -44,9 +48,28 @@
       <p>{{ experience().description }}</p>
     }
 
+    @if (experience().responsibilities?.length) {
+      <section [attr.aria-label]="labels().responsibilities">
+        @if (headingLevel() === 2) {
+          <h3>{{ labels().responsibilities }}</h3>
+        } @else {
+          <h4>{{ labels().responsibilities }}</h4>
+        }
+        <ul>
+          @for (responsibility of experience().responsibilities; track responsibility) {
+            <li>{{ responsibility }}</li>
+          }
+        </ul>
+      </section>
+    }
+
     @if (experience().achievements?.length) {
-      <section aria-label="Key achievements">
-        <h3>Key achievements</h3>
+      <section [attr.aria-label]="labels().achievements">
+        @if (headingLevel() === 2) {
+          <h3>{{ labels().achievements }}</h3>
+        } @else {
+          <h4>{{ labels().achievements }}</h4>
+        }
         <ul>
           @for (achievement of experience().achievements; track achievement) {
             <li>{{ achievement }}</li>
@@ -58,7 +81,11 @@
 
   @if (experience().technologies?.length) {
     <footer ghCardFooter class="experience-card__technologies">
-      <h3>Technologies</h3>
+      @if (headingLevel() === 2) {
+        <h3>{{ labels().technologies }}</h3>
+      } @else {
+        <h4>{{ labels().technologies }}</h4>
+      }
       <ul>
         @for (technology of experience().technologies; track technology) {
           <li>

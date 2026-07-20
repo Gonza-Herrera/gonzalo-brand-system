@@ -39,4 +39,34 @@ describe('GhExperienceTimelineComponent', () => {
     expect(element.classList).not.toContain('gh-experience-timeline--connector');
     expect(element.querySelectorAll('li')).toHaveLength(0);
   });
+
+  it('forwards localized Card labels and the requested heading level', () => {
+    const fixture = TestBed.createComponent(GhExperienceTimelineComponent);
+    fixture.componentRef.setInput('experiences', [
+      {
+        id: 'current-role',
+        role: 'Rol actual',
+        company: 'Empresa de ejemplo',
+        startDate: '2025',
+        responsibilities: ['Construir componentes reutilizables'],
+      },
+    ]);
+    fixture.componentRef.setInput('cardHeadingLevel', 3);
+    fixture.componentRef.setInput('cardLabels', {
+      at: 'en',
+      responsibilities: 'Responsabilidades',
+      achievements: 'Aportes destacados',
+      technologies: 'Tecnologías',
+    });
+    fixture.detectChanges();
+
+    const element = fixture.nativeElement as HTMLElement;
+    expect(element.querySelector('gh-experience-card h3')?.textContent).toContain('Rol actual');
+    expect(element.querySelector('gh-experience-card h4')?.textContent).toContain(
+      'Responsabilidades',
+    );
+    expect(element.querySelector('article')?.getAttribute('aria-label')).toBe(
+      'Rol actual en Empresa de ejemplo',
+    );
+  });
 });

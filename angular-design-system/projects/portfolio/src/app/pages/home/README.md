@@ -56,8 +56,8 @@ link mapping.
   destination is real. Full detail and case-study behavior belongs to the Projects page.
 - To change featured content, keep the same item ID across locales and select either a localized
   internal `pageId` or a verified explicit external URL. Never use a placeholder publication URL.
-- To publish experience, replace the empty arrays with at most three verified
-  `PortfolioExperiencePreviewItem` values in both locales and remove the corresponding content TODO.
+- To publish experience, add verified records to the canonical EN/ES Experience collections. Home
+  derives at most three entries with `selectFeaturedExperiences`; never add a separate preview list.
 
 ## Accessibility and limits
 
@@ -67,6 +67,6 @@ accessible label instead of `aria-hidden`. Status badges supplement visible stat
 does not depend on color. No image is used, so no unapproved portrait or missing alternative text is
 introduced.
 
-Home remains a strategic preview. Final About, Experience, Projects, Content and Contact pages,
-project details, case studies, complete SEO, analytics and forms are outside this page. PR 13 should
-replace the About placeholder without expanding Home into a biography.
+Home remains a strategic preview. Final Projects, Content and Contact pages, project details, case
+studies, complete SEO, analytics and forms are outside this page. PR 15 should implement Projects
+and Case Studies without expanding Home into a catalogue.

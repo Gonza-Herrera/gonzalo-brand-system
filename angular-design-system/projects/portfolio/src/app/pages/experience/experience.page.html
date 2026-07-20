@@ -1,10 +1,32 @@
-<gh-section spacing="lg">
-  <gh-container size="xl">
-    <gh-stack gap="md" align="start">
-      <p>{{ content().eyebrow }}</p>
-      <h1>{{ content().title }}</h1>
-      <p>{{ content().description }}</p>
-      <p>{{ content().stage }}</p>
-    </gh-stack>
-  </gh-container>
-</gh-section>
+<app-experience-hero [content]="content().hero" />
+
+<app-experience-summary-section [content]="content().summary" />
+
+<app-experience-timeline-section [content]="content().timeline" />
+
+<app-experience-feature-section
+  sectionId="leadership-impact"
+  [content]="content().leadership"
+  [externalLinkLabel]="externalLinkLabel()"
+  surface="transparent"
+/>
+
+<app-experience-feature-section
+  sectionId="ways-of-working"
+  [content]="content().waysOfWorking"
+  [externalLinkLabel]="externalLinkLabel()"
+  surface="subtle"
+/>
+
+<app-experience-capabilities-section [content]="content().capabilities" />
+
+<app-experience-career-direction-section
+  [content]="content().careerDirection"
+  [locale]="locale()"
+/>
+
+<app-experience-contact-section
+  [content]="content().contact"
+  [locale]="locale()"
+  [externalLinkLabel]="externalLinkLabel()"
+/>

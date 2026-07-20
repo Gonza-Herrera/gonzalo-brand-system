@@ -1,0 +1,33 @@
+<gh-section id="career-direction" spacing="lg" surface="accent">
+  <gh-container size="xl">
+    <gh-stack gap="xl">
+      <gh-section-heading
+        [eyebrow]="content().eyebrow"
+        [title]="content().title"
+        [headingLevel]="2"
+      >
+        <a
+          ghSectionHeadingAction
+          class="experience-direction__action"
+          [href]="projectsAction().href"
+        >
+          {{ projectsAction().label }}
+        </a>
+      </gh-section-heading>
+
+      <gh-stack class="experience-direction__copy" gap="md">
+        @for (paragraph of content().paragraphs; track paragraph) {
+          <p>{{ paragraph }}</p>
+        }
+      </gh-stack>
+
+      @if (content().points.length > 0) {
+        <gh-cluster role="list" gap="sm" [attr.aria-label]="content().pointsLabel">
+          @for (point of content().points; track point.id) {
+            <gh-tag role="listitem">{{ point.label }}</gh-tag>
+          }
+        </gh-cluster>
+      }
+    </gh-stack>
+  </gh-container>
+</gh-section>

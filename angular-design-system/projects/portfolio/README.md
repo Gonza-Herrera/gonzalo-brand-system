@@ -4,8 +4,8 @@
 from the technical Showcase and Storybook documentation: Portfolio owns real content, localized
 routing and product concerns; Showcase validates integration; Storybook documents reusable APIs.
 
-The current release includes the complete Portfolio Home and About experiences on top of the global
-shell, routing and internationalization foundation. Experience, Projects, Content and Contact remain
+The current release includes the complete Portfolio Home, About and Experience pages on top of the
+global shell, routing and internationalization foundation. Projects, Content and Contact remain
 localized route placeholders for their dedicated follow-up PRs.
 
 ## Run, build and test
@@ -82,8 +82,11 @@ content/
 ├── models/                         shared readonly contracts and stable IDs
 ├── en/home.content.ts              complete English Home
 ├── en/about.content.ts             complete English About
+├── en/experience.content.ts        complete English Experience
 ├── es/home.content.ts              equivalent Spanish Home
 ├── es/about.content.ts             equivalent Spanish About
+├── es/experience.content.ts        equivalent Spanish Experience
+├── utils/experience-card.mapper.ts shared pure Timeline and preview adapters
 ├── en/site-content.ts              English shell and page registry
 ├── es/site-content.ts              Spanish shell and page registry
 └── portfolio-content.registry.ts   locale-to-content registry
@@ -125,7 +128,7 @@ path while changing locale.
 2. Expertise with six areas spanning frontend, leadership, Angular, AI, developer experience and
    mentoring.
 3. Selected Projects with the Angular Design System plus three explicitly labelled concepts.
-4. Experience Preview with a verified-data empty state and a link to the future full page.
+4. Experience Preview derived from the full Experience source, with a verified-data empty state.
 5. Featured Content with an internal editorial preview.
 6. Contact Callout with the verified internal Contact route.
 
@@ -156,8 +159,32 @@ No portrait, employer history, dates, metrics or external profile links are show
 approved source for those values exists in the repository. See the
 [About architecture](src/app/pages/about/README.md) for maintenance and content rules.
 
-The next product milestone is PR 14 — Experience Page. It should add the verified professional
-timeline without duplicating About's qualitative narrative.
+## Experience page
+
+`/en/experience` and `/es/experience` render the same eight-section structure with localized copy:
+
+1. Experience Hero.
+2. Career Summary.
+3. Professional Timeline.
+4. Leadership and Engineering Impact.
+5. Ways of Working.
+6. Selected Capabilities.
+7. Career Direction with a localized Projects transition.
+8. Contact Callout with localized Contact and Projects actions.
+
+Experience reuses the public Hero, Section Heading, Feature Grid, Experience Timeline, Experience
+Card and Contact Callout patterns plus public layout and content primitives. A pure mapper adapts the
+Portfolio editorial model to `GhExperienceCardData`; a pure selector derives Home's first three
+records from the same canonical locale collection without sorting or mutation.
+
+The current repository has no approved employer, role or date source. The full Timeline and Home
+preview therefore share the same intentional empty collection and localized verification state.
+Qualitative career content is rendered from approved brand and technical sources, while companies,
+dates, role-specific responsibilities, achievements, technologies, current status and logos remain
+omitted rather than invented. See the [Experience architecture](src/app/pages/experience/README.md).
+
+The next product milestone is PR 15 — Projects and Case Studies. It should turn verified selected
+work into full bilingual project narratives without duplicating Home previews.
 
 ## Global shell
 
@@ -213,10 +240,10 @@ content.
 
 ## Current limits
 
-- Home and About are complete; Experience, Projects, Content and Contact remain localized
+- Home, About and Experience are complete; Projects, Content and Contact remain localized
   placeholders.
 - Only English and Spanish are implemented.
-- Experience details await a verified source and are intentionally not invented on Home.
+- Employer history awaits a verified source and is intentionally not invented on Experience or Home.
 - Social URLs await verified source data.
 - Canonical URLs, complete `hreflang`, Open Graph, sitemap, structured data and production domain
   configuration belong to PR 18.

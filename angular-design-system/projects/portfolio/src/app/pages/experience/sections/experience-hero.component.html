@@ -1,0 +1,18 @@
+<gh-hero
+  [eyebrow]="content().eyebrow"
+  [title]="content().title"
+  [description]="content().description"
+  [headingLevel]="1"
+  layout="split"
+  surface="gradient"
+  minHeight="auto"
+>
+  <aside ghHeroVisual class="experience-hero__visual" [attr.aria-label]="content().visualLabel">
+    <p class="experience-hero__visual-title">{{ content().visualTitle }}</p>
+    <ul class="experience-hero__highlights">
+      @for (highlight of content().highlights; track highlight.id) {
+        <li>{{ highlight.label }}</li>
+      }
+    </ul>
+  </aside>
+</gh-hero>
