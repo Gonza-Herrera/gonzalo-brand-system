@@ -1,4 +1,9 @@
 import type { PortfolioHomeContent } from '../models/home-content.model';
+import {
+  mapPortfolioExperiencesToTimeline,
+  selectFeaturedExperiences,
+} from '../utils/experience-card.mapper';
+import { ES_EXPERIENCE_CONTENT } from './experience.content';
 
 export const ES_HOME_CONTENT = {
   metaTitle: 'Gonzalo Herrera | Frontend Tech Lead & AI-Augmented Engineer',
@@ -151,8 +156,11 @@ export const ES_HOME_CONTENT = {
       pageId: 'experience',
       variant: 'ghost',
     },
-    // TODO(content): Agregar hasta tres roles recientes cuando empresas y fechas estén verificadas.
-    items: [],
+    cardLabels: ES_EXPERIENCE_CONTENT.timeline.labels.card,
+    items: mapPortfolioExperiencesToTimeline(
+      selectFeaturedExperiences(ES_EXPERIENCE_CONTENT.timeline.items),
+      ES_EXPERIENCE_CONTENT.timeline.labels,
+    ),
   },
   featuredContent: {
     eyebrow: 'Ideas y práctica',

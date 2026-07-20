@@ -1,5 +1,6 @@
 import type { PortfolioSiteContent } from '../models/site-content.model';
 import { EN_ABOUT_CONTENT } from './about.content';
+import { EN_EXPERIENCE_CONTENT } from './experience.content';
 import { EN_HOME_CONTENT } from './home.content';
 
 export const EN_SITE_CONTENT = {
@@ -53,14 +54,7 @@ export const EN_SITE_CONTENT = {
   pages: {
     home: EN_HOME_CONTENT,
     about: EN_ABOUT_CONTENT,
-    experience: {
-      eyebrow: 'Experience',
-      title: 'Engineering and leadership experience',
-      description: 'Roles, outcomes and teams supported throughout a frontend career.',
-      stage: 'The complete Experience page will be delivered in PR 14.',
-      metaTitle: 'Experience',
-      metaDescription: "Explore Gonzalo Herrera's engineering and leadership experience.",
-    },
+    experience: EN_EXPERIENCE_CONTENT,
     projects: {
       eyebrow: 'Projects',
       title: 'Selected projects and case studies',

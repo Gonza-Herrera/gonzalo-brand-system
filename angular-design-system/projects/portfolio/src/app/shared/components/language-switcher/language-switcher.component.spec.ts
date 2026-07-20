@@ -17,6 +17,7 @@ const testRoutes: Routes = [
     children: [
       { path: '', pathMatch: 'full', component: EmptyRouteComponent },
       { path: 'about', component: EmptyRouteComponent },
+      { path: 'experience', component: EmptyRouteComponent },
       { path: 'projects', component: EmptyRouteComponent },
     ],
   },
@@ -95,5 +96,20 @@ describe('LanguageSwitcherComponent', () => {
       'a[hreflang="en"]',
     );
     expect(englishLink?.getAttribute('href')).toBe('/en');
+  });
+
+  it('preserves the Experience route when changing language', async () => {
+    const fixture = TestBed.createComponent(LanguageSwitcherComponent);
+    const router = TestBed.inject(Router);
+    fixture.detectChanges();
+
+    await router.navigateByUrl('/en/experience');
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    const spanishLink = (fixture.nativeElement as HTMLElement).querySelector<HTMLAnchorElement>(
+      'a[hreflang="es"]',
+    );
+    expect(spanishLink?.getAttribute('href')).toBe('/es/experience');
   });
 });

@@ -23,9 +23,14 @@ import { GhExperienceCardComponent, type GhExperienceCardData } from 'gh-design-
 - Optional end date and current state.
 - Location and typed work mode.
 - Description.
-- Readonly achievements and technologies.
+- Readonly responsibilities, achievements and technologies.
 - Optional company logo and alternative text.
 - Optional labels for current state and work mode.
+
+The component also accepts `headingLevel` (`2` by default, or `3`) and a
+`GhExperienceCardLabels` object. The labels localize the relationship used by
+the Card's accessible name plus the Responsibilities, Achievements and
+Technologies headings.
 
 `highlighted` changes the visual Card variant without changing document
 semantics.
@@ -35,13 +40,13 @@ semantics.
 Start and end dates are rendered exactly as provided. The component does not
 parse dates, assume timezones or select a locale.
 
-English work-mode labels are safe defaults. Supply `workModeLabel` and
-`currentLabel` when localized copy is required.
+English work-mode and Card labels are safe defaults. Supply `workModeLabel`,
+`currentLabel` and `labels` when localized copy is required.
 
 ## Achievements and technologies
 
-Achievements render as a semantic list. Technologies render as static public
-`GhTagComponent` instances. Current and work-mode states reuse
+Responsibilities and achievements render as separate semantic lists.
+Technologies render as static public `GhTagComponent` instances. Current and work-mode states reuse
 `GhBadgeComponent`.
 
 ## Logos
@@ -53,6 +58,7 @@ logo contributes information or an empty string when decorative.
 
 - Role is the Card heading.
 - Company and period remain visible text.
-- Achievements use `<ul>` and `<li>`.
+- Responsibilities and achievements use separate `<ul>` and `<li>` groups.
+- `headingLevel="3"` keeps Card headings below a containing section `h2`.
 - Location and work mode are never represented by icon alone.
 - Optional content is removed cleanly rather than leaving empty regions.

@@ -13,7 +13,12 @@ const meta: Meta<GhExperienceTimelineComponent> = {
       },
     },
   },
-  args: { experiences: STORY_EXPERIENCES, orientation: 'vertical', showConnector: true },
+  args: {
+    experiences: STORY_EXPERIENCES,
+    orientation: 'vertical',
+    showConnector: true,
+    cardHeadingLevel: 2,
+  },
   argTypes: { orientation: { control: 'select', options: ['vertical', 'compact'] } },
 };
 
@@ -26,3 +31,14 @@ export const WithoutConnector: Story = { args: { showConnector: false } };
 export const SingleRole: Story = { args: { experiences: [STORY_EXPERIENCES[0]!] } };
 export const MultipleRoles: Story = { args: { experiences: STORY_EXPERIENCES } };
 export const Empty: Story = { args: { experiences: [] } };
+export const SpanishCardLabels: Story = {
+  args: {
+    cardHeadingLevel: 3,
+    cardLabels: {
+      at: 'en',
+      responsibilities: 'Responsabilidades',
+      achievements: 'Aportes destacados',
+      technologies: 'Tecnologías',
+    },
+  },
+};

@@ -25,7 +25,8 @@ gh-card {
     min-width: 0;
   }
 
-  h2 {
+  h2,
+  h3 {
     @include card.heading;
   }
 }
@@ -51,7 +52,9 @@ gh-card {
 .experience-card__period,
 .experience-card__content p,
 .experience-card__content h3,
-.experience-card__technologies h3 {
+.experience-card__content h4,
+.experience-card__technologies h3,
+.experience-card__technologies h4 {
   margin: 0;
 }
 
@@ -79,7 +82,8 @@ gh-card {
   display: grid;
   gap: var(--gh-space-sm);
 
-  h3 {
+  h3,
+  h4 {
     font-size: var(--gh-font-size-label);
   }
 
@@ -92,7 +96,8 @@ gh-card {
   }
 }
 
-.experience-card__technologies h3 {
+.experience-card__technologies h3,
+.experience-card__technologies h4 {
   font-size: var(--gh-font-size-label);
 }
 

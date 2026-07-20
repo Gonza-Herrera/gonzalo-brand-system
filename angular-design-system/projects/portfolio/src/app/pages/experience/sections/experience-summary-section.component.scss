@@ -1,0 +1,13 @@
+:host {
+  display: block;
+}
+
+.experience-summary__copy {
+  max-width: var(--gh-layout-reading-max);
+}
+
+.experience-summary__copy p {
+  margin: 0;
+  color: var(--gh-text-secondary);
+  line-height: var(--gh-line-height-body);
+}

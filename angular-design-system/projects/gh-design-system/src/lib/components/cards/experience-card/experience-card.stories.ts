@@ -10,7 +10,7 @@ const meta: Meta<GhExperienceCardComponent> = {
     docs: {
       description: {
         component:
-          'Professional experience summary with period, work mode, achievements, and technologies.',
+          'Professional experience summary with responsibilities, period, work mode, achievements, and technologies.',
       },
     },
   },
@@ -22,6 +22,7 @@ type Story = StoryObj<GhExperienceCardComponent>;
 
 export const CurrentRole: Story = {};
 export const WithAchievements: Story = {};
+export const WithResponsibilities: Story = {};
 export const WithTechnologies: Story = {};
 export const WithLogo: Story = {};
 export const Highlighted: Story = { args: { highlighted: true } };
@@ -42,6 +43,17 @@ export const CompactContent: Story = {
 };
 export const WithoutAchievements: Story = {
   args: { experience: { ...STORY_EXPERIENCE, achievements: undefined } },
+};
+export const SpanishLabels: Story = {
+  args: {
+    headingLevel: 3,
+    labels: {
+      at: 'en',
+      responsibilities: 'Responsabilidades',
+      achievements: 'Aportes destacados',
+      technologies: 'Tecnologías',
+    },
+  },
 };
 export const WithoutLogo: Story = {
   args: {

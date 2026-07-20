@@ -1,10 +1,15 @@
 <ol class="gh-experience-timeline__list">
   @for (
     experience of experiences();
-    track experience.role + experience.company + experience.startDate
+    track experience.id ?? experience.role + experience.company + experience.startDate
   ) {
     <li>
-      <gh-experience-card [experience]="experience" [highlighted]="experience.current ?? false" />
+      <gh-experience-card
+        [experience]="experience"
+        [highlighted]="experience.current ?? false"
+        [headingLevel]="cardHeadingLevel()"
+        [labels]="cardLabels()"
+      />
     </li>
   }
 </ol>

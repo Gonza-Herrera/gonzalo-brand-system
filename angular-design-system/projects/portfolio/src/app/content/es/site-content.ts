@@ -1,5 +1,6 @@
 import type { PortfolioSiteContent } from '../models/site-content.model';
 import { ES_ABOUT_CONTENT } from './about.content';
+import { ES_EXPERIENCE_CONTENT } from './experience.content';
 import { ES_HOME_CONTENT } from './home.content';
 
 export const ES_SITE_CONTENT = {
@@ -55,14 +56,7 @@ export const ES_SITE_CONTENT = {
   pages: {
     home: ES_HOME_CONTENT,
     about: ES_ABOUT_CONTENT,
-    experience: {
-      eyebrow: 'Experiencia',
-      title: 'Experiencia en ingeniería y liderazgo',
-      description: 'Roles, resultados y equipos acompañados a lo largo de una carrera frontend.',
-      stage: 'La página completa Experiencia se implementará en el PR 14.',
-      metaTitle: 'Experiencia',
-      metaDescription: 'Conocé la experiencia de Gonzalo Herrera en ingeniería y liderazgo.',
-    },
+    experience: ES_EXPERIENCE_CONTENT,
     projects: {
       eyebrow: 'Proyectos',
       title: 'Proyectos y casos de estudio seleccionados',

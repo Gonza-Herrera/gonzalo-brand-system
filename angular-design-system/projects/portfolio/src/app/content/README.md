@@ -1,8 +1,8 @@
 # Content
 
 Portfolio copy is typed and kept separate from page templates. English and Spanish implement the
-same `PortfolioSiteContent` structure, including identity, shell, navigation, footer, complete Home
-and About pages, future page placeholders, Not Found and metadata. Stable IDs and paths remain
+same `PortfolioSiteContent` structure, including identity, shell, navigation, footer, complete Home,
+About and Experience pages, future page placeholders, Not Found and metadata. Stable IDs and paths remain
 locale-independent.
 
 `portfolio-content.registry.ts` selects content by validated route locale. Compile-time contracts and
@@ -51,12 +51,47 @@ To change a principle or technical group:
 4. Update tests when the intentional contract changes.
 5. Run `npm run test:portfolio`.
 
+## Experience content
+
+Experience has a dedicated `PortfolioExperienceContent` contract and localized modules at
+`en/experience.content.ts` and `es/experience.content.ts`. It covers Hero, Career Summary,
+Professional Timeline, Leadership Impact, Ways of Working, Capabilities, Career Direction and
+Contact.
+
+The canonical professional collections live in those Experience modules. Home never owns a second
+history: it selects the first three records in source order and maps them to the same public Card
+model. `experience-card.mapper.ts` and `selectFeaturedExperiences` are pure, preserve input order and
+do not mutate records.
+
+Experience IDs, Leadership IDs, Ways-of-Working IDs, Capability Group IDs and Career Direction IDs
+must match between locales. Role titles, companies, dates, responsibilities, achievements and
+technologies are translated or adapted only when a verified source supports them; IDs never change
+with language.
+
+- `id`, `role`, `company`, `startDate`, `summary` and non-empty `responsibilities` are mandatory for
+  a professional record.
+- `endDate`, `location`, work mode, achievements, technologies, current state, logo and
+  confidentiality note are optional.
+- Dates are preformatted editorial strings. Never parse, sort, calculate duration or derive current
+  state from them.
+- Set `current: true` explicitly and provide localized visible labels.
+- Use only the public `remote`, `hybrid` and `onsite` work modes, and only when confirmed.
+- Keep responsibilities specific to the role. Keep achievements optional, qualitative and
+  verifiable; never invent metrics.
+- Associate technologies with a role only when the source confirms them.
+- For confidential work, omit protected names and use a truthful generic domain; never invent a
+  client or product.
+
+The current canonical collections are intentionally empty because the repository does not yet
+contain an approved employer, role and date source. The localized verification notice is the real
+empty state, not a fictional placeholder. See the [Experience page guide](../pages/experience/README.md).
+
 ## Data integrity
 
 Content must come from an approved repository source. Do not invent companies, roles, dates,
 metrics, publication status, email addresses or social URLs. Concepts must use the `concept` project
 status and say that they are concepts in their descriptions. When source data is missing, keep the
-typed empty state and a `TODO(content)` beside the owning collection.
+typed empty state and a source note beside the owning collection.
 
 The registry and page-specific tests protect stable ID order, required counts, valid project
 statuses, localized link targets, metadata completeness and the absence of placeholder domains.

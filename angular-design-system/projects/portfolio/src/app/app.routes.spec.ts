@@ -58,8 +58,8 @@ describe('Portfolio routing', () => {
       },
       {
         path: '/experience',
-        en: 'Engineering and leadership experience',
-        es: 'Experiencia en ingeniería y liderazgo',
+        en: 'Building frontend products, engineering systems and stronger teams.',
+        es: 'Construyendo productos frontend, sistemas de ingeniería y equipos más sólidos.',
       },
       {
         path: '/projects',
@@ -146,6 +146,17 @@ describe('Portfolio routing', () => {
     expect(activeLinks).toHaveLength(1);
     expect(activeLinks[0]?.textContent).toContain('Proyectos');
 
+    await router.navigateByUrl('/en/experience');
+    await fixture.whenStable();
+    fixture.detectChanges();
+    const activeExperienceLinks = (
+      fixture.nativeElement as HTMLElement
+    ).querySelectorAll<HTMLAnchorElement>(
+      'gh-navigation .gh-navigation__link[aria-current="page"]',
+    );
+    expect(activeExperienceLinks).toHaveLength(1);
+    expect(activeExperienceLinks[0]?.textContent).toContain('Experience');
+
     await router.navigateByUrl('/es/unknown');
     await fixture.whenStable();
     fixture.detectChanges();
@@ -187,6 +198,20 @@ describe('Portfolio routing', () => {
       'Conoce el enfoque de Gonzalo Herrera sobre ingeniería frontend, liderazgo técnico, arquitectura Angular y desarrollo de software asistido por IA.',
     );
     expect(document.head.querySelectorAll('meta[name="description"]')).toHaveLength(1);
+
+    await router.navigateByUrl('/en/experience');
+    await fixture.whenStable();
+    expect(title.getTitle()).toBe('Experience | Gonzalo Herrera');
+    expect(meta.getTag('name="description"')?.content).toBe(
+      'Explore Gonzalo Herrera’s experience in frontend engineering, Angular architecture, technical leadership and AI-augmented software development.',
+    );
+
+    await router.navigateByUrl('/es/experience');
+    await fixture.whenStable();
+    expect(title.getTitle()).toBe('Experiencia | Gonzalo Herrera');
+    expect(meta.getTag('name="description"')?.content).toBe(
+      'Conoce la experiencia de Gonzalo Herrera en ingeniería frontend, arquitectura Angular, liderazgo técnico y desarrollo de software asistido por IA.',
+    );
 
     await router.navigateByUrl('/es/unknown');
     await fixture.whenStable();
