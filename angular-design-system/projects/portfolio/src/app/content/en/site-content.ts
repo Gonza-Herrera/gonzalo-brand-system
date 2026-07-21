@@ -1,5 +1,6 @@
 import type { PortfolioSiteContent } from '../models/site-content.model';
 import { EN_ABOUT_CONTENT } from './about.content';
+import { EN_CONTENT_HUB_CONTENT } from './content-hub.content';
 import { EN_EXPERIENCE_CONTENT } from './experience.content';
 import { EN_HOME_CONTENT } from './home.content';
 import { EN_PROJECTS_CONTENT } from './projects.content';
@@ -57,15 +58,7 @@ export const EN_SITE_CONTENT = {
     about: EN_ABOUT_CONTENT,
     experience: EN_EXPERIENCE_CONTENT,
     projects: EN_PROJECTS_CONTENT,
-    content: {
-      eyebrow: 'Content',
-      title: 'Articles, talks and practical insights',
-      description: 'Frontend engineering, leadership and AI knowledge shared in practical formats.',
-      stage: 'The complete Content hub will be delivered in PR 16.',
-      metaTitle: 'Content',
-      metaDescription:
-        'Articles and practical insights about frontend engineering, leadership and AI.',
-    },
+    content: EN_CONTENT_HUB_CONTENT,
     contact: {
       eyebrow: 'Contact',
       title: 'Start a thoughtful conversation',

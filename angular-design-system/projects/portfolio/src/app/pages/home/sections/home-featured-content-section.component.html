@@ -7,15 +7,17 @@
         [description]="content().description"
         [headingLevel]="2"
       />
-      <gh-content-highlight
-        [content]="highlight()"
-        [typeLabels]="content().typeLabels"
-        [tagsLabel]="content().tagsLabel"
-        [externalLinkLabel]="externalLinkLabel()"
-        [headingLevel]="3"
-        orientation="horizontal"
-        surface="accent"
-      />
+      @if (highlight(); as featured) {
+        <gh-content-highlight
+          [content]="featured"
+          [typeLabels]="content().typeLabels"
+          [tagsLabel]="content().tagsLabel"
+          [externalLinkLabel]="externalLinkLabel()"
+          [headingLevel]="3"
+          orientation="horizontal"
+          surface="accent"
+        />
+      }
     </gh-stack>
   </gh-container>
 </gh-section>

@@ -16,7 +16,8 @@ gh-card {
   display: grid;
   gap: var(--gh-space-md);
 
-  h2 {
+  h2,
+  h3 {
     @include card.heading;
   }
 
@@ -31,8 +32,22 @@ gh-card {
   gap: var(--gh-space-sm);
 }
 
+.article-card__content {
+  display: grid;
+  gap: var(--gh-space-md);
+}
+
 .article-card__excerpt {
   @include card.body-copy;
+}
+
+.article-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gh-space-xs);
+  padding: 0;
+  margin: 0;
+  list-style: none;
 }
 
 .article-card__footer {

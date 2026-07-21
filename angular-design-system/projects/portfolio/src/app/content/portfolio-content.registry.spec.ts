@@ -51,7 +51,6 @@ describe('Portfolio content registry', () => {
         home.hero.secondaryAction,
         home.selectedProjects.viewAllAction,
         home.experience.viewAllAction,
-        home.featuredContent.item.link,
         ...home.contact.actions,
       ];
       expect(links.every((link) => link.label.length > 0)).toBe(true);
@@ -59,6 +58,9 @@ describe('Portfolio content registry', () => {
         true,
       );
       expect(JSON.stringify(home)).not.toContain('example.com');
+      expect(home.featuredContent.item).toBe(
+        content.pages.content.items.find((item) => item.featured && item.status === 'published'),
+      );
     }
 
     expect(PORTFOLIO_CONTENT.en.pages.about.hero.title).not.toBe(

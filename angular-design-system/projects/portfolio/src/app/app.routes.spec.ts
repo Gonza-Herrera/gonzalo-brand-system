@@ -68,8 +68,8 @@ describe('Portfolio routing', () => {
       },
       {
         path: '/content',
-        en: 'Articles, talks and practical insights',
-        es: 'Artículos, charlas e ideas prácticas',
+        en: 'Ideas, lessons and practical resources for building better software.',
+        es: 'Ideas, aprendizajes y recursos prácticos para construir mejor software.',
       },
       {
         path: '/contact',
@@ -150,6 +150,44 @@ describe('Portfolio routing', () => {
     expect(router.url).toBe('/es/projects/unknown-project');
     expect((fixture.nativeElement as HTMLElement).querySelector('h1')?.textContent).toContain(
       'Proyecto no encontrado',
+    );
+  });
+
+  it('lazy-loads localized content details, keeps Content active and preserves the slug', async () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const router = TestBed.inject(Router);
+    fixture.detectChanges();
+
+    for (const locale of ['en', 'es'] as const) {
+      await router.navigateByUrl(`/${locale}/content/angular-14-vs-angular-20`);
+      await fixture.whenStable();
+      fixture.detectChanges();
+
+      const element = fixture.nativeElement as HTMLElement;
+      expect(element.querySelectorAll('h1')).toHaveLength(1);
+      expect(element.querySelector('h1')?.textContent).toContain('Angular 14 vs Angular 20');
+      expect(
+        element.querySelector<HTMLAnchorElement>(`a[href="/${locale}/content"]`),
+      ).not.toBeNull();
+      expect(
+        element.querySelectorAll('gh-navigation .gh-navigation__link[aria-current="page"]'),
+      ).toHaveLength(1);
+      expect(document.documentElement.lang).toBe(locale);
+    }
+  });
+
+  it('renders localized content-not-found without redirecting', async () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const router = TestBed.inject(Router);
+    fixture.detectChanges();
+
+    await router.navigateByUrl('/es/content/unknown-content');
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    expect(router.url).toBe('/es/content/unknown-content');
+    expect((fixture.nativeElement as HTMLElement).querySelector('h1')?.textContent).toContain(
+      'Contenido no encontrado',
     );
   });
 
@@ -285,6 +323,25 @@ describe('Portfolio routing', () => {
     await fixture.whenStable();
     expect(title.getTitle()).toBe('Proyecto no encontrado | Gonzalo Herrera');
     expect(document.head.querySelectorAll('meta[name="description"]')).toHaveLength(1);
+
+    await router.navigateByUrl('/en/content');
+    await fixture.whenStable();
+    expect(title.getTitle()).toBe('Content | Gonzalo Herrera');
+    expect(meta.getTag('name="description"')?.content).toContain('AI-augmented development');
+
+    await router.navigateByUrl('/es/content/angular-14-vs-angular-20');
+    await fixture.whenStable();
+    expect(title.getTitle()).toBe(
+      'Angular 14 vs Angular 20: una revisión de arquitectura | Gonzalo Herrera',
+    );
+    expect(meta.getTag('name="description"')?.content).toContain('arquitectura standalone');
+
+    await router.navigateByUrl('/en/content/unknown-content');
+    await fixture.whenStable();
+    expect(title.getTitle()).toBe('Content not found | Gonzalo Herrera');
+    expect(meta.getTag('name="description"')?.content).toBe(
+      'The requested portfolio content could not be found.',
+    );
 
     await router.navigateByUrl('/es/unknown');
     await fixture.whenStable();

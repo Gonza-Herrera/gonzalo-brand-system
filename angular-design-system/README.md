@@ -117,6 +117,11 @@ Projects includes stable localized detail routes such as
 project registry also drives Home's featured preview, and unknown slugs render an explicit localized
 Project Not Found state.
 
+Content includes a published, filterable bilingual Hub at `/en/content` and `/es/content`, plus lazy
+typed detail routes such as `/en/content/angular-14-vs-angular-20`. The canonical content registry
+also drives Home's featured guide; unpublished records remain hidden and invalid slugs render an
+explicit localized Content Not Found state.
+
 Run Storybook for isolated visual and API documentation:
 
 ```bash

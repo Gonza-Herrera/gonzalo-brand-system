@@ -2,8 +2,8 @@
 
 Portfolio copy is typed and kept separate from page templates. English and Spanish implement the
 same `PortfolioSiteContent` structure, including identity, shell, navigation, footer, complete Home,
-About, Experience and Projects pages, future page placeholders, Project Not Found, global Not Found
-and metadata. Stable IDs, slugs and paths remain locale-independent.
+About, Experience, Projects and Content pages, typed Project/Content detail registries, localized Not
+Found states and metadata. Stable IDs, slugs and paths remain locale-independent.
 
 `portfolio-content.registry.ts` selects content by validated route locale. Compile-time contracts and
 parity tests prevent either locale from drifting. There is no HTTP-loaded JSON, external translation
@@ -130,6 +130,36 @@ The registry and page-specific tests protect stable ID/slug order, required coun
 statuses and categories, localized link targets, case-study parity, metadata completeness and the
 absence of placeholder domains.
 
+## Content Hub registry
+
+Content Hub summaries live in `en/content-hub.content.ts` and `es/content-hub.content.ts`. Stable
+IDs, untranslated slugs, types, categories, status, tags, source, featured state, detail availability
+and order remain structurally identical. Only `published` records enter the Hub, related-content
+selectors or Home Featured Content.
+
+Full internal bodies are split into `en/content-details.content.ts` and
+`es/content-details.content.ts`. `content-details.registry.ts` is imported only by the lazy detail
+page, so long editorial sections do not inflate the initial application bundle. The closed section
+union includes text, list, callout, code and comparison; templates never use arbitrary HTML,
+Markdown or `innerHTML`.
+
+Current IDs/slugs are `angular-14-vs-angular-20`, `lessons-from-code-reviews`,
+`building-ai-agents` and `signals-forms-vs-reactive-forms`. The first three are published internal
+items with bilingual detail. Signal Forms vs Reactive Forms is intentionally `planned`, has no
+detail and is excluded from production views.
+
+`content-selectors.ts` handles published ordering, featured selection, category filters, slug lookup
+and related content without mutation. `article-card.mapper.ts` maps the same registry records to
+public Article Card and Content Highlight APIs while keeping localized routing in Portfolio. Home
+selects its featured item from this canonical registry and holds the same object reference.
+
+Published internal records require `detailAvailable: true` plus both locale details. Published
+external records require a real approved HTTPS URL and do not get an internal route unless a detail
+also exists. No external URLs, dates, reading times, images or metrics are currently included because
+the repository does not substantiate them. Tests validate ID/slug uniqueness, closed values,
+published destinations, detail and section parity, related IDs, featured selection, non-empty tags
+and absence of placeholder URLs.
+
 ### Add a selected project
 
 1. Add one locale-independent ID and slug to the stable tuples in `projects-content.model.ts`.
@@ -143,6 +173,11 @@ absence of placeholder domains.
 
 ### Change featured content
 
-Update `featuredContent.item` in both locale files, preserving its ID. Use a `pageId` for an internal
-preview or an explicit external `href` only for an approved public publication. The Content page
-owns the future full catalogue.
+Set `featured: true` on the selected published Content Hub record and keep other published records
+false. Home uses `selectFeaturedContent` against each localized canonical registry; never add a
+second preview object. Update the Hub's localized link label and copy only when the editorial action
+changes.
+
+See the [Content Hub page guide](../pages/content/README.md) and
+[editorial guidelines](../../../../../docs/portfolio-content-guidelines.md) before adding or
+publishing a record.

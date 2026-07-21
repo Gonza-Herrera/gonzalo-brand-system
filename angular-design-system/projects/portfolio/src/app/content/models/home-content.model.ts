@@ -1,5 +1,4 @@
 import type {
-  GhContentHighlightData,
   GhContentHighlightTypeLabels,
   GhExperienceCardData,
   GhExperienceCardLabels,
@@ -7,6 +6,7 @@ import type {
 } from 'gh-design-system';
 
 import type { PortfolioLinkContent } from './link-content.model';
+import type { PortfolioContentItem } from './content-hub-content.model';
 import type { PortfolioPageMetadata } from './page-content.model';
 import type { PortfolioProjectCardLabels, PortfolioProjectContent } from './projects-content.model';
 
@@ -79,21 +79,14 @@ export interface PortfolioExperiencePreviewContent {
   readonly items: readonly PortfolioExperiencePreviewItem[];
 }
 
-export interface PortfolioContentHighlightItem extends Omit<
-  GhContentHighlightData,
-  'href' | 'linkLabel'
-> {
-  readonly id: string;
-  readonly link: PortfolioLinkContent;
-}
-
 export interface PortfolioFeaturedContent {
   readonly eyebrow: string;
   readonly title: string;
   readonly description: string;
   readonly typeLabels: GhContentHighlightTypeLabels;
   readonly tagsLabel: string;
-  readonly item: PortfolioContentHighlightItem;
+  readonly linkLabel: string;
+  readonly item: PortfolioContentItem;
 }
 
 export interface PortfolioHomeContactContent {

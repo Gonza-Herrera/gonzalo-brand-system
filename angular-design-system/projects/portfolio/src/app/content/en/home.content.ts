@@ -4,6 +4,8 @@ import {
   selectFeaturedExperiences,
 } from '../utils/experience-card.mapper';
 import { selectFeaturedProjects } from '../utils/project-selectors';
+import { selectFeaturedContent } from '../utils/content-selectors';
+import { EN_CONTENT_HUB_CONTENT } from './content-hub.content';
 import { EN_EXPERIENCE_CONTENT } from './experience.content';
 import { EN_PROJECTS_CONTENT } from './projects.content';
 
@@ -138,20 +140,8 @@ export const EN_HOME_CONTENT = {
       talk: 'Talk',
     },
     tagsLabel: 'Content topics',
-    item: {
-      id: 'beyond-chat-ai-agents',
-      type: 'article',
-      eyebrow: 'Editorial preview',
-      title: 'Beyond chat: building AI agents that do real work',
-      description:
-        'A practical look at moving from conversational AI to useful engineering workflows while keeping technical judgment in the loop.',
-      link: {
-        label: 'Explore content',
-        pageId: 'content',
-        variant: 'ghost',
-      },
-      tags: ['AI Agents', 'Engineering Workflows', 'Technical Judgment'],
-    },
+    linkLabel: 'Read the guide',
+    item: selectFeaturedContent(EN_CONTENT_HUB_CONTENT.items)!,
   },
   contact: {
     eyebrow: 'Start a conversation',

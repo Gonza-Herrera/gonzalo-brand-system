@@ -62,9 +62,23 @@ export const routes: Routes = [
       },
       {
         path: 'content',
-        data: { pageId: 'content' },
-        loadComponent: () =>
-          import('./pages/content/content.page').then((module) => module.ContentPage),
+        children: [
+          {
+            path: '',
+            pathMatch: 'full',
+            data: { pageId: 'content' },
+            loadComponent: () =>
+              import('./pages/content/content.page').then((module) => module.ContentPage),
+          },
+          {
+            path: ':slug',
+            data: { pageId: 'content', contentDetail: true },
+            loadComponent: () =>
+              import('./pages/content/content-detail/content-detail.page').then(
+                (module) => module.ContentDetailPage,
+              ),
+          },
+        ],
       },
       {
         path: 'contact',

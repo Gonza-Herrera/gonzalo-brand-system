@@ -14,7 +14,13 @@ const meta: Meta<GhArticleCardComponent> = {
       },
     },
   },
-  args: { article: STORY_ARTICLE },
+  args: {
+    article: STORY_ARTICLE,
+    articleLabel: 'Article',
+    featuredLabel: 'Featured',
+    topicsLabel: 'Topics',
+    externalLinkLabel: 'opens in a new tab',
+  },
 };
 
 export default meta;
@@ -30,6 +36,7 @@ export const External: Story = {
   args: { article: { ...STORY_ARTICLE, href: 'https://example.com/article', external: true } },
 };
 export const CompleteMetadata: Story = {};
+export const NestedHeading: Story = { args: { headingLevel: 3 } };
 export const MinimalMetadata: Story = {
   args: { article: { title: STORY_ARTICLE.title, href: STORY_ARTICLE.href } },
 };

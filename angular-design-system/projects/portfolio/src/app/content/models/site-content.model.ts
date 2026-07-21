@@ -1,4 +1,5 @@
 import type { PortfolioAboutContent } from './about-content.model';
+import type { PortfolioContentHubContent } from './content-hub-content.model';
 import type { PortfolioExperienceContent } from './experience-content.model';
 import type { PortfolioHomeContent } from './home-content.model';
 import type { PortfolioPageContent } from './page-content.model';
@@ -17,7 +18,7 @@ export interface PortfolioPagesContent {
   readonly about: PortfolioAboutContent;
   readonly experience: PortfolioExperienceContent;
   readonly projects: PortfolioProjectsContent;
-  readonly content: PortfolioPageContent;
+  readonly content: PortfolioContentHubContent;
   readonly contact: PortfolioPageContent;
   readonly 'not-found': PortfolioPageContent;
 }

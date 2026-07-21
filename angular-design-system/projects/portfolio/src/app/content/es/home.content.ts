@@ -4,6 +4,8 @@ import {
   selectFeaturedExperiences,
 } from '../utils/experience-card.mapper';
 import { selectFeaturedProjects } from '../utils/project-selectors';
+import { selectFeaturedContent } from '../utils/content-selectors';
+import { ES_CONTENT_HUB_CONTENT } from './content-hub.content';
 import { ES_EXPERIENCE_CONTENT } from './experience.content';
 import { ES_PROJECTS_CONTENT } from './projects.content';
 
@@ -143,20 +145,8 @@ export const ES_HOME_CONTENT = {
       talk: 'Charla',
     },
     tagsLabel: 'Temas del contenido',
-    item: {
-      id: 'beyond-chat-ai-agents',
-      type: 'article',
-      eyebrow: 'Preview editorial',
-      title: 'Más allá del chat: agentes de IA que hacen trabajo real',
-      description:
-        'Una mirada práctica al paso de la IA conversacional a flujos de ingeniería útiles, manteniendo siempre el criterio técnico.',
-      link: {
-        label: 'Explorar contenido',
-        pageId: 'content',
-        variant: 'ghost',
-      },
-      tags: ['Agentes de IA', 'Flujos de ingeniería', 'Criterio técnico'],
-    },
+    linkLabel: 'Leer la guía',
+    item: selectFeaturedContent(ES_CONTENT_HUB_CONTENT.items)!,
   },
   contact: {
     eyebrow: 'Iniciemos una conversación',

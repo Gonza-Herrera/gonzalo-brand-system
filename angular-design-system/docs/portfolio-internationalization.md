@@ -73,6 +73,18 @@ Project slugs are stable route segments and are preserved in the same way:
 EN/ES project-content validation requires slug parity, so a language change cannot intentionally
 target a missing localized project.
 
+Content slugs follow the same contract:
+
+```text
+/en/content/angular-14-vs-angular-20
+    ↓ select ES
+/es/content/angular-14-vs-angular-20
+```
+
+Only content with complete published detail in both locale registries receives an internal link.
+Planned or incomplete records stay out of production selectors, so the Language Switcher cannot
+target an intentionally missing translation.
+
 ## Content structure and parity
 
 `PortfolioSiteContent` is the shared readonly contract. English and Spanish each provide a complete
@@ -110,10 +122,13 @@ localized title and description without duplicating description tags.
 The switcher exposes `hreflang` on its direct alternatives, but complete SEO work—canonical URLs,
 document-level alternate links, Open Graph, sitemap and structured data—is owned by PR 18.
 
-Project Detail is the one route whose basic metadata is selected by both `pageId` and `slug`. The
-central title strategy resolves the active locale's typed project title and short description; an
-unknown slug receives localized Project Not Found metadata without adding duplicate description
-tags.
+Project and Content Detail select basic metadata by both `pageId` and `slug`. The central title
+strategy resolves the active locale's typed project title/description or content title/excerpt. An
+unknown project slug receives localized Project Not Found metadata without adding duplicate
+description tags. Content Detail follows the same centralized strategy.
+
+Unknown, planned or unavailable content receives localized Content Not Found metadata without
+creating another description tag.
 
 ## SSR and hydration implications
 
