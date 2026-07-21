@@ -133,8 +133,8 @@ portfolio/src/app/
 │   └── services/            locale Signal and safe preference storage
 ├── content/
 │   ├── models/              readonly content contracts
-│   ├── en/                  English shell, complete Home/About/Experience/Projects and placeholders
-│   ├── es/                  equivalent Spanish structure and Case Study
+│   ├── en/                  English shell, complete pages, projects and content details
+│   ├── es/                  equivalent Spanish structure and editorial parity
 │   └── registry             typed locale-to-content mapping
 ├── layout/
 │   └── portfolio-shell/     global Navigation, main and Footer
@@ -319,6 +319,45 @@ metadata and case-study structure remain Portfolio responsibilities. Pure transf
 and the absence of browser globals, dynamic dates or random values keep `/en/projects`,
 `/es/projects` and all detail variants deterministic for SSR and hydration.
 
+Content introduces a lightweight localized catalogue plus lazy editorial bodies shared with Home:
+
+```text
+Localized Content Hub registry
+    ↓
+Published content selectors
+    ├──→ Featured selector → Home Featured Content
+    ↓
+Content Highlight and Article Card Grid
+    ↓
+Localized /content/:slug route
+    ↓
+Lazy localized detail registry
+    ↓
+Typed editorial sections
+    ↓
+Related Content and Contact
+```
+
+Stable IDs and untranslated slugs identify four bilingual records. Three are published internal
+items; one planned forms comparison remains excluded from production. `selectPublishedContent`,
+`selectFeaturedContent`, `filterContent`, `findContentBySlug` and `selectRelatedContent` preserve
+authored order and never mutate the registry. The same featured registry object feeds Home and the
+Hub, removing the previous independent preview.
+
+Hub summaries remain part of localized site content, while the larger EN/ES detail registries are
+imported only by the lazy Content Detail page. This keeps the initial browser bundle within its
+budget without adding HTTP, Observables, a CMS or a Markdown runtime. The detail renderer handles a
+closed union of text, list, callout, code and comparison sections through explicit Angular control
+flow. It never uses `innerHTML`; code stays escaped and wide code/tables scroll locally.
+
+Content required one backwards-compatible Design System extension. Article Card now accepts
+optional content type, topics, intrinsic image dimensions and machine-readable publication date,
+plus localized labels and an `h2 | h3` heading input. Portfolio routing, locale, source validation,
+filters and editorial detail stay application-specific. No external item, publication date, reading
+time, image or metric is currently exposed because the approved repository source does not confirm
+one. Static ordering, locale-first lookup and the absence of browser/runtime values keep Hub and
+detail SSR output deterministic.
+
 Portfolio consumes TypeScript only from `gh-design-system` and Sass only from
 the public `styles` and `styles/foundations` exports. The application
 initializer instantiates the library's SSR-safe `GhThemeService`. The
@@ -458,13 +497,13 @@ of the route.
   mobile menu behavior, accessible theme selection, public component
   integration, real Card/Tag/Badge composition within Layout Primitives and the
   complete Brand Patterns landing demonstration.
-- Portfolio tests cover its minimal root, bilingual shell, public Navigation
-  and Footer integration, the complete bilingual Home, About, Experience and Projects compositions,
-  section adapters, localized links, stable About/Experience IDs and translations, Experience
-  mapping, project selection/mapping, Home-preview consistency, Project Detail and invalid slugs,
-  all localized lazy routes,
-  redirects, invalid-locale fallback, exact active state, content parity, locale storage, both
-  switchers, localized Not Found, document language, titles and basic descriptions.
+- Portfolio tests cover its minimal root, bilingual shell, public Navigation and Footer integration,
+  the complete bilingual Home, About, Experience, Projects and Content compositions, section
+  adapters, localized links, stable IDs/translations, Experience/Project/Content mapping and
+  selection, Home-preview consistency, Project/Content Detail and invalid slugs, accessible content
+  filters, typed editorial sections, all localized lazy routes, redirects, invalid-locale fallback,
+  exact active state, content parity, locale storage, both switchers, localized Not Found, document
+  language, titles and basic descriptions.
 - Portfolio's production build validates server rendering, hydration wiring,
   direct lazy-route compatibility and separate route chunks.
 - Storybook build-time checks compile every public story and MDX page against

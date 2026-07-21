@@ -15,7 +15,9 @@ import { GhArticleCardComponent, type GhArticleCardData } from 'gh-design-system
 const article: GhArticleCardData = {
   title: 'Reactive Forms vs Signal Forms',
   href: '/articles/forms',
+  type: 'Guide',
   category: 'Angular',
+  tags: ['Forms', 'Signals'],
   readingTime: '6 min read',
 };
 ```
@@ -30,9 +32,11 @@ const article: GhArticleCardData = {
 
 - Required `title` and `href`.
 - Optional `excerpt`.
-- Optional `imageSrc` and `imageAlt`.
-- Preformatted `publishedAt`.
-- `readingTime` and `category`.
+- Optional type and category labels.
+- Optional tags rendered with the public Tag component.
+- Optional `imageSrc`, `imageAlt` and intrinsic image dimensions.
+- Preformatted `publishedAt` with optional machine-readable `publishedAtDateTime`.
+- Optional `readingTime`.
 - `external` and `featured`.
 - Optional localized `linkLabel`.
 
@@ -62,10 +66,16 @@ locale, timezone and translation.
 
 Category and featured state reuse `GhBadgeComponent`.
 
+Type, category, featured, topic and external-link labels remain consumer-owned. Use the
+`articleLabel`, `featuredLabel`, `topicsLabel` and `externalLinkLabel` inputs when rendering a
+localized application. `headingLevel` accepts `2` or `3`, allowing a Card grid below an `h2`
+section heading without breaking the document outline.
+
 ## Accessibility
 
 - The composed root remains an `<article>`.
 - The title is the primary heading and link.
+- The heading level can match the surrounding page hierarchy.
 - External navigation is announced.
 - Image alternative text remains consumer-controlled.
 - The decorative CTA does not create a duplicate link target.

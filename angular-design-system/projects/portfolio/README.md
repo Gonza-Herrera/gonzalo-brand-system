@@ -4,10 +4,10 @@
 from the technical Showcase and Storybook documentation: Portfolio owns real content, localized
 routing and product concerns; Showcase validates integration; Storybook documents reusable APIs.
 
-The current release includes complete Portfolio Home, About, Experience and Projects pages plus the
-first full bilingual Case Study on top of the global shell, routing and internationalization
-foundation. Content and Contact remain localized route placeholders for their dedicated follow-up
-PRs.
+The current release includes complete Portfolio Home, About, Experience, Projects and Content Hub
+pages, the first full bilingual Project Case Study and three bilingual internal content details on
+top of the global shell, routing and internationalization foundation. Contact remains a localized
+route placeholder for its dedicated follow-up PR.
 
 ## Run, build and test
 
@@ -41,6 +41,7 @@ public page has both route variants:
 | Projects       | `/en/projects`       | `/es/projects`       |
 | Project detail | `/en/projects/:slug` | `/es/projects/:slug` |
 | Content        | `/en/content`        | `/es/content`        |
+| Content detail | `/en/content/:slug`  | `/es/content/:slug`  |
 | Contact        | `/en/contact`        | `/es/contact`        |
 | Not Found      | `/en/**`             | `/es/**`             |
 
@@ -73,8 +74,8 @@ PortfolioShellComponent and the lazy page render localized content
 `AppComponent` contains only the root `RouterOutlet`. The localized parent route renders
 `PortfolioShellComponent`; its standalone child pages are lazy-loaded with `loadComponent`. Stable
 `pageId` route data selects localized title and description metadata through
-`PortfolioTitleStrategy`. Project detail additionally resolves the stable slug to localized title
-and description metadata, including an explicit invalid-slug result.
+`PortfolioTitleStrategy`. Project and Content details additionally resolve their stable slug to a
+localized title and description, including explicit invalid-slug results.
 
 ## Typed content
 
@@ -87,13 +88,20 @@ content/
 ├── en/about.content.ts             complete English About
 ├── en/experience.content.ts        complete English Experience
 ├── en/projects.content.ts          English project registry and Case Study
+├── en/content-hub.content.ts       English lightweight Content Hub registry
+├── en/content-details.content.ts   English internal article bodies
 ├── es/home.content.ts              equivalent Spanish Home
 ├── es/about.content.ts             equivalent Spanish About
 ├── es/experience.content.ts        equivalent Spanish Experience
 ├── es/projects.content.ts          equivalent Spanish project registry and Case Study
+├── es/content-hub.content.ts       equivalent Spanish Content Hub registry
+├── es/content-details.content.ts   equivalent Spanish article bodies
 ├── utils/experience-card.mapper.ts shared pure Timeline and preview adapters
 ├── utils/project-card.mapper.ts    shared pure Project Card adapter
 ├── utils/project-selectors.ts      ordering, featured, related and slug helpers
+├── utils/content-selectors.ts      published, featured, filter, related and slug helpers
+├── utils/article-card.mapper.ts    Content to Article Card/Highlight adapter
+├── content-details.registry.ts     locale-to-detail registry loaded with Content Detail
 ├── en/site-content.ts              English shell and page registry
 ├── es/site-content.ts              Spanish shell and page registry
 └── portfolio-content.registry.ts   locale-to-content registry
@@ -221,8 +229,34 @@ Those fields remain absent because the approved content source does not substant
 [Projects architecture](src/app/pages/projects/README.md) and
 [case-study content rules](../../docs/portfolio-case-studies.md).
 
-The next product milestone is PR 16 — Content Hub. It should preserve the same typed, localized and
-evidence-based content boundary without introducing a CMS prematurely.
+## Content Hub
+
+`/en/content` and `/es/content` render a Hero, one featured item, accessible topic filters, the
+published Article Card grid, a defensive localized empty state and the Contact Callout. The
+canonical registry contains four stable entries:
+
+1. `angular-14-vs-angular-20` — published internal article with comparison and code sections.
+2. `lessons-from-code-reviews` — published internal leadership article.
+3. `building-ai-agents` — published internal guide and the single featured item.
+4. `signals-forms-vs-reactive-forms` — planned and intentionally absent from production views.
+
+The three available detail routes render typed text, list, callout, code and comparison sections,
+Key Takeaways, Tags, Related Content and Contact. Unknown, planned or unavailable slugs render
+localized Content Not Found without redirecting. Home Featured Content derives the same
+`building-ai-agents` registry object and links directly to its localized detail.
+
+All current destinations are internal. LinkedIn and other publication URLs, dates, reading times,
+images, downloads and metrics remain omitted because no approved source confirms them. Full bodies
+are bundled with the lazy Content Detail route instead of the initial Portfolio bundle. Content
+composes the public Hero, Content Highlight, Article Card, Badge, Tag, Card, Contact Callout and
+Layout APIs; one backwards-compatible Article Card extension adds optional type, topics, image
+dimensions, machine-readable date and localized labels/heading level.
+
+See the [Content Hub architecture](src/app/pages/content/README.md) and
+[editorial guidelines](../../docs/portfolio-content-guidelines.md).
+
+The next product milestone is PR 17 — Contact Page. It should keep Contact routes and personal
+destinations evidence-based; no email address or social URL should be invented.
 
 ## Global shell
 
@@ -278,13 +312,15 @@ content.
 
 ## Current limits
 
-- Home, About, Experience and Projects are complete; Content and Contact remain localized
-  placeholders.
+- Home, About, Experience, Projects and Content are complete; Contact remains a localized
+  placeholder.
 - Angular Design System is the only complete Case Study; the other project entries remain explicitly
   labelled concepts until implementation evidence exists.
 - Only English and Spanish are implemented.
 - Employer history awaits a verified source and is intentionally not invented on Experience or Home.
 - Social URLs await verified source data.
+- Content has no external publications, editorial dates, reading times or images until approved
+  source data exists; one planned forms comparison remains unpublished.
 - Canonical URLs, complete `hreflang`, Open Graph, sitemap, structured data and production domain
   configuration belong to PR 18.
 - The production SSR hostname must be approved and added to the host allowlist before deployment.

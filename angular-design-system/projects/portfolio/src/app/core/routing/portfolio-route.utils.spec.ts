@@ -34,6 +34,9 @@ describe('Portfolio route utilities', () => {
     expect(getPageIdFromUrl('/en/projects/angular-design-system')).toBe('projects');
     expect(getPageIdFromUrl('/en/projects/unknown')).toBe('projects');
     expect(getPageIdFromUrl('/en/projects/unknown/more')).toBe('not-found');
+    expect(getPageIdFromUrl('/es/content/angular-14-vs-angular-20')).toBe('content');
+    expect(getPageIdFromUrl('/en/content/unknown')).toBe('content');
+    expect(getPageIdFromUrl('/en/content/unknown/more')).toBe('not-found');
     expect(getPageIdFromUrl('/es/unknown')).toBe('not-found');
   });
 });

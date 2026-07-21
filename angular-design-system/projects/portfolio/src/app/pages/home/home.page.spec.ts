@@ -25,6 +25,9 @@ describe('HomePage', () => {
     expect(
       element.querySelector<HTMLAnchorElement>('a[href="/en/projects/angular-design-system"]'),
     ).not.toBeNull();
+    expect(
+      element.querySelector<HTMLAnchorElement>('a[href="/en/content/building-ai-agents"]'),
+    ).not.toBeNull();
   });
 
   it('reacts to locale changes with structural and link parity', () => {

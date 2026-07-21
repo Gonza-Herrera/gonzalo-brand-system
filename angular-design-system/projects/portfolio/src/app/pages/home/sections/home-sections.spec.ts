@@ -94,7 +94,9 @@ describe('Home sections', () => {
     expect(element.querySelector('gh-content-highlight h3')?.textContent).toContain(
       'Más allá del chat',
     );
-    expect(element.querySelector<HTMLAnchorElement>('a[href="/es/content"]')).not.toBeNull();
+    expect(
+      element.querySelector<HTMLAnchorElement>('a[href="/es/content/building-ai-agents"]'),
+    ).not.toBeNull();
   });
 
   it('renders the Contact Callout without unverified social links', async () => {

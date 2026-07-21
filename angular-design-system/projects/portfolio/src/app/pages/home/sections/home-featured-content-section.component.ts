@@ -10,7 +10,7 @@ import {
 
 import type { PortfolioFeaturedContent } from '../../../content/models/home-content.model';
 import type { PortfolioLocale } from '../../../content/models/portfolio-locale.type';
-import { resolvePortfolioHref } from '../../../core/routing/portfolio-link.utils';
+import { mapContentToHighlight } from '../../../content/utils/article-card.mapper';
 
 @Component({
   selector: 'app-home-featured-content-section',
@@ -30,13 +30,7 @@ export class HomeFeaturedContentSectionComponent {
   readonly locale = input.required<PortfolioLocale>();
   readonly externalLinkLabel = input.required<string>();
 
-  protected readonly highlight = computed((): GhContentHighlightData => {
-    const { id: _id, link, ...item } = this.content().item;
-    return {
-      ...item,
-      href: resolvePortfolioHref(this.locale(), link),
-      linkLabel: link.label,
-      external: link.external ?? false,
-    };
-  });
+  protected readonly highlight = computed((): GhContentHighlightData | undefined =>
+    mapContentToHighlight(this.content().item, this.locale(), this.content().linkLabel),
+  );
 }

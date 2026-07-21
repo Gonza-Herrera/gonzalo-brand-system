@@ -172,6 +172,10 @@ states. Specialized Cards consume typed data models and compose Badge and Tag
 without class inheritance. See the [`Card family`](src/lib/components/cards)
 documentation.
 
+Article Card supports optional content type, category, topics, intrinsic image dimensions,
+preformatted and machine-readable publication dates, external-link safety and a localized
+`h2 | h3` composition contract. Locale, routing and editorial status remain consumer concerns.
+
 Semantic tokens such as `--gh-text-primary`, `--gh-action-primary-background`,
 `--gh-status-success-background`, `--gh-tag-accent-selected-background` and
 `--gh-card-border-selected` are the supported styling contract for public

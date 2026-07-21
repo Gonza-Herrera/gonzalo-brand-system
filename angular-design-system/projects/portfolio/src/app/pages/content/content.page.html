@@ -1,10 +1,109 @@
-<gh-section spacing="lg">
+<gh-hero
+  [eyebrow]="content().hero.eyebrow"
+  [title]="content().hero.title"
+  [description]="content().hero.description"
+  layout="split"
+  surface="gradient"
+  [headingLevel]="1"
+>
+  <aside ghHeroVisual class="content-hero__visual" [attr.aria-label]="content().hero.visualLabel">
+    <p>{{ content().hero.visualTitle }}</p>
+    <ul>
+      @for (topic of content().hero.topics; track topic) {
+        <li>{{ topic }}</li>
+      }
+    </ul>
+  </aside>
+</gh-hero>
+
+@if (featured(); as featuredContent) {
+  <gh-section id="featured-content" spacing="lg" surface="primary">
+    <gh-container size="lg">
+      <gh-stack gap="xl">
+        <gh-section-heading
+          [eyebrow]="content().featured.eyebrow"
+          [title]="content().featured.title"
+          [description]="content().featured.description"
+          [headingLevel]="2"
+        />
+        <gh-content-highlight
+          [content]="featuredContent"
+          [typeLabels]="content().typeLabels"
+          [tagsLabel]="content().grid.cardLabels.topics"
+          [externalLinkLabel]="externalLinkLabel()"
+          [headingLevel]="3"
+          orientation="horizontal"
+          surface="accent"
+        />
+      </gh-stack>
+    </gh-container>
+  </gh-section>
+}
+
+<gh-section id="explore-content" spacing="lg" surface="subtle">
   <gh-container size="xl">
-    <gh-stack gap="md" align="start">
-      <p>{{ content().eyebrow }}</p>
-      <h1>{{ content().title }}</h1>
-      <p>{{ content().description }}</p>
-      <p>{{ content().stage }}</p>
+    <gh-stack gap="xl">
+      <gh-section-heading
+        [eyebrow]="content().filters.eyebrow"
+        [title]="content().filters.title"
+        [description]="content().filters.description"
+        [headingLevel]="2"
+      />
+
+      <div class="content-filters" role="group" [attr.aria-label]="content().filters.label">
+        @for (filter of filters(); track filter.id) {
+          <button
+            type="button"
+            [class.content-filter--active]="activeFilter() === filter.id"
+            [attr.aria-pressed]="activeFilter() === filter.id"
+            (click)="setFilter(filter.id)"
+          >
+            {{ filter.label }}
+          </button>
+        }
+      </div>
+
+      <gh-stack gap="lg">
+        <gh-section-heading
+          [eyebrow]="content().grid.eyebrow"
+          [title]="content().grid.title"
+          [description]="content().grid.description"
+          [headingLevel]="2"
+        />
+
+        @if (visibleCards().length) {
+          <gh-grid [columns]="3" minItemSize="md" gap="lg">
+            @for (view of visibleCards(); track view.item.id) {
+              <gh-article-card
+                [article]="view.card"
+                [headingLevel]="3"
+                [articleLabel]="content().grid.cardLabels.article"
+                [featuredLabel]="content().grid.cardLabels.featured"
+                [topicsLabel]="content().grid.cardLabels.topics"
+                [externalLinkLabel]="content().grid.cardLabels.externalLink"
+              />
+            }
+          </gh-grid>
+        } @else {
+          <div class="content-empty" role="status">
+            <h3>{{ content().empty.title }}</h3>
+            <p>{{ content().empty.description }}</p>
+            <button type="button" (click)="setFilter('all')">
+              {{ content().empty.resetLabel }}
+            </button>
+          </div>
+        }
+      </gh-stack>
     </gh-stack>
   </gh-container>
 </gh-section>
+
+<gh-contact-callout
+  [eyebrow]="content().contact.eyebrow"
+  [title]="content().contact.title"
+  [description]="content().contact.description"
+  [actions]="contactActions()"
+  [externalLinkLabel]="externalLinkLabel()"
+  alignment="center"
+  surface="gradient"
+/>

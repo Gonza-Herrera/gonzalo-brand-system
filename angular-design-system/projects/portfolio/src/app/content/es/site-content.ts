@@ -1,5 +1,6 @@
 import type { PortfolioSiteContent } from '../models/site-content.model';
 import { ES_ABOUT_CONTENT } from './about.content';
+import { ES_CONTENT_HUB_CONTENT } from './content-hub.content';
 import { ES_EXPERIENCE_CONTENT } from './experience.content';
 import { ES_HOME_CONTENT } from './home.content';
 import { ES_PROJECTS_CONTENT } from './projects.content';
@@ -59,15 +60,7 @@ export const ES_SITE_CONTENT = {
     about: ES_ABOUT_CONTENT,
     experience: ES_EXPERIENCE_CONTENT,
     projects: ES_PROJECTS_CONTENT,
-    content: {
-      eyebrow: 'Contenido',
-      title: 'Artículos, charlas e ideas prácticas',
-      description: 'Conocimiento práctico sobre frontend, liderazgo e inteligencia artificial.',
-      stage: 'El hub completo de Contenido se implementará en el PR 16.',
-      metaTitle: 'Contenido',
-      metaDescription:
-        'Artículos e ideas prácticas sobre ingeniería frontend, liderazgo e inteligencia artificial.',
-    },
+    content: ES_CONTENT_HUB_CONTENT,
     contact: {
       eyebrow: 'Contacto',
       title: 'Iniciemos una conversación con propósito',

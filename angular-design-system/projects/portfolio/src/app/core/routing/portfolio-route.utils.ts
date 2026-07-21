@@ -75,6 +75,10 @@ export function getPageIdFromUrl(url: string): PortfolioPageId {
     return 'projects';
   }
 
+  if (pageId === 'content' && pageSegments.length === 2) {
+    return 'content';
+  }
+
   if (pageSegments.length > 1) {
     return 'not-found';
   }
