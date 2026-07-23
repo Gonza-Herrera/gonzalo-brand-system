@@ -93,6 +93,31 @@ describe('Portfolio routing', () => {
     }
   });
 
+  it('uses client-side routing when a primary navigation tab is selected', async () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const router = TestBed.inject(Router);
+    fixture.detectChanges();
+
+    await router.navigateByUrl('/en');
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    const aboutLink = (fixture.nativeElement as HTMLElement).querySelector<HTMLAnchorElement>(
+      'gh-navigation a[href="/en/about"]',
+    )!;
+    const event = new MouseEvent('click', { bubbles: true, cancelable: true });
+    aboutLink.dispatchEvent(event);
+
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    expect(event.defaultPrevented).toBe(true);
+    expect(router.url).toBe('/en/about');
+    expect((fixture.nativeElement as HTMLElement).querySelector('h1')?.textContent).toContain(
+      'Engineering, leadership and better ways of building software.',
+    );
+  });
+
   it('renders a localized Not Found page inside the shell', async () => {
     const fixture = TestBed.createComponent(AppComponent);
     const router = TestBed.inject(Router);

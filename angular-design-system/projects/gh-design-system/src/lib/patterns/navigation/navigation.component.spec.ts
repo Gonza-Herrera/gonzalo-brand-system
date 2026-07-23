@@ -7,13 +7,22 @@ import { GhNavigationComponent } from './navigation.component';
   standalone: true,
   imports: [GhNavigationComponent],
   template: `
-    <gh-navigation brand="Brand" menuId="test-menu" [items]="items" [showThemeControl]="true">
+    <gh-navigation
+      brand="Brand"
+      menuId="test-menu"
+      [items]="items"
+      [showThemeControl]="true"
+      [interceptInternalNavigation]="interceptInternalNavigation"
+      (internalNavigate)="navigations.push($event)"
+    >
       <a ghNavigationActions href="/contact">Contact</a>
       <span ghNavigationThemeControl>Theme</span>
     </gh-navigation>
   `,
 })
 class NavigationTestHost {
+  interceptInternalNavigation = true;
+  readonly navigations: string[] = [];
   readonly items = [
     { label: 'Home', href: '/', active: true },
     { label: 'External', href: 'https://example.com', external: true },
@@ -58,5 +67,69 @@ describe('GhNavigationComponent', () => {
     element.querySelector<HTMLAnchorElement>('nav a')?.click();
     fixture.detectChanges();
     expect(toggle?.getAttribute('aria-expanded')).toBe('false');
+  });
+
+  it('emits intercepted internal navigation while preserving the semantic href', () => {
+    const fixture = TestBed.createComponent(NavigationTestHost);
+    fixture.detectChanges();
+    const element = fixture.nativeElement as HTMLElement;
+    const homeLink = element.querySelector<HTMLAnchorElement>('a[href="/"]')!;
+    const event = new MouseEvent('click', { bubbles: true, cancelable: true });
+
+    homeLink.dispatchEvent(event);
+
+    expect(event.defaultPrevented).toBe(true);
+    expect(fixture.componentInstance.navigations).toEqual(['/']);
+    expect(homeLink.getAttribute('href')).toBe('/');
+  });
+
+  it('preserves native navigation when interception is disabled', () => {
+    const fixture = TestBed.createComponent(NavigationTestHost);
+    fixture.componentInstance.interceptInternalNavigation = false;
+    fixture.detectChanges();
+    const homeLink = (fixture.nativeElement as HTMLElement).querySelector<HTMLAnchorElement>(
+      'a[href="/"]',
+    )!;
+    const event = new MouseEvent('click', { bubbles: true, cancelable: true });
+
+    homeLink.dispatchEvent(event);
+
+    expect(event.defaultPrevented).toBe(false);
+    expect(fixture.componentInstance.navigations).toEqual([]);
+  });
+
+  it('does not intercept external links or modified internal clicks', () => {
+    const fixture = TestBed.createComponent(NavigationTestHost);
+    fixture.detectChanges();
+    const element = fixture.nativeElement as HTMLElement;
+    const externalLink = element.querySelector<HTMLAnchorElement>('a[href="https://example.com"]')!;
+    const homeLink = element.querySelector<HTMLAnchorElement>('a[href="/"]')!;
+    const externalEvent = new MouseEvent('click', { bubbles: true, cancelable: true });
+    const modifiedEvent = new MouseEvent('click', {
+      bubbles: true,
+      cancelable: true,
+      ctrlKey: true,
+    });
+
+    externalLink.dispatchEvent(externalEvent);
+    homeLink.dispatchEvent(modifiedEvent);
+
+    expect(externalEvent.defaultPrevented).toBe(false);
+    expect(modifiedEvent.defaultPrevented).toBe(false);
+    expect(fixture.componentInstance.navigations).toEqual([]);
+  });
+
+  it('intercepts the brand link through the same navigation contract', () => {
+    const fixture = TestBed.createComponent(NavigationTestHost);
+    fixture.detectChanges();
+    const brandLink = (fixture.nativeElement as HTMLElement).querySelector<HTMLAnchorElement>(
+      '.gh-navigation__brand',
+    )!;
+    const event = new MouseEvent('click', { bubbles: true, cancelable: true });
+
+    brandLink.dispatchEvent(event);
+
+    expect(event.defaultPrevented).toBe(true);
+    expect(fixture.componentInstance.navigations).toEqual(['/']);
   });
 });

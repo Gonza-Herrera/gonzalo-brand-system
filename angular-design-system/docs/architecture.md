@@ -100,6 +100,11 @@ Experience Card; Content Highlight composes Card, Badge, Tag, Stack and Cluster.
 Patterns contain no business logic, personal copy, router dependency or
 viewport JavaScript.
 
+Navigation preserves semantic anchors and remains router-agnostic. Consumers may opt into its
+`internalNavigate` output to intercept unmodified primary clicks and delegate authored URLs to their
+application router. Portfolio uses this contract to avoid full-document reloads while modified and
+external clicks keep native behavior.
+
 ## Library style responsibilities
 
 ```text

@@ -290,8 +290,9 @@ advanced SEO, canonical and alternate links, Open Graph, structured data and sit
 
 The shell composes only public Design System APIs:
 
-- `gh-navigation` renders the brand, localized native links, exact active-page state, mobile menu,
-  language actions and theme control.
+- `gh-navigation` renders the brand, localized semantic links, exact active-page state, mobile menu,
+  language actions and theme control. Portfolio opts into its router-agnostic internal-navigation
+  output and resolves those URLs through Angular Router, preventing full-document reloads.
 - `gh-footer` renders localized identity, primary links, tagline and a static copyright.
 - `LanguageSwitcherComponent` uses accessible EN/ES links and preserves the current path, query and
   fragment. A manual choice is stored under `gh-portfolio-locale` when browser storage is available.
@@ -317,7 +318,9 @@ storage. It is intentionally small and portfolio-specific.
 ## Accessibility and responsive behavior
 
 - The localized skip link is the first focusable element and targets `main#main-content`.
-- Header, navigation, main and footer use semantic landmarks and native links.
+- Header, navigation, main and footer use semantic landmarks and real links. Header links preserve
+  their `href` while primary in-app clicks use Angular Router; modified and external clicks retain
+  native browser behavior.
 - Each route owns exactly one visible `h1`.
 - Exact active navigation uses `aria-current="page"`; the language switcher separately marks the
   current locale.

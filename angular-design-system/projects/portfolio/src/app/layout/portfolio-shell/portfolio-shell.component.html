@@ -12,6 +12,8 @@
     [navigationLabel]="content().shell.navigation.label"
     [externalLinkLabel]="content().shell.navigation.externalLinkLabel"
     [showThemeControl]="true"
+    [interceptInternalNavigation]="true"
+    (internalNavigate)="navigateInternally($event)"
     menuId="portfolio-navigation-menu"
     [sticky]="true"
   >
