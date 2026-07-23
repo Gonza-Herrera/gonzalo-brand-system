@@ -290,14 +290,14 @@ describe('Portfolio routing', () => {
     await fixture.whenStable();
     expect(title.getTitle()).toBe('Experience | Gonzalo Herrera');
     expect(meta.getTag('name="description"')?.content).toBe(
-      'Explore Gonzalo Herrera’s experience in frontend engineering, Angular architecture, technical leadership and AI-augmented software development.',
+      'Explore Gonzalo Herrera’s professional journey across frontend engineering, technical leadership and software project coordination.',
     );
 
     await router.navigateByUrl('/es/experience');
     await fixture.whenStable();
     expect(title.getTitle()).toBe('Experiencia | Gonzalo Herrera');
     expect(meta.getTag('name="description"')?.content).toBe(
-      'Conoce la experiencia de Gonzalo Herrera en ingeniería frontend, arquitectura Angular, liderazgo técnico y desarrollo de software asistido por IA.',
+      'Conoce la trayectoria profesional de Gonzalo Herrera en ingeniería frontend, liderazgo técnico y coordinación de proyectos de software.',
     );
 
     await router.navigateByUrl('/en/projects');

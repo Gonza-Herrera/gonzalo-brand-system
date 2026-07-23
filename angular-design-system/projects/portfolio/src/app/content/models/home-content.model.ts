@@ -73,7 +73,6 @@ export interface PortfolioExperiencePreviewContent {
   readonly eyebrow: string;
   readonly title: string;
   readonly description: string;
-  readonly verificationNotice: string;
   readonly viewAllAction: PortfolioLinkContent;
   readonly cardLabels: GhExperienceCardLabels;
   readonly items: readonly PortfolioExperiencePreviewItem[];

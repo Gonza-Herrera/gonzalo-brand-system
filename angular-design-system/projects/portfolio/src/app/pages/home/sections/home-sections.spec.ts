@@ -64,7 +64,7 @@ describe('Home sections', () => {
     expect(element.textContent).toContain('Destacado');
   });
 
-  it('keeps the Experience pattern honest when verified roles are unavailable', async () => {
+  it('renders the three most recent roles from the canonical Experience source', async () => {
     await TestBed.configureTestingModule({
       imports: [HomeExperiencePreviewSectionComponent],
     }).compileComponents();
@@ -75,8 +75,15 @@ describe('Home sections', () => {
 
     const element = fixture.nativeElement as HTMLElement;
     expect(element.querySelector('gh-experience-timeline')).not.toBeNull();
-    expect(element.querySelector('gh-experience-card')).toBeNull();
-    expect(element.textContent).toContain('verified source');
+    const cards = [...element.querySelectorAll('gh-experience-card')];
+    expect(cards).toHaveLength(3);
+    expect(cards[0]?.textContent).toContain('ICBC Bank');
+    expect(cards[0]?.textContent).toContain('Frontend Developer');
+    expect(cards[0]?.textContent).toContain('February 2023 — Present');
+    expect(cards[0]?.textContent).toContain('Current');
+    expect(cards[1]?.textContent).toContain('Endava');
+    expect(cards[2]?.textContent).toContain('Vortex');
+    expect(element.textContent).not.toContain('verified source');
     expect(element.querySelector<HTMLAnchorElement>('a[href="/en/experience"]')).not.toBeNull();
   });
 

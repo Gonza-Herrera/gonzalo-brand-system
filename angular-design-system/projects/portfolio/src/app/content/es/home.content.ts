@@ -1,8 +1,6 @@
 import type { PortfolioHomeContent } from '../models/home-content.model';
-import {
-  mapPortfolioExperiencesToTimeline,
-  selectFeaturedExperiences,
-} from '../utils/experience-card.mapper';
+import { mapPortfolioExperiencesToPreview } from '../utils/experience-card.mapper';
+import { selectExperiencePreview } from '../utils/experience-selectors';
 import { selectFeaturedProjects } from '../utils/project-selectors';
 import { selectFeaturedContent } from '../utils/content-selectors';
 import { ES_CONTENT_HUB_CONTENT } from './content-hub.content';
@@ -119,16 +117,14 @@ export const ES_HOME_CONTENT = {
     title: 'Experiencia',
     description:
       'Una trayectoria enfocada en ingeniería frontend, liderazgo técnico y mejores formas de construir software.',
-    verificationNotice:
-      'Los datos de empresas, roles y fechas se publicarán aquí cuando estén disponibles desde una fuente verificada.',
     viewAllAction: {
       label: 'Ver experiencia completa',
       pageId: 'experience',
       variant: 'ghost',
     },
     cardLabels: ES_EXPERIENCE_CONTENT.timeline.labels.card,
-    items: mapPortfolioExperiencesToTimeline(
-      selectFeaturedExperiences(ES_EXPERIENCE_CONTENT.timeline.items),
+    items: mapPortfolioExperiencesToPreview(
+      selectExperiencePreview(ES_EXPERIENCE_CONTENT.timeline.items),
       ES_EXPERIENCE_CONTENT.timeline.labels,
     ),
   },

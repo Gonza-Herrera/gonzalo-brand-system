@@ -59,33 +59,44 @@ Experience has a dedicated `PortfolioExperienceContent` contract and localized m
 Professional Timeline, Leadership Impact, Ways of Working, Capabilities, Career Direction and
 Contact.
 
-The canonical professional collections live in those Experience modules. Home never owns a second
-history: it selects the first three records in source order and maps them to the same public Card
-model. `experience-card.mapper.ts` and `selectFeaturedExperiences` are pure, preserve input order and
-do not mutate records.
+The canonical professional collections live in those Experience modules. They contain five approved
+records ordered from ICBC through Develative Project Manager. Home never owns a second history: it
+uses `selectExperiencePreview` to select the first three records by explicit editorial order and
+maps concise Cards from the same source. `experience-card.mapper.ts` and
+`experience-selectors.ts` are pure and do not mutate records.
 
 Experience IDs, Leadership IDs, Ways-of-Working IDs, Capability Group IDs and Career Direction IDs
 must match between locales. Role titles, companies, dates, responsibilities, achievements and
 technologies are translated or adapted only when a verified source supports them; IDs never change
 with language.
 
-- `id`, `role`, `company`, `startDate`, `summary` and non-empty `responsibilities` are mandatory for
-  a professional record.
-- `endDate`, `location`, work mode, achievements, technologies, current state, logo and
-  confidentiality note are optional.
+- `id`, `order`, `role`, `company`, `startDate`, paragraph-based `summary`, non-empty
+  `responsibilities` and explicit `current` are mandatory for a professional record.
+- `endDate`, location, work mode, achievements, technologies, capabilities, logo and
+  confidentiality note are optional, but every record must include technologies or capabilities.
 - Dates are preformatted editorial strings. Never parse, sort, calculate duration or derive current
   state from them.
-- Set `current: true` explicitly and provide localized visible labels.
+- The stable IDs are `icbc-frontend-developer`, `endava-team-leader`,
+  `vortex-frontend-developer`, `develative-frontend-developer` and
+  `develative-project-manager`; never translate or generate them.
+- `order` values are `1` through `5`. Selectors sort a copy by this field rather than by dates or
+  translated labels.
+- Set `current: true` explicitly and provide localized visible labels. ICBC is the only current
+  record.
 - Use only the public `remote`, `hybrid` and `onsite` work modes, and only when confirmed.
 - Keep responsibilities specific to the role. Keep achievements optional, qualitative and
   verifiable; never invent metrics.
-- Associate technologies with a role only when the source confirms them.
+- Store descriptions as ordered paragraph arrays and responsibilities as semantic list content.
+- Associate technologies or capabilities with a role only when the approved source confirms them.
+  Technologies stay non-translated; leadership and collaboration capabilities may be localized.
 - For confidential work, omit protected names and use a truthful generic domain; never invent a
   client or product.
 
-The current canonical collections are intentionally empty because the repository does not yet
-contain an approved employer, role and date source. The localized verification notice is the real
-empty state, not a fictional placeholder. See the [Experience page guide](../pages/experience/README.md).
+English and Spanish must keep identical IDs, order, roles, current flags, responsibility counts,
+technology values and optional-field structure. Add or update both records together and run the
+content, selector, mapper, page and Home integration tests. The Professional Experience brief is the
+approved source for these records; do not introduce claims, metrics, URLs or technologies beyond it.
+See the [Experience page guide](../pages/experience/README.md).
 
 ## Projects content
 
@@ -146,8 +157,8 @@ unrelated routes. See the [Contact page guide](../pages/contact/README.md) and
 
 Content must come from an approved repository source. Do not invent companies, roles, dates,
 metrics, publication status, email addresses or social URLs. Concepts must use the `concept` project
-status and say that they are concepts in their descriptions. When source data is missing, keep the
-typed empty state and a source note beside the owning collection.
+status and say that they are concepts in their descriptions. When source data is missing, omit the
+unsupported field and document the source gap beside the owning collection.
 
 The registry and page-specific tests protect stable ID/slug order, required counts, valid project
 statuses and categories, localized link targets, case-study parity, metadata completeness and the

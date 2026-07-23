@@ -3,14 +3,148 @@ import type {
   PortfolioProfessionalExperienceContent,
 } from '../models/experience-content.model';
 
-// Employment records stay empty until employer, role and date data is available from an
-// approved repository source. This collection is also the source for Home's preview.
-export const EN_PROFESSIONAL_EXPERIENCES: readonly PortfolioProfessionalExperienceContent[] = [];
+// Approved professional history. This collection is also the single source for Home's preview.
+export const EN_PROFESSIONAL_EXPERIENCES: readonly PortfolioProfessionalExperienceContent[] = [
+  {
+    id: 'icbc-frontend-developer',
+    order: 1,
+    company: 'ICBC Bank',
+    role: 'Frontend Developer',
+    startDate: 'February 2023',
+    endDate: 'Present',
+    current: true,
+    summary: [
+      'As a Frontend Developer, I contribute to the development and evolution of enterprise financial applications. My work focuses on building maintainable Angular solutions, delivering consistent user experiences and collaborating with multidisciplinary teams.',
+      'Beyond feature development, I participate in technical discussions, code reviews and continuous improvement initiatives that help maintain reliable engineering practices across the project.',
+    ],
+    responsibilities: [
+      'Develop and maintain enterprise Angular applications.',
+      'Build reusable user interface components.',
+      'Integrate frontend applications with REST APIs.',
+      'Collaborate with backend, QA and product teams.',
+      'Participate in code reviews and technical discussions.',
+      'Improve application maintainability and code quality.',
+      'Work within Agile and Scrum development practices.',
+      'Contribute to shared frontend engineering standards.',
+    ],
+    technologies: [
+      'Angular',
+      'TypeScript',
+      'RxJS',
+      'Angular Material',
+      'REST APIs',
+      'Git',
+      'Azure DevOps',
+      'Scrum',
+    ],
+  },
+  {
+    id: 'endava-team-leader',
+    order: 2,
+    company: 'Endava',
+    role: 'Team Leader',
+    startDate: 'June 2021',
+    endDate: 'January 2023',
+    current: false,
+    summary: [
+      'As a Team Leader, I led software engineering teams while balancing people leadership, delivery coordination and technical collaboration. I focused on creating an environment where communication, continuous learning and engineering quality could become part of the team’s daily work.',
+      'I worked closely with engineers, project managers and stakeholders to organize delivery, support professional growth and promote effective collaboration across the team.',
+    ],
+    responsibilities: [
+      'Lead and support software engineering teams.',
+      'Provide regular feedback, mentoring and professional guidance.',
+      'Coordinate project planning and delivery activities.',
+      'Facilitate communication between technical and business stakeholders.',
+      'Promote engineering practices and coding standards.',
+      'Participate in technical reviews and architecture discussions.',
+      'Encourage collaboration and continuous improvement.',
+      'Help teams work toward clear and shared objectives.',
+    ],
+    technologies: ['Angular', 'TypeScript', 'Git', 'Azure DevOps'],
+    capabilities: ['Technical Leadership', 'Team Leadership', 'Mentoring', 'Agile', 'Scrum'],
+  },
+  {
+    id: 'vortex-frontend-developer',
+    order: 3,
+    company: 'Vortex',
+    role: 'Frontend Developer',
+    startDate: 'February 2020',
+    endDate: 'May 2021',
+    current: false,
+    summary: [
+      'I worked as part of multidisciplinary teams delivering web applications from initial requirements through production releases. I collaborated closely with frontend and backend engineers to build maintainable solutions and resolve integration challenges before they affected delivery.',
+      'During this period, I strengthened my experience in Angular development, REST API integration and collaborative frontend engineering throughout the software development lifecycle.',
+    ],
+    responsibilities: [
+      'Develop web applications with Angular.',
+      'Build reusable and maintainable frontend components.',
+      'Integrate frontend applications with REST APIs.',
+      'Collaborate with backend developers.',
+      'Participate in technical planning and requirement analysis.',
+      'Improve application quality and maintainability.',
+      'Support production releases.',
+      'Resolve defects and technical issues.',
+    ],
+    technologies: ['Angular', 'TypeScript', 'RxJS', 'REST APIs', 'Git', 'Scrum'],
+  },
+  {
+    id: 'develative-frontend-developer',
+    order: 4,
+    company: 'Develative',
+    role: 'Frontend Developer',
+    startDate: 'August 2019',
+    endDate: 'January 2020',
+    current: false,
+    summary: [
+      'I developed responsive web applications while collaborating with other developers to deliver reusable and maintainable frontend solutions. My work included identifying defects, improving software quality and supporting testing and deployment activities.',
+      'This experience helped strengthen my frontend development foundations and collaborative engineering practices.',
+    ],
+    responsibilities: [
+      'Develop responsive web interfaces.',
+      'Build reusable frontend components.',
+      'Identify and resolve software defects.',
+      'Improve code quality and maintainability.',
+      'Collaborate with other developers.',
+      'Participate in testing and deployment activities.',
+    ],
+    technologies: ['Angular', 'JavaScript', 'HTML', 'CSS', 'Git'],
+  },
+  {
+    id: 'develative-project-manager',
+    order: 5,
+    company: 'Develative',
+    role: 'Project Manager',
+    startDate: 'April 2017',
+    endDate: 'July 2019',
+    current: false,
+    summary: [
+      'I began my professional career coordinating software projects and working closely with clients and development teams. This role helped me develop communication, planning and leadership skills that later became an important foundation for my engineering career.',
+      'I monitored project budgets and timelines, supported development teams and maintained communication with stakeholders to help projects progress toward their objectives.',
+    ],
+    responsibilities: [
+      'Coordinate software development projects.',
+      'Plan project timelines and priorities.',
+      'Monitor project budgets and delivery progress.',
+      'Communicate with clients and stakeholders.',
+      'Support development teams.',
+      'Help teams stay focused on project objectives.',
+      'Contribute to delivery and process improvements.',
+    ],
+    capabilities: [
+      'Project Management',
+      'Agile',
+      'Scrum',
+      'Planning',
+      'Stakeholder Communication',
+      'Team Coordination',
+    ],
+  },
+];
 
 export const EN_EXPERIENCE_CONTENT = {
   metaTitle: 'Experience',
   metaDescription:
-    'Explore Gonzalo Herrera’s experience in frontend engineering, Angular architecture, technical leadership and AI-augmented software development.',
+    'Explore Gonzalo Herrera’s professional journey across frontend engineering, technical leadership and software project coordination.',
   hero: {
     eyebrow: 'Experience',
     title: 'Building frontend products, engineering systems and stronger teams.',
@@ -44,18 +178,17 @@ export const EN_EXPERIENCE_CONTENT = {
     ],
   },
   timeline: {
-    eyebrow: 'Professional experience',
-    title: 'Career timeline',
+    eyebrow: 'Career',
+    title: 'Professional experience',
     description:
-      'Roles are presented in the order supplied by verified source data; dates are never inferred, sorted or used to calculate tenure.',
-    verificationNotice:
-      'Employer, role and date details are not yet available from an approved repository source. They will be added here only after verification.',
+      'A journey from project coordination to frontend engineering and technical leadership, shaped by collaboration, continuous learning and a focus on building maintainable software.',
     labels: {
       card: {
         at: 'at',
         responsibilities: 'Responsibilities',
         achievements: 'Selected contributions',
         technologies: 'Technologies',
+        capabilities: 'Capabilities',
       },
       current: 'Current',
       workModes: {

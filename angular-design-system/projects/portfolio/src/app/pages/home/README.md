@@ -27,8 +27,9 @@ links and explicitly external URLs.
 - Home derives featured projects from the canonical Projects registry. The Angular Design System is
   currently the only featured item, is labelled as work in progress and links to its localized Case
   Study. The remaining concepts stay available in the full Projects catalogue.
-- No company, role or date source is approved yet. Experience therefore renders the public timeline
-  with an empty collection and a localized verification notice instead of fabricated history.
+- Experience renders the three most recent approved roles—ICBC, Endava and Vortex—through the
+  public Timeline. The preview derives ID, company, role, period and current state from the
+  canonical localized Experience registry instead of owning duplicate employment content.
 - Featured content links to the localized internal Content preview until a verified publication URL
   exists.
 - Contact exposes only the localized Contact route. Social and email actions remain absent until
@@ -58,8 +59,9 @@ link mapping.
   and provide links only when their destinations are real.
 - To change featured content, keep the same item ID across locales and select either a localized
   internal `pageId` or a verified explicit external URL. Never use a placeholder publication URL.
-- To publish experience, add verified records to the canonical EN/ES Experience collections. Home
-  derives at most three entries with `selectFeaturedExperiences`; never add a separate preview list.
+- To add or update experience, edit the canonical EN/ES Experience collections together. Home uses
+  `selectExperiencePreview` to derive at most three entries by stable editorial order; never add a
+  separate preview list or sort localized period strings.
 
 ## Accessibility and limits
 

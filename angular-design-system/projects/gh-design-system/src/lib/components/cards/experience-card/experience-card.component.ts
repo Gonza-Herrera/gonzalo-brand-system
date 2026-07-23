@@ -47,4 +47,16 @@ export class GhExperienceCardComponent {
       (experience.workMode ? WORK_MODE_LABELS[experience.workMode] : undefined)
     );
   });
+  protected readonly descriptionParagraphs = computed(() => {
+    const description = this.experience().description;
+
+    if (!description) {
+      return [];
+    }
+
+    return typeof description === 'string' ? [description] : description;
+  });
+  protected readonly capabilitiesLabel = computed(
+    () => this.labels().capabilities ?? 'Capabilities',
+  );
 }

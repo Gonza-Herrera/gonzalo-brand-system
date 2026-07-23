@@ -148,7 +148,7 @@ path while changing locale.
    mentoring.
 3. Selected Projects derived from the canonical registry; Angular Design System is currently the
    only featured item and links to its localized Case Study.
-4. Experience Preview derived from the full Experience source, with a verified-data empty state.
+4. Experience Preview derived from the three most recent canonical professional records.
 5. Featured Content with an internal editorial preview.
 6. Contact Callout with the verified internal Contact route.
 
@@ -174,9 +174,10 @@ Container, Section, Stack, Grid, Cluster, Card and Tag APIs. Its content models 
 parity tests across locales. All internal actions are resolved from `pageId` through the shared
 locale-link helper.
 
-No portrait, employer history, dates, metrics or external profile links are shown because no
-approved source for those values exists in the repository. See the
-[About architecture](src/app/pages/about/README.md) for maintenance and content rules.
+No portrait, metrics or external profile links are shown because no approved source for those
+values exists in the repository. Employer history remains owned by Experience rather than
+duplicated on About. See the [About architecture](src/app/pages/about/README.md) for maintenance and
+content rules.
 
 ## Experience page
 
@@ -194,13 +195,14 @@ approved source for those values exists in the repository. See the
 Experience reuses the public Hero, Section Heading, Feature Grid, Experience Timeline, Experience
 Card and Contact Callout patterns plus public layout and content primitives. A pure mapper adapts the
 Portfolio editorial model to `GhExperienceCardData`; a pure selector derives Home's first three
-records from the same canonical locale collection without sorting or mutation.
+records from the same canonical locale collection by explicit editorial order without mutation.
 
-The current repository has no approved employer, role or date source. The full Timeline and Home
-preview therefore share the same intentional empty collection and localized verification state.
-Qualitative career content is rendered from approved brand and technical sources, while companies,
-dates, role-specific responsibilities, achievements, technologies, current status and logos remain
-omitted rather than invented. See the [Experience architecture](src/app/pages/experience/README.md).
+The canonical English and Spanish registries contain five approved experiences: ICBC, Endava,
+Vortex, Develative Frontend Developer and Develative Project Manager. Each record owns stable
+identity, order, localized periods and paragraphs, responsibilities, technologies or capabilities
+and explicit current state. ICBC is current. Home reuses the same source for ICBC, Endava and
+Vortex; it does not maintain duplicate professional content. See the
+[Experience architecture](src/app/pages/experience/README.md).
 
 ## Projects and Case Studies
 
@@ -342,7 +344,8 @@ content.
 - Angular Design System is the only complete Case Study; the other project entries remain explicitly
   labelled concepts until implementation evidence exists.
 - Only English and Spanish are implemented.
-- Employer history awaits a verified source and is intentionally not invented on Experience or Home.
+- Professional history is limited to the five approved records; employer links, logos, clients,
+  metrics and confidential project detail remain intentionally omitted.
 - Email and social URLs await verified source data; Contact omits every unconfigured channel.
 - Content has no external publications, editorial dates, reading times or images until approved
   source data exists; one planned forms comparison remains unpublished.

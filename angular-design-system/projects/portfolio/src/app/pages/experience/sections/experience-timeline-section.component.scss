@@ -2,14 +2,3 @@
   display: block;
   min-width: 0;
 }
-
-.experience-timeline__empty {
-  max-width: var(--gh-layout-reading-max);
-  padding: var(--gh-space-lg);
-  margin: 0;
-  border: var(--gh-border-width-default) solid var(--gh-border-subtle);
-  border-radius: var(--gh-radius-md);
-  background: var(--gh-surface-primary);
-  color: var(--gh-text-secondary);
-  line-height: var(--gh-line-height-body);
-}

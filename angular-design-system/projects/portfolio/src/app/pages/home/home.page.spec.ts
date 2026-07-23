@@ -19,6 +19,8 @@ describe('HomePage', () => {
     expect(element.querySelector('gh-feature-grid')).not.toBeNull();
     expect(element.querySelectorAll('gh-project-card')).toHaveLength(1);
     expect(element.querySelector('gh-experience-timeline')).not.toBeNull();
+    expect(element.querySelectorAll('gh-experience-card')).toHaveLength(3);
+    expect(element.querySelector('gh-experience-card')?.textContent).toContain('ICBC Bank');
     expect(element.querySelector('gh-content-highlight')).not.toBeNull();
     expect(element.querySelector('gh-contact-callout')).not.toBeNull();
     expect(element.querySelector<HTMLAnchorElement>('a[href="/en/projects"]')).not.toBeNull();
@@ -44,6 +46,8 @@ describe('HomePage', () => {
     expect(element.textContent).toContain('Qué ayudo a mejorar en los equipos');
     expect(element.textContent).toContain('En desarrollo');
     expect(element.querySelectorAll('gh-project-card')).toHaveLength(1);
+    expect(element.querySelectorAll('gh-experience-card')).toHaveLength(3);
+    expect(element.querySelector('gh-experience-card')?.textContent).toContain('Banco ICBC');
     expect(
       element.querySelector<HTMLAnchorElement>('a[href="/es/projects/angular-design-system"]'),
     ).not.toBeNull();

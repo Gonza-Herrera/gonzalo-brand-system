@@ -1,8 +1,6 @@
 import type { PortfolioHomeContent } from '../models/home-content.model';
-import {
-  mapPortfolioExperiencesToTimeline,
-  selectFeaturedExperiences,
-} from '../utils/experience-card.mapper';
+import { mapPortfolioExperiencesToPreview } from '../utils/experience-card.mapper';
+import { selectExperiencePreview } from '../utils/experience-selectors';
 import { selectFeaturedProjects } from '../utils/project-selectors';
 import { selectFeaturedContent } from '../utils/content-selectors';
 import { EN_CONTENT_HUB_CONTENT } from './content-hub.content';
@@ -114,16 +112,14 @@ export const EN_HOME_CONTENT = {
     title: 'Experience',
     description:
       'A career focused on frontend engineering, technical leadership and building better ways of working.',
-    verificationNotice:
-      'Company, role and date details will be published here once they are available from a verified source.',
     viewAllAction: {
       label: 'View full experience',
       pageId: 'experience',
       variant: 'ghost',
     },
     cardLabels: EN_EXPERIENCE_CONTENT.timeline.labels.card,
-    items: mapPortfolioExperiencesToTimeline(
-      selectFeaturedExperiences(EN_EXPERIENCE_CONTENT.timeline.items),
+    items: mapPortfolioExperiencesToPreview(
+      selectExperiencePreview(EN_EXPERIENCE_CONTENT.timeline.items),
       EN_EXPERIENCE_CONTENT.timeline.labels,
     ),
   },

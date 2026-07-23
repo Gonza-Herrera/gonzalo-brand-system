@@ -44,8 +44,12 @@
   </header>
 
   <div ghCardContent class="experience-card__content">
-    @if (experience().description) {
-      <p>{{ experience().description }}</p>
+    @if (descriptionParagraphs().length) {
+      <div class="experience-card__description">
+        @for (paragraph of descriptionParagraphs(); track $index) {
+          <p>{{ paragraph }}</p>
+        }
+      </div>
     }
 
     @if (experience().responsibilities?.length) {
@@ -79,20 +83,41 @@
     }
   </div>
 
-  @if (experience().technologies?.length) {
-    <footer ghCardFooter class="experience-card__technologies">
-      @if (headingLevel() === 2) {
-        <h3>{{ labels().technologies }}</h3>
-      } @else {
-        <h4>{{ labels().technologies }}</h4>
+  @if (experience().technologies?.length || experience().capabilities?.length) {
+    <footer ghCardFooter class="experience-card__skills">
+      @if (experience().technologies?.length) {
+        <section [attr.aria-label]="labels().technologies">
+          @if (headingLevel() === 2) {
+            <h3>{{ labels().technologies }}</h3>
+          } @else {
+            <h4>{{ labels().technologies }}</h4>
+          }
+          <ul>
+            @for (technology of experience().technologies; track technology) {
+              <li>
+                <gh-tag size="sm">{{ technology }}</gh-tag>
+              </li>
+            }
+          </ul>
+        </section>
       }
-      <ul>
-        @for (technology of experience().technologies; track technology) {
-          <li>
-            <gh-tag size="sm">{{ technology }}</gh-tag>
-          </li>
-        }
-      </ul>
+
+      @if (experience().capabilities?.length) {
+        <section [attr.aria-label]="capabilitiesLabel()">
+          @if (headingLevel() === 2) {
+            <h3>{{ capabilitiesLabel() }}</h3>
+          } @else {
+            <h4>{{ capabilitiesLabel() }}</h4>
+          }
+          <ul>
+            @for (capability of experience().capabilities; track capability) {
+              <li>
+                <gh-tag size="sm">{{ capability }}</gh-tag>
+              </li>
+            }
+          </ul>
+        </section>
+      }
     </footer>
   }
 </gh-card>

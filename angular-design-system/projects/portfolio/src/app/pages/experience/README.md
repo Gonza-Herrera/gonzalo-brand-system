@@ -1,8 +1,8 @@
 # Portfolio Experience
 
 Experience is the complete bilingual professional-positioning page for `/en/experience` and
-`/es/experience`. It explains Gonzalo Herrera's career direction, engineering impact and ways of
-working without inventing employment history that is not present in an approved repository source.
+`/es/experience`. Its Professional Experience section publishes Gonzalo Herrera's approved career
+history while the surrounding sections explain engineering impact and ways of working.
 
 ## Editorial structure
 
@@ -23,77 +23,117 @@ ExperiencePage
 Stable section IDs are `career-summary`, `professional-experience`, `leadership-impact`,
 `ways-of-working`, `capabilities`, `career-direction` and `contact`.
 
-## Content source and model
+## Official source, model and order
 
-`PortfolioExperienceContent` owns Hero, Career Summary, Timeline, Leadership Impact, Ways of
-Working, Capabilities, Career Direction and Contact. English lives in
-`content/en/experience.content.ts`; Spanish lives in `content/es/experience.content.ts`. Stable IDs
-are locale-independent and content tests require the same IDs and order in both languages.
+The approved professional history is defined by the Professional Experience content brief and lives
+in two canonical collections:
 
-`PortfolioProfessionalExperienceContent` is the editorial record. It requires a stable ID, role,
-company, preformatted start date, summary and responsibilities. End date, location, work mode,
-achievements, technologies, current state, authorized logo and confidentiality note are optional.
-The public Design System model is not duplicated: work modes reuse `GhExperienceWorkMode` and the
-pure `experience-card.mapper.ts` adapts editorial records to `GhExperienceCardData`.
+- `content/en/experience.content.ts` — English content.
+- `content/es/experience.content.ts` — Spanish content.
 
-The repository currently has no approved employer, role or date source. Both canonical experience
-collections therefore remain empty and the page renders a localized verification notice. No
-companies, dates, responsibilities, achievements, technologies, logos or current-role state have
-been invented. The qualitative sections are supported by the repository's brand positioning,
-technical architecture and existing About content.
+`PortfolioProfessionalExperienceContent` is the single editorial model. It requires a stable ID,
+explicit editorial order, company, role, preformatted dates, explicit current state, ordered
+description paragraphs and responsibilities. Technologies and capabilities are separate optional
+collections; at least one of them must be present for every record. Location, work mode, achievements,
+authorized logo and confidentiality note remain optional.
 
-## Timeline and Home preview
+The stable IDs and required order are:
 
-The full page passes consumer order directly to `gh-experience-timeline`; neither the mapper nor the
-component parses, sorts or calculates dates. The pattern owns the semantic ordered list and composes
-`gh-experience-card`, so Portfolio does not duplicate either visual.
+1. `icbc-frontend-developer`
+2. `endava-team-leader`
+3. `vortex-frontend-developer`
+4. `develative-frontend-developer`
+5. `develative-project-manager`
 
-Card labels are localized through `GhExperienceCardLabels`. Role headings use `h3` below the
-Timeline section's `h2`; responsibilities and selected contributions remain distinct semantic
-lists. `current: true` is explicit and accompanied by localized visible text.
+`order` is an editorial integer and never comes from a parsed date. `selectOrderedExperiences`
+returns a sorted copy without mutating the registry, and the public Timeline preserves that supplied
+order. Dates are static localized content; no runtime duration or current date is calculated.
 
-Home imports the same localized Experience collection, applies
-`selectFeaturedExperiences(items, 3)`, then uses the same pure mapper. This preserves IDs and source
-order without maintaining a second professional-history list.
+ICBC is the only record with `current: true`. The Card shows a visible localized status
+(`Current`/`Actualidad`) in addition to its highlighted surface, so the state never depends on color.
 
-## Add or modify an experience
+## Description, responsibilities, technologies and capabilities
 
-1. Confirm that company, role, dates and every role-specific statement exist in an approved source.
-2. Add one stable, non-translated ID to both locale collections at the same position, newest first.
-3. Provide localized, preformatted `startDate` and optional `endDate`; never use `Date`, parse dates
-   or calculate tenure.
-4. Add three to six specific responsibilities. Do not copy the same generic list across roles.
-5. Add achievements only when verifiable. Omit the field instead of relabeling responsibilities or
-   inventing percentages.
-6. Add only technologies confirmed for that role. Do not copy a global stack into every entry.
-7. Set `current: true` manually for the active role. Do not infer it from a missing end date.
-8. Use only `remote`, `hybrid` or `onsite`, and only when work mode is confirmed.
-9. For confidential work, keep the real employer when permitted, describe the domain generically
-   and add no fictitious client or product name.
-10. Run Portfolio content, mapper, section and routing tests.
+Each approved description is stored as an ordered paragraph array. The pure Card mapper preserves
+those paragraphs, and `gh-experience-card` renders each value as a separate `<p>`.
 
-To add a company logo, place an authorized, stable asset under `projects/portfolio/public`, provide
-meaningful alternative text when informative, and verify that the Card still works without it.
-External logo services are not allowed.
+Responsibilities remain an ordered semantic `<ul>` inside each Card. They are not converted to Tags
+or hidden in tooltips. Technologies and capabilities use distinct labelled Tag groups:
+
+- English: `Technologies` and `Capabilities`.
+- Spanish: `Tecnologías` and `Capacidades`.
+
+The distinction keeps Angular, TypeScript, Git and Azure DevOps separate from leadership,
+mentoring, planning and stakeholder capabilities. No proficiency percentages, progress bars, logos
+or unverified technologies are used.
+
+## Mapper and selectors
+
+`content/utils/experience-card.mapper.ts` is the only adapter between Portfolio content and
+`GhExperienceCardData`. It is pure, does not mutate input and maps identity, company, role, period,
+current state, paragraphs, responsibilities, achievements, technologies and capabilities.
+
+`content/utils/experience-selectors.ts` owns three deterministic selectors:
+
+- `selectOrderedExperiences` — stable ascending editorial order.
+- `selectCurrentExperience` — the explicitly current record or `undefined`.
+- `selectExperiencePreview` — the first `limit` ordered records, defaulting to three.
+
+The full page maps all five ordered records. Home uses `selectExperiencePreview` against the same
+localized collection and maps concise Cards containing the same ID, company, role, period and
+current state. Home never owns a second employment registry.
+
+## English and Spanish parity
+
+IDs, order, roles, current state, collection sizes, optional-field presence and non-translatable
+technology values remain aligned between languages. `ICBC Bank`/`Banco ICBC`, periods,
+descriptions, responsibilities and capabilities use approved localized copy. Tests validate:
+
+- exactly five unique records in both locales;
+- identical IDs and order;
+- one current record, always ICBC;
+- equivalent paragraph, responsibility, technology and capability counts;
+- non-empty required fields;
+- no provisional source notices, placeholder URLs or unapproved metrics;
+- a three-record Home preview consistent with the canonical page source.
+
+## Add or update an experience
+
+1. Confirm every company, role, date, responsibility, technology and capability against an approved
+   source. Do not infer or enrich missing facts.
+2. Add a stable, non-translated ID to `PORTFOLIO_PROFESSIONAL_EXPERIENCE_IDS`.
+3. Add structurally equivalent records to both locale collections.
+4. Assign an explicit unique `order`; do not sort by date strings.
+5. Store every description paragraph separately in `summary`.
+6. Keep responsibilities role-specific and as complete sentences.
+7. Place implementation tools under `technologies` and ways of leading or collaborating under
+   `capabilities`.
+8. Set `current: true` only for the active role and set every other record to `false`.
+9. Update content, selector, mapper, page, Home integration and metadata tests.
+10. Run the Portfolio, Design System and Showcase tests plus all required builds.
+
+To update an existing role, keep its stable ID unless the identity of the experience genuinely
+changes. To mark a different role as current, update both locales in the same change and ensure
+exactly one record remains current.
+
+Never add clients, product names, users, team sizes, percentages, commercial outcomes, awards,
+certifications, external URLs or technologies without an approved source. For confidential work,
+omit protected facts rather than replacing them with invented detail.
 
 ## Accessibility, responsive behavior and SSR
 
-Hero owns the only `h1`; sections use `h2`; timeline roles use `h3`. The timeline owns one semantic
-`ol`, responsibilities and contributions use separate `ul` elements, technologies and capabilities
-wrap without horizontal scrolling, and actions are native links with the existing focus treatment.
-Current state and work mode always include visible text rather than relying on color.
+Hero owns the only `h1`; sections use `h2`; Timeline roles use `h3`. The Timeline owns one semantic
+`ol`; responsibilities and contributions use `ul`; technology and capability Tags wrap without
+horizontal scrolling. Periods and current state are visible text, and DOM order matches visual order.
 
-Layout is CSS-only and uses semantic `--gh-*` tokens. The split Hero and grids collapse naturally at
-mobile sizes, Cards have no fixed height, and reading copy keeps the shared maximum measure. Theme
-surfaces work with light, dark and system modes, including reduced-motion foundations.
+Layout is CSS-only and uses semantic `--gh-*` tokens. Cards have no fixed height, copy preserves a
+comfortable reading measure and the Timeline remains a single column from 320px through desktop.
+The same semantic surfaces support light, dark and system themes. Motion is not required to
+understand the chronology, and global foundations respect reduced-motion preferences.
 
-The page uses Signals and pure deterministic transforms. It has no `window`, `document`, storage,
-observers, `Date`, random IDs or client-dependent ordering, so direct SSR and hydration for both
-localized routes remain stable.
+The page and selectors are deterministic. They do not use `window`, `document`, storage, `Date`,
+random values or client-dependent sorting, so direct SSR and hydration for `/en/experience` and
+`/es/experience` produce the same structure as the client.
 
-## Limits and next milestone
-
-Employment records remain the one intentional content gap until an approved CV or equivalent source
-is added. Projects and the first Case Study now use the same typed, locale-aware content boundary;
-advanced SEO, analytics and contact behavior remain outside this page. PR 16 should implement the
-Content Hub without duplicating Experience data.
+Advanced SEO, analytics, deployment, external company links and employer imagery remain outside
+this content update.
