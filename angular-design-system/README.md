@@ -122,6 +122,13 @@ typed detail routes such as `/en/content/angular-14-vs-angular-20`. The canonica
 also drives Home's featured guide; unpublished records remain hidden and invalid slugs render an
 explicit localized Content Not Found state.
 
+Contact at `/en/contact` and `/es/contact` provides a localized Hero, discussion topics, verified
+channel resolution, a typed form contract, privacy guidance and links back into the Portfolio. No
+email, social destination or submission endpoint is currently approved, so channel cards are
+omitted and the form is explicitly disabled without requests or simulated success. See the
+[Contact page guide](projects/portfolio/src/app/pages/contact/README.md) and
+[form integration contract](docs/portfolio-contact-form.md).
+
 Run Storybook for isolated visual and API documentation:
 
 ```bash

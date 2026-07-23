@@ -1,16 +1,73 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { GhContainerComponent, GhSectionComponent, GhStackComponent } from 'gh-design-system';
+import {
+  GhCardComponent,
+  GhContainerComponent,
+  GhFeatureGridComponent,
+  GhHeroComponent,
+  GhHeroVisualDirective,
+  GhSectionComponent,
+  GhSectionHeadingComponent,
+  GhStackComponent,
+  type GhFeatureItem,
+} from 'gh-design-system';
 
+import { PORTFOLIO_CONFIG } from '../../core/config/portfolio.config';
+import { resolvePortfolioHref } from '../../core/routing/portfolio-link.utils';
 import { PortfolioLocaleService } from '../../core/services/portfolio-locale.service';
+import { getPortfolioContactContent } from '../../content/contact-content.registry';
+import { resolvePortfolioContactChannels } from '../../content/utils/contact-channel.mapper';
+import { ContactFormComponent } from './components/contact-form/contact-form.component';
 
 @Component({
   selector: 'app-contact-page',
   standalone: true,
-  imports: [GhContainerComponent, GhSectionComponent, GhStackComponent],
+  imports: [
+    ContactFormComponent,
+    GhCardComponent,
+    GhContainerComponent,
+    GhFeatureGridComponent,
+    GhHeroComponent,
+    GhHeroVisualDirective,
+    GhSectionComponent,
+    GhSectionHeadingComponent,
+    GhStackComponent,
+  ],
   templateUrl: './contact.page.html',
+  styleUrl: './contact.page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContactPage {
   private readonly localeService = inject(PortfolioLocaleService);
-  protected readonly content = computed(() => this.localeService.content().pages.contact);
+
+  protected readonly content = computed(() =>
+    getPortfolioContactContent(this.localeService.locale()),
+  );
+  protected readonly externalLinkLabel = computed(
+    () => this.localeService.content().shell.navigation.externalLinkLabel,
+  );
+  protected readonly topicFeatures = computed<readonly GhFeatureItem[]>(() =>
+    this.content().topics.items.map((topic) => ({
+      title: topic.title,
+      description: topic.description,
+    })),
+  );
+  protected readonly availableChannels = computed(() =>
+    resolvePortfolioContactChannels(this.content().channels.items, PORTFOLIO_CONFIG.urls),
+  );
+  protected readonly channelFeatures = computed<readonly GhFeatureItem[]>(() =>
+    this.availableChannels().map((channel) => ({
+      title: channel.label,
+      description: channel.description,
+      href: channel.href,
+      external: channel.external,
+    })),
+  );
+  protected readonly exploreFeatures = computed<readonly GhFeatureItem[]>(() =>
+    this.content().explore.actions.map((action) => ({
+      title: action.label,
+      description: action.description,
+      href: resolvePortfolioHref(this.localeService.locale(), action),
+      external: action.external ?? false,
+    })),
+  );
 }

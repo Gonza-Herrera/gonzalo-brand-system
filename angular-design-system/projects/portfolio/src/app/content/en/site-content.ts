@@ -60,12 +60,9 @@ export const EN_SITE_CONTENT = {
     projects: EN_PROJECTS_CONTENT,
     content: EN_CONTENT_HUB_CONTENT,
     contact: {
-      eyebrow: 'Contact',
-      title: 'Start a thoughtful conversation',
-      description: 'A future place to discuss engineering, leadership and collaboration.',
-      stage: 'The complete Contact experience will be delivered in PR 17.',
       metaTitle: 'Contact',
-      metaDescription: 'Contact Gonzalo Herrera about engineering, leadership and collaboration.',
+      metaDescription:
+        'Contact Gonzalo Herrera to discuss frontend engineering, Angular architecture, technical leadership and AI-augmented software development.',
     },
     'not-found': {
       eyebrow: '404',

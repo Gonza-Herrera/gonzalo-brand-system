@@ -358,6 +358,43 @@ time, image or metric is currently exposed because the approved repository sourc
 one. Static ordering, locale-first lookup and the absence of browser/runtime values keep Hub and
 detail SSR output deterministic.
 
+Contact uses a lazy localized content registry and a deliberately unavailable submission boundary:
+
+```text
+Localized Contact route
+    ↓
+Lazy EN/ES Contact content
+    ↓
+Contact Page
+    ├──→ PORTFOLIO_CONFIG.urls → verified channels only
+    ├──→ Typed Reactive Form → unavailable state
+    └──→ localized Experience / Projects / Content links
+```
+
+No approved public email, LinkedIn profile, GitHub profile, endpoint, provider or environment
+strategy exists. The central URL configuration is therefore empty, channel mapping omits every
+destination and the form initializes disabled with `unavailable` feedback. It does not construct a
+request, persist draft data, log values or expose success. This preserves a real form/validation
+contract without suggesting that a message can be delivered.
+
+Contact owns stable highlight, topic and channel IDs, field labels, validation messages, submission
+status copy and privacy guidance in structurally equivalent EN/ES modules. Angular Forms, the full
+localized content and native-field styles stay inside the lazy Contact route. The Design System is
+unchanged: Contact composes public Hero, Section Heading, Feature Grid, Card, Button and Layout APIs;
+native form controls remain application-specific until a reusable form-control system is designed
+as a separate concern.
+
+`nonWhitespaceValidator` and `normalizeContactFormValue` are pure. The normalized payload trims
+boundaries, omits a blank optional company and preserves email case, Unicode and message line
+breaks. A future approved gateway must own real submission states, request concurrency, error
+mapping and interaction-driven focus management. Server validation, rate limiting and spam
+protection remain backend responsibilities.
+
+Production statistics keep the complete Contact page, localized copy and Angular Forms runtime in a
+dedicated lazy chunk. Reactive Forms adds shared Angular Core utilities to the initial graph, so the
+Portfolio-only initial warning budget is 525 kB (with the existing 1 MB error ceiling). Showcase
+budgets are unchanged.
+
 Portfolio consumes TypeScript only from `gh-design-system` and Sass only from
 the public `styles` and `styles/foundations` exports. The application
 initializer instantiates the library's SSR-safe `GhThemeService`. The
@@ -498,10 +535,10 @@ of the route.
   integration, real Card/Tag/Badge composition within Layout Primitives and the
   complete Brand Patterns landing demonstration.
 - Portfolio tests cover its minimal root, bilingual shell, public Navigation and Footer integration,
-  the complete bilingual Home, About, Experience, Projects and Content compositions, section
+  the complete bilingual Home, About, Experience, Projects, Content and Contact compositions, section
   adapters, localized links, stable IDs/translations, Experience/Project/Content mapping and
   selection, Home-preview consistency, Project/Content Detail and invalid slugs, accessible content
-  filters, typed editorial sections, all localized lazy routes, redirects, invalid-locale fallback,
+  filters, typed editorial sections, Contact validators/normalization/unavailable state, all localized lazy routes, redirects, invalid-locale fallback,
   exact active state, content parity, locale storage, both switchers, localized Not Found, document
   language, titles and basic descriptions.
 - Portfolio's production build validates server rendering, hydration wiring,

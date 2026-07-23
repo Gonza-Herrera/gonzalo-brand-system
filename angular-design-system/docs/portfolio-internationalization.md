@@ -85,6 +85,14 @@ Only content with complete published detail in both locale registries receives a
 Planned or incomplete records stay out of production selectors, so the Language Switcher cannot
 target an intentionally missing translation.
 
+Contact is also preserved directly:
+
+```text
+/en/contact
+    ↓ select ES
+/es/contact
+```
+
 ## Content structure and parity
 
 `PortfolioSiteContent` is the shared readonly contract. English and Spanish each provide a complete
@@ -101,6 +109,12 @@ content/
 
 TypeScript's `satisfies` operator catches missing or invalid fields at compile time. Registry tests
 also compare page and navigation keys so a translation cannot silently drift from the other locale.
+
+Contact keeps only basic metadata in `EN_SITE_CONTENT` and `ES_SITE_CONTENT`. Its complete localized
+Hero, topics, channel descriptors, form labels/errors/statuses, privacy guidance and Explore actions
+live in `en/contact.content.ts` and `es/contact.content.ts`, selected by the lazy
+`contact-content.registry.ts`. Tests enforce stable ID, field and destination parity even though no
+public channel is currently configured.
 
 ## Adding a future locale
 

@@ -4,10 +4,10 @@
 from the technical Showcase and Storybook documentation: Portfolio owns real content, localized
 routing and product concerns; Showcase validates integration; Storybook documents reusable APIs.
 
-The current release includes complete Portfolio Home, About, Experience, Projects and Content Hub
-pages, the first full bilingual Project Case Study and three bilingual internal content details on
-top of the global shell, routing and internationalization foundation. Contact remains a localized
-route placeholder for its dedicated follow-up PR.
+The current release includes complete Portfolio Home, About, Experience, Projects, Content Hub and
+Contact pages, the first full bilingual Project Case Study and three bilingual internal content
+details on top of the global shell, routing and internationalization foundation. Contact uses an
+honest unavailable message-form state until a real channel and submission service are approved.
 
 ## Run, build and test
 
@@ -90,18 +90,22 @@ content/
 ├── en/projects.content.ts          English project registry and Case Study
 ├── en/content-hub.content.ts       English lightweight Content Hub registry
 ├── en/content-details.content.ts   English internal article bodies
+├── en/contact.content.ts           complete English Contact content
 ├── es/home.content.ts              equivalent Spanish Home
 ├── es/about.content.ts             equivalent Spanish About
 ├── es/experience.content.ts        equivalent Spanish Experience
 ├── es/projects.content.ts          equivalent Spanish project registry and Case Study
 ├── es/content-hub.content.ts       equivalent Spanish Content Hub registry
 ├── es/content-details.content.ts   equivalent Spanish article bodies
+├── es/contact.content.ts           equivalent Spanish Contact content
 ├── utils/experience-card.mapper.ts shared pure Timeline and preview adapters
 ├── utils/project-card.mapper.ts    shared pure Project Card adapter
 ├── utils/project-selectors.ts      ordering, featured, related and slug helpers
 ├── utils/content-selectors.ts      published, featured, filter, related and slug helpers
 ├── utils/article-card.mapper.ts    Content to Article Card/Highlight adapter
+├── utils/contact-channel.mapper.ts verified Contact destination adapter
 ├── content-details.registry.ts     locale-to-detail registry loaded with Content Detail
+├── contact-content.registry.ts     locale-to-Contact registry loaded with Contact
 ├── en/site-content.ts              English shell and page registry
 ├── es/site-content.ts              Spanish shell and page registry
 └── portfolio-content.registry.ts   locale-to-content registry
@@ -255,8 +259,30 @@ dimensions, machine-readable date and localized labels/heading level.
 See the [Content Hub architecture](src/app/pages/content/README.md) and
 [editorial guidelines](../../docs/portfolio-content-guidelines.md).
 
-The next product milestone is PR 17 — Contact Page. It should keep Contact routes and personal
-destinations evidence-based; no email address or social URL should be invented.
+## Contact page
+
+`/en/contact` and `/es/contact` render a Hero, six conversation topics, configured contact channels,
+a typed message form, privacy/security guidance and localized cards for Experience, Projects and
+Content. Stable highlight, topic and channel IDs keep both locales structurally aligned.
+
+The repository currently has no approved public email, LinkedIn profile, GitHub profile, endpoint or
+form provider. `PORTFOLIO_CONFIG.urls` therefore contains explicit unconfigured values. The Contact
+page omits channel links and renders a visible `unavailable` state before a disabled Typed Reactive
+Form. No request, local storage, logging or simulated success occurs.
+
+The form contract includes Name, Email, optional Company or Organization, Subject and Message. Pure
+validators enforce required, whitespace, email and centralized length rules; normalization trims
+boundary whitespace without mutating the value or changing email case. These contracts prepare a
+future approved integration without introducing a fake service.
+
+Contact composes the public Hero, Section Heading, Feature Grid, Card and Button APIs plus Container,
+Section and Stack primitives. Native inputs and textarea are styled locally with semantic tokens
+because no general Design System form controls exist. The full Contact content and Angular Forms
+code remain in the lazy Contact chunk.
+
+See the [Contact page architecture](src/app/pages/contact/README.md) and
+[Contact form contract](../../docs/portfolio-contact-form.md). The next product milestone is PR 18 —
+advanced SEO, canonical and alternate links, Open Graph, structured data and sitemap work.
 
 ## Global shell
 
@@ -312,19 +338,19 @@ content.
 
 ## Current limits
 
-- Home, About, Experience, Projects and Content are complete; Contact remains a localized
-  placeholder.
+- Home, About, Experience, Projects, Content and Contact are complete.
 - Angular Design System is the only complete Case Study; the other project entries remain explicitly
   labelled concepts until implementation evidence exists.
 - Only English and Spanish are implemented.
 - Employer history awaits a verified source and is intentionally not invented on Experience or Home.
-- Social URLs await verified source data.
+- Email and social URLs await verified source data; Contact omits every unconfigured channel.
 - Content has no external publications, editorial dates, reading times or images until approved
   source data exists; one planned forms comparison remains unpublished.
 - Canonical URLs, complete `hreflang`, Open Graph, sitemap, structured data and production domain
   configuration belong to PR 18.
 - The production SSR hostname must be approved and added to the host allowlist before deployment.
-- No analytics, CMS, backend, contact form or deployment is included.
+- No analytics, CMS, contact backend/provider or deployment is included. The Contact form UI is
+  intentionally disabled and does not transmit or persist data.
 
 See [Portfolio internationalization](../../docs/portfolio-internationalization.md) for the detailed
 locale contract and [architecture](../../docs/architecture.md) for workspace boundaries.

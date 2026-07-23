@@ -22,6 +22,7 @@ const testRoutes: Routes = [
       { path: 'projects/:slug', component: EmptyRouteComponent },
       { path: 'content', component: EmptyRouteComponent },
       { path: 'content/:slug', component: EmptyRouteComponent },
+      { path: 'contact', component: EmptyRouteComponent },
     ],
   },
 ];
@@ -144,5 +145,20 @@ describe('LanguageSwitcherComponent', () => {
       'a[hreflang="es"]',
     );
     expect(spanishLink?.getAttribute('href')).toBe('/es/content/angular-14-vs-angular-20');
+  });
+
+  it('preserves the Contact route when changing language', async () => {
+    const fixture = TestBed.createComponent(LanguageSwitcherComponent);
+    const router = TestBed.inject(Router);
+    fixture.detectChanges();
+
+    await router.navigateByUrl('/en/contact');
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    const spanishLink = (fixture.nativeElement as HTMLElement).querySelector<HTMLAnchorElement>(
+      'a[hreflang="es"]',
+    );
+    expect(spanishLink?.getAttribute('href')).toBe('/es/contact');
   });
 });
