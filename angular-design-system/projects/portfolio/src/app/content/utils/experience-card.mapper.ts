@@ -2,14 +2,19 @@ import type { GhExperienceCardData } from 'gh-design-system';
 
 import type {
   PortfolioExperienceTimelineLabels,
+  PortfolioProfessionalExperienceId,
   PortfolioProfessionalExperienceContent,
 } from '../models/experience-content.model';
 
-export function mapPortfolioExperiencesToTimeline(
-  items: readonly PortfolioProfessionalExperienceContent[],
+export type PortfolioExperienceCardData = GhExperienceCardData & {
+  readonly id: PortfolioProfessionalExperienceId;
+};
+
+export function mapPortfolioExperienceToCard(
+  item: PortfolioProfessionalExperienceContent,
   labels: PortfolioExperienceTimelineLabels,
-): readonly (GhExperienceCardData & { readonly id: string })[] {
-  return items.map((item) => ({
+): PortfolioExperienceCardData {
+  return {
     id: item.id,
     role: item.role,
     company: item.company,
@@ -21,19 +26,39 @@ export function mapPortfolioExperiencesToTimeline(
     workMode: item.workMode,
     workModeLabel: item.workMode ? labels.workModes[item.workMode] : undefined,
     description: item.confidentialityNote
-      ? `${item.summary} ${item.confidentialityNote}`
+      ? [...item.summary, item.confidentialityNote]
       : item.summary,
     responsibilities: item.responsibilities,
     achievements: item.achievements,
     technologies: item.technologies,
+    capabilities: item.capabilities,
     companyLogoSrc: item.logo?.src,
     companyLogoAlt: item.logo?.alt,
-  }));
+  };
 }
 
-export function selectFeaturedExperiences(
+export function mapPortfolioExperiencesToTimeline(
   items: readonly PortfolioProfessionalExperienceContent[],
-  limit = 3,
-): readonly PortfolioProfessionalExperienceContent[] {
-  return items.slice(0, Math.max(0, limit));
+  labels: PortfolioExperienceTimelineLabels,
+): readonly PortfolioExperienceCardData[] {
+  return items.map((item) => mapPortfolioExperienceToCard(item, labels));
+}
+
+export function mapPortfolioExperiencesToPreview(
+  items: readonly PortfolioProfessionalExperienceContent[],
+  labels: PortfolioExperienceTimelineLabels,
+): readonly PortfolioExperienceCardData[] {
+  return items.map((item) => {
+    const card = mapPortfolioExperienceToCard(item, labels);
+
+    return {
+      id: card.id,
+      role: card.role,
+      company: card.company,
+      startDate: card.startDate,
+      endDate: card.endDate,
+      current: card.current,
+      currentLabel: card.currentLabel,
+    };
+  });
 }

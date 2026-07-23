@@ -24,6 +24,14 @@ export const CurrentRole: Story = {};
 export const WithAchievements: Story = {};
 export const WithResponsibilities: Story = {};
 export const WithTechnologies: Story = {};
+export const WithCapabilities: Story = {
+  args: {
+    experience: {
+      ...STORY_EXPERIENCE,
+      capabilities: ['Technical Leadership', 'Mentoring', 'Agile'],
+    },
+  },
+};
 export const WithLogo: Story = {};
 export const Highlighted: Story = { args: { highlighted: true } };
 export const PastRole: Story = {
@@ -52,6 +60,7 @@ export const SpanishLabels: Story = {
       responsibilities: 'Responsabilidades',
       achievements: 'Aportes destacados',
       technologies: 'Tecnologías',
+      capabilities: 'Capacidades',
     },
   },
 };
@@ -64,8 +73,10 @@ export const LongContent: Story = {
   args: {
     experience: {
       ...STORY_EXPERIENCE,
-      description:
-        'Led a cross-functional initiative to consolidate fragmented interface patterns into a documented, token-driven Angular system while supporting product delivery, mentoring contributors, and coordinating accessibility review across several application teams.',
+      description: [
+        'Led a cross-functional initiative to consolidate fragmented interface patterns into a documented, token-driven Angular system while supporting product delivery.',
+        'Mentored contributors and coordinated accessibility review across several application teams.',
+      ],
     },
   },
 };

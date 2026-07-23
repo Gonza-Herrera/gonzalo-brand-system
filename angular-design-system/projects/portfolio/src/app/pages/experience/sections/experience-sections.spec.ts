@@ -74,24 +74,28 @@ describe('Experience sections', () => {
   it('renders consumer-ordered roles through Timeline and Card with localized detail groups', () => {
     const items: readonly PortfolioProfessionalExperienceContent[] = [
       {
-        id: 'current-role',
+        id: 'icbc-frontend-developer',
+        order: 1,
         role: 'Current verified role',
         company: 'Verified Company',
         startDate: '2024',
-        summary: 'Current role context.',
+        summary: ['Current role context.', 'A second paragraph.'],
         responsibilities: ['Lead architecture decisions', 'Review pull requests'],
         achievements: ['Improved component reuse'],
         technologies: ['Angular', 'TypeScript'],
+        capabilities: ['Technical Leadership'],
         current: true,
       },
       {
-        id: 'earlier-role',
+        id: 'develative-project-manager',
+        order: 2,
         role: 'Earlier verified role',
         company: 'Earlier Company',
         startDate: '2021',
         endDate: '2024',
-        summary: 'Earlier role context.',
+        summary: ['Earlier role context.'],
         responsibilities: ['Build reusable components'],
+        current: false,
       },
     ];
     const content: PortfolioExperienceTimelineContent = {
@@ -112,19 +116,24 @@ describe('Experience sections', () => {
     expect(cards[0]?.textContent).toContain('Responsibilities');
     expect(cards[0]?.textContent).toContain('Selected contributions');
     expect(cards[0]?.textContent).toContain('Technologies');
+    expect(cards[0]?.textContent).toContain('Capabilities');
+    expect(cards[0]?.querySelectorAll('.experience-card__description p')).toHaveLength(2);
     expect(cards[1]?.textContent).not.toContain('Selected contributions');
     expect(cards[1]?.querySelector('img')).toBeNull();
   });
 
-  it('keeps an honest localized empty Timeline without failing', () => {
+  it('renders all five localized professional experiences in editorial order', () => {
     const fixture = TestBed.createComponent(ExperienceTimelineSectionComponent);
     fixture.componentRef.setInput('content', ES_EXPERIENCE_CONTENT.timeline);
     fixture.detectChanges();
 
     const element = fixture.nativeElement as HTMLElement;
     expect(element.querySelector('gh-experience-timeline')).not.toBeNull();
-    expect(element.querySelectorAll('gh-experience-timeline li')).toHaveLength(0);
-    expect(element.textContent).toContain('fuente aprobada del repositorio');
+    const cards = [...element.querySelectorAll('gh-experience-card')];
+    expect(cards).toHaveLength(5);
+    expect(cards[0]?.textContent).toContain('Banco ICBC');
+    expect(cards.at(-1)?.textContent).toContain('Project Manager');
+    expect(element.textContent).not.toContain('fuente aprobada del repositorio');
   });
 
   it('renders leadership and ways of working from localized feature content and handles empty items', () => {

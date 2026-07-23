@@ -19,10 +19,6 @@
         orientation="compact"
         [showConnector]="content().items.length > 1"
       />
-
-      @if (content().items.length === 0) {
-        <p class="home-experience__notice">{{ content().verificationNotice }}</p>
-      }
     </gh-stack>
   </gh-container>
 </gh-section>

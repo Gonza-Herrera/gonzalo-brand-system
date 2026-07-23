@@ -11,6 +11,7 @@ export interface GhExperienceCardLabels {
   readonly responsibilities: string;
   readonly achievements: string;
   readonly technologies: string;
+  readonly capabilities?: string;
 }
 
 export const GH_EXPERIENCE_CARD_DEFAULT_LABELS: GhExperienceCardLabels = {
@@ -18,6 +19,7 @@ export const GH_EXPERIENCE_CARD_DEFAULT_LABELS: GhExperienceCardLabels = {
   responsibilities: 'Responsibilities',
   achievements: 'Key achievements',
   technologies: 'Technologies',
+  capabilities: 'Capabilities',
 };
 
 export interface GhExperienceCardData {
@@ -31,10 +33,11 @@ export interface GhExperienceCardData {
   readonly location?: string;
   readonly workMode?: GhExperienceWorkMode;
   readonly workModeLabel?: string;
-  readonly description?: string;
+  readonly description?: string | readonly string[];
   readonly responsibilities?: readonly string[];
   readonly achievements?: readonly string[];
   readonly technologies?: readonly string[];
+  readonly capabilities?: readonly string[];
   readonly companyLogoSrc?: string;
   readonly companyLogoAlt?: string;
 }

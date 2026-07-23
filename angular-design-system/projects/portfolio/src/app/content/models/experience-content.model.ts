@@ -45,6 +45,14 @@ export const PORTFOLIO_EXPERIENCE_DIRECTION_IDS = [
   'engineering-mentoring',
 ] as const;
 
+export const PORTFOLIO_PROFESSIONAL_EXPERIENCE_IDS = [
+  'icbc-frontend-developer',
+  'endava-team-leader',
+  'vortex-frontend-developer',
+  'develative-frontend-developer',
+  'develative-project-manager',
+] as const;
+
 export type PortfolioExperienceHighlightId = (typeof PORTFOLIO_EXPERIENCE_HIGHLIGHT_IDS)[number];
 export type PortfolioExperienceLeadershipId = (typeof PORTFOLIO_EXPERIENCE_LEADERSHIP_IDS)[number];
 export type PortfolioExperienceWayOfWorkingId =
@@ -52,6 +60,8 @@ export type PortfolioExperienceWayOfWorkingId =
 export type PortfolioExperienceCapabilityGroupId =
   (typeof PORTFOLIO_EXPERIENCE_CAPABILITY_GROUP_IDS)[number];
 export type PortfolioExperienceDirectionId = (typeof PORTFOLIO_EXPERIENCE_DIRECTION_IDS)[number];
+export type PortfolioProfessionalExperienceId =
+  (typeof PORTFOLIO_PROFESSIONAL_EXPERIENCE_IDS)[number];
 
 export interface PortfolioExperienceHeroHighlightContent {
   readonly id: PortfolioExperienceHighlightId;
@@ -81,18 +91,20 @@ export interface PortfolioExperienceLogoContent {
 }
 
 export interface PortfolioProfessionalExperienceContent {
-  readonly id: string;
+  readonly id: PortfolioProfessionalExperienceId;
+  readonly order: number;
   readonly role: string;
   readonly company: string;
   readonly startDate: string;
   readonly endDate?: string;
   readonly location?: string;
   readonly workMode?: GhExperienceWorkMode;
-  readonly summary: string;
+  readonly summary: readonly string[];
   readonly responsibilities: readonly string[];
   readonly achievements?: readonly string[];
   readonly technologies?: readonly string[];
-  readonly current?: boolean;
+  readonly capabilities?: readonly string[];
+  readonly current: boolean;
   readonly logo?: PortfolioExperienceLogoContent;
   readonly confidentialityNote?: string;
 }
@@ -107,7 +119,6 @@ export interface PortfolioExperienceTimelineContent {
   readonly eyebrow: string;
   readonly title: string;
   readonly description: string;
-  readonly verificationNotice: string;
   readonly labels: PortfolioExperienceTimelineLabels;
   readonly items: readonly PortfolioProfessionalExperienceContent[];
 }

@@ -32,10 +32,14 @@ class ExperienceCardTestHost {
     current: true,
     location: 'Argentina',
     workMode: 'remote',
-    description: 'Demonstration content for leadership and frontend architecture.',
+    description: [
+      'Demonstration content for leadership and frontend architecture.',
+      'A second paragraph keeps longer professional context readable.',
+    ],
     responsibilities: ['Build reusable components', 'Review pull requests'],
     achievements: ['Improved delivery clarity', 'Mentored frontend engineers'],
-    technologies: ['Angular', 'Leadership', 'AI'],
+    technologies: ['Angular', 'TypeScript'],
+    capabilities: ['Leadership', 'Mentoring'],
     companyLogoSrc: '/company-logo.png',
     companyLogoAlt: 'Demonstration Company logo',
   });
@@ -69,7 +73,9 @@ describe('GhExperienceCardComponent', () => {
     expect(element.querySelectorAll('.experience-card__content li')).toHaveLength(4);
     expect(element.textContent).toContain('Responsibilities');
     expect(element.textContent).toContain('Key achievements');
-    expect(element.querySelectorAll('gh-tag')).toHaveLength(3);
+    expect(element.querySelectorAll('.experience-card__description p')).toHaveLength(2);
+    expect(element.querySelectorAll('gh-tag')).toHaveLength(4);
+    expect(element.textContent).toContain('Capabilities');
     expect(image?.getAttribute('loading')).toBe('lazy');
     expect(image?.alt).toBe('Demonstration Company logo');
     expect(element.querySelector('.gh-card--elevated')).not.toBeNull();
@@ -89,8 +95,25 @@ describe('GhExperienceCardComponent', () => {
 
     expect(element.querySelector('img')).toBeNull();
     expect(element.querySelector('.experience-card__content section')).toBeNull();
-    expect(element.querySelector('.experience-card__technologies')).toBeNull();
+    expect(element.querySelector('.experience-card__skills')).toBeNull();
     expect(element.querySelector('.experience-card__period')?.textContent).toContain('2021 — 2024');
+  });
+
+  it('keeps a single description string backwards compatible', () => {
+    const fixture = TestBed.createComponent(ExperienceCardTestHost);
+    fixture.componentInstance.experience.set({
+      role: 'Frontend Engineer',
+      company: 'Example Organization',
+      startDate: '2021',
+      description: 'One concise description.',
+    });
+    fixture.detectChanges();
+
+    const paragraphs = (fixture.nativeElement as HTMLElement).querySelectorAll(
+      '.experience-card__description p',
+    );
+    expect(paragraphs).toHaveLength(1);
+    expect(paragraphs[0]?.textContent).toContain('One concise description.');
   });
 
   it('localizes internal labels, aria copy and nested heading levels', () => {
@@ -101,6 +124,7 @@ describe('GhExperienceCardComponent', () => {
       responsibilities: 'Responsabilidades',
       achievements: 'Aportes destacados',
       technologies: 'Tecnologías',
+      capabilities: 'Capacidades',
     });
     fixture.detectChanges();
 
@@ -109,7 +133,7 @@ describe('GhExperienceCardComponent', () => {
     expect(element.querySelector('h3')?.textContent).toContain('Frontend Tech Lead');
     expect(
       [...element.querySelectorAll('h4')].map((heading) => heading.textContent?.trim()),
-    ).toEqual(['Responsabilidades', 'Aportes destacados', 'Tecnologías']);
+    ).toEqual(['Responsabilidades', 'Aportes destacados', 'Tecnologías', 'Capacidades']);
     expect(element.querySelector('article')?.getAttribute('aria-label')).toBe(
       'Frontend Tech Lead en Demonstration Company',
     );

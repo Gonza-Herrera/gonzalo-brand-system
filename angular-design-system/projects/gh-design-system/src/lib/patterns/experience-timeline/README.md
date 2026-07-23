@@ -43,7 +43,11 @@ The pattern renders an `ol`; each `li` contains a real `gh-experience-card`. Cur
 
 ## Internationalization and SSR
 
-Pass preformatted dates and localized `currentLabel` and `workModeLabel` through `GhExperienceCardData`. Pass localized internal headings through `cardLabels`; use `cardHeadingLevel="3"` when the Timeline sits below a page section `h2`. The component contains no browser APIs, generated dates or locale logic and is safe for SSR/hydration.
+Pass preformatted dates and localized `currentLabel` and `workModeLabel` through
+`GhExperienceCardData`. Descriptions may contain ordered paragraphs, while technologies and
+capabilities remain separate labelled groups. Pass localized internal headings through
+`cardLabels`; use `cardHeadingLevel="3"` when the Timeline sits below a page section `h2`. The
+component contains no browser APIs, generated dates or locale logic and is safe for SSR/hydration.
 
 ## Do / Don't / Limitations
 

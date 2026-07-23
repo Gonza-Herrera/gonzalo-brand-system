@@ -22,8 +22,9 @@ import { GhExperienceCardComponent, type GhExperienceCardData } from 'gh-design-
 - Required role, company and preformatted start date.
 - Optional end date and current state.
 - Location and typed work mode.
-- Description.
+- One description or an ordered collection of description paragraphs.
 - Readonly responsibilities, achievements and technologies.
+- Optional capabilities, separated semantically from technologies.
 - Optional company logo and alternative text.
 - Optional labels for current state and work mode.
 
@@ -31,6 +32,9 @@ The component also accepts `headingLevel` (`2` by default, or `3`) and a
 `GhExperienceCardLabels` object. The labels localize the relationship used by
 the Card's accessible name plus the Responsibilities, Achievements and
 Technologies headings.
+
+The optional `capabilities` label localizes the separate capabilities group and defaults to
+`Capabilities` for existing consumers.
 
 `highlighted` changes the visual Card variant without changing document
 semantics.
@@ -43,11 +47,12 @@ parse dates, assume timezones or select a locale.
 English work-mode and Card labels are safe defaults. Supply `workModeLabel`,
 `currentLabel` and `labels` when localized copy is required.
 
-## Achievements and technologies
+## Description, achievements and skills
 
 Responsibilities and achievements render as separate semantic lists.
-Technologies render as static public `GhTagComponent` instances. Current and work-mode states reuse
-`GhBadgeComponent`.
+Description arrays render as separate paragraphs in their supplied order. Technologies and
+capabilities render as separate labelled groups of static public `GhTagComponent` instances.
+Current and work-mode states reuse `GhBadgeComponent`.
 
 ## Logos
 

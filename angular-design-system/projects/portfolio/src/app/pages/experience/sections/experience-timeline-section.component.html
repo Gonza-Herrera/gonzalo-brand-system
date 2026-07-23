@@ -15,10 +15,6 @@
         orientation="vertical"
         [showConnector]="timelineItems().length > 1"
       />
-
-      @if (timelineItems().length === 0) {
-        <p class="experience-timeline__empty">{{ content().verificationNotice }}</p>
-      }
     </gh-stack>
   </gh-container>
 </gh-section>

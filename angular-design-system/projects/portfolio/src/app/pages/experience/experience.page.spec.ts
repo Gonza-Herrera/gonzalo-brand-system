@@ -30,6 +30,17 @@ describe('ExperiencePage', () => {
     expect(element.querySelector('#career-direction')).not.toBeNull();
     expect(element.querySelector('gh-contact-callout#contact')).not.toBeNull();
     expect(element.querySelector('gh-experience-timeline')).not.toBeNull();
+    const experienceCards = [...element.querySelectorAll('gh-experience-card')];
+    expect(experienceCards).toHaveLength(5);
+    expect(experienceCards[0]?.textContent).toContain('ICBC Bank');
+    expect(experienceCards[0]?.textContent).toContain('February 2023 — Present');
+    expect(experienceCards[0]?.textContent).toContain('Current');
+    expect(experienceCards.at(-1)?.textContent).toContain('Develative');
+    expect(experienceCards.at(-1)?.textContent).toContain('Project Manager');
+    expect(element.textContent).toContain('Responsibilities');
+    expect(element.textContent).toContain('Technologies');
+    expect(element.textContent).toContain('Capabilities');
+    expect(element.textContent).not.toContain('approved repository source');
     expect(element.textContent).not.toContain('PR 14');
   });
 
@@ -46,7 +57,16 @@ describe('ExperiencePage', () => {
     );
     expect(element.textContent).toContain('Impacto más allá de la implementación');
     expect(element.textContent).toContain('Hacia dónde conduce esta experiencia');
-    expect(element.textContent).toContain('fuente aprobada del repositorio');
+    const experienceCards = [...element.querySelectorAll('gh-experience-card')];
+    expect(experienceCards).toHaveLength(5);
+    expect(experienceCards[0]?.textContent).toContain('Banco ICBC');
+    expect(experienceCards[0]?.textContent).toContain('Febrero de 2023 — Actualidad');
+    expect(experienceCards[0]?.textContent).toContain('Actualidad');
+    expect(experienceCards.at(-1)?.textContent).toContain('Project Manager');
+    expect(element.textContent).toContain('Responsabilidades');
+    expect(element.textContent).toContain('Tecnologías');
+    expect(element.textContent).toContain('Capacidades');
+    expect(element.textContent).not.toContain('fuente aprobada del repositorio');
   });
 
   it('keeps every Experience action localized and native', () => {

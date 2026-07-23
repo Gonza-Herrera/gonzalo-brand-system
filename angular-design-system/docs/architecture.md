@@ -203,10 +203,9 @@ needed by Home is a backwards-compatible Project Card heading-level and label
 contract, which preserves correct `h2`/`h3` hierarchy and allows accessible
 strings to be localized.
 
-Home source data is intentionally conservative: project concepts are labelled,
-unverified professional history is represented by a localized empty state, and
-unverified social or publication URLs are omitted. This constraint belongs to
-the content layer rather than the reusable patterns.
+Home source data is intentionally conservative: project concepts are labelled, professional history
+is derived from the approved canonical Experience registry, and unverified social or publication
+URLs are omitted. This constraint belongs to the content layer rather than the reusable patterns.
 
 About follows the same typed-content boundary with a deeper editorial composition:
 
@@ -245,7 +244,7 @@ Pure Experience Card mapper
     ↓
 Experience Timeline and Cards
     ↓
-Home preview selector (first three, source order)
+Home preview selector (first three, editorial order)
     ↓
 Portfolio Experience and Home pages
 ```
@@ -256,15 +255,15 @@ Timeline consumes dates exactly as authored and owns the semantic ordered list; 
 sorts or calculates tenure.
 
 Home imports the same locale-specific professional collection and derives its preview through
-`selectFeaturedExperiences`. This keeps IDs, order and claims consistent without a second source of
-truth. The collections are currently empty because the repository has no approved employer, role or
-date source; both pages render localized verification copy instead of fictional records.
+`selectExperiencePreview`. This keeps IDs, company, role, period, current state and order consistent
+without a second source of truth. The canonical collections contain the same five stable IDs in
+English and Spanish, use explicit `order` values and mark ICBC as the only current record.
 
 Experience required one minimal backwards-compatible public-library extension:
-`GhExperienceCardData` now accepts responsibilities and a stable optional ID, while Card/Timeline
-accept localized internal labels and a `2 | 3` Card heading level. English defaults preserve existing
-consumers. Responsibilities and achievements remain separate semantic lists, and a Timeline placed
-under a section `h2` can expose role headings as `h3`.
+`GhExperienceCardData` now accepts ordered description paragraphs and a separate capabilities
+collection, while the optional localized capabilities label preserves existing consumers.
+Responsibilities and achievements remain semantic lists; technologies and capabilities render as
+distinct Tag groups; and a Timeline placed under a section `h2` exposes role headings as `h3`.
 
 Experience local styles are limited to editorial measure, Hero composition and token-based layout.
 Signals, pure mapping and the absence of browser APIs, generated IDs or dynamic dates keep direct

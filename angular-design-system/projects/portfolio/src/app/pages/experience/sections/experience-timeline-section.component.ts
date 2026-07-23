@@ -9,6 +9,7 @@ import {
 
 import type { PortfolioExperienceTimelineContent } from '../../../content/models/experience-content.model';
 import { mapPortfolioExperiencesToTimeline } from '../../../content/utils/experience-card.mapper';
+import { selectOrderedExperiences } from '../../../content/utils/experience-selectors';
 
 @Component({
   selector: 'app-experience-timeline-section',
@@ -28,6 +29,9 @@ export class ExperienceTimelineSectionComponent {
   readonly content = input.required<PortfolioExperienceTimelineContent>();
 
   protected readonly timelineItems = computed(() =>
-    mapPortfolioExperiencesToTimeline(this.content().items, this.content().labels),
+    mapPortfolioExperiencesToTimeline(
+      selectOrderedExperiences(this.content().items),
+      this.content().labels,
+    ),
   );
 }
