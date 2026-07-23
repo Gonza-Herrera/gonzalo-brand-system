@@ -17,6 +17,7 @@ import { PortfolioLocaleService } from '../../core/services/portfolio-locale.ser
 import { getPortfolioContactContent } from '../../content/contact-content.registry';
 import { resolvePortfolioContactChannels } from '../../content/utils/contact-channel.mapper';
 import { ContactFormComponent } from './components/contact-form/contact-form.component';
+import type { PortfolioContactEmailFallback } from './models/contact-form.model';
 
 @Component({
   selector: 'app-contact-page',
@@ -54,6 +55,17 @@ export class ContactPage {
   protected readonly availableChannels = computed(() =>
     resolvePortfolioContactChannels(this.content().channels.items, PORTFOLIO_CONFIG.urls),
   );
+  protected readonly fallbackEmail = computed<PortfolioContactEmailFallback | undefined>(() => {
+    const emailChannel = this.availableChannels().find((channel) => channel.id === 'email');
+    const address = emailChannel?.href.slice('mailto:'.length).split('?')[0]?.trim();
+
+    return emailChannel && address
+      ? {
+          href: emailChannel.href,
+          address,
+        }
+      : undefined;
+  });
   protected readonly channelFeatures = computed<readonly GhFeatureItem[]>(() =>
     this.availableChannels().map((channel) => ({
       title: channel.label,

@@ -71,7 +71,7 @@
         [description]="content().form.description"
         [headingLevel]="2"
       />
-      <app-contact-form [content]="content().form" />
+      <app-contact-form [content]="content().form" [fallbackEmail]="fallbackEmail()" />
     </gh-stack>
   </gh-container>
 </gh-section>

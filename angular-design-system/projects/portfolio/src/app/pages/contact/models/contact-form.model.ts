@@ -1,10 +1,11 @@
 export const CONTACT_FORM_LIMITS = {
-  name: 100,
-  email: 254,
-  company: 150,
-  subject: 160,
+  nameMin: 2,
+  nameMax: 80,
+  emailMax: 160,
+  subjectMin: 3,
+  subjectMax: 120,
   messageMin: 20,
-  messageMax: 3000,
+  messageMax: 2000,
 } as const;
 
 export type PortfolioContactSubmissionStatus =
@@ -13,20 +14,31 @@ export type PortfolioContactSubmissionStatus =
 export interface PortfolioContactFormValue {
   readonly name: string;
   readonly email: string;
-  readonly company: string;
   readonly subject: string;
   readonly message: string;
+  readonly botcheck: boolean;
 }
 
-export interface PortfolioContactSubmissionPayload {
+export interface Web3FormsContactPayload {
+  readonly access_key: string;
+  readonly from_name: string;
   readonly name: string;
   readonly email: string;
-  readonly company?: string;
   readonly subject: string;
   readonly message: string;
+  readonly botcheck: boolean;
 }
 
 export interface PortfolioContactSubmissionResult {
+  readonly success: true;
+}
+
+export interface Web3FormsResponse {
   readonly success: boolean;
-  readonly referenceId?: string;
+  readonly message?: string;
+}
+
+export interface PortfolioContactEmailFallback {
+  readonly href: string;
+  readonly address: string;
 }

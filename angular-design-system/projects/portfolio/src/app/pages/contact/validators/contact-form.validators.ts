@@ -5,3 +5,22 @@ export function nonWhitespaceValidator(control: AbstractControl<unknown>): Valid
     ? null
     : { whitespace: true };
 }
+
+export function trimmedMinLengthValidator(minLength: number) {
+  return (control: AbstractControl<unknown>): ValidationErrors | null => {
+    if (typeof control.value !== 'string' || control.value.length === 0) {
+      return null;
+    }
+
+    const actualLength = control.value.trim().length;
+
+    return actualLength >= minLength
+      ? null
+      : {
+          minlength: {
+            requiredLength: minLength,
+            actualLength,
+          },
+        };
+  };
+}

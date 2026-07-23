@@ -66,7 +66,7 @@ export interface PortfolioContactChannelsContent {
 export interface PortfolioContactFieldContent {
   readonly label: string;
   readonly description: string;
-  readonly optionalLabel?: string;
+  readonly placeholder: string;
   readonly requiredMessage?: string;
   readonly whitespaceMessage?: string;
   readonly invalidMessage?: string;
@@ -87,16 +87,18 @@ export interface PortfolioContactFormContent {
   readonly requiredFieldsMessage: string;
   readonly requiredLabel: string;
   readonly fieldGroupLabel: string;
+  readonly botcheckLabel: string;
+  readonly fallbackEmailLabel: string;
   readonly fields: {
     readonly name: PortfolioContactFieldContent;
     readonly email: PortfolioContactFieldContent;
-    readonly company: PortfolioContactFieldContent;
     readonly subject: PortfolioContactFieldContent;
     readonly message: PortfolioContactFieldContent;
   };
   readonly submitLabel: string;
   readonly submittingLabel: string;
   readonly errorSummary: string;
+  readonly errorWithoutFallbackDescription: string;
   readonly unavailable: PortfolioContactFormStatusContent;
   readonly success: PortfolioContactFormStatusContent;
   readonly error: PortfolioContactFormStatusContent;

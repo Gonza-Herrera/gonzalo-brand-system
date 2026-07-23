@@ -7,15 +7,33 @@
   display: grid;
   gap: var(--gh-space-sm);
   padding: var(--gh-space-lg);
-  border: var(--gh-border-width-default) solid var(--gh-status-warning-border);
   border-radius: var(--gh-radius-md);
+  border: var(--gh-border-width-default) solid;
+}
+
+.contact-form-status--unavailable {
+  border-color: var(--gh-status-warning-border);
   background: var(--gh-status-warning-background);
   color: var(--gh-status-warning-text);
+}
+
+.contact-form-status--success {
+  border-color: var(--gh-status-success-border);
+  background: var(--gh-status-success-background);
+  color: var(--gh-status-success-text);
+}
+
+.contact-form-status--error {
+  border-color: var(--gh-status-danger-border);
+  background: var(--gh-status-danger-background);
+  color: var(--gh-status-danger-text);
 }
 
 .contact-form-status h3,
 .contact-form-status p,
 .contact-form__required-note,
+.contact-form__validation-summary,
+.contact-form__fallback,
 .contact-field p {
   margin: 0;
 }
@@ -37,7 +55,6 @@
 .contact-form__required-note,
 .contact-field__description,
 .contact-field__counter,
-.contact-field__optional,
 .contact-field__required {
   color: var(--gh-text-secondary);
   font-size: var(--gh-font-size-caption);
@@ -45,6 +62,11 @@
 
 .contact-form__required-note {
   max-width: var(--gh-layout-reading-max);
+}
+
+.contact-form__validation-summary {
+  color: var(--gh-status-danger-text);
+  font-weight: var(--gh-font-weight-semibold);
 }
 
 .contact-form fieldset {
@@ -139,6 +161,31 @@
   color: var(--gh-status-danger-text);
   font-size: var(--gh-font-size-caption);
   font-weight: var(--gh-font-weight-semibold);
+}
+
+.contact-form__honeypot {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.contact-form__fallback {
+  color: var(--gh-text-secondary);
+  line-height: var(--gh-line-height-body);
+  overflow-wrap: anywhere;
+}
+
+.contact-form__fallback a {
+  color: var(--gh-text-accent);
+  font-weight: var(--gh-font-weight-semibold);
+}
+
+.contact-form__fallback a:focus-visible {
+  outline: var(--gh-border-width-focus) solid var(--gh-focus-ring);
+  outline-offset: var(--gh-space-xs);
 }
 
 @media (max-width: 48rem) {

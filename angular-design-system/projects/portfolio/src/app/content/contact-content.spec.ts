@@ -31,6 +31,12 @@ describe('Portfolio Contact content', () => {
     expect(Object.keys(EN_CONTACT_CONTENT.form.fields)).toEqual(
       Object.keys(ES_CONTACT_CONTENT.form.fields),
     );
+    expect(Object.keys(EN_CONTACT_CONTENT.form.fields)).toEqual([
+      'name',
+      'email',
+      'subject',
+      'message',
+    ]);
     expect(EN_CONTACT_CONTENT.explore.actions.map((action) => action.pageId)).toEqual(
       ES_CONTACT_CONTENT.explore.actions.map((action) => action.pageId),
     );
@@ -51,10 +57,24 @@ describe('Portfolio Contact content', () => {
       expect(content.form.unavailable.title.length).toBeGreaterThan(0);
       expect(content.form.success.title.length).toBeGreaterThan(0);
       expect(content.form.error.title.length).toBeGreaterThan(0);
+      expect(content.form.botcheckLabel.length).toBeGreaterThan(0);
+      expect(content.form.fallbackEmailLabel.length).toBeGreaterThan(0);
+      expect(
+        Object.values(content.form.fields).every((field) => field.placeholder.length > 0),
+      ).toBe(true);
     }
   });
 
-  it('publishes no unapproved destination or placeholder', () => {
+  it('centralizes Web3Forms configuration without committing a real access key', () => {
+    expect(PORTFOLIO_CONFIG.contactForm).toEqual({
+      provider: 'web3forms',
+      endpoint: 'https://api.web3forms.com/submit',
+      accessKey: '',
+      fromName: 'Gonzalo Herrera Portfolio',
+    });
+  });
+
+  it('publishes no unapproved destination', () => {
     expect(PORTFOLIO_CONFIG.urls).toEqual({
       email: undefined,
       linkedin: undefined,
@@ -66,11 +86,13 @@ describe('Portfolio Contact content', () => {
 
     for (const content of [EN_CONTACT_CONTENT, ES_CONTACT_CONTENT]) {
       const serialized = JSON.stringify(content);
-      expect(serialized).not.toContain('example.com');
       expect(serialized).not.toContain('EMAIL_REAL');
       expect(serialized).not.toContain('http://');
       expect(serialized).not.toContain('https://');
       expect(serialized).not.toContain('mailto:');
     }
+
+    expect(EN_CONTACT_CONTENT.form.fields.email.placeholder).toBe('you@example.com');
+    expect(ES_CONTACT_CONTENT.form.fields.email.placeholder).toBe('tu@ejemplo.com');
   });
 });

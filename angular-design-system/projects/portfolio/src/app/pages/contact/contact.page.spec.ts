@@ -1,11 +1,23 @@
 import { TestBed } from '@angular/core/testing';
 
 import { PortfolioLocaleService } from '../../core/services/portfolio-locale.service';
+import { ContactService } from './services/contact.service';
 import { ContactPage } from './contact.page';
 
 describe('ContactPage', () => {
   beforeEach(async () => {
-    await TestBed.configureTestingModule({ imports: [ContactPage] }).compileComponents();
+    await TestBed.configureTestingModule({
+      imports: [ContactPage],
+      providers: [
+        {
+          provide: ContactService,
+          useValue: {
+            isConfigured: () => false,
+            sendMessage: vi.fn(),
+          },
+        },
+      ],
+    }).compileComponents();
   });
 
   it('renders the complete English Contact page with one h1', () => {
@@ -23,6 +35,12 @@ describe('ContactPage', () => {
       'No public contact channel is configured yet',
     );
     expect(element.querySelector('#contact-form form')).not.toBeNull();
+    expect(
+      element.querySelectorAll(
+        '#contact-form input:not([type="checkbox"]), #contact-form textarea',
+      ),
+    ).toHaveLength(4);
+    expect(element.querySelector('#contact-botcheck')?.getAttribute('tabindex')).toBe('-1');
     expect(element.querySelector('#contact-privacy')?.textContent).toContain(
       'Before you send a message',
     );

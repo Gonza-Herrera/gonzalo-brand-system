@@ -8,8 +8,35 @@
           aria-live="polite"
           aria-atomic="true"
         >
-          <h3 id="contact-form-status-title">{{ content().unavailable.title }}</h3>
-          <p id="contact-form-status-description">{{ content().unavailable.description }}</p>
+          <h3>{{ content().unavailable.title }}</h3>
+          <p id="contact-form-unavailable-description">
+            {{ content().unavailable.description }}
+          </p>
+        </div>
+      }
+
+      @if (submissionStatus() === 'success') {
+        <div
+          class="contact-form-status contact-form-status--success"
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          <h3>{{ content().success.title }}</h3>
+          <p id="contact-form-success-description">{{ content().success.description }}</p>
+        </div>
+      }
+
+      @if (submissionStatus() === 'error') {
+        <div class="contact-form-status contact-form-status--error" role="alert" aria-atomic="true">
+          <h3>{{ content().error.title }}</h3>
+          <p id="contact-form-error-description">
+            {{
+              fallbackEmail()
+                ? content().error.description
+                : content().errorWithoutFallbackDescription
+            }}
+          </p>
         </div>
       }
 
@@ -17,17 +44,25 @@
         class="contact-form"
         [formGroup]="form"
         (ngSubmit)="submit()"
-        aria-describedby="contact-form-status-description contact-required-fields"
+        [attr.aria-describedby]="formDescribedBy()"
+        [attr.aria-busy]="isSubmitting() ? 'true' : null"
         novalidate
       >
         <p id="contact-required-fields" class="contact-form__required-note">
           {{ content().requiredFieldsMessage }}
         </p>
 
-        <fieldset
-          [disabled]="submissionStatus() !== 'idle'"
-          aria-describedby="contact-form-status-description"
-        >
+        @if (showValidationSummary()) {
+          <p
+            id="contact-form-validation-summary"
+            class="contact-form__validation-summary"
+            role="alert"
+          >
+            {{ content().errorSummary }}
+          </p>
+        }
+
+        <fieldset [disabled]="isUnavailable()">
           <legend>{{ content().fieldGroupLabel }}</legend>
 
           <div class="contact-form__grid">
@@ -44,7 +79,9 @@
                 formControlName="name"
                 type="text"
                 autocomplete="name"
-                [attr.maxlength]="limits.name"
+                [placeholder]="content().fields.name.placeholder"
+                [attr.minlength]="limits.nameMin"
+                [attr.maxlength]="limits.nameMax"
                 [attr.aria-describedby]="describedBy('name')"
                 [attr.aria-invalid]="ariaInvalid('name')"
                 aria-required="true"
@@ -69,7 +106,8 @@
                 type="email"
                 autocomplete="email"
                 inputmode="email"
-                [attr.maxlength]="limits.email"
+                [placeholder]="content().fields.email.placeholder"
+                [attr.maxlength]="limits.emailMax"
                 [attr.aria-describedby]="describedBy('email')"
                 [attr.aria-invalid]="ariaInvalid('email')"
                 aria-required="true"
@@ -77,30 +115,6 @@
               />
               @if (fieldError('email'); as error) {
                 <p id="contact-email-error" class="contact-field__error">{{ error }}</p>
-              }
-            </div>
-
-            <div class="contact-field">
-              <label for="contact-company">
-                {{ content().fields.company.label }}
-                <span class="contact-field__optional"
-                  >({{ content().fields.company.optionalLabel }})</span
-                >
-              </label>
-              <p id="contact-company-description" class="contact-field__description">
-                {{ content().fields.company.description }}
-              </p>
-              <input
-                id="contact-company"
-                formControlName="company"
-                type="text"
-                autocomplete="organization"
-                [attr.maxlength]="limits.company"
-                [attr.aria-describedby]="describedBy('company')"
-                [attr.aria-invalid]="ariaInvalid('company')"
-              />
-              @if (fieldError('company'); as error) {
-                <p id="contact-company-error" class="contact-field__error">{{ error }}</p>
               }
             </div>
 
@@ -117,15 +131,14 @@
                 formControlName="subject"
                 type="text"
                 autocomplete="off"
-                [attr.maxlength]="limits.subject"
+                [placeholder]="content().fields.subject.placeholder"
+                [attr.minlength]="limits.subjectMin"
+                [attr.maxlength]="limits.subjectMax"
                 [attr.aria-describedby]="describedBy('subject')"
                 [attr.aria-invalid]="ariaInvalid('subject')"
                 aria-required="true"
                 required
               />
-              <p class="contact-field__counter" aria-hidden="true">
-                {{ form.controls.subject.value.length }} / {{ limits.subject }}
-              </p>
               @if (fieldError('subject'); as error) {
                 <p id="contact-subject-error" class="contact-field__error">{{ error }}</p>
               }
@@ -142,6 +155,7 @@
               <textarea
                 id="contact-message"
                 formControlName="message"
+                [placeholder]="content().fields.message.placeholder"
                 [attr.minlength]="limits.messageMin"
                 [attr.maxlength]="limits.messageMax"
                 [attr.aria-describedby]="describedBy('message')"
@@ -157,18 +171,36 @@
               }
             </div>
           </div>
+
+          <div class="contact-form__honeypot" aria-hidden="true">
+            <label for="contact-botcheck">{{ content().botcheckLabel }}</label>
+            <input
+              id="contact-botcheck"
+              formControlName="botcheck"
+              type="checkbox"
+              tabindex="-1"
+              autocomplete="off"
+            />
+          </div>
         </fieldset>
 
         <gh-button
           type="submit"
           size="lg"
           fullWidth
-          [disabled]="submissionStatus() !== 'idle'"
+          [disabled]="isUnavailable()"
           [loading]="isSubmitting()"
         >
           {{ isSubmitting() ? content().submittingLabel : content().submitLabel }}
         </gh-button>
       </form>
+
+      @if (fallbackEmail(); as email) {
+        <p class="contact-form__fallback">
+          {{ content().fallbackEmailLabel }}
+          <a [href]="email.href">{{ email.address }}</a>
+        </p>
+      }
     </gh-stack>
   </div>
 </gh-card>

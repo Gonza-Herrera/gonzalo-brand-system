@@ -383,14 +383,14 @@ describe('Portfolio routing', () => {
     await fixture.whenStable();
     expect(title.getTitle()).toBe('Contact | Gonzalo Herrera');
     expect(meta.getTag('name="description"')?.content).toBe(
-      'Contact Gonzalo Herrera to discuss frontend engineering, Angular architecture, technical leadership and AI-augmented software development.',
+      'Contact Gonzalo Herrera to discuss frontend engineering, Angular, technical leadership, collaboration and software opportunities.',
     );
 
     await router.navigateByUrl('/es/contact');
     await fixture.whenStable();
     expect(title.getTitle()).toBe('Contacto | Gonzalo Herrera');
     expect(meta.getTag('name="description"')?.content).toBe(
-      'Contacta a Gonzalo Herrera para conversar sobre ingeniería frontend, arquitectura Angular, liderazgo técnico y desarrollo de software asistido por IA.',
+      'Contacta a Gonzalo Herrera para conversar sobre ingeniería frontend, Angular, liderazgo técnico, colaboración y oportunidades de software.',
     );
     expect(document.head.querySelectorAll('meta[name="description"]')).toHaveLength(1);
 

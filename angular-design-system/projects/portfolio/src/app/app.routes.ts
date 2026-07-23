@@ -82,9 +82,8 @@ export const routes: Routes = [
       },
       {
         path: 'contact',
-        data: { pageId: 'contact' },
-        loadComponent: () =>
-          import('./pages/contact/contact.page').then((module) => module.ContactPage),
+        loadChildren: () =>
+          import('./pages/contact/contact.routes').then((module) => module.CONTACT_ROUTES),
       },
       {
         path: '**',
