@@ -30,12 +30,15 @@ describe('GhClusterComponent', () => {
     fixture.detectChanges();
 
     const cluster = (fixture.nativeElement as HTMLElement).querySelector('gh-cluster');
+    const styles = getComputedStyle(cluster as HTMLElement);
 
     expect(cluster?.classList).toContain('gh-cluster');
     expect(cluster?.classList).toContain('gh-cluster--gap-sm');
     expect(cluster?.classList).toContain('gh-cluster--align-center');
     expect(cluster?.classList).toContain('gh-cluster--justify-start');
     expect(cluster?.querySelectorAll('span')).toHaveLength(3);
+    expect(styles.display).toBe('flex');
+    expect(styles.flexWrap).toBe('wrap');
   });
 
   it('applies gap, alignment and justification options', () => {

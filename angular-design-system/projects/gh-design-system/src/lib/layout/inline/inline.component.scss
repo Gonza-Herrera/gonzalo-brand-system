@@ -1,6 +1,6 @@
 @use '../layout-mixins' as layout;
 
-.gh-inline {
+:host {
   display: flex;
   max-width: 100%;
   width: fit-content;
@@ -8,14 +8,14 @@
   flex-direction: row;
 }
 
-.gh-inline--wrap {
+:host.gh-inline--wrap {
   flex-wrap: wrap;
 }
 
-.gh-inline--full-width {
+:host.gh-inline--full-width {
   width: 100%;
 }
 
-@include layout.gaps('.gh-inline');
-@include layout.inline-alignments('.gh-inline');
-@include layout.inline-justifications('.gh-inline');
+@include layout.gaps(':host.gh-inline');
+@include layout.inline-alignments(':host.gh-inline');
+@include layout.inline-justifications(':host.gh-inline');

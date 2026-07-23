@@ -1,6 +1,6 @@
 @use '../layout-mixins' as layout;
 
-.gh-cluster {
+:host {
   display: flex;
   max-width: 100%;
   width: fit-content;
@@ -8,6 +8,6 @@
   flex-wrap: wrap;
 }
 
-@include layout.gaps('.gh-cluster');
-@include layout.inline-alignments('.gh-cluster');
-@include layout.inline-justifications('.gh-cluster');
+@include layout.gaps(':host.gh-cluster');
+@include layout.inline-alignments(':host.gh-cluster');
+@include layout.inline-justifications(':host.gh-cluster');

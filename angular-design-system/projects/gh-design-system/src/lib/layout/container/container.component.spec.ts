@@ -29,11 +29,14 @@ describe('GhContainerComponent', () => {
     fixture.detectChanges();
 
     const container = (fixture.nativeElement as HTMLElement).querySelector('gh-container');
+    const styles = getComputedStyle(container as HTMLElement);
 
     expect(container?.classList).toContain('gh-container--xl');
     expect(container?.classList).toContain('gh-container--gutters-md');
     expect(container?.classList).toContain('gh-container--centered');
     expect(container?.textContent).toContain('Projected container content');
+    expect(styles.display).toBe('block');
+    expect(styles.boxSizing).toBe('border-box');
   });
 
   it('supports full width, alternate gutters and a non-centered layout', () => {

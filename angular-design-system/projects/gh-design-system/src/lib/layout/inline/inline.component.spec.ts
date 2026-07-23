@@ -38,12 +38,14 @@ describe('GhInlineComponent', () => {
     fixture.detectChanges();
 
     const inline = (fixture.nativeElement as HTMLElement).querySelector('gh-inline');
+    const styles = getComputedStyle(inline as HTMLElement);
 
     expect(inline?.classList).toContain('gh-inline--gap-sm');
     expect(inline?.classList).toContain('gh-inline--align-center');
     expect(inline?.classList).toContain('gh-inline--justify-start');
     expect(inline?.classList).toContain('gh-inline--wrap');
     expect(inline?.querySelector('button')).not.toBeNull();
+    expect(styles.display).toBe('flex');
   });
 
   it('supports full width, no wrap and alternate alignment', () => {

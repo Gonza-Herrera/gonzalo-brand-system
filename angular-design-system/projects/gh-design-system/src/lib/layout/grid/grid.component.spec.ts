@@ -32,12 +32,14 @@ describe('GhGridComponent', () => {
     fixture.detectChanges();
 
     const grid = (fixture.nativeElement as HTMLElement).querySelector('gh-grid');
+    const styles = getComputedStyle(grid as HTMLElement);
 
     expect(grid?.classList).toContain('gh-grid--columns-auto');
     expect(grid?.classList).toContain('gh-grid--min-md');
     expect(grid?.classList).toContain('gh-grid--gap-lg');
     expect(grid?.classList).toContain('gh-grid--align-stretch');
     expect(grid?.querySelectorAll('article')).toHaveLength(2);
+    expect(styles.display).toBe('grid');
   });
 
   it('applies fixed columns, minimum size, gap and alignment classes', () => {
