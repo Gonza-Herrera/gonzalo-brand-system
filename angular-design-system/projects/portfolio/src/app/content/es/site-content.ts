@@ -62,13 +62,9 @@ export const ES_SITE_CONTENT = {
     projects: ES_PROJECTS_CONTENT,
     content: ES_CONTENT_HUB_CONTENT,
     contact: {
-      eyebrow: 'Contacto',
-      title: 'Iniciemos una conversación con propósito',
-      description: 'Un futuro espacio para conversar sobre ingeniería, liderazgo y colaboración.',
-      stage: 'La experiencia completa de Contacto se implementará en el PR 17.',
       metaTitle: 'Contacto',
       metaDescription:
-        'Contactá a Gonzalo Herrera para conversar sobre ingeniería, liderazgo y colaboración.',
+        'Contacta a Gonzalo Herrera para conversar sobre ingeniería frontend, arquitectura Angular, liderazgo técnico y desarrollo de software asistido por IA.',
     },
     'not-found': {
       eyebrow: '404',

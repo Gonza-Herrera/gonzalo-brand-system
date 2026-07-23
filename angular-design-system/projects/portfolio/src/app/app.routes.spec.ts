@@ -73,8 +73,8 @@ describe('Portfolio routing', () => {
       },
       {
         path: '/contact',
-        en: 'Start a thoughtful conversation',
-        es: 'Iniciemos una conversación con propósito',
+        en: 'Let’s talk about building better software.',
+        es: 'Conversemos sobre cómo construir mejor software.',
       },
     ];
 
@@ -233,6 +233,17 @@ describe('Portfolio routing', () => {
     expect(activeExperienceLinks).toHaveLength(1);
     expect(activeExperienceLinks[0]?.textContent).toContain('Experience');
 
+    await router.navigateByUrl('/en/contact');
+    await fixture.whenStable();
+    fixture.detectChanges();
+    const activeContactLinks = (
+      fixture.nativeElement as HTMLElement
+    ).querySelectorAll<HTMLAnchorElement>(
+      'gh-navigation .gh-navigation__link[aria-current="page"]',
+    );
+    expect(activeContactLinks).toHaveLength(1);
+    expect(activeContactLinks[0]?.textContent).toContain('Contact');
+
     await router.navigateByUrl('/es/unknown');
     await fixture.whenStable();
     fixture.detectChanges();
@@ -342,6 +353,21 @@ describe('Portfolio routing', () => {
     expect(meta.getTag('name="description"')?.content).toBe(
       'The requested portfolio content could not be found.',
     );
+
+    await router.navigateByUrl('/en/contact');
+    await fixture.whenStable();
+    expect(title.getTitle()).toBe('Contact | Gonzalo Herrera');
+    expect(meta.getTag('name="description"')?.content).toBe(
+      'Contact Gonzalo Herrera to discuss frontend engineering, Angular architecture, technical leadership and AI-augmented software development.',
+    );
+
+    await router.navigateByUrl('/es/contact');
+    await fixture.whenStable();
+    expect(title.getTitle()).toBe('Contacto | Gonzalo Herrera');
+    expect(meta.getTag('name="description"')?.content).toBe(
+      'Contacta a Gonzalo Herrera para conversar sobre ingeniería frontend, arquitectura Angular, liderazgo técnico y desarrollo de software asistido por IA.',
+    );
+    expect(document.head.querySelectorAll('meta[name="description"]')).toHaveLength(1);
 
     await router.navigateByUrl('/es/unknown');
     await fixture.whenStable();

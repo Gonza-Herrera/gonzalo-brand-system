@@ -2,8 +2,9 @@
 
 Portfolio copy is typed and kept separate from page templates. English and Spanish implement the
 same `PortfolioSiteContent` structure, including identity, shell, navigation, footer, complete Home,
-About, Experience, Projects and Content pages, typed Project/Content detail registries, localized Not
-Found states and metadata. Stable IDs, slugs and paths remain locale-independent.
+About, Experience, Projects and Content pages, Contact metadata, typed Project/Content detail
+registries, localized Not Found states and metadata. Stable IDs, slugs and paths remain
+locale-independent. Full Contact content uses its own typed lazy registry.
 
 `portfolio-content.registry.ts` selects content by validated route locale. Compile-time contracts and
 parity tests prevent either locale from drifting. There is no HTTP-loaded JSON, external translation
@@ -118,6 +119,28 @@ Implementation, Challenges, Results, Lessons and Next Steps with stable nested I
 routes render concise concept overviews without fabricated implementation detail. See the
 [Projects guide](../pages/projects/README.md) and
 [case-study guidelines](../../../../../docs/portfolio-case-studies.md).
+
+## Contact content
+
+Contact uses `PortfolioContactContent` plus `en/contact.content.ts` and `es/contact.content.ts`.
+Stable highlight IDs (`engineering`, `leadership`, `ai`), six topic IDs and channel IDs (`email`,
+`linkedin`, `github`) must retain the same order in both locales. Form field keys, unavailable,
+success/error copy and Explore destinations also remain structurally equivalent.
+
+Contact destinations do not belong in localized content. The page resolves channel descriptors
+against `PORTFOLIO_CONFIG.urls`; empty or protocol-incompatible entries are omitted. No current
+destination is configured because the approved repository source does not contain an email or
+profile URL. Never add a placeholder to make a channel render.
+
+The form content owns labels, descriptions, required/optional text, localized validator messages,
+status feedback and privacy copy. Angular Forms validators and length limits remain code contracts,
+not editorial content. Success copy may only become visible after a real integration confirms a
+submission; the current UI is always `unavailable` and performs no request.
+
+`contact-content.registry.ts` is imported by the lazy Contact page rather than the global site
+registry. Only metadata stays global, keeping long bilingual Contact copy and Angular Forms outside
+unrelated routes. See the [Contact page guide](../pages/contact/README.md) and
+[form contract](../../../../../docs/portfolio-contact-form.md).
 
 ## Data integrity
 

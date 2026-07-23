@@ -1,7 +1,13 @@
 import { GH_PROJECT_STATUSES } from 'gh-design-system';
 
 import { PORTFOLIO_CONTENT, getPortfolioContent } from './portfolio-content.registry';
+import { getPortfolioContactContent } from './contact-content.registry';
 import { PORTFOLIO_EXPERTISE_IDS, PORTFOLIO_HERO_HIGHLIGHT_IDS } from './models/home-content.model';
+import {
+  PORTFOLIO_CONTACT_CHANNEL_IDS,
+  PORTFOLIO_CONTACT_HIGHLIGHT_IDS,
+  PORTFOLIO_CONTACT_TOPIC_IDS,
+} from './models/contact-content.model';
 import type { PortfolioLinkContent } from './models/link-content.model';
 import { PORTFOLIO_NAVIGATION_PAGE_IDS, PORTFOLIO_PAGE_IDS } from './models/page-content.model';
 import { PORTFOLIO_LOCALES } from './models/portfolio-locale.type';
@@ -61,6 +67,20 @@ describe('Portfolio content registry', () => {
       expect(home.featuredContent.item).toBe(
         content.pages.content.items.find((item) => item.featured && item.status === 'published'),
       );
+
+      const contact = getPortfolioContactContent(locale);
+      expect(contact.hero.highlights.map((item) => item.id)).toEqual(
+        PORTFOLIO_CONTACT_HIGHLIGHT_IDS,
+      );
+      expect(contact.topics.items.map((item) => item.id)).toEqual(PORTFOLIO_CONTACT_TOPIC_IDS);
+      expect(contact.channels.items.map((item) => item.id)).toEqual(PORTFOLIO_CONTACT_CHANNEL_IDS);
+      expect(contact.explore.actions.map((action) => action.pageId)).toEqual([
+        'experience',
+        'projects',
+        'content',
+      ]);
+      expect(JSON.stringify(contact)).not.toContain('example.com');
+      expect(JSON.stringify(contact)).not.toContain('mailto:');
     }
 
     expect(PORTFOLIO_CONTENT.en.pages.about.hero.title).not.toBe(

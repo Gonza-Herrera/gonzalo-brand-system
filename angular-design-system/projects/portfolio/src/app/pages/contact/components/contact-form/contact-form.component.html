@@ -1,0 +1,174 @@
+<gh-card variant="outlined" padding="lg" radius="lg">
+  <div ghCardContent>
+    <gh-stack gap="lg">
+      @if (submissionStatus() === 'unavailable') {
+        <div
+          class="contact-form-status contact-form-status--unavailable"
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          <h3 id="contact-form-status-title">{{ content().unavailable.title }}</h3>
+          <p id="contact-form-status-description">{{ content().unavailable.description }}</p>
+        </div>
+      }
+
+      <form
+        class="contact-form"
+        [formGroup]="form"
+        (ngSubmit)="submit()"
+        aria-describedby="contact-form-status-description contact-required-fields"
+        novalidate
+      >
+        <p id="contact-required-fields" class="contact-form__required-note">
+          {{ content().requiredFieldsMessage }}
+        </p>
+
+        <fieldset
+          [disabled]="submissionStatus() !== 'idle'"
+          aria-describedby="contact-form-status-description"
+        >
+          <legend>{{ content().fieldGroupLabel }}</legend>
+
+          <div class="contact-form__grid">
+            <div class="contact-field">
+              <label for="contact-name">
+                {{ content().fields.name.label }}
+                <span class="contact-field__required">({{ content().requiredLabel }})</span>
+              </label>
+              <p id="contact-name-description" class="contact-field__description">
+                {{ content().fields.name.description }}
+              </p>
+              <input
+                id="contact-name"
+                formControlName="name"
+                type="text"
+                autocomplete="name"
+                [attr.maxlength]="limits.name"
+                [attr.aria-describedby]="describedBy('name')"
+                [attr.aria-invalid]="ariaInvalid('name')"
+                aria-required="true"
+                required
+              />
+              @if (fieldError('name'); as error) {
+                <p id="contact-name-error" class="contact-field__error">{{ error }}</p>
+              }
+            </div>
+
+            <div class="contact-field">
+              <label for="contact-email">
+                {{ content().fields.email.label }}
+                <span class="contact-field__required">({{ content().requiredLabel }})</span>
+              </label>
+              <p id="contact-email-description" class="contact-field__description">
+                {{ content().fields.email.description }}
+              </p>
+              <input
+                id="contact-email"
+                formControlName="email"
+                type="email"
+                autocomplete="email"
+                inputmode="email"
+                [attr.maxlength]="limits.email"
+                [attr.aria-describedby]="describedBy('email')"
+                [attr.aria-invalid]="ariaInvalid('email')"
+                aria-required="true"
+                required
+              />
+              @if (fieldError('email'); as error) {
+                <p id="contact-email-error" class="contact-field__error">{{ error }}</p>
+              }
+            </div>
+
+            <div class="contact-field">
+              <label for="contact-company">
+                {{ content().fields.company.label }}
+                <span class="contact-field__optional"
+                  >({{ content().fields.company.optionalLabel }})</span
+                >
+              </label>
+              <p id="contact-company-description" class="contact-field__description">
+                {{ content().fields.company.description }}
+              </p>
+              <input
+                id="contact-company"
+                formControlName="company"
+                type="text"
+                autocomplete="organization"
+                [attr.maxlength]="limits.company"
+                [attr.aria-describedby]="describedBy('company')"
+                [attr.aria-invalid]="ariaInvalid('company')"
+              />
+              @if (fieldError('company'); as error) {
+                <p id="contact-company-error" class="contact-field__error">{{ error }}</p>
+              }
+            </div>
+
+            <div class="contact-field">
+              <label for="contact-subject">
+                {{ content().fields.subject.label }}
+                <span class="contact-field__required">({{ content().requiredLabel }})</span>
+              </label>
+              <p id="contact-subject-description" class="contact-field__description">
+                {{ content().fields.subject.description }}
+              </p>
+              <input
+                id="contact-subject"
+                formControlName="subject"
+                type="text"
+                autocomplete="off"
+                [attr.maxlength]="limits.subject"
+                [attr.aria-describedby]="describedBy('subject')"
+                [attr.aria-invalid]="ariaInvalid('subject')"
+                aria-required="true"
+                required
+              />
+              <p class="contact-field__counter" aria-hidden="true">
+                {{ form.controls.subject.value.length }} / {{ limits.subject }}
+              </p>
+              @if (fieldError('subject'); as error) {
+                <p id="contact-subject-error" class="contact-field__error">{{ error }}</p>
+              }
+            </div>
+
+            <div class="contact-field contact-field--message">
+              <label for="contact-message">
+                {{ content().fields.message.label }}
+                <span class="contact-field__required">({{ content().requiredLabel }})</span>
+              </label>
+              <p id="contact-message-description" class="contact-field__description">
+                {{ content().fields.message.description }}
+              </p>
+              <textarea
+                id="contact-message"
+                formControlName="message"
+                [attr.minlength]="limits.messageMin"
+                [attr.maxlength]="limits.messageMax"
+                [attr.aria-describedby]="describedBy('message')"
+                [attr.aria-invalid]="ariaInvalid('message')"
+                aria-required="true"
+                required
+              ></textarea>
+              <p class="contact-field__counter" aria-hidden="true">
+                {{ form.controls.message.value.length }} / {{ limits.messageMax }}
+              </p>
+              @if (fieldError('message'); as error) {
+                <p id="contact-message-error" class="contact-field__error">{{ error }}</p>
+              }
+            </div>
+          </div>
+        </fieldset>
+
+        <gh-button
+          type="submit"
+          size="lg"
+          fullWidth
+          [disabled]="submissionStatus() !== 'idle'"
+          [loading]="isSubmitting()"
+        >
+          {{ isSubmitting() ? content().submittingLabel : content().submitLabel }}
+        </gh-button>
+      </form>
+    </gh-stack>
+  </div>
+</gh-card>
