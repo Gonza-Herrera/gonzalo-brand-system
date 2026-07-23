@@ -76,6 +76,10 @@ export class PortfolioShellComponent {
     },
   ]);
 
+  protected navigateInternally(href: string): void {
+    void this.router.navigateByUrl(href);
+  }
+
   constructor() {
     effect(() => {
       const url = this.currentUrl();

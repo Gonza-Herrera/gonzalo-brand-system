@@ -6,7 +6,11 @@
 >
   <gh-container size="wide">
     <div class="gh-navigation__bar">
-      <a class="gh-navigation__brand" [href]="brandHref()">
+      <a
+        class="gh-navigation__brand"
+        [href]="brandHref()"
+        (click)="handleLinkClick($event, brandHref())"
+      >
         <ng-content select="[ghNavigationLogo]" />
         <span>{{ brand() }}</span>
       </a>
@@ -40,7 +44,7 @@
                   [attr.aria-current]="item.active ? 'page' : null"
                   [attr.target]="item.external ? '_blank' : null"
                   [attr.rel]="item.external ? 'noopener noreferrer' : null"
-                  (click)="closeMenu()"
+                  (click)="handleLinkClick($event, item.href, item.external ?? false)"
                 >
                   {{ item.label }}
                   @if (item.external) {
