@@ -31,11 +31,14 @@ describe('GhStackComponent', () => {
     fixture.detectChanges();
 
     const stack = (fixture.nativeElement as HTMLElement).querySelector('gh-stack');
+    const styles = getComputedStyle(stack as HTMLElement);
 
     expect(stack?.classList).toContain('gh-stack--gap-md');
     expect(stack?.classList).toContain('gh-stack--align-stretch');
     expect(stack?.classList).toContain('gh-stack--justify-start');
     expect(stack?.querySelectorAll('span')).toHaveLength(2);
+    expect(styles.display).toBe('flex');
+    expect(styles.flexDirection).toBe('column');
   });
 
   it('applies gap, alignment, justification and wrap options', () => {

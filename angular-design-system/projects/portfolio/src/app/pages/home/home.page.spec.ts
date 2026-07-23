@@ -40,6 +40,7 @@ describe('HomePage', () => {
 
     const element = fixture.nativeElement as HTMLElement;
     expect(element.querySelectorAll('h1')).toHaveLength(1);
+    expect(element.querySelector('h1')?.textContent).toContain('Pensá en grande. Construí mejor.');
     expect(element.textContent).toContain('Qué ayudo a mejorar en los equipos');
     expect(element.textContent).toContain('En desarrollo');
     expect(element.querySelectorAll('gh-project-card')).toHaveLength(1);

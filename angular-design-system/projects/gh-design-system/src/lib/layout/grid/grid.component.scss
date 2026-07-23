@@ -1,55 +1,55 @@
 @use '../../styles/tokens/breakpoints' as breakpoints;
 @use '../layout-mixins' as layout;
 
-.gh-grid {
+:host {
   display: grid;
   width: 100%;
   min-width: 0;
 }
 
-.gh-grid--min-sm {
+:host.gh-grid--min-sm {
   --gh-grid-current-min: var(--gh-grid-min-sm);
 }
 
-.gh-grid--min-md {
+:host.gh-grid--min-md {
   --gh-grid-current-min: var(--gh-grid-min-md);
 }
 
-.gh-grid--min-lg {
+:host.gh-grid--min-lg {
   --gh-grid-current-min: var(--gh-grid-min-lg);
 }
 
-.gh-grid--columns-auto {
+:host.gh-grid--columns-auto {
   grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--gh-grid-current-min)), 1fr));
 }
 
-.gh-grid--columns-1,
-.gh-grid--columns-2,
-.gh-grid--columns-3,
-.gh-grid--columns-4 {
+:host.gh-grid--columns-1,
+:host.gh-grid--columns-2,
+:host.gh-grid--columns-3,
+:host.gh-grid--columns-4 {
   grid-template-columns: minmax(0, 1fr);
 }
 
 @media (min-width: breakpoints.$gh-breakpoint-sm) {
-  .gh-grid--columns-2,
-  .gh-grid--columns-3,
-  .gh-grid--columns-4 {
+  :host.gh-grid--columns-2,
+  :host.gh-grid--columns-3,
+  :host.gh-grid--columns-4 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (min-width: breakpoints.$gh-breakpoint-md) {
-  .gh-grid--columns-3,
-  .gh-grid--columns-4 {
+  :host.gh-grid--columns-3,
+  :host.gh-grid--columns-4 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
 @media (min-width: breakpoints.$gh-breakpoint-lg) {
-  .gh-grid--columns-4 {
+  :host.gh-grid--columns-4 {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
-@include layout.gaps('.gh-grid');
-@include layout.standard-alignments('.gh-grid');
+@include layout.gaps(':host.gh-grid');
+@include layout.standard-alignments(':host.gh-grid');

@@ -50,7 +50,7 @@ describe('Portfolio routing', () => {
     fixture.detectChanges();
 
     const pages = [
-      { path: '', en: 'Think bigger. Build smarter.', es: 'Think bigger. Build smarter.' },
+      { path: '', en: 'Think bigger. Build smarter.', es: 'Pensá en grande. Construí mejor.' },
       {
         path: '/about',
         en: 'Engineering, leadership and better ways of building software.',

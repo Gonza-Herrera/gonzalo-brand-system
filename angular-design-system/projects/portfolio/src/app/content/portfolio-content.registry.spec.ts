@@ -86,6 +86,9 @@ describe('Portfolio content registry', () => {
     expect(PORTFOLIO_CONTENT.en.pages.about.hero.title).not.toBe(
       PORTFOLIO_CONTENT.es.pages.about.hero.title,
     );
+    expect(PORTFOLIO_CONTENT.en.pages.home.hero.title).not.toBe(
+      PORTFOLIO_CONTENT.es.pages.home.hero.title,
+    );
     expect(PORTFOLIO_CONTENT.en.pages.home.featuredContent.item.id).toBe(
       PORTFOLIO_CONTENT.es.pages.home.featuredContent.item.id,
     );

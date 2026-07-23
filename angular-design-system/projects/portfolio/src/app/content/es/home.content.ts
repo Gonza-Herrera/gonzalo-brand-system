@@ -16,7 +16,7 @@ export const ES_HOME_CONTENT = {
   metaTitleIsAbsolute: true,
   hero: {
     eyebrow: 'Liderazgo frontend · Angular · IA',
-    title: 'Think bigger. Build smarter.',
+    title: 'Pensá en grande. Construí mejor.',
     role: 'Frontend Tech Lead & AI-Augmented Engineer',
     description:
       'Ayudo a equipos a construir mejor software a través de ingeniería, liderazgo e inteligencia artificial.',
