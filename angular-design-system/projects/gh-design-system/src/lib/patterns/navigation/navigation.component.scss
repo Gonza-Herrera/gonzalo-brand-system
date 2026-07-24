@@ -1,0 +1,182 @@
+@use '../../styles/tokens/breakpoints' as breakpoints;
+@use '../pattern-foundations' as pattern;
+
+:host {
+  display: block;
+  min-width: 0;
+}
+
+.gh-navigation {
+  z-index: 20;
+  border-bottom: var(--gh-border-width-default) solid var(--gh-pattern-navigation-border);
+  background: var(--gh-pattern-navigation-background);
+  color: var(--gh-text-primary);
+}
+
+.gh-navigation--sticky {
+  position: sticky;
+  top: 0;
+}
+
+.gh-navigation--transparent {
+  background: transparent;
+}
+
+.gh-navigation__bar {
+  display: grid;
+  min-height: 4rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--gh-space-sm) var(--gh-space-md);
+}
+
+.gh-navigation__brand,
+.gh-navigation__link {
+  border-radius: var(--gh-radius-sm);
+  color: var(--gh-text-primary);
+  text-decoration: none;
+
+  &:focus-visible {
+    outline: var(--gh-border-width-focus) solid var(--gh-focus-ring);
+    outline-offset: var(--gh-border-width-focus);
+  }
+}
+
+.gh-navigation__brand {
+  display: inline-flex;
+  min-height: 2.75rem;
+  min-width: 0;
+  align-items: center;
+  gap: var(--gh-space-sm);
+  width: fit-content;
+  font-family: var(--gh-font-family-display);
+  font-weight: var(--gh-font-weight-bold);
+  overflow-wrap: anywhere;
+}
+
+.gh-navigation__toggle {
+  display: inline-grid;
+  width: 2.75rem;
+  min-height: 2.75rem;
+  place-items: center;
+  border: var(--gh-border-width-default) solid var(--gh-action-secondary-border);
+  border-radius: var(--gh-radius-md);
+  background: var(--gh-action-secondary-background);
+  color: var(--gh-action-secondary-text);
+  font: inherit;
+  font-size: var(--gh-font-size-body-large);
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: var(--gh-border-width-focus) solid var(--gh-focus-ring);
+    outline-offset: var(--gh-border-width-focus);
+  }
+}
+
+.gh-navigation__panel {
+  display: none;
+  min-width: 0;
+  grid-column: 1 / -1;
+  padding-block: var(--gh-space-sm) var(--gh-space-md);
+}
+
+.gh-navigation__panel--open {
+  display: grid;
+  gap: var(--gh-space-md);
+}
+
+.gh-navigation nav ul {
+  display: grid;
+  gap: var(--gh-space-xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gh-navigation__link {
+  position: relative;
+  display: flex;
+  min-height: 2.75rem;
+  align-items: center;
+  padding: var(--gh-space-sm);
+  color: var(--gh-text-secondary);
+  font-size: var(--gh-font-size-label);
+  font-weight: var(--gh-font-weight-medium);
+  transition:
+    color var(--gh-motion-duration-fast) var(--gh-motion-easing-standard),
+    background-color var(--gh-motion-duration-fast) var(--gh-motion-easing-standard);
+
+  &:hover {
+    background: var(--gh-action-ghost-hover);
+    color: var(--gh-text-primary);
+  }
+}
+
+.gh-navigation__link--active {
+  color: var(--gh-text-primary);
+  font-weight: var(--gh-font-weight-bold);
+}
+
+.gh-navigation__link--active::after {
+  position: absolute;
+  right: var(--gh-space-sm);
+  bottom: var(--gh-space-xs);
+  left: var(--gh-space-sm);
+  height: var(--gh-border-width-focus);
+  border-radius: var(--gh-radius-pill);
+  background: var(--gh-text-accent);
+  content: '';
+}
+
+.gh-navigation__actions:empty,
+.gh-navigation__theme-control:empty {
+  display: none;
+}
+
+.gh-navigation__actions,
+.gh-navigation__theme-control {
+  display: flex;
+  align-items: center;
+  gap: var(--gh-space-sm);
+}
+
+.gh-visually-hidden {
+  @include pattern.visually-hidden;
+}
+
+@media (min-width: breakpoints.$gh-breakpoint-lg) {
+  .gh-navigation__bar {
+    display: flex;
+  }
+
+  .gh-navigation__toggle {
+    display: none;
+  }
+
+  .gh-navigation__panel,
+  .gh-navigation__panel--open {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--gh-space-md);
+    padding-block: 0;
+  }
+
+  .gh-navigation nav ul {
+    display: flex;
+    align-items: center;
+  }
+
+  .gh-navigation__link--active::after {
+    right: var(--gh-space-sm);
+    bottom: 0;
+    left: var(--gh-space-sm);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gh-navigation__link {
+    transition: none;
+  }
+}

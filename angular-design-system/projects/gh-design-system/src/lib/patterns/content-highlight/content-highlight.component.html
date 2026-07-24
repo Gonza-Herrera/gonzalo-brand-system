@@ -1,0 +1,53 @@
+<gh-card padding="none" radius="xl">
+  <div ghCardContent class="gh-content-highlight__layout">
+    @if (content().imageSrc) {
+      <div class="gh-content-highlight__media">
+        <img [src]="content().imageSrc" [alt]="content().imageAlt ?? ''" loading="lazy" />
+      </div>
+    }
+
+    <gh-stack class="gh-content-highlight__content" gap="lg">
+      <gh-stack gap="sm">
+        <gh-cluster gap="sm">
+          <gh-badge variant="accent" [appearance]="surface() === 'accent' ? 'solid' : 'soft'">
+            {{ typeLabels()[content().type] }}
+          </gh-badge>
+          @if (content().eyebrow) {
+            <span class="gh-content-highlight__eyebrow">{{ content().eyebrow }}</span>
+          }
+        </gh-cluster>
+
+        @if (headingLevel() === 2) {
+          <h2>{{ content().title }}</h2>
+        } @else {
+          <h3>{{ content().title }}</h3>
+        }
+
+        @if (content().description) {
+          <p>{{ content().description }}</p>
+        }
+      </gh-stack>
+
+      @if (content().tags?.length) {
+        <gh-cluster gap="sm" role="group" [attr.aria-label]="tagsLabel()">
+          @for (tag of content().tags; track tag) {
+            <gh-tag size="sm">{{ tag }}</gh-tag>
+          }
+        </gh-cluster>
+      }
+
+      <a
+        class="gh-content-highlight__link"
+        [href]="content().href"
+        [attr.target]="content().external ? '_blank' : null"
+        [attr.rel]="content().external ? 'noopener noreferrer' : null"
+      >
+        <span>{{ content().linkLabel }}</span>
+        <span aria-hidden="true">→</span>
+        @if (content().external) {
+          <span class="gh-visually-hidden"> ({{ externalLinkLabel() }})</span>
+        }
+      </a>
+    </gh-stack>
+  </div>
+</gh-card>

@@ -1,0 +1,22 @@
+<a class="skip-link" href="#showcase-content">Skip to main content</a>
+
+<div class="shell">
+  <showcase-header [menuOpen]="menuOpen()" (menuToggled)="toggleMenu()" />
+
+  <div class="shell__body">
+    <showcase-sidebar [open]="menuOpen()" (navigationSelected)="closeMenu()" />
+
+    @if (menuOpen()) {
+      <button
+        class="navigation-backdrop"
+        type="button"
+        aria-label="Close navigation"
+        (click)="closeMenu()"
+      ></button>
+    }
+
+    <main id="showcase-content" tabindex="-1">
+      <router-outlet />
+    </main>
+  </div>
+</div>

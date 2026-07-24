@@ -1,0 +1,113 @@
+<gh-hero
+  [eyebrow]="content().hero.eyebrow"
+  [title]="content().hero.title"
+  [description]="content().hero.description"
+  layout="split"
+  surface="gradient"
+  [headingLevel]="1"
+>
+  <aside ghHeroVisual class="contact-hero__visual" [attr.aria-label]="content().hero.visualLabel">
+    <p class="contact-hero__visual-title">{{ content().hero.visualTitle }}</p>
+    <ul>
+      @for (highlight of content().hero.highlights; track highlight.id) {
+        <li>
+          <strong>{{ highlight.label }}</strong>
+          <span>{{ highlight.description }}</span>
+        </li>
+      }
+    </ul>
+  </aside>
+</gh-hero>
+
+<gh-section id="contact-topics" spacing="lg" surface="primary">
+  <gh-container size="xl">
+    <gh-stack gap="xl">
+      <gh-section-heading
+        [eyebrow]="content().topics.eyebrow"
+        [title]="content().topics.title"
+        [description]="content().topics.description"
+        [headingLevel]="2"
+      />
+      <gh-feature-grid [features]="topicFeatures()" [columns]="3" variant="cards" />
+    </gh-stack>
+  </gh-container>
+</gh-section>
+
+<gh-section id="contact-channels" spacing="lg" surface="subtle">
+  <gh-container size="lg">
+    <gh-stack gap="xl">
+      <gh-section-heading
+        [eyebrow]="content().channels.eyebrow"
+        [title]="content().channels.title"
+        [description]="content().channels.description"
+        [headingLevel]="2"
+      />
+
+      @if (channelFeatures().length) {
+        <gh-feature-grid
+          [features]="channelFeatures()"
+          [columns]="3"
+          variant="cards"
+          [externalLinkLabel]="externalLinkLabel()"
+        />
+      } @else {
+        <gh-card variant="subtle" padding="lg" radius="lg">
+          <div ghCardContent class="contact-channels__empty" role="status">
+            <h3>{{ content().channels.unavailableTitle }}</h3>
+            <p>{{ content().channels.unavailableDescription }}</p>
+          </div>
+        </gh-card>
+      }
+    </gh-stack>
+  </gh-container>
+</gh-section>
+
+<gh-section id="contact-form" spacing="lg" surface="primary">
+  <gh-container size="lg">
+    <gh-stack gap="xl">
+      <gh-section-heading
+        [eyebrow]="content().form.eyebrow"
+        [title]="content().form.title"
+        [description]="content().form.description"
+        [headingLevel]="2"
+      />
+      <app-contact-form [content]="content().form" [fallbackEmail]="fallbackEmail()" />
+    </gh-stack>
+  </gh-container>
+</gh-section>
+
+<gh-section id="contact-privacy" spacing="lg" surface="subtle">
+  <gh-container size="md">
+    <gh-stack gap="xl">
+      <gh-section-heading
+        [eyebrow]="content().privacy.eyebrow"
+        [title]="content().privacy.title"
+        [description]="content().privacy.description"
+        [headingLevel]="2"
+      />
+      <gh-card variant="outlined" padding="lg" radius="lg">
+        <div ghCardContent class="contact-privacy">
+          <ul>
+            @for (detail of content().privacy.details; track detail) {
+              <li>{{ detail }}</li>
+            }
+          </ul>
+        </div>
+      </gh-card>
+    </gh-stack>
+  </gh-container>
+</gh-section>
+
+<gh-section id="contact-explore" spacing="lg" surface="primary">
+  <gh-container size="xl">
+    <gh-stack gap="xl">
+      <gh-section-heading
+        [eyebrow]="content().explore.eyebrow"
+        [title]="content().explore.title"
+        [description]="content().explore.description"
+        [headingLevel]="2"
+      />
+      <gh-feature-grid [features]="exploreFeatures()" [columns]="3" variant="cards" />
+    </gh-stack>
+  </gh-container>
+</gh-section>

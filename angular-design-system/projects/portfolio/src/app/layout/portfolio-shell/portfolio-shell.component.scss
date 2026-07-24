@@ -1,0 +1,41 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: var(--gh-space-sm);
+  left: var(--gh-space-sm);
+  padding: var(--gh-space-sm) var(--gh-space-md);
+  border-radius: var(--gh-radius-pill);
+  background: var(--gh-text-primary);
+  color: var(--gh-text-inverse);
+  font-size: var(--gh-font-size-caption);
+  font-weight: var(--gh-font-weight-semibold);
+  text-decoration: none;
+  transform: translateY(calc(-100% - var(--gh-space-lg)));
+
+  &:focus-visible {
+    transform: translateY(0);
+  }
+}
+
+.portfolio-shell {
+  display: flex;
+  min-height: 100vh;
+  min-height: 100dvh;
+  flex-direction: column;
+}
+
+gh-navigation,
+gh-footer {
+  flex: none;
+}
+
+.portfolio-shell__main {
+  min-width: 0;
+  flex: 1;
+}

@@ -1,0 +1,52 @@
+<article class="page">
+  <header class="page-header">
+    <p>Gonzalo Herrera Design System</p>
+    <h1>Foundations for calm, intelligent interfaces.</h1>
+    <p>
+      A visual catalogue and validation environment for the brand foundations, design tokens, themes
+      and future reusable Angular components.
+    </p>
+  </header>
+
+  <section class="identity" aria-labelledby="identity-heading">
+    <div>
+      <p class="identity__eyebrow">Identity</p>
+      <h2 id="identity-heading">Gonzalo Herrera</h2>
+      <p>Frontend Tech Lead & AI-Augmented Engineer</p>
+    </div>
+
+    <div class="identity__message">
+      <strong>Think bigger. Build smarter.</strong>
+      <p>Helping teams build better software through engineering, leadership and AI.</p>
+    </div>
+  </section>
+
+  <showcase-documentation-section
+    sectionId="system-status"
+    eyebrow="Current state"
+    title="A foundation designed to grow"
+    description="Each layer is introduced deliberately, documented in isolation and validated across both themes."
+  >
+    <div class="status-grid">
+      @for (item of statuses; track item.area) {
+        <article class="status-item">
+          <div>
+            <h3>{{ item.area }}</h3>
+            <p>{{ item.description }}</p>
+          </div>
+          <span [attr.data-status]="item.status">{{ item.status }}</span>
+        </article>
+      }
+    </div>
+  </showcase-documentation-section>
+
+  <aside class="future-note" aria-labelledby="future-heading">
+    <p>Next layers</p>
+    <h2 id="future-heading">Components will be documented incrementally.</h2>
+    <p>
+      Button, Badge, Tag, four Card components and seven Layout Primitives now form the public set.
+      Brand Patterns and other APIs will follow in focused releases. Internal showcase visuals
+      remain documentation tools, not exports from <code>gh-design-system</code>.
+    </p>
+  </aside>
+</article>

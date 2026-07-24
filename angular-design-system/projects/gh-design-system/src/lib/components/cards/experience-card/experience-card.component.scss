@@ -1,0 +1,108 @@
+@use '../card-foundations' as card;
+
+:host {
+  @include card.component-host;
+}
+
+gh-card {
+  height: 100%;
+}
+
+.experience-card__header,
+.experience-card__content,
+.experience-card__skills,
+.experience-card__skills section,
+.experience-card__description {
+  display: grid;
+  gap: var(--gh-space-md);
+}
+
+.experience-card__identity {
+  display: flex;
+  gap: var(--gh-space-md);
+  align-items: flex-start;
+  min-width: 0;
+
+  > div:last-child {
+    min-width: 0;
+  }
+
+  h2,
+  h3 {
+    @include card.heading;
+  }
+}
+
+.experience-card__logo {
+  width: var(--gh-space-2xl);
+  aspect-ratio: 1;
+  flex: 0 0 var(--gh-space-2xl);
+  overflow: hidden;
+  border: var(--gh-border-width-default) solid var(--gh-card-border);
+  border-radius: var(--gh-radius-md);
+  background: var(--gh-card-background-subtle);
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.experience-card__company,
+.experience-card__period,
+.experience-card__description p,
+.experience-card__content h3,
+.experience-card__content h4,
+.experience-card__skills h3,
+.experience-card__skills h4 {
+  margin: 0;
+}
+
+.experience-card__company {
+  margin-top: var(--gh-space-xs);
+  color: var(--gh-text-primary);
+  font-weight: var(--gh-font-weight-semibold);
+}
+
+.experience-card__period {
+  margin-top: var(--gh-space-xs);
+  color: var(--gh-text-muted);
+  font-size: var(--gh-font-size-caption);
+}
+
+.experience-card__metadata {
+  @include card.metadata;
+}
+
+.experience-card__description p {
+  @include card.body-copy;
+}
+
+.experience-card__content section {
+  display: grid;
+  gap: var(--gh-space-sm);
+
+  h3,
+  h4 {
+    font-size: var(--gh-font-size-label);
+  }
+
+  ul {
+    display: grid;
+    gap: var(--gh-space-sm);
+    margin: 0;
+    padding-left: var(--gh-space-lg);
+    color: var(--gh-text-secondary);
+  }
+}
+
+.experience-card__skills h3,
+.experience-card__skills h4 {
+  font-size: var(--gh-font-size-label);
+}
+
+.experience-card__skills ul {
+  @include card.tag-list;
+}

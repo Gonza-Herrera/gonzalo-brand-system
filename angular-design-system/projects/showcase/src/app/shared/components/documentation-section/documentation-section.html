@@ -1,0 +1,11 @@
+<section class="documentation-section" [attr.aria-labelledby]="sectionId()">
+  <header>
+    <p>{{ eyebrow() }}</p>
+    <h2 [id]="sectionId()">{{ title() }}</h2>
+    @if (description()) {
+      <div>{{ description() }}</div>
+    }
+  </header>
+
+  <ng-content />
+</section>

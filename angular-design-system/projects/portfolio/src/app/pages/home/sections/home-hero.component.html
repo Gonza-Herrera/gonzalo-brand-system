@@ -1,0 +1,23 @@
+<gh-hero
+  [eyebrow]="content().eyebrow"
+  [title]="content().title"
+  [description]="content().description"
+  [actions]="actions()"
+  [externalLinkLabel]="externalLinkLabel()"
+  [headingLevel]="1"
+  layout="split"
+  surface="gradient"
+  minHeight="auto"
+>
+  <aside ghHeroVisual class="home-hero__visual" [attr.aria-label]="content().visualLabel">
+    <p class="home-hero__role">{{ content().role }}</p>
+    <ul class="home-hero__highlights">
+      @for (highlight of content().highlights; track highlight.id) {
+        <li>
+          <span>{{ highlight.label }}</span>
+          <strong>{{ highlight.value }}</strong>
+        </li>
+      }
+    </ul>
+  </aside>
+</gh-hero>

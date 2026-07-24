@@ -1,0 +1,46 @@
+:host {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--gh-container-xl);
+}
+
+:host.gh-container--sm {
+  max-width: var(--gh-container-sm);
+}
+
+:host.gh-container--md {
+  max-width: var(--gh-container-md);
+}
+
+:host.gh-container--lg {
+  max-width: var(--gh-container-lg);
+}
+
+:host.gh-container--wide {
+  max-width: var(--gh-container-wide);
+}
+
+:host.gh-container--full {
+  max-width: none;
+}
+
+:host.gh-container--centered {
+  margin-inline: auto;
+}
+
+:host.gh-container--gutters-none {
+  padding-inline: var(--gh-space-none);
+}
+
+:host.gh-container--gutters-sm {
+  padding-inline: var(--gh-container-gutter-sm);
+}
+
+:host.gh-container--gutters-md {
+  padding-inline: var(--gh-container-gutter-md);
+}
+
+:host.gh-container--gutters-lg {
+  padding-inline: var(--gh-container-gutter-lg);
+}

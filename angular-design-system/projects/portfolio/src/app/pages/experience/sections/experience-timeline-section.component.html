@@ -1,0 +1,20 @@
+<gh-section id="professional-experience" spacing="lg" surface="subtle">
+  <gh-container size="xl">
+    <gh-stack gap="xl">
+      <gh-section-heading
+        [eyebrow]="content().eyebrow"
+        [title]="content().title"
+        [description]="content().description"
+        [headingLevel]="2"
+      />
+
+      <gh-experience-timeline
+        [experiences]="timelineItems()"
+        [cardLabels]="content().labels.card"
+        [cardHeadingLevel]="3"
+        orientation="vertical"
+        [showConnector]="timelineItems().length > 1"
+      />
+    </gh-stack>
+  </gh-container>
+</gh-section>

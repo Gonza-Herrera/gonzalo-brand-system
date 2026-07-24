@@ -1,0 +1,21 @@
+<app-home-hero
+  [content]="content().hero"
+  [locale]="locale()"
+  [externalLinkLabel]="externalLinkLabel()"
+/>
+<app-home-expertise-section
+  [content]="content().expertise"
+  [externalLinkLabel]="externalLinkLabel()"
+/>
+<app-home-selected-projects-section [content]="content().selectedProjects" [locale]="locale()" />
+<app-home-experience-preview-section [content]="content().experience" [locale]="locale()" />
+<app-home-featured-content-section
+  [content]="content().featuredContent"
+  [locale]="locale()"
+  [externalLinkLabel]="externalLinkLabel()"
+/>
+<app-home-contact-section
+  [content]="content().contact"
+  [locale]="locale()"
+  [externalLinkLabel]="externalLinkLabel()"
+/>

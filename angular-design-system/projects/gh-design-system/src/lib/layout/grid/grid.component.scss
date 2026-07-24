@@ -1,0 +1,55 @@
+@use '../../styles/tokens/breakpoints' as breakpoints;
+@use '../layout-mixins' as layout;
+
+:host {
+  display: grid;
+  width: 100%;
+  min-width: 0;
+}
+
+:host.gh-grid--min-sm {
+  --gh-grid-current-min: var(--gh-grid-min-sm);
+}
+
+:host.gh-grid--min-md {
+  --gh-grid-current-min: var(--gh-grid-min-md);
+}
+
+:host.gh-grid--min-lg {
+  --gh-grid-current-min: var(--gh-grid-min-lg);
+}
+
+:host.gh-grid--columns-auto {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--gh-grid-current-min)), 1fr));
+}
+
+:host.gh-grid--columns-1,
+:host.gh-grid--columns-2,
+:host.gh-grid--columns-3,
+:host.gh-grid--columns-4 {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: breakpoints.$gh-breakpoint-sm) {
+  :host.gh-grid--columns-2,
+  :host.gh-grid--columns-3,
+  :host.gh-grid--columns-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: breakpoints.$gh-breakpoint-md) {
+  :host.gh-grid--columns-3,
+  :host.gh-grid--columns-4 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: breakpoints.$gh-breakpoint-lg) {
+  :host.gh-grid--columns-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@include layout.gaps(':host.gh-grid');
+@include layout.standard-alignments(':host.gh-grid');

@@ -1,0 +1,97 @@
+<gh-card
+  [variant]="article().featured ? 'elevated' : 'outlined'"
+  padding="md"
+  radius="lg"
+  interactive
+  fullHeight
+  [ariaLabel]="cardAriaLabel()"
+>
+  @if (article().imageSrc) {
+    <div ghCardMedia class="article-card__media">
+      <img
+        [src]="article().imageSrc"
+        [alt]="article().imageAlt ?? ''"
+        [attr.width]="article().imageWidth ?? null"
+        [attr.height]="article().imageHeight ?? null"
+        loading="lazy"
+      />
+    </div>
+  }
+
+  <header ghCardHeader class="article-card__header">
+    @if (article().type || article().category || article().featured) {
+      <div class="article-card__badges">
+        @if (article().type) {
+          <gh-badge variant="accent">{{ article().type }}</gh-badge>
+        }
+        @if (article().category) {
+          <gh-badge variant="neutral">{{ article().category }}</gh-badge>
+        }
+        @if (article().featured) {
+          <gh-badge variant="info" appearance="solid">{{ featuredLabel() }}</gh-badge>
+        }
+      </div>
+    }
+
+    @if (headingLevel() === 2) {
+      <h2>
+        <a
+          [href]="article().href"
+          [attr.target]="article().external ? '_blank' : null"
+          [attr.rel]="article().external ? 'noopener noreferrer' : null"
+          [attr.aria-label]="externalAriaLabel()"
+        >
+          {{ article().title }}
+        </a>
+      </h2>
+    } @else {
+      <h3>
+        <a
+          [href]="article().href"
+          [attr.target]="article().external ? '_blank' : null"
+          [attr.rel]="article().external ? 'noopener noreferrer' : null"
+          [attr.aria-label]="externalAriaLabel()"
+        >
+          {{ article().title }}
+        </a>
+      </h3>
+    }
+  </header>
+
+  @if (article().excerpt || article().tags?.length) {
+    <div ghCardContent class="article-card__content">
+      @if (article().excerpt) {
+        <p class="article-card__excerpt">{{ article().excerpt }}</p>
+      }
+
+      @if (article().tags?.length) {
+        <ul class="article-card__tags" [attr.aria-label]="topicsLabel()">
+          @for (tag of article().tags; track tag) {
+            <li>
+              <gh-tag size="sm">{{ tag }}</gh-tag>
+            </li>
+          }
+        </ul>
+      }
+    </div>
+  }
+
+  <footer ghCardFooter class="article-card__footer">
+    @if (article().publishedAt || article().readingTime) {
+      <div class="article-card__metadata">
+        @if (article().publishedAt) {
+          <time [attr.datetime]="article().publishedAtDateTime ?? null">{{
+            article().publishedAt
+          }}</time>
+        }
+        @if (article().readingTime) {
+          <span>{{ article().readingTime }}</span>
+        }
+      </div>
+    }
+
+    <span class="article-card__cta" aria-hidden="true">
+      {{ article().linkLabel ?? 'Read article' }} →
+    </span>
+  </footer>
+</gh-card>

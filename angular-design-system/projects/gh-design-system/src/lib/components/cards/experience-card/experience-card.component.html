@@ -1,0 +1,123 @@
+<gh-card
+  [variant]="highlighted() ? 'elevated' : 'outlined'"
+  padding="md"
+  radius="lg"
+  fullHeight
+  [ariaLabel]="ariaLabel()"
+>
+  <header ghCardHeader class="experience-card__header">
+    <div class="experience-card__identity">
+      @if (experience().companyLogoSrc) {
+        <div class="experience-card__logo">
+          <img
+            [src]="experience().companyLogoSrc"
+            [alt]="experience().companyLogoAlt ?? ''"
+            loading="lazy"
+          />
+        </div>
+      }
+
+      <div>
+        @if (headingLevel() === 2) {
+          <h2>{{ experience().role }}</h2>
+        } @else {
+          <h3>{{ experience().role }}</h3>
+        }
+        <p class="experience-card__company">{{ experience().company }}</p>
+        <p class="experience-card__period">{{ period() }}</p>
+      </div>
+    </div>
+
+    @if (experience().current || experience().location || workModeLabel()) {
+      <div class="experience-card__metadata">
+        @if (experience().current) {
+          <gh-badge variant="success">{{ experience().currentLabel ?? 'Current' }}</gh-badge>
+        }
+        @if (workModeLabel()) {
+          <gh-badge variant="info">{{ workModeLabel() }}</gh-badge>
+        }
+        @if (experience().location) {
+          <span>{{ experience().location }}</span>
+        }
+      </div>
+    }
+  </header>
+
+  <div ghCardContent class="experience-card__content">
+    @if (descriptionParagraphs().length) {
+      <div class="experience-card__description">
+        @for (paragraph of descriptionParagraphs(); track $index) {
+          <p>{{ paragraph }}</p>
+        }
+      </div>
+    }
+
+    @if (experience().responsibilities?.length) {
+      <section [attr.aria-label]="labels().responsibilities">
+        @if (headingLevel() === 2) {
+          <h3>{{ labels().responsibilities }}</h3>
+        } @else {
+          <h4>{{ labels().responsibilities }}</h4>
+        }
+        <ul>
+          @for (responsibility of experience().responsibilities; track responsibility) {
+            <li>{{ responsibility }}</li>
+          }
+        </ul>
+      </section>
+    }
+
+    @if (experience().achievements?.length) {
+      <section [attr.aria-label]="labels().achievements">
+        @if (headingLevel() === 2) {
+          <h3>{{ labels().achievements }}</h3>
+        } @else {
+          <h4>{{ labels().achievements }}</h4>
+        }
+        <ul>
+          @for (achievement of experience().achievements; track achievement) {
+            <li>{{ achievement }}</li>
+          }
+        </ul>
+      </section>
+    }
+  </div>
+
+  @if (experience().technologies?.length || experience().capabilities?.length) {
+    <footer ghCardFooter class="experience-card__skills">
+      @if (experience().technologies?.length) {
+        <section [attr.aria-label]="labels().technologies">
+          @if (headingLevel() === 2) {
+            <h3>{{ labels().technologies }}</h3>
+          } @else {
+            <h4>{{ labels().technologies }}</h4>
+          }
+          <ul>
+            @for (technology of experience().technologies; track technology) {
+              <li>
+                <gh-tag size="sm">{{ technology }}</gh-tag>
+              </li>
+            }
+          </ul>
+        </section>
+      }
+
+      @if (experience().capabilities?.length) {
+        <section [attr.aria-label]="capabilitiesLabel()">
+          @if (headingLevel() === 2) {
+            <h3>{{ capabilitiesLabel() }}</h3>
+          } @else {
+            <h4>{{ capabilitiesLabel() }}</h4>
+          }
+          <ul>
+            @for (capability of experience().capabilities; track capability) {
+              <li>
+                <gh-tag size="sm">{{ capability }}</gh-tag>
+              </li>
+            }
+          </ul>
+        </section>
+      }
+    </footer>
+  }
+</gh-card>

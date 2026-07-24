@@ -1,0 +1,272 @@
+@if (item(); as article) {
+  @if (detail(); as articleDetail) {
+    <article class="content-detail">
+      <gh-section spacing="sm" surface="primary">
+        <gh-container size="md">
+          <nav class="content-detail__back" [attr.aria-label]="content().detail.backToContent">
+            <a [href]="backUrl()">← {{ content().detail.backToContent }}</a>
+          </nav>
+        </gh-container>
+      </gh-section>
+
+      <gh-section spacing="lg" surface="transparent">
+        <gh-container size="md">
+          <header class="content-detail__header">
+            <div class="content-detail__badges">
+              <gh-badge variant="accent">{{ article.typeLabel }}</gh-badge>
+              <gh-badge variant="neutral">{{ article.categoryLabel }}</gh-badge>
+            </div>
+
+            <h1>{{ article.title }}</h1>
+            <p class="content-detail__lead">{{ article.excerpt }}</p>
+
+            @if (article.publishedAt || article.readingTime) {
+              <dl
+                class="content-detail__metadata"
+                [attr.aria-label]="content().detail.metadataLabel"
+              >
+                @if (article.publishedAt) {
+                  <div>
+                    <dt>{{ content().detail.publishedAt }}</dt>
+                    <dd>
+                      <time [attr.datetime]="article.publishedAt.iso">{{
+                        article.publishedAt.label
+                      }}</time>
+                    </dd>
+                  </div>
+                }
+                @if (article.readingTime) {
+                  <div>
+                    <dt>{{ content().detail.readingTime }}</dt>
+                    <dd>{{ article.readingTime }}</dd>
+                  </div>
+                }
+              </dl>
+            }
+
+            @if (article.tags.length) {
+              <ul class="content-detail__tags" [attr.aria-label]="content().detail.tags">
+                @for (tag of article.tags; track tag) {
+                  <li>
+                    <gh-tag>{{ tag }}</gh-tag>
+                  </li>
+                }
+              </ul>
+            }
+          </header>
+        </gh-container>
+      </gh-section>
+
+      @if (articleDetail.introduction?.length) {
+        <gh-section id="introduction" spacing="lg" surface="primary">
+          <gh-container size="md">
+            <gh-stack gap="md">
+              <h2>{{ content().detail.introduction }}</h2>
+              @for (paragraph of articleDetail.introduction; track paragraph) {
+                <p class="content-detail__copy">{{ paragraph }}</p>
+              }
+            </gh-stack>
+          </gh-container>
+        </gh-section>
+      }
+
+      @for (section of articleDetail.sections; track section.id; let index = $index) {
+        @switch (section.type) {
+          @case ('text') {
+            <gh-section
+              [id]="section.id"
+              spacing="lg"
+              [surface]="index % 2 === 0 ? 'subtle' : 'primary'"
+            >
+              <gh-container size="md">
+                <gh-stack gap="md">
+                  @if (section.title) {
+                    <h2>{{ section.title }}</h2>
+                  }
+                  @for (paragraph of section.paragraphs; track paragraph) {
+                    <p class="content-detail__copy">{{ paragraph }}</p>
+                  }
+                </gh-stack>
+              </gh-container>
+            </gh-section>
+          }
+          @case ('list') {
+            <gh-section
+              [id]="section.id"
+              spacing="lg"
+              [surface]="index % 2 === 0 ? 'subtle' : 'primary'"
+            >
+              <gh-container size="md">
+                <gh-stack gap="md">
+                  @if (section.title) {
+                    <h2>{{ section.title }}</h2>
+                  }
+                  @if (section.introduction) {
+                    <p class="content-detail__copy">{{ section.introduction }}</p>
+                  }
+                  @if (section.style === 'ordered') {
+                    <ol class="content-detail__list">
+                      @for (item of section.items; track item) {
+                        <li>{{ item }}</li>
+                      }
+                    </ol>
+                  } @else {
+                    <ul class="content-detail__list">
+                      @for (item of section.items; track item) {
+                        <li>{{ item }}</li>
+                      }
+                    </ul>
+                  }
+                </gh-stack>
+              </gh-container>
+            </gh-section>
+          }
+          @case ('callout') {
+            <gh-section [id]="section.id" spacing="md" surface="primary">
+              <gh-container size="md">
+                <gh-card
+                  [variant]="section.tone === 'insight' ? 'glass' : 'outlined'"
+                  padding="lg"
+                  radius="lg"
+                >
+                  <div ghCardHeader>
+                    @if (section.title) {
+                      <h2>{{ section.title }}</h2>
+                    }
+                  </div>
+                  <div ghCardContent>
+                    <p class="content-detail__copy">{{ section.text }}</p>
+                  </div>
+                </gh-card>
+              </gh-container>
+            </gh-section>
+          }
+          @case ('code') {
+            <gh-section [id]="section.id" spacing="lg" surface="subtle">
+              <gh-container size="lg">
+                <gh-stack gap="md">
+                  @if (section.title) {
+                    <h2>{{ section.title }}</h2>
+                  }
+                  <figure class="content-detail__code">
+                    <div class="content-detail__code-label">
+                      {{ content().detail.codeLanguage }}: {{ section.language }}
+                    </div>
+                    <pre><code>{{ section.code }}</code></pre>
+                    @if (section.caption) {
+                      <figcaption>{{ section.caption }}</figcaption>
+                    }
+                  </figure>
+                </gh-stack>
+              </gh-container>
+            </gh-section>
+          }
+          @case ('comparison') {
+            <gh-section [id]="section.id" spacing="lg" surface="subtle">
+              <gh-container size="lg">
+                <gh-stack gap="md">
+                  <h2>{{ section.title }}</h2>
+                  @if (section.description) {
+                    <p class="content-detail__copy">{{ section.description }}</p>
+                  }
+                  <div class="content-detail__table-wrapper">
+                    <table>
+                      <caption class="gh-visually-hidden">
+                        {{
+                          section.title
+                        }}
+                      </caption>
+                      <thead>
+                        <tr>
+                          <th scope="col">{{ content().detail.comparisonAspect }}</th>
+                          @for (column of section.columns; track column.id) {
+                            <th scope="col">{{ column.label }}</th>
+                          }
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @for (row of section.rows; track row.id) {
+                          <tr>
+                            <th scope="row">{{ row.label }}</th>
+                            @for (cell of row.cells; track $index) {
+                              <td>{{ cell }}</td>
+                            }
+                          </tr>
+                        }
+                      </tbody>
+                    </table>
+                  </div>
+                </gh-stack>
+              </gh-container>
+            </gh-section>
+          }
+        }
+      }
+
+      @if (articleDetail.takeaways; as takeaways) {
+        <gh-section id="key-takeaways" spacing="lg" surface="primary">
+          <gh-container size="md">
+            <gh-stack gap="md">
+              <h2>{{ takeaways.title }}</h2>
+              <ul class="content-detail__list">
+                @for (takeaway of takeaways.items; track takeaway) {
+                  <li>{{ takeaway }}</li>
+                }
+              </ul>
+            </gh-stack>
+          </gh-container>
+        </gh-section>
+      }
+    </article>
+
+    @if (relatedCards().length) {
+      <gh-section spacing="lg" surface="subtle">
+        <gh-container size="xl">
+          <gh-stack gap="xl">
+            <gh-section-heading
+              [eyebrow]="content().detail.relatedEyebrow"
+              [title]="content().detail.relatedTitle"
+              [description]="content().detail.relatedDescription"
+              [headingLevel]="2"
+            />
+            <gh-grid [columns]="2" minItemSize="md" gap="lg">
+              @for (view of relatedCards(); track view.item.id) {
+                <gh-article-card
+                  [article]="view.card"
+                  [headingLevel]="3"
+                  [articleLabel]="content().grid.cardLabels.article"
+                  [featuredLabel]="content().grid.cardLabels.featured"
+                  [topicsLabel]="content().grid.cardLabels.topics"
+                  [externalLinkLabel]="content().grid.cardLabels.externalLink"
+                />
+              }
+            </gh-grid>
+          </gh-stack>
+        </gh-container>
+      </gh-section>
+    }
+
+    <gh-contact-callout
+      [eyebrow]="content().contact.eyebrow"
+      [title]="content().contact.title"
+      [description]="content().contact.description"
+      [actions]="contactActions()"
+      [externalLinkLabel]="externalLinkLabel()"
+      alignment="center"
+      surface="gradient"
+    />
+  }
+} @else {
+  <gh-section spacing="lg" surface="primary">
+    <gh-container size="md">
+      <gh-stack gap="lg" align="start">
+        <p class="content-detail-not-found__eyebrow">{{ content().detail.notFoundEyebrow }}</p>
+        <h1>{{ content().detail.notFoundTitle }}</h1>
+        <p class="content-detail__copy">{{ content().detail.notFoundDescription }}</p>
+        <a class="content-detail__back-link" [href]="backUrl()">
+          {{ content().detail.backToContent }}
+        </a>
+      </gh-stack>
+    </gh-container>
+  </gh-section>
+}

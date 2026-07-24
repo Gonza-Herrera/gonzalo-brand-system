@@ -1,0 +1,71 @@
+<header
+  class="gh-navigation"
+  [class.gh-navigation--sticky]="sticky()"
+  [class.gh-navigation--transparent]="transparent()"
+  (keydown.escape)="handleEscape($event)"
+>
+  <gh-container size="wide">
+    <div class="gh-navigation__bar">
+      <a
+        class="gh-navigation__brand"
+        [href]="brandHref()"
+        (click)="handleLinkClick($event, brandHref())"
+      >
+        <ng-content select="[ghNavigationLogo]" />
+        <span>{{ brand() }}</span>
+      </a>
+
+      <button
+        #menuToggle
+        class="gh-navigation__toggle"
+        type="button"
+        [attr.aria-label]="menuOpen() ? closeMenuLabel() : menuLabel()"
+        [attr.aria-expanded]="menuOpen()"
+        [attr.aria-controls]="menuId()"
+        (click)="toggleMenu()"
+      >
+        <span aria-hidden="true">{{ menuOpen() ? '×' : '☰' }}</span>
+      </button>
+
+      <div
+        class="gh-navigation__panel"
+        [class.gh-navigation__panel--open]="menuOpen()"
+        [id]="menuId()"
+      >
+        <nav [attr.aria-label]="navigationLabel()">
+          <ul>
+            @for (item of items(); track item.href + item.label) {
+              <li>
+                <a
+                  class="gh-navigation__link"
+                  [class.gh-navigation__link--active]="item.active"
+                  [href]="item.href"
+                  [attr.aria-label]="item.ariaLabel ?? null"
+                  [attr.aria-current]="item.active ? 'page' : null"
+                  [attr.target]="item.external ? '_blank' : null"
+                  [attr.rel]="item.external ? 'noopener noreferrer' : null"
+                  (click)="handleLinkClick($event, item.href, item.external ?? false)"
+                >
+                  {{ item.label }}
+                  @if (item.external) {
+                    <span class="gh-visually-hidden"> ({{ externalLinkLabel() }})</span>
+                  }
+                </a>
+              </li>
+            }
+          </ul>
+        </nav>
+
+        <div class="gh-navigation__actions">
+          <ng-content select="[ghNavigationActions]" />
+        </div>
+
+        @if (showThemeControl()) {
+          <div class="gh-navigation__theme-control">
+            <ng-content select="[ghNavigationThemeControl]" />
+          </div>
+        }
+      </div>
+    </div>
+  </gh-container>
+</header>

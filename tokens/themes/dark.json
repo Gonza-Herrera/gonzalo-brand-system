@@ -2,47 +2,476 @@
   "theme": {
     "name": "dark"
   },
-
   "background": {
     "primary": {
       "$type": "color",
       "$value": "#111827"
     },
-
     "secondary": {
       "$type": "color",
       "$value": "#1F2937"
+    },
+    "subtle": {
+      "$type": "color",
+      "$value": "color-mix(in srgb, #111827 88%, {color.lavender})"
     }
   },
-
+  "surface": {
+    "primary": {
+      "$type": "color",
+      "$value": "#1F2937"
+    },
+    "secondary": {
+      "$type": "color",
+      "$value": "#263244"
+    },
+    "elevated": {
+      "$type": "color",
+      "$value": "#2B374A"
+    }
+  },
   "text": {
     "primary": {
       "$type": "color",
       "$value": "#F9FAFB"
     },
-
     "secondary": {
       "$type": "color",
       "$value": "#D1D5DB"
     },
-
+    "muted": {
+      "$type": "color",
+      "$value": "#9CA3AF"
+    },
+    "inverse": {
+      "$type": "color",
+      "$value": "{color.ink}"
+    },
     "accent": {
       "$type": "color",
-      "$value": "#CBB9E8"
+      "$value": "{color.lavender}"
     }
   },
-
   "border": {
     "default": {
       "$type": "color",
       "$value": "#374151"
+    },
+    "subtle": {
+      "$type": "color",
+      "$value": "rgb(209 213 219 / 12%)"
+    },
+    "strong": {
+      "$type": "color",
+      "$value": "rgb(209 213 219 / 28%)"
     }
   },
-
-  "surface": {
-    "card": {
+  "action": {
+    "primary": {
+      "background": {
+        "$type": "color",
+        "$value": "{color.lavender}"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{color.ink}"
+      },
+      "hover": {
+        "$type": "color",
+        "$value": "{color.cloudBlue}"
+      },
+      "active": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {color.lavender} 82%, {color.ink})"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {color.lavender} 72%, {color.ink})"
+      }
+    },
+    "secondary": {
+      "background": {
+        "$type": "color",
+        "$value": "#1F2937"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "#F9FAFB"
+      },
+      "hover": {
+        "$type": "color",
+        "$value": "#263244"
+      },
+      "active": {
+        "$type": "color",
+        "$value": "#2B374A"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "#4B5563"
+      }
+    },
+    "ghost": {
+      "text": {
+        "$type": "color",
+        "$value": "#F9FAFB"
+      },
+      "hover": {
+        "$type": "color",
+        "$value": "rgb(249 250 251 / 10%)"
+      },
+      "active": {
+        "$type": "color",
+        "$value": "rgb(249 250 251 / 16%)"
+      }
+    },
+    "danger": {
+      "background": {
+        "$type": "color",
+        "$value": "#B42318"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{color.white}"
+      },
+      "hover": {
+        "$type": "color",
+        "$value": "#912018"
+      },
+      "active": {
+        "$type": "color",
+        "$value": "#7A271A"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "#912018"
+      }
+    },
+    "disabled": {
+      "background": {
+        "$type": "color",
+        "$value": "#374151"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "#D1D5DB"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "#4B5563"
+      }
+    }
+  },
+  "status": {
+    "neutral": {
+      "background": {
+        "$type": "color",
+        "$value": "#374151"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "#F2F4F7"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "#4B5563"
+      },
+      "solidBackground": {
+        "$type": "color",
+        "$value": "#F2F4F7"
+      },
+      "solidText": {
+        "$type": "color",
+        "$value": "{color.ink}"
+      }
+    },
+    "info": {
+      "background": {
+        "$type": "color",
+        "$value": "#102A56"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "#B2DDFF"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "#175CD3"
+      },
+      "solidBackground": {
+        "$type": "color",
+        "$value": "#175CD3"
+      },
+      "solidText": {
+        "$type": "color",
+        "$value": "{color.white}"
+      }
+    },
+    "success": {
+      "background": {
+        "$type": "color",
+        "$value": "#0B2E21"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "#A6F4C5"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "#027A48"
+      },
+      "solidBackground": {
+        "$type": "color",
+        "$value": "#027A48"
+      },
+      "solidText": {
+        "$type": "color",
+        "$value": "{color.white}"
+      }
+    },
+    "warning": {
+      "background": {
+        "$type": "color",
+        "$value": "#3B2A0A"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "#FEDF89"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "#B54708"
+      },
+      "solidBackground": {
+        "$type": "color",
+        "$value": "#B54708"
+      },
+      "solidText": {
+        "$type": "color",
+        "$value": "{color.white}"
+      }
+    },
+    "danger": {
+      "background": {
+        "$type": "color",
+        "$value": "#3B1110"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "#FECDCA"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "#B42318"
+      },
+      "solidBackground": {
+        "$type": "color",
+        "$value": "#B42318"
+      },
+      "solidText": {
+        "$type": "color",
+        "$value": "{color.white}"
+      }
+    },
+    "accent": {
+      "background": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {color.lavender} 16%, transparent)"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{color.lavender}"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {color.lavender} 48%, transparent)"
+      },
+      "solidBackground": {
+        "$type": "color",
+        "$value": "{color.lavender}"
+      },
+      "solidText": {
+        "$type": "color",
+        "$value": "{color.ink}"
+      }
+    }
+  },
+  "tag": {
+    "neutral": {
+      "hover": {
+        "$type": "color",
+        "$value": "#4B5563"
+      },
+      "active": {
+        "$type": "color",
+        "$value": "#6B7280"
+      },
+      "selectedBackground": {
+        "$type": "color",
+        "$value": "#F2F4F7"
+      },
+      "selectedText": {
+        "$type": "color",
+        "$value": "{color.ink}"
+      },
+      "selectedBorder": {
+        "$type": "color",
+        "$value": "#F2F4F7"
+      },
+      "removeHover": {
+        "$type": "color",
+        "$value": "rgb(249 250 251 / 12%)"
+      }
+    },
+    "accent": {
+      "hover": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {color.lavender} 24%, transparent)"
+      },
+      "active": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {color.lavender} 36%, transparent)"
+      },
+      "selectedBackground": {
+        "$type": "color",
+        "$value": "{color.lavender}"
+      },
+      "selectedText": {
+        "$type": "color",
+        "$value": "{color.ink}"
+      },
+      "selectedBorder": {
+        "$type": "color",
+        "$value": "{color.lavender}"
+      },
+      "removeHover": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {color.lavender} 18%, transparent)"
+      }
+    },
+    "info": {
+      "hover": {
+        "$type": "color",
+        "$value": "#123A70"
+      },
+      "active": {
+        "$type": "color",
+        "$value": "#175CD3"
+      },
+      "selectedBackground": {
+        "$type": "color",
+        "$value": "#175CD3"
+      },
+      "selectedText": {
+        "$type": "color",
+        "$value": "{color.white}"
+      },
+      "selectedBorder": {
+        "$type": "color",
+        "$value": "#175CD3"
+      },
+      "removeHover": {
+        "$type": "color",
+        "$value": "rgb(178 221 255 / 16%)"
+      }
+    }
+  },
+  "card": {
+    "background": {
       "$type": "color",
       "$value": "#1F2937"
+    },
+    "backgroundSubtle": {
+      "$type": "color",
+      "$value": "#263244"
+    },
+    "backgroundGlass": {
+      "$type": "color",
+      "$value": "rgb(31 41 55 / 78%)"
+    },
+    "border": {
+      "$type": "color",
+      "$value": "#374151"
+    },
+    "borderGlass": {
+      "$type": "color",
+      "$value": "rgb(209 213 219 / 28%)"
+    },
+    "borderHover": {
+      "$type": "color",
+      "$value": "{color.lavender}"
+    },
+    "borderSelected": {
+      "$type": "color",
+      "$value": "{color.cloudBlue}"
+    },
+    "backgroundSelected": {
+      "$type": "color",
+      "$value": "rgb(169 201 245 / 12%)"
+    },
+    "shadow": {
+      "$type": "shadow",
+      "$value": "0 2px 8px rgb(0 0 0 / 24%)"
+    },
+    "shadowHover": {
+      "$type": "shadow",
+      "$value": "0 8px 24px rgb(0 0 0 / 32%)"
+    },
+    "glassBlur": {
+      "$type": "dimension",
+      "$value": "{spacing.md}"
+    }
+  },
+  "pattern": {
+    "accentGradient": {
+      "$type": "color",
+      "$value": "linear-gradient(135deg, color-mix(in srgb, #111827 86%, {color.lavender}), color-mix(in srgb, #111827 90%, {color.cloudBlue}) 52%, color-mix(in srgb, #111827 91%, {color.peach}))"
+    },
+    "navigationBackground": {
+      "$type": "color",
+      "$value": "rgb(17 24 39 / 92%)"
+    },
+    "navigationBorder": {
+      "$type": "color",
+      "$value": "rgb(209 213 219 / 16%)"
+    },
+    "footerBackground": {
+      "$type": "color",
+      "$value": "color-mix(in srgb, #111827 94%, {color.lavender})"
+    },
+    "timelineConnector": {
+      "$type": "color",
+      "$value": "{color.lavender}"
+    }
+  },
+  "focus": {
+    "ring": {
+      "$type": "color",
+      "$value": "{color.cloudBlue}"
+    }
+  },
+  "selection": {
+    "background": {
+      "$type": "color",
+      "$value": "{color.lavender}"
+    },
+    "text": {
+      "$type": "color",
+      "$value": "{color.ink}"
+    }
+  },
+  "shadow": {
+    "small": {
+      "$type": "shadow",
+      "$value": "0 2px 8px rgb(0 0 0 / 24%)"
+    },
+    "medium": {
+      "$type": "shadow",
+      "$value": "0 8px 24px rgb(0 0 0 / 32%)"
+    },
+    "large": {
+      "$type": "shadow",
+      "$value": "0 16px 48px rgb(0 0 0 / 40%)"
     }
   }
 }

@@ -1,0 +1,146 @@
+import type { PortfolioContentHubContent } from '../models/content-hub-content.model';
+import { ES_FEATURED_CONTENT_PREVIEW } from './home-previews.content';
+import { ES_PAGE_METADATA } from './page-metadata.content';
+
+export const ES_CONTENT_HUB_CONTENT = {
+  ...ES_PAGE_METADATA.content,
+  hero: {
+    eyebrow: 'Contenido',
+    title: 'Ideas, aprendizajes y recursos prácticos para construir mejor software.',
+    description:
+      'Artículos y recursos sobre Angular, ingeniería frontend, liderazgo técnico y desarrollo asistido por IA.',
+    visualLabel: 'Áreas de enfoque del contenido',
+    visualTitle: 'Explora conocimiento práctico de ingeniería',
+    topics: ['Angular', 'Ingeniería Frontend', 'Liderazgo Técnico', 'Ingeniería con IA'],
+  },
+  featured: {
+    eyebrow: 'Idea seleccionada',
+    title: 'Contenido destacado',
+    description:
+      'Un punto de partida práctico para usar IA en ingeniería manteniendo el criterio humano dentro del proceso.',
+    linkLabel: 'Leer la guía',
+  },
+  filters: {
+    eyebrow: 'Explorar por tema',
+    title: 'Encontrá las ideas más relevantes para tu trabajo',
+    description: 'Filtrá la colección publicada por su tema principal de ingeniería.',
+    label: 'Filtrar contenido por tema',
+    options: [
+      { id: 'all', label: 'Todos' },
+      { id: 'angular', label: 'Angular' },
+      { id: 'technical-leadership', label: 'Liderazgo Técnico' },
+      { id: 'ai-engineering', label: 'Ingeniería con IA' },
+    ],
+  },
+  grid: {
+    eyebrow: 'Colección publicada',
+    title: 'Artículos y guías prácticas',
+    description:
+      'Una colección deliberadamente enfocada en las prácticas de ingeniería y liderazgo documentadas en este repositorio.',
+    cardLabels: {
+      article: 'Contenido',
+      featured: 'Destacado',
+      topics: 'Temas',
+      read: 'Leer contenido',
+      viewExternal: 'Ver publicación original',
+      externalLink: 'se abre en una pestaña nueva',
+    },
+  },
+  empty: {
+    title: 'No se encontró contenido',
+    description: 'Todavía no hay publicaciones disponibles en esta categoría.',
+    resetLabel: 'Ver todo el contenido',
+  },
+  detail: {
+    backToContent: 'Volver a contenido',
+    introduction: 'Introducción',
+    metadataLabel: 'Detalles de publicación',
+    publishedAt: 'Publicado',
+    readingTime: 'Tiempo de lectura',
+    tags: 'Temas del contenido',
+    codeLanguage: 'Lenguaje',
+    comparisonAspect: 'Área',
+    relatedEyebrow: 'Seguir explorando',
+    relatedTitle: 'Contenido relacionado',
+    relatedDescription: 'Más ideas prácticas conectadas por tema o enfoque de ingeniería.',
+    notFoundEyebrow: 'Contenido',
+    notFoundTitle: 'Contenido no encontrado',
+    notFoundDescription: 'El artículo o recurso que buscás no existe o no está disponible.',
+    notFoundMetaTitle: 'Contenido no encontrado',
+    notFoundMetaDescription: 'No se pudo encontrar el contenido solicitado del portfolio.',
+  },
+  contact: {
+    eyebrow: 'Continuemos la conversación',
+    title: '¿Te interesa conversar sobre estas ideas?',
+    description:
+      'Si estás trabajando en arquitectura Angular, ingeniería frontend o desarrollo asistido por IA, conversemos.',
+    actions: [
+      { label: 'Contactarme', pageId: 'contact', variant: 'primary' },
+      { label: 'Ver proyectos', pageId: 'projects', variant: 'secondary' },
+    ],
+  },
+  typeLabels: {
+    article: 'Artículo',
+    project: 'Caso de estudio',
+    linkedin: 'LinkedIn',
+    resource: 'Guía',
+    talk: 'Charla',
+  },
+  items: [
+    {
+      id: 'angular-14-vs-angular-20',
+      slug: 'angular-14-vs-angular-20',
+      title: 'Angular 14 vs Angular 20: una revisión de arquitectura',
+      excerpt:
+        'Una perspectiva práctica de migración desde aplicaciones Angular centradas en módulos hacia una arquitectura standalone, basada en signals y preparada para SSR.',
+      type: 'article',
+      typeLabel: 'Artículo',
+      category: 'angular',
+      categoryLabel: 'Angular',
+      status: 'published',
+      statusLabel: 'Publicado',
+      tags: ['Angular', 'Componentes Standalone', 'Signals', 'SSR'],
+      featured: false,
+      order: 1,
+      source: { type: 'internal' },
+      detailAvailable: true,
+    },
+    {
+      id: 'lessons-from-code-reviews',
+      slug: 'lessons-from-code-reviews',
+      title: 'Aprendizajes de revisiones de código con propósito',
+      excerpt:
+        'Principios prácticos para que el feedback en pull requests sea más claro, respetuoso y útil para todo el equipo de ingeniería.',
+      type: 'article',
+      typeLabel: 'Artículo',
+      category: 'technical-leadership',
+      categoryLabel: 'Liderazgo Técnico',
+      status: 'published',
+      statusLabel: 'Publicado',
+      tags: ['Revisión de Código', 'Liderazgo Técnico', 'Mantenibilidad', 'Mentoría'],
+      featured: false,
+      order: 2,
+      source: { type: 'internal' },
+      detailAvailable: true,
+    },
+    ES_FEATURED_CONTENT_PREVIEW,
+    {
+      id: 'signals-forms-vs-reactive-forms',
+      slug: 'signals-forms-vs-reactive-forms',
+      title: 'Signal Forms vs Reactive Forms',
+      excerpt:
+        'Una comparación futura que se publicará únicamente cuando exista contenido bilingüe completo y verificado.',
+      type: 'article',
+      typeLabel: 'Artículo',
+      category: 'angular',
+      categoryLabel: 'Angular',
+      status: 'planned',
+      statusLabel: 'Planificado',
+      tags: ['Angular', 'Formularios'],
+      featured: false,
+      order: 4,
+      source: { type: 'internal' },
+      detailAvailable: false,
+    },
+  ],
+} as const satisfies PortfolioContentHubContent;

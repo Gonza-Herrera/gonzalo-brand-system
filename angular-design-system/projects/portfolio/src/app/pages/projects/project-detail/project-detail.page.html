@@ -1,0 +1,370 @@
+@if (project(); as project) {
+  <article class="project-detail">
+    <gh-section spacing="sm" surface="primary">
+      <gh-container size="wide">
+        <nav class="project-detail__back" [attr.aria-label]="content().detail.backToProjects">
+          <a [href]="backUrl()">← {{ content().detail.backToProjects }}</a>
+        </nav>
+      </gh-container>
+    </gh-section>
+
+    <gh-hero
+      [eyebrow]="project.caseStudy.available ? project.caseStudy.eyebrow : project.categoryLabel"
+      [title]="project.title"
+      [description]="project.shortDescription"
+      layout="split"
+      surface="gradient"
+      [headingLevel]="1"
+    >
+      <aside
+        ghHeroVisual
+        class="project-detail-hero__visual"
+        [attr.aria-label]="project.title + ' — ' + content().detail.summaryTitle"
+      >
+        <div class="project-detail-hero__badges">
+          <gh-badge [variant]="statusVariant()">{{ project.statusLabel }}</gh-badge>
+          <gh-badge variant="neutral">{{ project.categoryLabel }}</gh-badge>
+        </div>
+
+        @if (project.technologies.length) {
+          <ul class="project-detail__tags" [attr.aria-label]="content().detail.technologies">
+            @for (technology of project.technologies; track technology) {
+              <li>
+                <gh-tag size="sm">{{ technology }}</gh-tag>
+              </li>
+            }
+          </ul>
+        }
+
+        @if (project.capabilities?.length) {
+          <ul class="project-detail-hero__capabilities">
+            @for (capability of project.capabilities; track capability) {
+              <li>{{ capability }}</li>
+            }
+          </ul>
+        }
+      </aside>
+    </gh-hero>
+
+    <gh-section id="summary" spacing="lg" surface="primary">
+      <gh-container size="xl">
+        <gh-stack gap="lg">
+          <gh-section-heading
+            [title]="content().detail.summaryTitle"
+            [description]="caseStudy()?.summary?.description ?? content().detail.summaryDescription"
+            [headingLevel]="2"
+          />
+
+          <ul class="project-summary__facts">
+            @for (fact of summaryFacts(); track fact.id) {
+              <li>
+                <gh-card variant="outlined" padding="md" radius="md" fullHeight>
+                  <div ghCardHeader>
+                    <h3>{{ fact.label }}</h3>
+                  </div>
+                  <div ghCardContent>
+                    <p>{{ fact.value }}</p>
+                  </div>
+                </gh-card>
+              </li>
+            }
+          </ul>
+
+          @if (project.technologies.length) {
+            <div class="project-summary__technologies">
+              <h3>{{ content().detail.technologies }}</h3>
+              <ul class="project-detail__tags">
+                @for (technology of project.technologies; track technology) {
+                  <li>
+                    <gh-tag>{{ technology }}</gh-tag>
+                  </li>
+                }
+              </ul>
+            </div>
+          }
+        </gh-stack>
+      </gh-container>
+    </gh-section>
+
+    @if (caseStudy(); as study) {
+      <app-project-text-section [content]="study.context" surface="subtle" />
+      <app-project-text-section [content]="study.problem" surface="primary" />
+      <app-project-text-section [content]="study.goals" surface="subtle" />
+      <app-project-text-section [content]="study.constraints" surface="primary" />
+
+      <gh-section [id]="study.role.id" spacing="lg" surface="subtle">
+        <gh-container size="lg">
+          <gh-stack gap="lg">
+            <gh-section-heading [title]="study.role.title" [headingLevel]="2" />
+            @for (paragraph of study.role.paragraphs; track paragraph) {
+              <p class="project-detail__reading-copy">{{ paragraph }}</p>
+            }
+            <div class="project-detail__list-block">
+              <h3>{{ content().detail.responsibilities }}</h3>
+              <ul>
+                @for (responsibility of study.role.responsibilities; track responsibility) {
+                  <li>{{ responsibility }}</li>
+                }
+              </ul>
+            </div>
+            @if (study.role.aiDisclosure) {
+              <gh-card variant="glass" padding="md" radius="md">
+                <div ghCardHeader>
+                  <h3>{{ content().detail.aiDisclosure }}</h3>
+                </div>
+                <div ghCardContent>
+                  <p>{{ study.role.aiDisclosure }}</p>
+                </div>
+              </gh-card>
+            }
+          </gh-stack>
+        </gh-container>
+      </gh-section>
+
+      <gh-section [id]="study.approach.id" spacing="lg" surface="primary">
+        <gh-container size="xl">
+          <gh-stack gap="lg">
+            <gh-section-heading
+              [title]="study.approach.title"
+              [description]="study.approach.description"
+              [headingLevel]="2"
+            />
+            <ol class="project-flow" [attr.aria-label]="study.approach.flowLabel">
+              @for (step of study.approach.steps; track step; let index = $index) {
+                <li>
+                  <span aria-hidden="true">{{ index + 1 }}</span
+                  >{{ step }}
+                </li>
+              }
+            </ol>
+          </gh-stack>
+        </gh-container>
+      </gh-section>
+
+      <gh-section [id]="study.architecture.id" spacing="lg" surface="subtle">
+        <gh-container size="xl">
+          <gh-stack gap="lg">
+            <gh-section-heading
+              [title]="study.architecture.title"
+              [description]="study.architecture.description"
+              [headingLevel]="2"
+            />
+            <div class="project-architecture">
+              <ol [attr.aria-label]="study.architecture.flowLabel">
+                @for (stage of study.architecture.stages; track stage) {
+                  <li>{{ stage }}</li>
+                }
+              </ol>
+              <div class="project-architecture__consumers">
+                <h3>{{ study.architecture.consumersLabel }}</h3>
+                <ul>
+                  @for (consumer of study.architecture.consumers; track consumer) {
+                    <li>
+                      <gh-tag variant="accent">{{ consumer }}</gh-tag>
+                    </li>
+                  }
+                </ul>
+              </div>
+            </div>
+          </gh-stack>
+        </gh-container>
+      </gh-section>
+
+      <gh-section [id]="study.decisions.id" spacing="lg" surface="primary">
+        <gh-container size="xl">
+          <gh-stack gap="xl">
+            <gh-section-heading
+              [title]="study.decisions.title"
+              [description]="study.decisions.description"
+              [headingLevel]="2"
+            />
+            <gh-grid [columns]="2" minItemSize="md" gap="lg">
+              @for (decision of study.decisions.items; track decision.id) {
+                <gh-card variant="outlined" padding="lg" radius="lg" fullHeight>
+                  <div ghCardHeader>
+                    <h3>{{ decision.title }}</h3>
+                  </div>
+                  <div ghCardContent class="project-decision">
+                    <dl>
+                      <div>
+                        <dt>{{ content().detail.decisionContext }}</dt>
+                        <dd>{{ decision.context }}</dd>
+                      </div>
+                      <div>
+                        <dt>{{ content().detail.decision }}</dt>
+                        <dd>{{ decision.decision }}</dd>
+                      </div>
+                      <div>
+                        <dt>{{ content().detail.rationale }}</dt>
+                        <dd>{{ decision.rationale }}</dd>
+                      </div>
+                    </dl>
+                    @if (decision.tradeOffs?.length) {
+                      <div class="project-detail__list-block">
+                        <h4>{{ content().detail.tradeOffs }}</h4>
+                        <ul>
+                          @for (tradeOff of decision.tradeOffs; track tradeOff) {
+                            <li>{{ tradeOff }}</li>
+                          }
+                        </ul>
+                      </div>
+                    }
+                  </div>
+                </gh-card>
+              }
+            </gh-grid>
+          </gh-stack>
+        </gh-container>
+      </gh-section>
+
+      <gh-section [id]="study.implementation.id" spacing="lg" surface="subtle">
+        <gh-container size="xl">
+          <gh-stack gap="xl">
+            <gh-section-heading
+              [title]="study.implementation.title"
+              [description]="study.implementation.description"
+              [headingLevel]="2"
+            />
+            <gh-grid [columns]="2" minItemSize="md" gap="lg">
+              @for (phase of study.implementation.phases; track phase.id) {
+                <gh-card variant="elevated" padding="lg" radius="lg" fullHeight>
+                  <div ghCardHeader>
+                    <h3>{{ phase.title }}</h3>
+                  </div>
+                  <div ghCardContent class="project-phase">
+                    <p>{{ phase.description }}</p>
+                    <div class="project-detail__list-block">
+                      <h4>{{ content().detail.phaseItems }}</h4>
+                      <ul>
+                        @for (item of phase.items; track item) {
+                          <li>{{ item }}</li>
+                        }
+                      </ul>
+                    </div>
+                    <p class="project-phase__outcome">
+                      <strong>{{ content().detail.phaseOutcome }}:</strong> {{ phase.outcome }}
+                    </p>
+                  </div>
+                </gh-card>
+              }
+            </gh-grid>
+          </gh-stack>
+        </gh-container>
+      </gh-section>
+
+      <gh-section [id]="study.challenges.id" spacing="lg" surface="primary">
+        <gh-container size="xl">
+          <gh-stack gap="xl">
+            <gh-section-heading
+              [title]="study.challenges.title"
+              [description]="study.challenges.description"
+              [headingLevel]="2"
+            />
+            <gh-grid [columns]="2" minItemSize="md" gap="lg">
+              @for (challenge of study.challenges.items; track challenge.id) {
+                <gh-card variant="outlined" padding="lg" radius="lg" fullHeight>
+                  <div ghCardHeader>
+                    <h3>{{ challenge.title }}</h3>
+                  </div>
+                  <div ghCardContent class="project-challenge">
+                    <p>{{ challenge.description }}</p>
+                    <p>
+                      <strong>{{ content().detail.challengeResponse }}:</strong>
+                      {{ challenge.response }}
+                    </p>
+                  </div>
+                </gh-card>
+              }
+            </gh-grid>
+          </gh-stack>
+        </gh-container>
+      </gh-section>
+
+      <gh-section [id]="study.results.id" spacing="lg" surface="subtle">
+        <gh-container size="xl">
+          <gh-stack gap="xl">
+            <gh-section-heading
+              [title]="study.results.title"
+              [description]="study.results.description"
+              [headingLevel]="2"
+            />
+            <gh-grid columns="auto" minItemSize="md" gap="lg">
+              @for (result of study.results.items; track result.id) {
+                <gh-card variant="glass" padding="lg" radius="lg" fullHeight>
+                  <div ghCardHeader>
+                    <h3>{{ result.title }}</h3>
+                  </div>
+                  <div ghCardContent>
+                    <p>{{ result.description }}</p>
+                  </div>
+                </gh-card>
+              }
+            </gh-grid>
+          </gh-stack>
+        </gh-container>
+      </gh-section>
+
+      <app-project-text-section [content]="study.lessons" surface="primary" />
+      <app-project-text-section [content]="study.nextSteps" surface="subtle" />
+    } @else if (unavailableCaseStudy(); as unavailable) {
+      <gh-section id="case-study-availability" spacing="lg" surface="subtle">
+        <gh-container size="lg">
+          <gh-stack gap="md">
+            <h2>{{ unavailable.title }}</h2>
+            <p class="project-detail__reading-copy">{{ unavailable.description }}</p>
+          </gh-stack>
+        </gh-container>
+      </gh-section>
+    }
+  </article>
+
+  @if (relatedProjects().length) {
+    <gh-section spacing="lg" surface="primary">
+      <gh-container size="xl">
+        <gh-stack gap="xl">
+          <gh-section-heading
+            [eyebrow]="content().detail.relatedEyebrow"
+            [title]="content().detail.relatedTitle"
+            [description]="content().detail.relatedDescription"
+            [headingLevel]="2"
+          />
+          <gh-grid columns="auto" minItemSize="md" gap="lg">
+            @for (related of relatedCards(); track relatedProjects()[$index].id) {
+              <gh-project-card
+                [project]="related"
+                [ariaLabel]="content().grid.cardLabels.projectPrefix + ': ' + related.title"
+                [featuredLabel]="content().grid.cardLabels.featured"
+                [technologiesLabel]="content().grid.cardLabels.technologies"
+                [linksLabel]="content().grid.cardLabels.links"
+                [headingLevel]="3"
+              />
+            }
+          </gh-grid>
+        </gh-stack>
+      </gh-container>
+    </gh-section>
+  }
+
+  <gh-contact-callout
+    [eyebrow]="content().contact.eyebrow"
+    [title]="content().contact.title"
+    [description]="content().contact.description"
+    [actions]="contactActions()"
+    [externalLinkLabel]="externalLinkLabel()"
+    alignment="center"
+    surface="gradient"
+  />
+} @else {
+  <gh-section spacing="lg" surface="primary">
+    <gh-container size="lg">
+      <gh-stack gap="lg" align="start">
+        <p class="project-detail-not-found__eyebrow">{{ content().detail.notFoundEyebrow }}</p>
+        <h1>{{ content().detail.notFoundTitle }}</h1>
+        <p class="project-detail__reading-copy">{{ content().detail.notFoundDescription }}</p>
+        <a class="project-detail-not-found__link" [href]="backUrl()">
+          {{ content().detail.backToProjects }}
+        </a>
+      </gh-stack>
+    </gh-container>
+  </gh-section>
+}

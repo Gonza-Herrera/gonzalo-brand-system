@@ -1,0 +1,124 @@
+@use '../../shared/styles/documentation' as documentation;
+
+.page {
+  @include documentation.page;
+}
+
+.page-header {
+  @include documentation.page-header;
+}
+
+.demo-stage {
+  min-width: 0;
+  overflow: hidden;
+  border: var(--gh-border-width-default) solid var(--gh-border-default);
+  border-radius: var(--gh-radius-lg);
+  background: var(--gh-background-secondary);
+}
+
+.demo-label {
+  color: var(--gh-text-muted);
+  font-size: var(--gh-font-size-caption);
+  font-weight: var(--gh-font-weight-semibold);
+}
+
+.container-stage {
+  display: grid;
+  gap: var(--gh-space-xs);
+  padding-block: var(--gh-space-sm);
+
+  > .demo-label {
+    padding-inline: var(--gh-space-sm);
+  }
+
+  gh-container {
+    border-inline: var(--gh-border-width-default) dashed var(--gh-border-strong);
+    background: var(--gh-status-accent-background);
+  }
+}
+
+.container-content,
+.section-content,
+.padded-stage {
+  padding: var(--gh-space-md);
+}
+
+.container-content {
+  color: var(--gh-text-secondary);
+  text-align: center;
+}
+
+.section-stage {
+  background: var(--gh-background-subtle);
+}
+
+.section-content {
+  color: var(--gh-text-secondary);
+  text-align: center;
+}
+
+.full-height-details {
+  overflow: hidden;
+  border: var(--gh-border-width-default) solid var(--gh-border-default);
+  border-radius: var(--gh-radius-lg);
+  background: var(--gh-background-secondary);
+
+  summary {
+    padding: var(--gh-space-md);
+    color: var(--gh-text-primary);
+    cursor: pointer;
+  }
+}
+
+.layout-item {
+  display: block;
+  padding: var(--gh-space-xs) var(--gh-space-sm);
+  border-radius: var(--gh-radius-sm);
+  background: var(--gh-status-info-background);
+  color: var(--gh-status-info-text);
+}
+
+.layout-item--short {
+  width: fit-content;
+}
+
+.justified-stack {
+  min-height: calc(var(--gh-space-section) * 2);
+}
+
+.narrow-stage {
+  max-width: var(--gh-container-sm);
+}
+
+.vertical-divider-row {
+  min-height: var(--gh-space-2xl);
+}
+
+h3 {
+  margin: 0 0 var(--gh-space-md);
+  color: var(--gh-text-primary);
+  font-size: var(--gh-font-size-body-large);
+}
+
+.code-examples {
+  display: grid;
+  gap: var(--gh-space-lg);
+
+  > header {
+    display: grid;
+    gap: var(--gh-space-xs);
+
+    p,
+    h2 {
+      margin: 0;
+    }
+
+    p {
+      color: var(--gh-text-accent);
+      font-size: var(--gh-font-size-label);
+      font-weight: var(--gh-font-weight-bold);
+      letter-spacing: var(--gh-letter-spacing-wide);
+      text-transform: uppercase;
+    }
+  }
+}

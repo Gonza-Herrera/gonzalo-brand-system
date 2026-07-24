@@ -1,0 +1,23 @@
+:host {
+  display: block;
+}
+
+.experience-direction__copy {
+  max-width: var(--gh-layout-reading-max);
+}
+
+.experience-direction__copy p {
+  margin: 0;
+  color: var(--gh-text-secondary);
+  line-height: var(--gh-line-height-body);
+}
+
+.experience-direction__action {
+  color: var(--gh-text-accent);
+  font-weight: var(--gh-font-weight-semibold);
+  text-underline-offset: var(--gh-space-xs);
+}
+
+.experience-direction__action:hover {
+  color: var(--gh-text-primary);
+}

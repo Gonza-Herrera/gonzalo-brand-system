@@ -1,0 +1,26 @@
+:host {
+  display: block;
+}
+
+.project-text-section__copy,
+.project-text-section__list {
+  max-width: var(--gh-layout-reading-max);
+}
+
+.project-text-section__copy {
+  display: grid;
+  gap: var(--gh-space-md);
+}
+
+.project-text-section__copy p,
+.project-text-section__list {
+  margin: 0;
+  color: var(--gh-text-secondary);
+  line-height: var(--gh-line-height-body);
+}
+
+.project-text-section__list {
+  display: grid;
+  gap: var(--gh-space-sm);
+  padding-inline-start: var(--gh-space-xl);
+}

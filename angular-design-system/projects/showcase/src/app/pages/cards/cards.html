@@ -1,0 +1,141 @@
+<article class="page">
+  <header class="page-header">
+    <p>Components · Content</p>
+    <h1>Card family</h1>
+    <p>
+      A compositional surface and three typed content cards for articles, professional experience
+      and projects.
+    </p>
+  </header>
+
+  <showcase-documentation-section
+    sectionId="base-card-variants"
+    eyebrow="Base Card"
+    title="Four controlled surface treatments"
+    description="Interactive changes visual feedback only; links and buttons inside the Card retain native responsibility."
+  >
+    <div class="base-card-grid">
+      @for (item of variants; track item.variant) {
+        <div class="card-stage" [class.card-stage--glass]="item.variant === 'glass'">
+          <gh-card [variant]="item.variant" fullHeight>
+            <div ghCardHeader>
+              <h3>{{ item.label }}</h3>
+            </div>
+            <div ghCardContent>
+              <p>{{ item.description }}</p>
+            </div>
+          </gh-card>
+        </div>
+      }
+    </div>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="base-card-options"
+    eyebrow="Composition"
+    title="Padding, radius and visual states"
+    description="Slots remain optional and default projected content stays inside the padded body."
+  >
+    <div class="option-grid">
+      <gh-card interactive>
+        <div ghCardHeader><h3>Interactive surface</h3></div>
+        <div ghCardContent>
+          <p>Hover feedback does not make the article itself clickable.</p>
+        </div>
+        <div ghCardFooter>
+          <gh-button variant="secondary" size="sm">Native action</gh-button>
+        </div>
+      </gh-card>
+
+      <gh-card selected>
+        <div ghCardHeader><h3>Selected surface</h3></div>
+        <div ghCardContent>
+          <p>A thicker inset indication and changed surface reinforce selection.</p>
+        </div>
+      </gh-card>
+
+      <gh-card fullHeight>
+        <div ghCardHeader><h3>Full height</h3></div>
+        <div ghCardContent>
+          <p>Useful for equal-height documentation grids without a public Grid primitive.</p>
+        </div>
+      </gh-card>
+    </div>
+
+    <div class="scale-examples">
+      <div>
+        <h3>Padding</h3>
+        <div>
+          @for (padding of paddings; track padding) {
+            <gh-card [padding]="padding" variant="subtle">
+              <code>{{ padding }}</code>
+            </gh-card>
+          }
+        </div>
+      </div>
+
+      <div>
+        <h3>Radius</h3>
+        <div>
+          @for (radius of radii; track radius) {
+            <gh-card [radius]="radius" padding="sm">
+              <code>{{ radius }}</code>
+            </gh-card>
+          }
+        </div>
+      </div>
+    </div>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="article-cards"
+    eyebrow="Article Card"
+    title="Educational content with native navigation"
+    description="Images are optional, metadata is preformatted and external links expose safe attributes."
+  >
+    <div class="two-column-grid">
+      @for (article of articles; track article.title) {
+        <gh-article-card [article]="article" />
+      }
+    </div>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="experience-cards"
+    eyebrow="Experience Card"
+    title="Semantic professional history"
+    description="All organizations and experience details below are clearly demonstrative examples."
+  >
+    <div class="two-column-grid">
+      @for (experience of experiences; track experience.role) {
+        <gh-experience-card [experience]="experience" [highlighted]="experience.current ?? false" />
+      }
+    </div>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="project-cards"
+    eyebrow="Project Card"
+    title="Portfolio content across orientations and states"
+    description="Project actions remain native links and technology metadata reuses the public Tag component."
+  >
+    <div class="project-grid">
+      <gh-project-card [project]="projects[0]!" />
+      <gh-project-card [project]="projects[1]!" orientation="horizontal" />
+      <gh-project-card [project]="projects[2]!" />
+    </div>
+  </showcase-documentation-section>
+
+  <section class="code-examples" aria-labelledby="card-code-examples">
+    <header>
+      <p>Implementation</p>
+      <h2 id="card-code-examples">Public API examples</h2>
+    </header>
+    <div>
+      <showcase-code-preview label="Base Card" [code]="baseCardExample" />
+      <showcase-code-preview label="Article Card" [code]="articleExample" />
+      <showcase-code-preview label="Experience Card" [code]="experienceExample" />
+      <showcase-code-preview label="Project Card" [code]="projectExample" />
+    </div>
+  </section>
+</article>

@@ -1,0 +1,55 @@
+:host {
+  display: block;
+  min-width: 0;
+}
+
+.experience-hero__visual {
+  display: grid;
+  min-width: 0;
+  gap: var(--gh-space-lg);
+  padding: var(--gh-space-xl);
+  border: var(--gh-border-width-default) solid var(--gh-card-border-glass);
+  border-radius: var(--gh-radius-md);
+  background: var(--gh-card-background-glass);
+  box-shadow: var(--gh-shadow-sm);
+}
+
+.experience-hero__visual-title {
+  margin: 0;
+  color: var(--gh-text-primary);
+  font-family: var(--gh-font-family-display);
+  font-size: var(--gh-font-size-h3);
+  font-weight: var(--gh-font-weight-semibold);
+  line-height: var(--gh-line-height-heading);
+}
+
+.experience-hero__highlights {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--gh-space-sm);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.experience-hero__highlights li {
+  min-width: 0;
+  padding: var(--gh-space-sm) var(--gh-space-md);
+  border: var(--gh-border-width-default) solid var(--gh-border-subtle);
+  border-radius: var(--gh-radius-sm);
+  background: var(--gh-surface-primary);
+  color: var(--gh-text-primary);
+  font-size: var(--gh-font-size-caption);
+  font-weight: var(--gh-font-weight-medium);
+  line-height: var(--gh-line-height-body);
+}
+
+@media (max-width: 48rem) {
+  .experience-hero__visual {
+    padding: var(--gh-space-lg);
+  }
+
+  .experience-hero__highlights {
+    grid-template-columns: 1fr;
+  }
+}

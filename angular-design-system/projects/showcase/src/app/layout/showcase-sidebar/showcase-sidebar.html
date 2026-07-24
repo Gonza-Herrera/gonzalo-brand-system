@@ -1,0 +1,23 @@
+<aside class="sidebar" id="showcase-navigation" [class.sidebar--open]="open()">
+  <nav aria-label="Design system documentation">
+    <p>Documentation</p>
+    <ul>
+      @for (item of navigation; track item.path) {
+        <li>
+          <a
+            [routerLink]="item.path"
+            routerLinkActive="is-active"
+            [routerLinkActiveOptions]="{ exact: item.exact ?? false }"
+            ariaCurrentWhenActive="page"
+            (click)="navigationSelected.emit()"
+          >
+            <span>{{ item.label }}</span>
+            <small>{{ item.description }}</small>
+          </a>
+        </li>
+      }
+    </ul>
+  </nav>
+
+  <p class="sidebar__tagline">Think bigger. Build smarter.</p>
+</aside>

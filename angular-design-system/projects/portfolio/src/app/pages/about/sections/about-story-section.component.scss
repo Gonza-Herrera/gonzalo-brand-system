@@ -1,0 +1,29 @@
+:host {
+  display: block;
+}
+
+.about-story__copy {
+  max-width: var(--gh-layout-reading-max);
+}
+
+.about-story__copy p,
+gh-card h3,
+gh-card p {
+  margin: 0;
+}
+
+.about-story__copy p,
+gh-card p {
+  color: var(--gh-text-secondary);
+  line-height: var(--gh-line-height-body);
+}
+
+.about-story__action {
+  color: var(--gh-text-accent);
+  font-weight: var(--gh-font-weight-semibold);
+  text-underline-offset: var(--gh-space-xs);
+}
+
+.about-story__action:hover {
+  color: var(--gh-text-primary);
+}

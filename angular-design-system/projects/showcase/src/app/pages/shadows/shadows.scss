@@ -1,0 +1,65 @@
+@use '../../shared/styles/documentation' as documentation;
+
+.page {
+  @include documentation.page;
+}
+
+.page-header {
+  @include documentation.page-header;
+}
+
+.shadow-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gh-space-xl);
+}
+
+.shadow-token {
+  display: grid;
+  gap: var(--gh-space-xl);
+  padding: var(--gh-space-lg);
+  border: var(--gh-border-width-default) solid var(--gh-border-subtle);
+  border-radius: var(--gh-radius-lg);
+  background: var(--gh-background-subtle);
+}
+
+.shadow-token__preview {
+  display: grid;
+  min-height: calc(var(--gh-space-section) * 2);
+  place-items: center;
+
+  span {
+    display: grid;
+    width: min(75%, calc(var(--gh-space-section) * 1.5));
+    aspect-ratio: 1.2;
+    place-items: center;
+    border: var(--gh-border-width-default) solid var(--gh-border-default);
+    border-radius: var(--gh-radius-lg);
+    background: var(--gh-surface-elevated);
+    color: var(--gh-text-secondary);
+    font-size: var(--gh-font-size-caption);
+    font-weight: var(--gh-font-weight-semibold);
+    box-shadow: var(--preview-shadow);
+  }
+}
+
+.token-meta {
+  @include documentation.token-meta;
+}
+
+@media (max-width: 64rem) {
+  .shadow-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .shadow-token {
+    grid-template-columns: minmax(10rem, 0.45fr) minmax(0, 1fr);
+    align-items: center;
+  }
+}
+
+@media (max-width: 36rem) {
+  .shadow-token {
+    grid-template-columns: 1fr;
+  }
+}

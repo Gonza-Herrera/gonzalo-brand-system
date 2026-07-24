@@ -1,0 +1,74 @@
+@use '../pattern-foundations' as pattern;
+
+:host {
+  display: block;
+  min-width: 0;
+}
+
+.gh-feature-grid__minimal-item {
+  min-width: 0;
+  padding-block: var(--gh-space-lg);
+  border-top: var(--gh-border-width-default) solid var(--gh-border-default);
+}
+
+.gh-feature-grid__icon {
+  display: inline-grid;
+  width: 2.75rem;
+  min-height: 2.75rem;
+  place-items: center;
+  border: var(--gh-border-width-default) solid var(--gh-status-accent-border);
+  border-radius: var(--gh-radius-md);
+  background: var(--gh-status-accent-background);
+  color: var(--gh-status-accent-text);
+  font-family: var(--gh-font-family-display);
+  font-weight: var(--gh-font-weight-bold);
+}
+
+.gh-feature-grid__eyebrow {
+  @include pattern.eyebrow;
+}
+
+.gh-feature-grid h3,
+.gh-feature-grid__description {
+  margin: 0;
+}
+
+.gh-feature-grid h3 {
+  color: var(--gh-text-primary);
+  font-family: var(--gh-font-family-display);
+  font-size: var(--gh-font-size-h3);
+  line-height: var(--gh-line-height-heading);
+  overflow-wrap: anywhere;
+}
+
+.gh-feature-grid__description {
+  color: var(--gh-text-secondary);
+  line-height: var(--gh-line-height-body);
+}
+
+.gh-feature-grid__link {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: var(--gh-space-sm);
+  width: fit-content;
+  border-radius: var(--gh-radius-sm);
+  color: var(--gh-text-accent);
+  font-size: var(--gh-font-size-label);
+  font-weight: var(--gh-font-weight-semibold);
+  overflow-wrap: anywhere;
+  text-underline-offset: var(--gh-space-xs);
+
+  &:hover {
+    color: var(--gh-text-primary);
+  }
+
+  &:focus-visible {
+    outline: var(--gh-border-width-focus) solid var(--gh-focus-ring);
+    outline-offset: var(--gh-border-width-focus);
+  }
+}
+
+.gh-visually-hidden {
+  @include pattern.visually-hidden;
+}

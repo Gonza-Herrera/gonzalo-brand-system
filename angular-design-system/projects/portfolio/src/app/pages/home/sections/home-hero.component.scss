@@ -1,0 +1,51 @@
+:host {
+  display: block;
+  min-width: 0;
+}
+
+.home-hero__visual {
+  display: block;
+  min-width: 0;
+  padding: var(--gh-space-xl);
+  border: var(--gh-border-width-default) solid var(--gh-card-border-glass);
+  border-radius: var(--gh-radius-md);
+  background: var(--gh-card-background-glass);
+  box-shadow: var(--gh-shadow-sm);
+}
+
+.home-hero__role {
+  margin: 0 0 var(--gh-space-lg);
+  color: var(--gh-text-primary);
+  font-family: var(--gh-font-family-display);
+  font-size: var(--gh-font-size-h3);
+  font-weight: var(--gh-font-weight-semibold);
+  line-height: var(--gh-line-height-heading);
+}
+
+.home-hero__highlights {
+  display: grid;
+  gap: var(--gh-space-md);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.home-hero__highlights li {
+  display: grid;
+  gap: var(--gh-space-xs);
+  padding-block-start: var(--gh-space-md);
+  border-block-start: var(--gh-border-width-default) solid var(--gh-border-subtle);
+}
+
+.home-hero__highlights span {
+  color: var(--gh-text-muted);
+  font-size: var(--gh-font-size-caption);
+  font-weight: var(--gh-font-weight-medium);
+  letter-spacing: var(--gh-letter-spacing-wide);
+  text-transform: uppercase;
+}
+
+.home-hero__highlights strong {
+  color: var(--gh-text-primary);
+  font-weight: var(--gh-font-weight-semibold);
+}

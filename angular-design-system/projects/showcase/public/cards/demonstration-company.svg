@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title">
+  <title id="title">Demonstration company monogram</title>
+  <rect width="256" height="256" rx="56" fill="#101828"/>
+  <circle cx="176" cy="76" r="70" fill="#CBB9E8"/>
+  <circle cx="72" cy="188" r="86" fill="#A9C9F5"/>
+  <path d="M67 67h54c48 0 78 24 78 61s-30 61-78 61H67V67Zm51 88c24 0 38-10 38-27s-14-27-38-27h-9v54h9Z" fill="#F7F4F1"/>
+</svg>

@@ -1,0 +1,20 @@
+.theme-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gh-space-xs);
+  color: var(--gh-text-secondary);
+  font-size: var(--gh-font-size-caption);
+  font-weight: var(--gh-font-weight-semibold);
+}
+
+select {
+  min-height: 2.75rem;
+  max-width: 7rem;
+  padding: var(--gh-space-xs) var(--gh-space-sm);
+  border: var(--gh-border-width-default) solid var(--gh-action-secondary-border);
+  border-radius: var(--gh-radius-md);
+  background: var(--gh-action-secondary-background);
+  color: var(--gh-action-secondary-text);
+  font: inherit;
+  cursor: pointer;
+}

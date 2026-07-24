@@ -1,0 +1,328 @@
+<article class="page">
+  <header class="page-header">
+    <p>Patterns · Brand composition</p>
+    <h1>Brand patterns</h1>
+    <p>
+      Page-ready, configurable compositions built from public Design Tokens, components and Layout
+      Primitives.
+    </p>
+  </header>
+
+  <showcase-documentation-section
+    sectionId="patterns-hero"
+    eyebrow="Hero"
+    title="A calm, high-impact opening"
+    description="Split, centered and content-only layouts share the same semantic structure and native link actions."
+  >
+    <div class="pattern-stage pattern-stage--flush">
+      <gh-hero
+        eyebrow="Frontend leadership · Angular · AI"
+        title="Think bigger. Build smarter."
+        description="Helping teams build better software through engineering, leadership and AI."
+        [actions]="heroActions"
+        [headingLevel]="2"
+      >
+        <div ghHeroVisual class="hero-visual" aria-label="Demonstrative system composition">
+          <span>Engineering</span>
+          <span>Leadership</span>
+          <span>AI</span>
+        </div>
+      </gh-hero>
+    </div>
+
+    <div class="two-column-grid">
+      <div class="pattern-stage pattern-stage--flush">
+        <gh-hero
+          eyebrow="Centered"
+          title="Premium simplicity."
+          description="Strong hierarchy with generous space."
+          layout="centered"
+          alignment="center"
+          surface="subtle"
+          [headingLevel]="2"
+        />
+      </div>
+      <div class="pattern-stage pattern-stage--flush">
+        <gh-hero
+          eyebrow="Content only"
+          title="Clear by design."
+          description="No visual region is rendered when one is not provided."
+          layout="content-only"
+          surface="default"
+          [headingLevel]="2"
+        />
+      </div>
+    </div>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="patterns-navigation"
+    eyebrow="Navigation"
+    title="Native links and a Signal-driven mobile menu"
+    description="Resize the viewport to exercise the mobile state. Active state is supplied by the consumer."
+  >
+    <div class="pattern-stage pattern-stage--navigation">
+      <gh-navigation
+        brand="Gonzalo Herrera"
+        brandHref="#patterns-navigation"
+        menuId="patterns-navigation-menu"
+        [items]="navigationItems"
+        [transparent]="true"
+        [showThemeControl]="true"
+      >
+        <span ghNavigationLogo class="brand-mark" aria-hidden="true">GH</span>
+        <a ghNavigationActions class="projected-link" href="#patterns-contact-callout">Contact</a>
+        <showcase-theme-toggle ghNavigationThemeControl />
+      </gh-navigation>
+    </div>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="patterns-section-heading"
+    eyebrow="Section Heading"
+    title="Predictable content hierarchy"
+    description="Heading levels are explicit, and actions move below the text at narrow widths."
+  >
+    <div class="two-column-grid">
+      <div class="pattern-stage">
+        <gh-section-heading
+          eyebrow="Selected work"
+          title="Projects"
+          description="A focused selection of products and engineering experiments."
+          [headingLevel]="3"
+        >
+          <a ghSectionHeadingAction class="projected-link" href="#landing-projects">View all</a>
+        </gh-section-heading>
+      </div>
+      <div class="pattern-stage">
+        <gh-section-heading
+          eyebrow="Capabilities"
+          title="How I help"
+          description="Engineering, leadership and practical AI."
+          alignment="center"
+          [headingLevel]="4"
+        />
+      </div>
+    </div>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="patterns-feature-grid"
+    eyebrow="Feature Grid"
+    title="Capabilities with controlled visual weight"
+    description="The Cards variant reuses Card; the minimal variant keeps the same public Grid behavior."
+  >
+    <gh-stack gap="xl">
+      <gh-feature-grid [features]="capabilities" [columns]="3" variant="cards" />
+      <gh-feature-grid [features]="capabilities.slice(0, 4)" [columns]="2" variant="minimal" />
+    </gh-stack>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="patterns-experience-timeline"
+    eyebrow="Experience Timeline"
+    title="Consumer-ordered professional history"
+    description="The data below is explicitly demonstrative. Dates stay preformatted and the model is shared with Experience Card."
+  >
+    <div class="two-column-grid two-column-grid--top">
+      <gh-experience-timeline [experiences]="experiences" />
+      <gh-experience-timeline
+        [experiences]="experiences"
+        orientation="compact"
+        [showConnector]="false"
+      />
+    </div>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="patterns-content-highlight"
+    eyebrow="Content Highlight"
+    title="One editorial focal point"
+    description="Media remains optional and the Card surface never becomes an invalid interactive wrapper."
+  >
+    <gh-stack gap="lg">
+      <gh-content-highlight [content]="highlights[0]!" surface="gradient" [headingLevel]="3" />
+      <div class="two-column-grid two-column-grid--top">
+        <gh-content-highlight
+          [content]="highlights[1]!"
+          orientation="vertical"
+          surface="accent"
+          [headingLevel]="3"
+        />
+        <gh-content-highlight
+          [content]="highlights[2]!"
+          orientation="vertical"
+          [headingLevel]="3"
+        />
+      </div>
+    </gh-stack>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="patterns-contact-callout"
+    eyebrow="Contact Callout"
+    title="A focused closing action"
+    description="Actions remain native navigation links, including email and external destinations."
+  >
+    <gh-stack gap="lg">
+      <gh-contact-callout
+        eyebrow="Let's connect"
+        title="Let's build something better."
+        description="Have a project, opportunity or engineering challenge?"
+        [actions]="contactActions"
+      />
+      <gh-contact-callout
+        eyebrow="Start a conversation"
+        title="Bring the complex problem."
+        description="We can make the next decision clearer."
+        [actions]="contactActions.slice(0, 1)"
+        alignment="start"
+        surface="accent"
+      />
+    </gh-stack>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="patterns-footer"
+    eyebrow="Footer"
+    title="A semantic, configurable close"
+    description="Grouped navigation, social projection, tagline and bottom content remain consumer-owned."
+  >
+    <div class="pattern-stage pattern-stage--flush">
+      <gh-footer
+        brand="Gonzalo Herrera"
+        description="Frontend Tech Lead & AI-Augmented Engineer"
+        tagline="Think bigger. Build smarter."
+        [showTagline]="true"
+        [linkGroups]="footerGroups"
+        copyright="© 2026 Demonstration content"
+      >
+        <a ghFooterSocial class="projected-link" href="https://www.linkedin.com/">LinkedIn</a>
+        <span ghFooterBottom>English · Español</span>
+      </gh-footer>
+    </div>
+  </showcase-documentation-section>
+
+  <section class="landing-section" aria-labelledby="patterns-landing-title">
+    <header>
+      <p>Integration</p>
+      <h2 id="patterns-landing-title">Composed personal landing demonstration</h2>
+      <p>
+        A responsive, theme-aware page assembled from the real public patterns, Layout Primitives
+        and Cards. All employment and contact details remain demonstrative.
+      </p>
+    </header>
+
+    <div class="landing" data-testid="patterns-landing">
+      <gh-navigation
+        brand="Gonzalo Herrera"
+        brandHref="#landing-home"
+        menuId="landing-navigation-menu"
+        [items]="navigationItems"
+        [sticky]="false"
+        [showThemeControl]="true"
+      >
+        <span ghNavigationLogo class="brand-mark" aria-hidden="true">GH</span>
+        <a ghNavigationActions class="projected-link" href="#landing-contact">Contact</a>
+        <showcase-theme-toggle ghNavigationThemeControl />
+      </gh-navigation>
+
+      <div id="landing-home">
+        <gh-hero
+          eyebrow="Frontend leadership · Angular · AI"
+          title="Think bigger. Build smarter."
+          description="Helping teams build better software through engineering, leadership and AI."
+          [actions]="heroActions"
+          [headingLevel]="2"
+        >
+          <div ghHeroVisual class="hero-visual" aria-label="Demonstrative system composition">
+            <span>Clarity</span>
+            <span>Craft</span>
+            <span>Growth</span>
+          </div>
+        </gh-hero>
+      </div>
+
+      <gh-section id="landing-capabilities" spacing="lg" surface="primary">
+        <gh-container size="xl">
+          <gh-stack gap="xl">
+            <gh-section-heading
+              eyebrow="Capabilities"
+              title="Engineering, leadership and AI"
+              description="A practical combination for teams building ambitious software."
+            />
+            <gh-feature-grid [features]="capabilities" [columns]="3" />
+          </gh-stack>
+        </gh-container>
+      </gh-section>
+
+      <gh-section id="landing-projects" spacing="lg" surface="subtle">
+        <gh-container size="xl">
+          <gh-stack gap="xl">
+            <gh-section-heading
+              eyebrow="Selected work"
+              title="Projects"
+              description="Demonstrative product and engineering experiments."
+            />
+            <gh-grid [columns]="2" minItemSize="md" gap="lg">
+              @for (project of projects; track project.title) {
+                <gh-project-card [project]="project" />
+              }
+            </gh-grid>
+          </gh-stack>
+        </gh-container>
+      </gh-section>
+
+      <gh-section id="landing-experience" spacing="lg" surface="primary">
+        <gh-container size="lg">
+          <gh-stack gap="xl">
+            <gh-section-heading
+              eyebrow="Experience"
+              title="Demonstration career timeline"
+              description="Placeholder organizations are labeled as examples rather than real history."
+            />
+            <gh-experience-timeline [experiences]="experiences" />
+          </gh-stack>
+        </gh-container>
+      </gh-section>
+
+      <gh-section id="landing-writing" spacing="lg" surface="subtle">
+        <gh-container size="xl">
+          <gh-stack gap="xl">
+            <gh-section-heading
+              eyebrow="Writing"
+              title="Featured thinking"
+              description="Practical notes on Angular, architecture and leadership."
+            />
+            <gh-content-highlight
+              [content]="highlights[0]!"
+              surface="gradient"
+              [headingLevel]="3"
+            />
+          </gh-stack>
+        </gh-container>
+      </gh-section>
+
+      <div id="landing-contact">
+        <gh-contact-callout
+          eyebrow="Let's connect"
+          title="Let's build something better."
+          description="Have a project, opportunity or engineering challenge?"
+          [actions]="contactActions"
+        />
+      </div>
+
+      <gh-footer
+        brand="Gonzalo Herrera"
+        description="Frontend Tech Lead & AI-Augmented Engineer"
+        tagline="Think bigger. Build smarter."
+        [showTagline]="true"
+        [linkGroups]="footerGroups"
+        copyright="© 2026 Demonstration landing"
+      >
+        <a ghFooterSocial class="projected-link" href="https://www.linkedin.com/">LinkedIn</a>
+        <span ghFooterBottom>Built with public Brand Patterns</span>
+      </gh-footer>
+    </div>
+  </section>
+</article>

@@ -1,0 +1,31 @@
+<div class="gh-section-heading__layout">
+  <gh-stack
+    class="gh-section-heading__content"
+    gap="sm"
+    [align]="alignment() === 'center' ? 'center' : 'start'"
+  >
+    @if (eyebrow()) {
+      <p class="gh-section-heading__eyebrow">{{ eyebrow() }}</p>
+    }
+
+    @switch (headingLevel()) {
+      @case (2) {
+        <h2>{{ title() }}</h2>
+      }
+      @case (3) {
+        <h3>{{ title() }}</h3>
+      }
+      @case (4) {
+        <h4>{{ title() }}</h4>
+      }
+    }
+
+    @if (description()) {
+      <p class="gh-section-heading__description">{{ description() }}</p>
+    }
+  </gh-stack>
+
+  <div class="gh-section-heading__action">
+    <ng-content select="[ghSectionHeadingAction]" />
+  </div>
+</div>

@@ -1,0 +1,83 @@
+<article class="page">
+  <header class="page-header">
+    <p>Foundation · Typography</p>
+    <h1>Typography system</h1>
+    <p>
+      Manrope brings character to display moments while Inter keeps interfaces and long-form content
+      highly readable.
+    </p>
+  </header>
+
+  <showcase-documentation-section
+    sectionId="font-families"
+    eyebrow="Families"
+    title="Character with resilient fallbacks"
+    description="The library defines font stacks but does not download font files. Consuming applications own font loading and performance strategy."
+  >
+    <div class="family-grid">
+      @for (family of fontFamilies; track family.name) {
+        <article class="family-card" [style.--preview-font-family]="family.cssValue">
+          <p class="family-card__sample">Ag</p>
+          <div class="token-meta">
+            <strong>{{ family.name }}</strong>
+            <span>{{ family.role }}</span>
+            <code>{{ family.cssVariable }}</code>
+            <small>{{ family.value }}</small>
+          </div>
+        </article>
+      }
+    </div>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="type-scale"
+    eyebrow="Scale"
+    title="Clear hierarchy"
+    description="Each role combines family, size, weight, line-height and letter-spacing tokens."
+  >
+    <div class="type-list">
+      @for (type of typographyTokens; track type.id) {
+        <article
+          class="type-sample"
+          [style.--preview-font-family]="type.familyCssValue"
+          [style.--preview-font-size]="type.sizeCssValue"
+          [style.--preview-font-weight]="type.weightCssValue"
+          [style.--preview-line-height]="type.lineHeightCssValue"
+          [style.--preview-letter-spacing]="type.letterSpacingCssValue"
+        >
+          <header>
+            <strong>{{ type.name }}</strong>
+            <code>{{ type.sizeVariable }}</code>
+          </header>
+
+          <p>{{ type.sample }}</p>
+
+          <dl>
+            <div>
+              <dt>Family</dt>
+              <dd>{{ type.familyValue }}</dd>
+            </div>
+            <div>
+              <dt>Size</dt>
+              <dd>{{ type.sizeValue }}</dd>
+            </div>
+            <div>
+              <dt>Weight</dt>
+              <dd>{{ type.weightValue }}</dd>
+            </div>
+            <div>
+              <dt>Line-height</dt>
+              <dd>{{ type.lineHeightValue }}</dd>
+            </div>
+            <div>
+              <dt>Letter-spacing</dt>
+              <dd>{{ type.letterSpacingValue }}</dd>
+            </div>
+          </dl>
+        </article>
+      }
+    </div>
+  </showcase-documentation-section>
+
+  <showcase-code-preview label="Typography token usage" [code]="codeExample" />
+</article>

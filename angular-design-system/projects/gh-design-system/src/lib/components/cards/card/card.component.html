@@ -1,0 +1,21 @@
+<article [class]="cardClasses()" [attr.aria-label]="ariaLabel()">
+  <div class="gh-card__media">
+    <ng-content select="[ghCardMedia]" />
+  </div>
+
+  <div class="gh-card__body">
+    <div class="gh-card__header">
+      <ng-content select="[ghCardHeader]" />
+    </div>
+
+    <div class="gh-card__content">
+      <ng-content select="[ghCardContent]" />
+    </div>
+
+    <ng-content />
+
+    <div class="gh-card__footer">
+      <ng-content select="[ghCardFooter]" />
+    </div>
+  </div>
+</article>

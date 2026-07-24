@@ -1,0 +1,24 @@
+.not-found__code {
+  color: var(--gh-text-secondary);
+  font-family: var(--gh-font-family-display);
+  font-size: var(--gh-font-size-h1);
+  font-weight: var(--gh-font-weight-bold);
+  line-height: var(--gh-line-height-heading);
+}
+
+.not-found__link {
+  display: inline-flex;
+  min-height: var(--gh-space-2xl);
+  align-items: center;
+  padding-inline: var(--gh-space-lg);
+  border: var(--gh-border-width-default) solid var(--gh-action-primary-border);
+  border-radius: var(--gh-radius-pill);
+  background: var(--gh-action-primary-background);
+  color: var(--gh-action-primary-text);
+  font-weight: var(--gh-font-weight-semibold);
+  text-decoration: none;
+
+  &:hover {
+    background: var(--gh-action-primary-hover);
+  }
+}

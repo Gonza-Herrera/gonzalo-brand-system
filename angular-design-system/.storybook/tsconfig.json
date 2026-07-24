@@ -1,0 +1,15 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "types": ["node"]
+  },
+  "include": [
+    "./preview.ts",
+    "../docs/**/*.mdx",
+    "../stories/**/*.ts",
+    "../projects/gh-design-system/src/**/*.stories.ts"
+  ],
+  "exclude": ["../projects/**/*.spec.ts"]
+}

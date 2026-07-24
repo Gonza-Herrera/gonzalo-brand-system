@@ -1,0 +1,23 @@
+<gh-section id="featured-content" spacing="lg" surface="subtle">
+  <gh-container size="lg">
+    <gh-stack gap="xl">
+      <gh-section-heading
+        [eyebrow]="content().eyebrow"
+        [title]="content().title"
+        [description]="content().description"
+        [headingLevel]="2"
+      />
+      @if (highlight(); as featured) {
+        <gh-content-highlight
+          [content]="featured"
+          [typeLabels]="content().typeLabels"
+          [tagsLabel]="content().tagsLabel"
+          [externalLinkLabel]="externalLinkLabel()"
+          [headingLevel]="3"
+          orientation="horizontal"
+          surface="accent"
+        />
+      }
+    </gh-stack>
+  </gh-container>
+</gh-section>

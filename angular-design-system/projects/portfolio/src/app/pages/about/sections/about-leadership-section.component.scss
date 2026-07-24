@@ -1,0 +1,13 @@
+:host {
+  display: block;
+}
+
+.about-leadership__copy {
+  max-width: var(--gh-layout-reading-max);
+}
+
+.about-leadership__copy p {
+  margin: 0;
+  color: var(--gh-text-secondary);
+  line-height: var(--gh-line-height-body);
+}

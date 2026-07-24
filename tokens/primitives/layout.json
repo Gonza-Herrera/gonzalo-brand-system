@@ -1,0 +1,90 @@
+{
+  "layout": {
+    "containerMax": {
+      "$type": "dimension",
+      "$value": "75rem"
+    },
+    "readingMax": {
+      "$type": "dimension",
+      "$value": "48rem"
+    }
+  },
+  "container": {
+    "sm": {
+      "$type": "dimension",
+      "$value": "40rem"
+    },
+    "md": {
+      "$type": "dimension",
+      "$value": "48rem"
+    },
+    "lg": {
+      "$type": "dimension",
+      "$value": "64rem"
+    },
+    "xl": {
+      "$type": "dimension",
+      "$value": "75rem"
+    },
+    "wide": {
+      "$type": "dimension",
+      "$value": "90rem"
+    }
+  },
+  "containerGutter": {
+    "sm": {
+      "$type": "dimension",
+      "$value": "clamp({spacing.sm}, 2vw, {spacing.md})"
+    },
+    "md": {
+      "$type": "dimension",
+      "$value": "clamp({spacing.md}, 4vw, {spacing.xl})"
+    },
+    "lg": {
+      "$type": "dimension",
+      "$value": "clamp({spacing.lg}, 5vw, {spacing.2xl})"
+    }
+  },
+  "sectionPadding": {
+    "sm": {
+      "$type": "dimension",
+      "$value": "clamp({spacing.lg}, 4vw, {spacing.xl})"
+    },
+    "md": {
+      "$type": "dimension",
+      "$value": "clamp({spacing.xl}, 6vw, {spacing.2xl})"
+    },
+    "lg": {
+      "$type": "dimension",
+      "$value": "clamp({spacing.2xl}, 8vw, {spacing.section})"
+    }
+  },
+  "gridMin": {
+    "sm": {
+      "$type": "dimension",
+      "$value": "12rem"
+    },
+    "md": {
+      "$type": "dimension",
+      "$value": "18rem"
+    },
+    "lg": {
+      "$type": "dimension",
+      "$value": "24rem"
+    }
+  },
+  "breakpoint": {
+    "sm": {
+      "$type": "dimension",
+      "$value": "36rem"
+    },
+    "md": {
+      "$type": "dimension",
+      "$value": "48rem"
+    },
+    "lg": {
+      "$type": "dimension",
+      "$value": "64rem"
+    }
+  }
+}

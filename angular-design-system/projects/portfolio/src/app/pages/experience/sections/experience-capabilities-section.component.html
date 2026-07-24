@@ -1,0 +1,32 @@
+<gh-section id="capabilities" spacing="lg" surface="transparent">
+  <gh-container size="xl">
+    <gh-stack gap="xl">
+      <gh-section-heading
+        [eyebrow]="content().eyebrow"
+        [title]="content().title"
+        [description]="content().description"
+        [headingLevel]="2"
+      />
+
+      <gh-grid [columns]="2" minItemSize="md" gap="lg">
+        @for (group of content().groups; track group.id) {
+          @if (group.items.length > 0) {
+            <gh-card fullHeight padding="lg">
+              <h3 ghCardHeader>{{ group.title }}</h3>
+              <gh-cluster
+                ghCardContent
+                role="list"
+                gap="sm"
+                [attr.aria-label]="content().itemsLabel + ': ' + group.title"
+              >
+                @for (item of group.items; track item) {
+                  <gh-tag role="listitem" size="sm">{{ item }}</gh-tag>
+                }
+              </gh-cluster>
+            </gh-card>
+          }
+        }
+      </gh-grid>
+    </gh-stack>
+  </gh-container>
+</gh-section>

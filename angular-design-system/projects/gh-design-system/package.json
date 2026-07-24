@@ -1,0 +1,26 @@
+{
+  "name": "gh-design-system",
+  "version": "0.1.0",
+  "peerDependencies": {
+    "@angular/common": "^21.2.0",
+    "@angular/core": "^21.2.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "exports": {
+    "./styles": {
+      "sass": "./styles/index.scss"
+    },
+    "./styles/foundations": {
+      "sass": "./styles/foundations.scss"
+    },
+    "./styles/mixins": {
+      "sass": "./styles/_mixins.scss"
+    }
+  },
+  "sideEffects": [
+    "./styles/index.scss",
+    "./styles/foundations.scss"
+  ]
+}

@@ -1,0 +1,57 @@
+html,
+body,
+app-root {
+  min-height: 100%;
+}
+
+body {
+  min-width: 20rem;
+}
+
+app-root {
+  display: block;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+}
+
+:root.portfolio-locale-transition::view-transition-old(root) {
+  animation: var(--gh-motion-duration-fast) var(--gh-motion-easing-standard) both
+    portfolio-locale-fade-out;
+}
+
+:root.portfolio-locale-transition::view-transition-new(root) {
+  animation: var(--gh-motion-duration-fast) var(--gh-motion-easing-standard) both
+    portfolio-locale-fade-in;
+}
+
+@keyframes portfolio-locale-fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes portfolio-locale-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root.portfolio-locale-transition::view-transition-old(root),
+  :root.portfolio-locale-transition::view-transition-new(root) {
+    animation: none;
+  }
+}

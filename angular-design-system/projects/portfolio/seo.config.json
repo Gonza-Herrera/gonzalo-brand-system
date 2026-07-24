@@ -1,0 +1,17 @@
+{
+  "baseUrl": "https://gonzalo-herrera-dev.netlify.app",
+  "defaultSocialImagePath": "/assets/social/gonzalo-herrera-og.jpg",
+  "supportedLocales": ["en", "es"],
+  "indexableRouteSegments": [
+    "",
+    "about",
+    "experience",
+    "projects",
+    "projects/angular-design-system",
+    "content",
+    "content/angular-14-vs-angular-20",
+    "content/lessons-from-code-reviews",
+    "content/building-ai-agents",
+    "contact"
+  ]
+}

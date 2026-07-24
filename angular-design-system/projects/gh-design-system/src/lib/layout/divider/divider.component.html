@@ -1,0 +1,7 @@
+@if (decorative()) {
+  <div [class]="dividerClasses()" aria-hidden="true"></div>
+} @else if (orientation() === 'horizontal') {
+  <hr [class]="dividerClasses()" />
+} @else {
+  <div [class]="dividerClasses()" role="separator" aria-orientation="vertical"></div>
+}

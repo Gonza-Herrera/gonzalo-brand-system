@@ -1,0 +1,74 @@
+@use '../card-foundations' as card;
+
+:host {
+  @include card.component-host;
+}
+
+gh-card {
+  height: 100%;
+}
+
+.article-card__media {
+  @include card.media;
+}
+
+.article-card__header {
+  display: grid;
+  gap: var(--gh-space-md);
+
+  h2,
+  h3 {
+    @include card.heading;
+  }
+
+  a {
+    @include card.title-link;
+  }
+}
+
+.article-card__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gh-space-sm);
+}
+
+.article-card__content {
+  display: grid;
+  gap: var(--gh-space-md);
+}
+
+.article-card__excerpt {
+  @include card.body-copy;
+}
+
+.article-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gh-space-xs);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.article-card__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gh-space-md);
+}
+
+.article-card__metadata {
+  @include card.metadata;
+}
+
+.article-card__metadata > * + *::before {
+  content: '·';
+  margin-right: var(--gh-space-sm);
+}
+
+.article-card__cta {
+  color: var(--gh-text-accent);
+  font-size: var(--gh-font-size-caption);
+  font-weight: var(--gh-font-weight-semibold);
+}

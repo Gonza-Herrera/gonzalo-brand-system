@@ -1,0 +1,20 @@
+@mixin surface($shadow: var(--gh-shadow-sm)) {
+  border: var(--gh-border-width-default) solid var(--gh-border-default);
+  border-radius: var(--gh-radius-lg);
+  background: var(--gh-surface-primary);
+  box-shadow: $shadow;
+}
+
+@mixin section {
+  padding-block: var(--gh-space-section);
+}
+
+@mixin container {
+  width: min(calc(100% - (var(--gh-space-lg) * 2)), var(--gh-layout-container-max));
+  margin-inline: auto;
+}
+
+@mixin focus-ring {
+  outline: var(--gh-border-width-focus) solid var(--gh-focus-ring);
+  outline-offset: var(--gh-space-xs);
+}

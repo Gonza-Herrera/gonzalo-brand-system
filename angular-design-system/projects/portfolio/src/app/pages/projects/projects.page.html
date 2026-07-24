@@ -1,0 +1,78 @@
+<gh-hero
+  [eyebrow]="content().hero.eyebrow"
+  [title]="content().hero.title"
+  [description]="content().hero.description"
+  layout="split"
+  surface="gradient"
+  [headingLevel]="1"
+>
+  <aside ghHeroVisual class="projects-hero__visual" [attr.aria-label]="content().hero.visualLabel">
+    <ul class="projects-hero__focuses">
+      @for (focus of content().hero.focuses; track focus) {
+        <li>{{ focus }}</li>
+      }
+    </ul>
+  </aside>
+</gh-hero>
+
+<gh-section spacing="lg" surface="primary">
+  <gh-container size="xl">
+    <gh-stack gap="lg">
+      <gh-section-heading
+        [eyebrow]="content().overview.eyebrow"
+        [title]="content().overview.title"
+        [description]="content().overview.description"
+        [headingLevel]="2"
+      />
+
+      <p class="projects-overview__note">{{ content().overview.statusNote }}</p>
+
+      <ul
+        class="projects-overview__categories"
+        [attr.aria-label]="content().overview.categoriesLabel"
+      >
+        @for (category of categories(); track category) {
+          <li>
+            <gh-tag variant="accent">{{ category }}</gh-tag>
+          </li>
+        }
+      </ul>
+    </gh-stack>
+  </gh-container>
+</gh-section>
+
+<gh-section spacing="lg" surface="subtle">
+  <gh-container size="xl">
+    <gh-stack gap="xl">
+      <gh-section-heading
+        [eyebrow]="content().grid.eyebrow"
+        [title]="content().grid.title"
+        [description]="content().grid.description"
+        [headingLevel]="2"
+      />
+
+      <gh-grid [columns]="2" minItemSize="md" gap="lg">
+        @for (project of projectCards(); track projects()[$index].id) {
+          <gh-project-card
+            [project]="project"
+            [ariaLabel]="content().grid.cardLabels.projectPrefix + ': ' + project.title"
+            [featuredLabel]="content().grid.cardLabels.featured"
+            [technologiesLabel]="content().grid.cardLabels.technologies"
+            [linksLabel]="content().grid.cardLabels.links"
+            [headingLevel]="3"
+          />
+        }
+      </gh-grid>
+    </gh-stack>
+  </gh-container>
+</gh-section>
+
+<gh-contact-callout
+  [eyebrow]="content().contact.eyebrow"
+  [title]="content().contact.title"
+  [description]="content().contact.description"
+  [actions]="contactActions()"
+  [externalLinkLabel]="externalLinkLabel()"
+  alignment="center"
+  surface="gradient"
+/>
