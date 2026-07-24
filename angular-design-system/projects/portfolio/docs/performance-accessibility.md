@@ -190,23 +190,15 @@ an explicit limitation, not a successful validation claim.
 Run from `angular-design-system/`:
 
 ```bash
-npm run build:portfolio -- --stats-json
-npm run serve:ssr:portfolio
-npm run validate:ssr:seo
+npm run build:portfolio
+npm run validate:portfolio:output
 npm test -- --watch=false
 npm run build
 npm run build-storybook
 ```
 
-For a temporary local Lighthouse audit:
-
-```bash
-npx --yes lighthouse@12.8.2 http://localhost:4000/en
-npx --yes lighthouse@12.8.2 http://localhost:4000/en/contact
-npx --yes lighthouse@12.8.2 http://localhost:4000/es
-```
-
-Lighthouse is intentionally not a production dependency.
+Run Lighthouse against a Netlify Deploy Preview and repeat it against production; Lighthouse
+remains intentionally outside production dependencies.
 
 ## Regression checklist
 
@@ -214,14 +206,17 @@ For every new public page:
 
 1. Keep page content and metadata in its route-local typed registry.
 2. Confirm the initial and new lazy chunk sizes with a production stats build.
-3. Verify SSR HTML, localized metadata and a real 404 through the SSR validator.
+3. Verify prerendered HTML locally, then validate localized metadata and a real 404 on Netlify.
 4. Test keyboard order, visible focus, focus after navigation, landmarks and heading order.
 5. Review Light, Dark and System at 320, 375, 768, 1024 and 1440 px and at 200% zoom.
 6. Review contrast, reduced motion, alternative text, link purpose and form announcements.
 7. Run Lighthouse more than once when results vary and distinguish lab data from field data.
 8. Run tests, all builds and Storybook checks without suppressing warnings.
 
-## Remaining work for PR 20
+## Production follow-up
+
+Deployment-specific validation and release steps live in
+[`deployment.md`](deployment.md) and [`production-checklist.md`](production-checklist.md).
 
 - Complete the manual viewport/theme/zoom matrix in target browsers.
 - Perform a screen-reader smoke test without claiming a formal audit.

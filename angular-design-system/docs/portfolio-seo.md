@@ -148,22 +148,17 @@ outputs are current.
 
 ## Validation
 
-Build and start the production SSR output:
+Build and validate the static output:
 
 ```bash
 npm run build:portfolio
-npm run serve:ssr:portfolio
+npm run validate:portfolio:output
 ```
 
-In a second terminal:
-
-```bash
-npm run validate:ssr:seo
-```
-
-The validator checks all twelve base routes, both localized page-level 404 examples, invalid Project
-and Content details, deduplicated canonical and alternate links, Open Graph, Twitter, JSON-LD,
-language, HTTP status, `robots.txt`, `sitemap.xml` and the public JPEG response.
+The validator checks all 20 localized public routes, canonical metadata, language, JSON-LD,
+`robots.txt`, `sitemap.xml`, the public social image, fingerprinted assets, the static bilingual
+404 and the absence of a deployable server bundle. HTTP status and response headers are validated
+against Netlify after deployment.
 
 Also run:
 

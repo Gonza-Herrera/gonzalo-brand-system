@@ -36,9 +36,9 @@ describe('SEO utilities', () => {
 
   it('creates EN, ES and x-default alternates for the same conceptual page', () => {
     expect(buildAlternateLinks(SEO_CONFIG_VALUE, '/es/about')).toEqual([
-      { hreflang: 'en', href: 'https://portfolio.example/en/about' },
-      { hreflang: 'es', href: 'https://portfolio.example/es/about' },
-      { hreflang: 'x-default', href: 'https://portfolio.example/en/about' },
+      { hreflang: 'en', href: `${SEO_CONFIG_VALUE.baseUrl}/en/about` },
+      { hreflang: 'es', href: `${SEO_CONFIG_VALUE.baseUrl}/es/about` },
+      { hreflang: 'x-default', href: `${SEO_CONFIG_VALUE.baseUrl}/en/about` },
     ]);
   });
 
@@ -49,10 +49,10 @@ describe('SEO utilities', () => {
     });
 
     expect(viewModel.title).toBe('Sobre mí | Gonzalo Herrera');
-    expect(viewModel.canonicalUrl).toBe('https://portfolio.example/es/about');
+    expect(viewModel.canonicalUrl).toBe(`${SEO_CONFIG_VALUE.baseUrl}/es/about`);
     expect(viewModel.openGraph.url).toBe(viewModel.canonicalUrl);
     expect(viewModel.openGraph.image).toBe(
-      'https://portfolio.example/assets/social/gonzalo-herrera-og.jpg',
+      `${SEO_CONFIG_VALUE.baseUrl}/assets/social/gonzalo-herrera-og.jpg`,
     );
     expect(viewModel.openGraph.locale).toBe('es_AR');
     expect(viewModel.openGraph.alternateLocales).toEqual(['en_US']);

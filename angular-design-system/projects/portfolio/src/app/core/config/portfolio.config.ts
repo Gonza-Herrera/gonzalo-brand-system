@@ -5,7 +5,12 @@ import {
   type PortfolioLocale,
 } from '../../content/models/portfolio-locale.type';
 
+declare const PORTFOLIO_WEB3FORMS_ACCESS_KEY: string;
+
 export const WEB3FORMS_CONTACT_ENDPOINT = 'https://api.web3forms.com/submit';
+
+const web3FormsAccessKey =
+  typeof PORTFOLIO_WEB3FORMS_ACCESS_KEY === 'string' ? PORTFOLIO_WEB3FORMS_ACCESS_KEY.trim() : '';
 
 export interface PortfolioContactFormConfig {
   readonly provider: 'web3forms';
@@ -38,7 +43,7 @@ export const PORTFOLIO_CONFIG = {
   contactForm: {
     provider: 'web3forms',
     endpoint: WEB3FORMS_CONTACT_ENDPOINT,
-    accessKey: '2cdcf0da-e705-45af-9ac2-5fe142578784',
+    accessKey: web3FormsAccessKey,
     fromName: 'Gonzalo Herrera Portfolio',
   },
   urls: {

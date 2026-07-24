@@ -18,7 +18,7 @@ describe('SEO page registry', () => {
     }
   });
 
-  it('maps only the six public base pages to indexable route segments', () => {
+  it('maps the six base pages and approved details to indexable route segments', () => {
     for (const [pageId, routeSegment] of Object.entries(PORTFOLIO_PAGE_PATHS)) {
       expect(SEO_PAGE_REGISTRY[pageId as keyof typeof PORTFOLIO_PAGE_PATHS]).toMatchObject({
         routeSegment,
@@ -30,7 +30,18 @@ describe('SEO page registry', () => {
       indexable: false,
     });
     expect(runtimeSeoConfig.supportedLocales).toEqual([...PORTFOLIO_LOCALES]);
-    expect(runtimeSeoConfig.indexableRouteSegments).toEqual(Object.values(PORTFOLIO_PAGE_PATHS));
+    expect(runtimeSeoConfig.indexableRouteSegments).toEqual(
+      expect.arrayContaining([
+        ...Object.values(PORTFOLIO_PAGE_PATHS),
+        'projects/angular-design-system',
+        'content/angular-14-vs-angular-20',
+        'content/lessons-from-code-reviews',
+        'content/building-ai-agents',
+      ]),
+    );
+    expect(runtimeSeoConfig.indexableRouteSegments).not.toContain(
+      'content/signals-forms-vs-reactive-forms',
+    );
   });
 
   it('contains the approved localized Home and Not Found metadata', () => {

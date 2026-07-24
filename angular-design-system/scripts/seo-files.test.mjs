@@ -12,28 +12,35 @@ const config = validateSeoFileConfig({
   baseUrl: 'https://portfolio.example',
   defaultSocialImagePath: '/assets/social/gonzalo-herrera-og.jpg',
   supportedLocales: ['en', 'es'],
-  indexableRouteSegments: ['', 'about', 'experience', 'projects', 'content', 'contact'],
+  indexableRouteSegments: [
+    '',
+    'about',
+    'experience',
+    'projects',
+    'projects/angular-design-system',
+    'content',
+    'content/angular-14-vs-angular-20',
+    'content/lessons-from-code-reviews',
+    'content/building-ai-agents',
+    'contact',
+  ],
 });
 
 describe('SEO public file generation', () => {
-  it('generates the twelve localized, indexable portfolio URLs exactly once', () => {
+  it('generates all localized, indexable portfolio URLs exactly once', () => {
     const urls = buildPublicUrls(config);
-    assert.equal(urls.length, 12);
+    assert.equal(urls.length, 20);
     assert.equal(new Set(urls).size, urls.length);
-    assert.deepEqual(urls, [
-      'https://portfolio.example/en',
-      'https://portfolio.example/en/about',
-      'https://portfolio.example/en/experience',
-      'https://portfolio.example/en/projects',
-      'https://portfolio.example/en/content',
-      'https://portfolio.example/en/contact',
-      'https://portfolio.example/es',
-      'https://portfolio.example/es/about',
-      'https://portfolio.example/es/experience',
-      'https://portfolio.example/es/projects',
-      'https://portfolio.example/es/content',
-      'https://portfolio.example/es/contact',
-    ]);
+    assert.ok(urls.includes('https://portfolio.example/en/projects/angular-design-system'));
+    assert.ok(urls.includes('https://portfolio.example/es/content/building-ai-agents'));
+    assert.equal(
+      urls.some((url) => url.includes('signals-forms-vs-reactive-forms')),
+      false,
+    );
+    assert.equal(
+      urls.some((url) => url.includes('ai-code-review-assistant')),
+      false,
+    );
     assert.equal(
       urls.some((url) => /not-found|storybook|showcase|[?#]/u.test(url)),
       false,
@@ -51,7 +58,7 @@ describe('SEO public file generation', () => {
     const sitemap = renderSitemap(config);
     assert.match(sitemap, /^<\?xml version="1\.0" encoding="UTF-8"\?>/u);
     assert.match(sitemap, /xmlns="http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9"/u);
-    assert.equal((sitemap.match(/<url>/gu) ?? []).length, 12);
+    assert.equal((sitemap.match(/<url>/gu) ?? []).length, 20);
     assert.doesNotMatch(sitemap, /<lastmod>|<changefreq>|<priority>/u);
   });
 
