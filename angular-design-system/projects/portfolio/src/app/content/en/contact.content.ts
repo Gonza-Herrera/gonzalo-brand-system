@@ -1,9 +1,8 @@
 import type { PortfolioContactContent } from '../models/contact-content.model';
+import { EN_PAGE_METADATA } from './page-metadata.content';
 
 export const EN_CONTACT_CONTENT = {
-  metaTitle: 'Contact',
-  metaDescription:
-    'Contact Gonzalo Herrera to discuss frontend engineering, Angular, technical leadership, collaboration and software opportunities.',
+  ...EN_PAGE_METADATA.contact,
   hero: {
     eyebrow: 'Contact',
     title: 'Let’s talk about building better software.',

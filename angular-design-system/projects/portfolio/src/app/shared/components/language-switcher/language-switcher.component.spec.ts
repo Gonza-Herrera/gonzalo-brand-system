@@ -56,6 +56,7 @@ describe('LanguageSwitcherComponent', () => {
     expect(element.querySelector('nav')?.getAttribute('aria-label')).toBe('Language');
     expect(links).toHaveLength(2);
     expect(links[0]?.getAttribute('hreflang')).toBe('en');
+    expect(links[0]?.getAttribute('aria-label')).toBe('EN — English');
     expect(links[0]?.getAttribute('aria-current')).toBe('page');
     expect(links[1]?.getAttribute('href')).toBe('/es/projects');
     expect(links[1]?.getAttribute('lang')).toBe('es');

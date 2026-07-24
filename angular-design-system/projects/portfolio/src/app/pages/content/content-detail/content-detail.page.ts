@@ -13,6 +13,7 @@ import {
   type GhArticleCardData,
 } from 'gh-design-system';
 
+import { getPortfolioContentHubContent } from '../../../content/content-hub-content.registry';
 import type { PortfolioContentItem } from '../../../content/models/content-hub-content.model';
 import { getContentDetail } from '../../../content/content-details.registry';
 import { mapContentToArticleCard } from '../../../content/utils/article-card.mapper';
@@ -51,7 +52,9 @@ export class ContentDetailPage {
   private readonly localeService = inject(PortfolioLocaleService);
 
   protected readonly locale = this.localeService.locale;
-  protected readonly content = computed(() => this.localeService.content().pages.content);
+  protected readonly content = computed(() =>
+    getPortfolioContentHubContent(this.localeService.locale()),
+  );
   protected readonly item = computed(() => findContentBySlug(this.content().items, this.slug()));
   protected readonly detail = computed(() => {
     const item = this.item();

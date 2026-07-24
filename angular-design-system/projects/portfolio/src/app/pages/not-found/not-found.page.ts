@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { GhContainerComponent, GhSectionComponent, GhStackComponent } from 'gh-design-system';
 
+import { getPortfolioNotFoundContent } from '../../content/not-found-content.registry';
 import { createLocalizedPath } from '../../core/routing/portfolio-route.utils';
 import { PortfolioLocaleService } from '../../core/services/portfolio-locale.service';
 
@@ -15,7 +16,9 @@ import { PortfolioLocaleService } from '../../core/services/portfolio-locale.ser
 export class NotFoundPage {
   private readonly localeService = inject(PortfolioLocaleService);
 
-  protected readonly content = computed(() => this.localeService.content().pages['not-found']);
+  protected readonly content = computed(() =>
+    getPortfolioNotFoundContent(this.localeService.locale()),
+  );
   protected readonly homeUrl = computed(() =>
     createLocalizedPath(this.localeService.locale(), 'home'),
   );

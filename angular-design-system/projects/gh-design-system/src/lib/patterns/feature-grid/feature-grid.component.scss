@@ -48,6 +48,7 @@
 
 .gh-feature-grid__link {
   display: inline-flex;
+  min-height: 2.75rem;
   align-items: center;
   gap: var(--gh-space-sm);
   width: fit-content;

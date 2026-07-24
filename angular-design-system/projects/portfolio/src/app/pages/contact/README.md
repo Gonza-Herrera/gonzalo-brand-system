@@ -36,10 +36,10 @@ as a honeypot. Typed Reactive Forms enforce:
 - Subject: required, non-whitespace, 3–120 characters after trim for the minimum.
 - Message: required, non-whitespace, 20–2000 characters after trim for the minimum.
 
-Invalid submit marks fields touched and shows localized linked feedback. A valid submit enters
-`submitting`, disables the button and ignores duplicates. Confirmed success resets to empty,
-pristine and untouched; an error preserves all values for retry. Global success/error feedback
-stays visible until the next submit.
+Invalid submit marks fields touched, shows localized linked feedback and focuses the first invalid
+native field. A valid submit enters `submitting`, disables the button and ignores duplicates.
+Confirmed success resets to empty, pristine and untouched; an error preserves all values for retry.
+Global success/error feedback stays visible until the next submit.
 
 `mapContactFormToWeb3FormsPayload` trims values without mutation and sends only `access_key`,
 `from_name`, `name`, `email`, `subject`, `message` and `botcheck`.
@@ -49,14 +49,15 @@ stays visible until the next submit.
 `core/config/portfolio.config.ts` owns:
 
 - the fixed Web3Forms endpoint;
-- an empty public `accessKey`;
+- the public Web3Forms `accessKey`;
 - the provider-facing `fromName`;
 - verified public channel URLs, currently the LinkedIn profile;
 - an optional direct-email destination.
 
-No real access key or personal email is committed. The verified LinkedIn URL is centralized in
-`PORTFOLIO_CONFIG.urls.linkedin`; localized content owns its label, description, action and
-accessible label without duplicating the destination. With an empty form key, the form renders a
+No SMTP credential or personal email is committed. The browser-visible Web3Forms key is public by
+provider design. The verified LinkedIn URL is centralized in `PORTFOLIO_CONFIG.urls.linkedin`;
+localized content owns its label, description, action and accessible label without duplicating the
+destination. If a deployment supplies an empty or invalid form configuration, the form renders a
 localized unavailable state and sends no request. If `PORTFOLIO_CONFIG.urls.email` contains a
 verified `mailto:` URL, that address stays visible below the form during idle, success, error and
 unavailable states.
@@ -79,7 +80,8 @@ no channel resolves. Never add a placeholder channel to make a card or email fal
 - One `h1`; section headings remain `h2`.
 - Native form, fieldset, labels, stable IDs and a submit button.
 - Errors use `aria-invalid` and `aria-describedby`.
-- The form announces busy, unavailable, success and error states without forced focus.
+- The form announces busy, unavailable, success and error states; invalid submit focuses the first
+  invalid field.
 - The honeypot has no keyboard or reading-order presence but remains in the DOM.
 - Only the button is disabled while submitting; field values remain visible.
 - The form grid collapses to one column below 48rem.

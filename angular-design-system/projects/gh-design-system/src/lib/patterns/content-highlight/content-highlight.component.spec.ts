@@ -58,4 +58,21 @@ describe('GhContentHighlightComponent', () => {
     expect(element.querySelector('gh-tag')).toBeNull();
     expect(element.querySelector('h2')?.textContent).toContain('Design System');
   });
+
+  it('uses a solid accent badge on the accent surface to preserve contrast', () => {
+    const fixture = TestBed.createComponent(GhContentHighlightComponent);
+    fixture.componentRef.setInput('content', {
+      type: 'resource',
+      eyebrow: 'AI Engineering',
+      title: 'Building AI agents',
+      href: '/content/building-ai-agents',
+      linkLabel: 'Read the guide',
+    });
+    fixture.componentRef.setInput('surface', 'accent');
+    fixture.detectChanges();
+
+    const element = fixture.nativeElement as HTMLElement;
+    expect(element.querySelector('.gh-badge--accent.gh-badge--solid')).not.toBeNull();
+    expect(element.classList).toContain('gh-content-highlight--surface-accent');
+  });
 });

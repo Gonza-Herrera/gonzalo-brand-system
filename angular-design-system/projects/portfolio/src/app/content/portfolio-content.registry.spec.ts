@@ -41,7 +41,7 @@ describe('Portfolio content registry', () => {
       expect(home.selectedProjects.items.map((item) => item.id)).toEqual(['angular-design-system']);
       expect(home.expertise.items).toHaveLength(6);
       expect(home.selectedProjects.items).toHaveLength(1);
-      expect(home.selectedProjects.items[0]).toBe(content.pages.projects.items[0]);
+      expect(content.pages.projects.items[0]).toMatchObject(home.selectedProjects.items[0]);
       expect(home.experience.items.length).toBeLessThanOrEqual(3);
       expect(home.selectedProjects.items.every((project) => project.statusLabel.length > 0)).toBe(
         true,

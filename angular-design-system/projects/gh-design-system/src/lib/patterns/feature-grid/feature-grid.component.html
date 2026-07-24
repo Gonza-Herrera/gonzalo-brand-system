@@ -29,7 +29,11 @@
               [href]="feature.href"
               [attr.target]="feature.external ? '_blank' : null"
               [attr.rel]="feature.external ? 'noopener noreferrer' : null"
-              [attr.aria-label]="feature.ariaLabel ?? null"
+              [attr.aria-label]="
+                feature.ariaLabel
+                  ? (feature.actionLabel ?? feature.title) + '. ' + feature.ariaLabel
+                  : null
+              "
             >
               <span>{{ feature.actionLabel ?? feature.title }}</span>
               <span aria-hidden="true">→</span>
@@ -57,7 +61,11 @@
               [href]="feature.href"
               [attr.target]="feature.external ? '_blank' : null"
               [attr.rel]="feature.external ? 'noopener noreferrer' : null"
-              [attr.aria-label]="feature.ariaLabel ?? null"
+              [attr.aria-label]="
+                feature.ariaLabel
+                  ? (feature.actionLabel ?? feature.title) + '. ' + feature.ariaLabel
+                  : null
+              "
             >
               <span>{{ feature.actionLabel ?? feature.title }}</span>
               <span aria-hidden="true">→</span>

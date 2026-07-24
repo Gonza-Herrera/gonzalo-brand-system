@@ -121,16 +121,16 @@ describe('ContactFormComponent', () => {
 
   it('marks invalid fields as touched, links errors and does not call the service', async () => {
     const { fixture, component, contactService } = await createComponent();
+    const element = fixture.nativeElement as HTMLElement;
+    const nameInput = element.querySelector<HTMLInputElement>('#contact-name');
 
     component.submit();
     fixture.detectChanges();
 
-    const element = fixture.nativeElement as HTMLElement;
-    const nameInput = element.querySelector<HTMLInputElement>('#contact-name');
-
     expect(component.form.controls.name.touched).toBe(true);
     expect(component.submitted()).toBe(true);
     expect(contactService.sendMessage).not.toHaveBeenCalled();
+    expect(document.activeElement).toBe(nameInput);
     expect(nameInput?.getAttribute('aria-invalid')).toBe('true');
     expect(nameInput?.getAttribute('aria-describedby')).toContain('contact-name-error');
     expect(element.querySelector('#contact-name-error')?.textContent).toContain('Enter your name.');

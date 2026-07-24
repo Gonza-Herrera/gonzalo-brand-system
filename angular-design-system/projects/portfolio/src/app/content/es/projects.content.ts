@@ -1,9 +1,9 @@
 import type { PortfolioProjectsContent } from '../models/projects-content.model';
+import { ES_FEATURED_PROJECT_PREVIEW } from './home-previews.content';
+import { ES_PAGE_METADATA } from './page-metadata.content';
 
 export const ES_PROJECTS_CONTENT = {
-  metaTitle: 'Proyectos',
-  metaDescription:
-    'Explora proyectos seleccionados de Gonzalo Herrera sobre Angular, arquitectura frontend, sistemas de diseño, experiencia de desarrollo e ingeniería asistida por IA.',
+  ...ES_PAGE_METADATA.projects,
   hero: {
     eyebrow: 'Proyectos',
     title: 'Construyendo sistemas, herramientas e ideas para desarrollar mejor software.',
@@ -74,19 +74,7 @@ export const ES_PROJECTS_CONTENT = {
   },
   items: [
     {
-      id: 'angular-design-system',
-      slug: 'angular-design-system',
-      title: 'Angular Design System',
-      shortDescription:
-        'Un Design System reutilizable en Angular construido alrededor de design tokens, accesibilidad, composición y fundamentos consistentes de marca.',
-      status: 'in-progress',
-      statusLabel: 'En desarrollo',
-      category: 'design-system',
-      categoryLabel: 'Design System',
-      technologies: ['Angular', 'TypeScript', 'SCSS', 'Storybook', 'Design Tokens'],
-      capabilities: ['Accesibilidad', 'SSR', 'Temas claro y oscuro', 'APIs públicas tipadas'],
-      featured: true,
-      order: 1,
+      ...ES_FEATURED_PROJECT_PREVIEW,
       caseStudy: {
         available: true,
         eyebrow: 'Caso de estudio · Design System',

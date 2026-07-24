@@ -9,6 +9,8 @@ Contact pages, the first full bilingual Project Case Study and three bilingual i
 details on top of the global shell, routing and internationalization foundation. Contact includes a
 lazy Web3Forms integration. Localized technical SEO includes canonical and alternate URLs, Open
 Graph, Twitter/X Cards, Person and WebSite JSON-LD, a social image, robots and sitemap generation.
+The latest performance and accessibility audit is documented in
+[Performance and accessibility](docs/performance-accessibility.md).
 
 ## Run, build and test
 
@@ -20,11 +22,18 @@ npm run build:portfolio
 npm run test:portfolio
 npm run build:ssr:portfolio
 npm run seo:check
+npm run validate:ssr:seo
 ```
 
 The development server uses `http://localhost:4200`. The production build emits browser and server
 bundles with hydration. After building, `npm run serve:ssr:portfolio` serves them at
 `http://localhost:4000` by default and respects the host-provided `PORT` variable.
+
+Use `npm run build:portfolio -- --stats-json` for bundle analysis and run Lighthouse against the
+production SSR server, not the development server. The audit criteria include clean builds and
+console output, route-local lazy content, keyboard and focus behavior, Light/Dark/System review,
+responsive reflow, SSR parity and automated accessibility checks. Lighthouse and unit tests reduce
+regression risk; they do not establish complete WCAG conformance or field Core Web Vitals.
 
 The SSR host allowlist includes only `localhost` and `127.0.0.1` for local verification. Add the
 approved production hostname to `security.allowedHosts` as part of deployment configuration; do not
@@ -67,18 +76,18 @@ Localized URL
     ↓
 portfolioLocaleGuard validates and activates the prefix
     ↓
-PortfolioLocaleService updates its Signal and <html lang>
+PortfolioLocaleService updates its Signal, <html lang> and lightweight shell content
     ↓
-Typed content registry selects EN_SITE_CONTENT or ES_SITE_CONTENT
+Lazy page selects its route-local typed content registry
     ↓
 PortfolioShellComponent and the lazy page render localized content
 ```
 
 `AppComponent` contains only the root `RouterOutlet`. The localized parent route renders
 `PortfolioShellComponent`; its standalone child pages are lazy-loaded with `loadComponent`. Stable
-`pageId` route data selects localized SEO through `PortfolioTitleStrategy` and `SeoService`.
-Project and Content details additionally resolve their stable slug to localized metadata, including
-explicit non-indexable invalid-slug results. See
+`pageId` route data selects lightweight localized SEO through `PortfolioTitleStrategy` and
+`SeoService`. Project and Content details additionally resolve their route-local collection and
+stable slug to localized metadata, including explicit non-indexable invalid-slug results. See
 [Portfolio SEO and social metadata](../../docs/portfolio-seo.md).
 
 ## Typed content
@@ -88,6 +97,9 @@ All copy is compile-time TypeScript under `src/app/content/`:
 ```text
 content/
 ├── models/                         shared readonly contracts and stable IDs
+├── en/page-metadata.content.ts     lightweight English page metadata
+├── en/site-shell.content.ts        lightweight English shell
+├── en/home-previews.content.ts     minimal English Home previews
 ├── en/home.content.ts              complete English Home
 ├── en/about.content.ts             complete English About
 ├── en/experience.content.ts        complete English Experience
@@ -95,6 +107,9 @@ content/
 ├── en/content-hub.content.ts       English lightweight Content Hub registry
 ├── en/content-details.content.ts   English internal article bodies
 ├── en/contact.content.ts           complete English Contact content
+├── es/page-metadata.content.ts     equivalent Spanish page metadata
+├── es/site-shell.content.ts        equivalent Spanish shell
+├── es/home-previews.content.ts     equivalent Spanish Home previews
 ├── es/home.content.ts              equivalent Spanish Home
 ├── es/about.content.ts             equivalent Spanish About
 ├── es/experience.content.ts        equivalent Spanish Experience
@@ -110,6 +125,8 @@ content/
 ├── utils/contact-channel.mapper.ts verified Contact destination adapter
 ├── content-details.registry.ts     locale-to-detail registry loaded with Content Detail
 ├── contact-content.registry.ts     locale-to-Contact registry loaded with Contact
+├── site-shell-content.registry.ts  locale-to-lightweight-shell registry
+├── *-content.registry.ts           route-local locale registries
 ├── en/site-content.ts              English shell and page registry
 ├── es/site-content.ts              Spanish shell and page registry
 └── portfolio-content.registry.ts   locale-to-content registry
@@ -122,7 +139,7 @@ page, navigation and shell structure.
 ### Add or edit a translation
 
 1. Add the key to the relevant contract under `content/models/` if it does not exist.
-2. Add the same structural key to both `en/site-content.ts` and `es/site-content.ts`.
+2. Add the same structural key to the equivalent English and Spanish page or shell modules.
 3. Keep route IDs and navigation IDs stable; translate only user-facing values.
 4. Run `npm run test:portfolio` to validate parity and completeness.
 

@@ -44,6 +44,7 @@
 
 .gh-navigation__brand {
   display: inline-flex;
+  min-height: 2.75rem;
   min-width: 0;
   align-items: center;
   gap: var(--gh-space-sm);
@@ -94,7 +95,9 @@
 
 .gh-navigation__link {
   position: relative;
-  display: block;
+  display: flex;
+  min-height: 2.75rem;
+  align-items: center;
   padding: var(--gh-space-sm);
   color: var(--gh-text-secondary);
   font-size: var(--gh-font-size-label);

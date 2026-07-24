@@ -9,7 +9,9 @@
     <gh-stack class="gh-content-highlight__content" gap="lg">
       <gh-stack gap="sm">
         <gh-cluster gap="sm">
-          <gh-badge variant="accent">{{ typeLabels()[content().type] }}</gh-badge>
+          <gh-badge variant="accent" [appearance]="surface() === 'accent' ? 'solid' : 'soft'">
+            {{ typeLabels()[content().type] }}
+          </gh-badge>
           @if (content().eyebrow) {
             <span class="gh-content-highlight__eyebrow">{{ content().eyebrow }}</span>
           }

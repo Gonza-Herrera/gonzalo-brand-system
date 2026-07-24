@@ -1,9 +1,9 @@
 import type { PortfolioContentHubContent } from '../models/content-hub-content.model';
+import { EN_FEATURED_CONTENT_PREVIEW } from './home-previews.content';
+import { EN_PAGE_METADATA } from './page-metadata.content';
 
 export const EN_CONTENT_HUB_CONTENT = {
-  metaTitle: 'Content',
-  metaDescription:
-    'Articles, ideas and practical insights about Angular, frontend engineering, technical leadership, code quality and AI-augmented software development.',
+  ...EN_PAGE_METADATA.content,
   hero: {
     eyebrow: 'Content',
     title: 'Ideas, lessons and practical resources for building better software.',
@@ -124,24 +124,7 @@ export const EN_CONTENT_HUB_CONTENT = {
       source: { type: 'internal' },
       detailAvailable: true,
     },
-    {
-      id: 'building-ai-agents',
-      slug: 'building-ai-agents',
-      title: 'Beyond chat: building AI agents that do real work',
-      excerpt:
-        'A practical guide to turning AI assistance into bounded engineering workflows while keeping technical judgment and human review explicit.',
-      type: 'guide',
-      typeLabel: 'Guide',
-      category: 'ai-engineering',
-      categoryLabel: 'AI Engineering',
-      status: 'published',
-      statusLabel: 'Published',
-      tags: ['AI Agents', 'Engineering Workflows', 'Technical Judgment'],
-      featured: true,
-      order: 3,
-      source: { type: 'internal' },
-      detailAvailable: true,
-    },
+    EN_FEATURED_CONTENT_PREVIEW,
     {
       id: 'signals-forms-vs-reactive-forms',
       slug: 'signals-forms-vs-reactive-forms',

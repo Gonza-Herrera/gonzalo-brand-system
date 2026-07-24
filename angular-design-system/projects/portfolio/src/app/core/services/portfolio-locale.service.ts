@@ -1,11 +1,11 @@
 import { DOCUMENT } from '@angular/common';
 import { computed, inject, Injectable, signal } from '@angular/core';
 
-import { getPortfolioContent } from '../../content/portfolio-content.registry';
 import {
   isPortfolioLocale,
   type PortfolioLocale,
 } from '../../content/models/portfolio-locale.type';
+import { getPortfolioSiteShellContent } from '../../content/site-shell-content.registry';
 import { PORTFOLIO_CONFIG } from '../config/portfolio.config';
 import { switchLocaleInUrl } from '../routing/portfolio-route.utils';
 import { PortfolioLocaleStorageService } from './portfolio-locale-storage.service';
@@ -19,7 +19,7 @@ export class PortfolioLocaleService {
   readonly supportedLocales = PORTFOLIO_CONFIG.supportedLocales;
   readonly defaultLocale = PORTFOLIO_CONFIG.defaultLocale;
   readonly locale = this.activeLocale.asReadonly();
-  readonly content = computed(() => getPortfolioContent(this.locale()));
+  readonly content = computed(() => getPortfolioSiteShellContent(this.locale()));
 
   isSupportedLocale(value: unknown): value is PortfolioLocale {
     return isPortfolioLocale(value);

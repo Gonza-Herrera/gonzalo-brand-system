@@ -3,9 +3,11 @@ import {
   Component,
   computed,
   DestroyRef,
+  ElementRef,
   inject,
   input,
   signal,
+  viewChild,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -50,6 +52,12 @@ export class ContactFormComponent {
   readonly isSubmitting = computed(() => this.submissionStatus() === 'submitting');
   readonly isUnavailable = computed(() => this.submissionStatus() === 'unavailable');
   readonly submitted = signal(false);
+
+  private readonly nameInput = viewChild.required<ElementRef<HTMLInputElement>>('nameInput');
+  private readonly emailInput = viewChild.required<ElementRef<HTMLInputElement>>('emailInput');
+  private readonly subjectInput = viewChild.required<ElementRef<HTMLInputElement>>('subjectInput');
+  private readonly messageInput =
+    viewChild.required<ElementRef<HTMLTextAreaElement>>('messageInput');
 
   readonly form = this.formBuilder.nonNullable.group({
     name: [
@@ -100,6 +108,7 @@ export class ContactFormComponent {
     }
 
     if (this.form.invalid) {
+      this.focusFirstInvalidControl();
       return;
     }
 
@@ -181,6 +190,17 @@ export class ContactFormComponent {
   private shouldShowError(controlName: ContactFormControlName): boolean {
     const control = this.form.controls[controlName];
     return control.invalid && (control.touched || this.submitted());
+  }
+
+  private focusFirstInvalidControl(): void {
+    const controls = [
+      { control: this.form.controls.name, element: this.nameInput() },
+      { control: this.form.controls.email, element: this.emailInput() },
+      { control: this.form.controls.subject, element: this.subjectInput() },
+      { control: this.form.controls.message, element: this.messageInput() },
+    ];
+
+    controls.find(({ control }) => control.invalid)?.element.nativeElement.focus();
   }
 
   private resolveErrorMessage(

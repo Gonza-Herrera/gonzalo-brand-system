@@ -80,7 +80,7 @@ describe('ContactPage', () => {
     expect(linkedIn?.target).toBe('_blank');
     expect(linkedIn?.rel).toBe('noopener noreferrer');
     expect(linkedIn?.getAttribute('aria-label')).toBe(
-      'Open Gonzalo Herrera’s LinkedIn profile in a new tab',
+      'View LinkedIn profile. Open Gonzalo Herrera’s LinkedIn profile in a new tab',
     );
     expect(linkedIn?.tabIndex).toBe(0);
     expect(element.querySelector('#contact-channels .gh-feature-grid__icon')).toBeNull();
@@ -140,7 +140,7 @@ describe('ContactPage', () => {
     );
     expect(linkedIn?.textContent).toContain('Ver perfil en LinkedIn');
     expect(linkedIn?.getAttribute('aria-label')).toBe(
-      'Abrir el perfil de LinkedIn de Gonzalo Herrera en una nueva pestaña',
+      'Ver perfil en LinkedIn. Abrir el perfil de LinkedIn de Gonzalo Herrera en una nueva pestaña',
     );
     expect(channels?.querySelector('[role="status"]')).toBeNull();
     expect(

@@ -2,17 +2,16 @@ import type {
   PortfolioExperienceContent,
   PortfolioProfessionalExperienceContent,
 } from '../models/experience-content.model';
+import {
+  EN_EXPERIENCE_TIMELINE_LABELS,
+  EN_HOME_EXPERIENCE_IDENTITIES,
+} from './home-previews.content';
+import { EN_PAGE_METADATA } from './page-metadata.content';
 
 // Approved professional history. This collection is also the single source for Home's preview.
 export const EN_PROFESSIONAL_EXPERIENCES: readonly PortfolioProfessionalExperienceContent[] = [
   {
-    id: 'icbc-frontend-developer',
-    order: 1,
-    company: 'ICBC Bank',
-    role: 'Frontend Developer',
-    startDate: 'February 2023',
-    endDate: 'Present',
-    current: true,
+    ...EN_HOME_EXPERIENCE_IDENTITIES[0],
     summary: [
       'As a Frontend Developer, I contribute to the development and evolution of enterprise financial applications. My work focuses on building maintainable Angular solutions, delivering consistent user experiences and collaborating with multidisciplinary teams.',
       'Beyond feature development, I participate in technical discussions, code reviews and continuous improvement initiatives that help maintain reliable engineering practices across the project.',
@@ -39,13 +38,7 @@ export const EN_PROFESSIONAL_EXPERIENCES: readonly PortfolioProfessionalExperien
     ],
   },
   {
-    id: 'endava-team-leader',
-    order: 2,
-    company: 'Endava',
-    role: 'Team Leader',
-    startDate: 'June 2021',
-    endDate: 'January 2023',
-    current: false,
+    ...EN_HOME_EXPERIENCE_IDENTITIES[1],
     summary: [
       'As a Team Leader, I led software engineering teams while balancing people leadership, delivery coordination and technical collaboration. I focused on creating an environment where communication, continuous learning and engineering quality could become part of the team’s daily work.',
       'I worked closely with engineers, project managers and stakeholders to organize delivery, support professional growth and promote effective collaboration across the team.',
@@ -64,13 +57,7 @@ export const EN_PROFESSIONAL_EXPERIENCES: readonly PortfolioProfessionalExperien
     capabilities: ['Technical Leadership', 'Team Leadership', 'Mentoring', 'Agile', 'Scrum'],
   },
   {
-    id: 'vortex-frontend-developer',
-    order: 3,
-    company: 'Vortex',
-    role: 'Frontend Developer',
-    startDate: 'February 2020',
-    endDate: 'May 2021',
-    current: false,
+    ...EN_HOME_EXPERIENCE_IDENTITIES[2],
     summary: [
       'I worked as part of multidisciplinary teams delivering web applications from initial requirements through production releases. I collaborated closely with frontend and backend engineers to build maintainable solutions and resolve integration challenges before they affected delivery.',
       'During this period, I strengthened my experience in Angular development, REST API integration and collaborative frontend engineering throughout the software development lifecycle.',
@@ -142,9 +129,7 @@ export const EN_PROFESSIONAL_EXPERIENCES: readonly PortfolioProfessionalExperien
 ];
 
 export const EN_EXPERIENCE_CONTENT = {
-  metaTitle: 'Experience',
-  metaDescription:
-    'Explore Gonzalo Herrera’s professional experience in frontend engineering, Angular development, technical leadership and software delivery.',
+  ...EN_PAGE_METADATA.experience,
   hero: {
     eyebrow: 'Experience',
     title: 'Building frontend products, engineering systems and stronger teams.',
@@ -182,21 +167,7 @@ export const EN_EXPERIENCE_CONTENT = {
     title: 'Professional experience',
     description:
       'A journey from project coordination to frontend engineering and technical leadership, shaped by collaboration, continuous learning and a focus on building maintainable software.',
-    labels: {
-      card: {
-        at: 'at',
-        responsibilities: 'Responsibilities',
-        achievements: 'Selected contributions',
-        technologies: 'Technologies',
-        capabilities: 'Capabilities',
-      },
-      current: 'Current',
-      workModes: {
-        remote: 'Remote',
-        hybrid: 'Hybrid',
-        onsite: 'On-site',
-      },
-    },
+    labels: EN_EXPERIENCE_TIMELINE_LABELS,
     items: EN_PROFESSIONAL_EXPERIENCES,
   },
   leadership: {

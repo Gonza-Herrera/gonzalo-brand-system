@@ -6,10 +6,10 @@
     "types": ["node"]
   },
   "include": [
-    "./*.ts",
+    "./preview.ts",
     "../docs/**/*.mdx",
     "../stories/**/*.ts",
-    "../projects/gh-design-system/src/**/*.ts"
+    "../projects/gh-design-system/src/**/*.stories.ts"
   ],
   "exclude": ["../projects/**/*.spec.ts"]
 }

@@ -23,8 +23,11 @@ export interface PortfolioPagesContent {
   readonly 'not-found': PortfolioPageContent;
 }
 
-export interface PortfolioSiteContent {
+export interface PortfolioSiteShellContent {
   readonly identity: PortfolioIdentityContent;
   readonly shell: PortfolioShellContent;
+}
+
+export interface PortfolioSiteContent extends PortfolioSiteShellContent {
   readonly pages: PortfolioPagesContent;
 }
