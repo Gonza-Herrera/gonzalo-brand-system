@@ -289,25 +289,27 @@ describe('Portfolio routing', () => {
     await router.navigateByUrl('/en');
     await fixture.whenStable();
     expect(title.getTitle()).toBe('Gonzalo Herrera | Frontend Tech Lead & AI-Augmented Engineer');
-    expect(meta.getTag('name="description"')?.content).toContain('Angular architecture');
+    expect(meta.getTag('name="description"')?.content).toContain('scalable frontend architecture');
 
     await router.navigateByUrl('/es');
     await fixture.whenStable();
-    expect(title.getTitle()).toBe('Gonzalo Herrera | Frontend Tech Lead & AI-Augmented Engineer');
-    expect(meta.getTag('name="description"')?.content).toContain('arquitectura Angular');
+    expect(title.getTitle()).toBe(
+      'Gonzalo Herrera | Frontend Tech Lead e Ingeniero Aumentado por IA',
+    );
+    expect(meta.getTag('name="description"')?.content).toContain('arquitectura frontend escalable');
 
     await router.navigateByUrl('/en/about');
     await fixture.whenStable();
     expect(title.getTitle()).toBe('About | Gonzalo Herrera');
     expect(meta.getTag('name="description"')?.content).toBe(
-      'Learn about Gonzalo Herrera’s approach to frontend engineering, technical leadership, Angular architecture and AI-augmented software development.',
+      'Learn more about Gonzalo Herrera, his frontend engineering journey, leadership experience and approach to building maintainable software with Angular and AI.',
     );
 
     await router.navigateByUrl('/es/about');
     await fixture.whenStable();
     expect(title.getTitle()).toBe('Sobre mí | Gonzalo Herrera');
     expect(meta.getTag('name="description"')?.content).toBe(
-      'Conoce el enfoque de Gonzalo Herrera sobre ingeniería frontend, liderazgo técnico, arquitectura Angular y desarrollo de software asistido por IA.',
+      'Conoce la trayectoria de Gonzalo Herrera en ingeniería frontend, su experiencia en liderazgo y su enfoque para construir software mantenible con Angular e IA.',
     );
     expect(document.head.querySelectorAll('meta[name="description"]')).toHaveLength(1);
 
@@ -315,21 +317,21 @@ describe('Portfolio routing', () => {
     await fixture.whenStable();
     expect(title.getTitle()).toBe('Experience | Gonzalo Herrera');
     expect(meta.getTag('name="description"')?.content).toBe(
-      'Explore Gonzalo Herrera’s professional journey across frontend engineering, technical leadership and software project coordination.',
+      'Explore Gonzalo Herrera’s professional experience in frontend engineering, Angular development, technical leadership and software delivery.',
     );
 
     await router.navigateByUrl('/es/experience');
     await fixture.whenStable();
     expect(title.getTitle()).toBe('Experiencia | Gonzalo Herrera');
     expect(meta.getTag('name="description"')?.content).toBe(
-      'Conoce la trayectoria profesional de Gonzalo Herrera en ingeniería frontend, liderazgo técnico y coordinación de proyectos de software.',
+      'Explora la experiencia profesional de Gonzalo Herrera en ingeniería frontend, desarrollo con Angular, liderazgo técnico y entrega de software.',
     );
 
     await router.navigateByUrl('/en/projects');
     await fixture.whenStable();
     expect(title.getTitle()).toBe('Projects | Gonzalo Herrera');
     expect(meta.getTag('name="description"')?.content).toBe(
-      'Explore projects by Gonzalo Herrera focused on Angular, design systems, developer experience and AI-augmented software engineering.',
+      'Explore selected projects by Gonzalo Herrera focused on Angular, frontend architecture, design systems, developer experience and AI-assisted engineering.',
     );
 
     await router.navigateByUrl('/es/projects');
@@ -363,7 +365,9 @@ describe('Portfolio routing', () => {
     await router.navigateByUrl('/en/content');
     await fixture.whenStable();
     expect(title.getTitle()).toBe('Content | Gonzalo Herrera');
-    expect(meta.getTag('name="description"')?.content).toContain('AI-augmented development');
+    expect(meta.getTag('name="description"')?.content).toContain(
+      'AI-augmented software development',
+    );
 
     await router.navigateByUrl('/es/content/angular-14-vs-angular-20');
     await fixture.whenStable();
@@ -397,5 +401,13 @@ describe('Portfolio routing', () => {
     await router.navigateByUrl('/es/unknown');
     await fixture.whenStable();
     expect(title.getTitle()).toBe('Página no encontrada | Gonzalo Herrera');
+    expect(meta.getTag('name="robots"')?.content).toBe('noindex, nofollow');
+    expect(document.head.querySelector('link[rel="canonical"]')).toBeNull();
+    expect(document.head.querySelectorAll('link[rel="alternate"]')).toHaveLength(0);
+    expect(document.head.querySelectorAll('meta[name="description"]')).toHaveLength(1);
+    expect(document.head.querySelectorAll('meta[property="og:title"]')).toHaveLength(1);
+    expect(document.head.querySelectorAll('meta[name="twitter:title"]')).toHaveLength(1);
+    expect(document.head.querySelectorAll('script#seo-jsonld-person')).toHaveLength(1);
+    expect(document.head.querySelectorAll('script#seo-jsonld-website')).toHaveLength(1);
   });
 });

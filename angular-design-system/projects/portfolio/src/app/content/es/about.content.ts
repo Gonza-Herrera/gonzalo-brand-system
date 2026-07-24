@@ -3,7 +3,7 @@ import type { PortfolioAboutContent } from '../models/about-content.model';
 export const ES_ABOUT_CONTENT = {
   metaTitle: 'Sobre mí',
   metaDescription:
-    'Conoce el enfoque de Gonzalo Herrera sobre ingeniería frontend, liderazgo técnico, arquitectura Angular y desarrollo de software asistido por IA.',
+    'Conoce la trayectoria de Gonzalo Herrera en ingeniería frontend, su experiencia en liderazgo y su enfoque para construir software mantenible con Angular e IA.',
   hero: {
     eyebrow: 'Sobre mí',
     title: 'Ingeniería, liderazgo y mejores formas de construir software.',

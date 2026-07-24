@@ -3,7 +3,7 @@ import type { PortfolioProjectsContent } from '../models/projects-content.model'
 export const ES_PROJECTS_CONTENT = {
   metaTitle: 'Proyectos',
   metaDescription:
-    'Conoce los proyectos de Gonzalo Herrera enfocados en Angular, design systems, experiencia de desarrollo e ingeniería de software asistida por IA.',
+    'Explora proyectos seleccionados de Gonzalo Herrera sobre Angular, arquitectura frontend, sistemas de diseño, experiencia de desarrollo e ingeniería asistida por IA.',
   hero: {
     eyebrow: 'Proyectos',
     title: 'Construyendo sistemas, herramientas e ideas para desarrollar mejor software.',

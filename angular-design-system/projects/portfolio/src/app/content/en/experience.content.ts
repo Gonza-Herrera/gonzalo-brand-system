@@ -144,7 +144,7 @@ export const EN_PROFESSIONAL_EXPERIENCES: readonly PortfolioProfessionalExperien
 export const EN_EXPERIENCE_CONTENT = {
   metaTitle: 'Experience',
   metaDescription:
-    'Explore Gonzalo Herrera’s professional journey across frontend engineering, technical leadership and software project coordination.',
+    'Explore Gonzalo Herrera’s professional experience in frontend engineering, Angular development, technical leadership and software delivery.',
   hero: {
     eyebrow: 'Experience',
     title: 'Building frontend products, engineering systems and stronger teams.',

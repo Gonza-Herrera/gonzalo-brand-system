@@ -70,7 +70,8 @@ export const EN_SITE_CONTENT = {
       description: 'The page you are looking for does not exist or may have moved.',
       stage: 'Use the link below to continue browsing the portfolio.',
       metaTitle: 'Page not found',
-      metaDescription: 'The requested portfolio page could not be found.',
+      metaDescription:
+        'The page you are looking for could not be found. Return to Gonzalo Herrera’s portfolio and continue exploring.',
       actionLabel: 'Back to home',
     },
   },

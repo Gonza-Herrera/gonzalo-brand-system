@@ -10,7 +10,7 @@ import { EN_PROJECTS_CONTENT } from './projects.content';
 export const EN_HOME_CONTENT = {
   metaTitle: 'Gonzalo Herrera | Frontend Tech Lead & AI-Augmented Engineer',
   metaDescription:
-    'Frontend leadership, Angular architecture, design systems and AI-augmented engineering by Gonzalo Herrera.',
+    'Frontend Tech Lead and AI-Augmented Engineer specializing in Angular, scalable frontend architecture, technical leadership and better software delivery.',
   metaTitleIsAbsolute: true,
   hero: {
     eyebrow: 'Frontend leadership · Angular · AI',

@@ -1,0 +1,6 @@
+{
+  "baseUrl": "https://portfolio.example",
+  "defaultSocialImagePath": "/assets/social/gonzalo-herrera-og.jpg",
+  "supportedLocales": ["en", "es"],
+  "indexableRouteSegments": ["", "about", "experience", "projects", "content", "contact"]
+}

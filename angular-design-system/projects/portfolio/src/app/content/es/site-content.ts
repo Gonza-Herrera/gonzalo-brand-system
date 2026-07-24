@@ -72,7 +72,8 @@ export const ES_SITE_CONTENT = {
       description: 'La página que buscás no existe o pudo haber cambiado de ubicación.',
       stage: 'Usá el enlace siguiente para continuar navegando el portfolio.',
       metaTitle: 'Página no encontrada',
-      metaDescription: 'No se pudo encontrar la página solicitada del portfolio.',
+      metaDescription:
+        'No se pudo encontrar la página que buscas. Regresa al portfolio de Gonzalo Herrera y continúa explorando.',
       actionLabel: 'Volver al inicio',
     },
   },

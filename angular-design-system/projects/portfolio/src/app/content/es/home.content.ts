@@ -8,9 +8,9 @@ import { ES_EXPERIENCE_CONTENT } from './experience.content';
 import { ES_PROJECTS_CONTENT } from './projects.content';
 
 export const ES_HOME_CONTENT = {
-  metaTitle: 'Gonzalo Herrera | Frontend Tech Lead & AI-Augmented Engineer',
+  metaTitle: 'Gonzalo Herrera | Frontend Tech Lead e Ingeniero Aumentado por IA',
   metaDescription:
-    'Liderazgo frontend, arquitectura Angular, design systems e ingeniería asistida por IA por Gonzalo Herrera.',
+    'Frontend Tech Lead e Ingeniero Aumentado por IA especializado en Angular, arquitectura frontend escalable, liderazgo técnico y mejores procesos de desarrollo.',
   metaTitleIsAbsolute: true,
   hero: {
     eyebrow: 'Liderazgo frontend · Angular · IA',
