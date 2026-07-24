@@ -3,7 +3,7 @@ import type { PortfolioProjectsContent } from '../models/projects-content.model'
 export const EN_PROJECTS_CONTENT = {
   metaTitle: 'Projects',
   metaDescription:
-    'Explore projects by Gonzalo Herrera focused on Angular, design systems, developer experience and AI-augmented software engineering.',
+    'Explore selected projects by Gonzalo Herrera focused on Angular, frontend architecture, design systems, developer experience and AI-assisted engineering.',
   hero: {
     eyebrow: 'Projects',
     title: 'Building systems, tools and ideas for better software development.',

@@ -3,7 +3,7 @@ import type { PortfolioContentHubContent } from '../models/content-hub-content.m
 export const EN_CONTENT_HUB_CONTENT = {
   metaTitle: 'Content',
   metaDescription:
-    'Explore articles and resources by Gonzalo Herrera about Angular, frontend engineering, technical leadership and AI-augmented development.',
+    'Articles, ideas and practical insights about Angular, frontend engineering, technical leadership, code quality and AI-augmented software development.',
   hero: {
     eyebrow: 'Content',
     title: 'Ideas, lessons and practical resources for building better software.',

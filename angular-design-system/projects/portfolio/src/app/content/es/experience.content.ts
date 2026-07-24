@@ -144,7 +144,7 @@ export const ES_PROFESSIONAL_EXPERIENCES: readonly PortfolioProfessionalExperien
 export const ES_EXPERIENCE_CONTENT = {
   metaTitle: 'Experiencia',
   metaDescription:
-    'Conoce la trayectoria profesional de Gonzalo Herrera en ingeniería frontend, liderazgo técnico y coordinación de proyectos de software.',
+    'Explora la experiencia profesional de Gonzalo Herrera en ingeniería frontend, desarrollo con Angular, liderazgo técnico y entrega de software.',
   hero: {
     eyebrow: 'Experiencia',
     title: 'Construyendo productos frontend, sistemas de ingeniería y equipos más sólidos.',

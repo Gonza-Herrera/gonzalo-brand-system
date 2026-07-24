@@ -7,7 +7,8 @@ routing and product concerns; Showcase validates integration; Storybook document
 The current release includes complete Portfolio Home, About, Experience, Projects, Content Hub and
 Contact pages, the first full bilingual Project Case Study and three bilingual internal content
 details on top of the global shell, routing and internationalization foundation. Contact includes a
-lazy Web3Forms integration and falls back safely until its public access key is configured.
+lazy Web3Forms integration. Localized technical SEO includes canonical and alternate URLs, Open
+Graph, Twitter/X Cards, Person and WebSite JSON-LD, a social image, robots and sitemap generation.
 
 ## Run, build and test
 
@@ -18,6 +19,7 @@ npm run start:portfolio
 npm run build:portfolio
 npm run test:portfolio
 npm run build:ssr:portfolio
+npm run seo:check
 ```
 
 The development server uses `http://localhost:4200`. The production build emits browser and server
@@ -51,7 +53,8 @@ Routing is deterministic and safe for direct SSR requests:
 - Known legacy paths such as `/about` and `/projects` redirect to their English equivalents.
 - An invalid locale keeps the remaining path and falls back to English: `/fr/about` becomes
   `/en/about`.
-- Unknown pages under a valid locale render the localized 404 inside the shared shell.
+- Unknown pages under a valid locale render the localized 404 inside the shared shell and return
+  HTTP 404 from the SSR server.
 
 The locale prefix in the URL is the source of truth. A stored preference never overrides an
 explicit URL, which prevents the server from rendering English and the client immediately replacing
@@ -73,9 +76,10 @@ PortfolioShellComponent and the lazy page render localized content
 
 `AppComponent` contains only the root `RouterOutlet`. The localized parent route renders
 `PortfolioShellComponent`; its standalone child pages are lazy-loaded with `loadComponent`. Stable
-`pageId` route data selects localized title and description metadata through
-`PortfolioTitleStrategy`. Project and Content details additionally resolve their stable slug to a
-localized title and description, including explicit invalid-slug results.
+`pageId` route data selects localized SEO through `PortfolioTitleStrategy` and `SeoService`.
+Project and Content details additionally resolve their stable slug to localized metadata, including
+explicit non-indexable invalid-slug results. See
+[Portfolio SEO and social metadata](../../docs/portfolio-seo.md).
 
 ## Typed content
 
@@ -269,11 +273,9 @@ Content. The verified LinkedIn destination is centralized in `PORTFOLIO_CONFIG.u
 through the Design System external-link pattern; labels and descriptions remain localized. Stable
 highlight, topic and channel IDs keep both locales structurally aligned.
 
-Web3Forms is the approved form provider. Contact loads its `HttpClient(withFetch)` provider and
+Web3Forms is the approved and configured form provider. Contact loads its `HttpClient(withFetch)` provider and
 `ContactService` with the lazy route, maps an explicit JSON payload and handles idle, submitting,
-success, error and unavailable states. The committed access key remains empty, so local and preview
-builds show safe localized fallback feedback and issue no request until a deployment supplies the
-public key.
+success, error and unavailable states. Provider failures still show safe localized feedback.
 
 The form contract includes Name, Email, Subject, Message and an off-screen `botcheck` honeypot. Pure
 validators enforce required, whitespace, trimmed minimum and centralized maximum rules. The
@@ -288,19 +290,16 @@ code remain in the lazy Contact chunk.
 ### Configure Web3Forms
 
 1. Register the recipient email in Web3Forms and obtain an access key.
-2. Supply that public key through the deployment-specific `CONTACT_FORM_CONFIG` override (the
-   default is sourced from `PORTFOLIO_CONFIG.contactForm`).
+2. Supply or rotate that public key through the centralized `CONTACT_FORM_CONFIG` source.
 3. Add a verified direct fallback as `PORTFOLIO_CONFIG.urls.email = 'mailto:…'`.
 4. Build and run the Portfolio.
 5. Perform one real test and confirm receipt.
 
-The repository has no `.env` or runtime-config pipeline, so this PR does not document a fictional
-environment variable. Never commit SMTP credentials or private server secrets. The browser-visible
-Web3Forms access key is public by design, but no real value is committed here.
+The repository has no `.env` or runtime-config pipeline. Never commit SMTP credentials or private
+server secrets. The browser-visible Web3Forms access key is public by provider design.
 
 See the [Contact page architecture](src/app/pages/contact/README.md) and
-[Contact form contract](../../docs/portfolio-contact-form.md). The next product milestone is PR 18 —
-advanced SEO, canonical and alternate links, Open Graph, structured data and sitemap work.
+[Contact form contract](../../docs/portfolio-contact-form.md).
 
 ## Global shell
 
@@ -315,9 +314,8 @@ The shell composes only public Design System APIs:
 - `ThemeSwitcherComponent` controls the public `GhThemeService` with Light, Dark and System options.
   The Design System owns `data-theme`, system preference observation and safe persistence.
 
-LinkedIn, GitHub and email URLs are not present in the repository's approved source data. The
-central `PORTFOLIO_CONFIG.urls` fields therefore remain empty and the footer does not publish fake
-links. Add verified URLs there before exposing a social group.
+LinkedIn is the only verified public profile and is centralized in `PORTFOLIO_CONFIG.urls`. GitHub
+and email remain unconfigured and are not invented.
 
 ## URL, locale and content
 
@@ -365,11 +363,12 @@ content.
 - Only English and Spanish are implemented.
 - Professional history is limited to the five approved records; employer links, logos, clients,
   metrics and confidential project detail remain intentionally omitted.
-- Email and social URLs await verified source data; Contact omits every unconfigured channel.
+- LinkedIn is configured; email and GitHub remain absent until verified.
 - Content has no external publications, editorial dates, reading times or images until approved
   source data exists; one planned forms comparison remains unpublished.
-- Canonical URLs, complete `hreflang`, Open Graph, sitemap, structured data and production domain
-  configuration belong to PR 18.
+- The SEO base URL remains the explicit `https://portfolio.example` placeholder until the production
+  domain is approved; regenerate robots and sitemap after changing it.
+- The generated default social image requires final visual approval before production.
 - The production SSR hostname must be approved and added to the host allowlist before deployment.
 - No analytics, CMS, custom contact backend or deployment is included. Web3Forms submission is
   implemented, but remains unavailable until a deployment supplies its public access key. Messages

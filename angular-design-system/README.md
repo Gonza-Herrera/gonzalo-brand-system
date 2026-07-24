@@ -124,9 +124,9 @@ explicit localized Content Not Found state.
 
 Contact at `/en/contact` and `/es/contact` provides a localized Hero, discussion topics, verified
 channel resolution, a typed Web3Forms form, privacy guidance and links back into the Portfolio.
-Reactive validation, a honeypot, duplicate prevention and success/error states are implemented;
-with the committed empty access key the page renders a safe unavailable state and performs no
-request. See the
+Reactive validation, a honeypot, duplicate prevention and success/error states are implemented.
+Localized canonical URLs, `hreflang`, Open Graph, Twitter/X Cards, JSON-LD, robots and sitemap are
+documented in [Portfolio SEO](docs/portfolio-seo.md). See the
 [Contact page guide](projects/portfolio/src/app/pages/contact/README.md) and
 [form integration contract](docs/portfolio-contact-form.md).
 

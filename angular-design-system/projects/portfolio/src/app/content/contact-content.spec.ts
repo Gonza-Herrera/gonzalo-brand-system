@@ -68,13 +68,15 @@ describe('Portfolio Contact content', () => {
     }
   });
 
-  it('centralizes Web3Forms configuration without committing a real access key', () => {
-    expect(PORTFOLIO_CONFIG.contactForm).toEqual({
+  it('centralizes the configured Web3Forms integration', () => {
+    expect(PORTFOLIO_CONFIG.contactForm).toMatchObject({
       provider: 'web3forms',
       endpoint: 'https://api.web3forms.com/submit',
-      accessKey: '',
       fromName: 'Gonzalo Herrera Portfolio',
     });
+    expect(PORTFOLIO_CONFIG.contactForm.accessKey).toMatch(
+      /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/u,
+    );
   });
 
   it('publishes only the verified LinkedIn destination from central configuration', () => {

@@ -3,7 +3,7 @@ import type { PortfolioAboutContent } from '../models/about-content.model';
 export const EN_ABOUT_CONTENT = {
   metaTitle: 'About',
   metaDescription:
-    'Learn about Gonzalo Herrera’s approach to frontend engineering, technical leadership, Angular architecture and AI-augmented software development.',
+    'Learn more about Gonzalo Herrera, his frontend engineering journey, leadership experience and approach to building maintainable software with Angular and AI.',
   hero: {
     eyebrow: 'About me',
     title: 'Engineering, leadership and better ways of building software.',
