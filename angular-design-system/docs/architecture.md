@@ -362,7 +362,8 @@ time, image or metric is currently exposed because the approved repository sourc
 one. Static ordering, locale-first lookup and the absence of browser/runtime values keep Hub and
 detail SSR output deterministic.
 
-Contact uses a lazy localized content registry and a deliberately unavailable submission boundary:
+Contact uses a lazy localized content registry, a verified channel mapper and a configuration-safe
+submission boundary:
 
 ```text
 Localized Contact route
@@ -370,16 +371,20 @@ Localized Contact route
 Lazy EN/ES Contact content
     ↓
 Contact Page
-    ├──→ PORTFOLIO_CONFIG.urls → verified channels only
-    ├──→ Typed Reactive Form → unavailable state
+    ├──→ PORTFOLIO_CONFIG.urls → verified LinkedIn channel
+    ├──→ Typed Reactive Form → Web3Forms when configured
     └──→ localized Experience / Projects / Content links
 ```
 
-No approved public email, LinkedIn profile, GitHub profile, endpoint, provider or environment
-strategy exists. The central URL configuration is therefore empty, channel mapping omits every
-destination and the form initializes disabled with `unavailable` feedback. It does not construct a
-request, persist draft data, log values or expose success. This preserves a real form/validation
-contract without suggesting that a message can be delivered.
+The approved LinkedIn profile is stored once in central configuration and resolved against the
+stable `linkedin` descriptor in both locales. Unconfigured email and GitHub channels remain omitted,
+and the localized empty state remains available when no destination resolves. External channel links
+use the shared Feature Grid pattern for native keyboard access, safe new-tab attributes and
+accessible external-link labeling.
+
+Web3Forms is the approved form provider, but its public access key remains empty until deployment
+configuration supplies one. The form therefore initializes with `unavailable` feedback and does not
+construct a request, persist draft data or log values in the committed configuration.
 
 Contact owns stable highlight, topic and channel IDs, field labels, validation messages, submission
 status copy and privacy guidance in structurally equivalent EN/ES modules. Angular Forms, the full

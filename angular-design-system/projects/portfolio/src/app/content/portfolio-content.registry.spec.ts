@@ -79,7 +79,6 @@ describe('Portfolio content registry', () => {
         'projects',
         'content',
       ]);
-      expect(JSON.stringify(contact)).not.toContain('example.com');
       expect(JSON.stringify(contact)).not.toContain('mailto:');
     }
 

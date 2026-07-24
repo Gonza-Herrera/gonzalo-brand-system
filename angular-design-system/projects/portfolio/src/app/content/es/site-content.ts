@@ -64,7 +64,7 @@ export const ES_SITE_CONTENT = {
     contact: {
       metaTitle: 'Contacto',
       metaDescription:
-        'Contacta a Gonzalo Herrera para conversar sobre ingeniería frontend, arquitectura Angular, liderazgo técnico y desarrollo de software asistido por IA.',
+        'Contacta a Gonzalo Herrera para conversar sobre ingeniería frontend, Angular, liderazgo técnico, colaboración y oportunidades de software.',
     },
     'not-found': {
       eyebrow: '404',

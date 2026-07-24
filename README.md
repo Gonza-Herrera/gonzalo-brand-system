@@ -76,8 +76,9 @@ language and Light/Dark/System selectors, and keeps the URL locale authoritative
 hydration. Home, About, Experience, Projects, Content and Contact are complete; Angular Design
 System has the first full bilingual Case Study, and three internal articles/guides have localized
 detail routes under `/en/content/:slug` and `/es/content/:slug`. Contact documents relevant
-conversation topics and an honest unavailable form state because no public destination or message
-endpoint is approved yet.
+conversation topics and includes a typed Web3Forms message integration with validation, localized
+states, basic spam protection and a safe unavailable fallback until its public access key is
+configured.
 See the [Portfolio guide](angular-design-system/projects/portfolio/README.md) and
 [internationalization contract](angular-design-system/docs/portfolio-internationalization.md).
 

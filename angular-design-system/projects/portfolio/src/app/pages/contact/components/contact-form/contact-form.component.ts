@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  DestroyRef,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { GhButtonComponent, GhCardComponent, GhStackComponent } from 'gh-design-system';
 
@@ -8,11 +17,16 @@ import type {
 } from '../../../../content/models/contact-content.model';
 import {
   CONTACT_FORM_LIMITS,
+  type PortfolioContactEmailFallback,
   type PortfolioContactSubmissionStatus,
 } from '../../models/contact-form.model';
-import { nonWhitespaceValidator } from '../../validators/contact-form.validators';
+import { ContactService } from '../../services/contact.service';
+import {
+  nonWhitespaceValidator,
+  trimmedMinLengthValidator,
+} from '../../validators/contact-form.validators';
 
-type ContactFormControlName = 'name' | 'email' | 'company' | 'subject' | 'message';
+type ContactFormControlName = 'name' | 'email' | 'subject' | 'message';
 
 @Component({
   selector: 'app-contact-form',
@@ -24,29 +38,40 @@ type ContactFormControlName = 'name' | 'email' | 'company' | 'subject' | 'messag
 })
 export class ContactFormComponent {
   private readonly formBuilder = inject(FormBuilder);
+  private readonly contactService = inject(ContactService);
+  private readonly destroyRef = inject(DestroyRef);
 
   readonly content = input.required<PortfolioContactFormContent>();
+  readonly fallbackEmail = input<PortfolioContactEmailFallback | undefined>(undefined);
   readonly limits = CONTACT_FORM_LIMITS;
-  readonly submissionStatus = signal<PortfolioContactSubmissionStatus>('unavailable');
+  readonly submissionStatus = signal<PortfolioContactSubmissionStatus>(
+    this.contactService.isConfigured() ? 'idle' : 'unavailable',
+  );
   readonly isSubmitting = computed(() => this.submissionStatus() === 'submitting');
+  readonly isUnavailable = computed(() => this.submissionStatus() === 'unavailable');
   readonly submitted = signal(false);
 
   readonly form = this.formBuilder.nonNullable.group({
     name: [
       '',
-      [Validators.required, nonWhitespaceValidator, Validators.maxLength(CONTACT_FORM_LIMITS.name)],
+      [
+        Validators.required,
+        nonWhitespaceValidator,
+        trimmedMinLengthValidator(CONTACT_FORM_LIMITS.nameMin),
+        Validators.maxLength(CONTACT_FORM_LIMITS.nameMax),
+      ],
     ],
     email: [
       '',
-      [Validators.required, Validators.email, Validators.maxLength(CONTACT_FORM_LIMITS.email)],
+      [Validators.required, Validators.email, Validators.maxLength(CONTACT_FORM_LIMITS.emailMax)],
     ],
-    company: ['', [Validators.maxLength(CONTACT_FORM_LIMITS.company)]],
     subject: [
       '',
       [
         Validators.required,
         nonWhitespaceValidator,
-        Validators.maxLength(CONTACT_FORM_LIMITS.subject),
+        trimmedMinLengthValidator(CONTACT_FORM_LIMITS.subjectMin),
+        Validators.maxLength(CONTACT_FORM_LIMITS.subjectMax),
       ],
     ],
     message: [
@@ -54,18 +79,80 @@ export class ContactFormComponent {
       [
         Validators.required,
         nonWhitespaceValidator,
-        Validators.minLength(CONTACT_FORM_LIMITS.messageMin),
+        trimmedMinLengthValidator(CONTACT_FORM_LIMITS.messageMin),
         Validators.maxLength(CONTACT_FORM_LIMITS.messageMax),
       ],
     ],
+    botcheck: [false],
   });
 
-  constructor() {
-    this.form.disable({ emitEvent: false });
+  submit(): void {
+    if (this.isSubmitting()) {
+      return;
+    }
+
+    this.submitted.set(true);
+    this.form.markAllAsTouched();
+
+    if (!this.contactService.isConfigured()) {
+      this.submissionStatus.set('unavailable');
+      return;
+    }
+
+    if (this.form.invalid) {
+      return;
+    }
+
+    const value = this.form.getRawValue();
+
+    if (value.botcheck) {
+      return;
+    }
+
+    this.submissionStatus.set('submitting');
+
+    this.contactService
+      .sendMessage(value)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: () => {
+          this.form.reset({
+            name: '',
+            email: '',
+            subject: '',
+            message: '',
+            botcheck: false,
+          });
+          this.submitted.set(false);
+          this.submissionStatus.set('success');
+        },
+        error: () => {
+          this.submissionStatus.set('error');
+        },
+      });
   }
 
-  submit(): void {
-    this.submissionStatus.set('unavailable');
+  protected showValidationSummary(): boolean {
+    return this.submitted() && this.form.invalid;
+  }
+
+  protected formDescribedBy(): string {
+    const ids = ['contact-required-fields'];
+
+    if (this.submissionStatus() === 'unavailable') {
+      ids.push('contact-form-unavailable-description');
+    }
+    if (this.submissionStatus() === 'success') {
+      ids.push('contact-form-success-description');
+    }
+    if (this.submissionStatus() === 'error') {
+      ids.push('contact-form-error-description');
+    }
+    if (this.showValidationSummary()) {
+      ids.push('contact-form-validation-summary');
+    }
+
+    return ids.join(' ');
   }
 
   protected describedBy(controlName: ContactFormControlName): string {
@@ -106,14 +193,14 @@ export class ContactFormComponent {
     if (errors['whitespace']) {
       return field.whitespaceMessage;
     }
+    if (errors['maxlength']) {
+      return field.maxLengthMessage;
+    }
     if (errors['email']) {
       return field.invalidMessage;
     }
     if (errors['minlength']) {
       return field.minLengthMessage;
-    }
-    if (errors['maxlength']) {
-      return field.maxLengthMessage;
     }
     return undefined;
   }

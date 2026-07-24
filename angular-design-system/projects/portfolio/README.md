@@ -6,8 +6,8 @@ routing and product concerns; Showcase validates integration; Storybook document
 
 The current release includes complete Portfolio Home, About, Experience, Projects, Content Hub and
 Contact pages, the first full bilingual Project Case Study and three bilingual internal content
-details on top of the global shell, routing and internationalization foundation. Contact uses an
-honest unavailable message-form state until a real channel and submission service are approved.
+details on top of the global shell, routing and internationalization foundation. Contact includes a
+lazy Web3Forms integration and falls back safely until its public access key is configured.
 
 ## Run, build and test
 
@@ -265,22 +265,38 @@ See the [Content Hub architecture](src/app/pages/content/README.md) and
 
 `/en/contact` and `/es/contact` render a Hero, six conversation topics, configured contact channels,
 a typed message form, privacy/security guidance and localized cards for Experience, Projects and
-Content. Stable highlight, topic and channel IDs keep both locales structurally aligned.
+Content. The verified LinkedIn destination is centralized in `PORTFOLIO_CONFIG.urls` and opens
+through the Design System external-link pattern; labels and descriptions remain localized. Stable
+highlight, topic and channel IDs keep both locales structurally aligned.
 
-The repository currently has no approved public email, LinkedIn profile, GitHub profile, endpoint or
-form provider. `PORTFOLIO_CONFIG.urls` therefore contains explicit unconfigured values. The Contact
-page omits channel links and renders a visible `unavailable` state before a disabled Typed Reactive
-Form. No request, local storage, logging or simulated success occurs.
+Web3Forms is the approved form provider. Contact loads its `HttpClient(withFetch)` provider and
+`ContactService` with the lazy route, maps an explicit JSON payload and handles idle, submitting,
+success, error and unavailable states. The committed access key remains empty, so local and preview
+builds show safe localized fallback feedback and issue no request until a deployment supplies the
+public key.
 
-The form contract includes Name, Email, optional Company or Organization, Subject and Message. Pure
-validators enforce required, whitespace, email and centralized length rules; normalization trims
-boundary whitespace without mutating the value or changing email case. These contracts prepare a
-future approved integration without introducing a fake service.
+The form contract includes Name, Email, Subject, Message and an off-screen `botcheck` honeypot. Pure
+validators enforce required, whitespace, trimmed minimum and centralized maximum rules. The
+provider mapper trims boundary whitespace without mutation. Duplicate requests are blocked; success
+resets the form and error preserves input.
 
 Contact composes the public Hero, Section Heading, Feature Grid, Card and Button APIs plus Container,
 Section and Stack primitives. Native inputs and textarea are styled locally with semantic tokens
 because no general Design System form controls exist. The full Contact content and Angular Forms
 code remain in the lazy Contact chunk.
+
+### Configure Web3Forms
+
+1. Register the recipient email in Web3Forms and obtain an access key.
+2. Supply that public key through the deployment-specific `CONTACT_FORM_CONFIG` override (the
+   default is sourced from `PORTFOLIO_CONFIG.contactForm`).
+3. Add a verified direct fallback as `PORTFOLIO_CONFIG.urls.email = 'mailto:…'`.
+4. Build and run the Portfolio.
+5. Perform one real test and confirm receipt.
+
+The repository has no `.env` or runtime-config pipeline, so this PR does not document a fictional
+environment variable. Never commit SMTP credentials or private server secrets. The browser-visible
+Web3Forms access key is public by design, but no real value is committed here.
 
 See the [Contact page architecture](src/app/pages/contact/README.md) and
 [Contact form contract](../../docs/portfolio-contact-form.md). The next product milestone is PR 18 —
@@ -355,8 +371,9 @@ content.
 - Canonical URLs, complete `hreflang`, Open Graph, sitemap, structured data and production domain
   configuration belong to PR 18.
 - The production SSR hostname must be approved and added to the host allowlist before deployment.
-- No analytics, CMS, contact backend/provider or deployment is included. The Contact form UI is
-  intentionally disabled and does not transmit or persist data.
+- No analytics, CMS, custom contact backend or deployment is included. Web3Forms submission is
+  implemented, but remains unavailable until a deployment supplies its public access key. Messages
+  are never persisted in browser storage or logged.
 
 See [Portfolio internationalization](../../docs/portfolio-internationalization.md) for the detailed
 locale contract and [architecture](../../docs/architecture.md) for workspace boundaries.

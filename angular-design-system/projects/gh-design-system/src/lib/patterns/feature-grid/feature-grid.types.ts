@@ -7,6 +7,8 @@ export type GhFeatureGridVariant = (typeof GH_FEATURE_GRID_VARIANTS)[number];
 export interface GhFeatureItem {
   readonly title: string;
   readonly description: string;
+  readonly actionLabel?: string;
+  readonly ariaLabel?: string;
   readonly eyebrow?: string;
   readonly iconLabel?: string;
   readonly href?: string;

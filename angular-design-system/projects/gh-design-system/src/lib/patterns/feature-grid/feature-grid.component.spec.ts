@@ -14,6 +14,8 @@ describe('GhFeatureGridComponent', () => {
       {
         title: 'Leadership',
         description: 'Help teams grow.',
+        actionLabel: 'View leadership profile',
+        ariaLabel: 'Open the leadership profile in a new tab',
         href: 'https://example.com',
         external: true,
       },
@@ -26,6 +28,8 @@ describe('GhFeatureGridComponent', () => {
     expect(element.querySelector('gh-grid')?.classList).toContain('gh-grid--columns-2');
     expect(element.querySelectorAll('gh-card')).toHaveLength(2);
     expect(element.textContent).toContain('Engineering');
+    expect(external?.textContent).toContain('View leadership profile');
+    expect(external?.getAttribute('aria-label')).toBe('Open the leadership profile in a new tab');
     expect(external?.target).toBe('_blank');
     expect(external?.rel).toBe('noopener noreferrer');
   });

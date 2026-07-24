@@ -3,7 +3,7 @@ import type { PortfolioContactContent } from '../models/contact-content.model';
 export const EN_CONTACT_CONTENT = {
   metaTitle: 'Contact',
   metaDescription:
-    'Contact Gonzalo Herrera to discuss frontend engineering, Angular architecture, technical leadership and AI-augmented software development.',
+    'Contact Gonzalo Herrera to discuss frontend engineering, Angular, technical leadership, collaboration and software opportunities.',
   hero: {
     eyebrow: 'Contact',
     title: 'Let’s talk about building better software.',
@@ -75,9 +75,8 @@ export const EN_CONTACT_CONTENT = {
   },
   channels: {
     eyebrow: 'Contact channels',
-    title: 'Choose the best way to connect',
-    description:
-      'Public contact destinations appear here only after they have been verified and approved for publication.',
+    title: 'Choose the way that works best for you to get in touch.',
+    description: '',
     unavailableTitle: 'No public contact channel is configured yet',
     unavailableDescription:
       'Email, LinkedIn and GitHub destinations are intentionally omitted until a verified source is added to the central configuration.',
@@ -91,9 +90,11 @@ export const EN_CONTACT_CONTENT = {
       },
       {
         id: 'linkedin',
-        label: 'Connect on LinkedIn',
-        description: 'Connect through a verified professional profile.',
-        ariaLabel: 'Open Gonzalo Herrera’s LinkedIn profile',
+        label: 'LinkedIn',
+        description:
+          'Let’s connect and talk about Angular, frontend engineering, technical leadership and AI-augmented software development.',
+        actionLabel: 'View LinkedIn profile',
+        ariaLabel: 'Open Gonzalo Herrera’s LinkedIn profile in a new tab',
         external: true,
       },
       {
@@ -109,64 +110,65 @@ export const EN_CONTACT_CONTENT = {
     eyebrow: 'Message form',
     title: 'Share some context',
     description:
-      'The form interface and validation rules are ready, but online submission remains disabled until a reviewed endpoint or provider is configured.',
+      'Have a project, opportunity or idea in mind? Send me a message and I’ll get back to you as soon as possible.',
     requiredFieldsMessage: 'Fields marked as required must be completed.',
     requiredLabel: 'Required',
     fieldGroupLabel: 'Message details',
+    botcheckLabel: 'Leave this field empty',
+    fallbackEmailLabel: 'You can also contact me directly by email at',
     fields: {
       name: {
         label: 'Name',
         description: 'How should I address you?',
-        requiredMessage: 'Name is required.',
-        whitespaceMessage: 'Name cannot contain only spaces.',
-        maxLengthMessage: 'Name cannot exceed 100 characters.',
+        placeholder: 'Your name',
+        requiredMessage: 'Enter your name.',
+        whitespaceMessage: 'This field cannot contain only spaces.',
+        minLengthMessage: 'Your name must contain at least 2 characters.',
+        maxLengthMessage: 'Your name cannot exceed 80 characters.',
       },
       email: {
         label: 'Email',
         description: 'Use an address that can receive a reply.',
-        requiredMessage: 'Email is required.',
+        placeholder: 'you@example.com',
+        requiredMessage: 'Enter your email address.',
         invalidMessage: 'Enter a valid email address.',
-        maxLengthMessage: 'Email cannot exceed 254 characters.',
-      },
-      company: {
-        label: 'Company or organization',
-        optionalLabel: 'Optional',
-        description: 'Add this only when it helps explain the context.',
-        maxLengthMessage: 'Company or organization cannot exceed 150 characters.',
+        maxLengthMessage: 'Your email address cannot exceed 160 characters.',
       },
       subject: {
-        label: 'What would you like to discuss?',
+        label: 'Subject',
         description: 'Summarize the main topic of the conversation.',
-        requiredMessage: 'Subject is required.',
-        whitespaceMessage: 'Subject cannot contain only spaces.',
-        maxLengthMessage: 'Subject cannot exceed 160 characters.',
+        placeholder: 'What would you like to discuss?',
+        requiredMessage: 'Enter a subject.',
+        whitespaceMessage: 'This field cannot contain only spaces.',
+        minLengthMessage: 'The subject must contain at least 3 characters.',
+        maxLengthMessage: 'The subject cannot exceed 120 characters.',
       },
       message: {
-        label: 'Tell me a little about the context, challenge or opportunity.',
+        label: 'Message',
         description: 'Include enough non-confidential context to understand the topic.',
-        requiredMessage: 'Message is required.',
-        whitespaceMessage: 'Message cannot contain only spaces.',
+        placeholder: 'Tell me a little about your project, opportunity or idea.',
+        requiredMessage: 'Enter a message.',
+        whitespaceMessage: 'This field cannot contain only spaces.',
         minLengthMessage: 'Message must contain at least 20 characters.',
-        maxLengthMessage: 'Message cannot exceed 3000 characters.',
+        maxLengthMessage: 'Message cannot exceed 2000 characters.',
       },
     },
     submitLabel: 'Send message',
-    submittingLabel: 'Sending message…',
+    submittingLabel: 'Sending…',
     errorSummary: 'Please review the highlighted fields.',
+    errorWithoutFallbackDescription: 'Please try again in a moment.',
     unavailable: {
-      title: 'Online form submission is not configured yet',
-      description:
-        'The fields are disabled and no information is sent or stored. A real submission service must be reviewed and configured before this form can be activated.',
+      title: 'The contact form is temporarily unavailable',
+      description: 'Please try again later.',
     },
     success: {
-      title: 'Message sent',
-      description: 'Thank you for reaching out. Your message was sent successfully.',
+      title: 'Message sent successfully',
+      description: 'Thank you for reaching out. I’ll get back to you as soon as possible.',
       actionLabel: 'Send another message',
     },
     error: {
       title: 'The message could not be sent',
-      description:
-        'Please review your connection and try again. You can also use one of the available contact channels.',
+      description: 'Please try again or contact me directly by email.',
       actionLabel: 'Try again',
     },
   },
@@ -174,11 +176,11 @@ export const EN_CONTACT_CONTENT = {
     eyebrow: 'Privacy and security',
     title: 'Before you send a message',
     description:
-      'This form is currently disabled and does not transmit or store information in the browser or through an external service.',
+      'Your message is sent only when you submit this form and is never stored in this browser.',
     details: [
-      'Please avoid including confidential information, credentials or sensitive customer data in any future message.',
+      'Please avoid including confidential information, credentials or sensitive customer data.',
       'Provide enough context to understand the topic, but keep sensitive technical details for a secure conversation.',
-      'Any future submission integration must document how data is transmitted, handled and protected before activation.',
+      'The form sends only your name, email, subject and message through the configured contact provider.',
     ],
   },
   explore: {

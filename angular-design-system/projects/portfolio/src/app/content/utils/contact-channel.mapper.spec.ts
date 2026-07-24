@@ -20,7 +20,7 @@ describe('Contact channel mapper', () => {
 
   it('omits empty and protocol-incompatible values', () => {
     const links: PortfolioExternalLinks = {
-      email: 'https://angular.dev',
+      email: 'mailto:',
       linkedin: ' ',
       github: 'http://github.com/angular/angular',
     };

@@ -139,14 +139,16 @@ Stable highlight IDs (`engineering`, `leadership`, `ai`), six topic IDs and chan
 success/error copy and Explore destinations also remain structurally equivalent.
 
 Contact destinations do not belong in localized content. The page resolves channel descriptors
-against `PORTFOLIO_CONFIG.urls`; empty or protocol-incompatible entries are omitted. No current
-destination is configured because the approved repository source does not contain an email or
-profile URL. Never add a placeholder to make a channel render.
+against `PORTFOLIO_CONFIG.urls`; empty or protocol-incompatible entries are omitted. The verified
+LinkedIn profile is configured once in that shared source and is never duplicated across locale
+files. Email and GitHub remain omitted until an approved destination exists. Never add a placeholder
+to make a channel render.
 
-The form content owns labels, descriptions, required/optional text, localized validator messages,
-status feedback and privacy copy. Angular Forms validators and length limits remain code contracts,
-not editorial content. Success copy may only become visible after a real integration confirms a
-submission; the current UI is always `unavailable` and performs no request.
+The form content owns labels, placeholders, descriptions, localized validator messages, status
+feedback, direct-email fallback copy and privacy copy. Angular Forms validators and length limits
+remain code contracts, not editorial content. Only a confirmed Web3Forms response activates success
+copy; missing configuration uses `unavailable`, provider/network failures use `error`, and neither
+case exposes technical details.
 
 `contact-content.registry.ts` is imported by the lazy Contact page rather than the global site
 registry. Only metadata stays global, keeping long bilingual Contact copy and Angular Forms outside

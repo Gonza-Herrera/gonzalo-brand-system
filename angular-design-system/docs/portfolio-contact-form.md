@@ -1,67 +1,119 @@
 # Portfolio Contact form
 
-This document defines the production boundary for the Portfolio message form. The current
-implementation intentionally represents an unavailable integration rather than a fake successful
-submission.
+The Portfolio message form submits directly from Angular to Web3Forms without a custom backend. It
+uses Typed Reactive Forms, a lazy `HttpClient` provider, an explicit provider mapper, localized
+feedback and a central public configuration.
 
-## Current scenario
+## Runtime architecture
 
-No backend, approved form provider, endpoint, environment variable, public contact destination or
-privacy policy is present in the repository. The form therefore:
+```text
+/en/contact or /es/contact
+    ↓ lazy contact.routes.ts
+provideHttpClient(withFetch) + ContactService
+    ↓
+ContactFormComponent
+    ↓ valid user submit
+mapContactFormToWeb3FormsPayload
+    ↓ POST
+https://api.web3forms.com/submit
+```
 
-- uses Typed Reactive Forms and real validation rules;
-- renders all fields disabled;
-- exposes `unavailable` through visible and live-region feedback;
-- sends no HTTP request;
-- stores and logs no personal data;
-- never renders success feedback.
+The HTTP provider and service are registered by the lazy Contact route. They do not add Web3Forms
+code to unrelated page chunks. `withFetch()` follows Angular's SSR-compatible transport
+recommendation, while the request itself can run only after a user submits the form and never during
+server rendering.
 
-## Data contract
+## Configuration
 
-The editable form shape is `PortfolioContactFormValue`:
+The public configuration lives in
+`projects/portfolio/src/app/core/config/portfolio.config.ts`:
+
+```ts
+contactForm: {
+  provider: 'web3forms',
+  endpoint: 'https://api.web3forms.com/submit',
+  accessKey: '',
+  fromName: 'Gonzalo Herrera Portfolio',
+}
+```
+
+The repository has no environment or runtime-configuration pipeline. For that reason, this PR does
+not invent a `.env` file or use `process.env` in browser code. The central `PORTFOLIO_CONFIG` value
+is the implemented build-time source and `CONTACT_FORM_CONFIG` is its injectable boundary.
+
+To enable a deployment:
+
+1. Create a Web3Forms account and register the recipient email.
+2. Obtain the Web3Forms access key.
+3. Supply the public access key through a deployment-specific replacement or override of
+   `CONTACT_FORM_CONFIG`.
+4. Configure the verified direct email as a `mailto:` URL in `PORTFOLIO_CONFIG.urls.email`.
+5. Build and run the Portfolio.
+6. Submit one real test message and confirm the delivered sender, subject and body.
+
+The Web3Forms access key is intentionally used by browser code and is not a password, SMTP
+credential or private server secret. Even so, no real key is committed to this public repository.
+Never add an email password, private API token, arbitrary headers or a recipient override to the
+client. See the [official Web3Forms API reference](https://docs.web3forms.com/getting-started/api-reference)
+for the provider contract.
+
+When `accessKey` is empty, the application still builds and SSR still renders Contact. The form
+shows localized unavailable feedback, disables its fieldset and performs no request. A configured
+direct email remains visible independently of the form state. No unverified email address is
+included in the repository today. Error feedback mentions direct email only when that verified
+fallback exists.
+
+## Data contract and provider mapping
+
+The editable form shape is:
 
 ```ts
 {
   name: string;
   email: string;
-  company: string;
   subject: string;
   message: string;
+  botcheck: boolean;
 }
 ```
 
-Normalization produces `PortfolioContactSubmissionPayload`, where `company` is optional. No phone,
-address, budget, credential, attachment, tracking value or sensitive identifier is collected.
+`mapContactFormToWeb3FormsPayload` is pure and maps only:
 
-## Validation and limits
+```ts
+{
+  access_key: string;
+  from_name: string;
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+  botcheck: boolean;
+}
+```
 
-| Field   | Required | Rules                                    |
-| ------- | -------- | ---------------------------------------- |
-| Name    | Yes      | non-whitespace, maximum 100              |
-| Email   | Yes      | Angular email validation, maximum 254    |
-| Company | No       | maximum 150                              |
-| Subject | Yes      | non-whitespace, maximum 160              |
-| Message | Yes      | non-whitespace, minimum 20, maximum 3000 |
+It trims boundary whitespace from configuration and user text without mutating the original value.
+Unicode and internal message line breaks are preserved. No phone, company, budget, attachment,
+route, browser metadata, tracking value or recipient field is collected or sent.
 
-`nonWhitespaceValidator` does not rewrite input. Localized errors belong to Contact content and are
-associated with stable field IDs through `aria-describedby`. Errors are designed to appear after
-touch or an invalid submit once a real submission flow exists.
+`ContactService` rejects missing configuration and a checked honeypot before HTTP. It treats both
+network failures and `{ success: false }` provider responses as a controlled
+`ContactSubmissionError`. Provider messages are never rendered or logged.
 
-## Normalization
+## Validation
 
-`normalizeContactFormValue` is pure and does not mutate the form value. It:
+| Field    | Required | Rules                                                   |
+| -------- | -------- | ------------------------------------------------------- |
+| Name     | Yes      | non-whitespace, trimmed minimum 2, maximum 80           |
+| Email    | Yes      | Angular email validation, maximum 160                   |
+| Subject  | Yes      | non-whitespace, trimmed minimum 3, maximum 120          |
+| Message  | Yes      | non-whitespace, trimmed minimum 20, maximum 2000        |
+| Botcheck | No       | must remain `false`; removed from keyboard reading flow |
 
-- trims boundary whitespace from every field;
-- changes an empty company to `undefined`;
-- preserves Unicode and internal message line breaks;
-- trims but does not lowercase email, avoiding assumptions about the local part.
-
-The normalized payload must be created only immediately before a configured submission. It must not
-be persisted or logged.
+`nonWhitespaceValidator` and `trimmedMinLengthValidator` are pure and do not rewrite controls.
+Localized errors appear only after touch or an invalid submit and are connected through stable IDs,
+`aria-invalid` and `aria-describedby`.
 
 ## Submission states
-
-The closed state union is:
 
 ```text
 idle → submitting → success
@@ -69,58 +121,70 @@ idle → submitting → success
 unavailable
 ```
 
-The current page starts and remains `unavailable`. A future implementation may enter `success` only
-after a real service confirms the request. Errors must preserve input and expose a manual retry;
-concurrent submit attempts must be ignored while `submitting`.
+- Duplicate submits are ignored while `submitting`.
+- Only the submit button becomes disabled while a request is active; fields remain readable.
+- Success resets the form to empty, pristine and untouched while keeping confirmation visible.
+- Error preserves every value and leaves the button available for a manual retry.
+- Missing configuration enters `unavailable` without throwing during initialization.
+- Editing after an error does not dismiss global feedback; the next submit replaces the state.
 
-## Future service boundary
+The client never retries automatically.
 
-After a backend or provider is approved, add one typed service/gateway that accepts
-`PortfolioContactSubmissionPayload` and returns a typed result. Use the repository's chosen public
-environment strategy for the endpoint. Never hardcode a production endpoint in a component and
-never place secrets in browser environments, headers or source control.
+## Honeypot, privacy and security
 
-The client must not retry messages automatically. General user feedback may distinguish network,
-rate-limit, server and validation outcomes only when the real backend supports those meanings.
-Tests must use HttpClient mocks and must not reach the production endpoint.
+`botcheck` is an off-screen checkbox with a stable label, `tabindex="-1"` and
+`autocomplete="off"`. It remains in the DOM and payload contract but outside the visual and
+assistive-technology reading flow. If it is checked, neither the component nor service issues a
+request.
 
-## Security, privacy and spam
+Client validation and the honeypot improve feedback and basic spam resistance; they are not a
+server-side security boundary. The form:
 
-Client validation is not a security or anti-spam control. A production backend must provide:
+- stores no draft in local storage, session storage, cookies or IndexedDB;
+- adds no analytics or field tracking;
+- logs no name, email, subject, message, key or provider response;
+- renders no user HTML and accepts no attachments;
+- sends only after a real browser submit.
 
-- authoritative schema and payload-size validation;
-- appropriate rate limiting;
-- an approved spam strategy;
-- safe logging that excludes message bodies and unnecessary personal data;
-- transport and retention behavior aligned with reviewed privacy copy.
+Web3Forms owns provider-side validation, delivery and rate limiting. CAPTCHA, Turnstile, a custom
+backend and legal-policy work remain separate decisions.
 
-Do not add a decorative honeypot or CAPTCHA without compatible server behavior and approval. Do not
-claim GDPR compliance, absolute security or retention guarantees without legal and technical
-evidence.
+## Accessibility, localization and responsive behavior
 
-## Accessibility and focus
+- One semantic `<form>` and native `<button type="submit">`.
+- Four visible fields with labels, placeholders, stable IDs and suitable autocomplete.
+- Validation summary and field-specific linked feedback.
+- `aria-busy` during submission.
+- Polite success/unavailable status and assertive error feedback near the form.
+- No forced focus movement; live regions preserve the user's current context.
+- EN/ES content updates through the existing locale Signal without resetting form state.
+- One-column layout below 48rem, wrapping fallback email, vertical textarea resizing and no fixed
+  height.
+- Semantic theme tokens support Light, Dark and System; reduced motion removes control transitions.
 
-All fields require visible labels, stable IDs, logical DOM order, native autocomplete and specific
-linked errors. Status feedback must use a restrained live region and visible text. With a real
-integration, invalid submit must focus the first invalid control (or a correctly implemented error
-summary); success/error must focus their status heading without browser access during SSR render.
+## SSR and hydration
 
-While the form is unavailable no focus is moved: visitors cannot enter or submit data, and the
-reason is announced before the fieldset.
+The initial state depends only on deterministic injected configuration. The component does not read
+`window`, `document`, storage, time or random values. HTTP runs only from `submit()`, never while
+server-rendering. Direct `/en/contact` and `/es/contact` requests therefore produce stable server and
+client markup.
 
-## Testing checklist for activation
+## Tests
 
-Before enabling submission, add tests for:
+Portfolio tests cover:
 
-- invalid submit, `markAllAsTouched` and first-invalid focus;
-- payload normalization and request body;
-- one request during `submitting`;
-- confirmed success and optional reset;
-- error feedback, preserved values and manual retry;
-- endpoint-unconfigured fallback;
-- network/rate-limit/server mapping actually supported by the backend;
-- no payload logging or browser persistence;
-- SSR, hydration and direct `/en/contact` and `/es/contact` refreshes.
+- mapper fields, trimming, non-mutation and absence of extra data;
+- whitespace and trimmed-length validators;
+- successful POST, provider failure, HTTP 400/429/500, missing key and honeypot;
+- invalid form, duplicate submit, loading, reset-on-success and preserve-on-error;
+- unavailable configuration, fallback email, EN/ES content and accessible field wiring;
+- localized Contact routing, metadata and SSR-compatible builds.
 
-Provider approval, deployment, legal policy, CAPTCHA, analytics and advanced SEO remain outside the
-current Contact implementation.
+No test reaches the real Web3Forms endpoint.
+
+## Replacing Web3Forms
+
+Keep the form domain model and component state contract. Replace the provider-specific mapper,
+response model, `ContactService` transport and injected configuration behind
+`CONTACT_FORM_CONFIG`. Do not leak provider response details or transport fields into localized
+content.

@@ -62,7 +62,7 @@ export const EN_SITE_CONTENT = {
     contact: {
       metaTitle: 'Contact',
       metaDescription:
-        'Contact Gonzalo Herrera to discuss frontend engineering, Angular architecture, technical leadership and AI-augmented software development.',
+        'Contact Gonzalo Herrera to discuss frontend engineering, Angular, technical leadership, collaboration and software opportunities.',
     },
     'not-found': {
       eyebrow: '404',

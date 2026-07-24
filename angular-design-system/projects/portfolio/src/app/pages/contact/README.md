@@ -1,153 +1,99 @@
 # Contact page
 
-Contact is the localized public conversation entry point for the Portfolio:
+Contact is the localized public conversation entry point:
 
 - `/en/contact`
 - `/es/contact`
 
-The page explains useful conversation topics, resolves only verified public channels, exposes the
-future message form contract honestly, documents privacy expectations and links to Experience,
-Projects and Content. It is a lazy standalone page and remains deterministic for SSR and hydration.
+It combines the existing Hero, conversation topics, verified channels, a functional Web3Forms
+message form, privacy guidance and locale-aware links to Experience, Projects and Content.
 
-## Current architecture
+## Architecture
 
 ```text
 Localized Contact route
-    ↓
-PortfolioLocaleService locale Signal
-    ↓
-Lazy contact-content.registry.ts
+    ↓ lazy contact.routes.ts
+HttpClient(withFetch) + ContactService
     ↓
 ContactPage composition
+    ├──→ typed EN/ES contact registry
     ├──→ verified channels from PORTFOLIO_CONFIG.urls
-    ├──→ unavailable Typed Reactive Form
+    ├──→ ContactFormComponent
     └──→ localized Experience / Projects / Content links
 ```
 
-The repository currently has no approved backend, form provider, endpoint, public email address or
-social profile URL. This is **scenario C** from the implementation brief:
+`contact.routes.ts` keeps HTTP and provider code lazy. `ContactService` accepts the form domain
+value, validates injected configuration, maps the seven permitted Web3Forms fields and normalizes
+provider/network failures. It does not own UI copy, form resets, navigation or logging.
 
-- no request is performed;
-- no success state is simulated;
-- all form controls and the submit button are disabled before interaction;
-- an `aria-live` status explains why;
-- email, LinkedIn and GitHub cards are omitted because their destinations are unconfigured.
+## Form behavior
 
-The full EN/ES Contact content is imported by the lazy page through
-`content/contact-content.registry.ts`. Only basic Contact metadata remains in the global site
-registry, avoiding the cost of the form copy on unrelated routes.
+The form collects only Name, Email, Subject and Message. `botcheck` is an off-screen checkbox used
+as a honeypot. Typed Reactive Forms enforce:
 
-## Page composition
+- Name: required, non-whitespace, 2–80 characters after trim for the minimum.
+- Email: required, Angular email validation, maximum 160.
+- Subject: required, non-whitespace, 3–120 characters after trim for the minimum.
+- Message: required, non-whitespace, 20–2000 characters after trim for the minimum.
 
-1. Hero with one `h1` and three stable professional focus IDs.
-2. What We Can Discuss with six stable topic IDs.
-3. Contact Channels or an explicit localized empty state.
-4. Contact Form with a typed, disabled form and unavailable status.
-5. Privacy and Security with confidential-data guidance.
-6. Explore More with locale-aware links to Experience, Projects and Content.
+Invalid submit marks fields touched and shows localized linked feedback. A valid submit enters
+`submitting`, disables the button and ignores duplicates. Confirmed success resets to empty,
+pristine and untouched; an error preserves all values for retry. Global success/error feedback
+stays visible until the next submit.
 
-The page reuses public `gh-hero`, `gh-section`, `gh-container`, `gh-stack`, `gh-feature-grid`,
-`gh-card`, `gh-section-heading` and `gh-button` APIs. Native form controls remain Portfolio-private
-because the Design System does not yet expose a general form-control family.
+`mapContactFormToWeb3FormsPayload` trims values without mutation and sends only `access_key`,
+`from_name`, `name`, `email`, `subject`, `message` and `botcheck`.
 
-## Localized content and parity
+## Configuration and fallback
 
-`content/models/contact-content.model.ts` owns readonly contracts plus stable highlight, topic and
-channel IDs. `en/contact.content.ts` and `es/contact.content.ts` satisfy the same contract. Tests
-protect ID order, form-field shape, status messages, Explore destinations and the absence of URLs or
-personal data in localized copy.
+`core/config/portfolio.config.ts` owns:
 
-Do not translate IDs. Do not add an available channel until a real destination is approved.
+- the fixed Web3Forms endpoint;
+- an empty public `accessKey`;
+- the provider-facing `fromName`;
+- verified public channel URLs, currently the LinkedIn profile;
+- an optional direct-email destination.
 
-## Channel configuration
+No real access key or personal email is committed. The verified LinkedIn URL is centralized in
+`PORTFOLIO_CONFIG.urls.linkedin`; localized content owns its label, description, action and
+accessible label without duplicating the destination. With an empty form key, the form renders a
+localized unavailable state and sends no request. If `PORTFOLIO_CONFIG.urls.email` contains a
+verified `mailto:` URL, that address stays visible below the form during idle, success, error and
+unavailable states.
 
-All public destinations belong in `core/config/portfolio.config.ts` under
-`PORTFOLIO_CONFIG.urls`:
+See the [Contact form integration guide](../../../../../../docs/portfolio-contact-form.md) for setup
+and provider replacement.
 
-```ts
-urls: {
-  email: undefined,
-  linkedin: undefined,
-  github: undefined,
-}
-```
+## Content and channels
 
-- Email must be a verified `mailto:` destination approved for public use.
-- LinkedIn and GitHub must be verified `https://` profile URLs.
-- Never place destinations in locale content, templates or component classes.
-- Unconfigured, empty or protocol-incompatible destinations are omitted by
-  `resolvePortfolioContactChannels`.
+`contact-content.registry.ts` is loaded only with Contact. The EN/ES contracts keep stable highlight,
+topic and channel IDs plus equivalent form labels, placeholders, validators and status feedback.
+Configuration—not localized content—owns destinations and provider settings.
 
-Updating one of these values changes the Contact channel list only after the associated content and
-privacy implications have been reviewed. No credential belongs in client configuration.
-
-## Form contract
-
-`ContactFormComponent` uses a non-nullable typed Reactive Form with Name, Email, optional Company or
-Organization, Subject and Message. Constants in `models/contact-form.model.ts` define:
-
-- name: 100 characters;
-- email: 254 characters;
-- company: 150 characters;
-- subject: 160 characters;
-- message: 20–3000 characters.
-
-Required text fields use Angular validators plus `nonWhitespaceValidator`. Email uses Angular's
-built-in email validator. `normalizeContactFormValue` trims boundary whitespace, turns an empty
-company into `undefined`, preserves Unicode and internal line breaks, and deliberately preserves
-email case.
-
-The closed status union is `idle | submitting | success | error | unavailable`. Only
-`unavailable` is reachable today. Success copy exists in the localized contract for a future real
-integration but is never rendered or activated without confirmed service success.
-
-## Adding a real submission integration
-
-No environment files or Contact endpoint exist today. A future implementation must:
-
-1. approve and document one backend or provider;
-2. establish the repository's environment/configuration strategy;
-3. add a public endpoint URL without client secrets;
-4. introduce a small typed Contact service or gateway;
-5. send only `PortfolioContactSubmissionPayload`;
-6. map network, validation, rate-limit and server failures to non-technical localized feedback;
-7. prevent concurrent submissions and never retry automatically;
-8. focus the first invalid field after invalid submit and the status heading after success/error;
-9. reset only after confirmed success and preserve data after errors;
-10. add HttpClient mocks for success, error and unavailable tests.
-
-Do not add EmailJS, Formspree, Netlify Forms, CAPTCHA or another provider without explicit approval.
-
-## Privacy, security and spam
-
-The disabled form does not send or store values. There is no local/session storage, IndexedDB,
-analytics or console logging of contact data. The page asks visitors not to include credentials,
-confidential information or sensitive customer data.
-
-A future backend must own server-side validation, payload limits, rate limiting and an approved spam
-strategy. Client validators are user feedback, not a security boundary. Do not claim legal
-compliance or create a privacy-policy URL without reviewed policy text.
+`resolvePortfolioContactChannels` omits empty or protocol-incompatible URLs. The channel section
+renders the verified LinkedIn card and retains its localized empty state for configurations where
+no channel resolves. Never add a placeholder channel to make a card or email fallback render.
 
 ## Accessibility and responsive behavior
 
-- One `h1`; section headings are `h2` and cards/statuses use `h3`.
-- Every form control has a stable ID, visible label, description, native autocomplete where
-  appropriate, required semantics and an error target for `aria-describedby`.
-- The unavailable explanation uses `role="status"`, `aria-live="polite"` and visible text.
-- Disabled state is communicated before the form, not only through disabled controls.
-- External channels, once configured, receive safe new-tab behavior through Feature Grid.
-- The form grid collapses from two columns to one below 48rem; textarea resize remains vertical.
-- All visual values use semantic `--gh-*` variables and reduced-motion removes transitions.
-- There is no viewport, random ID, date, browser storage or DOM read during render.
+- One `h1`; section headings remain `h2`.
+- Native form, fieldset, labels, stable IDs and a submit button.
+- Errors use `aria-invalid` and `aria-describedby`.
+- The form announces busy, unavailable, success and error states without forced focus.
+- The honeypot has no keyboard or reading-order presence but remains in the DOM.
+- Only the button is disabled while submitting; field values remain visible.
+- The form grid collapses to one column below 48rem.
+- Fallback email wraps safely and textarea resize remains vertical.
+- All visual values use semantic `--gh-*` tokens in Light, Dark and System.
 
-Focus movement after validation or submission is intentionally inactive while submission itself is
-unavailable. It must be implemented and tested with the real integration rather than simulated.
+## SSR, privacy and tests
 
-## Tests and limits
+The initial state is configuration-driven and deterministic. Rendering uses no browser globals,
+storage, random IDs or timestamps, and no HTTP request occurs before user submit.
 
-Portfolio tests cover locale parity, stable IDs, configuration filtering, validators,
-normalization, disabled/unavailable behavior, labels, IDs, safe internal routes, metadata, language
-switching and direct lazy routing.
+Messages are not persisted, tracked or logged. The component sends no company, phone, budget,
+attachment, browser metadata or arbitrary HTML.
 
-Advanced canonical links, full `hreflang`, Open Graph, structured data, sitemap and social images
-remain PR 18 scope.
+Tests cover validators, mapper, service HTTP behavior, form states, honeypot, duplicate prevention,
+localization, routing and metadata. Provider tests use Angular's HTTP testing backend; no real
+message is sent.

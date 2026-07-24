@@ -9,7 +9,9 @@ export interface ResolvedPortfolioContactChannel extends PortfolioContactChannel
 }
 
 function hasExpectedProtocol(channelId: PortfolioContactChannelId, href: string): boolean {
-  return channelId === 'email' ? href.startsWith('mailto:') : href.startsWith('https://');
+  return channelId === 'email'
+    ? href.startsWith('mailto:') && href.slice('mailto:'.length).split('?')[0].trim().length > 0
+    : href.startsWith('https://');
 }
 
 export function resolvePortfolioContactChannels(

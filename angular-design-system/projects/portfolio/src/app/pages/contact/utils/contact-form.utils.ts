@@ -1,18 +1,20 @@
+import type { PortfolioContactFormConfig } from '../../../core/config/portfolio.config';
 import type {
   PortfolioContactFormValue,
-  PortfolioContactSubmissionPayload,
+  Web3FormsContactPayload,
 } from '../models/contact-form.model';
 
-export function normalizeContactFormValue(
+export function mapContactFormToWeb3FormsPayload(
   value: PortfolioContactFormValue,
-): PortfolioContactSubmissionPayload {
-  const company = value.company.trim();
-
+  config: PortfolioContactFormConfig,
+): Web3FormsContactPayload {
   return {
+    access_key: config.accessKey.trim(),
+    from_name: config.fromName.trim(),
     name: value.name.trim(),
     email: value.email.trim(),
-    company: company || undefined,
     subject: value.subject.trim(),
     message: value.message.trim(),
+    botcheck: value.botcheck,
   };
 }
