@@ -1,4 +1,5 @@
-import { PORTFOLIO_CONTENT } from '../../content/portfolio-content.registry';
+import { EN_PAGE_METADATA } from '../../content/en/page-metadata.content';
+import { ES_PAGE_METADATA } from '../../content/es/page-metadata.content';
 import {
   PORTFOLIO_PAGE_IDS,
   PORTFOLIO_PAGE_PATHS,
@@ -9,7 +10,7 @@ import { PORTFOLIO_CONFIG } from '../config/portfolio.config';
 import type { LocalizedSeoMetadata, SeoPageDefinition } from './seo.models';
 
 function pageMetadata(pageId: PortfolioPageId, locale: PortfolioLocale): LocalizedSeoMetadata {
-  const page = PORTFOLIO_CONTENT[locale].pages[pageId];
+  const page = locale === 'en' ? EN_PAGE_METADATA[pageId] : ES_PAGE_METADATA[pageId];
   return {
     title:
       'metaTitleIsAbsolute' in page && page.metaTitleIsAbsolute === true

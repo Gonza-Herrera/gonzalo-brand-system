@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 
+import { getPortfolioHomeContent } from '../../content/home-content.registry';
 import { PortfolioLocaleService } from '../../core/services/portfolio-locale.service';
 import { HomeContactSectionComponent } from './sections/home-contact-section.component';
 import { HomeExperiencePreviewSectionComponent } from './sections/home-experience-preview-section.component';
@@ -26,7 +27,7 @@ import { HomeSelectedProjectsSectionComponent } from './sections/home-selected-p
 export class HomePage {
   private readonly localeService = inject(PortfolioLocaleService);
 
-  protected readonly content = computed(() => this.localeService.content().pages.home);
+  protected readonly content = computed(() => getPortfolioHomeContent(this.localeService.locale()));
   protected readonly locale = this.localeService.locale;
   protected readonly externalLinkLabel = computed(
     () => this.localeService.content().shell.navigation.externalLinkLabel,

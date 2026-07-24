@@ -11,6 +11,10 @@
   --gh-card-border: var(--gh-status-accent-border);
 }
 
+:host.gh-content-highlight--surface-accent .gh-content-highlight__eyebrow {
+  color: var(--gh-text-secondary);
+}
+
 :host.gh-content-highlight--surface-gradient {
   --gh-card-background: var(--gh-pattern-accent-gradient);
   --gh-card-border: var(--gh-border-subtle);
@@ -77,6 +81,7 @@
 
 .gh-content-highlight__link {
   display: inline-flex;
+  min-height: 2.75rem;
   align-items: center;
   gap: var(--gh-space-sm);
   width: fit-content;

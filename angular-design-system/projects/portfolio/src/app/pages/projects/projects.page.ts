@@ -12,6 +12,7 @@ import {
   GhTagComponent,
 } from 'gh-design-system';
 
+import { getPortfolioProjectsContent } from '../../content/projects-content.registry';
 import { mapProjectToCard } from '../../content/utils/project-card.mapper';
 import { selectProjectsInEditorialOrder } from '../../content/utils/project-selectors';
 import { resolvePortfolioAction } from '../../core/routing/portfolio-link.utils';
@@ -39,7 +40,9 @@ import { PortfolioLocaleService } from '../../core/services/portfolio-locale.ser
 export class ProjectsPage {
   private readonly localeService = inject(PortfolioLocaleService);
 
-  protected readonly content = computed(() => this.localeService.content().pages.projects);
+  protected readonly content = computed(() =>
+    getPortfolioProjectsContent(this.localeService.locale()),
+  );
   protected readonly locale = this.localeService.locale;
   protected readonly projects = computed(() =>
     selectProjectsInEditorialOrder(this.content().items),

@@ -2,17 +2,16 @@ import type {
   PortfolioExperienceContent,
   PortfolioProfessionalExperienceContent,
 } from '../models/experience-content.model';
+import {
+  ES_EXPERIENCE_TIMELINE_LABELS,
+  ES_HOME_EXPERIENCE_IDENTITIES,
+} from './home-previews.content';
+import { ES_PAGE_METADATA } from './page-metadata.content';
 
 // Trayectoria profesional aprobada. Esta colección también es la única fuente para el preview de Home.
 export const ES_PROFESSIONAL_EXPERIENCES: readonly PortfolioProfessionalExperienceContent[] = [
   {
-    id: 'icbc-frontend-developer',
-    order: 1,
-    company: 'Banco ICBC',
-    role: 'Frontend Developer',
-    startDate: 'Febrero de 2023',
-    endDate: 'Actualidad',
-    current: true,
+    ...ES_HOME_EXPERIENCE_IDENTITIES[0],
     summary: [
       'Como Frontend Developer participo en el desarrollo y evolución de aplicaciones financieras empresariales. Mi trabajo se enfoca en construir soluciones mantenibles con Angular, ofrecer experiencias de usuario consistentes y colaborar con equipos multidisciplinarios.',
       'Además del desarrollo de funcionalidades, participo en discusiones técnicas, revisiones de código e iniciativas de mejora continua que contribuyen a mantener prácticas de ingeniería confiables dentro del proyecto.',
@@ -39,13 +38,7 @@ export const ES_PROFESSIONAL_EXPERIENCES: readonly PortfolioProfessionalExperien
     ],
   },
   {
-    id: 'endava-team-leader',
-    order: 2,
-    company: 'Endava',
-    role: 'Team Leader',
-    startDate: 'Junio de 2021',
-    endDate: 'Enero de 2023',
-    current: false,
+    ...ES_HOME_EXPERIENCE_IDENTITIES[1],
     summary: [
       'Como Team Leader lideré equipos de ingeniería de software combinando liderazgo de personas, coordinación de entregas y colaboración técnica. Me enfoqué en construir un entorno donde la comunicación, el aprendizaje continuo y la calidad de ingeniería fueran parte del trabajo diario.',
       'Trabajé junto a ingenieros, Project Managers y stakeholders para organizar las entregas, acompañar el crecimiento profesional y promover una colaboración efectiva dentro del equipo.',
@@ -64,13 +57,7 @@ export const ES_PROFESSIONAL_EXPERIENCES: readonly PortfolioProfessionalExperien
     capabilities: ['Liderazgo técnico', 'Liderazgo de equipos', 'Mentoring', 'Agile', 'Scrum'],
   },
   {
-    id: 'vortex-frontend-developer',
-    order: 3,
-    company: 'Vortex',
-    role: 'Frontend Developer',
-    startDate: 'Febrero de 2020',
-    endDate: 'Mayo de 2021',
-    current: false,
+    ...ES_HOME_EXPERIENCE_IDENTITIES[2],
     summary: [
       'Formé parte de equipos multidisciplinarios desarrollando aplicaciones web desde el relevamiento inicial de requerimientos hasta las entregas en producción. Colaboré estrechamente con desarrolladores frontend y backend para construir soluciones mantenibles y resolver desafíos de integración antes de que afectaran las entregas.',
       'Durante esta etapa fortalecí mi experiencia en desarrollo con Angular, integración de APIs REST e ingeniería frontend colaborativa a lo largo del ciclo de vida del software.',
@@ -142,9 +129,7 @@ export const ES_PROFESSIONAL_EXPERIENCES: readonly PortfolioProfessionalExperien
 ];
 
 export const ES_EXPERIENCE_CONTENT = {
-  metaTitle: 'Experiencia',
-  metaDescription:
-    'Explora la experiencia profesional de Gonzalo Herrera en ingeniería frontend, desarrollo con Angular, liderazgo técnico y entrega de software.',
+  ...ES_PAGE_METADATA.experience,
   hero: {
     eyebrow: 'Experiencia',
     title: 'Construyendo productos frontend, sistemas de ingeniería y equipos más sólidos.',
@@ -182,21 +167,7 @@ export const ES_EXPERIENCE_CONTENT = {
     title: 'Experiencia profesional',
     description:
       'Un recorrido desde la coordinación de proyectos hasta la ingeniería frontend y el liderazgo técnico, construido a través de la colaboración, el aprendizaje continuo y el enfoque en crear software mantenible.',
-    labels: {
-      card: {
-        at: 'en',
-        responsibilities: 'Responsabilidades',
-        achievements: 'Aportes destacados',
-        technologies: 'Tecnologías',
-        capabilities: 'Capacidades',
-      },
-      current: 'Actualidad',
-      workModes: {
-        remote: 'Remoto',
-        hybrid: 'Híbrido',
-        onsite: 'Presencial',
-      },
-    },
+    labels: ES_EXPERIENCE_TIMELINE_LABELS,
     items: ES_PROFESSIONAL_EXPERIENCES,
   },
   leadership: {

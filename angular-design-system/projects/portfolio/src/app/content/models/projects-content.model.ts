@@ -179,6 +179,12 @@ export interface PortfolioProjectContent {
     PortfolioProjectCaseStudyContent | PortfolioProjectUnavailableCaseStudyContent;
 }
 
+export type PortfolioProjectPreviewContent = Omit<PortfolioProjectContent, 'caseStudy'> & {
+  readonly caseStudy: {
+    readonly available: boolean;
+  };
+};
+
 export interface PortfolioProjectCardLabels {
   readonly projectPrefix: string;
   readonly featured: string;

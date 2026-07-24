@@ -75,6 +75,7 @@
                 {{ content().fields.name.description }}
               </p>
               <input
+                #nameInput
                 id="contact-name"
                 formControlName="name"
                 type="text"
@@ -101,6 +102,7 @@
                 {{ content().fields.email.description }}
               </p>
               <input
+                #emailInput
                 id="contact-email"
                 formControlName="email"
                 type="email"
@@ -127,6 +129,7 @@
                 {{ content().fields.subject.description }}
               </p>
               <input
+                #subjectInput
                 id="contact-subject"
                 formControlName="subject"
                 type="text"
@@ -153,6 +156,7 @@
                 {{ content().fields.message.description }}
               </p>
               <textarea
+                #messageInput
                 id="contact-message"
                 formControlName="message"
                 [placeholder]="content().fields.message.placeholder"

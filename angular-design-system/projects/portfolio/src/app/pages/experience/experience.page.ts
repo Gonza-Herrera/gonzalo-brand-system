@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 
+import { getPortfolioExperienceContent } from '../../content/experience-content.registry';
 import { PortfolioLocaleService } from '../../core/services/portfolio-locale.service';
 import { ExperienceCapabilitiesSectionComponent } from './sections/experience-capabilities-section.component';
 import { ExperienceCareerDirectionSectionComponent } from './sections/experience-career-direction-section.component';
@@ -28,7 +29,9 @@ import { ExperienceTimelineSectionComponent } from './sections/experience-timeli
 export class ExperiencePage {
   private readonly localeService = inject(PortfolioLocaleService);
 
-  protected readonly content = computed(() => this.localeService.content().pages.experience);
+  protected readonly content = computed(() =>
+    getPortfolioExperienceContent(this.localeService.locale()),
+  );
   protected readonly locale = this.localeService.locale;
   protected readonly externalLinkLabel = computed(
     () => this.localeService.content().shell.navigation.externalLinkLabel,

@@ -4,7 +4,7 @@
       [routerLink]="option.href"
       [attr.hreflang]="option.locale"
       [attr.lang]="option.locale"
-      [attr.aria-label]="option.label"
+      [attr.aria-label]="option.shortLabel + ' — ' + option.label"
       [attr.aria-current]="locale() === option.locale ? 'page' : null"
       [attr.title]="option.label"
       (click)="rememberLocale(option.locale)"

@@ -16,6 +16,7 @@ import {
 } from 'gh-design-system';
 
 import type { PortfolioProjectStatus } from '../../../content/models/projects-content.model';
+import { getPortfolioProjectsContent } from '../../../content/projects-content.registry';
 import { mapProjectToCard } from '../../../content/utils/project-card.mapper';
 import { findProjectBySlug, selectRelatedProjects } from '../../../content/utils/project-selectors';
 import { resolvePortfolioAction } from '../../../core/routing/portfolio-link.utils';
@@ -64,7 +65,9 @@ export class ProjectDetailPage {
   private readonly localeService = inject(PortfolioLocaleService);
 
   protected readonly locale = this.localeService.locale;
-  protected readonly content = computed(() => this.localeService.content().pages.projects);
+  protected readonly content = computed(() =>
+    getPortfolioProjectsContent(this.localeService.locale()),
+  );
   protected readonly project = computed(() => findProjectBySlug(this.content().items, this.slug()));
   protected readonly caseStudy = computed(() => {
     const caseStudy = this.project()?.caseStudy;

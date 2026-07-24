@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 
+import { getPortfolioAboutContent } from '../../content/about-content.registry';
 import { PortfolioLocaleService } from '../../core/services/portfolio-locale.service';
 import { AboutAiSectionComponent } from './sections/about-ai-section.component';
 import { AboutContactSectionComponent } from './sections/about-contact-section.component';
@@ -27,7 +28,9 @@ import { AboutTechnicalFocusSectionComponent } from './sections/about-technical-
 })
 export class AboutPage {
   private readonly localeService = inject(PortfolioLocaleService);
-  protected readonly content = computed(() => this.localeService.content().pages.about);
+  protected readonly content = computed(() =>
+    getPortfolioAboutContent(this.localeService.locale()),
+  );
   protected readonly locale = this.localeService.locale;
   protected readonly externalLinkLabel = computed(
     () => this.localeService.content().shell.navigation.externalLinkLabel,

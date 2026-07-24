@@ -26,14 +26,13 @@ describe('PortfolioLocaleService', () => {
     expect(service.isSupportedLocale('fr')).toBe(false);
   });
 
-  it('activates route content and updates the document language', () => {
+  it('activates localized shell content and updates the document language', () => {
     const service = TestBed.inject(PortfolioLocaleService);
 
     expect(service.activateLocale('es')).toBe(true);
     expect(service.locale()).toBe('es');
-    expect(service.content().pages.about.hero.title).toBe(
-      'Ingeniería, liderazgo y mejores formas de construir software.',
-    );
+    expect(service.content().shell.navigation.items[1]?.label).toBe('Sobre mí');
+    expect(service.content().shell.theme.darkLabel).toBe('Oscuro');
     expect(document.documentElement.lang).toBe('es');
     expect(service.activateLocale('fr')).toBe(false);
     expect(service.locale()).toBe('es');

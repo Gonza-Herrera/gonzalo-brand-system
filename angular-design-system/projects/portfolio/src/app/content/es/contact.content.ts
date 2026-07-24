@@ -1,9 +1,8 @@
 import type { PortfolioContactContent } from '../models/contact-content.model';
+import { ES_PAGE_METADATA } from './page-metadata.content';
 
 export const ES_CONTACT_CONTENT = {
-  metaTitle: 'Contacto',
-  metaDescription:
-    'Contacta a Gonzalo Herrera para conversar sobre ingeniería frontend, Angular, liderazgo técnico, colaboración y oportunidades de software.',
+  ...ES_PAGE_METADATA.contact,
   hero: {
     eyebrow: 'Contacto',
     title: 'Conversemos sobre cómo construir mejor software.',

@@ -13,6 +13,7 @@ import {
   type GhArticleCardData,
 } from 'gh-design-system';
 
+import { getPortfolioContentHubContent } from '../../content/content-hub-content.registry';
 import type {
   PortfolioContentFilter,
   PortfolioContentItem,
@@ -57,7 +58,9 @@ interface PortfolioContentCardView {
 export class ContentPage {
   private readonly localeService = inject(PortfolioLocaleService);
 
-  protected readonly content = computed(() => this.localeService.content().pages.content);
+  protected readonly content = computed(() =>
+    getPortfolioContentHubContent(this.localeService.locale()),
+  );
   protected readonly locale = this.localeService.locale;
   protected readonly activeFilter = signal<PortfolioContentFilter>('all');
   protected readonly publishedItems = computed(() => selectPublishedContent(this.content().items));

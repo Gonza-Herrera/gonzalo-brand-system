@@ -1,6 +1,12 @@
 import { Routes } from '@angular/router';
 
 import { portfolioLocaleGuard } from './core/routing/portfolio-locale.guard';
+import {
+  portfolioContentHubResolver,
+  portfolioProjectsContentResolver,
+  PORTFOLIO_CONTENT_HUB_DATA,
+  PORTFOLIO_PROJECTS_CONTENT_DATA,
+} from './core/routing/portfolio-route-content.resolvers';
 import { PortfolioShellComponent } from './layout/portfolio-shell/portfolio-shell.component';
 
 const unlocalizedRedirects: Routes = [
@@ -53,6 +59,9 @@ export const routes: Routes = [
           {
             path: ':slug',
             data: { pageId: 'projects', projectDetail: true },
+            resolve: {
+              [PORTFOLIO_PROJECTS_CONTENT_DATA]: portfolioProjectsContentResolver,
+            },
             loadComponent: () =>
               import('./pages/projects/project-detail/project-detail.page').then(
                 (module) => module.ProjectDetailPage,
@@ -73,6 +82,9 @@ export const routes: Routes = [
           {
             path: ':slug',
             data: { pageId: 'content', contentDetail: true },
+            resolve: {
+              [PORTFOLIO_CONTENT_HUB_DATA]: portfolioContentHubResolver,
+            },
             loadComponent: () =>
               import('./pages/content/content-detail/content-detail.page').then(
                 (module) => module.ContentDetailPage,

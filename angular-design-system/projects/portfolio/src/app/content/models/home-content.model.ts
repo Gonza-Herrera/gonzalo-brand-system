@@ -8,7 +8,10 @@ import type {
 import type { PortfolioLinkContent } from './link-content.model';
 import type { PortfolioContentItem } from './content-hub-content.model';
 import type { PortfolioPageMetadata } from './page-content.model';
-import type { PortfolioProjectCardLabels, PortfolioProjectContent } from './projects-content.model';
+import type {
+  PortfolioProjectCardLabels,
+  PortfolioProjectPreviewContent,
+} from './projects-content.model';
 
 export const PORTFOLIO_HERO_HIGHLIGHT_IDS = [
   'frontend-engineering',
@@ -62,7 +65,7 @@ export interface PortfolioSelectedProjectsContent {
   readonly description: string;
   readonly viewAllAction: PortfolioLinkContent;
   readonly cardLabels: PortfolioProjectCardLabels;
-  readonly items: readonly PortfolioProjectContent[];
+  readonly items: readonly PortfolioProjectPreviewContent[];
 }
 
 export interface PortfolioExperiencePreviewItem extends GhExperienceCardData {

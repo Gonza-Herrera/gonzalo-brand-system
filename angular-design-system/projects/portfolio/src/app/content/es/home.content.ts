@@ -1,17 +1,14 @@
 import type { PortfolioHomeContent } from '../models/home-content.model';
-import { mapPortfolioExperiencesToPreview } from '../utils/experience-card.mapper';
-import { selectExperiencePreview } from '../utils/experience-selectors';
-import { selectFeaturedProjects } from '../utils/project-selectors';
-import { selectFeaturedContent } from '../utils/content-selectors';
-import { ES_CONTENT_HUB_CONTENT } from './content-hub.content';
-import { ES_EXPERIENCE_CONTENT } from './experience.content';
-import { ES_PROJECTS_CONTENT } from './projects.content';
+import {
+  ES_EXPERIENCE_TIMELINE_LABELS,
+  ES_FEATURED_CONTENT_PREVIEW,
+  ES_FEATURED_PROJECT_PREVIEW,
+  ES_HOME_EXPERIENCE_IDENTITIES,
+} from './home-previews.content';
+import { ES_PAGE_METADATA } from './page-metadata.content';
 
 export const ES_HOME_CONTENT = {
-  metaTitle: 'Gonzalo Herrera | Frontend Tech Lead e Ingeniero Aumentado por IA',
-  metaDescription:
-    'Frontend Tech Lead e Ingeniero Aumentado por IA especializado en Angular, arquitectura frontend escalable, liderazgo técnico y mejores procesos de desarrollo.',
-  metaTitleIsAbsolute: true,
+  ...ES_PAGE_METADATA.home,
   hero: {
     eyebrow: 'Liderazgo frontend · Angular · IA',
     title: 'Pensá en grande. Construí mejor.',
@@ -110,7 +107,7 @@ export const ES_HOME_CONTENT = {
       caseStudy: 'Ver caso de estudio',
       repository: 'Ver repositorio',
     },
-    items: selectFeaturedProjects(ES_PROJECTS_CONTENT.items),
+    items: [ES_FEATURED_PROJECT_PREVIEW],
   },
   experience: {
     eyebrow: 'Resumen de experiencia',
@@ -122,10 +119,17 @@ export const ES_HOME_CONTENT = {
       pageId: 'experience',
       variant: 'ghost',
     },
-    cardLabels: ES_EXPERIENCE_CONTENT.timeline.labels.card,
-    items: mapPortfolioExperiencesToPreview(
-      selectExperiencePreview(ES_EXPERIENCE_CONTENT.timeline.items),
-      ES_EXPERIENCE_CONTENT.timeline.labels,
+    cardLabels: ES_EXPERIENCE_TIMELINE_LABELS.card,
+    items: ES_HOME_EXPERIENCE_IDENTITIES.map(
+      ({ id, role, company, startDate, endDate, current }) => ({
+        id,
+        role,
+        company,
+        startDate,
+        endDate,
+        current,
+        currentLabel: current ? ES_EXPERIENCE_TIMELINE_LABELS.current : undefined,
+      }),
     ),
   },
   featuredContent: {
@@ -142,7 +146,7 @@ export const ES_HOME_CONTENT = {
     },
     tagsLabel: 'Temas del contenido',
     linkLabel: 'Leer la guía',
-    item: selectFeaturedContent(ES_CONTENT_HUB_CONTENT.items)!,
+    item: ES_FEATURED_CONTENT_PREVIEW,
   },
   contact: {
     eyebrow: 'Iniciemos una conversación',

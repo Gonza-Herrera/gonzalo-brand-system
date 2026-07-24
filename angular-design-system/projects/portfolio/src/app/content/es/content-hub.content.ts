@@ -1,9 +1,9 @@
 import type { PortfolioContentHubContent } from '../models/content-hub-content.model';
+import { ES_FEATURED_CONTENT_PREVIEW } from './home-previews.content';
+import { ES_PAGE_METADATA } from './page-metadata.content';
 
 export const ES_CONTENT_HUB_CONTENT = {
-  metaTitle: 'Contenido',
-  metaDescription:
-    'Artículos, ideas y aprendizajes prácticos sobre Angular, ingeniería frontend, liderazgo técnico, calidad de código y desarrollo de software aumentado por IA.',
+  ...ES_PAGE_METADATA.content,
   hero: {
     eyebrow: 'Contenido',
     title: 'Ideas, aprendizajes y recursos prácticos para construir mejor software.',
@@ -123,24 +123,7 @@ export const ES_CONTENT_HUB_CONTENT = {
       source: { type: 'internal' },
       detailAvailable: true,
     },
-    {
-      id: 'building-ai-agents',
-      slug: 'building-ai-agents',
-      title: 'Más allá del chat: agentes de IA que hacen trabajo real',
-      excerpt:
-        'Una guía práctica para convertir la asistencia con IA en flujos de ingeniería acotados, manteniendo explícitos el criterio técnico y la revisión humana.',
-      type: 'guide',
-      typeLabel: 'Guía',
-      category: 'ai-engineering',
-      categoryLabel: 'Ingeniería con IA',
-      status: 'published',
-      statusLabel: 'Publicado',
-      tags: ['Agentes de IA', 'Flujos de Ingeniería', 'Criterio Técnico'],
-      featured: true,
-      order: 3,
-      source: { type: 'internal' },
-      detailAvailable: true,
-    },
+    ES_FEATURED_CONTENT_PREVIEW,
     {
       id: 'signals-forms-vs-reactive-forms',
       slug: 'signals-forms-vs-reactive-forms',

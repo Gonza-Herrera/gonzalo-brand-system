@@ -382,9 +382,9 @@ and the localized empty state remains available when no destination resolves. Ex
 use the shared Feature Grid pattern for native keyboard access, safe new-tab attributes and
 accessible external-link labeling.
 
-Web3Forms is the approved form provider, but its public access key remains empty until deployment
-configuration supplies one. The form therefore initializes with `unavailable` feedback and does not
-construct a request, persist draft data or log values in the committed configuration.
+Web3Forms is the approved form provider and its browser-visible public access key is centralized in
+configuration. Invalid configuration still initializes `unavailable` feedback and does not
+construct a request, persist draft data or log values.
 
 Contact owns stable highlight, topic and channel IDs, field labels, validation messages, submission
 status copy and privacy guidance in structurally equivalent EN/ES modules. Angular Forms, the full
@@ -394,15 +394,15 @@ native form controls remain application-specific until a reusable form-control s
 as a separate concern.
 
 `nonWhitespaceValidator` and `normalizeContactFormValue` are pure. The normalized payload trims
-boundaries, omits a blank optional company and preserves email case, Unicode and message line
-breaks. A future approved gateway must own real submission states, request concurrency, error
-mapping and interaction-driven focus management. Server validation, rate limiting and spam
-protection remain backend responsibilities.
+boundaries and preserves email case, Unicode and message line breaks. The component owns submission
+states, duplicate prevention, error mapping and first-invalid-field focus. Server validation, rate
+limiting and spam protection remain provider responsibilities.
 
 Production statistics keep the complete Contact page, localized copy and Angular Forms runtime in a
-dedicated lazy chunk. Reactive Forms adds shared Angular Core utilities to the initial graph, so the
-Portfolio-only initial warning budget is 525 kB (with the existing 1 MB error ceiling). Showcase
-budgets are unchanged.
+dedicated lazy chunk. Lightweight shell metadata and route-local content reduce the initial browser
+bundle to 452.91 kB. The Portfolio-only initial budget is a 500 kB warning and 550 kB error;
+Showcase budgets are unchanged. See the
+[performance and accessibility audit](../projects/portfolio/docs/performance-accessibility.md).
 
 Portfolio consumes TypeScript only from `gh-design-system` and Sass only from
 the public `styles` and `styles/foundations` exports. The application

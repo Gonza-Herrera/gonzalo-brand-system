@@ -1,9 +1,8 @@
 import type { PortfolioAboutContent } from '../models/about-content.model';
+import { ES_PAGE_METADATA } from './page-metadata.content';
 
 export const ES_ABOUT_CONTENT = {
-  metaTitle: 'Sobre mí',
-  metaDescription:
-    'Conoce la trayectoria de Gonzalo Herrera en ingeniería frontend, su experiencia en liderazgo y su enfoque para construir software mantenible con Angular e IA.',
+  ...ES_PAGE_METADATA.about,
   hero: {
     eyebrow: 'Sobre mí',
     title: 'Ingeniería, liderazgo y mejores formas de construir software.',

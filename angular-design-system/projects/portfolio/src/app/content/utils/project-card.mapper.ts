@@ -3,12 +3,12 @@ import type { GhProjectCardData } from 'gh-design-system';
 import type { PortfolioLocale } from '../models/portfolio-locale.type';
 import type {
   PortfolioProjectCardLabels,
-  PortfolioProjectContent,
+  PortfolioProjectPreviewContent,
 } from '../models/projects-content.model';
 import { createLocalizedProjectPath } from './project-selectors';
 
 export function mapProjectToCard(
-  project: PortfolioProjectContent,
+  project: PortfolioProjectPreviewContent,
   locale: PortfolioLocale,
   labels: PortfolioProjectCardLabels,
 ): GhProjectCardData {
