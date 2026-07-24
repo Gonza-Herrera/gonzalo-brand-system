@@ -29,8 +29,9 @@
               [href]="feature.href"
               [attr.target]="feature.external ? '_blank' : null"
               [attr.rel]="feature.external ? 'noopener noreferrer' : null"
+              [attr.aria-label]="feature.ariaLabel ?? null"
             >
-              <span>{{ feature.title }}</span>
+              <span>{{ feature.actionLabel ?? feature.title }}</span>
               <span aria-hidden="true">→</span>
               @if (feature.external) {
                 <span class="gh-visually-hidden"> ({{ externalLinkLabel() }})</span>
@@ -56,8 +57,9 @@
               [href]="feature.href"
               [attr.target]="feature.external ? '_blank' : null"
               [attr.rel]="feature.external ? 'noopener noreferrer' : null"
+              [attr.aria-label]="feature.ariaLabel ?? null"
             >
-              <span>{{ feature.title }}</span>
+              <span>{{ feature.actionLabel ?? feature.title }}</span>
               <span aria-hidden="true">→</span>
               @if (feature.external) {
                 <span class="gh-visually-hidden"> ({{ externalLinkLabel() }})</span>

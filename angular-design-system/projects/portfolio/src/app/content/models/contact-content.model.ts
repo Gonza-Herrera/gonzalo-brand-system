@@ -50,6 +50,7 @@ export interface PortfolioContactChannelContent {
   readonly id: PortfolioContactChannelId;
   readonly label: string;
   readonly description: string;
+  readonly actionLabel?: string;
   readonly ariaLabel: string;
   readonly external: boolean;
 }

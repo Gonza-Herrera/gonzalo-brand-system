@@ -123,9 +123,10 @@ also drives Home's featured guide; unpublished records remain hidden and invalid
 explicit localized Content Not Found state.
 
 Contact at `/en/contact` and `/es/contact` provides a localized Hero, discussion topics, verified
-channel resolution, a typed form contract, privacy guidance and links back into the Portfolio. No
-email, social destination or submission endpoint is currently approved, so channel cards are
-omitted and the form is explicitly disabled without requests or simulated success. See the
+channel resolution, a typed Web3Forms form, privacy guidance and links back into the Portfolio.
+Reactive validation, a honeypot, duplicate prevention and success/error states are implemented;
+with the committed empty access key the page renders a safe unavailable state and performs no
+request. See the
 [Contact page guide](projects/portfolio/src/app/pages/contact/README.md) and
 [form integration contract](docs/portfolio-contact-form.md).
 

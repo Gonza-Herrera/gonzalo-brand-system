@@ -265,7 +265,9 @@ See the [Content Hub architecture](src/app/pages/content/README.md) and
 
 `/en/contact` and `/es/contact` render a Hero, six conversation topics, configured contact channels,
 a typed message form, privacy/security guidance and localized cards for Experience, Projects and
-Content. Stable highlight, topic and channel IDs keep both locales structurally aligned.
+Content. The verified LinkedIn destination is centralized in `PORTFOLIO_CONFIG.urls` and opens
+through the Design System external-link pattern; labels and descriptions remain localized. Stable
+highlight, topic and channel IDs keep both locales structurally aligned.
 
 Web3Forms is the approved form provider. Contact loads its `HttpClient(withFetch)` provider and
 `ContactService` with the lazy route, maps an explicit JSON payload and handles idle, submitting,

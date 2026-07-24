@@ -75,9 +75,8 @@ export const ES_CONTACT_CONTENT = {
   },
   channels: {
     eyebrow: 'Canales de contacto',
-    title: 'Elige la mejor forma de contactarme',
-    description:
-      'Los destinos públicos aparecen aquí únicamente después de ser verificados y aprobados para su publicación.',
+    title: 'Elige la forma que prefieras para ponerte en contacto conmigo.',
+    description: '',
     unavailableTitle: 'Todavía no hay un canal de contacto público configurado',
     unavailableDescription:
       'Los destinos de correo electrónico, LinkedIn y GitHub se omiten intencionalmente hasta agregar una fuente verificada en la configuración central.',
@@ -91,9 +90,11 @@ export const ES_CONTACT_CONTENT = {
       },
       {
         id: 'linkedin',
-        label: 'Conectar en LinkedIn',
-        description: 'Conectar mediante un perfil profesional verificado.',
-        ariaLabel: 'Abrir el perfil de LinkedIn de Gonzalo Herrera',
+        label: 'LinkedIn',
+        description:
+          'Conectemos y conversemos sobre Angular, frontend, liderazgo técnico e inteligencia artificial aplicada al desarrollo de software.',
+        actionLabel: 'Ver perfil en LinkedIn',
+        ariaLabel: 'Abrir el perfil de LinkedIn de Gonzalo Herrera en una nueva pestaña',
         external: true,
       },
       {

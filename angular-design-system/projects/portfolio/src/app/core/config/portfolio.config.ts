@@ -43,7 +43,7 @@ export const PORTFOLIO_CONFIG = {
   },
   urls: {
     email: undefined,
-    linkedin: undefined,
+    linkedin: 'https://www.linkedin.com/in/gonzalo-herrera-a40a85b4/',
     github: undefined,
   },
   defaultLocale: 'en',
@@ -56,5 +56,13 @@ export const CONTACT_FORM_CONFIG = new InjectionToken<PortfolioContactFormConfig
   {
     providedIn: 'root',
     factory: () => PORTFOLIO_CONFIG.contactForm,
+  },
+);
+
+export const PORTFOLIO_EXTERNAL_LINKS = new InjectionToken<PortfolioExternalLinks>(
+  'PORTFOLIO_EXTERNAL_LINKS',
+  {
+    providedIn: 'root',
+    factory: () => PORTFOLIO_CONFIG.urls,
   },
 );

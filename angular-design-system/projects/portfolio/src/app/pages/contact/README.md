@@ -51,12 +51,15 @@ stays visible until the next submit.
 - the fixed Web3Forms endpoint;
 - an empty public `accessKey`;
 - the provider-facing `fromName`;
-- verified public channel URLs, including direct email.
+- verified public channel URLs, currently the LinkedIn profile;
+- an optional direct-email destination.
 
-No real access key or personal email is committed. With an empty key, the form renders a localized
-unavailable state and sends no request. If `PORTFOLIO_CONFIG.urls.email` contains a verified
-`mailto:` URL, that address stays visible below the form during idle, success, error and unavailable
-states.
+No real access key or personal email is committed. The verified LinkedIn URL is centralized in
+`PORTFOLIO_CONFIG.urls.linkedin`; localized content owns its label, description, action and
+accessible label without duplicating the destination. With an empty form key, the form renders a
+localized unavailable state and sends no request. If `PORTFOLIO_CONFIG.urls.email` contains a
+verified `mailto:` URL, that address stays visible below the form during idle, success, error and
+unavailable states.
 
 See the [Contact form integration guide](../../../../../../docs/portfolio-contact-form.md) for setup
 and provider replacement.
@@ -67,8 +70,9 @@ and provider replacement.
 topic and channel IDs plus equivalent form labels, placeholders, validators and status feedback.
 Configuration—not localized content—owns destinations and provider settings.
 
-`resolvePortfolioContactChannels` omits empty or protocol-incompatible URLs. Never add a placeholder
-channel to make a card or email fallback render.
+`resolvePortfolioContactChannels` omits empty or protocol-incompatible URLs. The channel section
+renders the verified LinkedIn card and retains its localized empty state for configurations where
+no channel resolves. Never add a placeholder channel to make a card or email fallback render.
 
 ## Accessibility and responsive behavior
 

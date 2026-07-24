@@ -19,7 +19,8 @@ import { GhFeatureGridComponent, type GhFeatureItem } from 'gh-design-system';
 | `variant`           | `'cards' \| 'minimal'`     | `'cards'`              |
 | `externalLinkLabel` | `string`                   | `'opens in a new tab'` |
 
-There are no outputs. Each feature includes `title`, `description` and optional `eyebrow`, `iconLabel`, `href` and `external`.
+There are no outputs. Each feature includes `title`, `description` and optional `actionLabel`,
+`ariaLabel`, `eyebrow`, `iconLabel`, `href` and `external`.
 
 ## Example and composition
 
@@ -36,6 +37,8 @@ The optional `iconLabel` is a compact textual symbol and is decorative. Titles a
 - Fixed columns collapse through the public Grid breakpoints; auto uses the shared Grid minimum-width token.
 - Cards remain equal-height through the Card API. Minimal items use a semantic border and tokenized rhythm.
 - Optional feature links are native anchors inside the item, not an interactive wrapper around the complete surface.
+- `actionLabel` can provide link copy distinct from the feature title; `ariaLabel` can provide a
+  more specific accessible name.
 - External links receive safe attributes and a configurable accessible indication.
 - Empty arrays render an empty Grid without errors; missing icons reserve no space.
 
