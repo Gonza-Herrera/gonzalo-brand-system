@@ -38,7 +38,7 @@ export const PORTFOLIO_CONFIG = {
   contactForm: {
     provider: 'web3forms',
     endpoint: WEB3FORMS_CONTACT_ENDPOINT,
-    accessKey: '',
+    accessKey: '2cdcf0da-e705-45af-9ac2-5fe142578784',
     fromName: 'Gonzalo Herrera Portfolio',
   },
   urls: {
