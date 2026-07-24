@@ -1,39 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://portfolio.example/en</loc>
+    <loc>https://gonzalo-herrera-dev.netlify.app/en</loc>
   </url>
   <url>
-    <loc>https://portfolio.example/en/about</loc>
+    <loc>https://gonzalo-herrera-dev.netlify.app/en/about</loc>
   </url>
   <url>
-    <loc>https://portfolio.example/en/experience</loc>
+    <loc>https://gonzalo-herrera-dev.netlify.app/en/experience</loc>
   </url>
   <url>
-    <loc>https://portfolio.example/en/projects</loc>
+    <loc>https://gonzalo-herrera-dev.netlify.app/en/projects</loc>
   </url>
   <url>
-    <loc>https://portfolio.example/en/content</loc>
+    <loc>https://gonzalo-herrera-dev.netlify.app/en/projects/angular-design-system</loc>
   </url>
   <url>
-    <loc>https://portfolio.example/en/contact</loc>
+    <loc>https://gonzalo-herrera-dev.netlify.app/en/content</loc>
   </url>
   <url>
-    <loc>https://portfolio.example/es</loc>
+    <loc>https://gonzalo-herrera-dev.netlify.app/en/content/angular-14-vs-angular-20</loc>
   </url>
   <url>
-    <loc>https://portfolio.example/es/about</loc>
+    <loc>https://gonzalo-herrera-dev.netlify.app/en/content/lessons-from-code-reviews</loc>
   </url>
   <url>
-    <loc>https://portfolio.example/es/experience</loc>
+    <loc>https://gonzalo-herrera-dev.netlify.app/en/content/building-ai-agents</loc>
   </url>
   <url>
-    <loc>https://portfolio.example/es/projects</loc>
+    <loc>https://gonzalo-herrera-dev.netlify.app/en/contact</loc>
   </url>
   <url>
-    <loc>https://portfolio.example/es/content</loc>
+    <loc>https://gonzalo-herrera-dev.netlify.app/es</loc>
   </url>
   <url>
-    <loc>https://portfolio.example/es/contact</loc>
+    <loc>https://gonzalo-herrera-dev.netlify.app/es/about</loc>
+  </url>
+  <url>
+    <loc>https://gonzalo-herrera-dev.netlify.app/es/experience</loc>
+  </url>
+  <url>
+    <loc>https://gonzalo-herrera-dev.netlify.app/es/projects</loc>
+  </url>
+  <url>
+    <loc>https://gonzalo-herrera-dev.netlify.app/es/projects/angular-design-system</loc>
+  </url>
+  <url>
+    <loc>https://gonzalo-herrera-dev.netlify.app/es/content</loc>
+  </url>
+  <url>
+    <loc>https://gonzalo-herrera-dev.netlify.app/es/content/angular-14-vs-angular-20</loc>
+  </url>
+  <url>
+    <loc>https://gonzalo-herrera-dev.netlify.app/es/content/lessons-from-code-reviews</loc>
+  </url>
+  <url>
+    <loc>https://gonzalo-herrera-dev.netlify.app/es/content/building-ai-agents</loc>
+  </url>
+  <url>
+    <loc>https://gonzalo-herrera-dev.netlify.app/es/contact</loc>
   </url>
 </urlset>

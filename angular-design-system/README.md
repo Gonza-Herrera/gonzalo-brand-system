@@ -4,14 +4,14 @@ Official Angular workspace for the Gonzalo Herrera Design System.
 
 This workspace provides a reusable Angular library with Button, Badge, Tag, a
 four-component Card family, seven Layout Primitives and eight Brand Patterns,
-plus Storybook, a routed standalone Showcase, a bilingual SSR-enabled Portfolio,
+plus Storybook, a routed standalone Showcase, a bilingual prerendered Portfolio,
 token-driven SCSS, light/dark/system theming, unit tests,
 accessibility checks and targeted interaction tests.
 
 ## Requirements
 
-- Node.js `^20.19.0`, `^22.12.0` or `>=24.0.0`
-- npm 10 or newer
+- Node.js `22.18.0`
+- npm `10.9.3`
 
 The workspace currently uses Angular 21 because it is the newest release line
 compatible with the repository's Node.js 22.18 runtime.
@@ -106,7 +106,7 @@ npm run start:portfolio
 ```
 
 Portfolio uses `/en/...` and `/es/...` routes, lazy standalone pages, the public
-Navigation and Footer patterns, language and theme selectors, SSR and client
+Navigation and Footer patterns, language and theme selectors, build-time prerendering and client
 hydration. For example, use `/en/projects` or `/es/projects`. See
 [`projects/portfolio/README.md`](projects/portfolio/README.md) for its architecture
 and [`docs/portfolio-internationalization.md`](docs/portfolio-internationalization.md)
@@ -153,7 +153,8 @@ Useful focused commands:
 npm run build:library
 npm run build:showcase
 npm run build:portfolio
-npm run build:ssr:portfolio
+npm run build:portfolio:preview
+npm run build:portfolio:production
 npm run test:portfolio
 npm run watch:library
 npm run watch:showcase

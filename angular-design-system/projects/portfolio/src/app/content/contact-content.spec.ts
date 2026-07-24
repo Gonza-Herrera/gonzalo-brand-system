@@ -74,9 +74,7 @@ describe('Portfolio Contact content', () => {
       endpoint: 'https://api.web3forms.com/submit',
       fromName: 'Gonzalo Herrera Portfolio',
     });
-    expect(PORTFOLIO_CONFIG.contactForm.accessKey).toMatch(
-      /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/u,
-    );
+    expect(PORTFOLIO_CONFIG.contactForm.accessKey).toBe('');
   });
 
   it('publishes only the verified LinkedIn destination from central configuration', () => {

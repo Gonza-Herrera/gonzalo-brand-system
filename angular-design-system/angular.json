@@ -206,13 +206,7 @@
             },
             "styles": ["projects/portfolio/src/styles.scss"],
             "server": "projects/portfolio/src/main.server.ts",
-            "outputMode": "server",
-            "security": {
-              "allowedHosts": ["localhost", "127.0.0.1"]
-            },
-            "ssr": {
-              "entry": "projects/portfolio/src/server.ts"
-            }
+            "outputMode": "static"
           },
           "configurations": {
             "production": {

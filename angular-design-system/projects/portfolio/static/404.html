@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Page not found · Página no encontrada | Gonzalo Herrera</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="__PORTFOLIO_STYLESHEET__" />
+    <style>
+      .not-found {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: var(--gh-container-gutter-lg);
+        background: var(--gh-pattern-accent-gradient);
+      }
+
+      .not-found__card {
+        width: min(100%, var(--gh-container-md));
+        display: grid;
+        gap: var(--gh-space-xl);
+        padding: var(--gh-space-2xl);
+        border: var(--gh-border-width-default) solid var(--gh-card-border);
+        border-radius: var(--gh-radius-xl);
+        background: var(--gh-card-background-glass);
+        box-shadow: var(--gh-shadow-md);
+        backdrop-filter: blur(var(--gh-card-glass-blur));
+      }
+
+      .not-found__eyebrow {
+        margin: 0;
+        color: var(--gh-text-accent);
+        font-weight: var(--gh-font-weight-semibold);
+        letter-spacing: var(--gh-letter-spacing-wide);
+        text-transform: uppercase;
+      }
+
+      .not-found h1,
+      .not-found p {
+        margin: 0;
+      }
+
+      .not-found__copy {
+        display: grid;
+        gap: var(--gh-space-sm);
+        color: var(--gh-text-secondary);
+      }
+
+      .not-found__actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--gh-space-md);
+      }
+
+      .not-found__actions a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: var(--gh-space-sm) var(--gh-space-lg);
+        border: var(--gh-border-width-default) solid var(--gh-action-primary-border);
+        border-radius: var(--gh-radius-pill);
+        background: var(--gh-action-primary-background);
+        color: var(--gh-action-primary-text);
+        font-weight: var(--gh-font-weight-semibold);
+        text-decoration: none;
+      }
+
+      .not-found__actions a:hover {
+        background: var(--gh-action-primary-hover);
+      }
+
+      @media (max-width: 36rem) {
+        .not-found__card {
+          padding: var(--gh-space-xl);
+        }
+
+        .not-found__actions a {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="not-found">
+      <section class="not-found__card" aria-labelledby="not-found-title">
+        <p class="not-found__eyebrow">404</p>
+        <h1 id="not-found-title">Page not found · Página no encontrada</h1>
+        <div class="not-found__copy">
+          <p>The requested page does not exist. Choose a language to return to the portfolio.</p>
+          <p>La página solicitada no existe. Elige un idioma para volver al portfolio.</p>
+        </div>
+        <nav class="not-found__actions" aria-label="Return to the Portfolio">
+          <a href="/en" lang="en">Continue in English</a>
+          <a href="/es" lang="es">Continuar en español</a>
+        </nav>
+      </section>
+    </main>
+  </body>
+</html>

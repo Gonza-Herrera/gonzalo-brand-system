@@ -5,6 +5,13 @@ import { PORTFOLIO_CONFIG } from '../config/portfolio.config';
 import type { SeoConfiguration } from './seo.models';
 import { normalizeBaseUrl, normalizePublicPath } from './seo.utils';
 
+declare const PORTFOLIO_SITE_URL: string;
+
+const configuredSiteUrl =
+  typeof PORTFOLIO_SITE_URL === 'string' && PORTFOLIO_SITE_URL.trim()
+    ? PORTFOLIO_SITE_URL
+    : runtimeSeoConfig.baseUrl;
+
 const verifiedProfileUrls = [PORTFOLIO_CONFIG.urls.linkedin, PORTFOLIO_CONFIG.urls.github].flatMap(
   (url) => (typeof url === 'string' ? [url] : []),
 );
@@ -12,7 +19,7 @@ const verifiedProfileUrls = [PORTFOLIO_CONFIG.urls.linkedin, PORTFOLIO_CONFIG.ur
 export const SEO_CONFIG_VALUE = {
   siteName: PORTFOLIO_CONFIG.identity.name,
   authorName: PORTFOLIO_CONFIG.identity.name,
-  baseUrl: normalizeBaseUrl(runtimeSeoConfig.baseUrl),
+  baseUrl: normalizeBaseUrl(configuredSiteUrl),
   defaultLocale: PORTFOLIO_CONFIG.defaultLocale,
   supportedLocales: PORTFOLIO_CONFIG.supportedLocales,
   defaultSocialImagePath: normalizePublicPath(runtimeSeoConfig.defaultSocialImagePath),

@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { RESPONSE_INIT } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 
+import { SEO_CONFIG_VALUE } from './seo.config';
 import { SeoService } from './seo.service';
 
 describe('SeoService', () => {
@@ -28,23 +29,23 @@ describe('SeoService', () => {
     expect(meta.getTag('name="robots"')?.content).toBe('index, follow');
     expect(meta.getTag('name="twitter:card"')?.content).toBe('summary_large_image');
     expect(meta.getTag('name="twitter:image"')?.content).toBe(
-      'https://portfolio.example/assets/social/gonzalo-herrera-og.jpg',
+      `${SEO_CONFIG_VALUE.baseUrl}/assets/social/gonzalo-herrera-og.jpg`,
     );
     expect(meta.getTag('property="og:type"')?.content).toBe('website');
     expect(meta.getTag('property="og:locale"')?.content).toBe('en_US');
     expect(meta.getTag('property="og:locale:alternate"')?.content).toBe('es_AR');
-    expect(meta.getTag('property="og:url"')?.content).toBe('https://portfolio.example/en');
+    expect(meta.getTag('property="og:url"')?.content).toBe(`${SEO_CONFIG_VALUE.baseUrl}/en`);
 
     const canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
-    expect(canonical?.href).toBe('https://portfolio.example/en');
+    expect(canonical?.href).toBe(`${SEO_CONFIG_VALUE.baseUrl}/en`);
     expect(
       Array.from(document.head.querySelectorAll<HTMLLinkElement>('link[rel="alternate"]')).map(
         (link) => [link.hreflang, link.href],
       ),
     ).toEqual([
-      ['en', 'https://portfolio.example/en'],
-      ['es', 'https://portfolio.example/es'],
-      ['x-default', 'https://portfolio.example/en'],
+      ['en', `${SEO_CONFIG_VALUE.baseUrl}/en`],
+      ['es', `${SEO_CONFIG_VALUE.baseUrl}/es`],
+      ['x-default', `${SEO_CONFIG_VALUE.baseUrl}/en`],
     ]);
 
     const person = JSON.parse(

@@ -1,8 +1,10 @@
 # Portfolio
 
-`portfolio` is Gonzalo Herrera's bilingual, SSR-enabled public website application. It is separate
-from the technical Showcase and Storybook documentation: Portfolio owns real content, localized
-routing and product concerns; Showcase validates integration; Storybook documents reusable APIs.
+`portfolio` is Gonzalo Herrera's bilingual, prerendered public website application. Angular SSR is
+used at build time to generate static HTML; production does not run a persistent Angular server.
+It is separate from the technical Showcase and Storybook documentation: Portfolio owns real
+content, localized routing and product concerns; Showcase validates integration; Storybook
+documents reusable APIs.
 
 The current release includes complete Portfolio Home, About, Experience, Projects, Content Hub and
 Contact pages, the first full bilingual Project Case Study and three bilingual internal content
@@ -20,24 +22,17 @@ From `angular-design-system/`:
 npm run start:portfolio
 npm run build:portfolio
 npm run test:portfolio
-npm run build:ssr:portfolio
 npm run seo:check
-npm run validate:ssr:seo
+npm run validate:portfolio:output
 ```
 
-The development server uses `http://localhost:4200`. The production build emits browser and server
-bundles with hydration. After building, `npm run serve:ssr:portfolio` serves them at
-`http://localhost:4000` by default and respects the host-provided `PORT` variable.
+The development server uses `http://localhost:4200`. The build emits a static, hydrated site to
+`dist/portfolio/browser`, including localized HTML, production SEO files and a standalone
+`404.html`. The build fails when a public route or required asset is missing.
 
-Use `npm run build:portfolio -- --stats-json` for bundle analysis and run Lighthouse against the
-production SSR server, not the development server. The audit criteria include clean builds and
-console output, route-local lazy content, keyboard and focus behavior, Light/Dark/System review,
-responsive reflow, SSR parity and automated accessibility checks. Lighthouse and unit tests reduce
-regression risk; they do not establish complete WCAG conformance or field Core Web Vitals.
-
-The SSR host allowlist includes only `localhost` and `127.0.0.1` for local verification. Add the
-approved production hostname to `security.allowedHosts` as part of deployment configuration; do not
-disable Angular's host validation.
+Production and preview builds require build-time variables. See
+[Deployment and production readiness](docs/deployment.md) for Netlify commands, environment
+configuration, direct-route checks and rollback.
 
 ## Localized routes
 
@@ -56,14 +51,14 @@ public page has both route variants:
 | Contact        | `/en/contact`        | `/es/contact`        |
 | Not Found      | `/en/**`             | `/es/**`             |
 
-Routing is deterministic and safe for direct SSR requests:
+Routing is deterministic and safe for direct static requests:
 
 - `/` redirects to `/en`.
 - Known legacy paths such as `/about` and `/projects` redirect to their English equivalents.
 - An invalid locale keeps the remaining path and falls back to English: `/fr/about` becomes
   `/en/about`.
-- Unknown pages under a valid locale render the localized 404 inside the shared shell and return
-  HTTP 404 from the SSR server.
+- Unknown client-side navigation under a valid locale renders the localized Angular Not Found page.
+  Unknown direct requests are handled by Netlify's static `404.html` with HTTP 404.
 
 The locale prefix in the URL is the source of truth. A stored preference never overrides an
 explicit URL, which prevents the server from rendering English and the client immediately replacing
@@ -360,17 +355,17 @@ storage. It is intentionally small and portfolio-specific.
 - The Design System navigation owns Escape handling, focus return and responsive mobile state.
 - Token-based CSS supports 320px through wide desktop layouts without viewport JavaScript.
 
-## SSR, hydration and persistence
+## Prerender, hydration and persistence
 
 The route guard runs for server and browser navigation. It activates content and sets the Angular
 `DOCUMENT` root language before the localized shell renders. English is used for `/` and invalid
 locales on both platforms, so server HTML and the first client render agree. Browser globals and
 storage are only accessed behind platform guards or the SSR-safe Design System service.
 
-Theme defaults to `system` during SSR. A stored explicit theme is applied by `GhThemeService` in the
-browser; there is no speculative inline pre-bootstrap script, so a brief theme transition can still
-occur on a cold load. This avoids unsafe script duplication while preserving hydration-safe Angular
-content.
+Theme defaults to `system` during prerender. A stored explicit theme is applied by
+`GhThemeService` in the browser; there is no speculative inline pre-bootstrap script, so a brief
+theme transition can still occur on a cold load. This avoids unsafe script duplication while
+preserving hydration-safe Angular content.
 
 ## Current limits
 
@@ -383,13 +378,12 @@ content.
 - LinkedIn is configured; email and GitHub remain absent until verified.
 - Content has no external publications, editorial dates, reading times or images until approved
   source data exists; one planned forms comparison remains unpublished.
-- The SEO base URL remains the explicit `https://portfolio.example` placeholder until the production
-  domain is approved; regenerate robots and sitemap after changing it.
+- The production URL is `https://gonzalo-herrera-dev.netlify.app` and is centralized in
+  `seo.config.json`; `SITE_URL` supplies the matching build-time value on Netlify.
 - The generated default social image requires final visual approval before production.
-- The production SSR hostname must be approved and added to the host allowlist before deployment.
-- No analytics, CMS, custom contact backend or deployment is included. Web3Forms submission is
-  implemented, but remains unavailable until a deployment supplies its public access key. Messages
-  are never persisted in browser storage or logged.
+- No analytics, CMS or custom contact backend is included. Web3Forms submission is enabled only in
+  production when Netlify supplies its public access key; preview builds intentionally disable it.
+  Messages are never persisted in browser storage or logged.
 
 See [Portfolio internationalization](../../docs/portfolio-internationalization.md) for the detailed
 locale contract and [architecture](../../docs/architecture.md) for workspace boundaries.

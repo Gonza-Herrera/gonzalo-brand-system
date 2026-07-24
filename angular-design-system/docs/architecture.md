@@ -425,13 +425,13 @@ semantics. It preserves the current path, query and fragment while replacing
 the locale prefix. These routing and preference controls are not exported by
 the Design System.
 
-The official Angular SSR builder produces browser and Express server bundles.
-`provideClientHydration(withEventReplay())` hydrates server HTML, while all
-routes use server rendering. URL-first locale resolution keeps server and
-first-client content deterministic. No environment files were introduced: the
-workspace has no existing environment convention and no production URL is approved. The build
-security allowlist contains only `localhost` and `127.0.0.1`, which enables real local SSR checks
-without disabling Angular's host validation; deployment must add the approved production hostname.
+The official Angular application builder uses SSR only at build time to prerender
+the complete public route manifest. `outputMode: "static"` emits hydrated browser
+HTML without a persistent Express server bundle.
+`provideClientHydration(withEventReplay())` hydrates that static HTML. URL-first
+locale resolution keeps prerendered and first-client content deterministic.
+Production URL and Web3Forms values enter through validated build-time constants;
+browser code does not read server environment variables at runtime.
 
 ## Showcase architecture
 

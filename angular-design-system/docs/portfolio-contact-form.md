@@ -25,28 +25,29 @@ server rendering.
 
 ## Configuration
 
-The public configuration lives in
-`projects/portfolio/src/app/core/config/portfolio.config.ts`:
+The public endpoint and form identity live in
+`projects/portfolio/src/app/core/config/portfolio.config.ts`. The browser-visible access key is
+injected only while building through the `PORTFOLIO_WEB3FORMS_ACCESS_KEY` Angular build constant:
 
 ```ts
 contactForm: {
   provider: 'web3forms',
   endpoint: 'https://api.web3forms.com/submit',
-  accessKey: '',
+  accessKey: web3FormsAccessKey,
   fromName: 'Gonzalo Herrera Portfolio',
 }
 ```
 
-The repository has no environment or runtime-configuration pipeline. For that reason, this PR does
-not invent a `.env` file or use `process.env` in browser code. The central `PORTFOLIO_CONFIG` value
-is the implemented build-time source and `CONTACT_FORM_CONFIG` is its injectable boundary.
+`scripts/build-portfolio.mjs` validates `WEB3FORMS_ACCESS_KEY` for production and passes it to
+Angular without printing it. Browser code does not read `process.env`. Deploy Preview and branch
+deploy builds deliberately replace the key with an empty string, so the localized unavailable
+state is rendered and no real submission can be made.
 
 To enable a deployment:
 
 1. Create a Web3Forms account and register the recipient email.
 2. Obtain the Web3Forms access key.
-3. Supply the public access key through a deployment-specific replacement or override of
-   `CONTACT_FORM_CONFIG`.
+3. Configure `WEB3FORMS_ACCESS_KEY` in the Netlify production context.
 4. Configure the verified direct email as a `mailto:` URL in `PORTFOLIO_CONFIG.urls.email`.
 5. Build and run the Portfolio.
 6. Submit one real test message and confirm the delivered sender, subject and body.
@@ -57,7 +58,7 @@ Never add an email password, private API token, arbitrary headers or a recipient
 client. See the [official Web3Forms API reference](https://docs.web3forms.com/getting-started/api-reference)
 for the provider contract.
 
-When `accessKey` is empty, the application still builds and SSR still renders Contact. The form
+When `accessKey` is empty, the application still builds and prerenders Contact. The form
 shows localized unavailable feedback, disables its fieldset and performs no request. A configured
 direct email remains visible independently of the form state. No unverified email address is
 included in the repository today. Error feedback mentions direct email only when that verified
@@ -162,11 +163,11 @@ backend and legal-policy work remain separate decisions.
   height.
 - Semantic theme tokens support Light, Dark and System; reduced motion removes control transitions.
 
-## SSR and hydration
+## Prerender and hydration
 
 The initial state depends only on deterministic injected configuration. The component does not read
 `window`, `document`, storage, time or random values. HTTP runs only from `submit()`, never while
-server-rendering. Direct `/en/contact` and `/es/contact` requests therefore produce stable server and
+prerendering. Direct `/en/contact` and `/es/contact` requests therefore produce stable static and
 client markup.
 
 ## Tests
