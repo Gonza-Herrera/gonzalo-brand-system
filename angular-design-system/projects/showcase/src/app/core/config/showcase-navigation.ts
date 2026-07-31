@@ -33,6 +33,11 @@ export const SHOWCASE_NAVIGATION: readonly ShowcaseNavigationItem[] = [
     description: 'Theme-aware elevation',
   },
   {
+    label: 'Surfaces',
+    path: '/surfaces',
+    description: 'Solid and Liquid Glass materials',
+  },
+  {
     label: 'Layout',
     path: '/layout',
     description: 'Responsive composition primitives',

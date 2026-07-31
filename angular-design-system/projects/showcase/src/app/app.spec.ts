@@ -31,6 +31,7 @@ describe('App routing', () => {
       ['/spacing', 'Spacing system'],
       ['/radii', 'Border radius system'],
       ['/shadows', 'Elevation and shadows'],
+      ['/surfaces', 'Surface foundations'],
       ['/layout', 'Layout primitives'],
       ['/buttons', 'Button'],
       ['/badges', 'Badge'],

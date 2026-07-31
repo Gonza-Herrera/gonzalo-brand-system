@@ -4,9 +4,8 @@ This document defines the public token contract for Liquid Glass materials. The 
 truth remains the repository-level [`/tokens`](../../../../tokens/) directory; generated SCSS
 inside the Angular library must never be edited by hand.
 
-PR 22 provides material values only. It does not create a Surface component, migrate an existing
-component, or activate Liquid Glass in Showcase or Portfolio. PR 23 will encapsulate this contract
-in reusable surface primitives.
+PR 22 provides the material values consumed by the Surface primitives introduced in PR 23. Existing
+product components and the Portfolio remain unmigrated.
 
 ## Architecture
 
@@ -19,7 +18,7 @@ radius, border, motion, focus  ->  overlay, interactive, disabled
                             generated --gh-* CSS properties
                                       |
                                       v
-                       future Surface primitives and components
+                         Surface primitives and components
 ```
 
 - Primitive tokens describe controlled material ingredients. They do not carry product intent.
@@ -147,16 +146,16 @@ Each material publishes one composed token, for example
 prevents every future component from concatenating its own filter chain while preserving primitive
 adjustability at the source.
 
-Future surface primitives must assign the same token to both `backdrop-filter` and
+Surface primitives assign the same token to both `backdrop-filter` and
 `-webkit-backdrop-filter`. No prefixed duplicate token is needed.
 
 ## Solid fallback
 
-Every material has a theme-aware `fallback-background`. Future production CSS should use the opaque
+Every material has a theme-aware `fallback-background`. Production Surface CSS uses the opaque
 fallback first and enhance the surface in one centralized feature query:
 
 ```scss
-// Documentation only. PR 23 will encapsulate this recipe.
+// Conceptual equivalent. gh-surface encapsulates this recipe.
 .example-glass-surface {
   background: var(--gh-surface-glass-fallback-background);
   border: var(--gh-surface-glass-border-width) solid var(--gh-surface-glass-border-color);
@@ -221,7 +220,7 @@ Consumers load the standard public entry point once:
 @use 'gh-design-system/styles';
 ```
 
-Future components consume semantic variables such as:
+Surface and future components consume semantic variables such as:
 
 ```scss
 background: var(--gh-surface-glass-background);

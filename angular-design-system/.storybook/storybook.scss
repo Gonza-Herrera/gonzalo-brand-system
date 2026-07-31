@@ -88,6 +88,40 @@
   color: var(--gh-text-secondary);
 }
 
+.gh-surface-story-stage {
+  padding: var(--gh-space-xl);
+  border: var(--gh-border-width-default) solid var(--gh-border-subtle);
+  border-radius: var(--gh-radius-xl);
+  background: var(--gh-pattern-accent-gradient);
+}
+
+.gh-surface-story-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  gap: var(--gh-space-lg);
+}
+
+.gh-surface-story-stage h3,
+.gh-surface-story-stage p {
+  margin-block-start: 0;
+}
+
+.gh-surface-story-stage p {
+  color: var(--gh-text-secondary);
+}
+
+.gh-surface-story-link {
+  color: var(--gh-text-accent);
+  font-weight: var(--gh-font-weight-semibold);
+}
+
+.gh-surface-story-target {
+  position: absolute;
+  overflow: hidden;
+  inline-size: var(--gh-space-none);
+  block-size: var(--gh-space-none);
+}
+
 .gh-glass-token-docs {
   display: grid;
   gap: var(--gh-space-xl);
