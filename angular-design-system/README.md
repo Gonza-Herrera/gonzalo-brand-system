@@ -429,6 +429,16 @@ state and the Light/Dark/System selector.
 Components under `showcase/src/app/shared` and `layout` are documentation-only.
 They must not be exported from the library public API.
 
+## Liquid Glass visual foundations
+
+The [Liquid Glass documentation](docs/design/liquid-glass/README.md) defines the material language,
+principles, surface taxonomy, depth, lighting, motion, accessibility, performance constraints and
+adoption roadmap for the next Design System phase. It is the reference for PR 22 and later migration
+work.
+
+The current Card and Hero `glass` variants predate that contract. They remain unchanged and are not
+considered migrated until a dedicated implementation PR validates them against the new foundations.
+
 ## Scope
 
 This release is deliberately limited to foundations, Button, Badge, Tag,
