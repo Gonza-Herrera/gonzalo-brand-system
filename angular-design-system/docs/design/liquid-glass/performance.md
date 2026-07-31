@@ -3,8 +3,9 @@
 Backdrop filtering, translucent compositing, large shadows, and moving ambient layers can increase
 paint, memory, and GPU cost. Performance is therefore part of the material contract.
 
-PR 21 sets constraints but introduces no effect or performance budget value. Implementation budgets
-must be measured in PR 22 prototypes and enforced proportionately in later component work.
+PR 21 sets the constraints. PR 22 adds a deliberately capped token scale but no production effect or
+speculative instance count. PR 23 must measure representative surfaces before setting an exact
+simultaneous-instance budget, and later component work must enforce it proportionately.
 
 ## Rendering rules
 

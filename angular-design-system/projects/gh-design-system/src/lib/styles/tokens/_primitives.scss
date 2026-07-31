@@ -64,6 +64,7 @@
   --gh-breakpoint-lg: 64rem;
 
   /* shadow-primitive */
+  --gh-shadow-primitive-none: none;
   --gh-shadow-primitive-sm: 0 2px 8px rgb(16 24 40 / 8%);
   --gh-shadow-primitive-md: 0 8px 24px rgb(16 24 40 / 12%);
   --gh-shadow-primitive-lg: 0 16px 48px rgb(16 24 40 / 16%);
@@ -72,4 +73,35 @@
   --gh-motion-duration-fast: 160ms;
   --gh-motion-duration-slow: 800ms;
   --gh-motion-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+
+  /* glass */
+  --gh-glass-blur-none: 0;
+  --gh-glass-blur-xs: 0.25rem;
+  --gh-glass-blur-sm: 0.5rem;
+  --gh-glass-blur-md: 0.75rem;
+  --gh-glass-blur-lg: 1rem;
+  --gh-glass-blur-xl: 1.5rem;
+  --gh-glass-saturation-none: 1;
+  --gh-glass-saturation-subtle: 1.04;
+  --gh-glass-saturation-default: 1.08;
+  --gh-glass-saturation-strong: 1.12;
+  --gh-glass-opacity-surface-subtle: 0.72;
+  --gh-glass-opacity-surface-default: 0.8;
+  --gh-glass-opacity-surface-strong: 0.9;
+  --gh-glass-opacity-border-subtle: 0.12;
+  --gh-glass-opacity-border-default: 0.18;
+  --gh-glass-opacity-border-strong: 0.28;
+  --gh-glass-opacity-highlight-subtle: 0.08;
+  --gh-glass-opacity-highlight-default: 0.14;
+  --gh-glass-opacity-highlight-strong: 0.22;
+  --gh-glass-opacity-overlay-subtle: 0.24;
+  --gh-glass-opacity-overlay-default: 0.4;
+  --gh-glass-opacity-overlay-strong: 0.56;
+  --gh-glass-opacity-disabled: 0.88;
+  --gh-glass-highlight-subtle: rgb(from var(--gh-color-white) r g b / var(--gh-glass-opacity-highlight-subtle));
+  --gh-glass-highlight-default: rgb(from var(--gh-color-white) r g b / var(--gh-glass-opacity-highlight-default));
+  --gh-glass-highlight-strong: rgb(from var(--gh-color-white) r g b / var(--gh-glass-opacity-highlight-strong));
+  --gh-glass-inner-shadow-none: none;
+  --gh-glass-inner-shadow-subtle: inset 0 1px 0 var(--gh-glass-highlight-subtle);
+  --gh-glass-inner-shadow-default: inset 0 1px 0 var(--gh-glass-highlight-default), inset 0 -1px 0 color-mix(in srgb, var(--gh-color-ink) 6%, transparent);
 }

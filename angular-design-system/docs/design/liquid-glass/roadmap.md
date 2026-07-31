@@ -8,7 +8,7 @@ foundation change with a broad product migration.
 
 | Area                                   | Status after PR 21                                  | Intended future review                        |
 | -------------------------------------- | --------------------------------------------------- | --------------------------------------------- |
-| Global foundations and themes          | Documented direction; implementation unchanged      | PR 22 token contract                          |
+| Global foundations and themes          | PR 22 token contract available; product unchanged   | PR 23 surface consumption                     |
 | Surface primitive                      | Not implemented                                     | PR 23                                         |
 | Ambient backgrounds                    | Not implemented                                     | PR 24                                         |
 | Button                                 | Pending; existing component unchanged               | PR 25                                         |
@@ -21,7 +21,7 @@ foundation change with a broad product migration.
 | Alerts, toasts, and status feedback    | Pending; not currently public                       | Feedback component PR                         |
 | Dialogs and overlays                   | Pending; not currently public                       | Overlay primitives PR                         |
 | Popovers and tooltips                  | Pending; not currently public                       | Floating surface PR                           |
-| Storybook documentation                | Foundations remain Markdown-only in PR 21           | Add visual references with implementations    |
+| Storybook documentation                | Token-only foundation reference in PR 22            | Add Surface stories with PR 23 implementation |
 | Showcase                               | Unchanged                                           | Integrate approved primitives after PR 23     |
 | Portfolio                              | Unchanged                                           | Product migration only after library adoption |
 
@@ -37,11 +37,11 @@ Pending means no component is authorized to invent a local Liquid Glass recipe.
 
 ### PR 22 — Glass Tokens
 
-- Prototype material values in light and dark themes.
-- Define semantic material, boundary, illumination, blur, fallback, and depth roles.
-- Decide how existing shadow and radius scales map to the conceptual model.
-- Validate composited contrast and representative rendering cost.
-- Generate outputs through the existing JSON token pipeline.
+- Define primitive material ingredients and semantic material roles in light and dark themes.
+- Map boundary, illumination, blur, fallbacks, motion, focus, shadow, and radius to existing scales.
+- Publish deterministic CSS custom properties through the existing JSON token pipeline.
+- Add automated validation and a token-only Storybook reference without migrating components.
+- Defer final composited contrast and rendering measurements to the concrete PR 23 surfaces.
 
 ### PR 23 — Surface Primitives
 

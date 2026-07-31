@@ -22,6 +22,7 @@ const primitiveFiles = [
   'shadows.json',
   'typography.json',
   'motion.json',
+  'glass.json',
 ];
 
 const typographyCategories = new Set([
@@ -135,6 +136,66 @@ const requiredSemanticPaths = [
   'shadow.large',
 ];
 
+const liquidGlassMaterialProperties = [
+  'background',
+  'fallbackBackground',
+  'borderColor',
+  'borderWidth',
+  'borderHighlight',
+  'backdropFilter',
+  'shadow',
+  'innerShadow',
+  'foreground',
+  'mutedForeground',
+  'radius',
+];
+
+export const requiredLiquidGlassPrimitivePaths = [
+  ...['none', 'xs', 'sm', 'md', 'lg', 'xl'].map((scale) => `glass.blur.${scale}`),
+  ...['none', 'subtle', 'default', 'strong'].map((scale) => `glass.saturation.${scale}`),
+  ...['subtle', 'default', 'strong'].flatMap((scale) => [
+    `glass.opacity.surface.${scale}`,
+    `glass.opacity.border.${scale}`,
+    `glass.opacity.highlight.${scale}`,
+    `glass.opacity.overlay.${scale}`,
+  ]),
+  'glass.opacity.disabled',
+  ...['subtle', 'default', 'strong'].map((scale) => `glass.highlight.${scale}`),
+  ...['none', 'subtle', 'default'].map((scale) => `glass.innerShadow.${scale}`),
+];
+
+export const requiredLiquidGlassSemanticPaths = [
+  'surface.base.background',
+  'surface.base.foreground',
+  ...liquidGlassMaterialProperties.map((property) => `surface.solid.${property}`),
+  ...['glassSubtle', 'glass', 'glassElevated', 'glassFloating'].flatMap((material) =>
+    liquidGlassMaterialProperties.map((property) => `surface.${material}.${property}`),
+  ),
+  'surface.overlay.background',
+  'surface.overlay.fallbackBackground',
+  'surface.overlay.backdropFilter',
+  ...['hover', 'active', 'selected'].flatMap((state) => [
+    `surface.interactive.${state}.background`,
+    `surface.interactive.${state}.borderColor`,
+    `surface.interactive.${state}.shadow`,
+  ]),
+  'surface.interactive.focus.ringColor',
+  'surface.interactive.focus.ringWidth',
+  'surface.interactive.focus.ringOffset',
+  'surface.interactive.focus.shadow',
+  'surface.disabled.background',
+  'surface.disabled.borderColor',
+  'surface.disabled.foreground',
+  'surface.disabled.opacity',
+  'surface.disabled.shadow',
+  'surface.transition.duration',
+  'surface.transition.easing',
+  'surface.radius.subtle',
+  'surface.radius.default',
+  'surface.radius.elevated',
+  'surface.radius.floating',
+];
+
 const requiredLayoutPrimitivePaths = [
   'spacing.none',
   'container.sm',
@@ -166,9 +227,10 @@ const supportedTokenTypes = new Set([
   'fontWeight',
   'number',
   'shadow',
+  'string',
 ]);
 
-class TokenValidationError extends Error {}
+export class TokenValidationError extends Error {}
 
 async function loadJson(relativePath) {
   const absolutePath = path.join(tokensRoot, relativePath);
@@ -393,7 +455,7 @@ function validateThemeMetadata(lightTheme, darkTheme) {
 }
 
 function validateSemanticCoverage(semanticTokens, darkTokens) {
-  for (const tokenPath of requiredSemanticPaths) {
+  for (const tokenPath of [...requiredSemanticPaths, ...requiredLiquidGlassSemanticPaths]) {
     if (!semanticTokens.has(tokenPath)) {
       throw new TokenValidationError(
         `semantic-tokens.json: required semantic token ${tokenPath} is missing`,
@@ -422,6 +484,17 @@ function validateSemanticCoverage(semanticTokens, darkTokens) {
       );
     }
   }
+
+  for (const [tokenPath, semanticToken] of semanticTokens) {
+    const darkToken = darkTokens.get(tokenPath);
+
+    if (darkToken?.type !== semanticToken.type) {
+      throw new TokenValidationError(
+        `themes/dark.json: ${tokenPath} uses type "${darkToken?.type ?? 'missing'}"; ` +
+          `expected "${semanticToken.type}"`,
+      );
+    }
+  }
 }
 
 function validateLayoutPrimitiveCoverage(primitiveTokens) {
@@ -429,6 +502,67 @@ function validateLayoutPrimitiveCoverage(primitiveTokens) {
     if (!primitiveTokens.has(tokenPath)) {
       throw new TokenValidationError(`Required layout primitive ${tokenPath} is missing`);
     }
+  }
+}
+
+function validateLiquidGlassPrimitives(primitiveTokens) {
+  for (const tokenPath of requiredLiquidGlassPrimitivePaths) {
+    if (!primitiveTokens.has(tokenPath)) {
+      throw new TokenValidationError(`Required Liquid Glass primitive ${tokenPath} is missing`);
+    }
+  }
+
+  for (const scale of ['none', 'xs', 'sm', 'md', 'lg', 'xl']) {
+    const token = primitiveTokens.get(`glass.blur.${scale}`);
+    const value = token?.value;
+
+    if (typeof value !== 'string') {
+      throw new TokenValidationError(`${token?.path ?? scale} must be a CSS dimension`);
+    }
+
+    const remValue = value === '0' ? 0 : Number.parseFloat(value.endsWith('rem') ? value : 'NaN');
+
+    if (!Number.isFinite(remValue) || remValue < 0 || remValue > 1.5) {
+      throw new TokenValidationError(
+        `${token.path} must be between 0 and 1.5rem to preserve the approved blur budget`,
+      );
+    }
+  }
+
+  for (const scale of ['none', 'subtle', 'default', 'strong']) {
+    const token = primitiveTokens.get(`glass.saturation.${scale}`);
+    const value = token?.value;
+
+    if (typeof value !== 'number' || value < 1 || value > 1.25) {
+      throw new TokenValidationError(`${token?.path ?? scale} must be a number between 1 and 1.25`);
+    }
+  }
+
+  for (const token of primitiveTokens.values()) {
+    if (!token.path.startsWith('glass.opacity.')) {
+      continue;
+    }
+
+    if (typeof token.value !== 'number' || token.value < 0 || token.value > 1) {
+      throw new TokenValidationError(`${token.path} must be a number between 0 and 1`);
+    }
+  }
+}
+
+function validateCssNameUniqueness(tokens, nameForToken, label) {
+  const names = new Map();
+
+  for (const token of tokens.values()) {
+    const cssName = nameForToken(token.path);
+    const existing = names.get(cssName);
+
+    if (existing) {
+      throw new TokenValidationError(
+        `${label}: ${token.path} and ${existing} both generate ${cssName}`,
+      );
+    }
+
+    names.set(cssName, token.path);
   }
 }
 
@@ -475,7 +609,7 @@ function semanticCssName(tokenPath) {
   return `--gh-${toKebabCase(category)}-${suffix}`;
 }
 
-function cssValue(value, primitiveTokens) {
+function cssValue(value, primitiveTokens, semanticTokens = new Map()) {
   if (typeof value === 'number') {
     return String(value);
   }
@@ -487,13 +621,15 @@ function cssValue(value, primitiveTokens) {
   }
 
   return value.replace(referencePattern, (_, reference) => {
-    if (!primitiveTokens.has(reference)) {
-      throw new TokenValidationError(
-        `Only primitive references can be emitted to CSS: {${reference}}`,
-      );
+    if (primitiveTokens.has(reference)) {
+      return `var(${primitiveCssName(reference)})`;
     }
 
-    return `var(${primitiveCssName(reference)})`;
+    if (semanticTokens.has(reference)) {
+      return `var(${semanticCssName(reference)})`;
+    }
+
+    throw new TokenValidationError(`Cannot emit missing CSS reference {${reference}}`);
   });
 }
 
@@ -605,7 +741,7 @@ function renderSemanticContract(tokens) {
   return lines.join('\n');
 }
 
-function renderThemeFile(themeName, tokens, primitiveTokens) {
+function renderThemeFile(themeName, tokens, primitiveTokens, semanticTokens) {
   const mapName = `$gh-${themeName}-theme`;
   const lines = [
     `// Generated by scripts/tokens.mjs from /tokens/${
@@ -618,7 +754,7 @@ function renderThemeFile(themeName, tokens, primitiveTokens) {
 
   for (const token of tokens.values()) {
     const name = semanticCssName(token.path).replace('--gh-', '');
-    lines.push(`  '${name}': ${cssValue(token.value, primitiveTokens)},`);
+    lines.push(`  '${name}': ${cssValue(token.value, primitiveTokens, semanticTokens)},`);
   }
 
   lines.push(
@@ -868,7 +1004,7 @@ function renderShowcaseTokenData(tokens) {
   ].join('\n');
 }
 
-async function loadAndValidateTokens() {
+export async function loadAndValidateTokens() {
   const primitiveTokens = new Map();
 
   for (const file of primitiveFiles) {
@@ -882,14 +1018,19 @@ async function loadAndValidateTokens() {
   const darkFile = await loadJson(path.join('themes', 'dark.json'));
   const darkTokens = collectTokens(darkFile.data, darkFile.relativePath);
   const availableTokens = new Map([...primitiveTokens, ...semanticTokens]);
+  const darkAvailableTokens = new Map([...primitiveTokens, ...darkTokens]);
 
   validateReferences(primitiveTokens, primitiveTokens);
   validateLayoutPrimitiveCoverage(primitiveTokens);
-  validateReferences(semanticTokens, primitiveTokens);
-  validateReferences(darkTokens, availableTokens);
+  validateLiquidGlassPrimitives(primitiveTokens);
+  validateReferences(semanticTokens, availableTokens);
+  validateReferences(darkTokens, darkAvailableTokens);
   validateReferenceCycles(availableTokens);
+  validateReferenceCycles(darkAvailableTokens);
   validateThemeMetadata(lightFile.data, darkFile.data);
   validateSemanticCoverage(semanticTokens, darkTokens);
+  validateCssNameUniqueness(primitiveTokens, primitiveCssName, 'Primitive tokens');
+  validateCssNameUniqueness(semanticTokens, semanticCssName, 'Semantic tokens');
 
   return {
     darkTokens,
@@ -898,7 +1039,7 @@ async function loadAndValidateTokens() {
   };
 }
 
-function getGeneratedFiles(tokens) {
+export function getGeneratedFiles(tokens) {
   return new Map([
     [path.join(stylesRoot, 'tokens/_primitives.scss'), renderPrimitiveFile(tokens.primitiveTokens)],
     [
@@ -912,11 +1053,16 @@ function getGeneratedFiles(tokens) {
     [path.join(stylesRoot, 'tokens/_semantic.scss'), renderSemanticContract(tokens.semanticTokens)],
     [
       path.join(stylesRoot, 'themes/_light-theme.scss'),
-      renderThemeFile('light', tokens.semanticTokens, tokens.primitiveTokens),
+      renderThemeFile(
+        'light',
+        tokens.semanticTokens,
+        tokens.primitiveTokens,
+        tokens.semanticTokens,
+      ),
     ],
     [
       path.join(stylesRoot, 'themes/_dark-theme.scss'),
-      renderThemeFile('dark', tokens.darkTokens, tokens.primitiveTokens),
+      renderThemeFile('dark', tokens.darkTokens, tokens.primitiveTokens, tokens.semanticTokens),
     ],
     [showcaseDataFile, renderShowcaseTokenData(tokens)],
   ]);
@@ -984,7 +1130,9 @@ async function main() {
   throw new TokenValidationError(`Unknown command "${command}". Use validate, generate or check.`);
 }
 
-main().catch((error) => {
-  console.error(error instanceof Error ? error.message : error);
-  process.exitCode = 1;
-});
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  main().catch((error) => {
+    console.error(error instanceof Error ? error.message : error);
+    process.exitCode = 1;
+  });
+}

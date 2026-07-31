@@ -9,6 +9,7 @@ tokens/
 ├── primitives/
 │   ├── borders.json
 │   ├── colors.json
+│   ├── glass.json
 │   ├── layout.json
 │   ├── motion.json
 │   ├── radii.json
@@ -44,7 +45,8 @@ npm run tokens:check
 ```
 
 Validation rejects invalid JSON, duplicate object keys, duplicate token paths,
-missing references, circular references, unpredictable names and incomplete
+missing references, circular references, unpredictable names, CSS-variable name
+collisions, unsafe Liquid Glass ranges and incomplete or type-incompatible
 dark-theme coverage.
 
 The build and test scripts run `tokens:check` so stale generated SCSS or
@@ -62,6 +64,17 @@ because custom properties cannot be evaluated inside media-query conditions.
 The semantic contract includes action roles, six status families for Badge and
 three interactive Tag families. Theme files must provide complete coverage for
 every semantic path.
+
+`glass.json` defines the deliberately limited blur, saturation, opacity,
+highlight and inner-shadow material ingredients. Theme-aware `surface.*` roles
+in `semantic-tokens.json` and `themes/dark.json` compose those ingredients into
+Solid, Glass Subtle, Glass, Glass Elevated and Glass Floating materials, plus
+overlay, interaction, disabled and fallback roles. `system` resolves through
+the existing light/dark mechanism and does not have a third token file.
+
+Components must consume the generated `--gh-surface-*` variables. Primitive
+`--gh-glass-*` variables exist to compose the semantic theme contract and must
+not become ad hoc component utilities.
 
 Card roles define shared surface, border, selected, elevation and restrained
 glass treatment values for the complete Card family.
