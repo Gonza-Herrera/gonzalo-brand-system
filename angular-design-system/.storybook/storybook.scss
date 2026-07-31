@@ -87,3 +87,193 @@
   background: var(--gh-pattern-accent-gradient);
   color: var(--gh-text-secondary);
 }
+
+.gh-glass-token-docs {
+  display: grid;
+  gap: var(--gh-space-xl);
+}
+
+.gh-glass-token-kicker,
+.gh-glass-token-sample__eyebrow {
+  margin: 0;
+  color: var(--gh-text-accent);
+  font-size: var(--gh-font-size-label);
+  font-weight: var(--gh-font-weight-semibold);
+  letter-spacing: var(--gh-letter-spacing-wide);
+}
+
+.gh-glass-token-stage {
+  position: relative;
+  overflow: hidden;
+  padding: var(--gh-space-xl);
+  border: var(--gh-border-width-default) solid var(--gh-border-subtle);
+  border-radius: var(--gh-radius-xl);
+  background: var(--gh-pattern-accent-gradient);
+}
+
+.gh-glass-token-stage::before {
+  position: absolute;
+  inset: var(--gh-space-xl) auto auto 52%;
+  inline-size: min(28rem, 52%);
+  block-size: min(20rem, 62%);
+  border-radius: var(--gh-radius-pill);
+  background: var(--gh-color-cloud-blue);
+  content: '';
+  opacity: var(--gh-glass-opacity-highlight-strong);
+  transform: translateX(-50%);
+}
+
+.gh-glass-token-section-heading,
+.gh-glass-token-grid {
+  position: relative;
+}
+
+.gh-glass-token-section-heading {
+  margin-block-end: var(--gh-space-lg);
+}
+
+.gh-glass-token-section-heading > :first-child {
+  margin-block-start: 0;
+}
+
+.gh-glass-token-section-heading > :last-child {
+  margin-block-end: 0;
+}
+
+.gh-glass-token-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: var(--gh-space-md);
+}
+
+.gh-glass-token-sample {
+  --gh-story-glass-background: var(--gh-surface-glass-background);
+  --gh-story-glass-fallback: var(--gh-surface-glass-fallback-background);
+  --gh-story-glass-border: var(--gh-surface-glass-border-color);
+  --gh-story-glass-border-highlight: var(--gh-surface-glass-border-highlight);
+  --gh-story-glass-border-width: var(--gh-surface-glass-border-width);
+  --gh-story-glass-filter: var(--gh-surface-glass-backdrop-filter);
+  --gh-story-glass-shadow: var(--gh-surface-glass-shadow);
+  --gh-story-glass-inner-shadow: var(--gh-surface-glass-inner-shadow);
+  --gh-story-glass-foreground: var(--gh-surface-glass-foreground);
+  --gh-story-glass-muted-foreground: var(--gh-surface-glass-muted-foreground);
+  --gh-story-glass-radius: var(--gh-surface-glass-radius);
+
+  position: relative;
+  min-block-size: 13rem;
+  padding: var(--gh-space-lg);
+  border: var(--gh-story-glass-border-width) solid var(--gh-story-glass-border);
+  border-radius: var(--gh-story-glass-radius);
+  background: var(--gh-story-glass-fallback);
+  box-shadow: var(--gh-story-glass-shadow), var(--gh-story-glass-inner-shadow);
+  color: var(--gh-story-glass-foreground);
+}
+
+.gh-glass-token-sample::before {
+  position: absolute;
+  inset: 0 0 auto;
+  block-size: var(--gh-story-glass-border-width);
+  border-radius: inherit;
+  background: var(--gh-story-glass-border-highlight);
+  content: '';
+  pointer-events: none;
+}
+
+.gh-glass-token-sample--glass-subtle {
+  --gh-story-glass-background: var(--gh-surface-glass-subtle-background);
+  --gh-story-glass-fallback: var(--gh-surface-glass-subtle-fallback-background);
+  --gh-story-glass-border: var(--gh-surface-glass-subtle-border-color);
+  --gh-story-glass-border-highlight: var(--gh-surface-glass-subtle-border-highlight);
+  --gh-story-glass-border-width: var(--gh-surface-glass-subtle-border-width);
+  --gh-story-glass-filter: var(--gh-surface-glass-subtle-backdrop-filter);
+  --gh-story-glass-shadow: var(--gh-surface-glass-subtle-shadow);
+  --gh-story-glass-inner-shadow: var(--gh-surface-glass-subtle-inner-shadow);
+  --gh-story-glass-foreground: var(--gh-surface-glass-subtle-foreground);
+  --gh-story-glass-muted-foreground: var(--gh-surface-glass-subtle-muted-foreground);
+  --gh-story-glass-radius: var(--gh-surface-glass-subtle-radius);
+}
+
+.gh-glass-token-sample--glass-elevated {
+  --gh-story-glass-background: var(--gh-surface-glass-elevated-background);
+  --gh-story-glass-fallback: var(--gh-surface-glass-elevated-fallback-background);
+  --gh-story-glass-border: var(--gh-surface-glass-elevated-border-color);
+  --gh-story-glass-border-highlight: var(--gh-surface-glass-elevated-border-highlight);
+  --gh-story-glass-border-width: var(--gh-surface-glass-elevated-border-width);
+  --gh-story-glass-filter: var(--gh-surface-glass-elevated-backdrop-filter);
+  --gh-story-glass-shadow: var(--gh-surface-glass-elevated-shadow);
+  --gh-story-glass-inner-shadow: var(--gh-surface-glass-elevated-inner-shadow);
+  --gh-story-glass-foreground: var(--gh-surface-glass-elevated-foreground);
+  --gh-story-glass-muted-foreground: var(--gh-surface-glass-elevated-muted-foreground);
+  --gh-story-glass-radius: var(--gh-surface-glass-elevated-radius);
+}
+
+.gh-glass-token-sample--glass-floating {
+  --gh-story-glass-background: var(--gh-surface-glass-floating-background);
+  --gh-story-glass-fallback: var(--gh-surface-glass-floating-fallback-background);
+  --gh-story-glass-border: var(--gh-surface-glass-floating-border-color);
+  --gh-story-glass-border-highlight: var(--gh-surface-glass-floating-border-highlight);
+  --gh-story-glass-border-width: var(--gh-surface-glass-floating-border-width);
+  --gh-story-glass-filter: var(--gh-surface-glass-floating-backdrop-filter);
+  --gh-story-glass-shadow: var(--gh-surface-glass-floating-shadow);
+  --gh-story-glass-inner-shadow: var(--gh-surface-glass-floating-inner-shadow);
+  --gh-story-glass-foreground: var(--gh-surface-glass-floating-foreground);
+  --gh-story-glass-muted-foreground: var(--gh-surface-glass-floating-muted-foreground);
+  --gh-story-glass-radius: var(--gh-surface-glass-floating-radius);
+}
+
+@supports ((backdrop-filter: none) or (-webkit-backdrop-filter: none)) {
+  .gh-glass-token-sample:not(.gh-glass-token-sample--fallback) {
+    background: var(--gh-story-glass-background);
+    -webkit-backdrop-filter: var(--gh-story-glass-filter);
+    backdrop-filter: var(--gh-story-glass-filter);
+  }
+}
+
+.gh-glass-token-sample h3 {
+  margin-block: var(--gh-space-md) var(--gh-space-sm);
+}
+
+.gh-glass-token-sample p {
+  color: var(--gh-story-glass-muted-foreground);
+}
+
+.gh-glass-token-sample code {
+  color: var(--gh-story-glass-muted-foreground);
+  font-size: var(--gh-font-size-caption);
+  overflow-wrap: anywhere;
+}
+
+.gh-glass-token-tables {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  gap: var(--gh-space-xl);
+}
+
+.gh-glass-token-tables table {
+  border-collapse: collapse;
+  inline-size: 100%;
+}
+
+.gh-glass-token-tables caption {
+  margin-block-end: var(--gh-space-sm);
+  color: var(--gh-text-primary);
+  font-weight: var(--gh-font-weight-semibold);
+  text-align: start;
+}
+
+.gh-glass-token-tables th,
+.gh-glass-token-tables td {
+  padding: var(--gh-space-sm);
+  border-block-end: var(--gh-border-width-default) solid var(--gh-border-subtle);
+  text-align: start;
+}
+
+.gh-glass-token-tables tbody th {
+  font-weight: var(--gh-font-weight-regular);
+}
+
+.gh-glass-token-tables code,
+.gh-glass-token-value {
+  color: var(--gh-text-secondary);
+  font-size: var(--gh-font-size-caption);
+}

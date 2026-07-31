@@ -19,6 +19,8 @@ reviews them against these foundations.
 8. [Do and don't](dos-and-donts.md) — reviewable examples of acceptable and excessive treatment.
 9. [Moodboard direction](moodboard.md) — materials, atmosphere, composition, and originality.
 10. [Adoption roadmap](roadmap.md) — component status, sequencing, gates, and migration risks.
+11. [Design tokens](tokens.md) — primitive scales, semantic materials, theme mappings, fallbacks,
+    and the public CSS contract for PR 23.
 
 ## How to use these documents
 

@@ -25,6 +25,9 @@ Semantic tokens describe intent and change by theme:
 --gh-status-success-background
 --gh-focus-ring
 --gh-shadow-md
+--gh-surface-glass-background
+--gh-surface-glass-backdrop-filter
+--gh-surface-glass-fallback-background
 ```
 
 Components consume semantic color, border, action, status, focus, and elevation tokens. This keeps visual meaning stable when the active theme changes. Primitive spacing, radius, typography, breakpoint, and motion tokens remain shared across themes.
@@ -95,6 +98,11 @@ Showcase uses `GhThemeService` to demonstrate the complete light/dark/system con
 ```
 
 Use semantic tokens for any value that should adapt to theme. Use primitive spacing, radius, type, and motion tokens for stable geometry and rhythm.
+
+Liquid Glass components additionally consume the complete semantic material contract rather than
+raw `--gh-glass-*` ingredients. `system` remains the existing light/dark resolver and introduces no
+third visual mapping. Every translucent material has a solid theme-aware fallback; see
+[Liquid Glass design tokens](design/liquid-glass/tokens.md).
 
 ## Extending without breaking the contract
 

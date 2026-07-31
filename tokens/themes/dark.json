@@ -28,6 +28,372 @@
     "elevated": {
       "$type": "color",
       "$value": "#2B374A"
+    },
+    "base": {
+      "background": {
+        "$type": "color",
+        "$value": "{background.primary}"
+      },
+      "foreground": {
+        "$type": "color",
+        "$value": "{text.primary}"
+      }
+    },
+    "solid": {
+      "background": {
+        "$type": "color",
+        "$value": "{surface.primary}"
+      },
+      "fallbackBackground": {
+        "$type": "color",
+        "$value": "{surface.primary}"
+      },
+      "borderColor": {
+        "$type": "color",
+        "$value": "{border.default}"
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{borderWidth.default}"
+      },
+      "borderHighlight": {
+        "$type": "color",
+        "$value": "{glass.highlight.subtle}"
+      },
+      "backdropFilter": {
+        "$type": "string",
+        "$value": "none"
+      },
+      "shadow": {
+        "$type": "shadow",
+        "$value": "{shadowPrimitive.none}"
+      },
+      "innerShadow": {
+        "$type": "shadow",
+        "$value": "{glass.innerShadow.none}"
+      },
+      "foreground": {
+        "$type": "color",
+        "$value": "{text.primary}"
+      },
+      "mutedForeground": {
+        "$type": "color",
+        "$value": "{text.secondary}"
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{surface.radius.default}"
+      }
+    },
+    "glassSubtle": {
+      "background": {
+        "$type": "color",
+        "$value": "rgb(from {surface.primary} r g b / {glass.opacity.surface.default})"
+      },
+      "fallbackBackground": {
+        "$type": "color",
+        "$value": "{surface.secondary}"
+      },
+      "borderColor": {
+        "$type": "color",
+        "$value": "rgb(from {color.lavender} r g b / {glass.opacity.border.subtle})"
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{borderWidth.default}"
+      },
+      "borderHighlight": {
+        "$type": "color",
+        "$value": "{glass.highlight.subtle}"
+      },
+      "backdropFilter": {
+        "$type": "string",
+        "$value": "blur({glass.blur.xs}) saturate({glass.saturation.subtle})"
+      },
+      "shadow": {
+        "$type": "shadow",
+        "$value": "{shadow.small}"
+      },
+      "innerShadow": {
+        "$type": "shadow",
+        "$value": "{glass.innerShadow.subtle}"
+      },
+      "foreground": {
+        "$type": "color",
+        "$value": "{text.primary}"
+      },
+      "mutedForeground": {
+        "$type": "color",
+        "$value": "{text.secondary}"
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{surface.radius.subtle}"
+      }
+    },
+    "glass": {
+      "background": {
+        "$type": "color",
+        "$value": "rgb(from {surface.primary} r g b / {glass.opacity.surface.strong})"
+      },
+      "fallbackBackground": {
+        "$type": "color",
+        "$value": "{surface.primary}"
+      },
+      "borderColor": {
+        "$type": "color",
+        "$value": "rgb(from {color.lavender} r g b / {glass.opacity.border.default})"
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{borderWidth.default}"
+      },
+      "borderHighlight": {
+        "$type": "color",
+        "$value": "{glass.highlight.default}"
+      },
+      "backdropFilter": {
+        "$type": "string",
+        "$value": "blur({glass.blur.sm}) saturate({glass.saturation.default})"
+      },
+      "shadow": {
+        "$type": "shadow",
+        "$value": "{shadow.small}"
+      },
+      "innerShadow": {
+        "$type": "shadow",
+        "$value": "{glass.innerShadow.default}"
+      },
+      "foreground": {
+        "$type": "color",
+        "$value": "{text.primary}"
+      },
+      "mutedForeground": {
+        "$type": "color",
+        "$value": "{text.secondary}"
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{surface.radius.default}"
+      }
+    },
+    "glassElevated": {
+      "background": {
+        "$type": "color",
+        "$value": "rgb(from {surface.elevated} r g b / {glass.opacity.surface.strong})"
+      },
+      "fallbackBackground": {
+        "$type": "color",
+        "$value": "{surface.elevated}"
+      },
+      "borderColor": {
+        "$type": "color",
+        "$value": "rgb(from {color.lavender} r g b / {glass.opacity.border.default})"
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{borderWidth.default}"
+      },
+      "borderHighlight": {
+        "$type": "color",
+        "$value": "{glass.highlight.default}"
+      },
+      "backdropFilter": {
+        "$type": "string",
+        "$value": "blur({glass.blur.md}) saturate({glass.saturation.default})"
+      },
+      "shadow": {
+        "$type": "shadow",
+        "$value": "{shadow.medium}"
+      },
+      "innerShadow": {
+        "$type": "shadow",
+        "$value": "{glass.innerShadow.default}"
+      },
+      "foreground": {
+        "$type": "color",
+        "$value": "{text.primary}"
+      },
+      "mutedForeground": {
+        "$type": "color",
+        "$value": "{text.secondary}"
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{surface.radius.elevated}"
+      }
+    },
+    "glassFloating": {
+      "background": {
+        "$type": "color",
+        "$value": "rgb(from {surface.elevated} r g b / {glass.opacity.surface.strong})"
+      },
+      "fallbackBackground": {
+        "$type": "color",
+        "$value": "{surface.elevated}"
+      },
+      "borderColor": {
+        "$type": "color",
+        "$value": "rgb(from {color.lavender} r g b / {glass.opacity.border.strong})"
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{borderWidth.default}"
+      },
+      "borderHighlight": {
+        "$type": "color",
+        "$value": "{glass.highlight.strong}"
+      },
+      "backdropFilter": {
+        "$type": "string",
+        "$value": "blur({glass.blur.md}) saturate({glass.saturation.strong})"
+      },
+      "shadow": {
+        "$type": "shadow",
+        "$value": "{shadow.large}"
+      },
+      "innerShadow": {
+        "$type": "shadow",
+        "$value": "{glass.innerShadow.default}"
+      },
+      "foreground": {
+        "$type": "color",
+        "$value": "{text.primary}"
+      },
+      "mutedForeground": {
+        "$type": "color",
+        "$value": "{text.secondary}"
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{surface.radius.floating}"
+      }
+    },
+    "overlay": {
+      "background": {
+        "$type": "color",
+        "$value": "rgb(from {color.ink} r g b / {glass.opacity.overlay.strong})"
+      },
+      "fallbackBackground": {
+        "$type": "color",
+        "$value": "{surface.overlay.background}"
+      },
+      "backdropFilter": {
+        "$type": "string",
+        "$value": "blur({glass.blur.sm}) saturate({glass.saturation.subtle})"
+      }
+    },
+    "interactive": {
+      "hover": {
+        "background": {
+          "$type": "color",
+          "$value": "{action.secondary.hover}"
+        },
+        "borderColor": {
+          "$type": "color",
+          "$value": "{border.strong}"
+        },
+        "shadow": {
+          "$type": "shadow",
+          "$value": "{shadow.small}"
+        }
+      },
+      "active": {
+        "background": {
+          "$type": "color",
+          "$value": "{action.secondary.active}"
+        },
+        "borderColor": {
+          "$type": "color",
+          "$value": "{border.strong}"
+        },
+        "shadow": {
+          "$type": "shadow",
+          "$value": "{shadow.small}"
+        }
+      },
+      "focus": {
+        "ringColor": {
+          "$type": "color",
+          "$value": "{focus.ring}"
+        },
+        "ringWidth": {
+          "$type": "dimension",
+          "$value": "{borderWidth.focus}"
+        },
+        "ringOffset": {
+          "$type": "dimension",
+          "$value": "{spacing.xs}"
+        },
+        "shadow": {
+          "$type": "shadow",
+          "$value": "0 0 0 {borderWidth.focus} {focus.ring}"
+        }
+      },
+      "selected": {
+        "background": {
+          "$type": "color",
+          "$value": "{action.secondary.active}"
+        },
+        "borderColor": {
+          "$type": "color",
+          "$value": "{action.primary.border}"
+        },
+        "shadow": {
+          "$type": "shadow",
+          "$value": "{shadow.medium}"
+        }
+      }
+    },
+    "disabled": {
+      "background": {
+        "$type": "color",
+        "$value": "{action.disabled.background}"
+      },
+      "borderColor": {
+        "$type": "color",
+        "$value": "{action.disabled.border}"
+      },
+      "foreground": {
+        "$type": "color",
+        "$value": "{action.disabled.text}"
+      },
+      "opacity": {
+        "$type": "number",
+        "$value": "{glass.opacity.disabled}"
+      },
+      "shadow": {
+        "$type": "shadow",
+        "$value": "{shadowPrimitive.none}"
+      }
+    },
+    "transition": {
+      "duration": {
+        "$type": "duration",
+        "$value": "{motion.duration.fast}"
+      },
+      "easing": {
+        "$type": "cubicBezier",
+        "$value": "{motion.easing.standard}"
+      }
+    },
+    "radius": {
+      "subtle": {
+        "$type": "dimension",
+        "$value": "{radius.md}"
+      },
+      "default": {
+        "$type": "dimension",
+        "$value": "{radius.lg}"
+      },
+      "elevated": {
+        "$type": "dimension",
+        "$value": "{radius.xl}"
+      },
+      "floating": {
+        "$type": "dimension",
+        "$value": "{radius.lg}"
+      }
     }
   },
   "text": {

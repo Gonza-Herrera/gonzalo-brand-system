@@ -29,6 +29,12 @@ Example:
 
 - Background: `--gh-background-primary`, `secondary`, `subtle`
 - Surface: `--gh-surface-primary`, `secondary`, `elevated`
+- Liquid Glass materials: `--gh-surface-solid-*`,
+  `--gh-surface-glass-subtle-*`, `--gh-surface-glass-*`,
+  `--gh-surface-glass-elevated-*` and `--gh-surface-glass-floating-*`
+- Liquid Glass support roles: `--gh-surface-overlay-*`,
+  `--gh-surface-interactive-*`, `--gh-surface-disabled-*`,
+  `--gh-surface-transition-*` and `--gh-surface-radius-*`
 - Text: `--gh-text-primary`, `secondary`, `muted`, `inverse`, `accent`
 - Border: `--gh-border-default`, `subtle`, `strong`
 - Primary action: `--gh-action-primary-background`, `text`, `hover`, `active`,
@@ -57,6 +63,13 @@ Example:
 
 Future components must not redefine these variables locally without a
 documented product-level reason.
+
+Each Liquid Glass material exposes a consistent theme-aware contract for its
+background, solid fallback, border, highlight, composed backdrop filter, outer
+and inner shadow, foregrounds and radius. Components consume those semantic
+properties rather than assembling `--gh-glass-*` primitives. See the normative
+[Liquid Glass token documentation](design/liquid-glass/tokens.md) for the
+material map, feature-detection recipe and PR 23 consumption boundary.
 
 Primitive motion variables provide a minimal shared interaction rhythm:
 
