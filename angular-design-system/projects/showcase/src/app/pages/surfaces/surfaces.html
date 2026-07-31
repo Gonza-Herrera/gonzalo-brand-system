@@ -1,0 +1,177 @@
+<article class="page">
+  <header class="page-header">
+    <p>Foundations · Materials</p>
+    <h1>Surface foundations</h1>
+    <p>
+      One semantic primitive for solid and Liquid Glass materials, with bounded depth, predictable
+      fallbacks and no imposed content semantics.
+    </p>
+  </header>
+
+  <showcase-documentation-section
+    sectionId="surface-materials"
+    eyebrow="Material scale"
+    title="Five deliberate levels of containment"
+    description="Use the lowest level that communicates hierarchy. The existing theme control updates every material through semantic variables."
+  >
+    <div class="ambient-stage">
+      <div class="material-grid">
+        @for (material of materials; track material.variant) {
+          <gh-surface [variant]="material.variant" padding="lg" radius="default">
+            <span class="surface-label">{{ material.variant }}</span>
+            <h3>{{ material.label }}</h3>
+            <p>{{ material.description }}</p>
+          </gh-surface>
+        }
+      </div>
+    </div>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="surface-scales"
+    eyebrow="Spacing and shape"
+    title="Closed token scales"
+    description="Padding and radius remain independent from material depth; arbitrary CSS values are not accepted."
+  >
+    <gh-grid [columns]="2" minItemSize="md" gap="lg">
+      <div class="scale-group">
+        <h3>Padding</h3>
+        <div class="scale-grid">
+          @for (padding of paddings; track padding) {
+            <gh-surface variant="glass-subtle" [padding]="padding" radius="small">
+              <code>{{ padding }}</code>
+            </gh-surface>
+          }
+        </div>
+      </div>
+
+      <div class="scale-group ambient-stage ambient-stage--compact">
+        <h3>Radius</h3>
+        <div class="scale-grid">
+          @for (radius of radii; track radius) {
+            <gh-surface variant="glass" padding="md" [radius]="radius">
+              <code>{{ radius }}</code>
+            </gh-surface>
+          }
+        </div>
+      </div>
+    </gh-grid>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="surface-states"
+    eyebrow="States"
+    title="Visual feedback with native semantics"
+    description="Interactive and disabled describe the material only. Links, buttons and fields keep their native responsibility."
+  >
+    <div class="ambient-stage">
+      <gh-grid [columns]="2" minItemSize="sm" gap="lg">
+        <gh-surface variant="glass" interactive padding="lg">
+          <gh-stack gap="sm">
+            <h3>Interactive surface</h3>
+            <p>Hover the panel, then use Tab to reveal focus when its real link receives it.</p>
+            <a class="surface-link" href="/surfaces#surface-composition">Review composition</a>
+          </gh-stack>
+        </gh-surface>
+
+        <gh-surface variant="glass" interactive disabled padding="lg">
+          <gh-stack gap="sm">
+            <h3>Disabled surface</h3>
+            <p>The panel is visually disabled and the projected control is actually disabled.</p>
+            <gh-button disabled>Unavailable action</gh-button>
+          </gh-stack>
+        </gh-surface>
+      </gh-grid>
+    </div>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="surface-composition"
+    eyebrow="Composition"
+    title="One glass boundary around related content"
+    description="Glass Panel narrows the Surface API to panel materials. A solid child avoids stacking backdrop filters."
+  >
+    <div class="ambient-stage">
+      <gh-glass-panel variant="glass-elevated" padding="lg" radius="large">
+        <gh-stack gap="md">
+          <div>
+            <span class="surface-label">Recommended nesting</span>
+            <h3>Project delivery summary</h3>
+            <p>
+              A single filtered parent establishes hierarchy without filtering each content row.
+            </p>
+          </div>
+
+          <gh-divider />
+
+          <gh-surface variant="solid" padding="md" radius="small">
+            <gh-stack gap="sm">
+              <strong>Solid detail region</strong>
+              <span>Readable, bounded and inexpensive to render.</span>
+              <div class="surface-tags">
+                <gh-tag>Angular</gh-tag>
+                <gh-tag>Design systems</gh-tag>
+                <gh-tag>Accessibility</gh-tag>
+              </div>
+              <code class="overflow-sample">
+                a-very-long-unbroken-content-example-that-remains-inside-the-surface-boundary
+              </code>
+            </gh-stack>
+          </gh-surface>
+
+          <form class="surface-form">
+            <label for="surface-demo-email">Email example</label>
+            <input id="surface-demo-email" type="email" placeholder="name@example.com" />
+            <gh-button type="button">Continue</gh-button>
+          </form>
+        </gh-stack>
+      </gh-glass-panel>
+    </div>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="surface-divider"
+    eyebrow="Divider"
+    title="Existing separator, unchanged"
+    description="The public Divider already provides decorative or semantic separation and tokenized tones, so Surface does not introduce a competing glass-specific divider API."
+  >
+    <gh-surface variant="solid" padding="lg">
+      <gh-stack gap="md">
+        <span>First content group</span>
+        <gh-divider tone="subtle" />
+        <span>Second content group</span>
+        <gh-divider tone="strong" [decorative]="false" />
+        <span>Semantic separation above</span>
+      </gh-stack>
+    </gh-surface>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="surface-performance"
+    eyebrow="Resilience"
+    title="Fallback and performance boundaries"
+    description="Every glass material first paints an opaque, theme-aware fallback. Supporting browsers enhance it through one CSS feature query."
+  >
+    <gh-surface variant="glass-subtle" padding="lg">
+      <ul class="guidance-list">
+        <li>Prefer one bounded filtered region instead of per-row or nested glass.</li>
+        <li>Do not animate blur, saturation or the backdrop-filter chain.</li>
+        <li>Use Solid when contrast over an ambient background is uncertain.</li>
+        <li>Reduced motion removes transitions; forced colors uses system surfaces and borders.</li>
+        <li>Reduced transparency remains a documented future preference, not runtime detection.</li>
+      </ul>
+    </gh-surface>
+  </showcase-documentation-section>
+
+  <section class="code-examples" aria-labelledby="surface-code-examples">
+    <header>
+      <p>Implementation</p>
+      <h2 id="surface-code-examples">Public composition examples</h2>
+    </header>
+    <gh-grid [columns]="3" minItemSize="md" gap="md">
+      <showcase-code-preview label="Surface" [code]="surfaceExample" />
+      <showcase-code-preview label="Native interaction" [code]="interactiveExample" />
+      <showcase-code-preview label="Glass Panel" [code]="panelExample" />
+    </gh-grid>
+  </section>
+</article>

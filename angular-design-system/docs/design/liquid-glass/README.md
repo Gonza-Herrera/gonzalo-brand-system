@@ -3,9 +3,10 @@
 This directory is the normative visual reference for the Gonzalo Herrera Design System's Liquid
 Glass phase. It defines the language before tokens, primitives, components, or products adopt it.
 
-PR 21 is documentation-only. The existing `glass` variants in Card and Hero predate this language,
-remain unchanged, and must not be treated as reference implementations until a later migration PR
-reviews them against these foundations.
+PR 21 established the documentation-only direction, PR 22 added the token contract, and PR 23
+provides the reference Surface primitives. The existing `glass` variants in Card and Hero predate
+this language, remain unchanged, and must not be treated as reference implementations until a later
+migration PR reviews them against these foundations.
 
 ## Reference map
 
@@ -21,6 +22,8 @@ reviews them against these foundations.
 10. [Adoption roadmap](roadmap.md) — component status, sequencing, gates, and migration risks.
 11. [Design tokens](tokens.md) — primitive scales, semantic materials, theme mappings, fallbacks,
     and the public CSS contract for PR 23.
+12. [Surface primitives](surface-primitives.md) — Angular API, composition, states, fallbacks,
+    accessibility, performance, and reuse policy.
 
 ## How to use these documents
 

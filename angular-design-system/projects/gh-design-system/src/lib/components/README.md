@@ -9,6 +9,8 @@ Reusable standalone Angular components live in dedicated feature directories.
   loading state, icon projection, tests and accessibility documentation.
 - `cards/`: foundational Card plus typed Article, Experience and Project
   compositions.
+- `glass-panel/`: a constrained glass-only convenience composition over Surface.
+- `surface/`: neutral, token-driven solid and Liquid Glass material primitive.
 - `tag/`: static metadata, selectable filters and accessible removal behavior.
 
 Each component owns its public API, template, encapsulated SCSS, colocated

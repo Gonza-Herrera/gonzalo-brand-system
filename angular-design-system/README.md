@@ -2,8 +2,8 @@
 
 Official Angular workspace for the Gonzalo Herrera Design System.
 
-This workspace provides a reusable Angular library with Button, Badge, Tag, a
-four-component Card family, seven Layout Primitives and eight Brand Patterns,
+This workspace provides a reusable Angular library with Button, Badge, Tag, Surface and Glass Panel,
+a four-component Card family, seven Layout Primitives and eight Brand Patterns,
 plus Storybook, a routed standalone Showcase, a bilingual prerendered Portfolio,
 token-driven SCSS, light/dark/system theming, unit tests,
 accessibility checks and targeted interaction tests.
@@ -37,6 +37,8 @@ angular-design-system/
 │   │       │   │   ├── badge/
 │   │       │   │   ├── button/
 │   │       │   │   ├── cards/
+│   │       │   │   ├── glass-panel/
+│   │       │   │   ├── surface/
 │   │       │   │   └── tag/
 │   │       │   ├── layout/
 │   │       │   │   ├── cluster/
@@ -276,6 +278,29 @@ Badge supports six semantic variants, soft/solid appearance and small/medium
 sizes while remaining non-interactive. Tag supports mutually exclusive static,
 selectable and removable modes, three variants and two sizes.
 
+## Surface primitives
+
+```ts
+import { GhGlassPanelComponent, GhSurfaceComponent } from 'gh-design-system';
+```
+
+```html
+<gh-surface variant="glass" padding="lg">
+  <h2>Project summary</h2>
+  <p>Content retains its own semantics.</p>
+</gh-surface>
+
+<gh-glass-panel variant="glass-elevated">
+  <a href="/projects">View projects</a>
+</gh-glass-panel>
+```
+
+Surface is a neutral, single-host primitive with a safe `solid` default and the controlled
+`glass-subtle`, `glass`, `glass-elevated` and `glass-floating` materials. Glass Panel composes
+Surface with a narrower glass-only API. Visual interaction never adds control semantics; use native
+links and buttons inside. See the
+[Surface primitive contract](docs/design/liquid-glass/surface-primitives.md).
+
 ## Card family
 
 ```ts
@@ -400,20 +425,21 @@ Import public TypeScript APIs from `gh-design-system`.
 
 ## Showcase routes
 
-| Route         | Documentation                 |
-| ------------- | ----------------------------- |
-| `/`           | Overview and system status    |
-| `/colors`     | Primitive and semantic colors |
-| `/typography` | Families and type scale       |
-| `/spacing`    | Spacing scale                 |
-| `/radii`      | Border radii                  |
-| `/shadows`    | Theme-aware elevation         |
-| `/layout`     | Public Layout Primitives      |
-| `/buttons`    | Public Button component       |
-| `/badges`     | Public Badge component        |
-| `/tags`       | Public Tag component          |
-| `/cards`      | Public Card family            |
-| `/patterns`   | Public Brand Patterns         |
+| Route         | Documentation                   |
+| ------------- | ------------------------------- |
+| `/`           | Overview and system status      |
+| `/colors`     | Primitive and semantic colors   |
+| `/typography` | Families and type scale         |
+| `/spacing`    | Spacing scale                   |
+| `/radii`      | Border radii                    |
+| `/shadows`    | Theme-aware elevation           |
+| `/surfaces`   | Solid and Liquid Glass surfaces |
+| `/layout`     | Public Layout Primitives        |
+| `/buttons`    | Public Button component         |
+| `/badges`     | Public Badge component          |
+| `/tags`       | Public Tag component            |
+| `/cards`      | Public Card family              |
+| `/patterns`   | Public Brand Patterns           |
 
 The shell provides a desktop sidebar, accessible mobile menu, active route
 state and the Light/Dark/System selector.
@@ -432,17 +458,16 @@ They must not be exported from the library public API.
 ## Liquid Glass visual foundations
 
 The [Liquid Glass documentation](docs/design/liquid-glass/README.md) defines the material language,
-principles, surface taxonomy, depth, lighting, motion, accessibility, performance constraints and
-adoption roadmap for the next Design System phase. It is the reference for PR 22 and later migration
-work.
+principles, surface taxonomy, token contract, Surface primitives, lighting, motion, accessibility,
+performance constraints and adoption roadmap for the current Design System phase.
 
 The current Card and Hero `glass` variants predate that contract. They remain unchanged and are not
 considered migrated until a dedicated implementation PR validates them against the new foundations.
 
 ## Scope
 
-This release is deliberately limited to foundations, Button, Badge, Tag,
-Cards, Layout Primitives and Brand Patterns:
+This release is deliberately limited to foundations, Surface primitives, Button, Badge, Tag, Cards,
+Layout Primitives and Brand Patterns:
 
 - Primitive and semantic CSS custom properties
 - Light and dark themes
@@ -453,6 +478,7 @@ Cards, Layout Primitives and Brand Patterns:
 - A standalone, accessible and token-driven public Button component
 - Non-interactive Badge status and category labels
 - Static, selectable and removable Tag behavior
+- Solid and Liquid Glass Surface primitives with CSS-only fallback behavior
 - Foundational, Article, Experience and Project Cards
 - Container, Section, Stack, Inline, Grid, Cluster and Divider composition
 - Hero, Navigation, Footer, Section Heading, Feature Grid, Experience Timeline,

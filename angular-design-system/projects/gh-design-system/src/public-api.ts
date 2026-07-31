@@ -2,6 +2,8 @@ export * from './lib/components/badge/badge.component';
 export * from './lib/components/badge/badge.types';
 export * from './lib/components/button/button.component';
 export * from './lib/components/button/button.types';
+export * from './lib/components/glass-panel/glass-panel.component';
+export * from './lib/components/glass-panel/glass-panel.types';
 export * from './lib/components/cards/article-card/article-card.component';
 export * from './lib/components/cards/article-card/article-card.types';
 export * from './lib/components/cards/card/card.component';
@@ -12,6 +14,8 @@ export * from './lib/components/cards/project-card/project-card.component';
 export * from './lib/components/cards/project-card/project-card.types';
 export * from './lib/components/tag/tag.component';
 export * from './lib/components/tag/tag.types';
+export * from './lib/components/surface/surface.component';
+export * from './lib/components/surface/surface.types';
 
 export * from './lib/layout/layout.types';
 export * from './lib/layout/container/container.component';
