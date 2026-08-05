@@ -2,9 +2,9 @@
 
 ## Purpose
 
-`GhButtonComponent` provides the primary native-button primitive for actions,
-forms and calls to action. It keeps visual variants, sizing, interaction states
-and accessibility behavior consistent across light and dark themes.
+`GhButtonComponent` provides the native-button primitive for actions, forms and calls to action.
+Its public API remains compatible while component-level tokens map every variant and state to the
+Liquid Glass foundations. Liquid Glass is an implementation language, not a public variant.
 
 ## Import
 
@@ -34,15 +34,15 @@ The internal native button uses `type="button"` by default.
 
 ## Inputs
 
-| Input       | Type                                                     | Default     | Purpose                                       |
-| ----------- | -------------------------------------------------------- | ----------- | --------------------------------------------- |
-| `variant`   | `'primary' \| 'secondary' \| 'ghost' \| 'danger'`        | `primary`   | Sets visual hierarchy and intent.             |
-| `size`      | `'sm' \| 'md' \| 'lg'`                                   | `md`        | Sets height, spacing, type and icon size.     |
-| `type`      | `'button' \| 'submit' \| 'reset'`                        | `button`    | Controls native form behavior.                |
-| `disabled`  | `boolean`                                                | `false`     | Applies the native disabled state.            |
-| `loading`   | `boolean`                                                | `false`     | Disables interaction and exposes `aria-busy`. |
-| `fullWidth` | `boolean`                                                | `false`     | Makes the host and native button fill width.  |
-| `ariaLabel` | `string \| undefined` via the `aria-label` template name | `undefined` | Labels icon-only buttons.                     |
+| Input       | Type                                                            | Default     | Purpose                                       |
+| ----------- | --------------------------------------------------------------- | ----------- | --------------------------------------------- |
+| `variant`   | `'primary' \| 'secondary' \| 'tertiary' \| 'ghost' \| 'danger'` | `primary`   | Sets visual hierarchy and intent.             |
+| `size`      | `'sm' \| 'md' \| 'lg'`                                          | `md`        | Sets height, spacing, type and icon size.     |
+| `type`      | `'button' \| 'submit' \| 'reset'`                               | `button`    | Controls native form behavior.                |
+| `disabled`  | `boolean`                                                       | `false`     | Applies the native disabled state.            |
+| `loading`   | `boolean`                                                       | `false`     | Disables interaction and exposes `aria-busy`. |
+| `fullWidth` | `boolean`                                                       | `false`     | Makes the host and native button fill width.  |
+| `ariaLabel` | `string \| undefined` via the `aria-label` template name        | `undefined` | Labels icon-only buttons.                     |
 
 Boolean inputs support Angular boolean attribute transformation:
 
@@ -54,6 +54,7 @@ Boolean inputs support Angular boolean attribute transformation:
 
 - `primary`: the single highest-priority action in a section.
 - `secondary`: supporting actions with medium hierarchy.
+- `tertiary`: restrained outlined actions below Secondary.
 - `ghost`: low-emphasis actions that should blend into a surface.
 - `danger`: destructive or sensitive actions that require clear context.
 
@@ -96,7 +97,9 @@ dimensions relative to the surrounding text and use `currentColor`.
 </gh-button>
 ```
 
-The projection attributes are selectors, not separate directives.
+The projection attributes are selectors, not separate directives. Existing icon-only Button usage
+continues to work, but new compact icon-only actions should use `GhIconButtonComponent` so their
+intent and accessible-name requirement are explicit.
 
 ## Accessibility
 
@@ -116,12 +119,22 @@ The projection attributes are selectors, not separate directives.
 - Disabled and loading states use the native `disabled` attribute.
 - Focus uses the public focus-ring token and is never removed.
 - Spinner motion stops when `prefers-reduced-motion: reduce` is active.
+- Forced colors replace the material with system colors and preserve the focus outline.
 - Use `type="button"` for actions that should not submit a form.
 
 ## Theme support
 
-All visual states use public semantic properties. Light, dark and system themes
-therefore require no component-specific theme logic.
+All visual states use `--gh-button-*` component properties that alias semantic Surface, action,
+focus and motion roles. Light, dark and system themes therefore require no TypeScript theme logic.
+Secondary paints an opaque fallback first and enables its bounded backdrop filter only through
+`@supports`; no other Button variant uses backdrop filtering.
+
+## Compatibility and element support
+
+The selector, inputs, defaults, icon projection slots, native form behavior and existing variants
+remain supported. `tertiary` is additive. Button still renders one internal native `<button>`; it
+does not support anchor or `routerLink` semantics. Navigation must remain a native `<a>` rather than
+being converted to a click handler.
 
 ## Do
 

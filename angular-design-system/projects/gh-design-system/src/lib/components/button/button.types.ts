@@ -1,4 +1,4 @@
-export const GH_BUTTON_VARIANTS = ['primary', 'secondary', 'ghost', 'danger'] as const;
+export const GH_BUTTON_VARIANTS = ['primary', 'secondary', 'tertiary', 'ghost', 'danger'] as const;
 export const GH_BUTTON_SIZES = ['sm', 'md', 'lg'] as const;
 export const GH_BUTTON_TYPES = ['button', 'submit', 'reset'] as const;
 

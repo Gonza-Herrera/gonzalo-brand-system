@@ -208,6 +208,87 @@ export const requiredAmbientSemanticPaths = [
   ...['subtle', 'default', 'strong'].map((intensity) => `ambient.intensity.${intensity}`),
 ];
 
+const buttonMaterialProperties = [
+  'background',
+  'fallbackBackground',
+  'foreground',
+  'borderColor',
+  'borderHighlight',
+  'backdropFilter',
+  'shadow',
+  'innerShadow',
+  'hover.background',
+  'hover.borderColor',
+  'hover.shadow',
+  'active.background',
+  'active.borderColor',
+  'active.shadow',
+];
+
+const buttonStructuralProperties = [
+  ...['sm', 'md', 'lg'].flatMap((size) => [
+    `height.${size}`,
+    `paddingBlock.${size}`,
+    `paddingInline.${size}`,
+    `gap.${size}`,
+    `fontSize.${size}`,
+    `iconSize.${size}`,
+  ]),
+  'radius',
+  'borderWidth',
+  'fontFamily',
+  'fontWeight',
+  'lineHeight',
+  'focus.ringColor',
+  'focus.ringWidth',
+  'focus.ringOffset',
+  'transition.duration',
+  'transition.easing',
+  'activeOffset',
+  'spinner.borderWidth',
+  'spinner.radius',
+  'spinner.duration',
+  'spinner.trackColor',
+  'spinner.easing',
+  'disabled.background',
+  'disabled.foreground',
+  'disabled.borderColor',
+  'disabled.shadow',
+];
+
+const iconButtonStructuralProperties = [
+  ...['sm', 'md', 'lg'].flatMap((size) => [`size.${size}`, `iconSize.${size}`]),
+  'padding',
+  'radius',
+  'borderWidth',
+  'focus.ringColor',
+  'focus.ringWidth',
+  'focus.ringOffset',
+  'transition.duration',
+  'transition.easing',
+  'activeOffset',
+  'spinner.borderWidth',
+  'spinner.radius',
+  'spinner.duration',
+  'spinner.trackColor',
+  'spinner.easing',
+  'disabled.background',
+  'disabled.foreground',
+  'disabled.borderColor',
+  'disabled.shadow',
+];
+
+export const requiredButtonSemanticPaths = [
+  ...buttonStructuralProperties.map((property) => `button.${property}`),
+  ...['primary', 'secondary', 'tertiary', 'ghost', 'danger'].flatMap((variant) =>
+    buttonMaterialProperties.map((property) => `button.${variant}.${property}`),
+  ),
+  ...iconButtonStructuralProperties.map((property) => `iconButton.${property}`),
+  ...['primary', 'secondary', 'ghost', 'danger'].flatMap((variant) =>
+    buttonMaterialProperties.map((property) => `iconButton.${variant}.${property}`),
+  ),
+];
+
 const requiredLayoutPrimitivePaths = [
   'spacing.none',
   'container.sm',
@@ -466,11 +547,42 @@ function validateThemeMetadata(lightTheme, darkTheme) {
   }
 }
 
+function composeDarkSemanticTokens(semanticTokens, authoredDarkTokens) {
+  for (const tokenPath of authoredDarkTokens.keys()) {
+    if (!semanticTokens.has(tokenPath)) {
+      throw new TokenValidationError(
+        `themes/dark.json: ${tokenPath} does not exist in semantic-tokens.json`,
+      );
+    }
+  }
+
+  return new Map(
+    [...semanticTokens].map(([tokenPath, semanticToken]) => {
+      const darkToken = authoredDarkTokens.get(tokenPath);
+      const isThemeInvariantComponentAlias =
+        tokenPath.startsWith('button.') || tokenPath.startsWith('iconButton.');
+
+      if (darkToken) {
+        return [tokenPath, darkToken];
+      }
+
+      if (isThemeInvariantComponentAlias) {
+        return [tokenPath, semanticToken];
+      }
+
+      throw new TokenValidationError(
+        `themes/dark.json: semantic token ${tokenPath} has no dark-theme value`,
+      );
+    }),
+  );
+}
+
 function validateSemanticCoverage(semanticTokens, darkTokens) {
   for (const tokenPath of [
     ...requiredSemanticPaths,
     ...requiredLiquidGlassSemanticPaths,
     ...requiredAmbientSemanticPaths,
+    ...requiredButtonSemanticPaths,
   ]) {
     if (!semanticTokens.has(tokenPath)) {
       throw new TokenValidationError(
@@ -1059,7 +1171,8 @@ export async function loadAndValidateTokens() {
   const semanticTokens = collectTokens(semanticFile.data, semanticFile.relativePath);
   const lightFile = await loadJson(path.join('themes', 'light.json'));
   const darkFile = await loadJson(path.join('themes', 'dark.json'));
-  const darkTokens = collectTokens(darkFile.data, darkFile.relativePath);
+  const authoredDarkTokens = collectTokens(darkFile.data, darkFile.relativePath);
+  const darkTokens = composeDarkSemanticTokens(semanticTokens, authoredDarkTokens);
   const availableTokens = new Map([...primitiveTokens, ...semanticTokens]);
   const darkAvailableTokens = new Map([...primitiveTokens, ...darkTokens]);
 

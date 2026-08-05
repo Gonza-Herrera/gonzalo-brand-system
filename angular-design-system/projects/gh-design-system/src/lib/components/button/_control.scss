@@ -1,0 +1,145 @@
+@mixin material($selector, $token-prefix, $variants) {
+  #{$selector} {
+    --_gh-control-background: var(--gh-#{$token-prefix}-primary-background);
+    --_gh-control-fallback-background: var(--gh-#{$token-prefix}-primary-fallback-background);
+    --_gh-control-foreground: var(--gh-#{$token-prefix}-primary-foreground);
+    --_gh-control-border-color: var(--gh-#{$token-prefix}-primary-border-color);
+    --_gh-control-border-highlight: var(--gh-#{$token-prefix}-primary-border-highlight);
+    --_gh-control-backdrop-filter: var(--gh-#{$token-prefix}-primary-backdrop-filter);
+    --_gh-control-shadow: var(--gh-#{$token-prefix}-primary-shadow);
+    --_gh-control-inner-shadow: var(--gh-#{$token-prefix}-primary-inner-shadow);
+    --_gh-control-hover-background: var(--gh-#{$token-prefix}-primary-hover-background);
+    --_gh-control-hover-border-color: var(--gh-#{$token-prefix}-primary-hover-border-color);
+    --_gh-control-hover-shadow: var(--gh-#{$token-prefix}-primary-hover-shadow);
+    --_gh-control-active-background: var(--gh-#{$token-prefix}-primary-active-background);
+    --_gh-control-active-border-color: var(--gh-#{$token-prefix}-primary-active-border-color);
+    --_gh-control-active-shadow: var(--gh-#{$token-prefix}-primary-active-shadow);
+
+    position: relative;
+    border-color: var(--_gh-control-border-color);
+    border-style: solid;
+    background: var(--_gh-control-fallback-background);
+    color: var(--_gh-control-foreground);
+    box-shadow: var(--_gh-control-shadow);
+    transition:
+      background-color var(--gh-#{$token-prefix}-transition-duration)
+        var(--gh-#{$token-prefix}-transition-easing),
+      border-color var(--gh-#{$token-prefix}-transition-duration)
+        var(--gh-#{$token-prefix}-transition-easing),
+      color var(--gh-#{$token-prefix}-transition-duration)
+        var(--gh-#{$token-prefix}-transition-easing),
+      box-shadow var(--gh-#{$token-prefix}-transition-duration)
+        var(--gh-#{$token-prefix}-transition-easing),
+      transform var(--gh-#{$token-prefix}-transition-duration)
+        var(--gh-#{$token-prefix}-transition-easing);
+  }
+
+  #{$selector}::before {
+    position: absolute;
+    inset: 0;
+    border-block-start: var(--gh-#{$token-prefix}-border-width) solid
+      var(--_gh-control-border-highlight);
+    border-radius: inherit;
+    box-shadow: var(--_gh-control-inner-shadow);
+    content: '';
+    pointer-events: none;
+  }
+
+  @each $variant in $variants {
+    #{$selector}[data-variant='#{$variant}'] {
+      --_gh-control-background: var(--gh-#{$token-prefix}-#{$variant}-background);
+      --_gh-control-fallback-background: var(--gh-#{$token-prefix}-#{$variant}-fallback-background);
+      --_gh-control-foreground: var(--gh-#{$token-prefix}-#{$variant}-foreground);
+      --_gh-control-border-color: var(--gh-#{$token-prefix}-#{$variant}-border-color);
+      --_gh-control-border-highlight: var(--gh-#{$token-prefix}-#{$variant}-border-highlight);
+      --_gh-control-backdrop-filter: var(--gh-#{$token-prefix}-#{$variant}-backdrop-filter);
+      --_gh-control-shadow: var(--gh-#{$token-prefix}-#{$variant}-shadow);
+      --_gh-control-inner-shadow: var(--gh-#{$token-prefix}-#{$variant}-inner-shadow);
+      --_gh-control-hover-background: var(--gh-#{$token-prefix}-#{$variant}-hover-background);
+      --_gh-control-hover-border-color: var(--gh-#{$token-prefix}-#{$variant}-hover-border-color);
+      --_gh-control-hover-shadow: var(--gh-#{$token-prefix}-#{$variant}-hover-shadow);
+      --_gh-control-active-background: var(--gh-#{$token-prefix}-#{$variant}-active-background);
+      --_gh-control-active-border-color: var(--gh-#{$token-prefix}-#{$variant}-active-border-color);
+      --_gh-control-active-shadow: var(--gh-#{$token-prefix}-#{$variant}-active-shadow);
+    }
+  }
+
+  #{$selector}:focus-visible {
+    outline: var(--gh-#{$token-prefix}-focus-ring-width) solid
+      var(--gh-#{$token-prefix}-focus-ring-color);
+    outline-offset: var(--gh-#{$token-prefix}-focus-ring-offset);
+  }
+
+  @supports ((backdrop-filter: none) or (-webkit-backdrop-filter: none)) {
+    #{$selector}[data-variant='secondary'] {
+      background: var(--_gh-control-background);
+      -webkit-backdrop-filter: var(--_gh-control-backdrop-filter);
+      backdrop-filter: var(--_gh-control-backdrop-filter);
+    }
+  }
+
+  #{$selector}:not(:disabled):hover {
+    border-color: var(--_gh-control-hover-border-color);
+    background: var(--_gh-control-hover-background);
+    box-shadow: var(--_gh-control-hover-shadow);
+  }
+
+  #{$selector}:not(:disabled):active {
+    border-color: var(--_gh-control-active-border-color);
+    background: var(--_gh-control-active-background);
+    box-shadow: var(--_gh-control-active-shadow);
+    transform: translateY(var(--gh-#{$token-prefix}-active-offset));
+  }
+
+  #{$selector}:disabled {
+    --_gh-control-border-highlight: var(--gh-#{$token-prefix}-disabled-border-color);
+    --_gh-control-inner-shadow: var(--gh-#{$token-prefix}-disabled-shadow);
+
+    border-color: var(--gh-#{$token-prefix}-disabled-border-color);
+    background: var(--gh-#{$token-prefix}-disabled-background);
+    color: var(--gh-#{$token-prefix}-disabled-foreground);
+    box-shadow: var(--gh-#{$token-prefix}-disabled-shadow);
+    cursor: not-allowed;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #{$selector} {
+      transition: none;
+    }
+
+    #{$selector}:not(:disabled):active {
+      transform: none;
+    }
+  }
+
+  @media (forced-colors: active) {
+    #{$selector},
+    #{$selector}:not(:disabled):hover,
+    #{$selector}:not(:disabled):active {
+      border-color: ButtonBorder;
+      background: ButtonFace;
+      color: ButtonText;
+      box-shadow: var(--gh-#{$token-prefix}-disabled-shadow);
+      -webkit-backdrop-filter: var(--gh-#{$token-prefix}-primary-backdrop-filter);
+      backdrop-filter: var(--gh-#{$token-prefix}-primary-backdrop-filter);
+    }
+
+    #{$selector}:not(:disabled):active {
+      transform: none;
+    }
+
+    #{$selector}:focus-visible {
+      outline-color: Highlight;
+    }
+
+    #{$selector}:disabled {
+      border-color: GrayText;
+      background: Canvas;
+      color: GrayText;
+    }
+
+    #{$selector}::before {
+      display: none;
+    }
+  }
+}

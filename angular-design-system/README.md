@@ -2,7 +2,7 @@
 
 Official Angular workspace for the Gonzalo Herrera Design System.
 
-This workspace provides a reusable Angular library with Button, Badge, Tag, Ambient Background,
+This workspace provides a reusable Angular library with Button, Icon Button, Badge, Tag, Ambient Background,
 Surface and Glass Panel,
 a four-component Card family, seven Layout Primitives and eight Brand Patterns,
 plus Storybook, a routed standalone Showcase, a bilingual prerendered Portfolio,
@@ -38,6 +38,7 @@ angular-design-system/
 │   │       │   │   ├── ambient-background/
 │   │       │   │   ├── badge/
 │   │       │   │   ├── button/
+│   │       │   │   ├── icon-button/
 │   │       │   │   ├── cards/
 │   │       │   │   ├── glass-panel/
 │   │       │   │   ├── surface/
@@ -236,7 +237,7 @@ variables for interactive components.
 Import the standalone component from the package root:
 
 ```ts
-import { GhButtonComponent } from 'gh-design-system';
+import { GhButtonComponent, GhIconButtonComponent } from 'gh-design-system';
 
 @Component({
   standalone: true,
@@ -251,12 +252,17 @@ export class ExampleComponent {}
 <gh-button variant="secondary" size="lg"> View project </gh-button>
 
 <gh-button type="submit" [loading]="isSaving()"> Save </gh-button>
+
+<gh-icon-button aria-label="Open navigation">
+  <svg aria-hidden="true"><!-- icon --></svg>
+</gh-icon-button>
 ```
 
-Supported public types are `GhButtonVariant`, `GhButtonSize` and
-`GhButtonType`. The native button defaults to `type="button"` and supports
-disabled, loading, full-width and start/end icon content. Icon-only buttons
-must provide `aria-label`.
+Button exposes `GhButtonVariant`, `GhButtonSize` and `GhButtonType`; Tertiary is additive to the
+existing Primary, Secondary, Ghost and Danger variants. Icon Button exposes its matching public
+types and requires a consumer-provided `aria-label` or `aria-labelledby`. Both render native
+buttons, default to `type="button"`, support disabled/loading states and consume only their
+component-level Liquid Glass token contracts.
 
 ## Badge and Tag components
 
@@ -454,7 +460,7 @@ Import public TypeScript APIs from `gh-design-system`.
 | `/shadows`    | Theme-aware elevation           |
 | `/surfaces`   | Solid and Liquid Glass surfaces |
 | `/layout`     | Public Layout Primitives        |
-| `/buttons`    | Public Button component         |
+| `/buttons`    | Public Button and Icon Button   |
 | `/badges`     | Public Badge component          |
 | `/tags`       | Public Tag component            |
 | `/cards`      | Public Card family              |
@@ -485,7 +491,7 @@ considered migrated until a dedicated implementation PR validates them against t
 
 ## Scope
 
-This release is deliberately limited to foundations, Surface primitives, Button, Badge, Tag, Cards,
+This release is deliberately limited to foundations, Surface primitives, Button, Icon Button, Badge, Tag, Cards,
 Layout Primitives and Brand Patterns:
 
 - Primitive and semantic CSS custom properties
@@ -494,7 +500,7 @@ Layout Primitives and Brand Patterns:
 - Deterministic JSON validation and SCSS generation
 - A strongly typed, SSR-safe Angular theme service
 - A routed, responsive and accessible foundations showcase
-- A standalone, accessible and token-driven public Button component
+- Standalone, accessible and token-driven public Button and Icon Button components
 - Non-interactive Badge status and category labels
 - Static, selectable and removable Tag behavior
 - Solid and Liquid Glass Surface primitives with CSS-only fallback behavior

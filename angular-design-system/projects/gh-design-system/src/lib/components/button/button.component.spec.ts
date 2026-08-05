@@ -26,7 +26,7 @@ import { GhButtonComponent } from './button.component';
   `,
 })
 class ButtonTestHost {
-  readonly variant = signal<'primary' | 'secondary' | 'ghost' | 'danger'>('primary');
+  readonly variant = signal<'primary' | 'secondary' | 'tertiary' | 'ghost' | 'danger'>('primary');
   readonly size = signal<'sm' | 'md' | 'lg'>('md');
   readonly type = signal<'button' | 'submit' | 'reset'>('button');
   readonly disabled = signal(false);
@@ -66,7 +66,37 @@ describe('GhButtonComponent', () => {
     expect(button?.classList).toContain('gh-button--primary');
     expect(button?.classList).toContain('gh-button--md');
     expect(button?.getAttribute('aria-label')).toBe('Save project');
+    expect(button?.getAttribute('data-variant')).toBe('primary');
+    expect(button?.getAttribute('data-size')).toBe('md');
+    expect(button?.getAttribute('role')).toBeNull();
+    expect(button?.getAttribute('tabindex')).toBeNull();
   });
+
+  it.each(['primary', 'secondary', 'tertiary', 'ghost', 'danger'] as const)(
+    'reflects the %s variant through its stable class and data attribute',
+    (variant) => {
+      const fixture = TestBed.createComponent(ButtonTestHost);
+      fixture.componentInstance.variant.set(variant);
+      fixture.detectChanges();
+
+      const button = (fixture.nativeElement as HTMLElement).querySelector('button');
+      expect(button?.classList).toContain(`gh-button--${variant}`);
+      expect(button?.getAttribute('data-variant')).toBe(variant);
+    },
+  );
+
+  it.each(['sm', 'md', 'lg'] as const)(
+    'reflects the %s size through its stable class and data attribute',
+    (size) => {
+      const fixture = TestBed.createComponent(ButtonTestHost);
+      fixture.componentInstance.size.set(size);
+      fixture.detectChanges();
+
+      const button = (fixture.nativeElement as HTMLElement).querySelector('button');
+      expect(button?.classList).toContain(`gh-button--${size}`);
+      expect(button?.getAttribute('data-size')).toBe(size);
+    },
+  );
 
   it('applies variant, size, type and full-width inputs', () => {
     const fixture = TestBed.createComponent(ButtonTestHost);
@@ -112,6 +142,7 @@ describe('GhButtonComponent', () => {
     button?.click();
 
     expect(button?.disabled).toBe(true);
+    expect(button?.getAttribute('data-disabled')).toBe('true');
     expect(host.clickCount).toBe(0);
   });
 
@@ -129,6 +160,7 @@ describe('GhButtonComponent', () => {
 
     expect(button?.disabled).toBe(true);
     expect(button?.getAttribute('aria-busy')).toBe('true');
+    expect(button?.getAttribute('data-loading')).toBe('true');
     expect(element.querySelector('.gh-button__spinner')).not.toBeNull();
     expect(button?.textContent).toContain('Save changes');
     expect(host.clickCount).toBe(0);
@@ -148,5 +180,16 @@ describe('GhButtonComponent', () => {
     (fixture.nativeElement as HTMLElement).querySelector('button')?.click();
 
     expect(host.submitCount).toBe(1);
+  });
+
+  it('does not mark optional states when they are inactive', () => {
+    const fixture = TestBed.createComponent(ButtonTestHost);
+    fixture.detectChanges();
+
+    const button = (fixture.nativeElement as HTMLElement).querySelector('button');
+    expect(button?.getAttribute('aria-busy')).toBeNull();
+    expect(button?.getAttribute('data-loading')).toBeNull();
+    expect(button?.getAttribute('data-disabled')).toBeNull();
+    expect(button?.getAttribute('data-full-width')).toBeNull();
   });
 });

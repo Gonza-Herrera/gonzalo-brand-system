@@ -25,8 +25,8 @@ motion, focus                      overlay, interactive, disabled
 - Primitive tokens describe controlled material ingredients. They do not carry product intent.
 - Semantic tokens describe a surface role and are the only material layer future components should
   consume.
-- Component tokens remain intentionally deferred until a component family demonstrates a real
-  mapping need.
+- Component tokens are added only when a component family demonstrates a real mapping need. PR 25
+  adds `button.*` and `iconButton.*`; Cards and later families remain deferred to their own PRs.
 
 Aliases are resolved by the existing generator. Semantic JSON therefore points to primitives or
 other semantic roles instead of repeating their literal values.
@@ -143,8 +143,8 @@ colors or positions. It uses only approved palette aliases and no image, filter,
 ## Interaction and disabled roles
 
 `surface.interactive` provides background, border, and shadow roles for hover, active, and selected
-states. Focus provides ring color, width, offset, and a composed shadow. These tokens prepare the
-contract only; existing components retain their current behavior in PR 22.
+states. Focus provides ring color, width, offset, and a composed shadow. PR 25 maps these roles into
+Button component aliases without exposing Surface state controls to consumers.
 
 `surface.disabled` provides background, border, foreground, opacity, and shadow independently. A
 future surface must not reduce the opacity of its entire subtree as a shortcut; text and state
@@ -253,7 +253,8 @@ backdrop-filter: var(--gh-surface-glass-backdrop-filter);
 -webkit-backdrop-filter: var(--gh-surface-glass-backdrop-filter);
 ```
 
-Components must not consume primitive opacity, blur, highlight, or shadow values directly. They also
+Components must not consume primitive opacity, blur, highlight, or shadow values directly. Button
+and Icon Button consume their `--gh-button-*` and `--gh-icon-button-*` component aliases. They also
 must not hardcode `rgba()`, `blur()`, local opacity, local shadows, or local fallback colors.
 
 ## Extending the system

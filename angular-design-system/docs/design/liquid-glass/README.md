@@ -27,6 +27,8 @@ migration PR reviews them against these foundations.
     accessibility, performance, and reuse policy.
 13. [Ambient backgrounds](ambient-backgrounds.md) — controlled environmental presets, tokens,
     composition, fallbacks, accessibility, responsive behavior, and performance.
+14. [Buttons](buttons.md) — Button and Icon Button component tokens, hierarchy, native semantics,
+    state behavior, fallback policy, accessibility, performance, and migration notes.
 
 ## How to use these documents
 
