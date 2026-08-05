@@ -7,6 +7,7 @@ This directory is the source of truth for the Gonzalo Herrera Design System.
 ```text
 tokens/
 ├── primitives/
+│   ├── ambient.json
 │   ├── borders.json
 │   ├── colors.json
 │   ├── glass.json
@@ -75,6 +76,12 @@ the existing light/dark mechanism and does not have a third token file.
 Components must consume the generated `--gh-surface-*` variables. Primitive
 `--gh-glass-*` variables exist to compose the semantic theme contract and must
 not become ad hoc component utilities.
+
+`ambient.json` defines only the bounded environmental opacity scale. Theme-aware
+`ambient.background.*`, `ambient.preset.*` and `ambient.intensity.*` roles compose the approved
+static Subtle, Brand, Cool and Warm fields, plus the `none` path. Components consume semantic
+`--gh-ambient-*` variables; they do not assemble local gradients or consume primitive opacity
+directly.
 
 Card roles define shared surface, border, selected, elevation and restrained
 glass treatment values for the complete Card family.

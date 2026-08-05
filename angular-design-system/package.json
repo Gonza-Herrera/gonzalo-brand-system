@@ -8,6 +8,8 @@
     "tokens:check": "node scripts/tokens.mjs check",
     "test:tokens": "node --test scripts/tokens.test.mjs",
     "test:surface-primitives": "node --test scripts/surface-primitives.test.mjs",
+    "test:ambient-backgrounds": "node --test scripts/ambient-backgrounds.test.mjs",
+    "test:ambient-backgrounds:ssr": "node --test scripts/ambient-backgrounds.ssr.test.mjs",
     "seo:generate": "node scripts/seo-files.mjs generate",
     "seo:check": "node scripts/seo-files.mjs check",
     "test:seo-files": "node --test scripts/seo-files.test.mjs",
@@ -31,7 +33,7 @@
     "prebuild-storybook": "npm run tokens:check && npm run build:library",
     "build-storybook": "ng run gh-design-system:build-storybook",
     "test-storybook": "test-storybook --ci --failOnConsole",
-    "pretest": "npm run tokens:check && npm run test:tokens && npm run test:surface-primitives && npm run seo:check && npm run test:seo-files && npm run test:deployment-config && npm run build:library",
+    "pretest": "npm run tokens:check && npm run test:tokens && npm run test:surface-primitives && npm run test:ambient-backgrounds && npm run seo:check && npm run test:seo-files && npm run test:deployment-config && npm run build:library && npm run test:ambient-backgrounds:ssr",
     "test": "ng test gh-design-system --watch=false && ng test showcase --watch=false && ng test portfolio --watch=false",
     "pretest:portfolio": "npm run tokens:check && npm run seo:check && npm run test:seo-files && npm run test:deployment-config && npm run build:library",
     "test:portfolio": "ng test portfolio --watch=false"

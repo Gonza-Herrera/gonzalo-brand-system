@@ -785,6 +785,54 @@
       "$value": "{spacing.md}"
     }
   },
+  "ambient": {
+    "background": {
+      "base": {
+        "$type": "color",
+        "$value": "{background.subtle}"
+      },
+      "none": {
+        "$type": "color",
+        "$value": "transparent"
+      }
+    },
+    "preset": {
+      "none": {
+        "$type": "string",
+        "$value": "none"
+      },
+      "subtle": {
+        "$type": "string",
+        "$value": "radial-gradient(circle at 18% 18%, color-mix(in srgb, {color.lavender} 38%, transparent) 0%, transparent 54%), radial-gradient(circle at 82% 72%, color-mix(in srgb, {color.cloudBlue} 28%, transparent) 0%, transparent 58%)"
+      },
+      "brand": {
+        "$type": "string",
+        "$value": "radial-gradient(circle at 16% 22%, color-mix(in srgb, {color.lavender} 66%, transparent) 0%, transparent 52%), radial-gradient(circle at 82% 28%, color-mix(in srgb, {color.cloudBlue} 44%, transparent) 0%, transparent 56%), radial-gradient(circle at 64% 88%, color-mix(in srgb, {color.peach} 40%, transparent) 0%, transparent 54%)"
+      },
+      "cool": {
+        "$type": "string",
+        "$value": "radial-gradient(circle at 78% 20%, color-mix(in srgb, {color.cloudBlue} 62%, transparent) 0%, transparent 54%), radial-gradient(circle at 18% 42%, color-mix(in srgb, {color.lavender} 42%, transparent) 0%, transparent 58%), radial-gradient(circle at 72% 88%, color-mix(in srgb, {color.mint} 32%, transparent) 0%, transparent 52%)"
+      },
+      "warm": {
+        "$type": "string",
+        "$value": "radial-gradient(circle at 20% 22%, color-mix(in srgb, {color.peach} 58%, transparent) 0%, transparent 54%), radial-gradient(circle at 80% 70%, color-mix(in srgb, {color.sand} 48%, transparent) 0%, transparent 56%), radial-gradient(circle at 74% 12%, color-mix(in srgb, {color.lavender} 34%, transparent) 0%, transparent 50%)"
+      }
+    },
+    "intensity": {
+      "subtle": {
+        "$type": "number",
+        "$value": "{ambient.opacity.subtle}"
+      },
+      "default": {
+        "$type": "number",
+        "$value": "{ambient.opacity.default}"
+      },
+      "strong": {
+        "$type": "number",
+        "$value": "{ambient.opacity.strong}"
+      }
+    }
+  },
   "pattern": {
     "accentGradient": {
       "$type": "color",

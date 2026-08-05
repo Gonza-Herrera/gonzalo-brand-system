@@ -33,7 +33,8 @@ angular-design-system/  Angular library, Portfolio, Showcase, Storybook, tests, 
 
 The public library currently includes:
 
-- Components: Button, Badge, Tag, Card, Article Card, Experience Card, and Project Card.
+- Components: Ambient Background, Surface, Glass Panel, Button, Badge, Tag, Card, Article Card,
+  Experience Card, and Project Card.
 - Layout: Container, Section, Stack, Inline, Grid, Cluster, and Divider.
 - Patterns: Hero, Navigation, Footer, Section Heading, Feature Grid, Experience Timeline, Content Highlight, and Contact Callout.
 - Foundations: generated design tokens, opt-in base styles, light/dark themes, and an SSR-safe theme service with system preference support.

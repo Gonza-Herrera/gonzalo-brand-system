@@ -226,10 +226,10 @@ import {
 } from 'gh-design-system';
 ```
 
-PR 24 can place controlled ambient backgrounds behind Surface without making them part of the
-material primitive. PR 25 and PR 26 should compose or share the Surface contract when migrating
-Button and Card, rather than copying filter recipes; their native semantics and specialized APIs
-must remain in those components.
+PR 24 places controlled `gh-ambient-background` environments behind Surface without making them
+part of the material primitive. PR 25 and PR 26 should compose or share the Surface contract when
+migrating Button and Card, rather than copying filter recipes; their native semantics and
+specialized APIs must remain in those components.
 
 Adding a variant, changing a default, removing a union member or altering host state attributes is a
 public breaking change. Internal selector organization may evolve if the rendered contract, token

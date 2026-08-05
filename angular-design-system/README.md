@@ -2,7 +2,8 @@
 
 Official Angular workspace for the Gonzalo Herrera Design System.
 
-This workspace provides a reusable Angular library with Button, Badge, Tag, Surface and Glass Panel,
+This workspace provides a reusable Angular library with Button, Badge, Tag, Ambient Background,
+Surface and Glass Panel,
 a four-component Card family, seven Layout Primitives and eight Brand Patterns,
 plus Storybook, a routed standalone Showcase, a bilingual prerendered Portfolio,
 token-driven SCSS, light/dark/system theming, unit tests,
@@ -34,6 +35,7 @@ angular-design-system/
 │   │   └── src/
 │   │       ├── lib/
 │   │       │   ├── components/
+│   │       │   │   ├── ambient-background/
 │   │       │   │   ├── badge/
 │   │       │   │   ├── button/
 │   │       │   │   ├── cards/
@@ -300,6 +302,23 @@ Surface is a neutral, single-host primitive with a safe `solid` default and the 
 Surface with a narrower glass-only API. Visual interaction never adds control semantics; use native
 links and buttons inside. See the
 [Surface primitive contract](docs/design/liquid-glass/surface-primitives.md).
+
+## Ambient Background
+
+```ts
+import { GhAmbientBackgroundComponent, GhSurfaceComponent } from 'gh-design-system';
+```
+
+```html
+<gh-ambient-background preset="brand" intensity="default">
+  <gh-surface variant="glass" padding="lg">Content</gh-surface>
+</gh-ambient-background>
+```
+
+Ambient Background provides the controlled `none`, `subtle`, `brand`, `cool` and `warm` static
+environments behind Surface. It adds no layout or interaction semantics and exposes no raw colors,
+blur or coordinates. See the
+[Ambient Background contract](docs/design/liquid-glass/ambient-backgrounds.md).
 
 ## Card family
 

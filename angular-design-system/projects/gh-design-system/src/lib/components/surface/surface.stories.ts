@@ -4,6 +4,7 @@ import {
   GH_SURFACE_PADDINGS,
   GH_SURFACE_RADII,
   GH_SURFACE_VARIANTS,
+  GhAmbientBackgroundComponent,
   GhButtonComponent,
   GhDividerComponent,
   GhGlassPanelComponent,
@@ -13,10 +14,15 @@ import {
 const meta: Meta<GhSurfaceComponent> = {
   title: 'Foundations/Surface',
   component: GhSurfaceComponent,
-  tags: ['autodocs'],
+  tags: ['autodocs', 'pr24-ambient'],
   decorators: [
     moduleMetadata({
-      imports: [GhButtonComponent, GhDividerComponent, GhGlassPanelComponent],
+      imports: [
+        GhAmbientBackgroundComponent,
+        GhButtonComponent,
+        GhDividerComponent,
+        GhGlassPanelComponent,
+      ],
     }),
   ],
   parameters: {
@@ -62,7 +68,7 @@ const meta: Meta<GhSurfaceComponent> = {
   render: (args) => ({
     props: args,
     template: `
-      <div class="gh-surface-story-stage">
+      <gh-ambient-background class="gh-surface-story-stage" preset="brand">
         <gh-surface
           [variant]="variant"
           [padding]="padding"
@@ -73,7 +79,7 @@ const meta: Meta<GhSurfaceComponent> = {
           <h3>Surface playground</h3>
           <p>Projected content keeps its own structure and semantics.</p>
         </gh-surface>
-      </div>
+      </gh-ambient-background>
     `,
   }),
 };
@@ -86,7 +92,7 @@ export const Playground: Story = {};
 export const MaterialScale: Story = {
   render: () => ({
     template: `
-      <div class="gh-surface-story-stage">
+      <gh-ambient-background class="gh-surface-story-stage" preset="brand">
         <div class="gh-surface-story-grid">
           @for (variant of ['solid', 'glass-subtle', 'glass', 'glass-elevated', 'glass-floating']; track variant) {
             <gh-surface [variant]="$any(variant)" padding="lg">
@@ -95,7 +101,7 @@ export const MaterialScale: Story = {
             </gh-surface>
           }
         </div>
-      </div>
+      </gh-ambient-background>
     `,
   }),
 };
@@ -122,7 +128,7 @@ export const PaddingScale: Story = {
 export const RadiusScale: Story = {
   render: () => ({
     template: `
-      <div class="gh-surface-story-stage">
+      <gh-ambient-background class="gh-surface-story-stage" preset="subtle">
         <div class="gh-surface-story-grid">
           @for (radius of ['none', 'small', 'default', 'large']; track radius) {
             <gh-surface [radius]="$any(radius)" variant="glass" padding="lg">
@@ -130,7 +136,7 @@ export const RadiusScale: Story = {
             </gh-surface>
           }
         </div>
-      </div>
+      </gh-ambient-background>
     `,
   }),
 };
@@ -138,7 +144,7 @@ export const RadiusScale: Story = {
 export const InteractionAndDisabled: Story = {
   render: () => ({
     template: `
-      <div class="gh-surface-story-stage">
+      <gh-ambient-background class="gh-surface-story-stage" preset="cool">
         <div class="gh-surface-story-grid">
           <gh-surface variant="glass" interactive>
             <h3>Native navigation</h3>
@@ -152,7 +158,7 @@ export const InteractionAndDisabled: Story = {
             <gh-button disabled>Unavailable action</gh-button>
           </gh-surface>
         </div>
-      </div>
+      </gh-ambient-background>
       <span id="surface-story-target" class="gh-surface-story-target">Destination</span>
     `,
   }),
@@ -161,7 +167,7 @@ export const InteractionAndDisabled: Story = {
 export const RecommendedComposition: Story = {
   render: () => ({
     template: `
-      <div class="gh-surface-story-stage">
+      <gh-ambient-background class="gh-surface-story-stage" preset="warm">
         <gh-glass-panel variant="glass-elevated" padding="lg" radius="large">
           <h3>One filtered parent</h3>
           <p>Use a solid child instead of stacking another filtered material.</p>
@@ -170,7 +176,7 @@ export const RecommendedComposition: Story = {
             <strong>Solid nested content</strong>
           </gh-surface>
         </gh-glass-panel>
-      </div>
+      </gh-ambient-background>
     `,
   }),
 };

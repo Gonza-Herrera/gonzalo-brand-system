@@ -3,8 +3,9 @@
 This directory is the normative visual reference for the Gonzalo Herrera Design System's Liquid
 Glass phase. It defines the language before tokens, primitives, components, or products adopt it.
 
-PR 21 established the documentation-only direction, PR 22 added the token contract, and PR 23
-provides the reference Surface primitives. The existing `glass` variants in Card and Hero predate
+PR 21 established the documentation-only direction, PR 22 added the token contract, PR 23 provides
+the reference Surface primitives, and PR 24 provides controlled ambient backgrounds. The existing
+`glass` variants in Card and Hero predate
 this language, remain unchanged, and must not be treated as reference implementations until a later
 migration PR reviews them against these foundations.
 
@@ -24,6 +25,8 @@ migration PR reviews them against these foundations.
     and the public CSS contract for PR 23.
 12. [Surface primitives](surface-primitives.md) — Angular API, composition, states, fallbacks,
     accessibility, performance, and reuse policy.
+13. [Ambient backgrounds](ambient-backgrounds.md) — controlled environmental presets, tokens,
+    composition, fallbacks, accessibility, responsive behavior, and performance.
 
 ## How to use these documents
 

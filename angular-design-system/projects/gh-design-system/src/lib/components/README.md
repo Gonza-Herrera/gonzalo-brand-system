@@ -4,6 +4,7 @@ Reusable standalone Angular components live in dedicated feature directories.
 
 ## Available
 
+- `ambient-background/`: controlled, decorative environmental context for solid and glass surfaces.
 - `badge/`: non-interactive status, category and count labels.
 - `button/`: public native-button wrapper with variants, sizes, form behavior,
   loading state, icon projection, tests and accessibility documentation.

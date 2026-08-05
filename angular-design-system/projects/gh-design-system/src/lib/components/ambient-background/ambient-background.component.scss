@@ -1,0 +1,74 @@
+:host {
+  --_gh-ambient-background: var(--gh-ambient-background-base);
+  --_gh-ambient-preset: var(--gh-ambient-preset-subtle);
+  --_gh-ambient-intensity: var(--gh-ambient-intensity-default);
+
+  position: relative;
+  isolation: isolate;
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+  border-radius: inherit;
+  background: var(--_gh-ambient-background);
+}
+
+.gh-ambient-background__visual {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--_gh-ambient-preset);
+  opacity: var(--_gh-ambient-intensity);
+  pointer-events: none;
+}
+
+.gh-ambient-background__content {
+  position: relative;
+  min-width: 0;
+}
+
+:host([data-preset='none']) {
+  --_gh-ambient-background: var(--gh-ambient-background-none);
+  --_gh-ambient-preset: var(--gh-ambient-preset-none);
+}
+
+:host([data-preset='brand']) {
+  --_gh-ambient-preset: var(--gh-ambient-preset-brand);
+}
+
+:host([data-preset='cool']) {
+  --_gh-ambient-preset: var(--gh-ambient-preset-cool);
+}
+
+:host([data-preset='warm']) {
+  --_gh-ambient-preset: var(--gh-ambient-preset-warm);
+}
+
+:host([data-intensity='subtle']) {
+  --_gh-ambient-intensity: var(--gh-ambient-intensity-subtle);
+}
+
+:host([data-intensity='strong']) {
+  --_gh-ambient-intensity: var(--gh-ambient-intensity-strong);
+}
+
+:host([data-preset='none']) .gh-ambient-background__visual {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gh-ambient-background__visual {
+    animation: none;
+    transition: none;
+  }
+}
+
+@media (forced-colors: active) {
+  :host {
+    background: Canvas;
+    color: CanvasText;
+  }
+
+  .gh-ambient-background__visual {
+    display: none;
+  }
+}

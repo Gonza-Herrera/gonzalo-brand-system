@@ -11,8 +11,9 @@ product components and the Portfolio remain unmigrated.
 
 ```text
 Primitive JSON                     Semantic light / dark JSON
-glass.*, global shadow,            surface.solid.*, surface.glass.*,
-radius, border, motion, focus  ->  overlay, interactive, disabled
+glass.*, ambient.opacity.*,        surface.solid.*, surface.glass.*,
+global shadow, radius, border, ->  ambient.background.*, ambient.preset.*,
+motion, focus                      overlay, interactive, disabled
                                       |
                                       v
                             generated --gh-* CSS properties
@@ -39,6 +40,10 @@ The system retains the existing `--gh-` prefix and uses one vocabulary:
 
 There are no parallel `liquid-*` aliases. JSON keys use camel case where a nested role needs more
 than one word; the generator publishes predictable kebab-case CSS names.
+
+Ambient foundations follow the same vocabulary: `ambient-opacity-*` is the bounded primitive scale,
+while `ambient-background-*`, `ambient-preset-*` and `ambient-intensity-*` are the only variables
+the public Ambient Background component consumes.
 
 ## Primitive scales
 
@@ -94,6 +99,12 @@ aliases reuse `radius.md`, `radius.lg`, and `radius.xl`; visual depth does not c
 scale. Visual elevation also remains independent from stacking order, so these tokens do not imply
 or introduce `z-index`.
 
+### Ambient opacity
+
+`ambient.opacity` contains exactly `subtle`, `default`, and `strong`. The scale is increasing and
+capped below fully opaque. Theme-aware preset gradients remain semantic values because their color
+balance expresses a reusable environmental intent rather than a component-local ingredient.
+
 ## Semantic materials
 
 | Material       | Intended role                                           | Containment strategy                                       |
@@ -117,6 +128,17 @@ Every material from Solid through Glass Floating exposes the same property contr
 
 This parity lets PR 23 switch material without assembling local recipes or adding conditional
 property names.
+
+## Semantic ambient environments
+
+`ambient.background.base` supplies the theme-aware solid paint and `ambient.background.none`
+supplies the transparent path. `ambient.preset.{none|subtle|brand|cool|warm}` owns the complete
+one-to-three-layer radial composition, while `ambient.intensity.{subtle|default|strong}` aliases the
+primitive opacity scale. Light and dark contain the same paths and types; system uses the existing
+CSS theme resolution.
+
+The preset is emitted as one CSS custom-property value so a component cannot independently remix
+colors or positions. It uses only approved palette aliases and no image, filter, blur or animation.
 
 ## Interaction and disabled roles
 

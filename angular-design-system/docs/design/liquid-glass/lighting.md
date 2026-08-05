@@ -109,9 +109,11 @@ Dark theme is an independent material calibration, not an inverted light theme.
 
 ## Ambient backgrounds
 
-Ambient backgrounds belong to PR 24. Until that contract exists, component work must not invent
-large gradients, glow fields, or blurred color blobs solely to make glass visible. A material must
-also work over the current semantic backgrounds and a Solid fallback.
+PR 24 defines controlled ambient backgrounds through `gh-ambient-background` and the semantic
+`ambient.*` contract. Component work must consume that primitive rather than inventing large
+gradients, glow fields, or blurred color blobs solely to make glass visible. A material must also
+work over the current semantic backgrounds and a Solid fallback. See
+[Ambient backgrounds](ambient-backgrounds.md).
 
 ## Visual inspection sequence
 

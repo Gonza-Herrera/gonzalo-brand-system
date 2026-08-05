@@ -7,6 +7,8 @@ import test from 'node:test';
 import {
   getGeneratedFiles,
   loadAndValidateTokens,
+  requiredAmbientPrimitivePaths,
+  requiredAmbientSemanticPaths,
   requiredLiquidGlassPrimitivePaths,
   requiredLiquidGlassSemanticPaths,
 } from './tokens.mjs';
@@ -56,6 +58,32 @@ test('loads the complete Liquid Glass primitive contract within its approved bud
   for (const token of primitiveTokens.values()) {
     if (token.path.startsWith('glass.opacity.')) {
       assert.ok(token.value >= 0 && token.value <= 1, `${token.path} must be between 0 and 1`);
+    }
+  }
+});
+
+test('loads the ambient opacity contract and keeps every preset within three layers', async () => {
+  const { darkTokens, primitiveTokens, semanticTokens } = await loadAndValidateTokens();
+
+  for (const tokenPath of requiredAmbientPrimitivePaths) {
+    const token = primitiveTokens.get(tokenPath);
+    assert.ok(token, `Missing ambient primitive ${tokenPath}`);
+    assert.ok(token.value >= 0 && token.value <= 0.9, `${tokenPath} exceeds the opacity budget`);
+  }
+
+  for (const tokenPath of requiredAmbientSemanticPaths) {
+    assert.ok(semanticTokens.has(tokenPath), `Missing light ambient token ${tokenPath}`);
+    assert.ok(darkTokens.has(tokenPath), `Missing dark ambient token ${tokenPath}`);
+    assert.equal(darkTokens.get(tokenPath).type, semanticTokens.get(tokenPath).type);
+  }
+
+  for (const theme of [semanticTokens, darkTokens]) {
+    for (const preset of ['subtle', 'brand', 'cool', 'warm']) {
+      const value = String(theme.get(`ambient.preset.${preset}`).value);
+      const layerCount = value.match(/radial-gradient\(/g)?.length ?? 0;
+
+      assert.ok(layerCount >= 1 && layerCount <= 3, `${preset} must use one to three layers`);
+      assert.doesNotMatch(value, /url\(|image\(|filter\(|blur\(/i);
     }
   }
 });

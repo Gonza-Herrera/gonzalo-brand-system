@@ -23,6 +23,7 @@ const primitiveFiles = [
   'typography.json',
   'motion.json',
   'glass.json',
+  'ambient.json',
 ];
 
 const typographyCategories = new Set([
@@ -194,6 +195,17 @@ export const requiredLiquidGlassSemanticPaths = [
   'surface.radius.default',
   'surface.radius.elevated',
   'surface.radius.floating',
+];
+
+export const requiredAmbientPrimitivePaths = ['subtle', 'default', 'strong'].map(
+  (intensity) => `ambient.opacity.${intensity}`,
+);
+
+export const requiredAmbientSemanticPaths = [
+  'ambient.background.base',
+  'ambient.background.none',
+  ...['none', 'subtle', 'brand', 'cool', 'warm'].map((preset) => `ambient.preset.${preset}`),
+  ...['subtle', 'default', 'strong'].map((intensity) => `ambient.intensity.${intensity}`),
 ];
 
 const requiredLayoutPrimitivePaths = [
@@ -455,7 +467,11 @@ function validateThemeMetadata(lightTheme, darkTheme) {
 }
 
 function validateSemanticCoverage(semanticTokens, darkTokens) {
-  for (const tokenPath of [...requiredSemanticPaths, ...requiredLiquidGlassSemanticPaths]) {
+  for (const tokenPath of [
+    ...requiredSemanticPaths,
+    ...requiredLiquidGlassSemanticPaths,
+    ...requiredAmbientSemanticPaths,
+  ]) {
     if (!semanticTokens.has(tokenPath)) {
       throw new TokenValidationError(
         `semantic-tokens.json: required semantic token ${tokenPath} is missing`,
@@ -549,6 +565,27 @@ function validateLiquidGlassPrimitives(primitiveTokens) {
   }
 }
 
+function validateAmbientPrimitives(primitiveTokens) {
+  let previousOpacity = -1;
+
+  for (const tokenPath of requiredAmbientPrimitivePaths) {
+    const token = primitiveTokens.get(tokenPath);
+    const value = token?.value;
+
+    if (typeof value !== 'number' || value < 0 || value > 0.9) {
+      throw new TokenValidationError(
+        `${token?.path ?? tokenPath} must be a number between 0 and 0.9`,
+      );
+    }
+
+    if (value <= previousOpacity) {
+      throw new TokenValidationError('Ambient opacity values must increase with intensity');
+    }
+
+    previousOpacity = value;
+  }
+}
+
 function validateCssNameUniqueness(tokens, nameForToken, label) {
   const names = new Map();
 
@@ -631,6 +668,12 @@ function cssValue(value, primitiveTokens, semanticTokens = new Map()) {
 
     throw new TokenValidationError(`Cannot emit missing CSS reference {${reference}}`);
   });
+}
+
+function sassMapValue(token, primitiveTokens, semanticTokens) {
+  const value = cssValue(token.value, primitiveTokens, semanticTokens);
+
+  return token.type === 'string' && value.includes(',') ? JSON.stringify(value) : value;
 }
 
 function renderPrimitiveFile(tokens) {
@@ -754,7 +797,7 @@ function renderThemeFile(themeName, tokens, primitiveTokens, semanticTokens) {
 
   for (const token of tokens.values()) {
     const name = semanticCssName(token.path).replace('--gh-', '');
-    lines.push(`  '${name}': ${cssValue(token.value, primitiveTokens, semanticTokens)},`);
+    lines.push(`  '${name}': ${sassMapValue(token, primitiveTokens, semanticTokens)},`);
   }
 
   lines.push(
@@ -1023,6 +1066,7 @@ export async function loadAndValidateTokens() {
   validateReferences(primitiveTokens, primitiveTokens);
   validateLayoutPrimitiveCoverage(primitiveTokens);
   validateLiquidGlassPrimitives(primitiveTokens);
+  validateAmbientPrimitives(primitiveTokens);
   validateReferences(semanticTokens, availableTokens);
   validateReferences(darkTokens, darkAvailableTokens);
   validateReferenceCycles(availableTokens);

@@ -1,5 +1,7 @@
 export * from './lib/components/badge/badge.component';
 export * from './lib/components/badge/badge.types';
+export * from './lib/components/ambient-background/ambient-background.component';
+export * from './lib/components/ambient-background/ambient-background.types';
 export * from './lib/components/button/button.component';
 export * from './lib/components/button/button.types';
 export * from './lib/components/glass-panel/glass-panel.component';

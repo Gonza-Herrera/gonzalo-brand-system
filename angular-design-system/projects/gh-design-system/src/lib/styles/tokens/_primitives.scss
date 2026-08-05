@@ -104,4 +104,9 @@
   --gh-glass-inner-shadow-none: none;
   --gh-glass-inner-shadow-subtle: inset 0 1px 0 var(--gh-glass-highlight-subtle);
   --gh-glass-inner-shadow-default: inset 0 1px 0 var(--gh-glass-highlight-default), inset 0 -1px 0 color-mix(in srgb, var(--gh-color-ink) 6%, transparent);
+
+  /* ambient */
+  --gh-ambient-opacity-subtle: 0.48;
+  --gh-ambient-opacity-default: 0.68;
+  --gh-ambient-opacity-strong: 0.84;
 }

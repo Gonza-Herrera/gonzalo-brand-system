@@ -6,11 +6,11 @@ foundation change with a broad product migration.
 
 ## Current component status
 
-| Area                                   | Status after PR 21                                  | Intended future review                        |
+| Area                                   | Current status                                      | Intended future review                        |
 | -------------------------------------- | --------------------------------------------------- | --------------------------------------------- |
-| Global foundations and themes          | PR 22 token contract available; product unchanged   | PR 23 surface consumption                     |
-| Surface primitive                      | Not implemented                                     | PR 23                                         |
-| Ambient backgrounds                    | Not implemented                                     | PR 24                                         |
+| Global foundations and themes          | PR 22 token contract available; product unchanged   | Component adoption                            |
+| Surface primitive                      | PR 23 Surface and Glass Panel implemented            | Component reuse in PR 25 and PR 26             |
+| Ambient backgrounds                    | PR 24 primitive and controlled presets implemented  | Product migration after library adoption      |
 | Button                                 | Pending; existing component unchanged               | PR 25                                         |
 | Foundational Card                      | Pending; existing `glass` variant is pre-migration  | PR 26                                         |
 | Article, Experience, and Project Cards | Pending; inherit no new material yet                | After foundational Card approval              |
@@ -21,8 +21,8 @@ foundation change with a broad product migration.
 | Alerts, toasts, and status feedback    | Pending; not currently public                       | Feedback component PR                         |
 | Dialogs and overlays                   | Pending; not currently public                       | Overlay primitives PR                         |
 | Popovers and tooltips                  | Pending; not currently public                       | Floating surface PR                           |
-| Storybook documentation                | Token-only foundation reference in PR 22            | Add Surface stories with PR 23 implementation |
-| Showcase                               | Unchanged                                           | Integrate approved primitives after PR 23     |
+| Storybook documentation                | Tokens, Surface and Ambient foundations documented  | Add component migrations incrementally        |
+| Showcase                               | Surface and Ambient foundation pages available      | Integrate later approved primitives            |
 | Portfolio                              | Unchanged                                           | Product migration only after library adoption |
 
 Pending means no component is authorized to invent a local Liquid Glass recipe.

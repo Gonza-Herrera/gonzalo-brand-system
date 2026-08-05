@@ -92,7 +92,6 @@
   padding: var(--gh-space-xl);
   border: var(--gh-border-width-default) solid var(--gh-border-subtle);
   border-radius: var(--gh-radius-xl);
-  background: var(--gh-pattern-accent-gradient);
 }
 
 .gh-surface-story-grid {
@@ -310,4 +309,59 @@
 .gh-glass-token-value {
   color: var(--gh-text-secondary);
   font-size: var(--gh-font-size-caption);
+}
+
+.gh-ambient-story-stage {
+  padding: var(--gh-space-xl);
+  border: var(--gh-border-width-default) solid var(--gh-border-subtle);
+  border-radius: var(--gh-radius-xl);
+}
+
+.gh-ambient-story-stage--compact {
+  padding: var(--gh-space-md);
+}
+
+.gh-ambient-story-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  gap: var(--gh-space-md);
+}
+
+.gh-ambient-story-content {
+  display: grid;
+  gap: var(--gh-space-md);
+}
+
+.gh-ambient-story-content > * {
+  margin-block: 0;
+}
+
+.gh-ambient-story-content p,
+.gh-ambient-story-grid p {
+  color: var(--gh-text-secondary);
+}
+
+.gh-ambient-story-form label {
+  font-weight: var(--gh-font-weight-semibold);
+}
+
+.gh-ambient-story-form input {
+  min-width: 0;
+  padding: var(--gh-space-sm) var(--gh-space-md);
+  border: var(--gh-border-width-default) solid var(--gh-border-default);
+  border-radius: var(--gh-radius-md);
+  background: var(--gh-background-secondary);
+  color: var(--gh-text-primary);
+  font: inherit;
+}
+
+.gh-ambient-story-form input:focus-visible {
+  outline: var(--gh-border-width-focus) solid var(--gh-focus-ring);
+  outline-offset: var(--gh-space-xs);
+}
+
+@media (max-width: 36rem) {
+  .gh-ambient-story-stage {
+    padding: var(--gh-space-md);
+  }
 }
