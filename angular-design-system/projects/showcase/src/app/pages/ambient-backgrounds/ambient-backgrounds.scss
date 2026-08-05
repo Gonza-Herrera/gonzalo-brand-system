@@ -1,0 +1,131 @@
+@use '../../shared/styles/documentation' as documentation;
+
+.page {
+  @include documentation.page;
+}
+
+.page-header {
+  @include documentation.page-header;
+}
+
+.preset-grid,
+.combination-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: var(--gh-space-md);
+}
+
+.ambient-sample,
+.ambient-feature {
+  padding: var(--gh-space-xl);
+  border: var(--gh-border-width-default) solid var(--gh-border-subtle);
+  border-radius: var(--gh-radius-xl);
+}
+
+.ambient-sample gh-surface {
+  min-block-size: 100%;
+}
+
+.ambient-sample h3,
+.ambient-sample p,
+.ambient-feature h3,
+.ambient-feature p,
+.guidance-grid h3,
+.guidance-grid ul {
+  margin: 0;
+}
+
+.ambient-sample p,
+.ambient-sample span,
+.ambient-feature p {
+  color: var(--gh-text-secondary);
+}
+
+.ambient-sample code {
+  color: var(--gh-text-accent);
+  font-size: var(--gh-font-size-caption);
+}
+
+.ambient-feature gh-glass-panel {
+  max-inline-size: var(--gh-container-md);
+  margin-inline: auto;
+}
+
+.ambient-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--gh-space-sm);
+}
+
+.ambient-form label {
+  grid-column: 1 / -1;
+  color: var(--gh-text-primary);
+  font-weight: var(--gh-font-weight-semibold);
+}
+
+.ambient-form input {
+  min-width: 0;
+  padding: var(--gh-space-sm) var(--gh-space-md);
+  border: var(--gh-border-width-default) solid var(--gh-border-default);
+  border-radius: var(--gh-radius-md);
+  background: var(--gh-background-secondary);
+  color: var(--gh-text-primary);
+  font: inherit;
+}
+
+.ambient-form input:focus-visible {
+  outline: var(--gh-border-width-focus) solid var(--gh-focus-ring);
+  outline-offset: var(--gh-space-xs);
+}
+
+.guidance-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--gh-space-xl);
+}
+
+.guidance-grid section {
+  display: grid;
+  gap: var(--gh-space-md);
+}
+
+.guidance-grid ul {
+  display: grid;
+  gap: var(--gh-space-sm);
+  padding-inline-start: var(--gh-space-lg);
+}
+
+.code-example,
+.code-example > header {
+  display: grid;
+  gap: var(--gh-space-lg);
+}
+
+.code-example > header {
+  gap: var(--gh-space-xs);
+}
+
+.code-example > header p,
+.code-example > header h2 {
+  margin: 0;
+}
+
+.code-example > header p {
+  color: var(--gh-text-accent);
+  font-size: var(--gh-font-size-label);
+  font-weight: var(--gh-font-weight-bold);
+  letter-spacing: var(--gh-letter-spacing-wide);
+  text-transform: uppercase;
+}
+
+@media (max-width: 36rem) {
+  .ambient-sample,
+  .ambient-feature {
+    padding: var(--gh-space-md);
+  }
+
+  .ambient-form,
+  .guidance-grid {
+    grid-template-columns: 1fr;
+  }
+}

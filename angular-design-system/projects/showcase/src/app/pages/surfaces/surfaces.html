@@ -14,7 +14,7 @@
     title="Five deliberate levels of containment"
     description="Use the lowest level that communicates hierarchy. The existing theme control updates every material through semantic variables."
   >
-    <div class="ambient-stage">
+    <gh-ambient-background class="ambient-stage" preset="brand">
       <div class="material-grid">
         @for (material of materials; track material.variant) {
           <gh-surface [variant]="material.variant" padding="lg" radius="default">
@@ -24,7 +24,7 @@
           </gh-surface>
         }
       </div>
-    </div>
+    </gh-ambient-background>
   </showcase-documentation-section>
 
   <showcase-documentation-section
@@ -45,7 +45,11 @@
         </div>
       </div>
 
-      <div class="scale-group ambient-stage ambient-stage--compact">
+      <gh-ambient-background
+        class="scale-group ambient-stage ambient-stage--compact"
+        preset="subtle"
+        intensity="subtle"
+      >
         <h3>Radius</h3>
         <div class="scale-grid">
           @for (radius of radii; track radius) {
@@ -54,7 +58,7 @@
             </gh-surface>
           }
         </div>
-      </div>
+      </gh-ambient-background>
     </gh-grid>
   </showcase-documentation-section>
 
@@ -64,7 +68,7 @@
     title="Visual feedback with native semantics"
     description="Interactive and disabled describe the material only. Links, buttons and fields keep their native responsibility."
   >
-    <div class="ambient-stage">
+    <gh-ambient-background class="ambient-stage" preset="cool">
       <gh-grid [columns]="2" minItemSize="sm" gap="lg">
         <gh-surface variant="glass" interactive padding="lg">
           <gh-stack gap="sm">
@@ -82,7 +86,7 @@
           </gh-stack>
         </gh-surface>
       </gh-grid>
-    </div>
+    </gh-ambient-background>
   </showcase-documentation-section>
 
   <showcase-documentation-section
@@ -91,7 +95,7 @@
     title="One glass boundary around related content"
     description="Glass Panel narrows the Surface API to panel materials. A solid child avoids stacking backdrop filters."
   >
-    <div class="ambient-stage">
+    <gh-ambient-background class="ambient-stage" preset="warm">
       <gh-glass-panel variant="glass-elevated" padding="lg" radius="large">
         <gh-stack gap="md">
           <div>
@@ -126,7 +130,7 @@
           </form>
         </gh-stack>
       </gh-glass-panel>
-    </div>
+    </gh-ambient-background>
   </showcase-documentation-section>
 
   <showcase-documentation-section

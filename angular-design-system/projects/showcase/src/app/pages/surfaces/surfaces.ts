@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {
+  GhAmbientBackgroundComponent,
   GhButtonComponent,
   GhDividerComponent,
   GhGlassPanelComponent,
@@ -27,6 +28,7 @@ interface SurfaceExample {
   imports: [
     CodePreview,
     DocumentationSection,
+    GhAmbientBackgroundComponent,
     GhButtonComponent,
     GhDividerComponent,
     GhGlassPanelComponent,

@@ -1,0 +1,129 @@
+<article class="page">
+  <header class="page-header">
+    <p>Foundations · Environment</p>
+    <h1>Ambient backgrounds</h1>
+    <p>
+      Calm, token-driven color fields that provide context behind solid and Liquid Glass surfaces
+      without becoming content or layout.
+    </p>
+  </header>
+
+  <showcase-documentation-section
+    sectionId="ambient-presets"
+    eyebrow="Presets"
+    title="Five controlled environmental intentions"
+    description="Presets keep color balance and layer count consistent. The current theme control maps them automatically in light, dark and system modes."
+  >
+    <div class="preset-grid">
+      @for (item of presets; track item.preset) {
+        <gh-ambient-background class="ambient-sample" [preset]="item.preset">
+          <gh-surface variant="glass-subtle" padding="md">
+            <gh-stack gap="sm">
+              <code>{{ item.preset }}</code>
+              <h3>{{ item.label }}</h3>
+              <p>{{ item.description }}</p>
+            </gh-stack>
+          </gh-surface>
+        </gh-ambient-background>
+      }
+    </div>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="ambient-intensity"
+    eyebrow="Intensity"
+    title="A bounded, calm opacity scale"
+    description="Intensity changes visibility, not composition. Even strong remains suitable for a restrained brand system."
+  >
+    <gh-grid [columns]="3" minItemSize="sm" gap="md">
+      @for (intensity of intensities; track intensity) {
+        <gh-ambient-background class="ambient-sample" preset="brand" [intensity]="intensity">
+          <gh-surface variant="glass" padding="md">
+            <strong>{{ intensity }}</strong>
+          </gh-surface>
+        </gh-ambient-background>
+      }
+    </gh-grid>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="ambient-surface-composition"
+    eyebrow="Composition"
+    title="Environmental context plus one bounded material"
+    description="Choose the lowest glass depth that communicates hierarchy. Solid remains the correct choice for dense content and uncertain contrast."
+  >
+    <div class="combination-grid">
+      @for (item of combinations; track item.label) {
+        <gh-ambient-background class="ambient-sample" [preset]="item.preset">
+          <gh-surface [variant]="item.variant" padding="md">
+            <gh-stack gap="sm">
+              <strong>{{ item.label }}</strong>
+              <span>Readable content over an approved pairing.</span>
+            </gh-stack>
+          </gh-surface>
+        </gh-ambient-background>
+      }
+    </div>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="ambient-content"
+    eyebrow="Real content"
+    title="Projection preserves forms, focus and responsive flow"
+    description="The ambient layer is hidden from assistive technology and pointer-inert. Content grows naturally with no fixed height or viewport-specific DOM."
+  >
+    <gh-ambient-background class="ambient-feature" preset="cool" intensity="default">
+      <gh-glass-panel variant="glass-elevated" padding="lg" radius="large">
+        <gh-stack gap="md">
+          <gh-tag variant="accent">Accessible composition</gh-tag>
+          <h3>Build context around content—not over it</h3>
+          <p>
+            Long text wraps normally, native controls keep their semantics, and a single decorative
+            layer stays behind the reading order.
+          </p>
+          <form class="ambient-form">
+            <label for="ambient-showcase-email">Email example</label>
+            <input id="ambient-showcase-email" type="email" autocomplete="email" />
+            <gh-button type="button">Continue</gh-button>
+          </form>
+        </gh-stack>
+      </gh-glass-panel>
+    </gh-ambient-background>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="ambient-resilience"
+    eyebrow="Resilience"
+    title="Static by design, predictable by default"
+    description="A semantic solid color paints before gradients. Forced colors removes decoration, and reduced motion is structurally safe because no ambient animation ships."
+  >
+    <gh-surface variant="solid" padding="lg">
+      <div class="guidance-grid">
+        <section>
+          <h3>Do</h3>
+          <ul>
+            <li>Use one ambient region for a hero or section.</li>
+            <li>Keep dense reading content on a solid Surface.</li>
+            <li>Verify light, dark, mobile and forced-colors behavior.</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Don’t</h3>
+          <ul>
+            <li>Nest ambient backgrounds.</li>
+            <li>Place a separate animated field behind every card.</li>
+            <li>Treat decorative color as the only source of hierarchy.</li>
+          </ul>
+        </section>
+      </div>
+    </gh-surface>
+  </showcase-documentation-section>
+
+  <section class="code-example" aria-labelledby="ambient-code-example">
+    <header>
+      <p>Implementation</p>
+      <h2 id="ambient-code-example">Public composition</h2>
+    </header>
+    <showcase-code-preview label="Ambient + Surface" [code]="basicExample" />
+  </section>
+</article>

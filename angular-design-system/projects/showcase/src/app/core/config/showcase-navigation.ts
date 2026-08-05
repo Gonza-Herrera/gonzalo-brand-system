@@ -38,6 +38,11 @@ export const SHOWCASE_NAVIGATION: readonly ShowcaseNavigationItem[] = [
     description: 'Solid and Liquid Glass materials',
   },
   {
+    label: 'Ambient Backgrounds',
+    path: '/ambient-backgrounds',
+    description: 'Environmental presets behind surfaces',
+  },
+  {
     label: 'Layout',
     path: '/layout',
     description: 'Responsive composition primitives',
