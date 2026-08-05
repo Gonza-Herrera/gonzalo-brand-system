@@ -38,6 +38,14 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/surfaces/surfaces').then((module) => module.SurfacesPage),
   },
   {
+    path: 'ambient-backgrounds',
+    title: 'Ambient Backgrounds · Gonzalo Herrera Design System',
+    loadComponent: () =>
+      import('./pages/ambient-backgrounds/ambient-backgrounds').then(
+        (module) => module.AmbientBackgroundsPage,
+      ),
+  },
+  {
     path: 'layout',
     title: 'Layout · Gonzalo Herrera Design System',
     loadComponent: () => import('./pages/layout/layout').then((module) => module.LayoutPage),

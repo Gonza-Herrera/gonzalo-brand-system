@@ -32,6 +32,7 @@ describe('App routing', () => {
       ['/radii', 'Border radius system'],
       ['/shadows', 'Elevation and shadows'],
       ['/surfaces', 'Surface foundations'],
+      ['/ambient-backgrounds', 'Ambient backgrounds'],
       ['/layout', 'Layout primitives'],
       ['/buttons', 'Button'],
       ['/badges', 'Badge'],
