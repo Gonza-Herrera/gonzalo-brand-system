@@ -7,7 +7,9 @@
 ```
 
 This import exposes primitive variables and theme-aware semantic variables. It
-does not apply a global reset.
+does not apply a global reset. It also emits the public native Form Control class
+foundation documented in
+[`form-controls.md`](../../../../../docs/design/liquid-glass/form-controls.md).
 
 Components should prefer semantic properties:
 
@@ -19,6 +21,18 @@ Components should prefer semantic properties:
   box-shadow: var(--gh-shadow-sm);
 }
 ```
+
+Native forms can opt into the shared visual contract without an Angular wrapper:
+
+```html
+<label class="gh-form-field">
+  <span class="gh-form-field__label">Email</span>
+  <input class="gh-input" type="email" />
+</label>
+```
+
+Checkbox, radio, switch, affix, state, Angular Forms, and accessibility guidance lives in the Form
+Control contract. Consumer styles must not reproduce the material recipe.
 
 Primitive color variables are reserved for documentation and approved brand
 expressions. Spacing and radius primitives remain appropriate for component

@@ -37,7 +37,7 @@ The public library currently includes:
   Experience Card, and Project Card.
 - Layout: Container, Section, Stack, Inline, Grid, Cluster, and Divider.
 - Patterns: Hero, Navigation, Footer, Section Heading, Feature Grid, Experience Timeline, Content Highlight, and Contact Callout.
-- Foundations: generated design tokens, opt-in base styles, light/dark themes, and an SSR-safe theme service with system preference support.
+- Foundations: generated design tokens, opt-in base styles, native Form Control classes, light/dark themes, and an SSR-safe theme service with system preference support.
 
 ## Requirements and installation
 

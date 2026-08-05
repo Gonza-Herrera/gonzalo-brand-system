@@ -341,25 +341,6 @@
   color: var(--gh-text-secondary);
 }
 
-.gh-ambient-story-form label {
-  font-weight: var(--gh-font-weight-semibold);
-}
-
-.gh-ambient-story-form input {
-  min-width: 0;
-  padding: var(--gh-space-sm) var(--gh-space-md);
-  border: var(--gh-border-width-default) solid var(--gh-border-default);
-  border-radius: var(--gh-radius-md);
-  background: var(--gh-background-secondary);
-  color: var(--gh-text-primary);
-  font: inherit;
-}
-
-.gh-ambient-story-form input:focus-visible {
-  outline: var(--gh-border-width-focus) solid var(--gh-focus-ring);
-  outline-offset: var(--gh-space-xs);
-}
-
 .gh-card-story-stage {
   display: block;
   padding: var(--gh-space-xl);
@@ -466,25 +447,6 @@
   font-weight: var(--gh-card-metadata-emphasis-font-weight);
 }
 
-.gh-card-story-form label {
-  font-weight: var(--gh-card-metadata-emphasis-font-weight);
-}
-
-.gh-card-story-form input {
-  min-width: 0;
-  padding: var(--gh-card-padding-sm) var(--gh-card-padding-md);
-  border: var(--gh-card-outlined-border-width) solid var(--gh-card-outlined-border-color);
-  border-radius: var(--gh-card-radius-sm);
-  background: var(--gh-card-outlined-background);
-  color: var(--gh-card-outlined-foreground);
-  font: inherit;
-}
-
-.gh-card-story-form input:focus-visible {
-  outline: var(--gh-card-link-focus-ring-width) solid var(--gh-card-link-focus-ring-color);
-  outline-offset: var(--gh-card-link-focus-ring-offset);
-}
-
 .gh-card-story-stat {
   display: grid;
   gap: var(--gh-card-gap-content);
@@ -495,9 +457,36 @@
   line-height: var(--gh-line-height-tight);
 }
 
+.gh-form-story-field {
+  inline-size: min(100%, var(--gh-container-sm));
+}
+
+.gh-form-story-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: var(--gh-form-field-group-gap);
+}
+
+.gh-form-story-stack {
+  display: grid;
+  gap: var(--gh-form-field-group-gap);
+}
+
+.gh-form-story-stack h2 {
+  margin: 0;
+}
+
+.gh-form-story-stage {
+  display: block;
+  padding: var(--gh-space-xl);
+  border: var(--gh-border-width-default) solid var(--gh-border-subtle);
+  border-radius: var(--gh-radius-xl);
+}
+
 @media (max-width: 36rem) {
   .gh-ambient-story-stage,
-  .gh-card-story-stage {
+  .gh-card-story-stage,
+  .gh-form-story-stage {
     padding: var(--gh-space-md);
   }
 }

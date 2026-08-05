@@ -1,0 +1,376 @@
+<article class="page">
+  <header class="page-header">
+    <p>Foundations · Forms</p>
+    <h1>Liquid Glass form controls</h1>
+    <p>
+      A class-based visual foundation for native controls, visible labels, linked guidance and
+      unambiguous states—without replacing browser or Angular Forms behavior.
+    </p>
+  </header>
+
+  <showcase-documentation-section
+    sectionId="form-input-types"
+    eyebrow="Native inputs"
+    title="One visual contract, correct native types"
+    description="Text, email, password, number and search retain their platform semantics, keyboard hints and autofill behavior."
+  >
+    <div class="control-grid">
+      <div class="gh-form-field">
+        <label class="gh-form-field__label" for="forms-name">Text input</label>
+        <input class="gh-input" id="forms-name" type="text" placeholder="Gonzalo Herrera" />
+      </div>
+      <div class="gh-form-field">
+        <label class="gh-form-field__label" for="forms-email">Email input</label>
+        <input
+          class="gh-input"
+          id="forms-email"
+          type="email"
+          inputmode="email"
+          autocomplete="email"
+          placeholder="name@example.com"
+        />
+      </div>
+      <div class="gh-form-field">
+        <label class="gh-form-field__label" for="forms-password">Password input</label>
+        <input
+          class="gh-input"
+          id="forms-password"
+          type="password"
+          autocomplete="current-password"
+          value="demonstration"
+        />
+      </div>
+      <div class="gh-form-field">
+        <label class="gh-form-field__label" for="forms-number">Number input</label>
+        <input class="gh-input" id="forms-number" type="number" min="0" max="100" step="1" />
+      </div>
+      <div class="gh-form-field">
+        <label class="gh-form-field__label" for="forms-search">Search input</label>
+        <input class="gh-input" id="forms-search" type="search" placeholder="Search articles" />
+      </div>
+    </div>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="form-field-anatomy"
+    eyebrow="Form Field"
+    title="Label, hint, required marker and error stay connected"
+    description="Stable IDs and aria-describedby preserve the accessible relationship. Invalid adds a linked message and does not replace the focus ring."
+  >
+    <div class="state-grid">
+      <div class="gh-form-field">
+        <label class="gh-form-field__label" for="forms-hint">
+          Project name
+          <span class="gh-form-field__required">(required)</span>
+        </label>
+        <p class="gh-form-field__hint" id="forms-hint-description">
+          Use the name your team recognizes.
+        </p>
+        <input
+          class="gh-input"
+          id="forms-hint"
+          type="text"
+          aria-describedby="forms-hint-description"
+          required
+        />
+      </div>
+
+      <div class="gh-form-field">
+        <label class="gh-form-field__label" for="forms-invalid">Work email</label>
+        <input
+          class="gh-input"
+          id="forms-invalid"
+          type="email"
+          value="invalid-address"
+          aria-invalid="true"
+          aria-describedby="forms-invalid-error"
+        />
+        <p class="gh-form-field__error" id="forms-invalid-error">
+          Enter an email address in the format name@example.com.
+        </p>
+      </div>
+
+      <div class="gh-form-field">
+        <label class="gh-form-field__label" for="forms-readonly">Read-only value</label>
+        <input
+          class="gh-input"
+          id="forms-readonly"
+          type="text"
+          value="Published configuration"
+          readonly
+        />
+        <p class="gh-form-field__hint">The value remains selectable and readable.</p>
+      </div>
+
+      <div class="gh-form-field">
+        <label class="gh-form-field__label" for="forms-disabled">Disabled value</label>
+        <input
+          class="gh-input"
+          id="forms-disabled"
+          type="text"
+          placeholder="Unavailable action"
+          disabled
+        />
+        <p class="gh-form-field__hint">Disabled is visually distinct from read-only.</p>
+      </div>
+    </div>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="form-textarea-select"
+    eyebrow="Long and constrained values"
+    title="Textarea and native Select"
+    description="Textarea keeps vertical resize and long content; Select preserves platform keyboard and mobile behavior."
+  >
+    <div class="two-column-grid">
+      <div class="gh-form-field">
+        <label class="gh-form-field__label" for="forms-message">Message</label>
+        <textarea
+          class="gh-textarea"
+          id="forms-message"
+          maxlength="240"
+          aria-describedby="forms-message-hint"
+          placeholder="Tell us about the engineering problem you want to solve."
+        ></textarea>
+        <p class="gh-form-field__hint" id="forms-message-hint">
+          Up to 240 characters. The control can grow vertically.
+        </p>
+      </div>
+      <div class="gh-form-field">
+        <label class="gh-form-field__label" for="forms-role">Primary role</label>
+        <select class="gh-select" id="forms-role">
+          <option value="">Choose a role</option>
+          <option value="frontend">Frontend engineering</option>
+          <option value="leadership">Technical leadership</option>
+          <option value="ai">AI-augmented development</option>
+        </select>
+        <p class="gh-form-field__hint">The native select owns its popup and keyboard behavior.</p>
+      </div>
+    </div>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="form-prefix-suffix"
+    eyebrow="Affixes"
+    title="Prefix, suffix and real trailing actions"
+    description="Affixes remain outside the accessible name unless consumers deliberately include them. Actions reuse Icon Button and keep a logical tab order."
+  >
+    <div class="control-grid">
+      <div class="gh-form-field">
+        <label class="gh-form-field__label" for="forms-budget">Budget</label>
+        <div class="gh-control-shell">
+          <span class="gh-control-shell__prefix" aria-hidden="true">€</span>
+          <input class="gh-input" id="forms-budget" type="number" min="0" />
+          <span class="gh-control-shell__suffix" aria-hidden="true">EUR</span>
+        </div>
+      </div>
+      <div class="gh-form-field">
+        <label class="gh-form-field__label" for="forms-action-search">Search documentation</label>
+        <div class="gh-control-shell">
+          <span class="gh-control-shell__prefix" aria-hidden="true">⌕</span>
+          <input class="gh-input" id="forms-action-search" type="search" />
+          <gh-icon-button
+            class="gh-control-shell__action"
+            type="button"
+            size="sm"
+            variant="ghost"
+            aria-label="Run search"
+          >
+            <span aria-hidden="true">→</span>
+          </gh-icon-button>
+        </div>
+      </div>
+    </div>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="form-selection-controls"
+    eyebrow="Selection"
+    title="Checkbox, Radio and Switch remain native"
+    description="Labels provide a generous target. Checked, indeterminate, disabled and focus states do not instantiate separate blurred surfaces."
+  >
+    <div class="selection-grid">
+      <fieldset class="gh-form-group">
+        <legend class="gh-form-field__label">Checkbox</legend>
+        <label class="gh-checkbox">
+          <input class="gh-checkbox__control" type="checkbox" />
+          <span>Unchecked option</span>
+        </label>
+        <label class="gh-checkbox">
+          <input class="gh-checkbox__control" type="checkbox" checked />
+          <span>Checked option</span>
+        </label>
+        <label class="gh-checkbox">
+          <input class="gh-checkbox__control" type="checkbox" [indeterminate]="true" />
+          <span>Indeterminate option</span>
+        </label>
+        <label class="gh-checkbox">
+          <input class="gh-checkbox__control" type="checkbox" checked disabled />
+          <span>Disabled option</span>
+        </label>
+      </fieldset>
+
+      <fieldset class="gh-form-group">
+        <legend class="gh-form-field__label">Radio group</legend>
+        <label class="gh-radio">
+          <input class="gh-radio__control" type="radio" name="forms-plan" value="starter" />
+          <span>Starter</span>
+        </label>
+        <label class="gh-radio">
+          <input
+            class="gh-radio__control"
+            type="radio"
+            name="forms-plan"
+            value="professional"
+            checked
+          />
+          <span>Professional</span>
+        </label>
+        <label class="gh-radio">
+          <input
+            class="gh-radio__control"
+            type="radio"
+            name="forms-plan"
+            value="enterprise"
+            disabled
+          />
+          <span>Enterprise unavailable</span>
+        </label>
+      </fieldset>
+
+      <fieldset class="gh-form-group">
+        <legend class="gh-form-field__label">Switch</legend>
+        <label class="gh-switch">
+          <input class="gh-switch__control" type="checkbox" role="switch" />
+          <span>Off</span>
+        </label>
+        <label class="gh-switch">
+          <input
+            class="gh-switch__control"
+            type="checkbox"
+            role="switch"
+            [formControl]="switchControl"
+          />
+          <span>Receive product updates and occasional technical articles</span>
+        </label>
+        <label class="gh-switch">
+          <input class="gh-switch__control" type="checkbox" role="switch" checked disabled />
+          <span>Disabled</span>
+        </label>
+      </fieldset>
+    </div>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="form-contact-composition"
+    eyebrow="Angular Forms"
+    title="Typed Reactive Forms inside Card"
+    description="Native elements keep FormControl integration. Submission marks controls touched, links errors and lets the migrated Button own submit behavior."
+  >
+    <gh-ambient-background class="form-environment" preset="subtle">
+      <gh-card variant="outlined" padding="lg">
+        <form
+          class="contact-demo"
+          [formGroup]="contactForm"
+          (ngSubmit)="submitContactDemo()"
+          novalidate
+        >
+          <div class="gh-form-field">
+            <label class="gh-form-field__label" for="forms-contact-name">Name</label>
+            <input
+              class="gh-input"
+              id="forms-contact-name"
+              type="text"
+              autocomplete="name"
+              formControlName="name"
+              [attr.aria-invalid]="isInvalid('name') ? 'true' : null"
+              [attr.aria-describedby]="isInvalid('name') ? 'forms-contact-name-error' : null"
+            />
+            @if (isInvalid('name')) {
+              <p class="gh-form-field__error" id="forms-contact-name-error">Enter your name.</p>
+            }
+          </div>
+
+          <div class="gh-form-field">
+            <label class="gh-form-field__label" for="forms-contact-email">Email</label>
+            <input
+              class="gh-input"
+              id="forms-contact-email"
+              type="email"
+              autocomplete="email"
+              inputmode="email"
+              formControlName="email"
+              [attr.aria-invalid]="isInvalid('email') ? 'true' : null"
+              [attr.aria-describedby]="isInvalid('email') ? 'forms-contact-email-error' : null"
+            />
+            @if (isInvalid('email')) {
+              <p class="gh-form-field__error" id="forms-contact-email-error">
+                Enter a valid email address.
+              </p>
+            }
+          </div>
+
+          <div class="gh-form-field contact-demo__message">
+            <label class="gh-form-field__label" for="forms-contact-message">Message</label>
+            <textarea
+              class="gh-textarea"
+              id="forms-contact-message"
+              formControlName="message"
+              [attr.aria-invalid]="isInvalid('message') ? 'true' : null"
+              [attr.aria-describedby]="
+                isInvalid('message') ? 'forms-contact-message-error' : 'forms-contact-message-hint'
+              "
+            ></textarea>
+            <p class="gh-form-field__hint" id="forms-contact-message-hint">
+              Add at least 12 characters.
+            </p>
+            @if (isInvalid('message')) {
+              <p class="gh-form-field__error" id="forms-contact-message-error">
+                Tell us a little more about your message.
+              </p>
+            }
+          </div>
+
+          <gh-button class="contact-demo__message" type="submit">Send demonstration</gh-button>
+        </form>
+      </gh-card>
+    </gh-ambient-background>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="form-guidance"
+    eyebrow="Accessibility and resilience"
+    title="Solid controls remain clear in every environment"
+    description="The control foundation uses no backdrop-filter. System theme resolves through CSS, reduced motion removes transitions and forced colors restores platform rendering for custom choices."
+  >
+    <div class="guidance-grid">
+      <gh-card variant="outlined">
+        <h3>Do</h3>
+        <ul>
+          <li>Use visible labels and stable IDs.</li>
+          <li>Link hint and error text with aria-describedby.</li>
+          <li>Keep native types, required, disabled and read-only attributes.</li>
+        </ul>
+      </gh-card>
+      <gh-card variant="subtle">
+        <h3>Don’t</h3>
+        <ul>
+          <li>Use placeholder as the only accessible name.</li>
+          <li>Apply blur to every compact control.</li>
+          <li>Replace native checkbox, radio or Select keyboard behavior.</li>
+        </ul>
+      </gh-card>
+    </div>
+  </showcase-documentation-section>
+
+  <section class="code-examples" aria-labelledby="form-code-examples">
+    <header>
+      <p>Implementation</p>
+      <h2 id="form-code-examples">Public class examples</h2>
+    </header>
+    <div>
+      <showcase-code-preview label="Form Field and Input" [code]="nativeExample" />
+      <showcase-code-preview label="Native Switch" [code]="selectionExample" />
+    </div>
+  </section>
+</article>

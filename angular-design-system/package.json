@@ -14,6 +14,8 @@
     "test:buttons:ssr": "node --test scripts/buttons.ssr.test.mjs",
     "test:cards": "node --test scripts/cards.test.mjs",
     "test:cards:ssr": "node --test scripts/cards.ssr.test.mjs",
+    "test:form-controls": "node --test scripts/form-controls.test.mjs",
+    "test:form-controls:ssr": "node --test scripts/form-controls.ssr.test.mjs",
     "seo:generate": "node scripts/seo-files.mjs generate",
     "seo:check": "node scripts/seo-files.mjs check",
     "test:seo-files": "node --test scripts/seo-files.test.mjs",
@@ -37,7 +39,7 @@
     "prebuild-storybook": "npm run tokens:check && npm run build:library",
     "build-storybook": "ng run gh-design-system:build-storybook",
     "test-storybook": "test-storybook --ci --failOnConsole",
-    "pretest": "npm run tokens:check && npm run test:tokens && npm run test:surface-primitives && npm run test:ambient-backgrounds && npm run test:buttons && npm run test:cards && npm run seo:check && npm run test:seo-files && npm run test:deployment-config && npm run build:library && npm run test:ambient-backgrounds:ssr && npm run test:buttons:ssr && npm run test:cards:ssr",
+    "pretest": "npm run tokens:check && npm run test:tokens && npm run test:surface-primitives && npm run test:ambient-backgrounds && npm run test:buttons && npm run test:cards && npm run test:form-controls && npm run seo:check && npm run test:seo-files && npm run test:deployment-config && npm run build:library && npm run test:ambient-backgrounds:ssr && npm run test:buttons:ssr && npm run test:cards:ssr && npm run test:form-controls:ssr",
     "test": "ng test gh-design-system --watch=false && ng test showcase --watch=false && ng test portfolio --watch=false",
     "pretest:portfolio": "npm run tokens:check && npm run seo:check && npm run test:seo-files && npm run test:deployment-config && npm run build:library",
     "test:portfolio": "ng test portfolio --watch=false"

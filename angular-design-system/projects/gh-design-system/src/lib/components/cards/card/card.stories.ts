@@ -144,8 +144,8 @@ export const Selected: Story = {
     props: args,
     template: `
       <gh-card [variant]="variant" [interactive]="interactive" [selected]="selected">
-        <label class="gh-card-story-selection">
-          <input type="radio" name="card-story-plan" checked />
+        <label class="gh-card-story-selection gh-radio">
+          <input class="gh-radio__control" type="radio" name="card-story-plan" checked />
           <span><strong>Selected plan</strong><br />The native radio owns selection semantics.</span>
         </label>
       </gh-card>
@@ -256,8 +256,8 @@ export const FormContent: Story = {
       <gh-card variant="outlined">
         <form class="gh-card-story-form" (submit)="$event.preventDefault()">
           <h3>Dense form content stays Solid</h3>
-          <label for="card-story-email">Email</label>
-          <input id="card-story-email" type="email" autocomplete="email" />
+          <label class="gh-form-field__label" for="card-story-email">Email</label>
+          <input class="gh-input" id="card-story-email" type="email" autocomplete="email" />
           <gh-button type="submit">Continue</gh-button>
         </form>
       </gh-card>

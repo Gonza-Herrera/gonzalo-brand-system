@@ -11,6 +11,7 @@ import {
   requiredAmbientSemanticPaths,
   requiredButtonSemanticPaths,
   requiredCardSemanticPaths,
+  requiredFormSemanticPaths,
   requiredLiquidGlassPrimitivePaths,
   requiredLiquidGlassSemanticPaths,
 } from './tokens.mjs';
@@ -196,6 +197,40 @@ test('provides a complete theme-aware Card contract mapped to Surface materials'
   );
 });
 
+test('provides a complete theme-aware native Form Control contract', async () => {
+  const { darkTokens, semanticTokens } = await loadAndValidateTokens();
+
+  for (const tokenPath of requiredFormSemanticPaths) {
+    const lightToken = semanticTokens.get(tokenPath);
+    const darkToken = darkTokens.get(tokenPath);
+
+    assert.ok(lightToken, `Missing light Form token ${tokenPath}`);
+    assert.ok(darkToken, `Missing dark Form token ${tokenPath}`);
+    assert.equal(darkToken.type, lightToken.type, `Theme type mismatch for ${tokenPath}`);
+  }
+
+  assert.equal(
+    semanticTokens.get('formControl.background').value,
+    '{surface.glassSubtle.fallbackBackground}',
+  );
+  assert.equal(
+    semanticTokens.get('formControl.focus.ringColor').value,
+    '{surface.interactive.focus.ringColor}',
+  );
+  assert.equal(
+    semanticTokens.get('choiceControl.checked.background').value,
+    '{action.primary.background}',
+  );
+  assert.equal(
+    semanticTokens.get('switchControl.checked.background').value,
+    '{action.primary.background}',
+  );
+
+  for (const tokenPath of requiredFormSemanticPaths) {
+    assert.doesNotMatch(String(semanticTokens.get(tokenPath).value), /backdrop-filter|blur\(/i);
+  }
+});
+
 test('provides solid fallbacks and global motion and focus aliases for future surfaces', async () => {
   const { semanticTokens } = await loadAndValidateTokens();
 
@@ -276,6 +311,15 @@ test('generates unique prefixed CSS variables for primitives and semantic themes
     assert.equal(countOccurrences(dark, mapKey), 1, `${variable} must have one dark value`);
   }
 
+  for (const tokenPath of requiredFormSemanticPaths) {
+    const variable = semanticCssName(tokenPath);
+    const mapKey = `'${variable.replace('--gh-', '')}':`;
+
+    assert.equal(countOccurrences(semantic, `'${variable.replace('--gh-', '')}',`), 1);
+    assert.equal(countOccurrences(light, mapKey), 1, `${variable} must have one light value`);
+    assert.equal(countOccurrences(dark, mapKey), 1, `${variable} must have one dark value`);
+  }
+
   assert.match(light, /'card-media-aspect-ratio': "16 \/ 9"/);
   assert.match(dark, /'card-media-aspect-ratio': "16 \/ 9"/);
 
@@ -286,7 +330,8 @@ test('generates unique prefixed CSS variables for primitives and semantic themes
     /\{[a-z][A-Za-z0-9]*(?:\.[A-Za-z0-9]+)+\}/,
     'Generated output contains an unresolved alias',
   );
-  assert.doesNotMatch(allScss, /\b(?:undefined|null|placeholder)\b/i);
+  assert.doesNotMatch(allScss, /\b(?:undefined|null)\b/i);
+  assert.doesNotMatch(allScss, /(?:^|[:\s])placeholder(?:[;\s]|$)/im);
 });
 
 test('keeps shared primitive durations positive and typed visual values non-empty', async () => {

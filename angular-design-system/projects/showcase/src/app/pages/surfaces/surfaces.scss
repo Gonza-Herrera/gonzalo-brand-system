@@ -93,26 +93,6 @@
   gap: var(--gh-space-sm);
 }
 
-.surface-form label {
-  color: var(--gh-text-primary);
-  font-weight: var(--gh-font-weight-semibold);
-}
-
-.surface-form input {
-  min-width: 0;
-  padding: var(--gh-space-sm) var(--gh-space-md);
-  border: var(--gh-border-width-default) solid var(--gh-border-default);
-  border-radius: var(--gh-radius-md);
-  background: var(--gh-background-secondary);
-  color: var(--gh-text-primary);
-  font: inherit;
-}
-
-.surface-form input:focus-visible {
-  outline: var(--gh-border-width-focus) solid var(--gh-focus-ring);
-  outline-offset: var(--gh-space-xs);
-}
-
 .surface-tags {
   display: flex;
   flex-wrap: wrap;

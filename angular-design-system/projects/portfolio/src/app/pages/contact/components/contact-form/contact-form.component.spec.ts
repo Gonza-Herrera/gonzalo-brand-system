@@ -75,6 +75,9 @@ describe('ContactFormComponent', () => {
       'contact-subject',
       'contact-message',
     ]);
+    expect(element.querySelectorAll('input.gh-input')).toHaveLength(3);
+    expect(element.querySelectorAll('textarea.gh-textarea')).toHaveLength(1);
+    expect(element.querySelectorAll('.contact-field.gh-form-field')).toHaveLength(4);
     expect(honeypot?.type).toBe('checkbox');
     expect(honeypot?.tabIndex).toBe(-1);
     expect(honeypot?.autocomplete).toBe('off');
@@ -84,6 +87,9 @@ describe('ContactFormComponent', () => {
 
     for (const control of visibleControls) {
       expect(element.querySelector(`label[for="${control.id}"]`)).not.toBeNull();
+      expect(
+        element.querySelector(`label[for="${control.id}"].gh-form-field__label`),
+      ).not.toBeNull();
       expect(control.hasAttribute('placeholder')).toBe(true);
       expect(control.hasAttribute('aria-describedby')).toBe(true);
     }

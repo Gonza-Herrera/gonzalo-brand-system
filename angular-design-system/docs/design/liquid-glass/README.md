@@ -5,8 +5,9 @@ Glass phase. It defines the language before tokens, primitives, components, or p
 
 PR 21 established the documentation-only direction, PR 22 added the token contract, PR 23 provides
 the reference Surface primitives, PR 24 provides controlled ambient backgrounds, PR 25 migrated
-actions, and PR 26 migrates the existing Card family. Hero's existing `glass` variant still predates
-this language and is not a reference implementation until its dedicated migration.
+actions, PR 26 migrates the existing Card family, and PR 27 provides the native Form Control
+foundation. Hero's existing `glass` variant still predates this language and is not a reference
+implementation until its dedicated migration.
 
 ## Reference map
 
@@ -30,6 +31,8 @@ this language and is not a reference implementation until its dedicated migratio
     state behavior, fallback policy, accessibility, performance, and migration notes.
 15. [Cards](cards.md) — the compatible Card material mapping, anatomy, slots, native interaction,
     fallback, themes, accessibility, performance, composition and Portfolio considerations.
+16. [Form controls](form-controls.md) — native control classes, component tokens, states, Angular
+    Forms compatibility, fallbacks, accessibility, performance, and migration guidance.
 
 ## How to use these documents
 

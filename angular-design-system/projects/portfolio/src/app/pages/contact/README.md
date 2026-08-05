@@ -26,6 +26,10 @@ ContactPage composition
 value, validates injected configuration, maps the seven permitted Web3Forms fields and normalizes
 provider/network failures. It does not own UI copy, form resets, navigation or logging.
 
+The native fields consume the Design System's public Form Control classes from the global styles
+entry point. They remain native typed Reactive Forms controls; the shared foundation changes paint
+and spacing only and introduces no wrapper or custom value accessor.
+
 ## Form behavior
 
 The form collects only Name, Email, Subject and Message. `botcheck` is an off-screen checkbox used

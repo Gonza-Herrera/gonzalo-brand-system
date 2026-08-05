@@ -1,0 +1,469 @@
+.gh-form-field {
+  display: grid;
+  min-inline-size: 0;
+  align-content: start;
+  gap: var(--gh-form-field-gap);
+}
+
+.gh-form-field__label {
+  color: var(--gh-form-field-label-foreground);
+  font-size: var(--gh-form-field-label-font-size);
+  font-weight: var(--gh-form-field-label-font-weight);
+  line-height: var(--gh-form-field-label-line-height);
+}
+
+.gh-form-field__required,
+.gh-form-field__optional {
+  color: var(--gh-form-field-required-foreground);
+  font-weight: inherit;
+}
+
+.gh-form-field__hint,
+.gh-form-field__error {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.gh-form-field__hint {
+  color: var(--gh-form-field-hint-foreground);
+  font-size: var(--gh-form-field-hint-font-size);
+}
+
+.gh-form-field__error {
+  color: var(--gh-form-field-error-foreground);
+  font-size: var(--gh-form-field-error-font-size);
+  font-weight: var(--gh-form-field-error-font-weight);
+}
+
+.gh-form-group {
+  display: grid;
+  min-inline-size: 0;
+  gap: var(--gh-form-field-group-gap);
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+
+.gh-input,
+.gh-textarea,
+.gh-select {
+  inline-size: 100%;
+  min-inline-size: 0;
+  border: var(--gh-form-control-border-width) solid var(--gh-form-control-border-color);
+  border-radius: var(--gh-form-control-radius);
+  background: var(--gh-form-control-background);
+  box-shadow: var(--gh-form-control-shadow), var(--gh-form-control-inner-shadow);
+  color: var(--gh-form-control-foreground);
+  font: inherit;
+  font-size: var(--gh-form-control-font-size);
+  line-height: var(--gh-form-control-line-height);
+  transition:
+    background-color var(--gh-form-control-transition-duration)
+      var(--gh-form-control-transition-easing),
+    border-color var(--gh-form-control-transition-duration) var(--gh-form-control-transition-easing),
+    box-shadow var(--gh-form-control-transition-duration) var(--gh-form-control-transition-easing),
+    color var(--gh-form-control-transition-duration) var(--gh-form-control-transition-easing);
+}
+
+.gh-input,
+.gh-select {
+  block-size: var(--gh-form-control-height);
+  padding-inline: var(--gh-form-control-padding-inline);
+}
+
+.gh-input::placeholder,
+.gh-textarea::placeholder {
+  color: var(--gh-form-control-placeholder-foreground);
+  opacity: 1;
+}
+
+.gh-textarea {
+  min-block-size: var(--gh-form-control-textarea-min-height);
+  padding: var(--gh-form-control-gap) var(--gh-form-control-padding-inline);
+  resize: vertical;
+}
+
+.gh-select {
+  cursor: pointer;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .gh-input:hover:not(:disabled):not(:read-only),
+  .gh-textarea:hover:not(:disabled):not(:read-only),
+  .gh-select:hover:not(:disabled) {
+    border-color: var(--gh-form-control-hover-border-color);
+    background: var(--gh-form-control-hover-background);
+  }
+}
+
+.gh-input:focus-visible,
+.gh-textarea:focus-visible,
+.gh-select:focus-visible,
+.gh-control-shell:focus-within {
+  border-color: var(--gh-form-control-focus-border-color);
+  background: var(--gh-form-control-focus-background);
+  outline: var(--gh-form-control-focus-ring-width) solid var(--gh-form-control-focus-ring-color);
+  outline-offset: var(--gh-form-control-focus-ring-offset);
+  box-shadow: var(--gh-form-control-focus-shadow), var(--gh-form-control-inner-shadow);
+}
+
+.gh-input[aria-invalid='true'],
+.gh-textarea[aria-invalid='true'],
+.gh-select[aria-invalid='true'],
+.gh-control-shell--invalid {
+  border-color: var(--gh-form-control-invalid-border-color);
+  background: var(--gh-form-control-invalid-background);
+  color: var(--gh-form-control-invalid-foreground);
+}
+
+.gh-input:disabled,
+.gh-textarea:disabled,
+.gh-select:disabled {
+  border-color: var(--gh-form-control-disabled-border-color);
+  background: var(--gh-form-control-disabled-background);
+  box-shadow: none;
+  color: var(--gh-form-control-disabled-foreground);
+  cursor: not-allowed;
+}
+
+.gh-input:disabled::placeholder,
+.gh-textarea:disabled::placeholder {
+  color: var(--gh-form-control-disabled-placeholder-foreground);
+}
+
+.gh-input:read-only,
+.gh-textarea:read-only {
+  border-color: var(--gh-form-control-readonly-border-color);
+  background: var(--gh-form-control-readonly-background);
+  color: var(--gh-form-control-readonly-foreground);
+  cursor: text;
+}
+
+.gh-control-shell {
+  display: flex;
+  min-inline-size: 0;
+  min-block-size: var(--gh-form-control-height);
+  align-items: center;
+  gap: var(--gh-form-control-gap);
+  padding-inline: var(--gh-form-control-padding-inline);
+  border: var(--gh-form-control-border-width) solid var(--gh-form-control-border-color);
+  border-radius: var(--gh-form-control-radius);
+  background: var(--gh-form-control-background);
+  box-shadow: var(--gh-form-control-shadow), var(--gh-form-control-inner-shadow);
+  color: var(--gh-form-control-foreground);
+  transition:
+    background-color var(--gh-form-control-transition-duration)
+      var(--gh-form-control-transition-easing),
+    border-color var(--gh-form-control-transition-duration) var(--gh-form-control-transition-easing),
+    box-shadow var(--gh-form-control-transition-duration) var(--gh-form-control-transition-easing);
+}
+
+.gh-control-shell > .gh-input,
+.gh-control-shell > .gh-select {
+  flex: 1 1 auto;
+  block-size: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  outline: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.gh-control-shell__prefix,
+.gh-control-shell__suffix,
+.gh-control-shell__action {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  color: var(--gh-form-control-icon-foreground);
+}
+
+.gh-control-shell__prefix > svg,
+.gh-control-shell__suffix > svg {
+  inline-size: var(--gh-form-control-icon-size);
+  block-size: var(--gh-form-control-icon-size);
+}
+
+@supports selector(.gh-control-shell:has(> .gh-input)) {
+  .gh-control-shell:has(> [aria-invalid='true']) {
+    border-color: var(--gh-form-control-invalid-border-color);
+    background: var(--gh-form-control-invalid-background);
+  }
+
+  .gh-control-shell:has(> :disabled) {
+    border-color: var(--gh-form-control-disabled-border-color);
+    background: var(--gh-form-control-disabled-background);
+    box-shadow: none;
+    color: var(--gh-form-control-disabled-foreground);
+    cursor: not-allowed;
+  }
+
+  .gh-control-shell:has(> :read-only) {
+    border-color: var(--gh-form-control-readonly-border-color);
+    background: var(--gh-form-control-readonly-background);
+  }
+}
+
+.gh-checkbox,
+.gh-radio,
+.gh-switch {
+  display: inline-flex;
+  min-inline-size: 0;
+  min-block-size: var(--gh-choice-control-target-size);
+  align-items: center;
+  gap: var(--gh-choice-control-gap);
+  color: var(--gh-form-field-label-foreground);
+  cursor: pointer;
+}
+
+.gh-checkbox__control,
+.gh-radio__control {
+  position: relative;
+  flex: none;
+  inline-size: var(--gh-choice-control-size);
+  block-size: var(--gh-choice-control-size);
+  appearance: none;
+  border: var(--gh-choice-control-border-width) solid var(--gh-choice-control-border-color);
+  background: var(--gh-choice-control-background);
+  color: var(--gh-choice-control-indicator);
+  cursor: pointer;
+  transition:
+    background-color var(--gh-choice-control-transition-duration)
+      var(--gh-choice-control-transition-easing),
+    border-color var(--gh-choice-control-transition-duration)
+      var(--gh-choice-control-transition-easing),
+    box-shadow var(--gh-choice-control-transition-duration)
+      var(--gh-choice-control-transition-easing);
+}
+
+.gh-checkbox__control {
+  border-radius: var(--gh-choice-control-checkbox-radius);
+}
+
+.gh-radio__control {
+  border-radius: var(--gh-choice-control-radio-radius);
+}
+
+.gh-checkbox__control::after {
+  position: absolute;
+  inset: 45% auto auto 50%;
+  inline-size: calc(var(--gh-choice-control-size) / 4);
+  block-size: calc(var(--gh-choice-control-size) / 2);
+  border: solid currentcolor;
+  border-width: 0 var(--gh-choice-control-border-width) var(--gh-choice-control-border-width) 0;
+  content: '';
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.gh-checkbox__control:indeterminate::after {
+  inset: 50% auto auto 50%;
+  inline-size: calc(var(--gh-choice-control-size) / 2);
+  block-size: var(--gh-choice-control-border-width);
+  border: 0;
+  background: currentcolor;
+  opacity: 1;
+  transform: translate(-50%, -50%);
+}
+
+.gh-checkbox__control:checked,
+.gh-checkbox__control:indeterminate,
+.gh-radio__control:checked {
+  border-color: var(--gh-choice-control-checked-border-color);
+  background: var(--gh-choice-control-checked-background);
+  color: var(--gh-choice-control-checked-indicator);
+}
+
+.gh-checkbox__control:checked::after {
+  opacity: 1;
+}
+
+.gh-radio__control:checked {
+  box-shadow: inset 0 0 0 calc(var(--gh-choice-control-size) / 4)
+    var(--gh-choice-control-checked-indicator);
+}
+
+.gh-checkbox__control:focus-visible,
+.gh-radio__control:focus-visible,
+.gh-switch__control:focus-visible {
+  outline: var(--gh-choice-control-focus-ring-width) solid var(--gh-choice-control-focus-ring-color);
+  outline-offset: var(--gh-choice-control-focus-ring-offset);
+}
+
+.gh-checkbox__control[aria-invalid='true'],
+.gh-radio__control[aria-invalid='true'] {
+  border-color: var(--gh-choice-control-invalid-border-color);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .gh-checkbox:hover .gh-checkbox__control:not(:disabled):not(:checked):not(:indeterminate),
+  .gh-radio:hover .gh-radio__control:not(:disabled):not(:checked) {
+    border-color: var(--gh-choice-control-hover-border-color);
+    background: var(--gh-choice-control-hover-background);
+  }
+}
+
+.gh-checkbox__control:disabled,
+.gh-radio__control:disabled {
+  border-color: var(--gh-choice-control-disabled-border-color);
+  background: var(--gh-choice-control-disabled-background);
+  color: var(--gh-choice-control-disabled-indicator);
+  cursor: not-allowed;
+}
+
+.gh-radio__control:checked:disabled {
+  box-shadow: inset 0 0 0 calc(var(--gh-choice-control-size) / 4)
+    var(--gh-choice-control-disabled-indicator);
+}
+
+.gh-switch {
+  min-block-size: var(--gh-switch-control-target-size);
+}
+
+.gh-switch__control {
+  position: relative;
+  flex: none;
+  inline-size: var(--gh-switch-control-track-width);
+  block-size: var(--gh-switch-control-track-height);
+  appearance: none;
+  border: var(--gh-switch-control-border-width) solid var(--gh-switch-control-border-color);
+  border-radius: var(--gh-switch-control-radius);
+  background: var(--gh-switch-control-background);
+  cursor: pointer;
+  transition:
+    background-color var(--gh-choice-control-transition-duration)
+      var(--gh-choice-control-transition-easing),
+    border-color var(--gh-choice-control-transition-duration)
+      var(--gh-choice-control-transition-easing);
+}
+
+.gh-switch__control::after {
+  position: absolute;
+  inset: 50% auto auto var(--gh-switch-control-thumb-inset);
+  inline-size: var(--gh-switch-control-thumb-size);
+  block-size: var(--gh-switch-control-thumb-size);
+  border-radius: var(--gh-switch-control-radius);
+  background: var(--gh-switch-control-thumb-background);
+  box-shadow: var(--gh-switch-control-thumb-shadow);
+  content: '';
+  transform: translateY(-50%);
+  transition:
+    background-color var(--gh-choice-control-transition-duration)
+      var(--gh-choice-control-transition-easing),
+    transform var(--gh-choice-control-transition-duration)
+      var(--gh-choice-control-transition-easing);
+}
+
+.gh-switch__control:checked {
+  border-color: var(--gh-switch-control-checked-border-color);
+  background: var(--gh-switch-control-checked-background);
+}
+
+.gh-switch__control:checked::after {
+  background: var(--gh-switch-control-checked-thumb-background);
+  transform: translate(
+    calc(
+      var(--gh-switch-control-track-width) - var(--gh-switch-control-thumb-size) -
+        (var(--gh-switch-control-thumb-inset) * 2)
+    ),
+    -50%
+  );
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .gh-switch:hover .gh-switch__control:not(:disabled):not(:checked) {
+    border-color: var(--gh-switch-control-hover-border-color);
+    background: var(--gh-switch-control-hover-background);
+  }
+}
+
+.gh-switch__control:disabled {
+  border-color: var(--gh-switch-control-disabled-border-color);
+  background: var(--gh-switch-control-disabled-background);
+  cursor: not-allowed;
+}
+
+.gh-switch__control:disabled::after {
+  background: var(--gh-switch-control-disabled-thumb-background);
+  box-shadow: none;
+}
+
+@supports selector(.gh-checkbox:has(> :disabled)) {
+  .gh-checkbox:has(> :disabled),
+  .gh-radio:has(> :disabled) {
+    color: var(--gh-choice-control-disabled-label);
+    cursor: not-allowed;
+  }
+
+  .gh-switch:has(> :disabled) {
+    color: var(--gh-switch-control-disabled-label);
+    cursor: not-allowed;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gh-input,
+  .gh-textarea,
+  .gh-select,
+  .gh-control-shell,
+  .gh-checkbox__control,
+  .gh-radio__control,
+  .gh-switch__control,
+  .gh-switch__control::after {
+    transition: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .gh-input,
+  .gh-textarea,
+  .gh-select,
+  .gh-control-shell {
+    border-color: CanvasText;
+    background: Canvas;
+    box-shadow: none;
+    color: CanvasText;
+  }
+
+  .gh-input:focus-visible,
+  .gh-textarea:focus-visible,
+  .gh-select:focus-visible,
+  .gh-control-shell:focus-within,
+  .gh-checkbox__control:focus-visible,
+  .gh-radio__control:focus-visible,
+  .gh-switch__control:focus-visible {
+    outline-color: Highlight;
+  }
+
+  .gh-input[aria-invalid='true'],
+  .gh-textarea[aria-invalid='true'],
+  .gh-select[aria-invalid='true'],
+  .gh-control-shell--invalid,
+  .gh-checkbox__control[aria-invalid='true'],
+  .gh-radio__control[aria-invalid='true'] {
+    border-color: Mark;
+  }
+
+  .gh-input:disabled,
+  .gh-textarea:disabled,
+  .gh-select:disabled,
+  .gh-checkbox__control:disabled,
+  .gh-radio__control:disabled,
+  .gh-switch__control:disabled {
+    border-color: GrayText;
+    color: GrayText;
+  }
+
+  .gh-checkbox__control,
+  .gh-radio__control,
+  .gh-switch__control {
+    appearance: auto;
+    accent-color: SelectedItem;
+  }
+
+  .gh-checkbox__control::after,
+  .gh-switch__control::after {
+    content: none;
+  }
+}
