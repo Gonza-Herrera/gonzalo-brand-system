@@ -1,63 +1,73 @@
 <article class="page">
   <header class="page-header">
     <p>Components · Content</p>
-    <h1>Card family</h1>
+    <h1>Liquid Glass Card family</h1>
     <p>
-      A compositional surface and three typed content cards for articles, professional experience
-      and projects.
+      One backward-compatible Card system with four material mappings, native interaction and typed
+      editorial, experience and project compositions.
     </p>
   </header>
 
   <showcase-documentation-section
-    sectionId="base-card-variants"
-    eyebrow="Base Card"
-    title="Four controlled surface treatments"
-    description="Interactive changes visual feedback only; links and buttons inside the Card retain native responsibility."
+    sectionId="base-card-materials"
+    eyebrow="Material strategy"
+    title="Hierarchy before translucency"
+    description="The existing variants now map to semantic Surface materials. Outlined remains the safe Solid default; blur is reserved for suitable contexts."
   >
-    <div class="base-card-grid">
-      @for (item of variants; track item.variant) {
-        <div class="card-stage" [class.card-stage--glass]="item.variant === 'glass'">
+    <gh-ambient-background class="card-environment" preset="brand" intensity="default">
+      <div class="base-card-grid">
+        @for (item of variants; track item.variant) {
           <gh-card [variant]="item.variant" fullHeight>
             <div ghCardHeader>
+              <p class="material-label">{{ item.variant }}</p>
               <h3>{{ item.label }}</h3>
             </div>
             <div ghCardContent>
               <p>{{ item.description }}</p>
             </div>
           </gh-card>
-        </div>
-      }
-    </div>
+        }
+      </div>
+    </gh-ambient-background>
   </showcase-documentation-section>
 
   <showcase-documentation-section
-    sectionId="base-card-options"
-    eyebrow="Composition"
-    title="Padding, radius and visual states"
-    description="Slots remain optional and default projected content stays inside the padded body."
+    sectionId="base-card-states"
+    eyebrow="Visual states"
+    title="Interaction stays semantic"
+    description="Interactive and selected are visual states layered over any material. Native controls retain focus, activation and selection semantics."
   >
     <div class="option-grid">
-      <gh-card interactive>
+      <gh-card variant="subtle" interactive>
         <div ghCardHeader><h3>Interactive surface</h3></div>
         <div ghCardContent>
-          <p>Hover feedback does not make the article itself clickable.</p>
+          <p>
+            Hover, active and focus-within reinforce a real action without making the article
+            clickable.
+          </p>
         </div>
-        <div ghCardFooter>
+        <div ghCardFooter class="card-actions">
           <gh-button variant="secondary" size="sm">Native action</gh-button>
+          <gh-icon-button size="sm" aria-label="More Card actions">
+            <span aria-hidden="true">•••</span>
+          </gh-icon-button>
         </div>
       </gh-card>
 
-      <gh-card selected>
-        <div ghCardHeader><h3>Selected surface</h3></div>
-        <div ghCardContent>
-          <p>A thicker inset indication and changed surface reinforce selection.</p>
-        </div>
+      <gh-card variant="glass" interactive selected>
+        <label class="selection-example">
+          <input type="radio" name="showcase-card-selection" checked />
+          <span>
+            <strong>Selected surface</strong>
+            <span>The radio owns selection; Card supplies a visible non-color indicator.</span>
+          </span>
+        </label>
       </gh-card>
 
       <gh-card fullHeight>
         <div ghCardHeader><h3>Full height</h3></div>
         <div ghCardContent>
-          <p>Useful for equal-height documentation grids without a public Grid primitive.</p>
+          <p>Supports equal-height documentation grids without imposing a fixed content height.</p>
         </div>
       </gh-card>
     </div>
@@ -88,10 +98,58 @@
   </showcase-documentation-section>
 
   <showcase-documentation-section
+    sectionId="card-anatomy"
+    eyebrow="Anatomy and slots"
+    title="Media, header, content, footer and actions"
+    description="Projection order is unchanged. Only media clips to the Card radius; actions wrap and reuse the migrated Button family."
+  >
+    <div class="anatomy-grid">
+      <gh-card padding="none" variant="subtle">
+        <img
+          ghCardMedia
+          class="card-media"
+          src="cards/project-design-system.svg"
+          alt="Abstract Design System component collection"
+        />
+        <div ghCardHeader class="card-padded-region">
+          <p class="material-label">Header slot</p>
+          <h3>Stable media composition</h3>
+        </div>
+        <div ghCardContent class="card-padded-region card-padded-region--content">
+          <p>Content grows naturally and preserves logical DOM order at every viewport.</p>
+        </div>
+        <div ghCardFooter class="card-padded-region card-actions">
+          <gh-button size="sm">Primary action</gh-button>
+          <gh-button variant="secondary" size="sm">Secondary</gh-button>
+        </div>
+      </gh-card>
+
+      <gh-card variant="outlined">
+        <form class="card-form" (submit)="$event.preventDefault()">
+          <h3>Dense form content</h3>
+          <p>Complex input remains on the predictable Solid material.</p>
+          <label for="card-showcase-email">Email example</label>
+          <input id="card-showcase-email" type="email" autocomplete="email" />
+          <gh-button type="submit">Continue</gh-button>
+        </form>
+      </gh-card>
+
+      <gh-card variant="subtle">
+        <div ghCardHeader><p class="material-label">Stat composition</p></div>
+        <div ghCardContent class="stat-content">
+          <strong>98%</strong>
+          <span>successful builds</span>
+        </div>
+        <div ghCardFooter><span>Last 30 days</span></div>
+      </gh-card>
+    </div>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
     sectionId="article-cards"
     eyebrow="Article Card"
-    title="Educational content with native navigation"
-    description="Images are optional, metadata is preformatted and external links expose safe attributes."
+    title="Editorial content with native navigation"
+    description="Featured articles inherit Elevated; standard articles inherit Solid. Images remain optional and external links keep safe attributes."
   >
     <div class="two-column-grid">
       @for (article of articles; track article.title) {
@@ -103,8 +161,8 @@
   <showcase-documentation-section
     sectionId="experience-cards"
     eyebrow="Experience Card"
-    title="Semantic professional history"
-    description="All organizations and experience details below are clearly demonstrative examples."
+    title="Dense professional history"
+    description="Experience remains Solid by default; highlighted roles use Elevated without changing data, headings or reading order."
   >
     <div class="two-column-grid">
       @for (experience of experiences; track experience.role) {
@@ -116,13 +174,79 @@
   <showcase-documentation-section
     sectionId="project-cards"
     eyebrow="Project Card"
-    title="Portfolio content across orientations and states"
-    description="Project actions remain native links and technology metadata reuses the public Tag component."
+    title="Feature and horizontal compositions"
+    description="The existing horizontal API remains CSS-responsive and returns to vertical on narrow screens. Project actions remain native links."
   >
     <div class="project-grid">
       <gh-project-card [project]="projects[0]!" />
       <gh-project-card [project]="projects[1]!" orientation="horizontal" />
       <gh-project-card [project]="projects[2]!" />
+    </div>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="card-environments"
+    eyebrow="Contexts"
+    title="Ambient when useful, Solid when necessary"
+    description="Theme switching is handled by the Showcase shell. Cards do not inspect light, dark or system mode and their DOM remains deterministic."
+  >
+    <div class="environment-grid">
+      <gh-ambient-background class="card-environment" preset="brand">
+        <gh-card variant="glass">
+          <h3>Brand ambient</h3>
+          <p>Feature emphasis with one bounded filtered region.</p>
+        </gh-card>
+      </gh-ambient-background>
+
+      <gh-ambient-background class="card-environment" preset="cool">
+        <gh-card variant="elevated">
+          <h3>Cool ambient</h3>
+          <p>Higher depth for a prominent summary.</p>
+        </gh-card>
+      </gh-ambient-background>
+
+      <gh-surface variant="solid" padding="lg" radius="large">
+        <gh-card variant="outlined">
+          <h3>Solid environment</h3>
+          <p>Predictable contrast for long-form or critical content.</p>
+        </gh-card>
+      </gh-surface>
+
+      <gh-ambient-background class="card-environment" preset="subtle">
+        <gh-card variant="glass">
+          <h3>One Glass parent</h3>
+          <p>Nested dense content switches back to Solid.</p>
+          <gh-surface variant="solid" padding="sm" radius="small">
+            <strong>Solid nested region</strong>
+          </gh-surface>
+        </gh-card>
+      </gh-ambient-background>
+    </div>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="card-guidance"
+    eyebrow="Quality guidance"
+    title="Fallback, accessibility and performance"
+    description="Glass always paints an opaque fallback before feature detection enhances it. Reduced motion and forced colors preserve state without decorative dependence."
+  >
+    <div class="guidance-grid">
+      <gh-card variant="outlined">
+        <h3>Do</h3>
+        <ul>
+          <li>Use Solid for dense content, forms and critical information.</li>
+          <li>Keep links, buttons, radios and checkboxes native.</li>
+          <li>Reserve media space and allow content to wrap.</li>
+        </ul>
+      </gh-card>
+      <gh-card variant="subtle">
+        <h3>Don’t</h3>
+        <ul>
+          <li>Turn every Card into Glass or nest filtered materials.</li>
+          <li>Animate backdrop-filter or attach click semantics to the article.</li>
+          <li>Use large blurred Card grids where Solid or Subtle is enough.</li>
+        </ul>
+      </gh-card>
     </div>
   </showcase-documentation-section>
 

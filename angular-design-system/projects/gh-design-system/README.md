@@ -180,10 +180,12 @@ import {
 } from 'gh-design-system';
 ```
 
-`GhCardComponent` owns shared surface, spacing, radius, elevation and visual
-states. Specialized Cards consume typed data models and compose Badge and Tag
-without class inheritance. See the [`Card family`](src/lib/components/cards)
-documentation.
+`GhCardComponent` owns shared surface, spacing, radius, elevation and visual states. Existing
+variants map through Card component tokens to Solid, Glass Subtle, Glass and Glass Elevated while
+interactive/selected remain state. Specialized Cards consume typed data models and compose Badge
+and Tag without class inheritance. See the
+[`Card`](src/lib/components/cards/card/README.md) and
+[`Liquid Glass Card`](../../docs/design/liquid-glass/cards.md) documentation.
 
 Article Card supports optional content type, category, topics, intrinsic image dimensions,
 preformatted and machine-readable publication dates, external-link safety and a localized

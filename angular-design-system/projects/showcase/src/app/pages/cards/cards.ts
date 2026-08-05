@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {
+  GhAmbientBackgroundComponent,
   GhArticleCardComponent,
   type GhArticleCardData,
   GhButtonComponent,
@@ -9,8 +10,10 @@ import {
   type GhCardVariant,
   GhExperienceCardComponent,
   type GhExperienceCardData,
+  GhIconButtonComponent,
   GhProjectCardComponent,
   type GhProjectCardData,
+  GhSurfaceComponent,
 } from 'gh-design-system';
 
 import { CodePreview } from '../../shared/components/code-preview/code-preview';
@@ -28,21 +31,40 @@ interface CardVariantExample {
   imports: [
     CodePreview,
     DocumentationSection,
+    GhAmbientBackgroundComponent,
     GhArticleCardComponent,
     GhButtonComponent,
     GhCardComponent,
     GhExperienceCardComponent,
+    GhIconButtonComponent,
     GhProjectCardComponent,
+    GhSurfaceComponent,
   ],
   templateUrl: './cards.html',
   styleUrl: './cards.scss',
 })
 export class CardsPage {
   protected readonly variants = [
-    { label: 'Outlined', description: 'Default structured surface.', variant: 'outlined' },
-    { label: 'Elevated', description: 'Highlighted content with elevation.', variant: 'elevated' },
-    { label: 'Subtle', description: 'Lower hierarchy on a soft surface.', variant: 'subtle' },
-    { label: 'Glass', description: 'Limited translucent highlight treatment.', variant: 'glass' },
+    {
+      label: 'Outlined · Solid',
+      description: 'Safe default for dense or critical content.',
+      variant: 'outlined',
+    },
+    {
+      label: 'Subtle · Glass Subtle',
+      description: 'Soft hierarchy for editorial grids and previews.',
+      variant: 'subtle',
+    },
+    {
+      label: 'Glass · Glass',
+      description: 'Feature emphasis over a meaningful ambient context.',
+      variant: 'glass',
+    },
+    {
+      label: 'Elevated · Glass Elevated',
+      description: 'Controlled depth for prominent summaries and actions.',
+      variant: 'elevated',
+    },
   ] as const satisfies readonly CardVariantExample[];
   protected readonly paddings = [
     'none',
@@ -134,13 +156,17 @@ export class CardsPage {
     },
   ];
 
-  protected readonly baseCardExample = `<gh-card variant="elevated">
+  protected readonly baseCardExample = `<gh-card variant="glass" interactive>
   <div ghCardHeader>
     <h2>Engineering Leadership</h2>
   </div>
 
   <div ghCardContent>
     <p>Helping teams build better software.</p>
+  </div>
+
+  <div ghCardFooter>
+    <gh-button>Explore</gh-button>
   </div>
 </gh-card>`;
   protected readonly articleExample = `<gh-article-card [article]="article" />`;

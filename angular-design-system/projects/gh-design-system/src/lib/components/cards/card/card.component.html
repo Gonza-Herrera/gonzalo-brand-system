@@ -1,4 +1,13 @@
-<article [class]="cardClasses()" [attr.aria-label]="ariaLabel()">
+<article
+  [class]="cardClasses()"
+  [attr.aria-label]="ariaLabel()"
+  [attr.data-variant]="variant()"
+  [attr.data-padding]="padding()"
+  [attr.data-radius]="radius()"
+  [attr.data-interactive]="interactive() ? 'true' : null"
+  [attr.data-selected]="selected() ? 'true' : null"
+  [attr.data-full-height]="fullHeight() ? 'true' : null"
+>
   <div class="gh-card__media">
     <ng-content select="[ghCardMedia]" />
   </div>

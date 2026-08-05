@@ -5,7 +5,7 @@ import { STORY_EXPERIENCE } from '../../../../../../../stories/shared/story-data
 const meta: Meta<GhExperienceCardComponent> = {
   title: 'Components/Cards/Experience Card',
   component: GhExperienceCardComponent,
-  tags: ['autodocs'],
+  tags: ['autodocs', 'pr26-cards'],
   parameters: {
     docs: {
       description: {

@@ -4,10 +4,9 @@ This directory is the normative visual reference for the Gonzalo Herrera Design 
 Glass phase. It defines the language before tokens, primitives, components, or products adopt it.
 
 PR 21 established the documentation-only direction, PR 22 added the token contract, PR 23 provides
-the reference Surface primitives, and PR 24 provides controlled ambient backgrounds. The existing
-`glass` variants in Card and Hero predate
-this language, remain unchanged, and must not be treated as reference implementations until a later
-migration PR reviews them against these foundations.
+the reference Surface primitives, PR 24 provides controlled ambient backgrounds, PR 25 migrated
+actions, and PR 26 migrates the existing Card family. Hero's existing `glass` variant still predates
+this language and is not a reference implementation until its dedicated migration.
 
 ## Reference map
 
@@ -29,6 +28,8 @@ migration PR reviews them against these foundations.
     composition, fallbacks, accessibility, responsive behavior, and performance.
 14. [Buttons](buttons.md) — Button and Icon Button component tokens, hierarchy, native semantics,
     state behavior, fallback policy, accessibility, performance, and migration notes.
+15. [Cards](cards.md) — the compatible Card material mapping, anatomy, slots, native interaction,
+    fallback, themes, accessibility, performance, composition and Portfolio considerations.
 
 ## How to use these documents
 

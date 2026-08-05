@@ -42,8 +42,11 @@ describe('CardsPage', () => {
     expect(element.querySelectorAll('gh-article-card')).toHaveLength(2);
     expect(element.querySelectorAll('gh-experience-card')).toHaveLength(2);
     expect(element.querySelectorAll('gh-project-card')).toHaveLength(3);
-    expect(element.querySelector('.gh-card--glass')).not.toBeNull();
-    expect(element.querySelector('.gh-card--selected')).not.toBeNull();
+    expect(element.querySelector('[data-variant="outlined"]')).not.toBeNull();
+    expect(element.querySelector('[data-variant="subtle"]')).not.toBeNull();
+    expect(element.querySelector('[data-variant="glass"]')).not.toBeNull();
+    expect(element.querySelector('[data-variant="elevated"]')).not.toBeNull();
+    expect(element.querySelector('[data-selected="true"]')).not.toBeNull();
   });
 
   it('uses native links without invalid interactive nesting', () => {
@@ -54,7 +57,22 @@ describe('CardsPage', () => {
 
     expect(element.querySelector('gh-article-card h2 a')).not.toBeNull();
     expect(element.querySelector('.project-card__actions a')).not.toBeNull();
+    expect(element.querySelector<HTMLInputElement>('.selection-example input')?.checked).toBe(true);
+    expect(element.querySelector('.card-form button[type="submit"]')).not.toBeNull();
     expect(element.querySelector('a button, button a')).toBeNull();
+    expect(element.querySelector('article.gh-card[role], article.gh-card[tabindex]')).toBeNull();
+  });
+
+  it('documents ambient, Solid and nested Solid contexts without a parallel Card family', () => {
+    const fixture = TestBed.createComponent(CardsPage);
+    fixture.detectChanges();
+
+    const element = fixture.nativeElement as HTMLElement;
+
+    expect(element.querySelectorAll('gh-ambient-background').length).toBeGreaterThanOrEqual(4);
+    expect(element.querySelector('gh-surface[data-variant="solid"] gh-card')).not.toBeNull();
+    expect(element.querySelectorAll('showcase-documentation-section')).toHaveLength(8);
+    expect(element.querySelector('gh-feature-card, gh-stat-card')).toBeNull();
   });
 
   it('continues rendering after a public theme change', () => {

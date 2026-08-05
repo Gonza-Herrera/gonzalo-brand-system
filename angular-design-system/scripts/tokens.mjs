@@ -289,6 +289,87 @@ export const requiredButtonSemanticPaths = [
   ),
 ];
 
+const cardMaterialProperties = [
+  'background',
+  'fallbackBackground',
+  'foreground',
+  'mutedForeground',
+  'borderColor',
+  'borderWidth',
+  'borderHighlight',
+  'backdropFilter',
+  'shadow',
+  'innerShadow',
+];
+
+const cardStructuralProperties = [
+  ...['none', 'sm', 'md', 'lg'].map((size) => `padding.${size}`),
+  ...[
+    'body',
+    'header',
+    'content',
+    'footer',
+    'footerOffset',
+    'actions',
+    'metadata',
+    'tags',
+    'tagsCompact',
+    'section',
+  ].map((name) => `gap.${name}`),
+  ...['sm', 'md', 'lg', 'xl'].map((size) => `radius.${size}`),
+  'transition.duration',
+  'transition.easing',
+  'activeOffset',
+  'title.foreground',
+  'title.fontFamily',
+  'title.fontSize',
+  'title.lineHeight',
+  'title.letterSpacing',
+  'body.foreground',
+  'metadata.foreground',
+  'metadata.fontSize',
+  'metadata.emphasisFontWeight',
+  'link.foreground',
+  'link.hoverForeground',
+  'link.fontWeight',
+  'link.focusRingColor',
+  'link.focusRingWidth',
+  'link.focusRingOffset',
+  'link.focusRadius',
+  'media.background',
+  'media.aspectRatio',
+  'media.horizontalMinHeight',
+  'logo.size',
+  'logo.background',
+  'logo.borderColor',
+  'logo.borderWidth',
+  'logo.radius',
+  'section.headingFontSize',
+  'section.listPaddingInlineStart',
+  'interactive.hover.background',
+  'interactive.hover.borderColor',
+  'interactive.hover.shadow',
+  'interactive.active.background',
+  'interactive.active.borderColor',
+  'interactive.active.shadow',
+  'interactive.focus.ringColor',
+  'interactive.focus.ringWidth',
+  'interactive.focus.ringOffset',
+  'interactive.focus.shadow',
+  'selected.background',
+  'selected.borderColor',
+  'selected.shadow',
+  'selected.ringWidth',
+  'selected.ringOffset',
+];
+
+export const requiredCardSemanticPaths = [
+  ...cardStructuralProperties.map((property) => `card.${property}`),
+  ...['outlined', 'subtle', 'glass', 'elevated'].flatMap((variant) =>
+    cardMaterialProperties.map((property) => `card.${variant}.${property}`),
+  ),
+];
+
 const requiredLayoutPrimitivePaths = [
   'spacing.none',
   'container.sm',
@@ -560,7 +641,9 @@ function composeDarkSemanticTokens(semanticTokens, authoredDarkTokens) {
     [...semanticTokens].map(([tokenPath, semanticToken]) => {
       const darkToken = authoredDarkTokens.get(tokenPath);
       const isThemeInvariantComponentAlias =
-        tokenPath.startsWith('button.') || tokenPath.startsWith('iconButton.');
+        tokenPath.startsWith('button.') ||
+        tokenPath.startsWith('iconButton.') ||
+        tokenPath.startsWith('card.');
 
       if (darkToken) {
         return [tokenPath, darkToken];
@@ -583,6 +666,7 @@ function validateSemanticCoverage(semanticTokens, darkTokens) {
     ...requiredLiquidGlassSemanticPaths,
     ...requiredAmbientSemanticPaths,
     ...requiredButtonSemanticPaths,
+    ...requiredCardSemanticPaths,
   ]) {
     if (!semanticTokens.has(tokenPath)) {
       throw new TokenValidationError(
@@ -785,7 +869,11 @@ function cssValue(value, primitiveTokens, semanticTokens = new Map()) {
 function sassMapValue(token, primitiveTokens, semanticTokens) {
   const value = cssValue(token.value, primitiveTokens, semanticTokens);
 
-  return token.type === 'string' && value.includes(',') ? JSON.stringify(value) : value;
+  // Sass otherwise interprets comma lists and slash-separated CSS strings such as `16 / 9` as
+  // Sass syntax. Interpolation removes these quotes when custom properties are emitted.
+  return token.type === 'string' && (value.includes(',') || value.includes(' / '))
+    ? JSON.stringify(value)
+    : value;
 }
 
 function renderPrimitiveFile(tokens) {

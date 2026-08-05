@@ -7,9 +7,9 @@
 @mixin media {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: var(--gh-card-media-aspect-ratio);
   overflow: hidden;
-  background: var(--gh-card-background-subtle);
+  background: var(--gh-card-media-background);
 
   img {
     display: block;
@@ -21,11 +21,11 @@
 
 @mixin heading {
   margin: 0;
-  color: var(--gh-text-primary);
-  font-family: var(--gh-font-family-display);
-  font-size: var(--gh-font-size-h3);
-  line-height: var(--gh-line-height-heading);
-  letter-spacing: var(--gh-letter-spacing-tight);
+  color: var(--gh-card-title-foreground);
+  font-family: var(--gh-card-title-font-family);
+  font-size: var(--gh-card-title-font-size);
+  line-height: var(--gh-card-title-line-height);
+  letter-spacing: var(--gh-card-title-letter-spacing);
 }
 
 @mixin title-link {
@@ -33,13 +33,13 @@
   text-decoration: none;
 
   &:hover {
-    color: var(--gh-text-accent);
+    color: var(--gh-card-link-foreground);
   }
 
   &:focus-visible {
-    outline: var(--gh-border-width-focus) solid var(--gh-focus-ring);
-    outline-offset: var(--gh-space-xs);
-    border-radius: var(--gh-radius-sm);
+    outline: var(--gh-card-link-focus-ring-width) solid var(--gh-card-link-focus-ring-color);
+    outline-offset: var(--gh-card-link-focus-ring-offset);
+    border-radius: var(--gh-card-link-focus-radius);
   }
 }
 
@@ -47,20 +47,20 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--gh-space-sm);
-  color: var(--gh-text-muted);
-  font-size: var(--gh-font-size-caption);
+  gap: var(--gh-card-gap-metadata);
+  color: var(--gh-card-metadata-foreground);
+  font-size: var(--gh-card-metadata-font-size);
 }
 
 @mixin body-copy {
   margin: 0;
-  color: var(--gh-text-secondary);
+  color: var(--gh-card-body-foreground);
 }
 
 @mixin tag-list {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--gh-space-sm);
+  gap: var(--gh-card-gap-tags);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -69,22 +69,22 @@
 @mixin actions {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--gh-space-md);
+  gap: var(--gh-card-gap-actions);
   align-items: center;
 
   a {
-    color: var(--gh-text-accent);
-    font-weight: var(--gh-font-weight-semibold);
+    color: var(--gh-card-link-foreground);
+    font-weight: var(--gh-card-link-font-weight);
     text-decoration: none;
   }
 
   a:hover {
-    color: var(--gh-text-primary);
+    color: var(--gh-card-link-hover-foreground);
   }
 
   a:focus-visible {
-    outline: var(--gh-border-width-focus) solid var(--gh-focus-ring);
-    outline-offset: var(--gh-space-xs);
-    border-radius: var(--gh-radius-sm);
+    outline: var(--gh-card-link-focus-ring-width) solid var(--gh-card-link-focus-ring-color);
+    outline-offset: var(--gh-card-link-focus-ring-offset);
+    border-radius: var(--gh-card-link-focus-radius);
   }
 }

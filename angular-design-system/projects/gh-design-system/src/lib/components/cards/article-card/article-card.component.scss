@@ -14,7 +14,7 @@ gh-card {
 
 .article-card__header {
   display: grid;
-  gap: var(--gh-space-md);
+  gap: var(--gh-card-gap-header);
 
   h2,
   h3 {
@@ -29,12 +29,12 @@ gh-card {
 .article-card__badges {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--gh-space-sm);
+  gap: var(--gh-card-gap-tags);
 }
 
 .article-card__content {
   display: grid;
-  gap: var(--gh-space-md);
+  gap: var(--gh-card-gap-content);
 }
 
 .article-card__excerpt {
@@ -44,7 +44,7 @@ gh-card {
 .article-card__tags {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--gh-space-xs);
+  gap: var(--gh-card-gap-tags-compact);
   padding: 0;
   margin: 0;
   list-style: none;
@@ -55,7 +55,7 @@ gh-card {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: var(--gh-space-md);
+  gap: var(--gh-card-gap-footer);
 }
 
 .article-card__metadata {
@@ -64,11 +64,11 @@ gh-card {
 
 .article-card__metadata > * + *::before {
   content: '·';
-  margin-right: var(--gh-space-sm);
+  margin-right: var(--gh-card-gap-metadata);
 }
 
 .article-card__cta {
-  color: var(--gh-text-accent);
-  font-size: var(--gh-font-size-caption);
-  font-weight: var(--gh-font-weight-semibold);
+  color: var(--gh-card-link-foreground);
+  font-size: var(--gh-card-metadata-font-size);
+  font-weight: var(--gh-card-link-font-weight);
 }

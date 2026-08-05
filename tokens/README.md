@@ -62,15 +62,16 @@ padding, Grid minimum item sizes and the shared responsive breakpoints. The
 generator publishes both CSS custom properties and a Sass breakpoint partial,
 because custom properties cannot be evaluated inside media-query conditions.
 
-The semantic contract includes action roles, Button and Icon Button component aliases, six status
-families for Badge and three interactive Tag families. Theme generation must provide complete
-coverage for every semantic path.
+The semantic contract includes action roles, Button, Icon Button and Card component aliases, six
+status families for Badge and three interactive Tag families. Theme generation must provide
+complete coverage for every semantic path.
 
-Button component aliases live once in `semantic-tokens.json` because they contain no theme-specific
-raw values: each alias resolves through the current theme's action, Surface, focus, motion and
-structural roles. The generator includes that identical component contract in both generated theme
-maps while `themes/dark.json` remains responsible for the underlying dark semantic values. This
-avoids copying the full component graph while preserving generated light/dark key and type parity.
+Button and Card component aliases live once in `semantic-tokens.json` because they contain no
+theme-specific raw values: each alias resolves through the current theme's action, Surface, focus,
+motion and structural roles. The generator includes those identical component contracts in both
+generated theme maps while `themes/dark.json` remains responsible for the underlying dark semantic
+values. This avoids copying full component graphs while preserving generated light/dark key and
+type parity.
 
 `glass.json` defines the deliberately limited blur, saturation, opacity,
 highlight and inner-shadow material ingredients. Theme-aware `surface.*` roles
@@ -89,8 +90,10 @@ static Subtle, Brand, Cool and Warm fields, plus the `none` path. Components con
 `--gh-ambient-*` variables; they do not assemble local gradients or consume primitive opacity
 directly.
 
-Card roles define shared surface, border, selected, elevation and restrained
-glass treatment values for the complete Card family.
+Legacy Card roles remain for compatibility with existing pattern consumers. The PR 26 `card.*`
+component contract adds structural, material, interactive and selected aliases for the complete
+Card family. Its `outlined`, `subtle`, `glass` and `elevated` groups map to semantic Solid, Glass
+Subtle, Glass and Glass Elevated contracts; component SCSS does not consume primitives directly.
 
 Brand Pattern roles centralize the single restrained accent gradient plus
 navigation, footer and timeline colors. Hero, Content Highlight and Contact

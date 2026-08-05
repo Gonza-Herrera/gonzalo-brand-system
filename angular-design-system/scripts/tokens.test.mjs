@@ -10,6 +10,7 @@ import {
   requiredAmbientPrimitivePaths,
   requiredAmbientSemanticPaths,
   requiredButtonSemanticPaths,
+  requiredCardSemanticPaths,
   requiredLiquidGlassPrimitivePaths,
   requiredLiquidGlassSemanticPaths,
 } from './tokens.mjs';
@@ -151,6 +152,50 @@ test('provides complete theme-aware component contracts for Button and Icon Butt
   );
 });
 
+test('provides a complete theme-aware Card contract mapped to Surface materials', async () => {
+  const { darkTokens, semanticTokens } = await loadAndValidateTokens();
+
+  for (const tokenPath of requiredCardSemanticPaths) {
+    const lightToken = semanticTokens.get(tokenPath);
+    const darkToken = darkTokens.get(tokenPath);
+
+    assert.ok(lightToken, `Missing light Card token ${tokenPath}`);
+    assert.ok(darkToken, `Missing dark Card token ${tokenPath}`);
+    assert.equal(darkToken.type, lightToken.type, `Theme type mismatch for ${tokenPath}`);
+  }
+
+  const materialMapping = {
+    outlined: 'solid',
+    subtle: 'glassSubtle',
+    glass: 'glass',
+    elevated: 'glassElevated',
+  };
+
+  for (const [variant, material] of Object.entries(materialMapping)) {
+    assert.equal(
+      semanticTokens.get(`card.${variant}.background`).value,
+      `{surface.${material}.background}`,
+    );
+    assert.equal(
+      semanticTokens.get(`card.${variant}.fallbackBackground`).value,
+      `{surface.${material}.fallbackBackground}`,
+    );
+    assert.equal(
+      semanticTokens.get(`card.${variant}.backdropFilter`).value,
+      `{surface.${material}.backdropFilter}`,
+    );
+  }
+
+  assert.equal(
+    semanticTokens.get('card.interactive.focus.ringColor').value,
+    '{surface.interactive.focus.ringColor}',
+  );
+  assert.equal(
+    semanticTokens.get('card.selected.borderColor').value,
+    '{surface.interactive.selected.borderColor}',
+  );
+});
+
 test('provides solid fallbacks and global motion and focus aliases for future surfaces', async () => {
   const { semanticTokens } = await loadAndValidateTokens();
 
@@ -221,6 +266,18 @@ test('generates unique prefixed CSS variables for primitives and semantic themes
     assert.equal(countOccurrences(light, mapKey), 1, `${variable} must have one light value`);
     assert.equal(countOccurrences(dark, mapKey), 1, `${variable} must have one dark value`);
   }
+
+  for (const tokenPath of requiredCardSemanticPaths) {
+    const variable = semanticCssName(tokenPath);
+    const mapKey = `'${variable.replace('--gh-', '')}':`;
+
+    assert.equal(countOccurrences(semantic, `'${variable.replace('--gh-', '')}',`), 1);
+    assert.equal(countOccurrences(light, mapKey), 1, `${variable} must have one light value`);
+    assert.equal(countOccurrences(dark, mapKey), 1, `${variable} must have one dark value`);
+  }
+
+  assert.match(light, /'card-media-aspect-ratio': "16 \/ 9"/);
+  assert.match(dark, /'card-media-aspect-ratio': "16 \/ 9"/);
 
   const allScss = [primitives, semantic, light, dark].join('\n');
 

@@ -9,62 +9,125 @@
 }
 
 .gh-card {
-  --gh-card-padding: var(--gh-space-lg);
-  --gh-card-radius: var(--gh-radius-lg);
-  --gh-card-current-background: var(--gh-card-background);
-  --gh-card-current-border: var(--gh-card-border);
-  --gh-card-current-shadow: none;
+  --_gh-card-background: var(--gh-card-outlined-background);
+  --_gh-card-fallback-background: var(--gh-card-outlined-fallback-background);
+  --_gh-card-foreground: var(--gh-card-outlined-foreground);
+  --_gh-card-muted-foreground: var(--gh-card-outlined-muted-foreground);
+  --_gh-card-border-color: var(--gh-card-outlined-border-color);
+  --_gh-card-border-width: var(--gh-card-outlined-border-width);
+  --_gh-card-border-highlight: var(--gh-card-outlined-border-highlight);
+  --_gh-card-backdrop-filter: var(--gh-card-outlined-backdrop-filter);
+  --_gh-card-shadow: var(--gh-card-outlined-shadow);
+  --_gh-card-inner-shadow: var(--gh-card-outlined-inner-shadow);
+  --_gh-card-padding: var(--gh-card-padding-md);
+  --_gh-card-radius: var(--gh-card-radius-lg);
 
-  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
   max-width: 100%;
-  border: var(--gh-border-width-default) solid var(--gh-card-current-border);
-  border-radius: var(--gh-card-radius);
-  background: var(--gh-card-current-background);
-  color: var(--gh-text-primary);
-  box-shadow: var(--gh-card-current-shadow);
+  border-color: var(--_gh-card-border-color);
+  border-style: solid;
+  border-width: var(--_gh-card-border-width);
+  border-radius: var(--_gh-card-radius);
+  background: var(--_gh-card-fallback-background);
+  color: var(--_gh-card-foreground);
+  box-shadow: var(--_gh-card-shadow);
   transition:
-    background-color var(--gh-motion-duration-fast) var(--gh-motion-easing-standard),
-    border-color var(--gh-motion-duration-fast) var(--gh-motion-easing-standard),
-    box-shadow var(--gh-motion-duration-fast) var(--gh-motion-easing-standard),
-    transform var(--gh-motion-duration-fast) var(--gh-motion-easing-standard);
+    background-color var(--gh-card-transition-duration) var(--gh-card-transition-easing),
+    border-color var(--gh-card-transition-duration) var(--gh-card-transition-easing),
+    color var(--gh-card-transition-duration) var(--gh-card-transition-easing),
+    box-shadow var(--gh-card-transition-duration) var(--gh-card-transition-easing),
+    transform var(--gh-card-transition-duration) var(--gh-card-transition-easing);
 }
 
-.gh-card--outlined {
-  --gh-card-current-background: var(--gh-card-background);
-  --gh-card-current-border: var(--gh-card-border);
+.gh-card::before {
+  position: absolute;
+  inset: 0;
+  border-block-start: var(--_gh-card-border-width) solid var(--_gh-card-border-highlight);
+  border-radius: inherit;
+  box-shadow: var(--_gh-card-inner-shadow);
+  content: '';
+  pointer-events: none;
 }
 
 .gh-card--elevated {
-  --gh-card-current-background: var(--gh-surface-elevated);
-  --gh-card-current-border: var(--gh-border-subtle);
-  --gh-card-current-shadow: var(--gh-card-shadow);
+  --_gh-card-background: var(--gh-card-elevated-background);
+  --_gh-card-fallback-background: var(--gh-card-elevated-fallback-background);
+  --_gh-card-foreground: var(--gh-card-elevated-foreground);
+  --_gh-card-muted-foreground: var(--gh-card-elevated-muted-foreground);
+  --_gh-card-border-color: var(--gh-card-elevated-border-color);
+  --_gh-card-border-width: var(--gh-card-elevated-border-width);
+  --_gh-card-border-highlight: var(--gh-card-elevated-border-highlight);
+  --_gh-card-backdrop-filter: var(--gh-card-elevated-backdrop-filter);
+  --_gh-card-shadow: var(--gh-card-elevated-shadow);
+  --_gh-card-inner-shadow: var(--gh-card-elevated-inner-shadow);
 }
 
 .gh-card--subtle {
-  --gh-card-current-background: var(--gh-card-background-subtle);
-  --gh-card-current-border: transparent;
+  --_gh-card-background: var(--gh-card-subtle-background);
+  --_gh-card-fallback-background: var(--gh-card-subtle-fallback-background);
+  --_gh-card-foreground: var(--gh-card-subtle-foreground);
+  --_gh-card-muted-foreground: var(--gh-card-subtle-muted-foreground);
+  --_gh-card-border-color: var(--gh-card-subtle-border-color);
+  --_gh-card-border-width: var(--gh-card-subtle-border-width);
+  --_gh-card-border-highlight: var(--gh-card-subtle-border-highlight);
+  --_gh-card-backdrop-filter: var(--gh-card-subtle-backdrop-filter);
+  --_gh-card-shadow: var(--gh-card-subtle-shadow);
+  --_gh-card-inner-shadow: var(--gh-card-subtle-inner-shadow);
 }
 
 .gh-card--glass {
-  --gh-card-current-background: var(--gh-card-background-glass);
-  --gh-card-current-border: var(--gh-card-border-glass);
-  --gh-card-current-shadow: var(--gh-card-shadow);
-
-  -webkit-backdrop-filter: blur(var(--gh-card-glass-blur));
-  backdrop-filter: blur(var(--gh-card-glass-blur));
+  --_gh-card-background: var(--gh-card-glass-background);
+  --_gh-card-fallback-background: var(--gh-card-glass-fallback-background);
+  --_gh-card-foreground: var(--gh-card-glass-foreground);
+  --_gh-card-muted-foreground: var(--gh-card-glass-muted-foreground);
+  --_gh-card-border-color: var(--gh-card-glass-border-color);
+  --_gh-card-border-width: var(--gh-card-glass-border-width);
+  --_gh-card-border-highlight: var(--gh-card-glass-border-highlight);
+  --_gh-card-backdrop-filter: var(--gh-card-glass-backdrop-filter);
+  --_gh-card-shadow: var(--gh-card-glass-shadow);
+  --_gh-card-inner-shadow: var(--gh-card-glass-inner-shadow);
 }
 
-.gh-card--interactive:hover,
+@supports ((backdrop-filter: none) or (-webkit-backdrop-filter: none)) {
+  .gh-card--subtle,
+  .gh-card--glass,
+  .gh-card--elevated {
+    background: var(--_gh-card-background);
+    -webkit-backdrop-filter: var(--_gh-card-backdrop-filter);
+    backdrop-filter: var(--_gh-card-backdrop-filter);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .gh-card--interactive:hover {
+    border-color: var(--gh-card-interactive-hover-border-color);
+    background: var(--gh-card-interactive-hover-background);
+    box-shadow: var(--gh-card-interactive-hover-shadow);
+    transform: translateY(calc(var(--gh-card-active-offset) * -1));
+  }
+}
+
+.gh-card--interactive:active {
+  border-color: var(--gh-card-interactive-active-border-color);
+  background: var(--gh-card-interactive-active-background);
+  box-shadow: var(--gh-card-interactive-active-shadow);
+  transform: translateY(var(--gh-card-active-offset));
+}
+
 .gh-card--interactive:focus-within {
-  border-color: var(--gh-card-border-hover);
-  box-shadow: var(--gh-card-shadow-hover);
+  outline: var(--gh-card-interactive-focus-ring-width) solid
+    var(--gh-card-interactive-focus-ring-color);
+  outline-offset: var(--gh-card-interactive-focus-ring-offset);
+  box-shadow: var(--gh-card-interactive-focus-shadow);
 }
 
 .gh-card--selected {
-  border-color: var(--gh-card-border-selected);
-  background: var(--gh-card-background-selected);
-  outline: var(--gh-border-width-focus) solid var(--gh-card-border-selected);
-  outline-offset: calc(var(--gh-border-width-focus) * -1);
+  border-color: var(--gh-card-selected-border-color);
+  background: var(--gh-card-selected-background);
+  outline: var(--gh-card-selected-ring-width) solid var(--gh-card-selected-border-color);
+  outline-offset: var(--gh-card-selected-ring-offset);
+  box-shadow: var(--gh-card-selected-shadow);
 }
 
 .gh-card--full-height {
@@ -72,39 +135,33 @@
 }
 
 .gh-card--padding-none {
-  --gh-card-padding: 0;
+  --_gh-card-padding: var(--gh-card-padding-none);
 }
 
 .gh-card--padding-sm {
-  --gh-card-padding: var(--gh-space-md);
-}
-
-.gh-card--padding-md {
-  --gh-card-padding: var(--gh-space-lg);
+  --_gh-card-padding: var(--gh-card-padding-sm);
 }
 
 .gh-card--padding-lg {
-  --gh-card-padding: var(--gh-space-xl);
+  --_gh-card-padding: var(--gh-card-padding-lg);
 }
 
 .gh-card--radius-sm {
-  --gh-card-radius: var(--gh-radius-sm);
+  --_gh-card-radius: var(--gh-card-radius-sm);
 }
 
 .gh-card--radius-md {
-  --gh-card-radius: var(--gh-radius-md);
-}
-
-.gh-card--radius-lg {
-  --gh-card-radius: var(--gh-radius-lg);
+  --_gh-card-radius: var(--gh-card-radius-md);
 }
 
 .gh-card--radius-xl {
-  --gh-card-radius: var(--gh-radius-xl);
+  --_gh-card-radius: var(--gh-card-radius-xl);
 }
 
 .gh-card__media {
   overflow: hidden;
+  border-start-start-radius: inherit;
+  border-start-end-radius: inherit;
 }
 
 .gh-card__media:empty,
@@ -116,8 +173,10 @@
 
 .gh-card__body {
   display: grid;
-  gap: var(--gh-space-md);
-  padding: var(--gh-card-padding);
+  min-width: 0;
+  gap: var(--gh-card-gap-body);
+  padding: var(--_gh-card-padding);
+  border-radius: inherit;
 }
 
 .gh-card__header,
@@ -127,17 +186,44 @@
 }
 
 .gh-card__footer {
-  margin-top: var(--gh-space-sm);
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .gh-card--interactive:hover {
-    transform: translateY(calc(var(--gh-space-xs) / -2));
-  }
+  margin-top: var(--gh-card-gap-footer-offset);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .gh-card {
     transition: none;
+  }
+
+  .gh-card--interactive:hover,
+  .gh-card--interactive:active {
+    transform: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .gh-card,
+  .gh-card--interactive:hover,
+  .gh-card--interactive:active,
+  .gh-card--selected {
+    border-color: ButtonBorder;
+    background: Canvas;
+    color: CanvasText;
+    box-shadow: var(--gh-card-outlined-shadow);
+    transform: none;
+    -webkit-backdrop-filter: var(--gh-card-outlined-backdrop-filter);
+    backdrop-filter: var(--gh-card-outlined-backdrop-filter);
+  }
+
+  .gh-card::before {
+    display: none;
+  }
+
+  .gh-card--interactive:focus-within,
+  .gh-card--selected {
+    outline-color: Highlight;
+  }
+
+  .gh-card--selected {
+    border-color: Highlight;
   }
 }
