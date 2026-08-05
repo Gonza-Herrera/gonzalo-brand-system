@@ -22,6 +22,13 @@ System.
 - `GH_BUTTON_VARIANTS`
 - `GH_BUTTON_SIZES`
 - `GH_BUTTON_TYPES`
+- `GhIconButtonComponent`
+- `GhIconButtonVariant`
+- `GhIconButtonSize`
+- `GhIconButtonType`
+- `GH_ICON_BUTTON_VARIANTS`
+- `GH_ICON_BUTTON_SIZES`
+- `GH_ICON_BUTTON_TYPES`
 - `GhCardComponent`
 - `GhCardVariant`
 - `GhCardPadding`
@@ -123,18 +130,24 @@ selected preference and avoids browser-only APIs during SSR.
 ## Button
 
 ```ts
-import { GhButtonComponent } from 'gh-design-system';
+import { GhButtonComponent, GhIconButtonComponent } from 'gh-design-system';
 ```
 
 ```html
 <gh-button variant="secondary" size="lg">View project</gh-button>
+
+<gh-icon-button aria-label="Open navigation">
+  <svg aria-hidden="true"><!-- icon --></svg>
+</gh-icon-button>
 ```
 
-The standalone component supports primary, secondary, ghost and danger
+Button supports primary, secondary, tertiary, ghost and danger
 variants; small, medium and large sizes; native form types; disabled, loading
-and full-width states; and start/end icon projection. See
+and full-width states; and start/end icon projection. Icon Button supports primary, secondary,
+ghost and danger variants with a required consumer-supplied accessible name. See
 [`src/lib/components/button/README.md`](src/lib/components/button/README.md)
-for its complete API and accessibility guidance.
+and [`src/lib/components/icon-button/README.md`](src/lib/components/icon-button/README.md)
+for their complete APIs and accessibility guidance.
 
 ## Badge and Tag
 

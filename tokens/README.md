@@ -62,9 +62,15 @@ padding, Grid minimum item sizes and the shared responsive breakpoints. The
 generator publishes both CSS custom properties and a Sass breakpoint partial,
 because custom properties cannot be evaluated inside media-query conditions.
 
-The semantic contract includes action roles, six status families for Badge and
-three interactive Tag families. Theme files must provide complete coverage for
-every semantic path.
+The semantic contract includes action roles, Button and Icon Button component aliases, six status
+families for Badge and three interactive Tag families. Theme generation must provide complete
+coverage for every semantic path.
+
+Button component aliases live once in `semantic-tokens.json` because they contain no theme-specific
+raw values: each alias resolves through the current theme's action, Surface, focus, motion and
+structural roles. The generator includes that identical component contract in both generated theme
+maps while `themes/dark.json` remains responsible for the underlying dark semantic values. This
+avoids copying the full component graph while preserving generated light/dark key and type parity.
 
 `glass.json` defines the deliberately limited blur, saturation, opacity,
 highlight and inner-shadow material ingredients. Theme-aware `surface.*` roles

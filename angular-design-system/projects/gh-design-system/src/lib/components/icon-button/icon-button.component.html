@@ -1,0 +1,24 @@
+<button
+  [class]="buttonClasses()"
+  [type]="type()"
+  [disabled]="interactionDisabled()"
+  [attr.aria-label]="ariaLabel()"
+  [attr.aria-labelledby]="ariaLabelledby()"
+  [attr.aria-busy]="loading() ? 'true' : null"
+  [attr.data-variant]="variant()"
+  [attr.data-size]="size()"
+  [attr.data-loading]="loading() ? 'true' : null"
+  [attr.data-disabled]="disabled() ? 'true' : null"
+>
+  <span
+    class="gh-icon-button__content"
+    [class.gh-icon-button__content--loading]="loading()"
+    aria-hidden="true"
+  >
+    <ng-content />
+  </span>
+
+  @if (loading()) {
+    <span class="gh-icon-button__spinner" aria-hidden="true"></span>
+  }
+</button>

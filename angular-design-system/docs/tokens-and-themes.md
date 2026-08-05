@@ -45,6 +45,11 @@ Example:
 - Danger action: `--gh-action-danger-background`, `text`, `hover`, `active`,
   `border`
 - Disabled action: `--gh-action-disabled-background`, `text`, `border`
+- Button component roles: `--gh-button-{variant}-*` for Primary, Secondary, Tertiary, Ghost and
+  Danger materials and states, plus `--gh-button-*` structure, focus, motion, spinner and disabled
+  aliases
+- Icon Button component roles: `--gh-icon-button-{variant}-*` for Primary, Secondary, Ghost and
+  Danger, plus compact size, focus, motion, spinner and disabled aliases
 - Status roles: `--gh-status-{variant}-background`, `text`, `border`,
   `solid-background`, `solid-text` for neutral, info, success, warning, danger
   and accent

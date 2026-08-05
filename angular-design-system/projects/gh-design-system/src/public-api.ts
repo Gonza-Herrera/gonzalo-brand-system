@@ -4,6 +4,8 @@ export * from './lib/components/ambient-background/ambient-background.component'
 export * from './lib/components/ambient-background/ambient-background.types';
 export * from './lib/components/button/button.component';
 export * from './lib/components/button/button.types';
+export * from './lib/components/icon-button/icon-button.component';
+export * from './lib/components/icon-button/icon-button.types';
 export * from './lib/components/glass-panel/glass-panel.component';
 export * from './lib/components/glass-panel/glass-panel.types';
 export * from './lib/components/cards/article-card/article-card.component';

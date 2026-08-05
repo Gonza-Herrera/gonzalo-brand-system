@@ -9,6 +9,7 @@ import {
   loadAndValidateTokens,
   requiredAmbientPrimitivePaths,
   requiredAmbientSemanticPaths,
+  requiredButtonSemanticPaths,
   requiredLiquidGlassPrimitivePaths,
   requiredLiquidGlassSemanticPaths,
 } from './tokens.mjs';
@@ -103,6 +104,53 @@ test('keeps the Liquid Glass semantic contract identical in light and dark theme
   }
 });
 
+test('provides complete theme-aware component contracts for Button and Icon Button', async () => {
+  const { darkTokens, semanticTokens } = await loadAndValidateTokens();
+
+  for (const tokenPath of requiredButtonSemanticPaths) {
+    const lightToken = semanticTokens.get(tokenPath);
+    const darkToken = darkTokens.get(tokenPath);
+
+    assert.ok(lightToken, `Missing light component token ${tokenPath}`);
+    assert.ok(darkToken, `Missing dark component token ${tokenPath}`);
+    assert.equal(darkToken.type, lightToken.type, `Theme type mismatch for ${tokenPath}`);
+  }
+
+  assert.equal(
+    semanticTokens.get('button.secondary.backdropFilter').value,
+    '{surface.glass.backdropFilter}',
+  );
+  assert.equal(
+    semanticTokens.get('button.secondary.fallbackBackground').value,
+    '{surface.glass.fallbackBackground}',
+  );
+
+  for (const variant of ['primary', 'tertiary', 'ghost', 'danger']) {
+    assert.equal(
+      semanticTokens.get(`button.${variant}.backdropFilter`).value,
+      'none',
+      `${variant} must not instantiate a filtered material`,
+    );
+  }
+
+  assert.equal(
+    semanticTokens.get('button.focus.ringColor').value,
+    '{surface.interactive.focus.ringColor}',
+  );
+  assert.equal(
+    semanticTokens.get('button.transition.duration').value,
+    '{surface.transition.duration}',
+  );
+  assert.equal(
+    semanticTokens.get('iconButton.secondary.background').value,
+    '{button.secondary.background}',
+  );
+  assert.equal(
+    semanticTokens.get('iconButton.disabled.foreground').value,
+    '{button.disabled.foreground}',
+  );
+});
+
 test('provides solid fallbacks and global motion and focus aliases for future surfaces', async () => {
   const { semanticTokens } = await loadAndValidateTokens();
 
@@ -157,6 +205,15 @@ test('generates unique prefixed CSS variables for primitives and semantic themes
   }
 
   for (const tokenPath of requiredLiquidGlassSemanticPaths) {
+    const variable = semanticCssName(tokenPath);
+    const mapKey = `'${variable.replace('--gh-', '')}':`;
+
+    assert.equal(countOccurrences(semantic, `'${variable.replace('--gh-', '')}',`), 1);
+    assert.equal(countOccurrences(light, mapKey), 1, `${variable} must have one light value`);
+    assert.equal(countOccurrences(dark, mapKey), 1, `${variable} must have one dark value`);
+  }
+
+  for (const tokenPath of requiredButtonSemanticPaths) {
     const variable = semanticCssName(tokenPath);
     const mapKey = `'${variable.replace('--gh-', '')}':`;
 

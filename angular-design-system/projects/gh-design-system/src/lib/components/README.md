@@ -8,6 +8,7 @@ Reusable standalone Angular components live in dedicated feature directories.
 - `badge/`: non-interactive status, category and count labels.
 - `button/`: public native-button wrapper with variants, sizes, form behavior,
   loading state, icon projection, tests and accessibility documentation.
+- `icon-button/`: compact native icon action with an explicit accessible-name contract.
 - `cards/`: foundational Card plus typed Article, Experience and Project
   compositions.
 - `glass-panel/`: a constrained glass-only convenience composition over Surface.

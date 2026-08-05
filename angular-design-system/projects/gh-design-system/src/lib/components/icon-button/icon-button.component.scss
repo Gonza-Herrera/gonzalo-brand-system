@@ -1,0 +1,79 @@
+@use '../button/control' as control;
+
+:host {
+  display: inline-flex;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+.gh-icon-button {
+  --_gh-icon-button-size: var(--gh-icon-button-size-md);
+  --_gh-icon-button-icon-size: var(--gh-icon-button-icon-size-md);
+
+  display: inline-grid;
+  width: var(--_gh-icon-button-size);
+  height: var(--_gh-icon-button-size);
+  flex: 0 0 var(--_gh-icon-button-size);
+  padding: var(--gh-icon-button-padding);
+  place-items: center;
+  border-width: var(--gh-icon-button-border-width);
+  border-radius: var(--gh-icon-button-radius);
+  cursor: pointer;
+}
+
+@include control.material(
+  '.gh-icon-button',
+  'icon-button',
+  ('primary', 'secondary', 'ghost', 'danger')
+);
+
+.gh-icon-button[data-size='sm'] {
+  --_gh-icon-button-size: var(--gh-icon-button-size-sm);
+  --_gh-icon-button-icon-size: var(--gh-icon-button-icon-size-sm);
+}
+
+.gh-icon-button[data-size='lg'] {
+  --_gh-icon-button-size: var(--gh-icon-button-size-lg);
+  --_gh-icon-button-icon-size: var(--gh-icon-button-icon-size-lg);
+}
+
+.gh-icon-button__content {
+  display: inline-grid;
+  width: var(--_gh-icon-button-icon-size);
+  height: var(--_gh-icon-button-icon-size);
+  place-items: center;
+  line-height: 0;
+}
+
+.gh-icon-button__content--loading {
+  opacity: 0;
+}
+
+.gh-icon-button__spinner {
+  position: absolute;
+  width: var(--_gh-icon-button-icon-size);
+  height: var(--_gh-icon-button-icon-size);
+  border: var(--gh-icon-button-spinner-border-width) solid currentColor;
+  border-inline-end-color: var(--gh-icon-button-spinner-track-color);
+  border-radius: var(--gh-icon-button-spinner-radius);
+  animation: gh-icon-button-spin var(--gh-icon-button-spinner-duration)
+    var(--gh-icon-button-spinner-easing) infinite;
+}
+
+@keyframes gh-icon-button-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gh-icon-button__spinner {
+    animation: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .gh-icon-button__spinner {
+    border-inline-end-color: ButtonFace;
+  }
+}

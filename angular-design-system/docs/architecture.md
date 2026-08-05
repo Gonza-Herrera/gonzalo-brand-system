@@ -46,6 +46,7 @@ Public package and documentation routes
 components/
 ├── badge/
 ├── button/
+├── icon-button/
 ├── cards/
 │   ├── card/
 │   ├── article-card/

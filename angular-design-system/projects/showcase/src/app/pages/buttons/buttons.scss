@@ -70,11 +70,53 @@
 }
 
 .content-examples,
-.form-example__actions {
+.form-example__actions,
+.icon-button-examples,
+.icon-button-states,
+.button-environment__actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: var(--gh-space-md);
+}
+
+.icon-button-example {
+  display: inline-grid;
+  justify-items: center;
+  gap: var(--gh-space-xs);
+
+  span {
+    color: var(--gh-text-secondary);
+    font-size: var(--gh-font-size-caption);
+  }
+}
+
+.icon-button-states {
+  margin-top: var(--gh-space-lg);
+  padding-top: var(--gh-space-lg);
+  border-top: var(--gh-border-width-default) solid var(--gh-border-subtle);
+}
+
+.button-environment {
+  display: block;
+  padding: var(--gh-space-lg);
+  border-radius: var(--gh-radius-xl);
+}
+
+.button-environment__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gh-space-md);
+
+  gh-surface {
+    display: grid;
+    align-content: space-between;
+    gap: var(--gh-space-lg);
+  }
+
+  h3 {
+    margin: 0;
+  }
 }
 
 .accessibility-note {
@@ -171,5 +213,9 @@
   .content-examples gh-button,
   .form-example__actions gh-button {
     width: 100%;
+  }
+
+  .button-environment__grid {
+    grid-template-columns: 1fr;
   }
 }

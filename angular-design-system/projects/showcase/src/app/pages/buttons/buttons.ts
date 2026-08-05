@@ -1,5 +1,13 @@
 import { Component, signal } from '@angular/core';
-import { GhButtonComponent, type GhButtonSize, type GhButtonVariant } from 'gh-design-system';
+import {
+  GhAmbientBackgroundComponent,
+  GhButtonComponent,
+  GhIconButtonComponent,
+  GhSurfaceComponent,
+  type GhButtonSize,
+  type GhButtonVariant,
+  type GhIconButtonVariant,
+} from 'gh-design-system';
 
 import { CodePreview } from '../../shared/components/code-preview/code-preview';
 import { DocumentationSection } from '../../shared/components/documentation-section/documentation-section';
@@ -16,10 +24,23 @@ interface ButtonSizeExample {
   readonly size: GhButtonSize;
 }
 
+interface IconButtonVariantExample {
+  readonly label: string;
+  readonly accessibleLabel: string;
+  readonly variant: GhIconButtonVariant;
+}
+
 @Component({
   selector: 'showcase-buttons-page',
   standalone: true,
-  imports: [CodePreview, DocumentationSection, GhButtonComponent],
+  imports: [
+    CodePreview,
+    DocumentationSection,
+    GhAmbientBackgroundComponent,
+    GhButtonComponent,
+    GhIconButtonComponent,
+    GhSurfaceComponent,
+  ],
   templateUrl: './buttons.html',
   styleUrl: './buttons.scss',
 })
@@ -37,6 +58,11 @@ export class ButtonsPage {
       variant: 'secondary',
     },
     {
+      label: 'Tertiary',
+      description: 'A restrained outlined action below Secondary in the hierarchy.',
+      variant: 'tertiary',
+    },
+    {
       label: 'Ghost',
       description: 'Low-emphasis actions placed on an existing surface.',
       variant: 'ghost',
@@ -47,6 +73,12 @@ export class ButtonsPage {
       variant: 'danger',
     },
   ] as const satisfies readonly ButtonVariantExample[];
+  protected readonly iconButtonVariants = [
+    { label: 'Primary', accessibleLabel: 'Create project', variant: 'primary' },
+    { label: 'Secondary', accessibleLabel: 'Add project', variant: 'secondary' },
+    { label: 'Ghost', accessibleLabel: 'Add filter', variant: 'ghost' },
+    { label: 'Danger', accessibleLabel: 'Delete project', variant: 'danger' },
+  ] as const satisfies readonly IconButtonVariantExample[];
   protected readonly sizes = [
     {
       label: 'Small',
@@ -80,11 +112,11 @@ export class ButtonsPage {
 >
   Save
 </gh-button>`;
-  protected readonly iconExample = `<gh-button aria-label="Add project">
-  <svg ghButtonIconStart aria-hidden="true">
+  protected readonly iconExample = `<gh-icon-button aria-label="Add project">
+  <svg aria-hidden="true">
     <!-- icon -->
   </svg>
-</gh-button>`;
+</gh-icon-button>`;
 
   protected handleSubmit(event: SubmitEvent): void {
     event.preventDefault();

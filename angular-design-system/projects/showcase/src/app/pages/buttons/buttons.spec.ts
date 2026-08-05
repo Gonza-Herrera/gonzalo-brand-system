@@ -3,6 +3,7 @@ import {
   GH_THEME_ATTRIBUTE,
   GH_THEME_STORAGE_KEY,
   GhButtonComponent,
+  GhIconButtonComponent,
   GhThemeService,
 } from 'gh-design-system';
 
@@ -14,7 +15,7 @@ describe('ButtonsPage', () => {
     localStorage.removeItem(GH_THEME_STORAGE_KEY);
 
     await TestBed.configureTestingModule({
-      imports: [ButtonsPage, GhButtonComponent],
+      imports: [ButtonsPage, GhButtonComponent, GhIconButtonComponent],
     }).compileComponents();
   });
 
@@ -28,10 +29,24 @@ describe('ButtonsPage', () => {
     fixture.detectChanges();
 
     const element = fixture.nativeElement as HTMLElement;
-    const variants = ['primary', 'secondary', 'ghost', 'danger'];
+    const variants = ['primary', 'secondary', 'tertiary', 'ghost', 'danger'];
 
     for (const variant of variants) {
       expect(element.querySelector(`button.gh-button--${variant}`)).not.toBeNull();
+    }
+  });
+
+  it('renders every Icon Button variant with a consumer-provided accessible name', () => {
+    const fixture = TestBed.createComponent(ButtonsPage);
+    fixture.detectChanges();
+
+    const element = fixture.nativeElement as HTMLElement;
+    const variants = ['primary', 'secondary', 'ghost', 'danger'];
+
+    for (const variant of variants) {
+      const button = element.querySelector<HTMLButtonElement>(`button.gh-icon-button--${variant}`);
+      expect(button).not.toBeNull();
+      expect(button?.getAttribute('aria-label')).toBeTruthy();
     }
   });
 

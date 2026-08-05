@@ -35,9 +35,10 @@ Priority:
 Selecting the `system` preference removes `data-theme`, allowing the media
 query to resolve the active theme without a competing explicit selector.
 
-Public components consume semantic variables and work in both themes. Button
-action roles include primary, secondary, ghost, danger and disabled mappings,
-with hover and active values where interaction requires them.
+Public components consume semantic variables and work in both themes. Button and Icon Button
+consume component-level aliases that resolve through the current theme's Primary, Secondary,
+Tertiary/Ghost, Danger, disabled, focus, Surface and motion roles. The generated light and dark maps
+contain the same component keys; system continues to resolve through the existing media query.
 
 Badge uses neutral, info, success, warning, danger and accent status families.
 Tag reuses those base status roles and adds variant-specific hover, active,

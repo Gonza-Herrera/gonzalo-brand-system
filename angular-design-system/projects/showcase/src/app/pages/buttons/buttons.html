@@ -4,7 +4,8 @@
     <h1>Button</h1>
     <p>
       The first public Angular component establishes a native, accessible and token-driven action
-      primitive for interfaces and forms.
+      primitive for interfaces and forms, now expressed through the controlled Liquid Glass material
+      language.
     </p>
   </header>
 
@@ -12,7 +13,7 @@
     sectionId="button-variants"
     eyebrow="Variants"
     title="A clear hierarchy for every action"
-    description="Use one primary action per section. Secondary and ghost reduce emphasis; danger remains reserved for destructive decisions."
+    description="Use one primary action per section. Secondary, tertiary and ghost progressively reduce emphasis; danger remains reserved for destructive decisions."
   >
     <div class="demo-grid demo-grid--variants">
       @for (item of variants; track item.variant) {
@@ -137,9 +138,8 @@
         </svg>
       </gh-button>
 
-      <gh-button variant="ghost" aria-label="Add project">
+      <gh-icon-button variant="ghost" aria-label="Add project">
         <svg
-          ghButtonIconStart
           width="1em"
           height="1em"
           viewBox="0 0 24 24"
@@ -150,13 +150,104 @@
         >
           <path d="M12 5v14M5 12h14" />
         </svg>
-      </gh-button>
+      </gh-icon-button>
     </div>
 
     <p class="accessibility-note">
       Icon-only example: the projected SVG is decorative and the native button receives
       <code>aria-label="Add project"</code>.
     </p>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="icon-buttons"
+    eyebrow="Icon Button"
+    title="Compact actions with explicit accessible names"
+    description="Icon Button preserves native button semantics and a stable target at every size. The consumer supplies an action-oriented aria-label or aria-labelledby; the icon remains decorative."
+  >
+    <div class="icon-button-examples">
+      @for (item of iconButtonVariants; track item.variant) {
+        <article class="icon-button-example">
+          <gh-icon-button [variant]="item.variant" [aria-label]="item.accessibleLabel">
+            <svg
+              width="1em"
+              height="1em"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+              <path d="M12 5v14M5 12h14" />
+            </svg>
+          </gh-icon-button>
+          <span>{{ item.label }}</span>
+        </article>
+      }
+    </div>
+
+    <div class="icon-button-states" aria-label="Icon Button sizes and states">
+      <gh-icon-button size="sm" aria-label="Small add action">
+        <span aria-hidden="true">+</span>
+      </gh-icon-button>
+      <gh-icon-button size="md" aria-label="Medium add action">
+        <span aria-hidden="true">+</span>
+      </gh-icon-button>
+      <gh-icon-button size="lg" aria-label="Large add action">
+        <span aria-hidden="true">+</span>
+      </gh-icon-button>
+      <gh-icon-button loading aria-label="Save project">
+        <span aria-hidden="true">✓</span>
+      </gh-icon-button>
+      <gh-icon-button disabled aria-label="Unavailable action">
+        <span aria-hidden="true">+</span>
+      </gh-icon-button>
+    </div>
+
+    <p class="accessibility-note">
+      The visible captions above are documentation only. Each native button has its own accessible
+      action name, and loading retains that name while adding <code>aria-busy</code>.
+    </p>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
+    sectionId="button-contexts"
+    eyebrow="Material contexts"
+    title="Legible on solid and ambient environments"
+    description="Primary stays contained, Secondary enhances to bounded glass when supported, and Tertiary/Ghost avoid per-control blur. Every variant starts with a deterministic solid fallback."
+  >
+    <gh-ambient-background class="button-environment" preset="brand" intensity="default">
+      <div class="button-environment__grid">
+        <gh-surface variant="solid" padding="lg">
+          <h3>Solid Surface</h3>
+          <div class="button-environment__actions">
+            <gh-button>Continue</gh-button>
+            <gh-button variant="secondary">Review</gh-button>
+            <gh-button variant="tertiary">Details</gh-button>
+          </div>
+        </gh-surface>
+
+        <gh-surface variant="glass" padding="lg">
+          <h3>Glass Surface</h3>
+          <div class="button-environment__actions">
+            <gh-button>Continue</gh-button>
+            <gh-button variant="secondary">Review</gh-button>
+            <gh-icon-button variant="ghost" aria-label="Add item">
+              <span aria-hidden="true">+</span>
+            </gh-icon-button>
+          </div>
+        </gh-surface>
+
+        <gh-surface variant="glass-elevated" padding="lg">
+          <h3>Glass Elevated</h3>
+          <div class="button-environment__actions">
+            <gh-button>Confirm</gh-button>
+            <gh-button variant="ghost">Dismiss</gh-button>
+            <gh-button variant="danger">Delete</gh-button>
+          </div>
+        </gh-surface>
+      </div>
+    </gh-ambient-background>
   </showcase-documentation-section>
 
   <showcase-documentation-section
@@ -188,7 +279,7 @@
       <showcase-code-preview label="Basic button" [code]="basicExample" />
       <showcase-code-preview label="Variant and size" [code]="variantExample" />
       <showcase-code-preview label="Loading submit button" [code]="loadingExample" />
-      <showcase-code-preview label="Accessible icon-only button" [code]="iconExample" />
+      <showcase-code-preview label="Accessible Icon Button" [code]="iconExample" />
     </div>
   </section>
 </article>
