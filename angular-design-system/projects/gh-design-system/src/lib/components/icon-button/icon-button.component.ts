@@ -3,7 +3,9 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  ElementRef,
   input,
+  viewChild,
 } from '@angular/core';
 
 import type { GhIconButtonSize, GhIconButtonType, GhIconButtonVariant } from './icon-button.types';
@@ -23,6 +25,10 @@ export class GhIconButtonComponent {
   readonly loading = input(false, { transform: booleanAttribute });
   readonly ariaLabel = input<string | undefined>(undefined, { alias: 'aria-label' });
   readonly ariaLabelledby = input<string | undefined>(undefined, { alias: 'aria-labelledby' });
+  readonly ariaExpanded = input<boolean | undefined>(undefined, { alias: 'aria-expanded' });
+  readonly ariaControls = input<string | undefined>(undefined, { alias: 'aria-controls' });
+
+  private readonly button = viewChild.required<ElementRef<HTMLButtonElement>>('button');
 
   protected readonly interactionDisabled = computed(() => this.disabled() || this.loading());
   protected readonly buttonClasses = computed(
@@ -31,4 +37,8 @@ export class GhIconButtonComponent {
         this.loading() ? ' gh-icon-button--loading' : ''
       }`,
   );
+
+  focus(options?: FocusOptions): void {
+    this.button().nativeElement.focus(options);
+  }
 }

@@ -47,13 +47,14 @@ describe('GhNavigationComponent', () => {
     expect(external?.rel).toBe('noopener noreferrer');
     expect(element.querySelector('[ghNavigationActions]')).not.toBeNull();
     expect(element.querySelector('[ghNavigationThemeControl]')).not.toBeNull();
+    expect(element.querySelector('gh-icon-button.gh-navigation__toggle button')).not.toBeNull();
   });
 
   it('starts closed and opens and closes the mobile menu with its real button', () => {
     const fixture = TestBed.createComponent(NavigationTestHost);
     fixture.detectChanges();
     const element = fixture.nativeElement as HTMLElement;
-    const toggle = element.querySelector<HTMLButtonElement>('.gh-navigation__toggle');
+    const toggle = element.querySelector<HTMLButtonElement>('.gh-navigation__toggle button');
     const panel = element.querySelector('#test-menu');
 
     expect(toggle?.getAttribute('aria-expanded')).toBe('false');
@@ -67,6 +68,22 @@ describe('GhNavigationComponent', () => {
     element.querySelector<HTMLAnchorElement>('nav a')?.click();
     fixture.detectChanges();
     expect(toggle?.getAttribute('aria-expanded')).toBe('false');
+  });
+
+  it('closes on Escape and restores focus to the real menu button', () => {
+    const fixture = TestBed.createComponent(NavigationTestHost);
+    fixture.detectChanges();
+    const element = fixture.nativeElement as HTMLElement;
+    const header = element.querySelector<HTMLElement>('.gh-navigation');
+    const toggle = element.querySelector<HTMLButtonElement>('.gh-navigation__toggle button');
+
+    toggle?.click();
+    fixture.detectChanges();
+    header?.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+    fixture.detectChanges();
+
+    expect(toggle?.getAttribute('aria-expanded')).toBe('false');
+    expect(document.activeElement).toBe(toggle);
   });
 
   it('emits intercepted internal navigation while preserving the semantic href', () => {

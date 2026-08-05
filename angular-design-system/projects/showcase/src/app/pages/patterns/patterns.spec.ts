@@ -40,6 +40,10 @@ describe('PatternsPage', () => {
     expect(element.querySelector('gh-experience-timeline')).not.toBeNull();
     expect(element.querySelector('gh-content-highlight')).not.toBeNull();
     expect(element.querySelector('gh-contact-callout')).not.toBeNull();
+    expect(
+      element.querySelector('[data-testid="patterns-navigation-guidance"]')?.textContent,
+    ).toContain('Tabs, Breadcrumbs and Pagination are not current Design System components');
+    expect(element.querySelector('gh-navigation a[aria-current="page"]')).not.toBeNull();
   });
 
   it('renders the composed landing with public primitives and components', () => {

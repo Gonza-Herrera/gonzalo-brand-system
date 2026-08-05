@@ -1,5 +1,13 @@
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
-import { Component, DestroyRef, HostListener, inject, PLATFORM_ID, signal } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  HostListener,
+  inject,
+  PLATFORM_ID,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
@@ -20,6 +28,7 @@ export class ShowcaseShell {
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
   private readonly isBrowser = isPlatformBrowser(this.platformId);
+  private readonly header = viewChild.required(ShowcaseHeader);
 
   protected readonly menuOpen = signal(false);
 
@@ -39,13 +48,18 @@ export class ShowcaseShell {
     this.menuOpen.update((open) => !open);
   }
 
-  protected closeMenu(): void {
+  protected closeMenu(restoreFocus = false): void {
+    const wasOpen = this.menuOpen();
     this.menuOpen.set(false);
+
+    if (restoreFocus && wasOpen) {
+      this.header().focusMenuToggle();
+    }
   }
 
   @HostListener('document:keydown.escape')
   protected closeMenuOnEscape(): void {
-    this.closeMenu();
+    this.closeMenu(true);
   }
 
   private focusPageHeading(): void {

@@ -39,6 +39,9 @@ The public library currently includes:
 - Patterns: Hero, Navigation, Footer, Section Heading, Feature Grid, Experience Timeline, Content Highlight, and Contact Callout.
 - Foundations: generated design tokens, opt-in base styles, native Form Control classes, light/dark themes, and an SSR-safe theme service with system preference support.
 
+Navigation uses the shared Liquid Glass component-token contract for its persistent Header, active
+links and mobile panel while preserving native anchors, routing ownership and SSR-safe closed state.
+
 ## Requirements and installation
 
 - Node.js `^20.19.0`, `^22.12.0`, or `>=24.0.0`

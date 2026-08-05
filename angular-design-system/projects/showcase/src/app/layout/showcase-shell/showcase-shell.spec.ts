@@ -33,7 +33,7 @@ describe('ShowcaseShell', () => {
     const fixture = TestBed.createComponent(ShowcaseShell);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    const toggle = compiled.querySelector<HTMLButtonElement>('.menu-toggle');
+    const toggle = compiled.querySelector<HTMLButtonElement>('.menu-toggle button');
 
     toggle?.click();
     fixture.detectChanges();
@@ -51,5 +51,6 @@ describe('ShowcaseShell', () => {
       compiled.querySelector('#showcase-navigation')?.classList.contains('sidebar--open'),
     ).toBe(false);
     expect(compiled.querySelector('.navigation-backdrop')).toBeNull();
+    expect(document.activeElement).toBe(toggle);
   });
 });

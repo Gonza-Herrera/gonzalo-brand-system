@@ -57,9 +57,9 @@
 
   <showcase-documentation-section
     sectionId="patterns-navigation"
-    eyebrow="Navigation"
-    title="Native links and a Signal-driven mobile menu"
-    description="Resize the viewport to exercise the mobile state. Active state is supplied by the consumer."
+    eyebrow="Navigation · Global chrome"
+    title="Stable Liquid Glass with native routing semantics"
+    description="The public Header, Top Navigation, Navigation Items and collapsible mobile panel share one component-token contract. Resize the viewport to exercise the mobile state; active state remains consumer-owned."
   >
     <div class="pattern-stage pattern-stage--navigation">
       <gh-navigation
@@ -74,6 +74,31 @@
         <a ghNavigationActions class="projected-link" href="#patterns-contact-callout">Contact</a>
         <showcase-theme-toggle ghNavigationThemeControl />
       </gh-navigation>
+    </div>
+
+    <div class="navigation-guidance" data-testid="patterns-navigation-guidance">
+      <article>
+        <h3>Current public scope</h3>
+        <p>
+          Header, primary links, active route, mobile open/close and projected selectors are the
+          existing public Navigation API. The Showcase shell separately proves a real Side
+          Navigation and focused Skip Link.
+        </p>
+      </article>
+      <article>
+        <h3>Accessibility and performance</h3>
+        <p>
+          Links retain href and aria-current, Escape restores focus, responsive behavior is CSS
+          only, and backdrop filtering is limited to the structural Header and open mobile panel.
+        </p>
+      </article>
+      <article>
+        <h3>Local navigation boundary</h3>
+        <p>
+          Tabs, Breadcrumbs and Pagination are not current Design System components, so this PR does
+          not introduce demonstration-only substitutes or parallel APIs.
+        </p>
+      </article>
     </div>
   </showcase-documentation-section>
 

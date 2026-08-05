@@ -62,13 +62,13 @@ padding, Grid minimum item sizes and the shared responsive breakpoints. The
 generator publishes both CSS custom properties and a Sass breakpoint partial,
 because custom properties cannot be evaluated inside media-query conditions.
 
-The semantic contract includes action roles, Button, Icon Button, Card and native Form Control
-component aliases, six status families for Badge and three interactive Tag families. Theme
-generation must provide complete coverage for every semantic path.
+The semantic contract includes action roles, Button, Icon Button, Card, native Form Control and
+Navigation component aliases, six status families for Badge and three interactive Tag families.
+Theme generation must provide complete coverage for every semantic path.
 
-Button, Card and Form Control component aliases live once in `semantic-tokens.json` because they
-contain no theme-specific raw values: each alias resolves through the current theme's action,
-Surface, focus, status, motion and structural roles. The generator includes those identical
+Button, Card, Form Control and Navigation component aliases live once in `semantic-tokens.json`
+because they contain no theme-specific raw values: each alias resolves through the current theme's
+action, Surface, focus, status, motion and structural roles. The generator includes those identical
 component contracts in both generated theme maps while `themes/dark.json` remains responsible for
 the underlying dark semantic values. This avoids copying full component graphs while preserving
 generated light/dark key and type parity.
@@ -99,6 +99,10 @@ PR 27 adds `formField.*`, `formControl.*`, `choiceControl.*`, and `switchControl
 provide one native input, textarea, select, checkbox, radio, and switch contract. Compact controls
 use the opaque Glass Subtle fallback and no backdrop filter; reusable CSS consumes only the Form
 component namespaces.
+
+PR 28 adds `navigation.header`, `panel`, `brand`, `item`, `side`, `selector`, `skipLink`, `backdrop`
+and `transition`. Header and the bounded open mobile panel alias Glass materials with opaque
+fallbacks; Side Navigation uses Glass Subtle; links and compact selectors never instantiate blur.
 
 Brand Pattern roles centralize the single restrained accent gradient plus
 navigation, footer and timeline colors. Hero, Content Highlight and Contact

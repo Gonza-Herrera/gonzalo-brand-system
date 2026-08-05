@@ -319,7 +319,8 @@ The shell composes only public Design System APIs:
 
 - `gh-navigation` renders the brand, localized semantic links, exact active-page state, mobile menu,
   language actions and theme control. Portfolio opts into its router-agnostic internal-navigation
-  output and resolves those URLs through Angular Router, preventing full-document reloads.
+  output and resolves those URLs through Angular Router, preventing full-document reloads. Its
+  Liquid Glass Header and bounded mobile panel use opaque fallbacks and no item-level blur.
 - `gh-footer` renders localized identity, primary links, tagline and a static copyright.
 - `LanguageSwitcherComponent` uses accessible EN/ES links and preserves the current path, query and
   fragment. A manual choice is stored under `gh-portfolio-locale` when browser storage is available.

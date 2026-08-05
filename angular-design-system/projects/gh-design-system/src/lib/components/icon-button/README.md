@@ -30,6 +30,8 @@ does not derive a label from an icon name because a graphic identifier is not ne
 | `loading`         | `boolean`                                         | `false`     |
 | `aria-label`      | `string \| undefined`                             | `undefined` |
 | `aria-labelledby` | `string \| undefined`                             | `undefined` |
+| `aria-expanded`   | `boolean \| undefined`                            | `undefined` |
+| `aria-controls`   | `string \| undefined`                             | `undefined` |
 
 ## Behavior
 
@@ -39,6 +41,8 @@ does not derive a label from an icon name because a graphic identifier is not ne
 - The accessible action name is retained during loading.
 - Enter and Space behavior come from the native button; no keyboard handlers are recreated.
 - Focus uses the shared component token contract and remains an outline in forced colors.
+- Disclosure compositions can forward `aria-expanded` and `aria-controls`; the public `focus()`
+  method supports deterministic focus restoration after a collapsible region closes.
 - Reduced motion removes the active transform and spinner animation without removing state color.
 
 ## Material policy

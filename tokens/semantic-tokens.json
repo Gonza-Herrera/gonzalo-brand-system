@@ -2018,6 +2018,295 @@
       "label": { "$type": "color", "$value": "{surface.disabled.foreground}" }
     }
   },
+  "navigation": {
+    "header": {
+      "background": {
+        "$type": "color",
+        "$value": "{surface.glass.background}"
+      },
+      "fallbackBackground": {
+        "$type": "color",
+        "$value": "{surface.glass.fallbackBackground}"
+      },
+      "foreground": {
+        "$type": "color",
+        "$value": "{surface.glass.foreground}"
+      },
+      "mutedForeground": {
+        "$type": "color",
+        "$value": "{surface.glass.mutedForeground}"
+      },
+      "borderColor": {
+        "$type": "color",
+        "$value": "{surface.glass.borderColor}"
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{surface.glass.borderWidth}"
+      },
+      "borderHighlight": {
+        "$type": "color",
+        "$value": "{surface.glass.borderHighlight}"
+      },
+      "backdropFilter": {
+        "$type": "string",
+        "$value": "{surface.glass.backdropFilter}"
+      },
+      "shadow": { "$type": "shadow", "$value": "{surface.glass.shadow}" },
+      "innerShadow": {
+        "$type": "shadow",
+        "$value": "{surface.glass.innerShadow}"
+      },
+      "minHeight": {
+        "$type": "dimension",
+        "$value": "calc({spacing.2xl} + {spacing.md})"
+      },
+      "gap": { "$type": "dimension", "$value": "{spacing.md}" },
+      "zIndex": { "$type": "number", "$value": 20 }
+    },
+    "panel": {
+      "background": {
+        "$type": "color",
+        "$value": "{surface.glassElevated.background}"
+      },
+      "fallbackBackground": {
+        "$type": "color",
+        "$value": "{surface.glassElevated.fallbackBackground}"
+      },
+      "foreground": {
+        "$type": "color",
+        "$value": "{surface.glassElevated.foreground}"
+      },
+      "borderColor": {
+        "$type": "color",
+        "$value": "{surface.glassElevated.borderColor}"
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{surface.glassElevated.borderWidth}"
+      },
+      "borderHighlight": {
+        "$type": "color",
+        "$value": "{surface.glassElevated.borderHighlight}"
+      },
+      "backdropFilter": {
+        "$type": "string",
+        "$value": "{surface.glassElevated.backdropFilter}"
+      },
+      "shadow": {
+        "$type": "shadow",
+        "$value": "{surface.glassElevated.shadow}"
+      },
+      "innerShadow": {
+        "$type": "shadow",
+        "$value": "{surface.glassElevated.innerShadow}"
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{surface.glassElevated.radius}"
+      },
+      "paddingBlock": { "$type": "dimension", "$value": "{spacing.md}" },
+      "paddingInline": { "$type": "dimension", "$value": "{spacing.md}" },
+      "gap": { "$type": "dimension", "$value": "{spacing.md}" },
+      "zIndex": { "$type": "number", "$value": 30 }
+    },
+    "brand": {
+      "foreground": { "$type": "color", "$value": "{text.primary}" },
+      "hoverForeground": { "$type": "color", "$value": "{text.accent}" },
+      "minHeight": { "$type": "dimension", "$value": "{button.height.md}" },
+      "gap": { "$type": "dimension", "$value": "{spacing.sm}" },
+      "radius": { "$type": "dimension", "$value": "{radius.md}" },
+      "fontFamily": { "$type": "fontFamily", "$value": "{fontFamily.display}" },
+      "fontSize": { "$type": "dimension", "$value": "{fontSize.body}" },
+      "fontWeight": { "$type": "fontWeight", "$value": "{fontWeight.bold}" }
+    },
+    "item": {
+      "background": { "$type": "color", "$value": "transparent" },
+      "foreground": { "$type": "color", "$value": "{text.secondary}" },
+      "borderColor": { "$type": "color", "$value": "transparent" },
+      "minHeight": { "$type": "dimension", "$value": "{button.height.md}" },
+      "paddingBlock": { "$type": "dimension", "$value": "{spacing.sm}" },
+      "paddingInline": { "$type": "dimension", "$value": "{spacing.md}" },
+      "gap": { "$type": "dimension", "$value": "{spacing.xs}" },
+      "radius": { "$type": "dimension", "$value": "{radius.md}" },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{borderWidth.default}"
+      },
+      "fontSize": { "$type": "dimension", "$value": "{fontSize.label}" },
+      "fontWeight": { "$type": "fontWeight", "$value": "{fontWeight.medium}" },
+      "hover": {
+        "background": {
+          "$type": "color",
+          "$value": "{surface.interactive.hover.background}"
+        },
+        "foreground": { "$type": "color", "$value": "{text.primary}" },
+        "borderColor": {
+          "$type": "color",
+          "$value": "{surface.interactive.hover.borderColor}"
+        }
+      },
+      "active": {
+        "background": {
+          "$type": "color",
+          "$value": "{surface.interactive.selected.background}"
+        },
+        "foreground": { "$type": "color", "$value": "{text.primary}" },
+        "borderColor": {
+          "$type": "color",
+          "$value": "{surface.interactive.selected.borderColor}"
+        },
+        "indicator": { "$type": "color", "$value": "{text.accent}" },
+        "indicatorWidth": {
+          "$type": "dimension",
+          "$value": "{borderWidth.focus}"
+        },
+        "fontWeight": { "$type": "fontWeight", "$value": "{fontWeight.bold}" }
+      },
+      "focus": {
+        "ringColor": {
+          "$type": "color",
+          "$value": "{surface.interactive.focus.ringColor}"
+        },
+        "ringWidth": {
+          "$type": "dimension",
+          "$value": "{surface.interactive.focus.ringWidth}"
+        },
+        "ringOffset": {
+          "$type": "dimension",
+          "$value": "{surface.interactive.focus.ringOffset}"
+        }
+      },
+      "disabled": {
+        "background": {
+          "$type": "color",
+          "$value": "{surface.disabled.background}"
+        },
+        "foreground": {
+          "$type": "color",
+          "$value": "{surface.disabled.foreground}"
+        },
+        "borderColor": {
+          "$type": "color",
+          "$value": "{surface.disabled.borderColor}"
+        }
+      }
+    },
+    "side": {
+      "background": {
+        "$type": "color",
+        "$value": "{surface.glassSubtle.background}"
+      },
+      "fallbackBackground": {
+        "$type": "color",
+        "$value": "{surface.glassSubtle.fallbackBackground}"
+      },
+      "foreground": {
+        "$type": "color",
+        "$value": "{surface.glassSubtle.foreground}"
+      },
+      "mutedForeground": {
+        "$type": "color",
+        "$value": "{surface.glassSubtle.mutedForeground}"
+      },
+      "borderColor": {
+        "$type": "color",
+        "$value": "{surface.glassSubtle.borderColor}"
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{surface.glassSubtle.borderWidth}"
+      },
+      "borderHighlight": {
+        "$type": "color",
+        "$value": "{surface.glassSubtle.borderHighlight}"
+      },
+      "backdropFilter": {
+        "$type": "string",
+        "$value": "{surface.glassSubtle.backdropFilter}"
+      },
+      "shadow": { "$type": "shadow", "$value": "{surface.glassSubtle.shadow}" },
+      "innerShadow": {
+        "$type": "shadow",
+        "$value": "{surface.glassSubtle.innerShadow}"
+      },
+      "paddingBlock": { "$type": "dimension", "$value": "{spacing.xl}" },
+      "paddingInline": { "$type": "dimension", "$value": "{spacing.lg}" },
+      "gap": { "$type": "dimension", "$value": "{spacing.xs}" }
+    },
+    "selector": {
+      "background": {
+        "$type": "color",
+        "$value": "{surface.glassSubtle.fallbackBackground}"
+      },
+      "borderColor": {
+        "$type": "color",
+        "$value": "{surface.glassSubtle.borderColor}"
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{surface.glassSubtle.borderWidth}"
+      },
+      "radius": { "$type": "dimension", "$value": "{radius.pill}" },
+      "padding": { "$type": "dimension", "$value": "{spacing.xs}" },
+      "gap": { "$type": "dimension", "$value": "{spacing.xs}" },
+      "labelForeground": { "$type": "color", "$value": "{text.secondary}" },
+      "itemForeground": { "$type": "color", "$value": "{text.secondary}" },
+      "itemHoverForeground": { "$type": "color", "$value": "{text.primary}" },
+      "itemActiveBackground": {
+        "$type": "color",
+        "$value": "{action.primary.background}"
+      },
+      "itemActiveForeground": {
+        "$type": "color",
+        "$value": "{action.primary.text}"
+      },
+      "itemActiveShadow": { "$type": "shadow", "$value": "{shadow.small}" }
+    },
+    "skipLink": {
+      "background": {
+        "$type": "color",
+        "$value": "{surface.solid.foreground}"
+      },
+      "foreground": { "$type": "color", "$value": "{text.inverse}" },
+      "borderColor": {
+        "$type": "color",
+        "$value": "{surface.solid.borderColor}"
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{borderWidth.default}"
+      },
+      "radius": { "$type": "dimension", "$value": "{radius.pill}" },
+      "paddingBlock": { "$type": "dimension", "$value": "{spacing.sm}" },
+      "paddingInline": { "$type": "dimension", "$value": "{spacing.md}" },
+      "shadow": { "$type": "shadow", "$value": "{shadow.medium}" },
+      "focusRingColor": { "$type": "color", "$value": "{focus.ring}" },
+      "focusRingWidth": {
+        "$type": "dimension",
+        "$value": "{borderWidth.focus}"
+      },
+      "focusRingOffset": { "$type": "dimension", "$value": "{spacing.xs}" },
+      "zIndex": { "$type": "number", "$value": 100 }
+    },
+    "backdrop": {
+      "background": {
+        "$type": "color",
+        "$value": "{surface.overlay.background}"
+      },
+      "zIndex": { "$type": "number", "$value": 25 }
+    },
+    "transition": {
+      "duration": {
+        "$type": "duration",
+        "$value": "{surface.transition.duration}"
+      },
+      "easing": {
+        "$type": "cubicBezier",
+        "$value": "{surface.transition.easing}"
+      }
+    }
+  },
   "ambient": {
     "background": {
       "base": {

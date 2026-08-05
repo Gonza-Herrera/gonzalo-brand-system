@@ -32,6 +32,9 @@ Cards inside Grid and real Tags and Badges inside Cluster.
 
 The Patterns page exercises all eight Brand Patterns in isolation and includes
 a composed personal-landing demonstration built from the public package API.
+Its Navigation section documents the migrated public Header, active items, mobile disclosure,
+selectors, accessibility and performance boundaries. The Showcase shell remains the real Side
+Navigation and Skip Link consumer; no public Tabs, Breadcrumbs or Pagination are implied.
 
 ## Run
 

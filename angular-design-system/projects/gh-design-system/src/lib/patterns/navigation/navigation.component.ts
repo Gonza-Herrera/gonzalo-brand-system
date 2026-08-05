@@ -1,5 +1,4 @@
 import {
-  ElementRef,
   ChangeDetectionStrategy,
   Component,
   input,
@@ -8,13 +7,14 @@ import {
   viewChild,
 } from '@angular/core';
 
+import { GhIconButtonComponent } from '../../components/icon-button/icon-button.component';
 import { GhContainerComponent } from '../../layout/container/container.component';
 import type { GhNavigationItem } from './navigation.types';
 
 @Component({
   selector: 'gh-navigation',
   standalone: true,
-  imports: [GhContainerComponent],
+  imports: [GhContainerComponent, GhIconButtonComponent],
   templateUrl: './navigation.component.html',
   styleUrl: './navigation.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -38,7 +38,7 @@ export class GhNavigationComponent {
   readonly internalNavigate = output<string>();
 
   protected readonly menuOpen = signal(false);
-  private readonly menuToggle = viewChild<ElementRef<HTMLButtonElement>>('menuToggle');
+  private readonly menuToggle = viewChild<GhIconButtonComponent>('menuToggle');
 
   protected toggleMenu(): void {
     this.menuOpen.update((open) => !open);
@@ -52,7 +52,7 @@ export class GhNavigationComponent {
     this.menuOpen.set(false);
 
     if (restoreFocus) {
-      this.menuToggle()?.nativeElement.focus();
+      this.menuToggle()?.focus();
     }
   }
 
