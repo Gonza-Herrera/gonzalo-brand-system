@@ -71,6 +71,11 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/cards/cards').then((module) => module.CardsPage),
   },
   {
+    path: 'forms',
+    title: 'Form Controls · Gonzalo Herrera Design System',
+    loadComponent: () => import('./pages/forms/forms').then((module) => module.FormsPage),
+  },
+  {
     path: 'patterns',
     title: 'Patterns · Gonzalo Herrera Design System',
     loadComponent: () => import('./pages/patterns/patterns').then((module) => module.PatternsPage),

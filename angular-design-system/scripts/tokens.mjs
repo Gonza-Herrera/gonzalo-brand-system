@@ -370,6 +370,119 @@ export const requiredCardSemanticPaths = [
   ),
 ];
 
+const formFieldProperties = [
+  'gap',
+  'groupGap',
+  'label.foreground',
+  'label.fontSize',
+  'label.fontWeight',
+  'label.lineHeight',
+  'requiredForeground',
+  'hint.foreground',
+  'hint.fontSize',
+  'error.foreground',
+  'error.fontSize',
+  'error.fontWeight',
+];
+
+const formControlProperties = [
+  'height',
+  'paddingInline',
+  'gap',
+  'radius',
+  'borderWidth',
+  'fontSize',
+  'lineHeight',
+  'background',
+  'foreground',
+  'placeholderForeground',
+  'borderColor',
+  'shadow',
+  'innerShadow',
+  'hover.background',
+  'hover.borderColor',
+  'focus.background',
+  'focus.borderColor',
+  'focus.ringColor',
+  'focus.ringWidth',
+  'focus.ringOffset',
+  'focus.shadow',
+  'invalid.background',
+  'invalid.borderColor',
+  'invalid.foreground',
+  'invalid.ringColor',
+  'disabled.background',
+  'disabled.borderColor',
+  'disabled.foreground',
+  'disabled.placeholderForeground',
+  'readonly.background',
+  'readonly.borderColor',
+  'readonly.foreground',
+  'transition.duration',
+  'transition.easing',
+  'iconSize',
+  'iconForeground',
+  'textareaMinHeight',
+];
+
+const choiceControlProperties = [
+  'size',
+  'targetSize',
+  'gap',
+  'borderWidth',
+  'checkboxRadius',
+  'radioRadius',
+  'background',
+  'borderColor',
+  'indicator',
+  'hover.background',
+  'hover.borderColor',
+  'focus.ringColor',
+  'focus.ringWidth',
+  'focus.ringOffset',
+  'checked.background',
+  'checked.borderColor',
+  'checked.indicator',
+  'invalid.borderColor',
+  'invalid.ringColor',
+  'disabled.background',
+  'disabled.borderColor',
+  'disabled.indicator',
+  'disabled.label',
+  'transition.duration',
+  'transition.easing',
+];
+
+const switchControlProperties = [
+  'trackWidth',
+  'trackHeight',
+  'thumbSize',
+  'thumbInset',
+  'targetSize',
+  'borderWidth',
+  'radius',
+  'background',
+  'borderColor',
+  'thumbBackground',
+  'thumbShadow',
+  'hover.background',
+  'hover.borderColor',
+  'checked.background',
+  'checked.borderColor',
+  'checked.thumbBackground',
+  'disabled.background',
+  'disabled.borderColor',
+  'disabled.thumbBackground',
+  'disabled.label',
+];
+
+export const requiredFormSemanticPaths = [
+  ...formFieldProperties.map((property) => `formField.${property}`),
+  ...formControlProperties.map((property) => `formControl.${property}`),
+  ...choiceControlProperties.map((property) => `choiceControl.${property}`),
+  ...switchControlProperties.map((property) => `switchControl.${property}`),
+];
+
 const requiredLayoutPrimitivePaths = [
   'spacing.none',
   'container.sm',
@@ -643,7 +756,11 @@ function composeDarkSemanticTokens(semanticTokens, authoredDarkTokens) {
       const isThemeInvariantComponentAlias =
         tokenPath.startsWith('button.') ||
         tokenPath.startsWith('iconButton.') ||
-        tokenPath.startsWith('card.');
+        tokenPath.startsWith('card.') ||
+        tokenPath.startsWith('formField.') ||
+        tokenPath.startsWith('formControl.') ||
+        tokenPath.startsWith('choiceControl.') ||
+        tokenPath.startsWith('switchControl.');
 
       if (darkToken) {
         return [tokenPath, darkToken];
@@ -667,6 +784,7 @@ function validateSemanticCoverage(semanticTokens, darkTokens) {
     ...requiredAmbientSemanticPaths,
     ...requiredButtonSemanticPaths,
     ...requiredCardSemanticPaths,
+    ...requiredFormSemanticPaths,
   ]) {
     if (!semanticTokens.has(tokenPath)) {
       throw new TokenValidationError(

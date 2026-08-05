@@ -68,6 +68,11 @@ export const SHOWCASE_NAVIGATION: readonly ShowcaseNavigationItem[] = [
     description: 'Content surfaces and typed compositions',
   },
   {
+    label: 'Forms',
+    path: '/forms',
+    description: 'Native controls, fields and validation',
+  },
+  {
     label: 'Patterns',
     path: '/patterns',
     description: 'Page-ready brand compositions',

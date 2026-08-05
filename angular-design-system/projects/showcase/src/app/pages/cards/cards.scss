@@ -135,25 +135,6 @@
   gap: var(--gh-card-gap-content);
 }
 
-.card-form label {
-  font-weight: var(--gh-card-metadata-emphasis-font-weight);
-}
-
-.card-form input {
-  min-width: 0;
-  padding: var(--gh-card-padding-sm) var(--gh-card-padding-md);
-  border: var(--gh-card-outlined-border-width) solid var(--gh-card-outlined-border-color);
-  border-radius: var(--gh-card-radius-sm);
-  background: var(--gh-card-outlined-background);
-  color: var(--gh-card-outlined-foreground);
-  font: inherit;
-}
-
-.card-form input:focus-visible {
-  outline: var(--gh-card-link-focus-ring-width) solid var(--gh-card-link-focus-ring-color);
-  outline-offset: var(--gh-card-link-focus-ring-offset);
-}
-
 .stat-content {
   display: grid;
   gap: var(--gh-card-gap-content);

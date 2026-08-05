@@ -257,8 +257,8 @@
     description="The default type is button. Submit and reset are explicit inputs, preserving predictable Angular form behavior."
   >
     <form class="form-example" (submit)="handleSubmit($event)" (reset)="handleReset()">
-      <label for="project-name">Project name</label>
-      <input id="project-name" name="projectName" value="Design System" required />
+      <label class="gh-form-field__label" for="project-name">Project name</label>
+      <input class="gh-input" id="project-name" name="projectName" value="Design System" required />
 
       <div class="form-example__actions">
         <gh-button type="submit">Submit form</gh-button>

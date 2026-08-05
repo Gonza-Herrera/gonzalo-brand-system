@@ -4,7 +4,7 @@ Official Angular workspace for the Gonzalo Herrera Design System.
 
 This workspace provides a reusable Angular library with Button, Icon Button, Badge, Tag, Ambient Background,
 Surface and Glass Panel,
-a four-component Card family, seven Layout Primitives and eight Brand Patterns,
+a four-component Card family, native Form Control foundations, seven Layout Primitives and eight Brand Patterns,
 plus Storybook, a routed standalone Showcase, a bilingual prerendered Portfolio,
 token-driven SCSS, light/dark/system theming, unit tests,
 accessibility checks and targeted interaction tests.
@@ -466,6 +466,7 @@ Import public TypeScript APIs from `gh-design-system`.
 | `/badges`     | Public Badge component          |
 | `/tags`       | Public Tag component            |
 | `/cards`      | Public Card family              |
+| `/forms`      | Native Form Control foundations |
 | `/patterns`   | Public Brand Patterns           |
 
 The shell provides a desktop sidebar, accessible mobile menu, active route
@@ -488,13 +489,14 @@ The [Liquid Glass documentation](docs/design/liquid-glass/README.md) defines the
 principles, surface taxonomy, token contract, Surface primitives, lighting, motion, accessibility,
 performance constraints and adoption roadmap for the current Design System phase.
 
-Button, Icon Button and the Card family now consume component-level Liquid Glass contracts. Hero's
+Button, Icon Button, the Card family, and native Form Controls now consume component-level Liquid
+Glass contracts. Compact controls use an opaque fallback material without per-control blur. Hero's
 existing `glass` variant still predates those migrations and awaits its dedicated implementation PR.
 
 ## Scope
 
-This release is deliberately limited to foundations, Surface primitives, Button, Icon Button, Badge, Tag, Cards,
-Layout Primitives and Brand Patterns:
+This release is deliberately limited to foundations, Surface primitives, Button, Icon Button,
+Badge, Tag, Cards, native Form Controls, Layout Primitives and Brand Patterns:
 
 - Primitive and semantic CSS custom properties
 - Light and dark themes
@@ -507,6 +509,7 @@ Layout Primitives and Brand Patterns:
 - Static, selectable and removable Tag behavior
 - Solid and Liquid Glass Surface primitives with CSS-only fallback behavior
 - Foundational, Article, Experience and Project Cards
+- Native input, textarea, select, checkbox, radio and switch class foundations
 - Container, Section, Stack, Inline, Grid, Cluster and Divider composition
 - Hero, Navigation, Footer, Section Heading, Feature Grid, Experience Timeline,
   Content Highlight and Contact Callout

@@ -40,7 +40,7 @@ export const GapScale: Story = {
 export const FormLikeComposition: Story = {
   render: () => ({
     template:
-      '<form (submit)="$event.preventDefault()"><gh-stack gap="md"><label for="story-name">Name</label><input id="story-name" name="name"><button type="submit">Save</button></gh-stack></form>',
+      '<form (submit)="$event.preventDefault()"><gh-stack gap="md"><label class="gh-form-field__label" for="story-name">Name</label><input class="gh-input" id="story-name" name="name"><button type="submit">Save</button></gh-stack></form>',
   }),
 };
 export const NestedStacks: Story = {

@@ -6,24 +6,24 @@ foundation change with a broad product migration.
 
 ## Current component status
 
-| Area                                   | Current status                                          | Intended future review                   |
-| -------------------------------------- | ------------------------------------------------------- | ---------------------------------------- |
-| Global foundations and themes          | PR 22 token contract available; product unchanged       | Component adoption                       |
-| Surface primitive                      | PR 23 Surface and Glass Panel implemented               | Component reuse in PR 25 and PR 26       |
-| Ambient backgrounds                    | PR 24 primitive and controlled presets implemented      | Product migration after library adoption |
-| Button and Icon Button                 | PR 25 component migration implemented                   | Validate through component consumers     |
-| Foundational Card                      | PR 26 component migration implemented                   | Validate through component consumers     |
-| Article, Experience, and Project Cards | PR 26 mappings inherited through foundational Card      | Product-specific evidence only           |
-| Forms and form controls                | Pending; Portfolio native controls unchanged            | Dedicated forms PR                       |
-| Navigation and Footer                  | Pending; existing pattern tokens unchanged              | Dedicated chrome PR                      |
-| Hero and Content Highlight             | Pending; existing glass/gradient surfaces unchanged     | Pattern migration PR                     |
-| Badge and Tag                          | Pending                                                 | Compact component review                 |
-| Alerts, toasts, and status feedback    | Pending; not currently public                           | Feedback component PR                    |
-| Dialogs and overlays                   | Pending; not currently public                           | Overlay primitives PR                    |
-| Popovers and tooltips                  | Pending; not currently public                           | Floating surface PR                      |
-| Storybook documentation                | Tokens, Surface, Ambient, Buttons and Cards documented  | Add component migrations incrementally   |
-| Showcase                               | Surface, Ambient, Button and Card integration available | Integrate later approved primitives      |
-| Portfolio                              | Button and Card consumers inherit public migrations     | Product redesign remains out of scope    |
+| Area                                   | Current status                                                   | Intended future review                   |
+| -------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------- |
+| Global foundations and themes          | PR 22 token contract available; product unchanged                | Component adoption                       |
+| Surface primitive                      | PR 23 Surface and Glass Panel implemented                        | Component reuse in PR 25 and PR 26       |
+| Ambient backgrounds                    | PR 24 primitive and controlled presets implemented               | Product migration after library adoption |
+| Button and Icon Button                 | PR 25 component migration implemented                            | Validate through component consumers     |
+| Foundational Card                      | PR 26 component migration implemented                            | Validate through component consumers     |
+| Article, Experience, and Project Cards | PR 26 mappings inherited through foundational Card               | Product-specific evidence only           |
+| Forms and form controls                | PR 27 native control foundations implemented                     | Validate through component consumers     |
+| Navigation and Footer                  | Pending; existing pattern tokens unchanged                       | Dedicated chrome PR                      |
+| Hero and Content Highlight             | Pending; existing glass/gradient surfaces unchanged              | Pattern migration PR                     |
+| Badge and Tag                          | Pending                                                          | Compact component review                 |
+| Alerts, toasts, and status feedback    | Pending; not currently public                                    | Feedback component PR                    |
+| Dialogs and overlays                   | Pending; not currently public                                    | Overlay primitives PR                    |
+| Popovers and tooltips                  | Pending; not currently public                                    | Floating surface PR                      |
+| Storybook documentation                | Tokens, Surface, Ambient, Buttons, Cards and Forms documented    | Add component migrations incrementally   |
+| Showcase                               | Surface, Ambient, Button, Card and Form integration available    | Integrate later approved primitives      |
+| Portfolio                              | Button, Card and native Form consumers inherit public migrations | Product redesign remains out of scope    |
 
 Pending means no component is authorized to invent a local Liquid Glass recipe.
 
@@ -70,18 +70,26 @@ Pending means no component is authorized to invent a local Liquid Glass recipe.
 - Added component tokens plus fallback, reduced-motion, forced-colors, SSR and content coverage.
 - Preserved all public names and semantics; no deprecation was required.
 
+### PR 27 — Form Controls
+
+- Added one CSS-class foundation for existing native input, textarea, select, checkbox, radio, and
+  switch controls; no parallel Angular component family was created.
+- Preserved native value accessors, typed Reactive Forms, semantic HTML, keyboard operation, and
+  Portfolio submission behavior.
+- Added component tokens, opaque compact-control materials, reduced-motion and forced-colors paths.
+- Migrated real Portfolio, Showcase, and Storybook consumers and removed duplicated visual recipes.
+
 ### Proposed follow-up PRs
 
 Sequence these only after the first component migrations provide evidence:
 
 1. Navigation and persistent chrome.
 2. Dialog, overlay, popover, and tooltip primitives.
-3. Forms and validation-heavy controls.
-4. Alerts, toasts, and status feedback.
-5. Badge, Tag, and other compact components.
-6. Brand Patterns.
-7. Showcase integration and migration guidance.
-8. Portfolio product migration.
+3. Alerts, toasts, and status feedback.
+4. Badge, Tag, and other compact components.
+5. Brand Patterns.
+6. Showcase integration and migration guidance.
+7. Portfolio product migration.
 
 ## Gate for every implementation PR
 

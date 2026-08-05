@@ -134,27 +134,6 @@
   background: var(--gh-surface-primary);
   box-shadow: var(--gh-shadow-sm);
 
-  label {
-    font-size: var(--gh-font-size-label);
-    font-weight: var(--gh-font-weight-semibold);
-  }
-
-  input {
-    width: 100%;
-    min-height: var(--gh-space-2xl);
-    padding: var(--gh-space-sm) var(--gh-space-md);
-    border: var(--gh-border-width-default) solid var(--gh-border-default);
-    border-radius: var(--gh-radius-md);
-    background: var(--gh-background-primary);
-    color: var(--gh-text-primary);
-    font: inherit;
-  }
-
-  input:focus-visible {
-    outline: var(--gh-border-width-focus) solid var(--gh-focus-ring);
-    outline-offset: var(--gh-space-xs);
-  }
-
   > p {
     margin: 0;
     color: var(--gh-text-secondary);

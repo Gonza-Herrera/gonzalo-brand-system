@@ -55,8 +55,8 @@
       </gh-card>
 
       <gh-card variant="glass" interactive selected>
-        <label class="selection-example">
-          <input type="radio" name="showcase-card-selection" checked />
+        <label class="selection-example gh-radio">
+          <input class="gh-radio__control" type="radio" name="showcase-card-selection" checked />
           <span>
             <strong>Selected surface</strong>
             <span>The radio owns selection; Card supplies a visible non-color indicator.</span>
@@ -128,8 +128,8 @@
         <form class="card-form" (submit)="$event.preventDefault()">
           <h3>Dense form content</h3>
           <p>Complex input remains on the predictable Solid material.</p>
-          <label for="card-showcase-email">Email example</label>
-          <input id="card-showcase-email" type="email" autocomplete="email" />
+          <label class="gh-form-field__label" for="card-showcase-email">Email example</label>
+          <input class="gh-input" id="card-showcase-email" type="email" autocomplete="email" />
           <gh-button type="submit">Continue</gh-button>
         </form>
       </gh-card>

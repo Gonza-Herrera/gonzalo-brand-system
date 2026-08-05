@@ -119,6 +119,11 @@ Load reusable mixins:
 
 The package build includes all three entry points as SCSS assets.
 
+The main styles entry point also emits the native Form Control classes (`.gh-form-field`,
+`.gh-input`, `.gh-textarea`, `.gh-select`, `.gh-checkbox`, `.gh-radio`, `.gh-switch`, and affix
+shells). These classes preserve native elements and Angular Forms value accessors; see the
+[`Liquid Glass Form Control contract`](../../docs/design/liquid-glass/form-controls.md).
+
 ## Theming
 
 Apply `data-theme="light"` or `data-theme="dark"` to the document root, or use

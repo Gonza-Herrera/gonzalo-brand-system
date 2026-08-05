@@ -139,8 +139,8 @@ export const GlassPanelAndFormContent: Story = {
           <form class="gh-ambient-story-content gh-ambient-story-form">
             <h2>Contact</h2>
             <p>Forms remain real content; ambience stays decorative.</p>
-            <label for="ambient-story-email">Email</label>
-            <input id="ambient-story-email" type="email" autocomplete="email" />
+            <label class="gh-form-field__label" for="ambient-story-email">Email</label>
+            <input class="gh-input" id="ambient-story-email" type="email" autocomplete="email" />
             <gh-button type="button">Continue</gh-button>
           </form>
         </gh-glass-panel>

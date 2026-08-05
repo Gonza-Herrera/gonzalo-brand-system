@@ -26,6 +26,7 @@ describe('ThemeSwitcherComponent', () => {
     const select = element.querySelector<HTMLSelectElement>('select');
 
     expect(element.querySelector('label')?.textContent).toContain('Theme');
+    expect(select?.classList.contains('gh-select')).toBe(true);
     expect(select?.querySelectorAll('option')).toHaveLength(3);
     expect(select?.value).toBe('system');
   });

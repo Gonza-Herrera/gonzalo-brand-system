@@ -57,25 +57,8 @@
   gap: var(--gh-space-sm);
 }
 
-.ambient-form label {
+.ambient-form .gh-form-field__label {
   grid-column: 1 / -1;
-  color: var(--gh-text-primary);
-  font-weight: var(--gh-font-weight-semibold);
-}
-
-.ambient-form input {
-  min-width: 0;
-  padding: var(--gh-space-sm) var(--gh-space-md);
-  border: var(--gh-border-width-default) solid var(--gh-border-default);
-  border-radius: var(--gh-radius-md);
-  background: var(--gh-background-secondary);
-  color: var(--gh-text-primary);
-  font: inherit;
-}
-
-.ambient-form input:focus-visible {
-  outline: var(--gh-border-width-focus) solid var(--gh-focus-ring);
-  outline-offset: var(--gh-space-xs);
 }
 
 .guidance-grid {
