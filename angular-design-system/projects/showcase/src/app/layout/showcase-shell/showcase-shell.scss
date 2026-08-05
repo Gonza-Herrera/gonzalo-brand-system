@@ -1,5 +1,5 @@
 :host {
-  --showcase-header-height: calc(var(--gh-space-2xl) + var(--gh-space-xl));
+  --showcase-header-height: calc(var(--gh-navigation-header-min-height) + var(--gh-space-md));
   display: block;
   min-height: 100dvh;
   overflow-x: clip;
@@ -7,13 +7,17 @@
 
 .skip-link {
   position: fixed;
-  z-index: 100;
+  z-index: var(--gh-navigation-skip-link-z-index);
   top: var(--gh-space-sm);
   left: var(--gh-space-sm);
-  padding: var(--gh-space-sm) var(--gh-space-md);
-  border-radius: var(--gh-radius-pill);
-  background: var(--gh-text-primary);
-  color: var(--gh-text-inverse);
+  padding: var(--gh-navigation-skip-link-padding-block)
+    var(--gh-navigation-skip-link-padding-inline);
+  border: var(--gh-navigation-skip-link-border-width) solid
+    var(--gh-navigation-skip-link-border-color);
+  border-radius: var(--gh-navigation-skip-link-radius);
+  background: var(--gh-navigation-skip-link-background);
+  color: var(--gh-navigation-skip-link-foreground);
+  box-shadow: var(--gh-navigation-skip-link-shadow);
   font-size: var(--gh-font-size-caption);
   font-weight: var(--gh-font-weight-semibold);
   text-decoration: none;
@@ -21,6 +25,9 @@
 
   &:focus {
     transform: translateY(0);
+    outline: var(--gh-navigation-skip-link-focus-ring-width) solid
+      var(--gh-navigation-skip-link-focus-ring-color);
+    outline-offset: var(--gh-navigation-skip-link-focus-ring-offset);
   }
 }
 
@@ -53,21 +60,33 @@ main {
 
   .navigation-backdrop {
     position: fixed;
-    z-index: 25;
+    z-index: var(--gh-navigation-backdrop-z-index);
     inset: var(--showcase-header-height) 0 0;
     display: block;
     border: 0;
-    background: var(--gh-border-strong);
+    background: var(--gh-navigation-backdrop-background);
     cursor: pointer;
   }
 }
 
 @media (max-width: 42rem) {
-  :host {
-    --showcase-header-height: calc(var(--gh-space-2xl) + var(--gh-space-2xl));
-  }
-
   main {
     padding: var(--gh-space-xl) var(--gh-space-md);
+  }
+}
+
+@media (forced-colors: active) {
+  .skip-link {
+    border-color: ButtonBorder;
+    background: CanvasText;
+    color: Canvas;
+
+    &:focus {
+      outline-color: Highlight;
+    }
+  }
+
+  .navigation-backdrop {
+    background: Canvas;
   }
 }

@@ -34,6 +34,10 @@ Native forms can opt into the shared visual contract without an Angular wrapper:
 Checkbox, radio, switch, affix, state, Angular Forms, and accessibility guidance lives in the Form
 Control contract. Consumer styles must not reproduce the material recipe.
 
+Generated themes also expose the `navigation.*` component contract used by the public Navigation
+pattern and real application shells. Navigation styles consume those aliases rather than primitive
+Glass variables; Header and mobile panel filters always follow opaque fallbacks.
+
 Primitive color variables are reserved for documentation and approved brand
 expressions. Spacing and radius primitives remain appropriate for component
 geometry.

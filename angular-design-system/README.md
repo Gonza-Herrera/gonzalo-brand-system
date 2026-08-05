@@ -489,8 +489,9 @@ The [Liquid Glass documentation](docs/design/liquid-glass/README.md) defines the
 principles, surface taxonomy, token contract, Surface primitives, lighting, motion, accessibility,
 performance constraints and adoption roadmap for the current Design System phase.
 
-Button, Icon Button, the Card family, and native Form Controls now consume component-level Liquid
-Glass contracts. Compact controls use an opaque fallback material without per-control blur. Hero's
+Button, Icon Button, the Card family, native Form Controls, and Navigation now consume
+component-level Liquid Glass contracts. Compact controls and Navigation Items avoid per-control
+blur; the Header and bounded mobile panel use structural materials with opaque fallbacks. Hero's
 existing `glass` variant still predates those migrations and awaits its dedicated implementation PR.
 
 ## Scope
@@ -510,6 +511,8 @@ Badge, Tag, Cards, native Form Controls, Layout Primitives and Brand Patterns:
 - Solid and Liquid Glass Surface primitives with CSS-only fallback behavior
 - Foundational, Article, Experience and Project Cards
 - Native input, textarea, select, checkbox, radio and switch class foundations
+- Liquid Glass Navigation with native links, active route, responsive mobile disclosure and Skip
+  Link/selector integration
 - Container, Section, Stack, Inline, Grid, Cluster and Divider composition
 - Hero, Navigation, Footer, Section Heading, Feature Grid, Experience Timeline,
   Content Highlight and Contact Callout

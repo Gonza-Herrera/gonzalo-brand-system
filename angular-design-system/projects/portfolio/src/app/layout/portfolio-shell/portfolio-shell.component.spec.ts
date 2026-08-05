@@ -30,6 +30,12 @@ describe('PortfolioShellComponent', () => {
     expect(element.querySelector('gh-footer')).not.toBeNull();
     expect(element.querySelector('app-language-switcher')).not.toBeNull();
     expect(element.querySelector('app-theme-switcher')).not.toBeNull();
+    expect(
+      element.querySelectorAll('gh-navigation .gh-navigation__link[aria-current="page"]'),
+    ).toHaveLength(1);
+    expect(
+      element.querySelector('.gh-navigation__toggle button')?.getAttribute('aria-controls'),
+    ).toBe('portfolio-navigation-menu');
   });
 
   it('localizes navigation, controls and footer from the locale service', () => {

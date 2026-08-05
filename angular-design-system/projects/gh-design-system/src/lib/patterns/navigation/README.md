@@ -60,7 +60,7 @@ Angular Router:
 ## Behavior
 
 - The consumer determines the active item; active links expose `aria-current="page"` and a non-color underline.
-- The mobile menu uses a real button, Signals, `aria-expanded` and `aria-controls`.
+- The mobile menu composes the public Icon Button, Signals, `aria-expanded` and `aria-controls`.
 - Selecting an item closes the mobile menu. Escape closes it and returns focus to the toggle.
 - Internal interception is opt-in. When enabled, an unmodified primary click on the brand or an
   internal item prevents full-document navigation and emits `internalNavigate`.
@@ -71,6 +71,17 @@ Angular Router:
   longer localized labels have enough room. The initial Signal state is closed and deterministic.
 - External links receive `target="_blank"`, `rel="noopener noreferrer"` and accessible context.
 - Sticky and transparent presentation remain optional and token-driven.
+
+## Liquid Glass material and tokens
+
+The existing selector and API now consume `--gh-navigation-*` component tokens. The global Header
+maps to bounded Glass with an opaque fallback; the open mobile panel maps to Glass Elevated. Blur is
+never instantiated per link, selector item or Side Navigation item. `@supports` performs the CSS-only
+enhancement and forced colors returns structural surfaces to system colors.
+
+The explicit `transparent` input remains compatible and intentionally disables the Header material.
+Consumers should use it only when the authored backdrop preserves contrast. Sticky positioning does
+not add scroll listeners, resize listeners, progressive blur or a separate scrolled state.
 
 When more than one Navigation exists on a page, pass a unique, stable `menuId`. This avoids duplicate IDs and remains deterministic for SSR.
 
@@ -91,3 +102,5 @@ browser interaction.
   knowing how the consumer resolves it.
 - Don't use the theme slot without `showThemeControl`.
 - The mobile menu is intentionally a simple collapsible panel, not a drawer, focus trap or global scroll lock.
+- Tabs, Breadcrumbs, Pagination, nested navigation and collapsed Side Navigation are not current
+  public APIs and are not synthesized by this migration.

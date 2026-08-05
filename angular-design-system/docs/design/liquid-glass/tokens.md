@@ -5,9 +5,9 @@ truth remains the repository-level [`/tokens`](../../../../tokens/) directory; g
 inside the Angular library must never be edited by hand.
 
 PR 22 provides the material values consumed by the Surface primitives introduced in PR 23. PR 25
-adds action component mappings, PR 26 adds Card component mappings, and PR 27 adds native Form
-Control component mappings; Portfolio consumers inherit those compatible public migrations without
-a page redesign.
+adds action component mappings, PR 26 adds Card component mappings, PR 27 adds native Form Control
+component mappings, and PR 28 adds Navigation component mappings; Portfolio consumers inherit those
+compatible public migrations without a page redesign.
 
 ## Architecture
 
@@ -29,8 +29,8 @@ motion, focus                      overlay, interactive, disabled
   consume.
 - Component tokens are added only when a component family demonstrates a real mapping need. PR 25
   adds `button.*` and `iconButton.*`; PR 26 adds `card.*`; PR 27 adds `formField.*`,
-  `formControl.*`, `choiceControl.*`, and `switchControl.*`. Later families remain deferred to their
-  own PRs.
+  `formControl.*`, `choiceControl.*`, and `switchControl.*`; PR 28 adds `navigation.*`. Later
+  families remain deferred to their own PRs.
 
 Aliases are resolved by the existing generator. Semantic JSON therefore points to primitives or
 other semantic roles instead of repeating their literal values.
@@ -167,6 +167,17 @@ Compact controls deliberately map their paint to `surface.glassSubtle.fallbackBa
 no backdrop-filter token. This provides opaque containment, stable contrast, and a restrained inner
 highlight without multiplying filtered regions in long forms. Reusable Form CSS consumes only the
 four component namespaces and never assembles a material from primitive Glass variables.
+
+## Navigation mappings
+
+PR 28 maps the existing public Navigation and real application chrome through `navigation.header`,
+`panel`, `brand`, `item`, `side`, `selector`, `skipLink`, `backdrop`, and `transition`. Header maps to
+Glass, the bounded open mobile panel maps to Glass Elevated, and the Showcase Sidebar maps to Glass
+Subtle. All paint is preceded by an opaque fallback.
+
+Navigation Items, language choices and theme choices use interaction and action aliases without
+per-item backdrop filtering. Tabs, Breadcrumbs and Pagination have no component tokens because no
+corresponding public components exist.
 
 ## Theme mappings
 

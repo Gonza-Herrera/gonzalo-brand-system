@@ -1,10 +1,11 @@
 .language-switcher {
   display: inline-flex;
-  gap: var(--gh-space-xs);
-  padding: var(--gh-space-xs);
-  border: var(--gh-border-width-default) solid var(--gh-border-default);
-  border-radius: var(--gh-radius-pill);
-  background: var(--gh-surface-secondary);
+  gap: var(--gh-navigation-selector-gap);
+  padding: var(--gh-navigation-selector-padding);
+  border: var(--gh-navigation-selector-border-width) solid
+    var(--gh-navigation-selector-border-color);
+  border-radius: var(--gh-navigation-selector-radius);
+  background: var(--gh-navigation-selector-background);
 }
 
 a {
@@ -12,19 +13,50 @@ a {
   min-width: 2.75rem;
   min-height: 2.75rem;
   place-items: center;
-  border-radius: var(--gh-radius-pill);
-  color: var(--gh-text-secondary);
+  border-radius: var(--gh-navigation-selector-radius);
+  color: var(--gh-navigation-selector-item-foreground);
   font-size: var(--gh-font-size-caption);
   font-weight: var(--gh-font-weight-semibold);
   text-decoration: none;
+  transition:
+    background-color var(--gh-navigation-transition-duration) var(--gh-navigation-transition-easing),
+    color var(--gh-navigation-transition-duration) var(--gh-navigation-transition-easing);
 }
 
 a:hover {
-  color: var(--gh-text-primary);
+  color: var(--gh-navigation-selector-item-hover-foreground);
+}
+
+a:focus-visible {
+  outline: var(--gh-navigation-item-focus-ring-width) solid
+    var(--gh-navigation-item-focus-ring-color);
+  outline-offset: var(--gh-navigation-item-focus-ring-offset);
 }
 
 a[aria-current='page'] {
-  background: var(--gh-action-primary-background);
-  color: var(--gh-action-primary-text);
-  box-shadow: var(--gh-shadow-sm);
+  background: var(--gh-navigation-selector-item-active-background);
+  color: var(--gh-navigation-selector-item-active-foreground);
+  box-shadow: var(--gh-navigation-selector-item-active-shadow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  a {
+    transition: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .language-switcher {
+    border-color: ButtonBorder;
+    background: Canvas;
+  }
+
+  a[aria-current='page'] {
+    background: Highlight;
+    color: HighlightText;
+  }
+
+  a:focus-visible {
+    outline-color: Highlight;
+  }
 }

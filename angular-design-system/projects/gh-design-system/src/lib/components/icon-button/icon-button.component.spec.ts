@@ -15,6 +15,8 @@ import { GhIconButtonComponent } from './icon-button.component';
       [loading]="loading()"
       [aria-label]="ariaLabel()"
       [aria-labelledby]="ariaLabelledby()"
+      [aria-expanded]="ariaExpanded()"
+      [aria-controls]="ariaControls()"
       (click)="handleClick()"
     >
       <svg data-testid="icon"></svg>
@@ -28,6 +30,8 @@ class IconButtonTestHost {
   readonly loading = signal(false);
   readonly ariaLabel = signal<string | undefined>('Open navigation');
   readonly ariaLabelledby = signal<string | undefined>(undefined);
+  readonly ariaExpanded = signal<boolean | undefined>(undefined);
+  readonly ariaControls = signal<string | undefined>(undefined);
   clickCount = 0;
 
   handleClick(): void {
@@ -92,6 +96,26 @@ describe('GhIconButtonComponent', () => {
     fixture.componentInstance.ariaLabelledby.set(undefined);
     fixture.detectChanges();
     expect(button?.getAttribute('aria-labelledby')).toBeNull();
+  });
+
+  it('forwards disclosure relationships and exposes focus for composed navigation controls', () => {
+    const fixture = TestBed.createComponent(IconButtonTestHost);
+    fixture.componentInstance.ariaExpanded.set(false);
+    fixture.componentInstance.ariaControls.set('test-navigation');
+    fixture.detectChanges();
+
+    const button = (fixture.nativeElement as HTMLElement).querySelector<HTMLButtonElement>(
+      'button',
+    );
+    const iconButton = fixture.debugElement.children.find(
+      (child) => child.componentInstance instanceof GhIconButtonComponent,
+    )?.componentInstance as GhIconButtonComponent | undefined;
+
+    expect(button?.getAttribute('aria-expanded')).toBe('false');
+    expect(button?.getAttribute('aria-controls')).toBe('test-navigation');
+
+    iconButton?.focus();
+    expect(document.activeElement).toBe(button);
   });
 
   it('uses native disabled behavior and blocks activation', () => {

@@ -14,6 +14,7 @@ import {
   requiredFormSemanticPaths,
   requiredLiquidGlassPrimitivePaths,
   requiredLiquidGlassSemanticPaths,
+  requiredNavigationSemanticPaths,
 } from './tokens.mjs';
 
 const workspaceRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -231,6 +232,44 @@ test('provides a complete theme-aware native Form Control contract', async () =>
   }
 });
 
+test('provides a complete theme-aware Navigation contract', async () => {
+  const { darkTokens, semanticTokens } = await loadAndValidateTokens();
+
+  for (const tokenPath of requiredNavigationSemanticPaths) {
+    const lightToken = semanticTokens.get(tokenPath);
+    const darkToken = darkTokens.get(tokenPath);
+
+    assert.ok(lightToken, `Missing light Navigation token ${tokenPath}`);
+    assert.ok(darkToken, `Missing dark Navigation token ${tokenPath}`);
+    assert.equal(darkToken.type, lightToken.type, `Theme type mismatch for ${tokenPath}`);
+  }
+
+  assert.equal(
+    semanticTokens.get('navigation.header.backdropFilter').value,
+    '{surface.glass.backdropFilter}',
+  );
+  assert.equal(
+    semanticTokens.get('navigation.header.fallbackBackground').value,
+    '{surface.glass.fallbackBackground}',
+  );
+  assert.equal(
+    semanticTokens.get('navigation.panel.backdropFilter').value,
+    '{surface.glassElevated.backdropFilter}',
+  );
+  assert.equal(
+    semanticTokens.get('navigation.item.focus.ringColor').value,
+    '{surface.interactive.focus.ringColor}',
+  );
+  assert.equal(
+    semanticTokens.get('navigation.item.active.borderColor').value,
+    '{surface.interactive.selected.borderColor}',
+  );
+  assert.equal(
+    semanticTokens.get('navigation.selector.background').value,
+    '{surface.glassSubtle.fallbackBackground}',
+  );
+});
+
 test('provides solid fallbacks and global motion and focus aliases for future surfaces', async () => {
   const { semanticTokens } = await loadAndValidateTokens();
 
@@ -319,6 +358,20 @@ test('generates unique prefixed CSS variables for primitives and semantic themes
     assert.equal(countOccurrences(light, mapKey), 1, `${variable} must have one light value`);
     assert.equal(countOccurrences(dark, mapKey), 1, `${variable} must have one dark value`);
   }
+
+  for (const tokenPath of requiredNavigationSemanticPaths) {
+    const variable = semanticCssName(tokenPath);
+    const mapKey = `'${variable.replace('--gh-', '')}':`;
+
+    assert.equal(countOccurrences(semantic, `'${variable.replace('--gh-', '')}',`), 1);
+    assert.equal(countOccurrences(light, mapKey), 1, `${variable} must have one light value`);
+    assert.equal(countOccurrences(dark, mapKey), 1, `${variable} must have one dark value`);
+  }
+
+  assert.match(semantic, /\$gh-theme-invariant-token-names:/);
+  assert.match(semantic, /@mixin apply\(\$tokens, \$include-invariant: true\)/);
+  assert.match(light, /semantic\.apply\(\$gh-light-theme, true\)/);
+  assert.match(dark, /semantic\.apply\(\$gh-dark-theme, false\)/);
 
   assert.match(light, /'card-media-aspect-ratio': "16 \/ 9"/);
   assert.match(dark, /'card-media-aspect-ratio': "16 \/ 9"/);

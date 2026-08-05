@@ -124,6 +124,10 @@ The main styles entry point also emits the native Form Control classes (`.gh-for
 shells). These classes preserve native elements and Angular Forms value accessors; see the
 [`Liquid Glass Form Control contract`](../../docs/design/liquid-glass/form-controls.md).
 
+The existing `GhNavigationComponent` consumes the `navigation.*` component contract, reuses Icon
+Button for mobile disclosure and limits filtering to its structural Header and open panel. See the
+[`Liquid Glass Navigation contract`](../../docs/design/liquid-glass/navigation.md).
+
 ## Theming
 
 Apply `data-theme="light"` or `data-theme="dark"` to the document root, or use

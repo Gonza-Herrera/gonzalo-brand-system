@@ -1,33 +1,64 @@
 .theme-toggle {
   display: inline-flex;
-  gap: var(--gh-space-xs);
+  gap: var(--gh-navigation-selector-gap);
   margin: 0;
-  padding: var(--gh-space-xs);
-  border: var(--gh-border-width-default) solid var(--gh-border-default);
-  border-radius: var(--gh-radius-pill);
-  background: var(--gh-surface-secondary);
+  padding: var(--gh-navigation-selector-padding);
+  border: var(--gh-navigation-selector-border-width) solid
+    var(--gh-navigation-selector-border-color);
+  border-radius: var(--gh-navigation-selector-radius);
+  background: var(--gh-navigation-selector-background);
 
   button {
     padding: var(--gh-space-xs) var(--gh-space-sm);
     border: 0;
-    border-radius: var(--gh-radius-pill);
+    border-radius: var(--gh-navigation-selector-radius);
     background: transparent;
-    color: var(--gh-text-secondary);
+    color: var(--gh-navigation-selector-item-foreground);
     font-size: var(--gh-font-size-caption);
     font-weight: var(--gh-font-weight-semibold);
     cursor: pointer;
     transition:
-      background-color 160ms ease,
-      color 160ms ease;
+      background-color var(--gh-navigation-transition-duration)
+        var(--gh-navigation-transition-easing),
+      color var(--gh-navigation-transition-duration) var(--gh-navigation-transition-easing);
   }
 
   button:hover {
-    color: var(--gh-text-primary);
+    color: var(--gh-navigation-selector-item-hover-foreground);
+  }
+
+  button:focus-visible {
+    outline: var(--gh-navigation-item-focus-ring-width) solid
+      var(--gh-navigation-item-focus-ring-color);
+    outline-offset: var(--gh-navigation-item-focus-ring-offset);
   }
 
   button[aria-pressed='true'] {
-    background: var(--gh-action-primary-background);
-    color: var(--gh-action-primary-text);
-    box-shadow: var(--gh-shadow-sm);
+    background: var(--gh-navigation-selector-item-active-background);
+    color: var(--gh-navigation-selector-item-active-foreground);
+    box-shadow: var(--gh-navigation-selector-item-active-shadow);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle button {
+    transition: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .theme-toggle {
+    border-color: ButtonBorder;
+    background: Canvas;
+  }
+
+  .theme-toggle button[aria-pressed='true'] {
+    border-color: Highlight;
+    background: Highlight;
+    color: HighlightText;
+  }
+
+  .theme-toggle button:focus-visible {
+    outline-color: Highlight;
   }
 }
