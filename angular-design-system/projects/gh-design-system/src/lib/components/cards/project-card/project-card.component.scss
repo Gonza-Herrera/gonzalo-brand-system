@@ -11,6 +11,7 @@ gh-card {
 .project-card__layout {
   display: grid;
   height: 100%;
+  border-radius: inherit;
 }
 
 .project-card__layout--horizontal {
@@ -19,25 +20,29 @@ gh-card {
 
 .project-card__media {
   @include card.media;
+  border-start-start-radius: inherit;
+  border-start-end-radius: inherit;
 }
 
 .project-card__layout--horizontal .project-card__media {
   height: 100%;
   aspect-ratio: auto;
-  min-height: calc(var(--gh-space-section) * 2);
+  min-height: var(--gh-card-media-horizontal-min-height);
+  border-start-end-radius: var(--gh-card-padding-none);
+  border-end-start-radius: inherit;
 }
 
 .project-card__body {
   display: flex;
   min-width: 0;
   flex-direction: column;
-  gap: var(--gh-space-md);
-  padding: var(--gh-space-lg);
+  gap: var(--gh-card-gap-content);
+  padding: var(--gh-card-padding-md);
 }
 
 .project-card__header {
   display: grid;
-  gap: var(--gh-space-md);
+  gap: var(--gh-card-gap-header);
 
   h2,
   h3 {
@@ -48,7 +53,7 @@ gh-card {
 .project-card__badges {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--gh-space-sm);
+  gap: var(--gh-card-gap-tags);
 }
 
 .project-card__description {
@@ -62,7 +67,7 @@ gh-card {
 .project-card__actions {
   @include card.actions;
   margin-top: auto;
-  padding-top: var(--gh-space-sm);
+  padding-top: var(--gh-card-gap-footer-offset);
 }
 
 @media (max-width: 48rem) {
@@ -72,6 +77,8 @@ gh-card {
 
   .project-card__layout--horizontal .project-card__media {
     min-height: auto;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: var(--gh-card-media-aspect-ratio);
+    border-start-end-radius: inherit;
+    border-end-start-radius: var(--gh-card-padding-none);
   }
 }

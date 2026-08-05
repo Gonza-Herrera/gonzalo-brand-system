@@ -5,7 +5,7 @@ import { STORY_ARTICLE } from '../../../../../../../stories/shared/story-data';
 const meta: Meta<GhArticleCardComponent> = {
   title: 'Components/Cards/Article Card',
   component: GhArticleCardComponent,
-  tags: ['autodocs'],
+  tags: ['autodocs', 'pr26-cards'],
   parameters: {
     docs: {
       description: {

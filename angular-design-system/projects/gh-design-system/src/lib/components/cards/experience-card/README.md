@@ -5,6 +5,10 @@
 `GhExperienceCardComponent` presents a semantic professional-experience entry
 for portfolios, CV pages and leadership profiles.
 
+It continues to compose the public base Card. Standard entries use `outlined` → Solid for dense
+professional content; `highlighted` entries use `elevated` → Glass Elevated. No Experience input or
+content structure changes as part of the material migration.
+
 ## Import
 
 ```ts

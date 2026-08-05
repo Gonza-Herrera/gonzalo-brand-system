@@ -14,12 +14,12 @@ gh-card {
 .experience-card__skills section,
 .experience-card__description {
   display: grid;
-  gap: var(--gh-space-md);
+  gap: var(--gh-card-gap-content);
 }
 
 .experience-card__identity {
   display: flex;
-  gap: var(--gh-space-md);
+  gap: var(--gh-card-gap-header);
   align-items: flex-start;
   min-width: 0;
 
@@ -34,13 +34,13 @@ gh-card {
 }
 
 .experience-card__logo {
-  width: var(--gh-space-2xl);
+  width: var(--gh-card-logo-size);
   aspect-ratio: 1;
-  flex: 0 0 var(--gh-space-2xl);
+  flex: 0 0 var(--gh-card-logo-size);
   overflow: hidden;
-  border: var(--gh-border-width-default) solid var(--gh-card-border);
-  border-radius: var(--gh-radius-md);
-  background: var(--gh-card-background-subtle);
+  border: var(--gh-card-logo-border-width) solid var(--gh-card-logo-border-color);
+  border-radius: var(--gh-card-logo-radius);
+  background: var(--gh-card-logo-background);
 
   img {
     display: block;
@@ -61,15 +61,15 @@ gh-card {
 }
 
 .experience-card__company {
-  margin-top: var(--gh-space-xs);
-  color: var(--gh-text-primary);
-  font-weight: var(--gh-font-weight-semibold);
+  margin-top: var(--gh-card-gap-tags-compact);
+  color: var(--gh-card-title-foreground);
+  font-weight: var(--gh-card-metadata-emphasis-font-weight);
 }
 
 .experience-card__period {
-  margin-top: var(--gh-space-xs);
-  color: var(--gh-text-muted);
-  font-size: var(--gh-font-size-caption);
+  margin-top: var(--gh-card-gap-tags-compact);
+  color: var(--gh-card-metadata-foreground);
+  font-size: var(--gh-card-metadata-font-size);
 }
 
 .experience-card__metadata {
@@ -82,25 +82,25 @@ gh-card {
 
 .experience-card__content section {
   display: grid;
-  gap: var(--gh-space-sm);
+  gap: var(--gh-card-gap-section);
 
   h3,
   h4 {
-    font-size: var(--gh-font-size-label);
+    font-size: var(--gh-card-section-heading-font-size);
   }
 
   ul {
     display: grid;
-    gap: var(--gh-space-sm);
+    gap: var(--gh-card-gap-section);
     margin: 0;
-    padding-left: var(--gh-space-lg);
-    color: var(--gh-text-secondary);
+    padding-inline-start: var(--gh-card-section-list-padding-inline-start);
+    color: var(--gh-card-body-foreground);
   }
 }
 
 .experience-card__skills h3,
 .experience-card__skills h4 {
-  font-size: var(--gh-font-size-label);
+  font-size: var(--gh-card-section-heading-font-size);
 }
 
 .experience-card__skills ul {

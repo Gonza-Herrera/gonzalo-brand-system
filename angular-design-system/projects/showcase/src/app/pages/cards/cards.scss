@@ -10,35 +10,78 @@
 
 .base-card-grid,
 .option-grid,
-.two-column-grid {
+.two-column-grid,
+.anatomy-grid,
+.environment-grid,
+.guidance-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--gh-space-md);
+  gap: var(--gh-card-gap-body);
 }
 
-.card-stage {
+.option-grid,
+.anatomy-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.card-environment {
+  display: block;
   min-width: 0;
-}
-
-.card-stage--glass {
-  padding: var(--gh-space-lg);
+  padding: var(--gh-space-xl);
+  border: var(--gh-border-width-default) solid var(--gh-border-subtle);
   border-radius: var(--gh-radius-xl);
-  background:
-    radial-gradient(circle at top right, var(--gh-status-accent-background), transparent),
-    var(--gh-background-subtle);
 }
 
 .base-card-grid h3,
 .base-card-grid p,
 .option-grid h3,
 .option-grid p,
-.scale-examples h3 {
-  margin: 0;
+.anatomy-grid h3,
+.anatomy-grid p,
+.environment-grid h3,
+.environment-grid p,
+.guidance-grid h3,
+.scale-examples h3,
+.card-form > * {
+  margin-block: 0;
 }
 
-.base-card-grid p,
-.option-grid p {
-  color: var(--gh-text-secondary);
+.base-card-grid p:not(.material-label),
+.option-grid p,
+.anatomy-grid p:not(.material-label),
+.environment-grid p,
+.selection-example span span {
+  color: var(--gh-card-body-foreground);
+}
+
+.material-label {
+  color: var(--gh-card-metadata-foreground);
+  font-size: var(--gh-card-metadata-font-size);
+  font-weight: var(--gh-card-metadata-emphasis-font-weight);
+  letter-spacing: var(--gh-card-title-letter-spacing);
+  text-transform: uppercase;
+}
+
+.card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--gh-card-gap-actions);
+}
+
+.selection-example {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gh-card-gap-header);
+}
+
+.selection-example > input {
+  flex: none;
+}
+
+.selection-example > span {
+  display: grid;
+  gap: var(--gh-card-gap-content);
 }
 
 .scale-examples {
@@ -59,18 +102,91 @@
   }
 
   code {
-    color: var(--gh-text-muted);
+    color: var(--gh-card-metadata-foreground);
   }
+}
+
+.card-media {
+  display: block;
+  inline-size: 100%;
+  aspect-ratio: var(--gh-card-media-aspect-ratio);
+  background: var(--gh-card-media-background);
+  object-fit: cover;
+}
+
+.card-padded-region {
+  padding-inline: var(--gh-card-padding-md);
+}
+
+.card-padded-region:first-child {
+  padding-block-start: var(--gh-card-padding-md);
+}
+
+.card-padded-region--content {
+  padding-block-start: var(--gh-card-gap-content);
+}
+
+.card-padded-region.card-actions {
+  padding-block: var(--gh-card-gap-footer-offset) var(--gh-card-padding-md);
+}
+
+.card-form {
+  display: grid;
+  gap: var(--gh-card-gap-content);
+}
+
+.card-form label {
+  font-weight: var(--gh-card-metadata-emphasis-font-weight);
+}
+
+.card-form input {
+  min-width: 0;
+  padding: var(--gh-card-padding-sm) var(--gh-card-padding-md);
+  border: var(--gh-card-outlined-border-width) solid var(--gh-card-outlined-border-color);
+  border-radius: var(--gh-card-radius-sm);
+  background: var(--gh-card-outlined-background);
+  color: var(--gh-card-outlined-foreground);
+  font: inherit;
+}
+
+.card-form input:focus-visible {
+  outline: var(--gh-card-link-focus-ring-width) solid var(--gh-card-link-focus-ring-color);
+  outline-offset: var(--gh-card-link-focus-ring-offset);
+}
+
+.stat-content {
+  display: grid;
+  gap: var(--gh-card-gap-content);
+}
+
+.stat-content strong {
+  font-size: var(--gh-font-size-h1);
+  line-height: var(--gh-line-height-tight);
 }
 
 .project-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--gh-space-md);
+  gap: var(--gh-card-gap-body);
 
   gh-project-card:nth-child(2) {
     grid-column: 1 / -1;
   }
+}
+
+.environment-grid > gh-surface {
+  min-width: 0;
+}
+
+.environment-grid gh-surface gh-card {
+  display: block;
+}
+
+.guidance-grid ul {
+  display: grid;
+  gap: var(--gh-card-gap-content);
+  margin-block-end: 0;
+  padding-inline-start: var(--gh-card-list-padding-inline-start);
 }
 
 .code-examples {
@@ -103,22 +219,29 @@
 }
 
 @media (max-width: 64rem) {
+  .option-grid,
+  .anatomy-grid,
   .project-grid {
     grid-template-columns: 1fr;
+  }
 
-    gh-project-card:nth-child(2) {
-      grid-column: auto;
-    }
+  .project-grid gh-project-card:nth-child(2) {
+    grid-column: auto;
   }
 }
 
 @media (max-width: 48rem) {
   .base-card-grid,
-  .option-grid,
   .two-column-grid,
+  .environment-grid,
+  .guidance-grid,
   .scale-examples,
   .code-examples > div {
     grid-template-columns: 1fr;
+  }
+
+  .card-environment {
+    padding: var(--gh-space-md);
   }
 }
 

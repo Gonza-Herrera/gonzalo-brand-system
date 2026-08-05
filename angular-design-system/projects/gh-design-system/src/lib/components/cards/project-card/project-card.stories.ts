@@ -5,7 +5,7 @@ import { STORY_PROJECT } from '../../../../../../../stories/shared/story-data';
 const meta: Meta<GhProjectCardComponent> = {
   title: 'Components/Cards/Project Card',
   component: GhProjectCardComponent,
-  tags: ['autodocs'],
+  tags: ['autodocs', 'pr26-cards'],
   parameters: {
     docs: {
       description: {

@@ -5,6 +5,10 @@
 `GhProjectCardComponent` presents portfolio projects, case studies,
 open-source work and clearly labelled concepts.
 
+It continues to compose one public base Card. Standard projects use `outlined` → Solid and featured
+projects use `elevated` → Glass Elevated. Material does not change the typed data, native links or
+orientation API.
+
 ## Import
 
 ```ts

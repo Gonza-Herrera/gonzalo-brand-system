@@ -5,6 +5,10 @@
 `GhArticleCardComponent` presents educational content, blog articles and
 external publications using a native linked title and optional media.
 
+It continues to compose the public base Card. Standard articles use the safe `outlined` → Solid
+mapping; `featured` articles use `elevated` → Glass Elevated. This is a visual mapping only and does
+not change the article model, link or heading semantics.
+
 ## Import
 
 ```ts

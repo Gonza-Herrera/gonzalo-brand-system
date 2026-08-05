@@ -348,9 +348,11 @@ import {
 <gh-project-card [project]="project" orientation="horizontal" />
 ```
 
-The foundational Card controls surface, padding, radius and visual states.
-Article, Experience and Project Cards use typed models, semantic HTML, native
-links and existing public Badge/Tag components.
+The foundational Card preserves its existing variants and maps them through `--gh-card-*`
+component tokens: `outlined` → Solid, `subtle` → Glass Subtle, `glass` → Glass and `elevated` →
+Glass Elevated. Interactive and selected remain visual states; native controls retain semantics.
+Article, Experience and Project Cards keep their typed models, semantic HTML, native links and
+existing public Badge/Tag composition. See the [Liquid Glass Card contract](docs/design/liquid-glass/cards.md).
 
 ## Layout primitives
 
@@ -486,8 +488,8 @@ The [Liquid Glass documentation](docs/design/liquid-glass/README.md) defines the
 principles, surface taxonomy, token contract, Surface primitives, lighting, motion, accessibility,
 performance constraints and adoption roadmap for the current Design System phase.
 
-The current Card and Hero `glass` variants predate that contract. They remain unchanged and are not
-considered migrated until a dedicated implementation PR validates them against the new foundations.
+Button, Icon Button and the Card family now consume component-level Liquid Glass contracts. Hero's
+existing `glass` variant still predates those migrations and awaits its dedicated implementation PR.
 
 ## Scope
 

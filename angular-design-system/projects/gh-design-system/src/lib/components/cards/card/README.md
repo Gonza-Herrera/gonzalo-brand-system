@@ -41,10 +41,16 @@ export class ExampleComponent {}
 
 ## Variants
 
-- `outlined`: default semantic surface and visible border.
-- `elevated`: elevated surface and soft semantic shadow.
-- `subtle`: lower-hierarchy background without elevation.
-- `glass`: limited translucent surface with moderate blur.
+- `outlined`: the safe default, mapped to the Solid Surface material with a visible border.
+- `subtle`: mapped to Glass Subtle for editorial grids, previews and secondary grouping.
+- `glass`: mapped to Glass for concise feature content over a controlled ambient background.
+- `elevated`: mapped to Glass Elevated for prominent summaries and higher local depth.
+
+Every Glass-capable variant paints an opaque fallback first and enhances through CSS `@supports`.
+Card component styles consume `--gh-card-*` component tokens that alias the semantic Surface
+contract. The component does not render an internal `gh-surface`, preserving its established DOM
+and projection regions. See the normative
+[Liquid Glass Card documentation](../../../../../../../docs/design/liquid-glass/cards.md).
 
 ## Projection slots
 
@@ -87,12 +93,19 @@ only a hue change. Card does not add `aria-selected`; consumers must provide the
 correct semantics when Cards participate in a listbox, grid or other selection
 pattern.
 
+## Unsupported states
+
+Generic Card does not expose `disabled`, `loading` or `skeleton`. An article has no native disabled
+behavior, and adding those states without a domain-specific semantic contract would be misleading.
+Disable actual descendant controls and use an appropriate busy region in the consuming feature.
+
 ## Accessibility
 
 - The root is a semantic `<article>`.
 - Non-interactive Cards do not enter the tab order.
 - Focus feedback follows interactive descendants through `focus-within`.
 - Motion stops under `prefers-reduced-motion`.
+- Forced-colors removes decorative Glass while preserving focus and selected structure.
 - `ariaLabel` is optional when visible headings already label the article.
 
 ## Do
@@ -100,11 +113,13 @@ pattern.
 - Keep related content within one Card.
 - Use native controls for actions.
 - Use glass selectively over a suitable background.
+- Use Solid for forms, dense reading and large repeated collections.
 - Preserve heading hierarchy in projected content.
 
 ## Don't
 
 - Treat `interactive` as navigation.
 - Add click handlers to the Card host.
+- Nest Glass Cards or animate `backdrop-filter`.
 - Nest buttons inside links.
 - Use selected without defining the surrounding selection semantics.
