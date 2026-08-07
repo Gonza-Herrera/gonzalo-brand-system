@@ -5,7 +5,11 @@
   border: var(--gh-navigation-selector-border-width) solid
     var(--gh-navigation-selector-border-color);
   border-radius: var(--gh-navigation-selector-radius);
-  background: var(--gh-navigation-selector-background);
+  background: var(--gh-navigation-selector-fallback-background);
+  box-shadow: var(--gh-navigation-selector-shadow), var(--gh-navigation-selector-inner-shadow);
+  transition:
+    border-color var(--gh-navigation-transition-duration) var(--gh-navigation-transition-easing),
+    box-shadow var(--gh-navigation-transition-duration) var(--gh-navigation-transition-easing);
 }
 
 a {
@@ -13,6 +17,7 @@ a {
   min-width: 2.75rem;
   min-height: 2.75rem;
   place-items: center;
+  border: var(--gh-navigation-selector-border-width) solid transparent;
   border-radius: var(--gh-navigation-selector-radius);
   color: var(--gh-navigation-selector-item-foreground);
   font-size: var(--gh-font-size-caption);
@@ -20,10 +25,13 @@ a {
   text-decoration: none;
   transition:
     background-color var(--gh-navigation-transition-duration) var(--gh-navigation-transition-easing),
+    border-color var(--gh-navigation-transition-duration) var(--gh-navigation-transition-easing),
+    box-shadow var(--gh-navigation-transition-duration) var(--gh-navigation-transition-easing),
     color var(--gh-navigation-transition-duration) var(--gh-navigation-transition-easing);
 }
 
 a:hover {
+  background: var(--gh-navigation-selector-item-hover-background);
   color: var(--gh-navigation-selector-item-hover-foreground);
 }
 
@@ -34,12 +42,22 @@ a:focus-visible {
 }
 
 a[aria-current='page'] {
+  border-color: var(--gh-navigation-selector-item-active-border-color);
   background: var(--gh-navigation-selector-item-active-background);
   color: var(--gh-navigation-selector-item-active-foreground);
-  box-shadow: var(--gh-navigation-selector-item-active-shadow);
+  box-shadow:
+    var(--gh-navigation-selector-item-active-shadow),
+    var(--gh-navigation-selector-item-active-inner-shadow);
+}
+
+@supports ((backdrop-filter: none) or (-webkit-backdrop-filter: none)) {
+  .language-switcher {
+    background: var(--gh-navigation-selector-background);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .language-switcher,
   a {
     transition: none;
   }
@@ -49,11 +67,14 @@ a[aria-current='page'] {
   .language-switcher {
     border-color: ButtonBorder;
     background: Canvas;
+    box-shadow: none;
   }
 
   a[aria-current='page'] {
+    border-color: Highlight;
     background: Highlight;
     color: HighlightText;
+    box-shadow: none;
   }
 
   a:focus-visible {
