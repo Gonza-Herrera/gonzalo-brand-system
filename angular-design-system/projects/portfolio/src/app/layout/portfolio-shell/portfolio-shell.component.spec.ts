@@ -23,7 +23,11 @@ describe('PortfolioShellComponent', () => {
     expect(skipLink?.getAttribute('href')).toBe('#main-content');
     expect(skipLink?.textContent).toContain('Skip to main content');
     expect(element.firstElementChild).toBe(skipLink);
-    expect(element.querySelector('gh-navigation')).not.toBeNull();
+    const ambientLayout = element.querySelector('gh-ambient-background');
+
+    expect(ambientLayout?.getAttribute('data-preset')).toBe('brand');
+    expect(ambientLayout?.querySelector('gh-navigation')).not.toBeNull();
+    expect(ambientLayout?.querySelector('main')).toBe(main);
     expect(main?.id).toBe('main-content');
     expect(main?.getAttribute('tabindex')).toBe('-1');
     expect(main?.querySelector('router-outlet')).not.toBeNull();

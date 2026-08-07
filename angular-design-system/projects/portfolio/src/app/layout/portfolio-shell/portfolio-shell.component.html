@@ -3,27 +3,31 @@
 </a>
 
 <div class="portfolio-shell">
-  <gh-navigation
-    [brand]="content().shell.brand.name"
-    [brandHref]="homeUrl()"
-    [items]="navigationItems()"
-    [menuLabel]="content().shell.navigation.openMenuLabel"
-    [closeMenuLabel]="content().shell.navigation.closeMenuLabel"
-    [navigationLabel]="content().shell.navigation.label"
-    [externalLinkLabel]="content().shell.navigation.externalLinkLabel"
-    [showThemeControl]="true"
-    [interceptInternalNavigation]="true"
-    (internalNavigate)="navigateInternally($event)"
-    menuId="portfolio-navigation-menu"
-    [sticky]="true"
-  >
-    <app-language-switcher ghNavigationActions />
-    <app-theme-switcher ghNavigationThemeControl />
-  </gh-navigation>
+  <gh-ambient-background class="portfolio-shell__ambient" preset="brand" intensity="default">
+    <div class="portfolio-shell__canvas">
+      <gh-navigation
+        [brand]="content().shell.brand.name"
+        [brandHref]="homeUrl()"
+        [items]="navigationItems()"
+        [menuLabel]="content().shell.navigation.openMenuLabel"
+        [closeMenuLabel]="content().shell.navigation.closeMenuLabel"
+        [navigationLabel]="content().shell.navigation.label"
+        [externalLinkLabel]="content().shell.navigation.externalLinkLabel"
+        [showThemeControl]="true"
+        [interceptInternalNavigation]="true"
+        (internalNavigate)="navigateInternally($event)"
+        menuId="portfolio-navigation-menu"
+        [sticky]="true"
+      >
+        <app-language-switcher ghNavigationActions />
+        <app-theme-switcher ghNavigationThemeControl />
+      </gh-navigation>
 
-  <main id="main-content" class="portfolio-shell__main" tabindex="-1">
-    <router-outlet />
-  </main>
+      <main id="main-content" class="portfolio-shell__main" tabindex="-1">
+        <router-outlet />
+      </main>
+    </div>
+  </gh-ambient-background>
 
   <gh-footer
     [brand]="content().identity.name"

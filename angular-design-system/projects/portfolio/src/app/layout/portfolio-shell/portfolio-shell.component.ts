@@ -10,6 +10,7 @@ import {
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import {
+  GhAmbientBackgroundComponent,
   type GhFooterGroup,
   GhFooterComponent,
   type GhNavigationItem,
@@ -26,6 +27,7 @@ import { ThemeSwitcherComponent } from '../../shared/components/theme-switcher/t
   selector: 'app-portfolio-shell',
   standalone: true,
   imports: [
+    GhAmbientBackgroundComponent,
     GhFooterComponent,
     GhNavigationComponent,
     LanguageSwitcherComponent,
