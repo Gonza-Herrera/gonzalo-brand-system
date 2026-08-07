@@ -1,14 +1,105 @@
 .theme-switcher {
   display: inline-flex;
   align-items: center;
-  gap: var(--gh-space-xs);
+  gap: var(--gh-navigation-selector-gap);
+  padding: var(--gh-navigation-selector-padding);
+  border: var(--gh-navigation-selector-border-width) solid
+    var(--gh-navigation-selector-border-color);
+  border-radius: var(--gh-navigation-selector-radius);
+  background: var(--gh-navigation-selector-fallback-background);
   color: var(--gh-navigation-selector-label-foreground);
+  box-shadow: var(--gh-navigation-selector-shadow), var(--gh-navigation-selector-inner-shadow);
   font-size: var(--gh-font-size-caption);
   font-weight: var(--gh-font-weight-semibold);
+  transition:
+    border-color var(--gh-navigation-motion-duration-normal)
+      var(--gh-navigation-motion-easing-standard),
+    box-shadow var(--gh-navigation-motion-duration-normal)
+      var(--gh-navigation-motion-easing-standard);
+}
+
+.theme-switcher:focus-within {
+  border-color: var(--gh-navigation-selector-item-active-border-color);
 }
 
 .gh-select {
   width: auto;
   max-width: 7rem;
+  border-color: var(--gh-navigation-selector-item-active-border-color);
+  border-radius: var(--gh-navigation-selector-radius);
+  background: var(--gh-navigation-selector-item-active-background);
+  box-shadow:
+    var(--gh-navigation-selector-item-active-shadow),
+    var(--gh-navigation-selector-item-active-inner-shadow);
+  color: var(--gh-navigation-selector-item-active-foreground);
   font-size: inherit;
+  transition:
+    background-color var(--gh-navigation-motion-duration-slow)
+      var(--gh-navigation-motion-easing-standard),
+    border-color var(--gh-navigation-motion-duration-normal)
+      var(--gh-navigation-motion-easing-standard),
+    box-shadow var(--gh-navigation-motion-duration-slow) var(--gh-navigation-motion-easing-standard),
+    color var(--gh-navigation-motion-duration-fast) var(--gh-navigation-motion-easing-standard),
+    transform var(--gh-navigation-motion-duration-fast)
+      var(--gh-navigation-motion-easing-emphasized);
+}
+
+.gh-select:hover {
+  background: var(--gh-navigation-selector-item-hover-background);
+  color: var(--gh-navigation-selector-item-hover-foreground);
+}
+
+.gh-select:focus-visible {
+  border-color: var(--gh-navigation-selector-item-active-border-color);
+  background: var(--gh-navigation-selector-item-active-background);
+  outline: var(--gh-navigation-item-focus-ring-width) solid
+    var(--gh-navigation-item-focus-ring-color);
+  outline-offset: var(--gh-navigation-item-focus-ring-offset);
+  box-shadow:
+    var(--gh-navigation-selector-item-active-shadow),
+    var(--gh-navigation-selector-item-active-inner-shadow);
+}
+
+.gh-select:active {
+  background: var(--gh-navigation-selector-item-pressed-background);
+  box-shadow: var(--gh-navigation-selector-item-pressed-shadow);
+  transform: scale(var(--gh-navigation-motion-scale-pressed));
+}
+
+@supports ((backdrop-filter: none) or (-webkit-backdrop-filter: none)) {
+  .theme-switcher {
+    background: var(--gh-navigation-selector-background);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gh-select {
+    transition:
+      background-color var(--gh-navigation-motion-duration-fast)
+        var(--gh-navigation-motion-easing-standard),
+      border-color var(--gh-navigation-motion-duration-fast)
+        var(--gh-navigation-motion-easing-standard),
+      color var(--gh-navigation-motion-duration-fast) var(--gh-navigation-motion-easing-standard);
+  }
+
+  .gh-select,
+  .gh-select:active {
+    transform: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .theme-switcher,
+  .gh-select {
+    border-color: ButtonBorder;
+    background: Canvas;
+    color: CanvasText;
+    box-shadow: none;
+    transform: none;
+    transition: none;
+  }
+
+  .theme-switcher:focus-within {
+    border-color: Highlight;
+  }
 }
