@@ -8,6 +8,71 @@
   @include documentation.page-header;
 }
 
+.floating-layout-demo {
+  --gh-navigation-header-inset-block-start: var(--gh-space-md);
+  --gh-navigation-header-inset-inline: var(--gh-space-md);
+
+  display: block;
+  min-width: 0;
+  border: var(--gh-border-width-default) solid var(--gh-border-subtle);
+  border-radius: var(--gh-radius-xl);
+}
+
+.floating-layout-demo__main {
+  padding-block-start: var(--gh-space-sm);
+  background: transparent;
+}
+
+.floating-layout-demo gh-hero {
+  --gh-pattern-accent-gradient: transparent;
+}
+
+.floating-layout-demo__visual {
+  display: grid;
+  gap: var(--gh-space-sm);
+  padding: var(--gh-space-xl);
+  border: var(--gh-border-width-default) solid var(--gh-card-border-glass);
+  border-radius: var(--gh-radius-lg);
+  background: var(--gh-card-background-glass);
+  box-shadow: var(--gh-shadow-sm);
+
+  span {
+    color: var(--gh-text-secondary);
+  }
+}
+
+.floating-layout-demo__continuation {
+  max-width: var(--gh-layout-reading-max);
+  margin-block: 0;
+  color: var(--gh-text-secondary);
+}
+
+.floating-layout-principles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  gap: var(--gh-space-md);
+  margin: var(--gh-space-lg) 0 0;
+
+  div {
+    display: grid;
+    gap: var(--gh-space-xs);
+    padding: var(--gh-space-md);
+    border: var(--gh-border-width-default) solid var(--gh-border-subtle);
+    border-radius: var(--gh-radius-md);
+    background: var(--gh-surface-secondary);
+  }
+
+  dt {
+    color: var(--gh-text-primary);
+    font-weight: var(--gh-font-weight-semibold);
+  }
+
+  dd {
+    margin: 0;
+    color: var(--gh-text-secondary);
+  }
+}
+
 .demo-stage {
   min-width: 0;
   overflow: hidden;
@@ -120,5 +185,11 @@ h3 {
       letter-spacing: var(--gh-letter-spacing-wide);
       text-transform: uppercase;
     }
+  }
+}
+
+@media (max-width: 48rem) {
+  .floating-layout-demo__visual {
+    padding: var(--gh-space-lg);
   }
 }

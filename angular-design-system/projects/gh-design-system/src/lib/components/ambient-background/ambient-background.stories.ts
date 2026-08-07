@@ -5,7 +5,13 @@ import {
   GH_AMBIENT_PRESETS,
   GhAmbientBackgroundComponent,
   GhButtonComponent,
+  GhContainerComponent,
   GhGlassPanelComponent,
+  GhHeroComponent,
+  GhHeroVisualDirective,
+  type GhNavigationItem,
+  GhNavigationComponent,
+  GhSectionComponent,
   GhSurfaceComponent,
   GhTagComponent,
 } from 'gh-design-system';
@@ -16,7 +22,17 @@ const meta: Meta<GhAmbientBackgroundComponent> = {
   tags: ['autodocs', 'pr24-ambient'],
   decorators: [
     moduleMetadata({
-      imports: [GhButtonComponent, GhGlassPanelComponent, GhSurfaceComponent, GhTagComponent],
+      imports: [
+        GhButtonComponent,
+        GhContainerComponent,
+        GhGlassPanelComponent,
+        GhHeroComponent,
+        GhHeroVisualDirective,
+        GhNavigationComponent,
+        GhSectionComponent,
+        GhSurfaceComponent,
+        GhTagComponent,
+      ],
     }),
   ],
   parameters: {
@@ -66,6 +82,73 @@ const meta: Meta<GhAmbientBackgroundComponent> = {
 
 export default meta;
 type Story = StoryObj<GhAmbientBackgroundComponent>;
+
+const floatingNavigationItems = [
+  { label: 'Home', href: '#home', active: true },
+  { label: 'Work', href: '#work' },
+  { label: 'Contact', href: '#contact' },
+] as const satisfies readonly GhNavigationItem[];
+
+const renderFloatingLayout =
+  (eyebrow: string, preset: 'brand' | 'cool' | 'warm' = 'brand') =>
+  () => ({
+    props: {
+      eyebrow,
+      preset,
+      items: floatingNavigationItems,
+      actions: [
+        { label: 'Explore work', href: '#work', variant: 'primary' },
+        { label: 'About', href: '#about', variant: 'secondary' },
+      ],
+    },
+    template: `
+      <gh-ambient-background
+        class="gh-floating-layout-story"
+        [preset]="$any(preset)"
+        intensity="default"
+      >
+        <gh-navigation
+          brand="Gonzalo Herrera"
+          brandHref="#home"
+          [items]="items"
+          navigationLabel="Portfolio"
+          menuLabel="Open menu"
+          closeMenuLabel="Close menu"
+          menuId="storybook-floating-layout-menu"
+          [sticky]="false"
+        />
+
+        <main class="gh-floating-layout-story__main">
+          <gh-hero
+            [eyebrow]="eyebrow"
+            title="One canvas from the viewport edge to the first section."
+            description="Ambient Background belongs to Layout; Header floats above it and Hero only arranges content."
+            [actions]="actions"
+            layout="split"
+            surface="gradient"
+            [headingLevel]="1"
+          >
+            <aside
+              ghHeroVisual
+              class="gh-floating-layout-story__visual"
+              aria-label="Layout hierarchy"
+            >
+              <strong>Continuous depth</strong>
+              <span>Ambient → Header → Main → Hero</span>
+            </aside>
+          </gh-hero>
+
+          <gh-section spacing="md" surface="transparent">
+            <gh-container size="wide">
+              <p class="gh-floating-layout-story__continuation">
+                The first section stays on the same environmental plane.
+              </p>
+            </gh-container>
+          </gh-section>
+        </main>
+      </gh-ambient-background>
+    `,
+  });
 
 export const Playground: Story = {};
 
@@ -182,4 +265,36 @@ export const ReducedMotionAndForcedColors: Story = {
 export const Mobile320: Story = {
   args: { preset: 'cool', intensity: 'default' },
   parameters: { viewport: { defaultViewport: 'mobile320' } },
+};
+
+export const FloatingLayout: Story = {
+  tags: ['pr28-15-floating-layout'],
+  parameters: {
+    layout: 'fullscreen',
+    docs: {
+      description: {
+        story:
+          'The complete integration: one ambient owner contains the floating Header, transparent Main, Hero and first section.',
+      },
+    },
+  },
+  render: renderFloatingLayout('Floating Layout'),
+};
+
+export const AmbientLayout: Story = {
+  tags: ['pr28-15-floating-layout'],
+  parameters: { layout: 'fullscreen' },
+  render: renderFloatingLayout('Ambient Layout', 'cool'),
+};
+
+export const HeaderIntegration: Story = {
+  tags: ['pr28-15-floating-layout'],
+  parameters: { layout: 'fullscreen' },
+  render: renderFloatingLayout('Header Integration', 'warm'),
+};
+
+export const HeroIntegration: Story = {
+  tags: ['pr28-15-floating-layout'],
+  parameters: { layout: 'fullscreen' },
+  render: renderFloatingLayout('Hero Integration'),
 };

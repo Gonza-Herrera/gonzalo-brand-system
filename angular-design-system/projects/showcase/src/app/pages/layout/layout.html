@@ -9,6 +9,75 @@
   </header>
 
   <showcase-documentation-section
+    sectionId="layout-floating-integration"
+    eyebrow="Floating Layout"
+    title="One ambient canvas behind Header and Hero"
+    description="The layout owns one Ambient Background. Navigation, the transparent Main region and Hero share that canvas without a painted seam."
+  >
+    <gh-ambient-background class="floating-layout-demo" preset="brand" intensity="default">
+      <gh-navigation
+        brand="Gonzalo Herrera"
+        brandHref="#floating-home"
+        [items]="floatingNavigationItems"
+        navigationLabel="Floating layout demonstration"
+        menuLabel="Open demonstration menu"
+        closeMenuLabel="Close demonstration menu"
+        menuId="floating-layout-demo-navigation"
+        [sticky]="false"
+      />
+
+      <div class="floating-layout-demo__main" data-layout-region="main">
+        <gh-hero
+          eyebrow="Layout integration · CSS only"
+          title="A Header suspended over one continuous canvas."
+          description="The ambient layer begins at the top edge, while Hero only organizes content."
+          [actions]="floatingHeroActions"
+          layout="split"
+          surface="gradient"
+          [headingLevel]="2"
+        >
+          <aside
+            ghHeroVisual
+            class="floating-layout-demo__visual"
+            aria-label="Layout ownership summary"
+          >
+            <strong>One owner</strong>
+            <span>Ambient Background → Header → Main → Hero</span>
+          </aside>
+        </gh-hero>
+
+        <gh-section spacing="md" surface="transparent">
+          <gh-container size="wide">
+            <p class="floating-layout-demo__continuation">
+              The first section continues on the same background; no new plane begins below the
+              Header.
+            </p>
+          </gh-container>
+        </gh-section>
+      </div>
+    </gh-ambient-background>
+
+    <dl class="floating-layout-principles">
+      <div>
+        <dt>Floating Layout</dt>
+        <dd>Viewport insets and natural flow preserve air without overlay calculations.</dd>
+      </div>
+      <div>
+        <dt>Ambient Layout</dt>
+        <dd>A single decorative layer spans Header, Hero and the first section.</dd>
+      </div>
+      <div>
+        <dt>Header Integration</dt>
+        <dd>The existing capsule keeps its material, shadow, z-index and sticky contract.</dd>
+      </div>
+      <div>
+        <dt>Hero Integration</dt>
+        <dd>Hero retains content rhythm and removes ownership of the page background.</dd>
+      </div>
+    </dl>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
     sectionId="layout-container"
     eyebrow="Container"
     title="Consistent content widths and responsive gutters"

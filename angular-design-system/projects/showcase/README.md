@@ -27,8 +27,9 @@ than recreating it with showcase-only markup.
 Current public documentation routes include `/layout`, `/buttons`, `/badges`,
 `/tags`, `/cards`, `/forms` and `/patterns`.
 
-The Layout page exercises all seven public primitives, including real Project
-Cards inside Grid and real Tags and Badges inside Cluster.
+The Layout page exercises all seven public primitives, including real Project Cards inside Grid and
+real Tags and Badges inside Cluster. Its Floating Layout integration demo composes Ambient
+Background, Navigation, transparent Main, Hero and the first Section on one continuous canvas.
 
 The Patterns page exercises all eight Brand Patterns in isolation and includes
 a composed personal-landing demonstration built from the public package API.
