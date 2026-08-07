@@ -8,7 +8,9 @@ import {
   GhContainerComponent,
   GhDividerComponent,
   GhGridComponent,
+  GhHeroComponent,
   GhInlineComponent,
+  GhNavigationComponent,
   GhProjectCardComponent,
   GhSectionComponent,
   GhStackComponent,
@@ -47,6 +49,22 @@ describe('LayoutPage', () => {
     expect(element.querySelector('.gh-divider--dashed')).not.toBeNull();
   });
 
+  it('demonstrates one ambient layout containing Navigation, Main and Hero', () => {
+    const fixture = TestBed.createComponent(LayoutPage);
+    fixture.detectChanges();
+
+    const element = fixture.nativeElement as HTMLElement;
+    const integration = element.querySelector('#layout-floating-integration')?.closest('section');
+    const ambient = integration?.querySelector('gh-ambient-background');
+
+    expect(ambient?.getAttribute('data-preset')).toBe('brand');
+    expect(ambient?.querySelector('gh-navigation')).not.toBeNull();
+    expect(ambient?.querySelector('[data-layout-region="main"]')).not.toBeNull();
+    expect(ambient?.querySelector('gh-hero')).not.toBeNull();
+    expect(integration?.textContent).toContain('Header Integration');
+    expect(integration?.textContent).toContain('Hero Integration');
+  });
+
   it('composes real Cards in Grid and real Tags and Badges in Cluster', () => {
     const fixture = TestBed.createComponent(LayoutPage);
     fixture.detectChanges();
@@ -81,11 +99,13 @@ describe('LayoutPage', () => {
     expect(GhStackComponent).toBeDefined();
     expect(GhInlineComponent).toBeDefined();
     expect(GhGridComponent).toBeDefined();
+    expect(GhHeroComponent).toBeDefined();
     expect(GhClusterComponent).toBeDefined();
     expect(GhDividerComponent).toBeDefined();
     expect(GhCardComponent).toBeDefined();
     expect(GhProjectCardComponent).toBeDefined();
     expect(GhTagComponent).toBeDefined();
     expect(GhBadgeComponent).toBeDefined();
+    expect(GhNavigationComponent).toBeDefined();
   });
 });

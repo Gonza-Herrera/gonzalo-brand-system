@@ -341,6 +341,44 @@
   color: var(--gh-text-secondary);
 }
 
+.gh-floating-layout-story {
+  --gh-navigation-header-inset-block-start: var(--gh-space-md);
+  --gh-navigation-header-inset-inline: var(--gh-space-md);
+
+  display: block;
+  min-height: 100svh;
+  border-radius: 0;
+}
+
+.gh-floating-layout-story__main {
+  padding-block-start: var(--gh-space-sm);
+  background: transparent;
+}
+
+.gh-floating-layout-story gh-hero {
+  --gh-pattern-accent-gradient: transparent;
+}
+
+.gh-floating-layout-story__visual {
+  display: grid;
+  gap: var(--gh-space-sm);
+  padding: var(--gh-space-xl);
+  border: var(--gh-border-width-default) solid var(--gh-card-border-glass);
+  border-radius: var(--gh-radius-lg);
+  background: var(--gh-card-background-glass);
+  box-shadow: var(--gh-shadow-sm);
+}
+
+.gh-floating-layout-story__visual span,
+.gh-floating-layout-story__continuation {
+  color: var(--gh-text-secondary);
+}
+
+.gh-floating-layout-story__continuation {
+  max-width: var(--gh-layout-reading-max);
+  margin-block: 0;
+}
+
 .gh-card-story-stage {
   display: block;
   padding: var(--gh-space-xl);
@@ -488,5 +526,9 @@
   .gh-card-story-stage,
   .gh-form-story-stage {
     padding: var(--gh-space-md);
+  }
+
+  .gh-floating-layout-story__visual {
+    padding: var(--gh-space-lg);
   }
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {
+  GhAmbientBackgroundComponent,
   GhBadgeComponent,
   GhButtonComponent,
   GhCardComponent,
@@ -10,8 +11,13 @@ import {
   GhDividerComponent,
   type GhDividerTone,
   GhGridComponent,
+  type GhHeroAction,
+  GhHeroComponent,
+  GhHeroVisualDirective,
   type GhGridColumns,
   GhInlineComponent,
+  type GhNavigationItem,
+  GhNavigationComponent,
   type GhLayoutGap,
   GhProjectCardComponent,
   type GhProjectCardData,
@@ -31,6 +37,7 @@ import { DocumentationSection } from '../../shared/components/documentation-sect
   imports: [
     CodePreview,
     DocumentationSection,
+    GhAmbientBackgroundComponent,
     GhBadgeComponent,
     GhButtonComponent,
     GhCardComponent,
@@ -38,7 +45,10 @@ import { DocumentationSection } from '../../shared/components/documentation-sect
     GhContainerComponent,
     GhDividerComponent,
     GhGridComponent,
+    GhHeroComponent,
+    GhHeroVisualDirective,
     GhInlineComponent,
+    GhNavigationComponent,
     GhProjectCardComponent,
     GhSectionComponent,
     GhStackComponent,
@@ -48,6 +58,15 @@ import { DocumentationSection } from '../../shared/components/documentation-sect
   styleUrl: './layout.scss',
 })
 export class LayoutPage {
+  protected readonly floatingNavigationItems = [
+    { label: 'Home', href: '#floating-home', active: true },
+    { label: 'Work', href: '#floating-work' },
+    { label: 'Contact', href: '#floating-contact' },
+  ] as const satisfies readonly GhNavigationItem[];
+  protected readonly floatingHeroActions = [
+    { label: 'Explore work', href: '#floating-work', variant: 'primary' },
+    { label: 'About the system', href: '#floating-about', variant: 'secondary' },
+  ] as const satisfies readonly GhHeroAction[];
   protected readonly containerSizes = [
     'sm',
     'md',

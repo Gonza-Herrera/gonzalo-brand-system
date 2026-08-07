@@ -2,7 +2,9 @@
 
 This document defines the implementation and usage contract for `gh-ambient-background`. Ambient
 backgrounds provide approved environmental color behind Surface primitives; they are decorative
-context, not content, layout, interaction, or a replacement for legible material boundaries.
+context, not content, interaction, or a replacement for legible material boundaries. A product
+Layout may own one Ambient Background as its shared environmental canvas, as defined by
+[Floating Layout Integration](floating-layout.md).
 
 ## 1. Purpose
 
@@ -26,7 +28,9 @@ ambient.opacity.* primitives
             ↓
 ambient.background.*, ambient.preset.*, ambient.intensity.* semantics
             ↓
-GhAmbientBackgroundComponent
+            GhAmbientBackgroundComponent
+            ↓
+Layout or bounded composition owner
             ↓
 projected native content and optional Surface composition
 ```
@@ -47,8 +51,8 @@ gradient, opacity, blur, radius, shadow, spacing, or duration recipe.
 
 ## 5. Presets
 
-| Preset   | Intent                                                     |
-| -------- | ---------------------------------------------------------- |
+| Preset   | Intent                                                    |
+| -------- | --------------------------------------------------------- |
 | `none`   | Stable wrapper with transparent background and no visual. |
 | `subtle` | Quiet sections, documentation, forms, dense contexts.     |
 | `brand`  | Lavender-led primary moments, demos and heroes.           |
@@ -158,7 +162,8 @@ Glass is optional. A Solid Surface is often the better composition.
 
 ## 20. Nested backgrounds
 
-Do not place one Ambient Background inside another. Nesting multiplies paint, makes color hierarchy
+Do not place one Ambient Background inside another. When Layout owns the ambient plane, Hero and
+child sections must not mount another instance. Nesting multiplies paint, makes color hierarchy
 unpredictable, and can reduce composited contrast. The component does not inspect ancestors at
 runtime; review and documentation enforce the rule.
 

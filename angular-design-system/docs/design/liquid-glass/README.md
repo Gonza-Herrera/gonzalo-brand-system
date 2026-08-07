@@ -8,8 +8,10 @@ the reference Surface primitives, PR 24 provides controlled ambient backgrounds,
 actions, PR 26 migrates the existing Card family, PR 27 provides the native Form Control
 foundation, PR 28 migrates Navigation and its real shells, and PR 28.1 refines Navigation material
 without changing its architecture. PR 28.2 adds restrained CSS-only Navigation motion while keeping
-the Header, routing and SSR behavior stable. Hero's existing `glass` variant still predates this
-language and is not a reference implementation until its dedicated migration.
+the Header, routing and SSR behavior stable. PR 28.15 moves ambient ownership to the application
+Layout so the floating Header and transparent Hero share one continuous canvas. Hero's existing
+`glass` variant still predates this language and is not a reference implementation until its
+dedicated migration.
 
 ## Reference map
 
@@ -41,6 +43,9 @@ language and is not a reference implementation until its dedicated migration.
     layered light, boundaries, shadows, selectors, fallbacks, comparison and PR 28.2 guidance.
 19. [Navigation motion](navigation-motion.md) — philosophy, timing, easing, hover, pressed, focus,
     active continuity, selector thumbs, reduced motion, forced colors and performance.
+20. [Floating layout integration](floating-layout.md) — measured diagnosis, layout hierarchy,
+    background ownership, Header and Hero integration, safe areas, responsive behavior, SSR and
+    performance.
 
 ## How to use these documents
 
