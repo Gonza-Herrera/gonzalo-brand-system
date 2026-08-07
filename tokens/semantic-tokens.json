@@ -2028,6 +2028,30 @@
         "$type": "color",
         "$value": "{surface.glass.fallbackBackground}"
       },
+      "highlightColor": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {surface.glass.borderHighlight} 78%, transparent)"
+      },
+      "reflectionLavender": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {color.lavender} 9%, transparent)"
+      },
+      "reflectionCool": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {color.cloudBlue} 7%, transparent)"
+      },
+      "reflectionWarm": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {color.peach} 5%, transparent)"
+      },
+      "materialBackground": {
+        "$type": "string",
+        "$value": "linear-gradient(180deg, {navigation.header.highlightColor} 0%, transparent 46%), linear-gradient(118deg, {navigation.header.reflectionLavender} 0%, transparent 42%, {navigation.header.reflectionCool} 72%, {navigation.header.reflectionWarm} 100%), linear-gradient(180deg, color-mix(in srgb, {surface.glass.background} 94%, {surface.glass.borderHighlight}) 0%, {surface.glass.background} 100%)"
+      },
+      "fallbackMaterialBackground": {
+        "$type": "string",
+        "$value": "linear-gradient(180deg, {navigation.header.highlightColor} 0%, transparent 46%), linear-gradient(118deg, {navigation.header.reflectionLavender} 0%, transparent 42%, {navigation.header.reflectionCool} 72%, {navigation.header.reflectionWarm} 100%), linear-gradient(180deg, color-mix(in srgb, {surface.glass.fallbackBackground} 96%, {surface.glass.borderHighlight}) 0%, {surface.glass.fallbackBackground} 100%)"
+      },
       "foreground": {
         "$type": "color",
         "$value": "{surface.glass.foreground}"
@@ -2038,7 +2062,7 @@
       },
       "borderColor": {
         "$type": "color",
-        "$value": "{surface.glass.borderColor}"
+        "$value": "color-mix(in srgb, {surface.glass.borderColor} 62%, transparent)"
       },
       "borderWidth": {
         "$type": "dimension",
@@ -2048,15 +2072,23 @@
         "$type": "color",
         "$value": "{surface.glass.borderHighlight}"
       },
+      "innerBorderColor": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {surface.glass.borderHighlight} 82%, transparent)"
+      },
       "backdropFilter": {
         "$type": "string",
-        "$value": "{surface.glass.backdropFilter}"
+        "$value": "blur({glass.blur.md}) saturate({glass.saturation.default})"
       },
-      "shadow": { "$type": "shadow", "$value": "{surface.glass.shadow}" },
+      "shadow": { "$type": "shadow", "$value": "{shadow.large}" },
       "innerShadow": {
         "$type": "shadow",
-        "$value": "{surface.glass.innerShadow}"
+        "$value": "inset 0 1px 0 {navigation.header.innerBorderColor}, inset 1px 0 0 color-mix(in srgb, {color.cloudBlue} 8%, transparent), inset 0 -1px 0 color-mix(in srgb, {text.primary} 4%, transparent)"
       },
+      "radius": { "$type": "dimension", "$value": "{radius.xl}" },
+      "insetBlockStart": { "$type": "dimension", "$value": "{spacing.sm}" },
+      "insetInline": { "$type": "dimension", "$value": "{spacing.md}" },
+      "maxWidth": { "$type": "dimension", "$value": "{container.wide}" },
       "minHeight": {
         "$type": "dimension",
         "$value": "calc({spacing.2xl} + {spacing.md})"
@@ -2072,6 +2104,14 @@
       "fallbackBackground": {
         "$type": "color",
         "$value": "{surface.glassElevated.fallbackBackground}"
+      },
+      "materialBackground": {
+        "$type": "string",
+        "$value": "linear-gradient(180deg, {navigation.header.highlightColor} 0%, transparent 42%), linear-gradient(128deg, {navigation.header.reflectionLavender} 0%, transparent 58%, {navigation.header.reflectionCool} 100%), linear-gradient(180deg, color-mix(in srgb, {surface.glassElevated.background} 94%, {surface.glassElevated.borderHighlight}) 0%, {surface.glassElevated.background} 100%)"
+      },
+      "fallbackMaterialBackground": {
+        "$type": "string",
+        "$value": "linear-gradient(180deg, {navigation.header.highlightColor} 0%, transparent 42%), linear-gradient(128deg, {navigation.header.reflectionLavender} 0%, transparent 58%, {navigation.header.reflectionCool} 100%), {surface.glassElevated.fallbackBackground}"
       },
       "foreground": {
         "$type": "color",
@@ -2124,6 +2164,10 @@
       "background": { "$type": "color", "$value": "transparent" },
       "foreground": { "$type": "color", "$value": "{text.secondary}" },
       "borderColor": { "$type": "color", "$value": "transparent" },
+      "shadow": {
+        "$type": "shadow",
+        "$value": "{navigation.motion.shadow.rest}"
+      },
       "minHeight": { "$type": "dimension", "$value": "{button.height.md}" },
       "paddingBlock": { "$type": "dimension", "$value": "{spacing.sm}" },
       "paddingInline": { "$type": "dimension", "$value": "{spacing.md}" },
@@ -2138,30 +2182,56 @@
       "hover": {
         "background": {
           "$type": "color",
-          "$value": "{surface.interactive.hover.background}"
+          "$value": "color-mix(in srgb, {surface.glass.background} 44%, transparent)"
         },
         "foreground": { "$type": "color", "$value": "{text.primary}" },
         "borderColor": {
           "$type": "color",
-          "$value": "{surface.interactive.hover.borderColor}"
+          "$value": "transparent"
+        },
+        "shadow": {
+          "$type": "shadow",
+          "$value": "{navigation.motion.shadow.hover}"
+        }
+      },
+      "pressed": {
+        "background": {
+          "$type": "color",
+          "$value": "color-mix(in srgb, {color.lavender} 18%, {surface.glass.background})"
+        },
+        "foreground": { "$type": "color", "$value": "{text.primary}" },
+        "borderColor": {
+          "$type": "color",
+          "$value": "color-mix(in srgb, {surface.glass.borderColor} 42%, transparent)"
+        },
+        "shadow": {
+          "$type": "shadow",
+          "$value": "{navigation.motion.shadow.pressed}"
         }
       },
       "active": {
         "background": {
           "$type": "color",
-          "$value": "{surface.interactive.selected.background}"
+          "$value": "color-mix(in srgb, {color.lavender} 12%, transparent)"
         },
         "foreground": { "$type": "color", "$value": "{text.primary}" },
         "borderColor": {
           "$type": "color",
-          "$value": "{surface.interactive.selected.borderColor}"
+          "$value": "transparent"
         },
         "indicator": { "$type": "color", "$value": "{text.accent}" },
         "indicatorWidth": {
           "$type": "dimension",
-          "$value": "{borderWidth.focus}"
+          "$value": "{borderWidth.default}"
         },
-        "fontWeight": { "$type": "fontWeight", "$value": "{fontWeight.bold}" }
+        "fontWeight": {
+          "$type": "fontWeight",
+          "$value": "{fontWeight.semibold}"
+        },
+        "shadow": {
+          "$type": "shadow",
+          "$value": "{navigation.motion.shadow.hover}"
+        }
       },
       "focus": {
         "ringColor": {
@@ -2237,11 +2307,19 @@
     "selector": {
       "background": {
         "$type": "color",
+        "$value": "{surface.glassSubtle.background}"
+      },
+      "fallbackBackground": {
+        "$type": "color",
         "$value": "{surface.glassSubtle.fallbackBackground}"
       },
       "borderColor": {
         "$type": "color",
-        "$value": "{surface.glassSubtle.borderColor}"
+        "$value": "color-mix(in srgb, {surface.glassSubtle.borderColor} 68%, transparent)"
+      },
+      "borderHighlight": {
+        "$type": "color",
+        "$value": "{surface.glassSubtle.borderHighlight}"
       },
       "borderWidth": {
         "$type": "dimension",
@@ -2250,18 +2328,47 @@
       "radius": { "$type": "dimension", "$value": "{radius.pill}" },
       "padding": { "$type": "dimension", "$value": "{spacing.xs}" },
       "gap": { "$type": "dimension", "$value": "{spacing.xs}" },
+      "shadow": { "$type": "shadow", "$value": "{shadow.small}" },
+      "innerShadow": {
+        "$type": "shadow",
+        "$value": "{surface.glassSubtle.innerShadow}"
+      },
       "labelForeground": { "$type": "color", "$value": "{text.secondary}" },
       "itemForeground": { "$type": "color", "$value": "{text.secondary}" },
       "itemHoverForeground": { "$type": "color", "$value": "{text.primary}" },
+      "itemHoverBackground": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {surface.glass.background} 36%, transparent)"
+      },
+      "itemPressedBackground": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {color.lavender} 30%, {surface.glass.background})"
+      },
+      "itemPressedShadow": {
+        "$type": "shadow",
+        "$value": "{navigation.motion.shadow.pressed}"
+      },
       "itemActiveBackground": {
         "$type": "color",
-        "$value": "{action.primary.background}"
+        "$value": "color-mix(in srgb, {color.lavender} 24%, {surface.glass.background})"
       },
       "itemActiveForeground": {
         "$type": "color",
-        "$value": "{action.primary.text}"
+        "$value": "{text.primary}"
       },
-      "itemActiveShadow": { "$type": "shadow", "$value": "{shadow.small}" }
+      "itemActiveBorderColor": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {surface.glass.borderColor} 58%, transparent)"
+      },
+      "itemActiveHighlight": {
+        "$type": "color",
+        "$value": "{surface.glass.borderHighlight}"
+      },
+      "itemActiveShadow": { "$type": "shadow", "$value": "{shadow.small}" },
+      "itemActiveInnerShadow": {
+        "$type": "shadow",
+        "$value": "inset 0 1px 0 {navigation.selector.itemActiveHighlight}"
+      }
     },
     "skipLink": {
       "background": {
@@ -2296,14 +2403,56 @@
       },
       "zIndex": { "$type": "number", "$value": 25 }
     },
+    "motion": {
+      "duration": {
+        "fast": { "$type": "duration", "$value": "120ms" },
+        "normal": { "$type": "duration", "$value": "180ms" },
+        "slow": { "$type": "duration", "$value": "220ms" }
+      },
+      "easing": {
+        "standard": {
+          "$type": "cubicBezier",
+          "$value": "cubic-bezier(0.22, 0.61, 0.36, 1)"
+        },
+        "emphasized": {
+          "$type": "cubicBezier",
+          "$value": "cubic-bezier(0.16, 1, 0.3, 1)"
+        },
+        "exit": {
+          "$type": "cubicBezier",
+          "$value": "cubic-bezier(0.4, 0, 1, 1)"
+        }
+      },
+      "scale": {
+        "pressed": { "$type": "number", "$value": 0.985 }
+      },
+      "opacity": {
+        "rest": { "$type": "number", "$value": 0.96 },
+        "hover": { "$type": "number", "$value": 1 }
+      },
+      "shadow": {
+        "rest": {
+          "$type": "shadow",
+          "$value": "inset 0 1px 0 transparent, 0 2px 8px transparent"
+        },
+        "hover": {
+          "$type": "shadow",
+          "$value": "inset 0 1px 0 color-mix(in srgb, {surface.glass.borderHighlight} 58%, transparent), 0 2px 8px color-mix(in srgb, {text.primary} 7%, transparent)"
+        },
+        "pressed": {
+          "$type": "shadow",
+          "$value": "inset 0 1px 0 color-mix(in srgb, {surface.glass.borderHighlight} 38%, transparent), 0 2px 8px color-mix(in srgb, {text.primary} 10%, transparent)"
+        }
+      }
+    },
     "transition": {
       "duration": {
         "$type": "duration",
-        "$value": "{surface.transition.duration}"
+        "$value": "{navigation.motion.duration.normal}"
       },
       "easing": {
         "$type": "cubicBezier",
-        "$value": "{surface.transition.easing}"
+        "$value": "{navigation.motion.easing.standard}"
       }
     }
   },

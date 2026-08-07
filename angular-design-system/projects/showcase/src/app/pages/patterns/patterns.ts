@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {
+  GhAmbientBackgroundComponent,
   GhContactCalloutComponent,
   type GhContactAction,
   GhContainerComponent,
@@ -32,6 +33,7 @@ import { ThemeToggle } from '../../shared/components/theme-toggle/theme-toggle';
   standalone: true,
   imports: [
     DocumentationSection,
+    GhAmbientBackgroundComponent,
     GhContactCalloutComponent,
     GhContainerComponent,
     GhContentHighlightComponent,

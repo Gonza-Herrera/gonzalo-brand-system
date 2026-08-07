@@ -246,7 +246,7 @@ test('provides a complete theme-aware Navigation contract', async () => {
 
   assert.equal(
     semanticTokens.get('navigation.header.backdropFilter').value,
-    '{surface.glass.backdropFilter}',
+    'blur({glass.blur.md}) saturate({glass.saturation.default})',
   );
   assert.equal(
     semanticTokens.get('navigation.header.fallbackBackground').value,
@@ -260,13 +260,30 @@ test('provides a complete theme-aware Navigation contract', async () => {
     semanticTokens.get('navigation.item.focus.ringColor').value,
     '{surface.interactive.focus.ringColor}',
   );
-  assert.equal(
-    semanticTokens.get('navigation.item.active.borderColor').value,
-    '{surface.interactive.selected.borderColor}',
-  );
+  assert.equal(semanticTokens.get('navigation.item.active.borderColor').value, 'transparent');
   assert.equal(
     semanticTokens.get('navigation.selector.background').value,
+    '{surface.glassSubtle.background}',
+  );
+  assert.equal(
+    semanticTokens.get('navigation.selector.fallbackBackground').value,
     '{surface.glassSubtle.fallbackBackground}',
+  );
+  assert.match(
+    String(semanticTokens.get('navigation.header.materialBackground').value),
+    /linear-gradient/,
+  );
+  assert.match(
+    String(semanticTokens.get('navigation.header.materialBackground').value),
+    /navigation\.header\.(?:highlightColor|reflectionLavender)/,
+  );
+  assert.equal(
+    semanticTokens.get('navigation.item.active.indicatorWidth').value,
+    '{borderWidth.default}',
+  );
+  assert.equal(
+    semanticTokens.get('navigation.selector.itemActiveForeground').value,
+    '{text.primary}',
   );
 });
 
@@ -385,6 +402,20 @@ test('generates unique prefixed CSS variables for primitives and semantic themes
   );
   assert.doesNotMatch(allScss, /\b(?:undefined|null)\b/i);
   assert.doesNotMatch(allScss, /(?:^|[:\s])placeholder(?:[;\s]|$)/im);
+});
+
+test('serializes compound Navigation shadows without breaking generated Sass maps', async () => {
+  const tokens = await loadAndValidateTokens();
+  const files = getGeneratedFiles(tokens);
+  const lightTheme = files.get(
+    path.join(
+      repositoryRoot,
+      'angular-design-system/projects/gh-design-system/src/lib/styles/themes/_light-theme.scss',
+    ),
+  );
+
+  assert.match(lightTheme, /'navigation-header-inner-shadow':\s*"inset 0 1px 0[^\n]+"/);
+  assert.doesNotMatch(lightTheme, /'navigation-header-inner-shadow':\s*inset[^\n]+color-mix/);
 });
 
 test('keeps shared primitive durations positive and typed visual values non-empty', async () => {

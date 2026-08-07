@@ -74,14 +74,34 @@ Angular Router:
 
 ## Liquid Glass material and tokens
 
-The existing selector and API now consume `--gh-navigation-*` component tokens. The global Header
-maps to bounded Glass with an opaque fallback; the open mobile panel maps to Glass Elevated. Blur is
-never instantiated per link, selector item or Side Navigation item. `@supports` performs the CSS-only
-enhancement and forced colors returns structural surfaces to system colors.
+The existing selector and API consume `--gh-navigation-*` component tokens. The global Header maps
+to a floating, three-layer Glass material with an opaque layered fallback; the open mobile panel maps
+to Glass Elevated. The complete outer boundary, inset edge and broad ambient shadow build depth
+without Card-like weight. Blur is never instantiated per link, selector item or Side Navigation
+item. `@supports` performs the CSS-only enhancement and forced colors returns structural surfaces to
+system colors.
+
+The active link uses a low-alpha material and a fine structural indicator instead of a heavy selected
+control. Projected Language and Theme selectors may use the matching `navigation.selector` aliases;
+they must not add a nested backdrop filter when the Header already owns one.
 
 The explicit `transparent` input remains compatible and intentionally disables the Header material.
 Consumers should use it only when the authored backdrop preserves contrast. Sticky positioning does
 not add scroll listeners, resize listeners, progressive blur or a separate scrolled state.
+
+## Motion
+
+The Header remains stable. Navigation Items use the component-specific `navigation.motion` scale
+for hover light, active continuity, visible focus and a restrained `0.985` pressed compression. The
+active indicator interpolates through CSS without runtime measurement. Projected Language and Theme
+selectors should use the same fast, normal and slow timing roles and must preserve native semantics.
+
+Reduced motion removes transform and selector-thumb travel while keeping semantic color changes and
+the focus outline. Forced colors removes decorative transitions entirely. Do not animate blur,
+`backdrop-filter`, layout, reflections or ambient backgrounds, and do not use `transition: all`.
+
+See [Navigation Motion](../../../../../../docs/design/liquid-glass/navigation-motion.md) for the full
+interaction contract.
 
 When more than one Navigation exists on a page, pass a unique, stable `menuId`. This avoids duplicate IDs and remains deterministic for SSR.
 

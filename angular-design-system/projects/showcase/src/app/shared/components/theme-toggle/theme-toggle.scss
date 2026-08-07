@@ -6,25 +6,41 @@
   border: var(--gh-navigation-selector-border-width) solid
     var(--gh-navigation-selector-border-color);
   border-radius: var(--gh-navigation-selector-radius);
-  background: var(--gh-navigation-selector-background);
+  background: var(--gh-navigation-selector-fallback-background);
+  box-shadow: var(--gh-navigation-selector-shadow), var(--gh-navigation-selector-inner-shadow);
+  transition:
+    border-color var(--gh-navigation-motion-duration-normal)
+      var(--gh-navigation-motion-easing-standard),
+    box-shadow var(--gh-navigation-motion-duration-normal)
+      var(--gh-navigation-motion-easing-standard);
 
   button {
     padding: var(--gh-space-xs) var(--gh-space-sm);
-    border: 0;
+    border: var(--gh-navigation-selector-border-width) solid transparent;
     border-radius: var(--gh-navigation-selector-radius);
     background: transparent;
     color: var(--gh-navigation-selector-item-foreground);
     font-size: var(--gh-font-size-caption);
     font-weight: var(--gh-font-weight-semibold);
     cursor: pointer;
+    opacity: var(--gh-navigation-motion-opacity-rest);
     transition:
-      background-color var(--gh-navigation-transition-duration)
-        var(--gh-navigation-transition-easing),
-      color var(--gh-navigation-transition-duration) var(--gh-navigation-transition-easing);
+      background-color var(--gh-navigation-motion-duration-slow)
+        var(--gh-navigation-motion-easing-standard),
+      border-color var(--gh-navigation-motion-duration-normal)
+        var(--gh-navigation-motion-easing-standard),
+      box-shadow var(--gh-navigation-motion-duration-slow)
+        var(--gh-navigation-motion-easing-standard),
+      color var(--gh-navigation-motion-duration-fast) var(--gh-navigation-motion-easing-standard),
+      opacity var(--gh-navigation-motion-duration-fast) var(--gh-navigation-motion-easing-standard),
+      transform var(--gh-navigation-motion-duration-fast)
+        var(--gh-navigation-motion-easing-emphasized);
   }
 
   button:hover {
+    background: var(--gh-navigation-selector-item-hover-background);
     color: var(--gh-navigation-selector-item-hover-foreground);
+    opacity: var(--gh-navigation-motion-opacity-hover);
   }
 
   button:focus-visible {
@@ -34,15 +50,42 @@
   }
 
   button[aria-pressed='true'] {
+    border-color: var(--gh-navigation-selector-item-active-border-color);
     background: var(--gh-navigation-selector-item-active-background);
     color: var(--gh-navigation-selector-item-active-foreground);
-    box-shadow: var(--gh-navigation-selector-item-active-shadow);
+    box-shadow:
+      var(--gh-navigation-selector-item-active-shadow),
+      var(--gh-navigation-selector-item-active-inner-shadow);
+    opacity: var(--gh-navigation-motion-opacity-hover);
+  }
+
+  button:active {
+    background: var(--gh-navigation-selector-item-pressed-background);
+    box-shadow: var(--gh-navigation-selector-item-pressed-shadow);
+    transform: scale(var(--gh-navigation-motion-scale-pressed));
+  }
+}
+
+@supports ((backdrop-filter: none) or (-webkit-backdrop-filter: none)) {
+  .theme-toggle {
+    background: var(--gh-navigation-selector-background);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .theme-toggle button {
-    transition: none;
+    transition:
+      background-color var(--gh-navigation-motion-duration-fast)
+        var(--gh-navigation-motion-easing-standard),
+      border-color var(--gh-navigation-motion-duration-fast)
+        var(--gh-navigation-motion-easing-standard),
+      color var(--gh-navigation-motion-duration-fast) var(--gh-navigation-motion-easing-standard);
+  }
+
+  .theme-toggle button,
+  .theme-toggle button:active {
+    opacity: 1;
+    transform: none;
   }
 }
 
@@ -50,15 +93,25 @@
   .theme-toggle {
     border-color: ButtonBorder;
     background: Canvas;
+    box-shadow: none;
+    transition: none;
   }
 
   .theme-toggle button[aria-pressed='true'] {
     border-color: Highlight;
     background: Highlight;
     color: HighlightText;
+    box-shadow: none;
   }
 
   .theme-toggle button:focus-visible {
     outline-color: Highlight;
+  }
+
+  .theme-toggle button,
+  .theme-toggle button:active {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }

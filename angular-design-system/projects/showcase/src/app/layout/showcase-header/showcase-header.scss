@@ -1,16 +1,24 @@
+:host {
+  display: block;
+}
+
 .header {
   position: sticky;
   z-index: var(--gh-navigation-header-z-index);
-  top: 0;
+  top: var(--gh-navigation-header-inset-block-start);
   display: flex;
+  width: calc(100% - (var(--gh-navigation-header-inset-inline) * 2));
+  max-width: var(--gh-navigation-header-max-width);
   min-height: var(--gh-navigation-header-min-height);
   align-items: center;
   justify-content: space-between;
   gap: var(--gh-navigation-header-gap);
+  margin-block-start: var(--gh-navigation-header-inset-block-start);
+  margin-inline: auto;
   padding: var(--gh-space-md) var(--gh-space-xl);
-  border-bottom: var(--gh-navigation-header-border-width) solid
-    var(--gh-navigation-header-border-color);
-  background: var(--gh-navigation-header-fallback-background);
+  border: var(--gh-navigation-header-border-width) solid var(--gh-navigation-header-border-color);
+  border-radius: var(--gh-navigation-header-radius);
+  background: var(--gh-navigation-header-fallback-material-background);
   color: var(--gh-navigation-header-foreground);
   box-shadow: var(--gh-navigation-header-shadow), var(--gh-navigation-header-inner-shadow);
 }
@@ -23,6 +31,9 @@
   border-radius: var(--gh-navigation-brand-radius);
   color: var(--gh-navigation-brand-foreground);
   text-decoration: none;
+  transition:
+    color var(--gh-navigation-motion-duration-fast) var(--gh-navigation-motion-easing-standard),
+    opacity var(--gh-navigation-motion-duration-fast) var(--gh-navigation-motion-easing-standard);
 
   &:hover {
     color: var(--gh-navigation-brand-hover-foreground);
@@ -85,7 +96,7 @@
 
 @supports ((backdrop-filter: none) or (-webkit-backdrop-filter: none)) {
   .header {
-    background: var(--gh-navigation-header-background);
+    background: var(--gh-navigation-header-material-background);
     backdrop-filter: var(--gh-navigation-header-backdrop-filter);
     -webkit-backdrop-filter: var(--gh-navigation-header-backdrop-filter);
   }
@@ -113,6 +124,10 @@
 
   .brand:focus-visible {
     outline-color: Highlight;
+  }
+
+  .brand {
+    transition: none;
   }
 }
 

@@ -18,6 +18,7 @@ const [
   iconButtonTemplate,
   lightTheme,
   darkTheme,
+  semanticTokens,
   stories,
   showcaseTemplate,
   showcaseSidebar,
@@ -26,6 +27,8 @@ const [
   portfolioLanguage,
   portfolioTheme,
   documentation,
+  refinementDocumentation,
+  motionDocumentation,
 ] = await Promise.all([
   readFile(path.join(libraryRoot, 'lib/patterns/navigation/navigation.component.ts'), 'utf8'),
   readFile(path.join(libraryRoot, 'lib/patterns/navigation/navigation.component.html'), 'utf8'),
@@ -37,6 +40,7 @@ const [
   readFile(path.join(libraryRoot, 'lib/components/icon-button/icon-button.component.html'), 'utf8'),
   readFile(path.join(libraryRoot, 'lib/styles/themes/_light-theme.scss'), 'utf8'),
   readFile(path.join(libraryRoot, 'lib/styles/themes/_dark-theme.scss'), 'utf8'),
+  readFile(path.join(workspaceRoot, '..', 'tokens/semantic-tokens.json'), 'utf8'),
   readFile(path.join(libraryRoot, 'lib/patterns/navigation/navigation.stories.ts'), 'utf8'),
   readFile(
     path.join(workspaceRoot, 'projects/showcase/src/app/pages/patterns/patterns.html'),
@@ -78,6 +82,11 @@ const [
     'utf8',
   ),
   readFile(path.join(workspaceRoot, 'docs/design/liquid-glass/navigation.md'), 'utf8'),
+  readFile(
+    path.join(workspaceRoot, 'docs/design/liquid-glass/navigation-material-refinement.md'),
+    'utf8',
+  ),
+  readFile(path.join(workspaceRoot, 'docs/design/liquid-glass/navigation-motion.md'), 'utf8'),
 ]);
 
 test('preserves the Navigation selector, public inputs, output and item type', () => {
@@ -143,6 +152,10 @@ test('uses Navigation component tokens without raw visual recipes or item-level 
   }
   assert.doesNotMatch(styles, /#[\da-f]{3,8}|rgba?\s*\(|(?:radial|linear)-gradient\s*\(/i);
   assert.doesNotMatch(styles, /transition:\s*all/i);
+  assert.doesNotMatch(
+    styles,
+    /transition:[^;]*(?:backdrop-filter|filter|width|height|inset|margin|padding|visibility)/i,
+  );
   const linkBlock = styles.slice(
     styles.indexOf('.gh-navigation__link {'),
     styles.indexOf('.gh-navigation__link--active {'),
@@ -154,10 +167,46 @@ test('limits backdrop filtering to structural Header and mobile panel with solid
   assert.match(styles, /@supports\s*\(\(backdrop-filter:\s*none\)/);
   assert.match(styles, /\.gh-navigation:not\(\.gh-navigation--transparent\)/);
   assert.match(styles, /\.gh-navigation__panel--open/);
-  assert.match(styles, /navigation-header-fallback-background/);
-  assert.match(styles, /navigation-panel-fallback-background/);
+  assert.match(styles, /navigation-header-fallback-material-background/);
+  assert.match(styles, /navigation-header-material-background/);
+  assert.match(styles, /navigation-panel-fallback-material-background/);
+  assert.match(styles, /navigation-panel-material-background/);
   assert.doesNotMatch(styles, /transition:[^;]*(?:backdrop-filter|filter)/i);
   assert.doesNotMatch(component, /HostListener|window|document|matchMedia|ResizeObserver|scroll/);
+  assert.doesNotMatch(
+    component,
+    /requestAnimationFrame|IntersectionObserver|ResizeObserver|setTimeout/,
+  );
+});
+
+test('uses Navigation motion tokens for stable Header and physical item states', () => {
+  const headerBlock = styles.slice(
+    styles.indexOf('.gh-navigation {'),
+    styles.indexOf('.gh-navigation--sticky {'),
+  );
+
+  assert.doesNotMatch(headerBlock, /transition:/);
+  assert.match(styles, /--gh-navigation-motion-duration-fast/);
+  assert.match(styles, /--gh-navigation-motion-duration-normal/);
+  assert.match(styles, /--gh-navigation-motion-duration-slow/);
+  assert.match(styles, /--gh-navigation-motion-easing-emphasized/);
+  assert.match(styles, /\.gh-navigation__link:active/);
+  assert.match(styles, /scale\(var\(--gh-navigation-motion-scale-pressed\)\)/);
+  assert.match(styles, /\.gh-navigation__link::after[\s\S]*opacity:\s*0/);
+  assert.match(styles, /\.gh-navigation__link--active::after[\s\S]*opacity:\s*1/);
+  assert.match(styles, /prefers-reduced-motion[\s\S]*transform:\s*none/);
+
+  for (const token of [
+    '"motion"',
+    '"duration"',
+    '"normal"',
+    '"emphasized"',
+    '"pressed"',
+    '"opacity"',
+    '"shadow"',
+  ]) {
+    assert.match(semanticTokens, new RegExp(token));
+  }
 });
 
 test('provides reduced-motion and forced-colors navigation paths', () => {
@@ -172,12 +221,20 @@ test('publishes every Navigation token in generated light and dark themes', () =
   for (const theme of [lightTheme, darkTheme]) {
     for (const token of [
       'navigation-header-fallback-background',
+      'navigation-header-material-background',
+      'navigation-header-fallback-material-background',
       'navigation-header-backdrop-filter',
       'navigation-panel-fallback-background',
       'navigation-item-active-indicator',
+      'navigation-item-pressed-background',
       'navigation-item-focus-ring-color',
       'navigation-side-background',
       'navigation-selector-item-active-background',
+      'navigation-selector-item-active-inner-shadow',
+      'navigation-selector-item-pressed-background',
+      'navigation-motion-duration-fast',
+      'navigation-motion-easing-standard',
+      'navigation-motion-scale-pressed',
       'navigation-skip-link-background',
       'navigation-backdrop-background',
     ]) {
@@ -188,16 +245,22 @@ test('publishes every Navigation token in generated light and dark themes', () =
 });
 
 test('migrates real Showcase and Portfolio navigation consumers', () => {
-  assert.match(showcaseTemplate, /Current public scope/);
-  assert.match(showcaseTemplate, /Tabs, Breadcrumbs and Pagination are not current/);
+  assert.match(showcaseTemplate, /Refined material anatomy/);
+  assert.match(showcaseTemplate, /One Header filter/);
+  assert.match(showcaseTemplate, /Navigation · Motion Guidelines/);
+  assert.match(showcaseTemplate, /patterns-navigation-motion-guidelines/);
   assert.match(showcaseSidebar, /--gh-navigation-side-/);
   assert.match(showcaseSidebar, /--gh-navigation-item-active-/);
-  assert.match(showcaseHeader, /--gh-navigation-header-fallback-background/);
+  assert.match(showcaseHeader, /--gh-navigation-header-fallback-material-background/);
   assert.match(portfolioTemplate, /<gh-navigation/);
   assert.match(portfolioTemplate, /\[interceptInternalNavigation\]="true"/);
   assert.match(portfolioTemplate, /menuId="portfolio-navigation-menu"/);
   assert.match(portfolioLanguage, /--gh-navigation-selector-/);
+  assert.match(portfolioLanguage, /:has\(> a\[aria-current='page'\]\)/);
+  assert.match(portfolioLanguage, /a:active/);
   assert.match(portfolioTheme, /--gh-navigation-selector-label-foreground/);
+  assert.match(portfolioTheme, /--gh-navigation-selector-item-active-background/);
+  assert.match(portfolioTheme, /\.gh-select:active/);
 });
 
 test('documents the existing Navigation family without parallel local-navigation APIs', () => {
@@ -219,6 +282,26 @@ test('documents the existing Navigation family without parallel local-navigation
     'MobileRouteSelectionCloses',
     'DarkMobileOpen',
     'ReducedMotionAndForcedColors',
+    'HeaderMaterialLight',
+    'HeaderMaterialDark',
+    'AmbientBrand',
+    'AmbientSubtle',
+    'ActiveNavigationItem',
+    'HoverNavigationItem',
+    'PressedNavigationItem',
+    'FocusNavigationItem',
+    'NavigationMotion',
+    'Hover',
+    'Pressed',
+    'Focus',
+    'LanguageSelector',
+    'ThemeSelector',
+    'NavigationMaterialComparison',
+    'SolidFallbackDocumentation',
+    'MobileNavigationMaterial',
+    'Mobile320',
+    'Desktop1440',
+    'ReducedMotion',
   ]) {
     assert.match(stories, new RegExp(`export const ${story}:`));
   }
@@ -231,6 +314,41 @@ test('provides every required Liquid Glass Navigation documentation section', ()
   assert.match(documentation, /## 2\. Architecture/);
   assert.match(documentation, /## 20\. Component tokens/);
   assert.match(documentation, /## 31\. Recommendations for PR 29/);
+});
+
+test('documents every required Navigation material-refinement decision', () => {
+  const numberedSections = refinementDocumentation.match(/^## \d+\./gm) ?? [];
+
+  assert.equal(numberedSections.length, 23);
+  assert.match(refinementDocumentation, /## 2\. PR 28 vs PR 28\.1/);
+  assert.match(refinementDocumentation, /## 20\. Performance/);
+  assert.match(refinementDocumentation, /## 21\. Comparison with mockup/);
+  assert.match(refinementDocumentation, /## 22\. Limitations/);
+  assert.match(refinementDocumentation, /## 23\. Recommendations for PR 28\.2/);
+  assert.match(refinementDocumentation, /19,123 to 24,560 bytes/);
+  assert.match(refinementDocumentation, /559\.71 kB \/ 120\.02 kB/);
+});
+
+test('documents the complete Navigation motion contract', () => {
+  for (const section of [
+    'Philosophy',
+    'Timings',
+    'Easing',
+    'Hover',
+    'Pressed',
+    'Focus',
+    'Active',
+    'Selectors',
+    'Reduced motion',
+    'Performance',
+    'Good practices',
+  ]) {
+    assert.match(motionDocumentation, new RegExp(`## ${section}`));
+  }
+
+  assert.match(motionDocumentation, /CSS-only/);
+  assert.match(motionDocumentation, /transition: all/);
+  assert.match(motionDocumentation, /requestAnimationFrame/);
 });
 
 test('keeps focused unit coverage for active state, disclosure, Escape and interception', () => {

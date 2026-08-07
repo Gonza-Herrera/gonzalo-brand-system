@@ -32,9 +32,12 @@ Cards inside Grid and real Tags and Badges inside Cluster.
 
 The Patterns page exercises all eight Brand Patterns in isolation and includes
 a composed personal-landing demonstration built from the public package API.
-Its Navigation section documents the migrated public Header, active items, mobile disclosure,
-selectors, accessibility and performance boundaries. The Showcase shell remains the real Side
-Navigation and Skip Link consumer; no public Tabs, Breadcrumbs or Pagination are implied.
+Its Navigation section documents the refined floating Header, multi-layer light, active items,
+projected Language and Theme selectors, mobile disclosure, ambient integration, solid fallback and
+performance boundaries. Its Motion Guidelines section demonstrates Hover, Pressed, Active, Focus
+and Selector continuity with reduced-motion and forced-colors degradation. The Showcase shell
+remains the real Side Navigation and Skip Link consumer; no public Tabs, Breadcrumbs or Pagination
+are implied.
 
 ## Run
 

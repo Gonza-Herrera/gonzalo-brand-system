@@ -69,32 +69,54 @@
     border-radius: var(--gh-navigation-item-radius);
     background: var(--gh-navigation-item-background);
     color: var(--gh-navigation-item-foreground);
+    box-shadow: var(--gh-navigation-item-shadow);
+    opacity: var(--gh-navigation-motion-opacity-rest);
     text-decoration: none;
     transition:
-      background-color var(--gh-navigation-transition-duration)
-        var(--gh-navigation-transition-easing),
-      border-color var(--gh-navigation-transition-duration) var(--gh-navigation-transition-easing),
-      color var(--gh-navigation-transition-duration) var(--gh-navigation-transition-easing);
+      background-color var(--gh-navigation-motion-duration-normal)
+        var(--gh-navigation-motion-easing-standard),
+      border-color var(--gh-navigation-motion-duration-normal)
+        var(--gh-navigation-motion-easing-standard),
+      box-shadow var(--gh-navigation-motion-duration-normal)
+        var(--gh-navigation-motion-easing-standard),
+      color var(--gh-navigation-motion-duration-fast) var(--gh-navigation-motion-easing-standard),
+      opacity var(--gh-navigation-motion-duration-fast) var(--gh-navigation-motion-easing-standard),
+      transform var(--gh-navigation-motion-duration-fast)
+        var(--gh-navigation-motion-easing-emphasized);
   }
 
   a:hover {
     border-color: var(--gh-navigation-item-hover-border-color);
     background: var(--gh-navigation-item-hover-background);
     color: var(--gh-navigation-item-hover-foreground);
+    box-shadow: var(--gh-navigation-item-hover-shadow);
+    opacity: var(--gh-navigation-motion-opacity-hover);
   }
 
   a:focus-visible {
     outline: var(--gh-navigation-item-focus-ring-width) solid
       var(--gh-navigation-item-focus-ring-color);
     outline-offset: var(--gh-navigation-item-focus-ring-offset);
+    opacity: var(--gh-navigation-motion-opacity-hover);
   }
 
   a.is-active {
     border-color: var(--gh-navigation-item-active-border-color);
     background: var(--gh-navigation-item-active-background);
     color: var(--gh-navigation-item-active-foreground);
-    box-shadow: inset var(--gh-navigation-item-active-indicator-width) 0
-      var(--gh-navigation-item-active-indicator);
+    box-shadow:
+      inset var(--gh-navigation-item-active-indicator-width) 0
+        var(--gh-navigation-item-active-indicator),
+      var(--gh-navigation-item-active-shadow);
+    opacity: var(--gh-navigation-motion-opacity-hover);
+  }
+
+  a:active {
+    border-color: var(--gh-navigation-item-pressed-border-color);
+    background: var(--gh-navigation-item-pressed-background);
+    color: var(--gh-navigation-item-pressed-foreground);
+    box-shadow: var(--gh-navigation-item-pressed-shadow);
+    transform: scale(var(--gh-navigation-motion-scale-pressed));
   }
 
   a span {
@@ -135,14 +157,17 @@
     box-shadow: var(--gh-navigation-panel-shadow), var(--gh-navigation-panel-inner-shadow);
     pointer-events: none;
     transition:
-      transform var(--gh-navigation-transition-duration) var(--gh-navigation-transition-easing),
-      visibility var(--gh-navigation-transition-duration) var(--gh-navigation-transition-easing);
+      opacity var(--gh-navigation-motion-duration-normal) var(--gh-navigation-motion-easing-exit),
+      transform var(--gh-navigation-motion-duration-slow) var(--gh-navigation-motion-easing-exit);
+    opacity: 0;
   }
 
   .sidebar--open {
     transform: translateX(0);
     visibility: visible;
     pointer-events: auto;
+    opacity: 1;
+    transition-timing-function: var(--gh-navigation-motion-easing-emphasized);
   }
 }
 
@@ -150,6 +175,12 @@
   .sidebar,
   .sidebar a {
     transition: none;
+  }
+
+  .sidebar a,
+  .sidebar a:active {
+    opacity: 1;
+    transform: none;
   }
 }
 
@@ -172,5 +203,12 @@
 
   .sidebar a:focus-visible {
     outline-color: Highlight;
+  }
+
+  .sidebar a,
+  .sidebar a:active {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }

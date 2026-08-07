@@ -6,7 +6,8 @@ inside the Angular library must never be edited by hand.
 
 PR 22 provides the material values consumed by the Surface primitives introduced in PR 23. PR 25
 adds action component mappings, PR 26 adds Card component mappings, PR 27 adds native Form Control
-component mappings, and PR 28 adds Navigation component mappings; Portfolio consumers inherit those
+component mappings, PR 28 adds Navigation component mappings, and PR 28.1 refines their material
+recipes. PR 28.2 adds a Navigation-specific motion scale; Portfolio consumers inherit those
 compatible public migrations without a page redesign.
 
 ## Architecture
@@ -98,6 +99,11 @@ tokens are carried speculatively.
 Surface transition aliases map to the global fast duration and standard easing. No Liquid Glass
 animation scale, keyframe, or filter animation is introduced.
 
+Navigation is the first component family with a dedicated interaction rhythm. Its 120/180/220 ms
+duration roles and standard/emphasized/exit cubic Bézier curves remain semantic component tokens,
+not a replacement for the global primitive scale. Pressed scale, item opacity and constant-geometry
+shadow roles are similarly scoped to Navigation.
+
 Interactive focus aliases reuse the shared focus color and global focus border width. Surface radius
 aliases reuse `radius.md`, `radius.lg`, and `radius.xl`; visual depth does not create a new geometry
 scale. Visual elevation also remains independent from stacking order, so these tokens do not imply
@@ -174,6 +180,16 @@ PR 28 maps the existing public Navigation and real application chrome through `n
 `panel`, `brand`, `item`, `side`, `selector`, `skipLink`, `backdrop`, and `transition`. Header maps to
 Glass, the bounded open mobile panel maps to Glass Elevated, and the Showcase Sidebar maps to Glass
 Subtle. All paint is preceded by an opaque fallback.
+
+PR 28.1 extends those same groups with layered Header and panel backgrounds, reflection colors,
+floating geometry, inner-border roles and selector thumb states. It does not introduce a second
+Navigation family or change primitive scales. The Header recipe is capped at three background layers
+and selectors remain unfiltered inside the primary Glass surface.
+
+PR 28.2 adds `navigation.motion.duration`, `easing`, `scale`, `opacity` and `shadow` groups plus
+pressed paint roles for items and selectors. The former `navigation.transition` aliases remain
+compatible and resolve to the new normal duration and standard easing; authored Navigation CSS uses
+the more specific motion roles.
 
 Navigation Items, language choices and theme choices use interaction and action aliases without
 per-item backdrop filtering. Tabs, Breadcrumbs and Pagination have no component tokens because no

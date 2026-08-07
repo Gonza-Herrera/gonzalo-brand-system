@@ -124,10 +124,10 @@ keeps its own scroll area. Hover is never the only feedback.
 
 ## 20. Component tokens
 
-`navigation.header`, `panel`, `brand`, `item`, `side`, `selector`, `skipLink`, `backdrop` and
-`transition` form one component-level contract. They cover material, structure, active/focus state,
-selector containment and shell layering without adding tokens for nonexistent Tabs, Breadcrumbs or
-Pagination.
+`navigation.header`, `panel`, `brand`, `item`, `side`, `selector`, `skipLink`, `backdrop`, `motion`
+and compatibility `transition` aliases form one component-level contract. They cover material,
+structure, active/focus/pressed state, selector containment, interaction timing and shell layering
+without adding tokens for nonexistent Tabs, Breadcrumbs or Pagination.
 
 ## 21. Light, dark and system
 
@@ -143,9 +143,10 @@ therefore retain contrast, boundaries, active state and focus without JavaScript
 
 ## 23. Reduced motion
 
-Reduced motion removes item color transitions and the Showcase mobile Sidebar transform transition.
-Open/closed state, visibility, focus and active indicators remain explicit. Blur and
-`backdrop-filter` are never animated.
+Reduced motion removes pressed scale, selector-thumb travel, active-indicator growth and the
+Showcase mobile Sidebar transition. Short semantic color and boundary changes, open/closed state,
+visibility, focus and active indicators remain explicit. Blur and `backdrop-filter` are never
+animated.
 
 ## 24. Forced colors
 
@@ -199,3 +200,11 @@ language changes preserve the equivalent page.
 Feedback Components should define status and announcement semantics independently of Navigation.
 Toasts or banners must not compete with the Header z-index, trap focus, reuse navigation active
 state, or introduce a global overlay before the dedicated Overlay work.
+
+The compatible PR 28.1 art-direction layer is documented in
+[Navigation Material Refinement](navigation-material-refinement.md). It preserves every architecture
+and behavior decision in this document.
+
+The compatible PR 28.2 interaction layer is documented in
+[Navigation Motion](navigation-motion.md). It adds CSS-only continuity without changing routing,
+DOM, public APIs, SSR or Header material behavior.

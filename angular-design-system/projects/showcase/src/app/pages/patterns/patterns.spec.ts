@@ -42,8 +42,16 @@ describe('PatternsPage', () => {
     expect(element.querySelector('gh-contact-callout')).not.toBeNull();
     expect(
       element.querySelector('[data-testid="patterns-navigation-guidance"]')?.textContent,
-    ).toContain('Tabs, Breadcrumbs and Pagination are not current Design System components');
+    ).toContain('One Header filter');
     expect(element.querySelector('gh-navigation a[aria-current="page"]')).not.toBeNull();
+    expect(element.querySelector('.pattern-language-selector')).not.toBeNull();
+    expect(element.querySelector('gh-ambient-background[data-preset="brand"]')).not.toBeNull();
+    expect(
+      element.querySelector('[data-testid="patterns-navigation-motion-guidelines"]')?.textContent,
+    ).toContain('Pressed');
+    expect(
+      element.querySelector('[data-testid="patterns-navigation-motion-guidelines"]')?.textContent,
+    ).toContain('Selector');
   });
 
   it('renders the composed landing with public primitives and components', () => {

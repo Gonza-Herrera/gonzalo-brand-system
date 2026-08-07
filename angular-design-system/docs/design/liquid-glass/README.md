@@ -6,8 +6,10 @@ Glass phase. It defines the language before tokens, primitives, components, or p
 PR 21 established the documentation-only direction, PR 22 added the token contract, PR 23 provides
 the reference Surface primitives, PR 24 provides controlled ambient backgrounds, PR 25 migrated
 actions, PR 26 migrates the existing Card family, PR 27 provides the native Form Control
-foundation, and PR 28 migrates Navigation and its real shells. Hero's existing `glass` variant
-still predates this language and is not a reference implementation until its dedicated migration.
+foundation, PR 28 migrates Navigation and its real shells, and PR 28.1 refines Navigation material
+without changing its architecture. PR 28.2 adds restrained CSS-only Navigation motion while keeping
+the Header, routing and SSR behavior stable. Hero's existing `glass` variant still predates this
+language and is not a reference implementation until its dedicated migration.
 
 ## Reference map
 
@@ -35,6 +37,10 @@ still predates this language and is not a reference implementation until its ded
     Forms compatibility, fallbacks, accessibility, performance, and migration guidance.
 17. [Navigation](navigation.md) — global and local navigation boundaries, Header and mobile
     materials, active/focus behavior, selectors, Skip Link, SSR, performance, and migration notes.
+18. [Navigation material refinement](navigation-material-refinement.md) — floating geometry,
+    layered light, boundaries, shadows, selectors, fallbacks, comparison and PR 28.2 guidance.
+19. [Navigation motion](navigation-motion.md) — philosophy, timing, easing, hover, pressed, focus,
+    active continuity, selector thumbs, reduced motion, forced colors and performance.
 
 ## How to use these documents
 

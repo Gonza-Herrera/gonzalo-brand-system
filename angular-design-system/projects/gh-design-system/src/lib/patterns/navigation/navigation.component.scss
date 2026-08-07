@@ -8,19 +8,24 @@
 
 .gh-navigation {
   z-index: var(--gh-navigation-header-z-index);
-  border-bottom: var(--gh-navigation-header-border-width) solid
-    var(--gh-navigation-header-border-color);
-  background: var(--gh-navigation-header-fallback-background);
+  width: calc(100% - (var(--gh-navigation-header-inset-inline) * 2));
+  max-width: var(--gh-navigation-header-max-width);
+  margin-block-start: var(--gh-navigation-header-inset-block-start);
+  margin-inline: auto;
+  border: var(--gh-navigation-header-border-width) solid var(--gh-navigation-header-border-color);
+  border-radius: var(--gh-navigation-header-radius);
+  background: var(--gh-navigation-header-fallback-material-background);
   color: var(--gh-navigation-header-foreground);
   box-shadow: var(--gh-navigation-header-shadow), var(--gh-navigation-header-inner-shadow);
 }
 
 .gh-navigation--sticky {
   position: sticky;
-  top: 0;
+  top: var(--gh-navigation-header-inset-block-start);
 }
 
 .gh-navigation--transparent {
+  border-color: transparent;
   background: transparent;
   box-shadow: none;
 }
@@ -58,7 +63,9 @@
   font-size: var(--gh-navigation-brand-font-size);
   font-weight: var(--gh-navigation-brand-font-weight);
   overflow-wrap: anywhere;
-  transition: color var(--gh-navigation-transition-duration) var(--gh-navigation-transition-easing);
+  transition:
+    color var(--gh-navigation-motion-duration-fast) var(--gh-navigation-motion-easing-standard),
+    opacity var(--gh-navigation-motion-duration-fast) var(--gh-navigation-motion-easing-standard);
 
   &:hover {
     color: var(--gh-navigation-brand-hover-foreground);
@@ -91,7 +98,7 @@
   padding: var(--gh-navigation-panel-padding-block) var(--gh-navigation-panel-padding-inline);
   border: var(--gh-navigation-panel-border-width) solid var(--gh-navigation-panel-border-color);
   border-radius: var(--gh-navigation-panel-radius);
-  background: var(--gh-navigation-panel-fallback-background);
+  background: var(--gh-navigation-panel-fallback-material-background);
   color: var(--gh-navigation-panel-foreground);
   box-shadow: var(--gh-navigation-panel-shadow), var(--gh-navigation-panel-inner-shadow);
 }
@@ -114,17 +121,35 @@
   border: var(--gh-navigation-item-border-width) solid var(--gh-navigation-item-border-color);
   background: var(--gh-navigation-item-background);
   color: var(--gh-navigation-item-foreground);
+  box-shadow: var(--gh-navigation-item-shadow);
   font-size: var(--gh-navigation-item-font-size);
   font-weight: var(--gh-navigation-item-font-weight);
+  opacity: var(--gh-navigation-motion-opacity-rest);
   transition:
-    background-color var(--gh-navigation-transition-duration) var(--gh-navigation-transition-easing),
-    border-color var(--gh-navigation-transition-duration) var(--gh-navigation-transition-easing),
-    color var(--gh-navigation-transition-duration) var(--gh-navigation-transition-easing);
+    background-color var(--gh-navigation-motion-duration-normal)
+      var(--gh-navigation-motion-easing-standard),
+    border-color var(--gh-navigation-motion-duration-normal)
+      var(--gh-navigation-motion-easing-standard),
+    box-shadow var(--gh-navigation-motion-duration-normal)
+      var(--gh-navigation-motion-easing-standard),
+    color var(--gh-navigation-motion-duration-fast) var(--gh-navigation-motion-easing-standard),
+    opacity var(--gh-navigation-motion-duration-fast) var(--gh-navigation-motion-easing-standard),
+    transform var(--gh-navigation-motion-duration-fast)
+      var(--gh-navigation-motion-easing-emphasized);
 
   &:hover {
     border-color: var(--gh-navigation-item-hover-border-color);
     background: var(--gh-navigation-item-hover-background);
     color: var(--gh-navigation-item-hover-foreground);
+    box-shadow: var(--gh-navigation-item-hover-shadow);
+    opacity: var(--gh-navigation-motion-opacity-hover);
+  }
+
+  &:focus-visible {
+    border-color: var(--gh-navigation-item-hover-border-color);
+    background: var(--gh-navigation-item-hover-background);
+    color: var(--gh-navigation-item-hover-foreground);
+    opacity: var(--gh-navigation-motion-opacity-hover);
   }
 }
 
@@ -133,9 +158,19 @@
   background: var(--gh-navigation-item-active-background);
   color: var(--gh-navigation-item-active-foreground);
   font-weight: var(--gh-navigation-item-active-font-weight);
+  box-shadow: var(--gh-navigation-item-active-shadow);
+  opacity: var(--gh-navigation-motion-opacity-hover);
 }
 
-.gh-navigation__link--active::after {
+.gh-navigation__link:active {
+  border-color: var(--gh-navigation-item-pressed-border-color);
+  background: var(--gh-navigation-item-pressed-background);
+  color: var(--gh-navigation-item-pressed-foreground);
+  box-shadow: var(--gh-navigation-item-pressed-shadow);
+  transform: scale(var(--gh-navigation-motion-scale-pressed));
+}
+
+.gh-navigation__link::after {
   position: absolute;
   inset-block: var(--gh-navigation-item-padding-block);
   inset-inline-start: 0;
@@ -143,6 +178,18 @@
   border-radius: var(--gh-navigation-item-radius);
   background: var(--gh-navigation-item-active-indicator);
   content: '';
+  opacity: 0;
+  transform: scaleY(0);
+  transform-origin: center;
+  transition:
+    opacity var(--gh-navigation-motion-duration-fast) var(--gh-navigation-motion-easing-standard),
+    transform var(--gh-navigation-motion-duration-slow)
+      var(--gh-navigation-motion-easing-emphasized);
+}
+
+.gh-navigation__link--active::after {
+  opacity: 1;
+  transform: scaleY(1);
 }
 
 .gh-navigation__actions:empty,
@@ -164,13 +211,13 @@
 
 @supports ((backdrop-filter: none) or (-webkit-backdrop-filter: none)) {
   .gh-navigation:not(.gh-navigation--transparent) {
-    background: var(--gh-navigation-header-background);
+    background: var(--gh-navigation-header-material-background);
     backdrop-filter: var(--gh-navigation-header-backdrop-filter);
     -webkit-backdrop-filter: var(--gh-navigation-header-backdrop-filter);
   }
 
   .gh-navigation__panel--open {
-    background: var(--gh-navigation-panel-background);
+    background: var(--gh-navigation-panel-material-background);
     backdrop-filter: var(--gh-navigation-panel-backdrop-filter);
     -webkit-backdrop-filter: var(--gh-navigation-panel-backdrop-filter);
   }
@@ -207,18 +254,41 @@
     align-items: center;
   }
 
-  .gh-navigation__link--active::after {
+  .gh-navigation__link::after {
     inset-block: auto 0;
     inset-inline: var(--gh-navigation-item-padding-inline);
     width: auto;
     height: var(--gh-navigation-item-active-indicator-width);
+    transform: scaleX(0);
+    transform-origin: center;
+  }
+
+  .gh-navigation__link--active::after {
+    transform: scaleX(1);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .gh-navigation__brand,
   .gh-navigation__link {
+    transition:
+      background-color var(--gh-navigation-motion-duration-fast)
+        var(--gh-navigation-motion-easing-standard),
+      border-color var(--gh-navigation-motion-duration-fast)
+        var(--gh-navigation-motion-easing-standard),
+      color var(--gh-navigation-motion-duration-fast) var(--gh-navigation-motion-easing-standard);
+  }
+
+  .gh-navigation__link,
+  .gh-navigation__link:active {
+    opacity: 1;
+    transform: none;
+  }
+
+  .gh-navigation__link::after,
+  .gh-navigation__link--active::after {
     transition: none;
+    transform: none;
   }
 }
 
@@ -245,5 +315,14 @@
   .gh-navigation__brand:focus-visible,
   .gh-navigation__link:focus-visible {
     outline-color: Highlight;
+  }
+
+  .gh-navigation__brand,
+  .gh-navigation__link,
+  .gh-navigation__link:active,
+  .gh-navigation__link::after {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }
