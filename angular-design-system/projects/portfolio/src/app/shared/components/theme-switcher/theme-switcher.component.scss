@@ -12,8 +12,10 @@
   font-size: var(--gh-font-size-caption);
   font-weight: var(--gh-font-weight-semibold);
   transition:
-    border-color var(--gh-navigation-transition-duration) var(--gh-navigation-transition-easing),
-    box-shadow var(--gh-navigation-transition-duration) var(--gh-navigation-transition-easing);
+    border-color var(--gh-navigation-motion-duration-normal)
+      var(--gh-navigation-motion-easing-standard),
+    box-shadow var(--gh-navigation-motion-duration-normal)
+      var(--gh-navigation-motion-easing-standard);
 }
 
 .theme-switcher:focus-within {
@@ -31,6 +33,37 @@
     var(--gh-navigation-selector-item-active-inner-shadow);
   color: var(--gh-navigation-selector-item-active-foreground);
   font-size: inherit;
+  transition:
+    background-color var(--gh-navigation-motion-duration-slow)
+      var(--gh-navigation-motion-easing-standard),
+    border-color var(--gh-navigation-motion-duration-normal)
+      var(--gh-navigation-motion-easing-standard),
+    box-shadow var(--gh-navigation-motion-duration-slow) var(--gh-navigation-motion-easing-standard),
+    color var(--gh-navigation-motion-duration-fast) var(--gh-navigation-motion-easing-standard),
+    transform var(--gh-navigation-motion-duration-fast)
+      var(--gh-navigation-motion-easing-emphasized);
+}
+
+.gh-select:hover {
+  background: var(--gh-navigation-selector-item-hover-background);
+  color: var(--gh-navigation-selector-item-hover-foreground);
+}
+
+.gh-select:focus-visible {
+  border-color: var(--gh-navigation-selector-item-active-border-color);
+  background: var(--gh-navigation-selector-item-active-background);
+  outline: var(--gh-navigation-item-focus-ring-width) solid
+    var(--gh-navigation-item-focus-ring-color);
+  outline-offset: var(--gh-navigation-item-focus-ring-offset);
+  box-shadow:
+    var(--gh-navigation-selector-item-active-shadow),
+    var(--gh-navigation-selector-item-active-inner-shadow);
+}
+
+.gh-select:active {
+  background: var(--gh-navigation-selector-item-pressed-background);
+  box-shadow: var(--gh-navigation-selector-item-pressed-shadow);
+  transform: scale(var(--gh-navigation-motion-scale-pressed));
 }
 
 @supports ((backdrop-filter: none) or (-webkit-backdrop-filter: none)) {
@@ -40,8 +73,18 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .theme-switcher {
-    transition: none;
+  .gh-select {
+    transition:
+      background-color var(--gh-navigation-motion-duration-fast)
+        var(--gh-navigation-motion-easing-standard),
+      border-color var(--gh-navigation-motion-duration-fast)
+        var(--gh-navigation-motion-easing-standard),
+      color var(--gh-navigation-motion-duration-fast) var(--gh-navigation-motion-easing-standard);
+  }
+
+  .gh-select,
+  .gh-select:active {
+    transform: none;
   }
 }
 
@@ -52,6 +95,8 @@
     background: Canvas;
     color: CanvasText;
     box-shadow: none;
+    transform: none;
+    transition: none;
   }
 
   .theme-switcher:focus-within {
