@@ -208,3 +208,8 @@ and behavior decision in this document.
 The compatible PR 28.2 interaction layer is documented in
 [Navigation Motion](navigation-motion.md). It adds CSS-only continuity without changing routing,
 DOM, public APIs, SSR or Header material behavior.
+
+The final correction-only review is documented in
+[Navigation Polish and QA](navigation-polish.md). It records measured Showcase corrections,
+responsive and accessibility QA, browser coverage and remaining limitations without changing the
+public Navigation contract.

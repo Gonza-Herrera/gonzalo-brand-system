@@ -23,12 +23,16 @@ const [
   showcaseTemplate,
   showcaseSidebar,
   showcaseHeader,
+  showcaseShell,
+  showcaseThemeToggle,
+  storybookPreview,
   portfolioTemplate,
   portfolioLanguage,
   portfolioTheme,
   documentation,
   refinementDocumentation,
   motionDocumentation,
+  polishDocumentation,
 ] = await Promise.all([
   readFile(path.join(libraryRoot, 'lib/patterns/navigation/navigation.component.ts'), 'utf8'),
   readFile(path.join(libraryRoot, 'lib/patterns/navigation/navigation.component.html'), 'utf8'),
@@ -61,6 +65,18 @@ const [
     'utf8',
   ),
   readFile(
+    path.join(workspaceRoot, 'projects/showcase/src/app/layout/showcase-shell/showcase-shell.scss'),
+    'utf8',
+  ),
+  readFile(
+    path.join(
+      workspaceRoot,
+      'projects/showcase/src/app/shared/components/theme-toggle/theme-toggle.scss',
+    ),
+    'utf8',
+  ),
+  readFile(path.join(workspaceRoot, '.storybook/preview.ts'), 'utf8'),
+  readFile(
     path.join(
       workspaceRoot,
       'projects/portfolio/src/app/layout/portfolio-shell/portfolio-shell.component.html',
@@ -87,6 +103,7 @@ const [
     'utf8',
   ),
   readFile(path.join(workspaceRoot, 'docs/design/liquid-glass/navigation-motion.md'), 'utf8'),
+  readFile(path.join(workspaceRoot, 'docs/design/liquid-glass/navigation-polish.md'), 'utf8'),
 ]);
 
 test('preserves the Navigation selector, public inputs, output and item type', () => {
@@ -247,8 +264,8 @@ test('publishes every Navigation token in generated light and dark themes', () =
 test('migrates real Showcase and Portfolio navigation consumers', () => {
   assert.match(showcaseTemplate, /Refined material anatomy/);
   assert.match(showcaseTemplate, /One Header filter/);
-  assert.match(showcaseTemplate, /Navigation · Motion Guidelines/);
-  assert.match(showcaseTemplate, /patterns-navigation-motion-guidelines/);
+  assert.match(showcaseTemplate, /Hover, pressed, focus and active states/);
+  assert.doesNotMatch(showcaseTemplate, /patterns-navigation-motion-guidelines/);
   assert.match(showcaseSidebar, /--gh-navigation-side-/);
   assert.match(showcaseSidebar, /--gh-navigation-item-active-/);
   assert.match(showcaseHeader, /--gh-navigation-header-fallback-material-background/);
@@ -266,22 +283,16 @@ test('migrates real Showcase and Portfolio navigation consumers', () => {
 test('documents the existing Navigation family without parallel local-navigation APIs', () => {
   assert.match(stories, /title:\s*'Patterns\/Navigation'/);
   assert.match(stories, /'pr28-navigation'/);
+  assert.match(stories, /'pr28-3-navigation-polish'/);
   for (const story of [
-    'Default',
-    'Sticky',
-    'LightTheme',
-    'DarkTheme',
-    'AmbientBackground',
-    'ActiveRoute',
+    'Playground',
     'WithProjectedControls',
     'LongEnglishAndSpanishLabels',
-    'NavigationItemFocus',
     'MobileClosed',
     'MobileOpen',
     'MobileEscapeRestoresFocus',
     'MobileRouteSelectionCloses',
     'DarkMobileOpen',
-    'ReducedMotionAndForcedColors',
     'HeaderMaterialLight',
     'HeaderMaterialDark',
     'AmbientBrand',
@@ -290,6 +301,22 @@ test('documents the existing Navigation family without parallel local-navigation
     'HoverNavigationItem',
     'PressedNavigationItem',
     'FocusNavigationItem',
+    'LanguageAndThemeSelectors',
+    'Mobile320',
+    'Desktop1024',
+    'Desktop1440',
+    'UltraWide1920',
+  ]) {
+    assert.match(stories, new RegExp(`export const ${story}:`));
+  }
+  for (const duplicate of [
+    'Default',
+    'Sticky',
+    'LightTheme',
+    'DarkTheme',
+    'AmbientBackground',
+    'ActiveRoute',
+    'NavigationItemFocus',
     'NavigationMotion',
     'Hover',
     'Pressed',
@@ -299,13 +326,39 @@ test('documents the existing Navigation family without parallel local-navigation
     'NavigationMaterialComparison',
     'SolidFallbackDocumentation',
     'MobileNavigationMaterial',
-    'Mobile320',
-    'Desktop1440',
+    'ReducedMotionAndForcedColors',
     'ReducedMotion',
   ]) {
-    assert.match(stories, new RegExp(`export const ${story}:`));
+    assert.doesNotMatch(stories, new RegExp(`export const ${duplicate}:`));
   }
   assert.doesNotMatch(publicApi, /tabs|breadcrumbs|pagination/i);
+});
+
+test('polishes the real Showcase navigation without changing public behavior', () => {
+  assert.match(showcaseHeader, /:host\s*{[\s\S]*position:\s*sticky/);
+  assert.match(showcaseHeader, /padding-block:\s*0/);
+  assert.match(showcaseHeader, /width:\s*var\(--gh-navigation-brand-min-height\)/);
+  assert.doesNotMatch(showcaseHeader, /align-items:\s*flex-start/);
+  assert.match(
+    showcaseShell,
+    /navigation-header-min-height\)[\s\S]*navigation-header-inset-block-start/,
+  );
+  assert.match(showcaseShell, /\.skip-link[\s\S]*&:focus-visible/);
+  assert.match(showcaseThemeToggle, /min-height:\s*var\(--gh-navigation-item-min-height\)/);
+  assert.match(showcaseSidebar, /a span[\s\S]*--gh-navigation-item-font-weight/);
+  assert.match(showcaseSidebar, /a\.is-active span[\s\S]*--gh-navigation-item-active-font-weight/);
+  for (const viewport of [
+    'mobile320',
+    'mobile375',
+    'mobile390',
+    'tablet768',
+    'desktop1024',
+    'desktop1280',
+    'desktop1440',
+    'desktop1920',
+  ]) {
+    assert.match(storybookPreview, new RegExp(`${viewport}:`));
+  }
 });
 
 test('provides every required Liquid Glass Navigation documentation section', () => {
@@ -349,6 +402,24 @@ test('documents the complete Navigation motion contract', () => {
   assert.match(motionDocumentation, /CSS-only/);
   assert.match(motionDocumentation, /transition: all/);
   assert.match(motionDocumentation, /requestAnimationFrame/);
+});
+
+test('documents the complete Navigation polish and QA review', () => {
+  for (const section of [
+    'QA checklist',
+    'Visual checklist',
+    'Browser review',
+    'Responsive review',
+    'Accessibility review',
+    'Performance review',
+    'Remaining observations',
+    'Final approval notes',
+  ]) {
+    assert.match(polishDocumentation, new RegExp(`## ${section}`));
+  }
+  assert.match(polishDocumentation, /320 px/);
+  assert.match(polishDocumentation, /400%/);
+  assert.match(polishDocumentation, /Chromium/);
 });
 
 test('keeps focused unit coverage for active state, disclosure, Escape and interception', () => {

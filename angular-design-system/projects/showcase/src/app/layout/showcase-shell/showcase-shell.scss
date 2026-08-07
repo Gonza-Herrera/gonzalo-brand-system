@@ -1,5 +1,7 @@
 :host {
-  --showcase-header-height: calc(var(--gh-navigation-header-min-height) + var(--gh-space-md));
+  --showcase-header-height: calc(
+    var(--gh-navigation-header-min-height) + var(--gh-navigation-header-inset-block-start)
+  );
   display: block;
   min-height: 100dvh;
   overflow-x: clip;
@@ -23,7 +25,7 @@
   text-decoration: none;
   transform: translateY(calc(-100% - var(--gh-space-lg)));
 
-  &:focus {
+  &:focus-visible {
     transform: translateY(0);
     outline: var(--gh-navigation-skip-link-focus-ring-width) solid
       var(--gh-navigation-skip-link-focus-ring-color);
@@ -81,7 +83,7 @@ main {
     background: CanvasText;
     color: Canvas;
 
-    &:focus {
+    &:focus-visible {
       outline-color: Highlight;
     }
   }

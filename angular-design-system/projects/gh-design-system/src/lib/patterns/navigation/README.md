@@ -103,6 +103,10 @@ the focus outline. Forced colors removes decorative transitions entirely. Do not
 See [Navigation Motion](../../../../../../docs/design/liquid-glass/navigation-motion.md) for the full
 interaction contract.
 
+See [Navigation Polish and QA](../../../../../../docs/design/liquid-glass/navigation-polish.md) for
+the final measured Showcase corrections, responsive matrix, accessibility review and browser
+coverage boundaries.
+
 When more than one Navigation exists on a page, pass a unique, stable `menuId`. This avoids duplicate IDs and remains deterministic for SSR.
 
 ## Internationalization and SSR

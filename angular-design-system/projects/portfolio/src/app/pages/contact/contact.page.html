@@ -88,7 +88,7 @@
       <gh-card variant="outlined" padding="lg" radius="lg">
         <div ghCardContent class="contact-privacy">
           <ul>
-            @for (detail of content().privacy.details; track detail) {
+            @for (detail of content().privacy.details; track $index) {
               <li>{{ detail }}</li>
             }
           </ul>
