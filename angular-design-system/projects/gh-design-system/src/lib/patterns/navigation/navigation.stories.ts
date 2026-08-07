@@ -277,7 +277,13 @@ function ambientStory(preset: 'brand' | 'subtle', menuId: string): Story {
 const meta: Meta<GhNavigationComponent> = {
   title: 'Patterns/Navigation',
   component: GhNavigationComponent,
-  tags: ['autodocs', 'pr28-navigation', 'pr28-1-navigation-material', 'pr28-2-navigation-motion'],
+  tags: [
+    'autodocs',
+    'pr28-navigation',
+    'pr28-1-navigation-material',
+    'pr28-2-navigation-motion',
+    'pr28-3-navigation-polish',
+  ],
   decorators: [
     moduleMetadata({
       imports: [
@@ -293,7 +299,7 @@ const meta: Meta<GhNavigationComponent> = {
     docs: {
       description: {
         component:
-          'Responsive global navigation with a floating multi-layer Liquid Glass header, an elevated mobile panel, solid fallbacks, native links, a lightweight structural active state and keyboard-safe dismissal. Tabs, Breadcrumbs and Pagination are not public components in the current library.',
+          'Responsive global navigation with a floating multi-layer Liquid Glass header, an elevated mobile panel, solid and forced-colors fallbacks, reduced-motion handling, native links, a lightweight structural active state and keyboard-safe dismissal. Tabs, Breadcrumbs and Pagination are not public components in the current library.',
       },
     },
   },
@@ -328,18 +334,25 @@ export default meta;
 type Story = StoryObj<GhNavigationComponent>;
 
 export const Playground: Story = {};
-export const Default: Story = {};
-export const Sticky: Story = { args: { sticky: true } };
-export const LightTheme: Story = { globals: { theme: 'light' } };
-export const DarkTheme: Story = { globals: { theme: 'dark' } };
 export const HeaderMaterialLight: Story = { globals: { theme: 'light' } };
 export const HeaderMaterialDark: Story = { globals: { theme: 'dark' } };
-export const ActiveRoute: Story = {};
-export const ActiveNavigationItem: Story = {};
-export const ExternalLinks: Story = {};
+export const ActiveNavigationItem: Story = {
+  play: async ({ canvas }) => {
+    await expect(canvas.getByRole('link', { name: 'Work' })).toHaveAttribute(
+      'aria-current',
+      'page',
+    );
+  },
+};
+export const ExternalLinks: Story = {
+  play: async ({ canvas }) => {
+    const externalLink = canvas.getByRole('link', { name: /GitHub/ });
+    await expect(externalLink).toHaveAttribute('target', '_blank');
+    await expect(externalLink).toHaveAttribute('rel', 'noopener noreferrer');
+  },
+};
 export const Transparent: Story = { args: { transparent: true, sticky: false } };
 
-export const AmbientBackground: Story = ambientStory('brand', 'ambient-navigation-menu');
 export const AmbientBrand: Story = ambientStory('brand', 'ambient-brand-navigation-menu');
 export const AmbientSubtle: Story = ambientStory('subtle', 'ambient-subtle-navigation-menu');
 
@@ -373,14 +386,9 @@ export const LongEnglishAndSpanishLabels: Story = {
     navigationLabel: 'Navegación principal del portfolio',
   },
   globals: { viewport: { value: 'tablet768', isRotated: false } },
-};
-
-export const NavigationItemFocus: Story = {
   play: async ({ canvas }) => {
-    const activeLink = canvas.getByRole('link', { name: 'Work' });
-    activeLink.focus();
-    await expect(activeLink).toHaveFocus();
-    await expect(activeLink).toHaveAttribute('aria-current', 'page');
+    await userEvent.click(canvas.getByRole('button', { name: 'Open navigation menu' }));
+    await expect(canvas.getByRole('link', { name: 'Proyectos y casos de estudio' })).toBeVisible();
   },
 };
 
@@ -399,64 +407,22 @@ export const PressedNavigationItem: Story = {
   },
 };
 
-export const FocusNavigationItem: Story = NavigationItemFocus;
-
-export const NavigationMotion: Story = {
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'Motion reference for restrained hover light, pressed compression, active-indicator continuity and immediate visible focus. The Header material itself remains stable.',
-      },
-    },
+export const FocusNavigationItem: Story = {
+  play: async ({ canvas }) => {
+    const activeLink = canvas.getByRole('link', { name: 'Work' });
+    activeLink.focus();
+    await expect(activeLink).toHaveFocus();
+    await expect(activeLink).toHaveAttribute('aria-current', 'page');
   },
 };
 
-export const Hover: Story = HoverNavigationItem;
-export const Pressed: Story = PressedNavigationItem;
-export const Focus: Story = FocusNavigationItem;
-
-export const LanguageSelector: Story = {
+export const LanguageAndThemeSelectors: Story = {
   render: () => ({ template: '<gh-navigation-selectors-story />' }),
   parameters: {
     docs: {
       description: {
         story:
-          'Visual projection reference for the EN/ES segmented material. Portfolio retains the real localized Router links and locale behavior.',
-      },
-    },
-  },
-};
-
-export const ThemeSelector: Story = {
-  ...LanguageSelector,
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'Visual projection reference for the native Theme select integrated with the Header material. The production Theme Service and persistence remain unchanged.',
-      },
-    },
-  },
-};
-
-export const NavigationMaterialComparison: Story = {
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'PR 28 used a full-width single-layer Glass strip and a bordered selected item. PR 28.1 keeps the same component while introducing floating geometry, restrained multi-layer reflections, a softer outer boundary and a fine active indicator. No legacy production style is retained for comparison.',
-      },
-    },
-  },
-};
-
-export const SolidFallbackDocumentation: Story = {
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'When backdrop filtering is unsupported, the same bounded geometry, reflections, borders and shadows are painted over an opaque semantic fallback without JavaScript detection.',
+          'Visual projection reference for the EN/ES segmented material and native Theme select. Portfolio retains the real localized Router links, Theme Service and persistence.',
       },
     },
   },
@@ -515,35 +481,19 @@ export const DarkMobileOpen: Story = {
   play: MobileOpen.play,
 };
 
-export const MobileNavigationMaterial: Story = MobileOpen;
-
 export const Mobile320: Story = {
   globals: { viewport: { value: 'mobile320', isRotated: false } },
   play: MobileOpen.play,
+};
+
+export const Desktop1024: Story = {
+  globals: { viewport: { value: 'desktop1024', isRotated: false } },
 };
 
 export const Desktop1440: Story = {
   globals: { viewport: { value: 'desktop1440', isRotated: false } },
 };
 
-export const ReducedMotionAndForcedColors: Story = {
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'CSS removes decorative transitions for reduced motion and neutralizes Glass with system colors in forced-colors mode; focus and active indicators remain structural.',
-      },
-    },
-  },
-};
-
-export const ReducedMotion: Story = {
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'With prefers-reduced-motion, scale and indicator travel are removed while immediate focus and semantic color changes remain available.',
-      },
-    },
-  },
+export const UltraWide1920: Story = {
+  globals: { viewport: { value: 'desktop1920', isRotated: false } },
 };

@@ -120,13 +120,16 @@
   }
 
   a span {
+    font-weight: var(--gh-navigation-item-font-weight);
+  }
+
+  a.is-active span {
     font-weight: var(--gh-navigation-item-active-font-weight);
   }
 
   a small {
-    color: inherit;
+    color: var(--gh-navigation-side-muted-foreground);
     font-size: var(--gh-font-size-caption);
-    opacity: 0.78;
   }
 }
 

@@ -149,4 +149,21 @@ describe('ContactPage', () => {
       ),
     ).toEqual(['/es/experience', '/es/projects', '/es/content']);
   });
+
+  it('updates localized privacy details without recreating their list items', () => {
+    const localeService = TestBed.inject(PortfolioLocaleService);
+    const fixture = TestBed.createComponent(ContactPage);
+    fixture.detectChanges();
+
+    const element = fixture.nativeElement as HTMLElement;
+    const englishItems = [...element.querySelectorAll('#contact-privacy li')];
+
+    localeService.activateLocale('es');
+    fixture.detectChanges();
+
+    const spanishItems = [...element.querySelectorAll('#contact-privacy li')];
+    expect(spanishItems).toHaveLength(englishItems.length);
+    expect(spanishItems.every((item, index) => item === englishItems[index])).toBe(true);
+    expect(spanishItems[0]?.textContent).toContain('Evita incluir información confidencial');
+  });
 });

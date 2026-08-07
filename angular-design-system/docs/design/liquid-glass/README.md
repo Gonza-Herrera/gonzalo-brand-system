@@ -46,6 +46,8 @@ dedicated migration.
 20. [Floating layout integration](floating-layout.md) — measured diagnosis, layout hierarchy,
     background ownership, Header and Hero integration, safe areas, responsive behavior, SSR and
     performance.
+21. [Navigation polish and QA](navigation-polish.md) — final visual, responsive, accessibility and
+    production-quality review.
 
 ## How to use these documents
 

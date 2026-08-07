@@ -47,11 +47,14 @@ describe('PatternsPage', () => {
     expect(element.querySelector('.pattern-language-selector')).not.toBeNull();
     expect(element.querySelector('gh-ambient-background[data-preset="brand"]')).not.toBeNull();
     expect(
-      element.querySelector('[data-testid="patterns-navigation-motion-guidelines"]')?.textContent,
-    ).toContain('Pressed');
+      element.querySelector('[data-testid="patterns-navigation-guidance"]')?.textContent,
+    ).toContain('pressed');
     expect(
-      element.querySelector('[data-testid="patterns-navigation-motion-guidelines"]')?.textContent,
-    ).toContain('Selector');
+      element.querySelector('[data-testid="patterns-navigation-guidance"]')?.textContent,
+    ).toContain('focus');
+    expect(
+      element.querySelector('[data-testid="patterns-navigation-motion-guidelines"]'),
+    ).toBeNull();
   });
 
   it('renders the composed landing with public primitives and components', () => {

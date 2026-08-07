@@ -54,9 +54,12 @@ const preview: Preview = {
       options: {
         mobile320: { name: 'Mobile 320', styles: { width: '320px', height: '800px' } },
         mobile375: { name: 'Mobile 375', styles: { width: '375px', height: '812px' } },
+        mobile390: { name: 'Mobile 390', styles: { width: '390px', height: '844px' } },
         tablet768: { name: 'Tablet 768', styles: { width: '768px', height: '1024px' } },
         desktop1024: { name: 'Desktop 1024', styles: { width: '1024px', height: '768px' } },
+        desktop1280: { name: 'Desktop 1280', styles: { width: '1280px', height: '800px' } },
         desktop1440: { name: 'Desktop 1440', styles: { width: '1440px', height: '900px' } },
+        desktop1920: { name: 'Desktop 1920', styles: { width: '1920px', height: '1080px' } },
       },
     },
   },
