@@ -5,7 +5,8 @@ Glass phase. It defines the language before tokens, primitives, components, or p
 
 PR 21 established the documentation-only direction, PR 22 added the token contract, PR 23 provides
 the reference Surface primitives, PR 24 provides controlled ambient backgrounds, PR 25 migrated
-actions, PR 26 migrates the existing Card family, PR 27 provides the native Form Control
+actions, PR 26 migrates the existing Card family, PR 26.1 refines its suspended Glass material,
+PR 27 provides the native Form Control
 foundation, PR 28 migrates Navigation and its real shells, and PR 28.1 refines Navigation material
 without changing its architecture. PR 28.2 adds restrained CSS-only Navigation motion while keeping
 the Header, routing and SSR behavior stable. PR 28.15 moves ambient ownership to the application
@@ -48,6 +49,8 @@ dedicated migration.
     performance.
 21. [Navigation polish and QA](navigation-polish.md) — final visual, responsive, accessibility and
     production-quality review.
+22. [Card material refinement](card-material.md) — transparency, blur, reflections, boundaries,
+    ambient shadows, Hero continuity, theme behavior, limitations and PR 26.2 guidance.
 
 ## How to use these documents
 

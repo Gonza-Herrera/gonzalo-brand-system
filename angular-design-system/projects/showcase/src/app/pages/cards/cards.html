@@ -9,6 +9,51 @@
   </header>
 
   <showcase-documentation-section
+    sectionId="card-material-refinement"
+    eyebrow="Material refinement"
+    title="A suspended Glass plate"
+    description="Use the Showcase theme control to compare the same Card in light and dark. Its material remains token-driven and lets the ambient background participate."
+  >
+    <gh-ambient-background
+      class="card-environment card-material-stage"
+      preset="brand"
+      intensity="default"
+    >
+      <gh-card variant="glass" padding="lg">
+        <div ghCardHeader>
+          <p class="material-label">Glass material</p>
+          <h3>Ambient continuity with physical depth</h3>
+        </div>
+        <div ghCardContent>
+          <p>
+            The surface combines controlled transparency, medium blur, quiet saturation, an
+            upper-left reflection, a faint right edge and one broad ambient shadow.
+          </p>
+        </div>
+      </gh-card>
+
+      <dl class="material-diagnostics">
+        <div>
+          <dt>Transparency</dt>
+          <dd>The ambient plane remains visible.</dd>
+        </div>
+        <div>
+          <dt>Blur</dt>
+          <dd>Static and graduated by material.</dd>
+        </div>
+        <div>
+          <dt>Reflections</dt>
+          <dd>Top, upper-left and faint right light.</dd>
+        </div>
+        <div>
+          <dt>Shadow</dt>
+          <dd>One broad, diffuse separation layer.</dd>
+        </div>
+      </dl>
+    </gh-ambient-background>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
     sectionId="base-card-materials"
     eyebrow="Material strategy"
     title="Hierarchy before translucency"

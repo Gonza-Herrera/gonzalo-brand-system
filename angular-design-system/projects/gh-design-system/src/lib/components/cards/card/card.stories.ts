@@ -3,6 +3,8 @@ import {
   GhAmbientBackgroundComponent,
   GhButtonComponent,
   GhCardComponent,
+  GhHeroComponent,
+  GhHeroVisualDirective,
   GhIconButtonComponent,
   GhSurfaceComponent,
 } from 'gh-design-system';
@@ -16,6 +18,8 @@ const meta: Meta<GhCardComponent> = {
       imports: [
         GhAmbientBackgroundComponent,
         GhButtonComponent,
+        GhHeroComponent,
+        GhHeroVisualDirective,
         GhIconButtonComponent,
         GhSurfaceComponent,
       ],
@@ -314,6 +318,68 @@ export const AmbientBrandBackground: Story = {
     template: `
       <gh-ambient-background class="gh-card-story-stage" preset="brand">
         <div class="gh-card-story-grid"><gh-card variant="subtle"><h3>Glass Subtle</h3><p>Editorial grouping.</p></gh-card><gh-card variant="glass"><h3>Glass</h3><p>Feature emphasis.</p></gh-card></div>
+      </gh-ambient-background>
+    `,
+  }),
+};
+
+export const AmbientBackground: Story = {
+  render: () => ({
+    template: `
+      <gh-ambient-background class="gh-card-story-stage" preset="brand">
+        <div class="gh-card-story-grid">
+          <gh-card variant="glass" fullHeight><h3>Ambient continuity</h3><p>Lavender, Cloud Blue and Peach remain visible through the filtered material.</p></gh-card>
+          <gh-card variant="elevated" fullHeight><h3>Ambient depth</h3><p>A broad diffuse shadow separates the plate without a hard Material-style edge.</p></gh-card>
+        </div>
+      </gh-ambient-background>
+    `,
+  }),
+};
+
+export const GlassMaterial: Story = {
+  render: () => ({
+    template: `
+      <gh-ambient-background class="gh-card-story-stage" preset="cool">
+        <gh-card variant="glass" padding="lg">
+          <div ghCardHeader><span class="gh-card-story-eyebrow">Material inspection</span><h2>Suspended Glass plate</h2></div>
+          <div ghCardContent><p>The top light, upper-left reflection, faint right edge and inner boundary are decorative CSS layers. Content remains on one semantic article.</p></div>
+        </gh-card>
+      </gh-ambient-background>
+    `,
+  }),
+};
+
+export const HeroIntegration: Story = {
+  render: () => ({
+    template: `
+      <gh-ambient-background class="gh-card-story-hero-stage" preset="brand">
+        <gh-hero
+          eyebrow="Frontend leadership · Angular · AI"
+          title="Think bigger. Build smarter."
+          description="Hero and Card share one continuous ambient plane."
+          layout="split"
+          surface="gradient"
+          minHeight="auto"
+        >
+          <gh-card ghHeroVisual variant="glass" padding="lg">
+            <div ghCardHeader><span class="gh-card-story-eyebrow">Engineering</span><h3>Frontend systems</h3></div>
+            <div ghCardContent><p>The Card modifies how the Hero background is perceived instead of hiding it.</p></div>
+          </gh-card>
+        </gh-hero>
+      </gh-ambient-background>
+    `,
+  }),
+};
+
+export const EmptyState: Story = {
+  render: () => ({
+    template: `
+      <gh-ambient-background class="gh-card-story-stage" preset="subtle">
+        <gh-card variant="subtle">
+          <div ghCardHeader><h3>No saved items</h3></div>
+          <div ghCardContent><p>Empty content keeps the same material hierarchy and readable contrast.</p></div>
+          <div ghCardFooter><gh-button variant="secondary" size="sm">Browse content</gh-button></div>
+        </gh-card>
       </gh-ambient-background>
     `,
   }),

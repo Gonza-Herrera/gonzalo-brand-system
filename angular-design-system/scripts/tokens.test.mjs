@@ -182,11 +182,36 @@ test('provides a complete theme-aware Card contract mapped to Surface materials'
       semanticTokens.get(`card.${variant}.fallbackBackground`).value,
       `{surface.${material}.fallbackBackground}`,
     );
-    assert.equal(
-      semanticTokens.get(`card.${variant}.backdropFilter`).value,
-      `{surface.${material}.backdropFilter}`,
+    assert.match(
+      String(semanticTokens.get(`card.${variant}.materialBackground`).value),
+      /linear-gradient/,
+    );
+    assert.match(
+      String(semanticTokens.get(`card.${variant}.fallbackMaterialBackground`).value),
+      /surface\./,
+    );
+    assert.match(
+      String(semanticTokens.get(`card.${variant}.reflectionBackground`).value),
+      /(?:radial|linear)-gradient/,
     );
   }
+
+  assert.equal(
+    semanticTokens.get('card.outlined.backdropFilter').value,
+    '{surface.solid.backdropFilter}',
+  );
+  assert.equal(
+    semanticTokens.get('card.subtle.backdropFilter').value,
+    'blur({glass.blur.sm}) saturate({glass.saturation.default})',
+  );
+  assert.equal(
+    semanticTokens.get('card.glass.backdropFilter').value,
+    'blur({glass.blur.md}) saturate({glass.saturation.default})',
+  );
+  assert.equal(
+    semanticTokens.get('card.elevated.backdropFilter').value,
+    'blur({glass.blur.lg}) saturate({glass.saturation.default})',
+  );
 
   assert.equal(
     semanticTokens.get('card.interactive.focus.ringColor').value,
@@ -416,6 +441,25 @@ test('serializes compound Navigation shadows without breaking generated Sass map
 
   assert.match(lightTheme, /'navigation-header-inner-shadow':\s*"inset 0 1px 0[^\n]+"/);
   assert.doesNotMatch(lightTheme, /'navigation-header-inner-shadow':\s*inset[^\n]+color-mix/);
+});
+
+test('serializes layered Card materials and compound inner borders safely', async () => {
+  const tokens = await loadAndValidateTokens();
+  const files = getGeneratedFiles(tokens);
+  const lightTheme = files.get(
+    path.join(
+      repositoryRoot,
+      'angular-design-system/projects/gh-design-system/src/lib/styles/themes/_light-theme.scss',
+    ),
+  );
+
+  for (const variant of ['outlined', 'subtle', 'glass', 'elevated']) {
+    assert.match(
+      lightTheme,
+      new RegExp(`'card-${variant}-material-background':\\s*"linear-gradient`),
+    );
+    assert.match(lightTheme, new RegExp(`'card-${variant}-inner-shadow':\\s*"inset 0 1px 0`));
+  }
 });
 
 test('keeps shared primitive durations positive and typed visual values non-empty', async () => {

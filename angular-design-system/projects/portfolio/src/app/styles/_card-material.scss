@@ -1,0 +1,57 @@
+.portfolio-card-material {
+  position: relative;
+  isolation: isolate;
+  border-color: var(--gh-card-glass-border-color);
+  border-style: solid;
+  border-width: var(--gh-card-glass-border-width);
+  background: var(--gh-card-glass-fallback-material-background);
+  box-shadow: var(--gh-card-glass-shadow);
+}
+
+.portfolio-card-material::before,
+.portfolio-card-material::after {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  border-radius: inherit;
+  content: '';
+  pointer-events: none;
+}
+
+.portfolio-card-material::before {
+  border-block-start: var(--gh-card-glass-border-width) solid var(--gh-card-glass-border-highlight);
+  box-shadow: var(--gh-card-glass-inner-shadow);
+}
+
+.portfolio-card-material::after {
+  background: var(--gh-card-glass-reflection-background);
+}
+
+.portfolio-card-material > * {
+  position: relative;
+  z-index: 1;
+}
+
+@supports ((backdrop-filter: none) or (-webkit-backdrop-filter: none)) {
+  .portfolio-card-material {
+    background: var(--gh-card-glass-material-background);
+    -webkit-backdrop-filter: var(--gh-card-glass-backdrop-filter);
+    backdrop-filter: var(--gh-card-glass-backdrop-filter);
+  }
+}
+
+@media (forced-colors: active) {
+  .portfolio-card-material {
+    border-color: ButtonBorder;
+    background: Canvas;
+    color: CanvasText;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .portfolio-card-material::before,
+  .portfolio-card-material::after {
+    display: none;
+  }
+}

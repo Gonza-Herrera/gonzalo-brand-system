@@ -1548,6 +1548,18 @@
         "$type": "color",
         "$value": "{surface.solid.fallbackBackground}"
       },
+      "materialBackground": {
+        "$type": "string",
+        "$value": "linear-gradient(180deg, color-mix(in srgb, {surface.solid.borderHighlight} 58%, transparent) 0%, transparent 34%), linear-gradient(118deg, color-mix(in srgb, {color.lavender} 4%, transparent) 0%, transparent 48%, color-mix(in srgb, {color.cloudBlue} 3%, transparent) 78%, color-mix(in srgb, {color.peach} 2%, transparent) 100%), linear-gradient(180deg, color-mix(in srgb, {surface.solid.background} 98%, {surface.solid.borderHighlight}) 0%, {surface.solid.background} 100%)"
+      },
+      "fallbackMaterialBackground": {
+        "$type": "string",
+        "$value": "linear-gradient(180deg, color-mix(in srgb, {surface.solid.borderHighlight} 58%, transparent) 0%, transparent 34%), linear-gradient(118deg, color-mix(in srgb, {color.lavender} 4%, transparent) 0%, transparent 48%, color-mix(in srgb, {color.cloudBlue} 3%, transparent) 78%, color-mix(in srgb, {color.peach} 2%, transparent) 100%), {surface.solid.fallbackBackground}"
+      },
+      "reflectionBackground": {
+        "$type": "string",
+        "$value": "radial-gradient(circle at 0% 0%, color-mix(in srgb, {surface.solid.borderHighlight} 48%, transparent) 0%, transparent 42%), linear-gradient(90deg, transparent 84%, color-mix(in srgb, {color.cloudBlue} 2%, transparent) 100%)"
+      },
       "foreground": {
         "$type": "color",
         "$value": "{surface.solid.foreground}"
@@ -1558,7 +1570,7 @@
       },
       "borderColor": {
         "$type": "color",
-        "$value": "{surface.solid.borderColor}"
+        "$value": "color-mix(in srgb, {surface.solid.borderColor} 74%, transparent)"
       },
       "borderWidth": {
         "$type": "dimension",
@@ -1566,16 +1578,27 @@
       },
       "borderHighlight": {
         "$type": "color",
-        "$value": "{surface.solid.borderHighlight}"
+        "$value": "color-mix(in srgb, {surface.solid.borderHighlight} 68%, transparent)"
+      },
+      "innerBorderColor": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {surface.solid.borderHighlight} 76%, transparent)"
+      },
+      "dividerColor": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {border.subtle} 72%, transparent)"
       },
       "backdropFilter": {
         "$type": "string",
         "$value": "{surface.solid.backdropFilter}"
       },
-      "shadow": { "$type": "shadow", "$value": "{surface.solid.shadow}" },
+      "shadow": {
+        "$type": "shadow",
+        "$value": "0 16px 48px color-mix(in srgb, {color.ink} 6%, transparent)"
+      },
       "innerShadow": {
         "$type": "shadow",
-        "$value": "{surface.solid.innerShadow}"
+        "$value": "inset 0 1px 0 {card.outlined.innerBorderColor}, inset 1px 0 0 color-mix(in srgb, {color.cloudBlue} 3%, transparent), inset 0 -1px 0 color-mix(in srgb, {text.primary} 3%, transparent)"
       }
     },
     "subtle": {
@@ -1587,6 +1610,18 @@
         "$type": "color",
         "$value": "{surface.glassSubtle.fallbackBackground}"
       },
+      "materialBackground": {
+        "$type": "string",
+        "$value": "linear-gradient(180deg, color-mix(in srgb, {surface.glassSubtle.borderHighlight} 68%, transparent) 0%, transparent 32%), linear-gradient(118deg, color-mix(in srgb, {color.lavender} 6%, transparent) 0%, transparent 46%, color-mix(in srgb, {color.cloudBlue} 5%, transparent) 76%, color-mix(in srgb, {color.peach} 3%, transparent) 100%), linear-gradient(180deg, color-mix(in srgb, {surface.glassSubtle.background} 94%, {surface.glassSubtle.borderHighlight}) 0%, color-mix(in srgb, {surface.glassSubtle.background} 94%, transparent) 100%)"
+      },
+      "fallbackMaterialBackground": {
+        "$type": "string",
+        "$value": "linear-gradient(180deg, color-mix(in srgb, {surface.glassSubtle.borderHighlight} 68%, transparent) 0%, transparent 32%), linear-gradient(118deg, color-mix(in srgb, {color.lavender} 6%, transparent) 0%, transparent 46%, color-mix(in srgb, {color.cloudBlue} 5%, transparent) 76%, color-mix(in srgb, {color.peach} 3%, transparent) 100%), {surface.glassSubtle.fallbackBackground}"
+      },
+      "reflectionBackground": {
+        "$type": "string",
+        "$value": "radial-gradient(circle at 0% 0%, color-mix(in srgb, {surface.glassSubtle.borderHighlight} 58%, transparent) 0%, transparent 42%), linear-gradient(90deg, transparent 84%, color-mix(in srgb, {color.cloudBlue} 3%, transparent) 100%)"
+      },
       "foreground": {
         "$type": "color",
         "$value": "{surface.glassSubtle.foreground}"
@@ -1597,7 +1632,7 @@
       },
       "borderColor": {
         "$type": "color",
-        "$value": "{surface.glassSubtle.borderColor}"
+        "$value": "color-mix(in srgb, {surface.glassSubtle.borderColor} 72%, transparent)"
       },
       "borderWidth": {
         "$type": "dimension",
@@ -1605,16 +1640,27 @@
       },
       "borderHighlight": {
         "$type": "color",
-        "$value": "{surface.glassSubtle.borderHighlight}"
+        "$value": "color-mix(in srgb, {surface.glassSubtle.borderHighlight} 74%, transparent)"
+      },
+      "innerBorderColor": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {surface.glassSubtle.borderHighlight} 82%, transparent)"
+      },
+      "dividerColor": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {border.subtle} 56%, transparent)"
       },
       "backdropFilter": {
         "$type": "string",
-        "$value": "{surface.glassSubtle.backdropFilter}"
+        "$value": "blur({glass.blur.sm}) saturate({glass.saturation.default})"
       },
-      "shadow": { "$type": "shadow", "$value": "{surface.glassSubtle.shadow}" },
+      "shadow": {
+        "$type": "shadow",
+        "$value": "0 20px 56px color-mix(in srgb, {color.ink} 9%, transparent)"
+      },
       "innerShadow": {
         "$type": "shadow",
-        "$value": "{surface.glassSubtle.innerShadow}"
+        "$value": "inset 0 1px 0 {card.subtle.innerBorderColor}, inset 1px 0 0 color-mix(in srgb, {color.cloudBlue} 5%, transparent), inset 0 -1px 0 color-mix(in srgb, {text.primary} 3%, transparent)"
       }
     },
     "glass": {
@@ -1626,6 +1672,18 @@
         "$type": "color",
         "$value": "{surface.glass.fallbackBackground}"
       },
+      "materialBackground": {
+        "$type": "string",
+        "$value": "linear-gradient(180deg, color-mix(in srgb, {surface.glass.borderHighlight} 72%, transparent) 0%, transparent 30%), linear-gradient(118deg, color-mix(in srgb, {color.lavender} 7%, transparent) 0%, transparent 44%, color-mix(in srgb, {color.cloudBlue} 6%, transparent) 76%, color-mix(in srgb, {color.peach} 4%, transparent) 100%), linear-gradient(180deg, color-mix(in srgb, {surface.glass.background} 94%, {surface.glass.borderHighlight}) 0%, color-mix(in srgb, {surface.glass.background} 94%, transparent) 100%)"
+      },
+      "fallbackMaterialBackground": {
+        "$type": "string",
+        "$value": "linear-gradient(180deg, color-mix(in srgb, {surface.glass.borderHighlight} 72%, transparent) 0%, transparent 30%), linear-gradient(118deg, color-mix(in srgb, {color.lavender} 7%, transparent) 0%, transparent 44%, color-mix(in srgb, {color.cloudBlue} 6%, transparent) 76%, color-mix(in srgb, {color.peach} 4%, transparent) 100%), {surface.glass.fallbackBackground}"
+      },
+      "reflectionBackground": {
+        "$type": "string",
+        "$value": "radial-gradient(circle at 0% 0%, color-mix(in srgb, {surface.glass.borderHighlight} 64%, transparent) 0%, transparent 40%), linear-gradient(90deg, transparent 84%, color-mix(in srgb, {color.cloudBlue} 4%, transparent) 100%)"
+      },
       "foreground": {
         "$type": "color",
         "$value": "{surface.glass.foreground}"
@@ -1636,7 +1694,7 @@
       },
       "borderColor": {
         "$type": "color",
-        "$value": "{surface.glass.borderColor}"
+        "$value": "color-mix(in srgb, {surface.glass.borderColor} 74%, transparent)"
       },
       "borderWidth": {
         "$type": "dimension",
@@ -1644,16 +1702,27 @@
       },
       "borderHighlight": {
         "$type": "color",
-        "$value": "{surface.glass.borderHighlight}"
+        "$value": "color-mix(in srgb, {surface.glass.borderHighlight} 78%, transparent)"
+      },
+      "innerBorderColor": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {surface.glass.borderHighlight} 86%, transparent)"
+      },
+      "dividerColor": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {border.subtle} 52%, transparent)"
       },
       "backdropFilter": {
         "$type": "string",
-        "$value": "{surface.glass.backdropFilter}"
+        "$value": "blur({glass.blur.md}) saturate({glass.saturation.default})"
       },
-      "shadow": { "$type": "shadow", "$value": "{surface.glass.shadow}" },
+      "shadow": {
+        "$type": "shadow",
+        "$value": "0 24px 68px color-mix(in srgb, {color.ink} 12%, transparent)"
+      },
       "innerShadow": {
         "$type": "shadow",
-        "$value": "{surface.glass.innerShadow}"
+        "$value": "inset 0 1px 0 {card.glass.innerBorderColor}, inset 1px 0 0 color-mix(in srgb, {color.cloudBlue} 6%, transparent), inset 0 -1px 0 color-mix(in srgb, {text.primary} 4%, transparent)"
       }
     },
     "elevated": {
@@ -1665,6 +1734,18 @@
         "$type": "color",
         "$value": "{surface.glassElevated.fallbackBackground}"
       },
+      "materialBackground": {
+        "$type": "string",
+        "$value": "linear-gradient(180deg, color-mix(in srgb, {surface.glassElevated.borderHighlight} 76%, transparent) 0%, transparent 28%), linear-gradient(118deg, color-mix(in srgb, {color.lavender} 8%, transparent) 0%, transparent 42%, color-mix(in srgb, {color.cloudBlue} 6%, transparent) 74%, color-mix(in srgb, {color.peach} 4%, transparent) 100%), linear-gradient(180deg, color-mix(in srgb, {surface.glassElevated.background} 96%, {surface.glassElevated.borderHighlight}) 0%, color-mix(in srgb, {surface.glassElevated.background} 96%, transparent) 100%)"
+      },
+      "fallbackMaterialBackground": {
+        "$type": "string",
+        "$value": "linear-gradient(180deg, color-mix(in srgb, {surface.glassElevated.borderHighlight} 76%, transparent) 0%, transparent 28%), linear-gradient(118deg, color-mix(in srgb, {color.lavender} 8%, transparent) 0%, transparent 42%, color-mix(in srgb, {color.cloudBlue} 6%, transparent) 74%, color-mix(in srgb, {color.peach} 4%, transparent) 100%), {surface.glassElevated.fallbackBackground}"
+      },
+      "reflectionBackground": {
+        "$type": "string",
+        "$value": "radial-gradient(circle at 0% 0%, color-mix(in srgb, {surface.glassElevated.borderHighlight} 68%, transparent) 0%, transparent 38%), linear-gradient(90deg, transparent 82%, color-mix(in srgb, {color.cloudBlue} 4%, transparent) 100%)"
+      },
       "foreground": {
         "$type": "color",
         "$value": "{surface.glassElevated.foreground}"
@@ -1675,7 +1756,7 @@
       },
       "borderColor": {
         "$type": "color",
-        "$value": "{surface.glassElevated.borderColor}"
+        "$value": "color-mix(in srgb, {surface.glassElevated.borderColor} 78%, transparent)"
       },
       "borderWidth": {
         "$type": "dimension",
@@ -1683,19 +1764,27 @@
       },
       "borderHighlight": {
         "$type": "color",
-        "$value": "{surface.glassElevated.borderHighlight}"
+        "$value": "color-mix(in srgb, {surface.glassElevated.borderHighlight} 82%, transparent)"
+      },
+      "innerBorderColor": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {surface.glassElevated.borderHighlight} 88%, transparent)"
+      },
+      "dividerColor": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {border.subtle} 60%, transparent)"
       },
       "backdropFilter": {
         "$type": "string",
-        "$value": "{surface.glassElevated.backdropFilter}"
+        "$value": "blur({glass.blur.lg}) saturate({glass.saturation.default})"
       },
       "shadow": {
         "$type": "shadow",
-        "$value": "{surface.glassElevated.shadow}"
+        "$value": "0 30px 84px color-mix(in srgb, {color.ink} 16%, transparent)"
       },
       "innerShadow": {
         "$type": "shadow",
-        "$value": "{surface.glassElevated.innerShadow}"
+        "$value": "inset 0 1px 0 {card.elevated.innerBorderColor}, inset 1px 0 0 color-mix(in srgb, {color.cloudBlue} 7%, transparent), inset 0 -1px 0 color-mix(in srgb, {text.primary} 4%, transparent)"
       }
     },
     "interactive": {

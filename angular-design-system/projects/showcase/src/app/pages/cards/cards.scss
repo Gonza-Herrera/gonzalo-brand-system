@@ -32,6 +32,40 @@
   border-radius: var(--gh-radius-xl);
 }
 
+.card-material-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: var(--gh-space-lg);
+  align-items: center;
+}
+
+.material-diagnostics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--gh-space-sm);
+  margin: 0;
+}
+
+.material-diagnostics div {
+  display: grid;
+  gap: var(--gh-space-xs);
+  min-width: 0;
+  padding: var(--gh-space-md);
+  border: var(--gh-border-width-default) solid var(--gh-border-subtle);
+  border-radius: var(--gh-radius-md);
+  background: var(--gh-surface-glass-subtle-background);
+}
+
+.material-diagnostics dt {
+  color: var(--gh-text-primary);
+  font-weight: var(--gh-font-weight-semibold);
+}
+
+.material-diagnostics dd {
+  margin: 0;
+  color: var(--gh-text-secondary);
+}
+
 .base-card-grid h3,
 .base-card-grid p,
 .option-grid h3,
@@ -221,12 +255,17 @@
     grid-template-columns: 1fr;
   }
 
+  .card-material-stage {
+    grid-template-columns: 1fr;
+  }
+
   .card-environment {
     padding: var(--gh-space-md);
   }
 }
 
 @media (max-width: 36rem) {
+  .material-diagnostics,
   .scale-examples > div > div {
     grid-template-columns: 1fr;
   }
