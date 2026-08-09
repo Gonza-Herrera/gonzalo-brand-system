@@ -7,7 +7,11 @@
   surface="gradient"
   minHeight="auto"
 >
-  <aside ghHeroVisual class="experience-hero__visual" [attr.aria-label]="content().visualLabel">
+  <aside
+    ghHeroVisual
+    class="experience-hero__visual portfolio-card-material"
+    [attr.aria-label]="content().visualLabel"
+  >
     <p class="experience-hero__visual-title">{{ content().visualTitle }}</p>
     <ul class="experience-hero__highlights">
       @for (highlight of content().highlights; track highlight.id) {

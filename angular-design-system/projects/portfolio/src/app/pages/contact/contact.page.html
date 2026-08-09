@@ -6,7 +6,11 @@
   surface="gradient"
   [headingLevel]="1"
 >
-  <aside ghHeroVisual class="contact-hero__visual" [attr.aria-label]="content().hero.visualLabel">
+  <aside
+    ghHeroVisual
+    class="contact-hero__visual portfolio-card-material"
+    [attr.aria-label]="content().hero.visualLabel"
+  >
     <p class="contact-hero__visual-title">{{ content().hero.visualTitle }}</p>
     <ul>
       @for (highlight of content().hero.highlights; track highlight.id) {

@@ -7,10 +7,7 @@
   display: block;
   min-width: 0;
   padding: var(--gh-space-xl);
-  border: var(--gh-border-width-default) solid var(--gh-card-border-glass);
   border-radius: var(--gh-radius-md);
-  background: var(--gh-card-background-glass);
-  box-shadow: var(--gh-shadow-sm);
 }
 
 .home-hero__role {
@@ -34,7 +31,7 @@
   display: grid;
   gap: var(--gh-space-xs);
   padding-block-start: var(--gh-space-md);
-  border-block-start: var(--gh-border-width-default) solid var(--gh-border-subtle);
+  border-block-start: var(--gh-border-width-default) solid var(--gh-card-glass-divider-color);
 }
 
 .home-hero__highlights span {

@@ -6,7 +6,11 @@
   surface="gradient"
   [headingLevel]="1"
 >
-  <aside ghHeroVisual class="content-hero__visual" [attr.aria-label]="content().hero.visualLabel">
+  <aside
+    ghHeroVisual
+    class="content-hero__visual portfolio-card-material"
+    [attr.aria-label]="content().hero.visualLabel"
+  >
     <p>{{ content().hero.visualTitle }}</p>
     <ul>
       @for (topic of content().hero.topics; track topic) {

@@ -71,7 +71,9 @@ describe('CardsPage', () => {
 
     expect(element.querySelectorAll('gh-ambient-background').length).toBeGreaterThanOrEqual(4);
     expect(element.querySelector('gh-surface[data-variant="solid"] gh-card')).not.toBeNull();
-    expect(element.querySelectorAll('showcase-documentation-section')).toHaveLength(8);
+    expect(element.querySelectorAll('showcase-documentation-section')).toHaveLength(9);
+    expect(element.querySelector('#card-material-refinement')).not.toBeNull();
+    expect(element.querySelectorAll('.material-diagnostics > div')).toHaveLength(4);
     expect(element.querySelector('gh-feature-card, gh-stat-card')).toBeNull();
   });
 

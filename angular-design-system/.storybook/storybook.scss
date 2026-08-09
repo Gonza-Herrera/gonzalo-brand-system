@@ -386,6 +386,14 @@
   border-radius: var(--gh-radius-xl);
 }
 
+.gh-card-story-hero-stage {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  border: var(--gh-border-width-default) solid var(--gh-border-subtle);
+  border-radius: var(--gh-radius-xl);
+}
+
 .gh-card-story-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));

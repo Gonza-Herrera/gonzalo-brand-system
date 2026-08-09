@@ -7,10 +7,7 @@
   display: grid;
   min-width: 0;
   padding: var(--gh-space-xl);
-  border: var(--gh-border-width-default) solid var(--gh-card-border-glass);
   border-radius: var(--gh-radius-md);
-  background: var(--gh-card-background-glass);
-  box-shadow: var(--gh-shadow-sm);
 }
 
 .projects-hero__focuses,

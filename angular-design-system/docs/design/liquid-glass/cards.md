@@ -34,8 +34,8 @@ a Solid Surface inside a Glass Card when dense nested content needs predictable 
 
 `card.*` owns padding, gaps, radii, border width, motion, typography, link focus, media geometry,
 logo geometry and section/list spacing. Material groups `outlined`, `subtle`, `glass` and `elevated`
-alias the complete Surface contracts: background, fallback, foreground, muted foreground, border,
-highlight, filter, shadow and inner shadow. `interactive.*` and `selected.*` alias Surface state
+resolve from the Surface contracts and add Card-specific material/fallback backgrounds, reflections,
+inner boundaries, filters and ambient shadows. `interactive.*` and `selected.*` alias Surface state
 roles. Generated CSS is exposed as `--gh-card-*`; library Card styles consume no primitives.
 
 The older broad `--gh-card-background`, `--gh-card-border`, `--gh-card-shadow` and related variables
@@ -46,8 +46,9 @@ new component implementation boundary.
 
 The host contains one semantic `<article>`. Its children remain a media region followed by a body.
 The body contains header, content, unmatched default projection and footer in that logical order.
-One pointer-inert `::before` layer supplies the tokenized upper highlight and inner shadow. The Card
-does not add a Surface wrapper, overlay layer or fixed-height content container.
+Two pointer-inert pseudo-elements supply the tokenized upper/inner boundary and restrained
+upper-left/right reflections. They remain behind projected content and add no DOM. The Card does not
+add a Surface wrapper or fixed-height content container.
 
 ## 6. Slots
 
@@ -57,12 +58,12 @@ and footer. Existing composed Cards keep their current markup and no projection 
 
 ## 7. Material strategy
 
-| Existing variant | Surface material | Intended use                                             |
-| ---------------- | ---------------- | -------------------------------------------------------- |
-| `outlined`       | Solid            | Default, dense, critical and predictable content         |
-| `subtle`         | Glass Subtle     | Editorial grids, previews and secondary grouping         |
-| `glass`          | Glass            | Concise feature content over an approved ambient context |
-| `elevated`       | Glass Elevated   | Prominent summaries and higher local depth               |
+| Existing variant | Material                     | Intended use                                             |
+| ---------------- | ---------------------------- | -------------------------------------------------------- |
+| `outlined`       | Solid + Card recipe          | Default, dense, critical and predictable content         |
+| `subtle`         | Glass Subtle + Card recipe   | Editorial grids, previews and secondary grouping         |
+| `glass`          | Glass + Card recipe          | Concise feature content over an approved ambient context |
+| `elevated`       | Glass Elevated + Card recipe | Prominent summaries and higher local depth               |
 
 `interactive` and `selected` layer state over any of these materials. No new material input or
 low-level blur, opacity, shadow, glow or border API is introduced.
@@ -187,9 +188,10 @@ conformance, screen-reader behavior across platforms or contrast over every poss
 ## 25. Performance
 
 The migration adds no listener, service, dependency, runtime style generation, theme detection,
-ripple, glow or complex per-Card gradient. Solid never filters. Glass variants create at most one
-bounded filter and one pseudo-element, and blur is not animated. Use Solid or Glass Subtle for large
-grids, avoid nested Glass and measure product rendering before expanding filtered regions.
+ripple or glow. Solid never filters. Glass variants create at most one bounded filter, three
+token-authored material layers and one two-layer reflection overlay; blur is not animated. Use Solid
+or Glass Subtle for large grids, avoid nested Glass and measure product rendering before expanding
+filtered regions.
 
 ## 26. Responsive
 

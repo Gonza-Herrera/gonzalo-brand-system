@@ -11,6 +11,9 @@
 .gh-card {
   --_gh-card-background: var(--gh-card-outlined-background);
   --_gh-card-fallback-background: var(--gh-card-outlined-fallback-background);
+  --_gh-card-material-background: var(--gh-card-outlined-material-background);
+  --_gh-card-fallback-material-background: var(--gh-card-outlined-fallback-material-background);
+  --_gh-card-reflection-background: var(--gh-card-outlined-reflection-background);
   --_gh-card-foreground: var(--gh-card-outlined-foreground);
   --_gh-card-muted-foreground: var(--gh-card-outlined-muted-foreground);
   --_gh-card-border-color: var(--gh-card-outlined-border-color);
@@ -23,13 +26,14 @@
   --_gh-card-radius: var(--gh-card-radius-lg);
 
   position: relative;
+  isolation: isolate;
   box-sizing: border-box;
   max-width: 100%;
   border-color: var(--_gh-card-border-color);
   border-style: solid;
   border-width: var(--_gh-card-border-width);
   border-radius: var(--_gh-card-radius);
-  background: var(--_gh-card-fallback-background);
+  background: var(--_gh-card-fallback-material-background);
   color: var(--_gh-card-foreground);
   box-shadow: var(--_gh-card-shadow);
   transition:
@@ -40,19 +44,31 @@
     transform var(--gh-card-transition-duration) var(--gh-card-transition-easing);
 }
 
-.gh-card::before {
+.gh-card::before,
+.gh-card::after {
   position: absolute;
+  z-index: 0;
   inset: 0;
-  border-block-start: var(--_gh-card-border-width) solid var(--_gh-card-border-highlight);
   border-radius: inherit;
-  box-shadow: var(--_gh-card-inner-shadow);
   content: '';
   pointer-events: none;
+}
+
+.gh-card::before {
+  border-block-start: var(--_gh-card-border-width) solid var(--_gh-card-border-highlight);
+  box-shadow: var(--_gh-card-inner-shadow);
+}
+
+.gh-card::after {
+  background: var(--_gh-card-reflection-background);
 }
 
 .gh-card--elevated {
   --_gh-card-background: var(--gh-card-elevated-background);
   --_gh-card-fallback-background: var(--gh-card-elevated-fallback-background);
+  --_gh-card-material-background: var(--gh-card-elevated-material-background);
+  --_gh-card-fallback-material-background: var(--gh-card-elevated-fallback-material-background);
+  --_gh-card-reflection-background: var(--gh-card-elevated-reflection-background);
   --_gh-card-foreground: var(--gh-card-elevated-foreground);
   --_gh-card-muted-foreground: var(--gh-card-elevated-muted-foreground);
   --_gh-card-border-color: var(--gh-card-elevated-border-color);
@@ -66,6 +82,9 @@
 .gh-card--subtle {
   --_gh-card-background: var(--gh-card-subtle-background);
   --_gh-card-fallback-background: var(--gh-card-subtle-fallback-background);
+  --_gh-card-material-background: var(--gh-card-subtle-material-background);
+  --_gh-card-fallback-material-background: var(--gh-card-subtle-fallback-material-background);
+  --_gh-card-reflection-background: var(--gh-card-subtle-reflection-background);
   --_gh-card-foreground: var(--gh-card-subtle-foreground);
   --_gh-card-muted-foreground: var(--gh-card-subtle-muted-foreground);
   --_gh-card-border-color: var(--gh-card-subtle-border-color);
@@ -79,6 +98,9 @@
 .gh-card--glass {
   --_gh-card-background: var(--gh-card-glass-background);
   --_gh-card-fallback-background: var(--gh-card-glass-fallback-background);
+  --_gh-card-material-background: var(--gh-card-glass-material-background);
+  --_gh-card-fallback-material-background: var(--gh-card-glass-fallback-material-background);
+  --_gh-card-reflection-background: var(--gh-card-glass-reflection-background);
   --_gh-card-foreground: var(--gh-card-glass-foreground);
   --_gh-card-muted-foreground: var(--gh-card-glass-muted-foreground);
   --_gh-card-border-color: var(--gh-card-glass-border-color);
@@ -93,7 +115,7 @@
   .gh-card--subtle,
   .gh-card--glass,
   .gh-card--elevated {
-    background: var(--_gh-card-background);
+    background: var(--_gh-card-material-background);
     -webkit-backdrop-filter: var(--_gh-card-backdrop-filter);
     backdrop-filter: var(--_gh-card-backdrop-filter);
   }
@@ -159,6 +181,8 @@
 }
 
 .gh-card__media {
+  position: relative;
+  z-index: 1;
   overflow: hidden;
   border-start-start-radius: inherit;
   border-start-end-radius: inherit;
@@ -172,6 +196,8 @@
 }
 
 .gh-card__body {
+  position: relative;
+  z-index: 1;
   display: grid;
   min-width: 0;
   gap: var(--gh-card-gap-body);
@@ -214,7 +240,8 @@
     backdrop-filter: var(--gh-card-outlined-backdrop-filter);
   }
 
-  .gh-card::before {
+  .gh-card::before,
+  .gh-card::after {
     display: none;
   }
 

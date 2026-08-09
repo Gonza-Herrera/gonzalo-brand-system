@@ -47,10 +47,12 @@ export class ExampleComponent {}
 - `elevated`: mapped to Glass Elevated for prominent summaries and higher local depth.
 
 Every Glass-capable variant paints an opaque fallback first and enhances through CSS `@supports`.
-Card component styles consume `--gh-card-*` component tokens that alias the semantic Surface
-contract. The component does not render an internal `gh-surface`, preserving its established DOM
-and projection regions. See the normative
-[Liquid Glass Card documentation](../../../../../../../docs/design/liquid-glass/cards.md).
+Card component styles consume `--gh-card-*` component tokens that resolve from the semantic Surface
+contract and add Card-specific material backgrounds, reflections, inner boundaries and ambient
+shadows. The component does not render an internal `gh-surface`, preserving its established DOM and
+projection regions. See the normative
+[Liquid Glass Card documentation](../../../../../../../docs/design/liquid-glass/cards.md) and the
+[material refinement](../../../../../../../docs/design/liquid-glass/card-material.md).
 
 ## Projection slots
 

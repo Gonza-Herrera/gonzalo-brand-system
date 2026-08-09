@@ -8,6 +8,7 @@ const workspaceRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)),
 const libraryRoot = path.join(workspaceRoot, 'projects/gh-design-system/src');
 const cardsRoot = path.join(libraryRoot, 'lib/components/cards');
 const cardRoot = path.join(cardsRoot, 'card');
+const portfolioRoot = path.join(workspaceRoot, 'projects/portfolio/src');
 
 const [
   cardComponent,
@@ -26,6 +27,7 @@ const [
   publicApi,
   cardStories,
   cardDocumentation,
+  cardMaterialDocumentation,
 ] = await Promise.all([
   readFile(path.join(cardRoot, 'card.component.ts'), 'utf8'),
   readFile(path.join(cardRoot, 'card.component.html'), 'utf8'),
@@ -43,12 +45,32 @@ const [
   readFile(path.join(libraryRoot, 'public-api.ts'), 'utf8'),
   readFile(path.join(cardRoot, 'card.stories.ts'), 'utf8'),
   readFile(path.join(workspaceRoot, 'docs/design/liquid-glass/cards.md'), 'utf8'),
+  readFile(path.join(workspaceRoot, 'docs/design/liquid-glass/card-material.md'), 'utf8'),
 ]);
+
+const [portfolioCardMaterial, portfolioStyles, homeHeroStyles, ...portfolioHeroTemplates] =
+  await Promise.all([
+    readFile(path.join(portfolioRoot, 'app/styles/_card-material.scss'), 'utf8'),
+    readFile(path.join(portfolioRoot, 'styles.scss'), 'utf8'),
+    readFile(path.join(portfolioRoot, 'app/pages/home/sections/home-hero.component.scss'), 'utf8'),
+    ...[
+      'app/pages/home/sections/home-hero.component.html',
+      'app/pages/about/sections/about-hero.component.html',
+      'app/pages/experience/sections/experience-hero.component.html',
+      'app/pages/projects/projects.page.html',
+      'app/pages/projects/project-detail/project-detail.page.html',
+      'app/pages/content/content.page.html',
+      'app/pages/contact/contact.page.html',
+    ].map((relativePath) => readFile(path.join(portfolioRoot, relativePath), 'utf8')),
+  ]);
 
 const variants = ['outlined', 'subtle', 'glass', 'elevated'];
 const materialProperties = [
   'background',
   'fallback-background',
+  'material-background',
+  'fallback-material-background',
+  'reflection-background',
   'foreground',
   'muted-foreground',
   'border-color',
@@ -117,14 +139,16 @@ test('uses Card component tokens instead of local visual recipes or primitive va
   assert.doesNotMatch(styles, /\[data-theme|prefers-color-scheme/i);
 });
 
-test('limits clipping to media and keeps one non-interactive highlight layer', () => {
+test('limits clipping to media and keeps pointer-inert material layers', () => {
   const baseCardBlock = cardStyles.slice(
     cardStyles.indexOf('.gh-card {'),
     cardStyles.indexOf('.gh-card::before'),
   );
   assert.doesNotMatch(baseCardBlock, /overflow:\s*(?:hidden|clip)/);
   assert.match(cardStyles, /\.gh-card__media\s*\{[\s\S]*overflow:\s*hidden/);
-  assert.equal((cardStyles.match(/\.gh-card::before/g) ?? []).length, 2);
+  assert.equal((cardStyles.match(/\.gh-card::before/g) ?? []).length, 3);
+  assert.equal((cardStyles.match(/\.gh-card::after/g) ?? []).length, 3);
+  assert.match(cardStyles, /\.gh-card::after\s*\{[\s\S]*reflection-background/);
   assert.match(cardStyles, /pointer-events:\s*none/);
 });
 
@@ -150,6 +174,8 @@ test('publishes Card component tokens in both generated themes', () => {
   for (const theme of [lightTheme, darkTheme]) {
     for (const variant of variants) {
       assert.match(theme, new RegExp(`'card-${variant}-fallback-background':`));
+      assert.match(theme, new RegExp(`'card-${variant}-material-background':`));
+      assert.match(theme, new RegExp(`'card-${variant}-reflection-background':`));
       assert.match(theme, new RegExp(`'card-${variant}-backdrop-filter':`));
     }
     assert.match(theme, /'card-interactive-focus-ring-color':/);
@@ -186,7 +212,12 @@ test('documents the migrated family in the existing Storybook category', () => {
     'FeatureComposition',
     'StatComposition',
     'DarkTheme',
+    'AmbientBackground',
     'AmbientBrandBackground',
+    'GlassMaterial',
+    'HeroIntegration',
+    'LongContent',
+    'EmptyState',
     'Responsive320',
     'ReducedMotionAndForcedColors',
   ]) {
@@ -201,4 +232,47 @@ test('provides every required Liquid Glass Card documentation section', () => {
   assert.match(cardDocumentation, /## 3\. Relationship with Surface/);
   assert.match(cardDocumentation, /## 21\. Solid fallback/);
   assert.match(cardDocumentation, /## 31\. Recommendations for PR 27/);
+});
+
+test('documents every Card material-refinement decision', () => {
+  for (const section of [
+    'Objetivo',
+    'Material Strategy',
+    'Transparency',
+    'Blur',
+    'Reflections',
+    'Inner Border',
+    'Outer Border',
+    'Shadows',
+    'Ambient Integration',
+    'Light Theme',
+    'Dark Theme',
+    'Performance',
+    'Comparación con el mockup',
+    'Limitaciones',
+    'Recomendaciones para PR 26.2',
+  ]) {
+    assert.match(cardMaterialDocumentation, new RegExp(`^## ${section}$`, 'm'));
+  }
+
+  assert.match(cardMaterialDocumentation, /no se afirma paridad exacta/i);
+  assert.match(cardMaterialDocumentation, /CSS-only/);
+});
+
+test('integrates every Portfolio Hero visual with the shared Card material contract', () => {
+  assert.match(portfolioStyles, /@use '\.\/app\/styles\/card-material'/);
+  assert.match(portfolioCardMaterial, /--gh-card-glass-fallback-material-background/);
+  assert.match(portfolioCardMaterial, /--gh-card-glass-material-background/);
+  assert.match(portfolioCardMaterial, /--gh-card-glass-reflection-background/);
+  assert.match(portfolioCardMaterial, /--gh-card-glass-inner-shadow/);
+  assert.match(portfolioCardMaterial, /--gh-card-glass-backdrop-filter/);
+  assert.match(portfolioCardMaterial, /@supports\s*\(\(backdrop-filter:\s*none\)/);
+  assert.match(portfolioCardMaterial, /@media\s*\(forced-colors:\s*active\)/);
+  assert.doesNotMatch(portfolioCardMaterial, /transition:|animation:|#[\da-f]{3,8}|rgba?\s*\(/i);
+
+  for (const template of portfolioHeroTemplates) {
+    assert.match(template, /ghHeroVisual[\s\S]*portfolio-card-material/);
+  }
+
+  assert.match(homeHeroStyles, /--gh-card-glass-divider-color/);
 });
