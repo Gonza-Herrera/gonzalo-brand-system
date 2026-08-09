@@ -389,9 +389,24 @@
 .gh-card-story-hero-stage {
   display: block;
   min-width: 0;
-  overflow: hidden;
+  overflow: visible;
   border: var(--gh-border-width-default) solid var(--gh-border-subtle);
   border-radius: var(--gh-radius-xl);
+}
+
+.gh-card-story-hero-stage gh-hero {
+  --gh-pattern-accent-gradient: transparent;
+}
+
+.gh-card-story-hero-card {
+  display: block;
+  min-width: 0;
+}
+
+.gh-card-story-hero-continuation {
+  margin: 0;
+  padding: 0 var(--gh-space-xl) var(--gh-space-xl);
+  color: var(--gh-text-secondary);
 }
 
 .gh-card-story-grid {
@@ -538,5 +553,9 @@
 
   .gh-floating-layout-story__visual {
     padding: var(--gh-space-lg);
+  }
+
+  .gh-card-story-hero-continuation {
+    padding: 0 var(--gh-space-md) var(--gh-space-md);
   }
 }

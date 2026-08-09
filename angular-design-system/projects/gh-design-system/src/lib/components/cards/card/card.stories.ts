@@ -102,6 +102,37 @@ const meta: Meta<GhCardComponent> = {
   }),
 };
 
+const heroIntegrationTemplate = `
+  <gh-ambient-background class="gh-card-story-hero-stage" preset="brand" intensity="default">
+    <gh-hero
+      eyebrow="Frontend leadership · Angular · AI"
+      title="Think bigger. Build smarter."
+      description="Hero content and Card share one continuous ambient plane."
+      layout="split"
+      surface="gradient"
+      minHeight="auto"
+    >
+      <gh-card
+        ghHeroVisual
+        class="gh-card-story-hero-card"
+        variant="glass"
+        padding="lg"
+      >
+        <div ghCardHeader>
+          <span class="gh-card-story-eyebrow">Engineering</span>
+          <h3>Frontend systems</h3>
+        </div>
+        <div ghCardContent>
+          <p>The Card refracts the same Lavender, Cloud Blue and Peach environment as the Hero.</p>
+        </div>
+      </gh-card>
+    </gh-hero>
+    <p class="gh-card-story-hero-continuation">
+      The ambient canvas continues below the Card without introducing another surface.
+    </p>
+  </gh-ambient-background>
+`;
+
 export default meta;
 type Story = StoryObj<GhCardComponent>;
 
@@ -351,24 +382,31 @@ export const GlassMaterial: Story = {
 
 export const HeroIntegration: Story = {
   render: () => ({
-    template: `
-      <gh-ambient-background class="gh-card-story-hero-stage" preset="brand">
-        <gh-hero
-          eyebrow="Frontend leadership · Angular · AI"
-          title="Think bigger. Build smarter."
-          description="Hero and Card share one continuous ambient plane."
-          layout="split"
-          surface="gradient"
-          minHeight="auto"
-        >
-          <gh-card ghHeroVisual variant="glass" padding="lg">
-            <div ghCardHeader><span class="gh-card-story-eyebrow">Engineering</span><h3>Frontend systems</h3></div>
-            <div ghCardContent><p>The Card modifies how the Hero background is perceived instead of hiding it.</p></div>
-          </gh-card>
-        </gh-hero>
-      </gh-ambient-background>
-    `,
+    template: heroIntegrationTemplate,
   }),
+};
+
+export const HeroIntegrationLight: Story = {
+  name: 'Hero Integration / Light',
+  globals: { theme: 'light' },
+  render: () => ({ template: heroIntegrationTemplate }),
+};
+
+export const HeroIntegrationDark: Story = {
+  name: 'Hero Integration / Dark',
+  globals: { theme: 'dark' },
+  render: () => ({ template: heroIntegrationTemplate }),
+};
+
+export const AmbientIntegration: Story = {
+  name: 'Ambient Integration',
+  render: () => ({ template: heroIntegrationTemplate }),
+};
+
+export const ResponsiveHeroIntegration: Story = {
+  name: 'Responsive Hero Integration',
+  globals: { viewport: { value: 'mobile390', isRotated: false } },
+  render: () => ({ template: heroIntegrationTemplate }),
 };
 
 export const EmptyState: Story = {
