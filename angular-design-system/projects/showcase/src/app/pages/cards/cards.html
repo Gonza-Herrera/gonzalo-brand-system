@@ -54,6 +54,41 @@
   </showcase-documentation-section>
 
   <showcase-documentation-section
+    sectionId="card-layout-integration"
+    eyebrow="Hero integration"
+    title="One continuous ambient plane"
+    description="The Hero owns content and layout while the surrounding Ambient Background owns the visual environment. Use the global theme control to inspect the same real Card in Light and Dark."
+  >
+    <div class="hero-integration-grid">
+      <gh-ambient-background
+        class="card-environment hero-integration-stage"
+        preset="brand"
+        intensity="default"
+      >
+        <p class="hero-integration-theme">Theme-responsive Hero integration</p>
+        <gh-hero
+          eyebrow="Frontend leadership · Angular · AI"
+          title="Think bigger. Build smarter."
+          description="Hero and Card share the same Lavender, Cloud Blue and Peach environment."
+          layout="split"
+          surface="gradient"
+          minHeight="auto"
+        >
+          <gh-card ghHeroVisual class="hero-integration-card" variant="glass" padding="lg">
+            <div ghCardHeader>
+              <p class="material-label">Engineering</p>
+              <h3>Frontend systems</h3>
+            </div>
+            <div ghCardContent>
+              <p>The surrounding color remains subtly perceptible through the material.</p>
+            </div>
+          </gh-card>
+        </gh-hero>
+      </gh-ambient-background>
+    </div>
+  </showcase-documentation-section>
+
+  <showcase-documentation-section
     sectionId="base-card-materials"
     eyebrow="Material strategy"
     title="Hierarchy before translucency"

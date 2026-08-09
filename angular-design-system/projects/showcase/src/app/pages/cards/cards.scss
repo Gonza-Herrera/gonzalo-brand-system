@@ -39,6 +39,35 @@
   align-items: center;
 }
 
+.hero-integration-grid {
+  display: grid;
+  gap: var(--gh-space-xl);
+}
+
+.hero-integration-stage {
+  overflow: visible;
+  padding: 0;
+}
+
+.hero-integration-stage gh-hero {
+  --gh-pattern-accent-gradient: transparent;
+}
+
+.hero-integration-theme {
+  margin: 0;
+  padding: var(--gh-space-md) var(--gh-space-xl) 0;
+  color: var(--gh-text-secondary);
+  font-size: var(--gh-font-size-label);
+  font-weight: var(--gh-font-weight-semibold);
+  letter-spacing: var(--gh-letter-spacing-wide);
+  text-transform: uppercase;
+}
+
+.hero-integration-card {
+  display: block;
+  min-width: 0;
+}
+
 .material-diagnostics {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -261,6 +290,14 @@
 
   .card-environment {
     padding: var(--gh-space-md);
+  }
+
+  .hero-integration-stage {
+    padding: 0;
+  }
+
+  .hero-integration-theme {
+    padding: var(--gh-space-md) var(--gh-space-md) 0;
   }
 }
 

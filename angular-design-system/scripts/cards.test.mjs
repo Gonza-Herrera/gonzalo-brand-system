@@ -28,6 +28,9 @@ const [
   cardStories,
   cardDocumentation,
   cardMaterialDocumentation,
+  cardLayoutDocumentation,
+  heroStyles,
+  ambientBackgroundStyles,
 ] = await Promise.all([
   readFile(path.join(cardRoot, 'card.component.ts'), 'utf8'),
   readFile(path.join(cardRoot, 'card.component.html'), 'utf8'),
@@ -46,23 +49,47 @@ const [
   readFile(path.join(cardRoot, 'card.stories.ts'), 'utf8'),
   readFile(path.join(workspaceRoot, 'docs/design/liquid-glass/cards.md'), 'utf8'),
   readFile(path.join(workspaceRoot, 'docs/design/liquid-glass/card-material.md'), 'utf8'),
+  readFile(path.join(workspaceRoot, 'docs/design/liquid-glass/card-layout-integration.md'), 'utf8'),
+  readFile(path.join(libraryRoot, 'lib/patterns/hero/hero.component.scss'), 'utf8'),
+  readFile(
+    path.join(libraryRoot, 'lib/components/ambient-background/ambient-background.component.scss'),
+    'utf8',
+  ),
 ]);
 
-const [portfolioCardMaterial, portfolioStyles, homeHeroStyles, ...portfolioHeroTemplates] =
-  await Promise.all([
-    readFile(path.join(portfolioRoot, 'app/styles/_card-material.scss'), 'utf8'),
-    readFile(path.join(portfolioRoot, 'styles.scss'), 'utf8'),
-    readFile(path.join(portfolioRoot, 'app/pages/home/sections/home-hero.component.scss'), 'utf8'),
-    ...[
-      'app/pages/home/sections/home-hero.component.html',
-      'app/pages/about/sections/about-hero.component.html',
-      'app/pages/experience/sections/experience-hero.component.html',
-      'app/pages/projects/projects.page.html',
-      'app/pages/projects/project-detail/project-detail.page.html',
-      'app/pages/content/content.page.html',
-      'app/pages/contact/contact.page.html',
-    ].map((relativePath) => readFile(path.join(portfolioRoot, relativePath), 'utf8')),
-  ]);
+const [
+  portfolioCardMaterial,
+  portfolioStyles,
+  homeHeroStyles,
+  portfolioShellTemplate,
+  portfolioShellStyles,
+  appLayoutStyles,
+  showcaseCardsTemplate,
+  ...portfolioHeroTemplates
+] = await Promise.all([
+  readFile(path.join(portfolioRoot, 'app/styles/_card-material.scss'), 'utf8'),
+  readFile(path.join(portfolioRoot, 'styles.scss'), 'utf8'),
+  readFile(path.join(portfolioRoot, 'app/pages/home/sections/home-hero.component.scss'), 'utf8'),
+  readFile(
+    path.join(portfolioRoot, 'app/layout/portfolio-shell/portfolio-shell.component.html'),
+    'utf8',
+  ),
+  readFile(
+    path.join(portfolioRoot, 'app/layout/portfolio-shell/portfolio-shell.component.scss'),
+    'utf8',
+  ),
+  readFile(path.join(portfolioRoot, 'app/styles/_app-layout.scss'), 'utf8'),
+  readFile(path.join(workspaceRoot, 'projects/showcase/src/app/pages/cards/cards.html'), 'utf8'),
+  ...[
+    'app/pages/home/sections/home-hero.component.html',
+    'app/pages/about/sections/about-hero.component.html',
+    'app/pages/experience/sections/experience-hero.component.html',
+    'app/pages/projects/projects.page.html',
+    'app/pages/projects/project-detail/project-detail.page.html',
+    'app/pages/content/content.page.html',
+    'app/pages/contact/contact.page.html',
+  ].map((relativePath) => readFile(path.join(portfolioRoot, relativePath), 'utf8')),
+]);
 
 const variants = ['outlined', 'subtle', 'glass', 'elevated'];
 const materialProperties = [
@@ -216,6 +243,10 @@ test('documents the migrated family in the existing Storybook category', () => {
     'AmbientBrandBackground',
     'GlassMaterial',
     'HeroIntegration',
+    'HeroIntegrationLight',
+    'HeroIntegrationDark',
+    'AmbientIntegration',
+    'ResponsiveHeroIntegration',
     'LongContent',
     'EmptyState',
     'Responsive320',
@@ -224,6 +255,36 @@ test('documents the migrated family in the existing Storybook category', () => {
     assert.match(cardStories, new RegExp(`export const ${story}:`));
   }
   assert.doesNotMatch(cardStories, /title:\s*['"]Liquid Glass Card/);
+});
+
+test('keeps Hero and Card on one unclipped ambient plane', () => {
+  assert.match(
+    portfolioShellTemplate,
+    /<gh-ambient-background[\s\S]*<gh-navigation[\s\S]*<main[\s\S]*<router-outlet/,
+  );
+  assert.match(
+    portfolioShellStyles,
+    /\.portfolio-shell__main\s*\{[\s\S]*background:\s*transparent/,
+  );
+  assert.match(appLayoutStyles, /\.portfolio-shell__main gh-hero[\s\S]*transparent/);
+  assert.match(
+    ambientBackgroundStyles,
+    /\.gh-ambient-background__visual\s*\{[\s\S]*position:\s*absolute/,
+  );
+  assert.match(
+    ambientBackgroundStyles,
+    /\.gh-ambient-background__content\s*\{[\s\S]*position:\s*relative/,
+  );
+  assert.match(heroStyles, /\.gh-hero__section\s*\{[\s\S]*overflow:\s*visible/);
+  assert.match(heroStyles, /\.gh-hero__visual\s*\{[\s\S]*overflow:\s*visible/);
+  assert.doesNotMatch(heroStyles, /\.gh-hero__(?:section|visual)\s*\{[^}]*overflow:\s*hidden/);
+});
+
+test('documents the real Hero and Card integration in Showcase', () => {
+  assert.match(showcaseCardsTemplate, /sectionId="card-layout-integration"/);
+  assert.match(showcaseCardsTemplate, /<gh-ambient-background[\s\S]*<gh-hero[\s\S]*<gh-card/);
+  assert.match(showcaseCardsTemplate, /global theme control/i);
+  assert.doesNotMatch(showcaseCardsTemplate, /style="/);
 });
 
 test('provides every required Liquid Glass Card documentation section', () => {
@@ -275,4 +336,35 @@ test('integrates every Portfolio Hero visual with the shared Card material contr
   }
 
   assert.match(homeHeroStyles, /--gh-card-glass-divider-color/);
+});
+
+test('documents every Card layout-integration decision and its validation limits', () => {
+  for (const section of [
+    'Contexto',
+    'Problema identificado',
+    'Background ownership',
+    'Hero architecture',
+    'Card placement',
+    'Ambient continuity',
+    'Backdrop-filter context',
+    'Stacking context',
+    'Z-index',
+    'Overflow',
+    'Grid alignment',
+    'Light Theme',
+    'Dark Theme',
+    'Responsive',
+    'Mobile',
+    'SSR',
+    'Performance',
+    'Comparison with mockup',
+    'Remaining differences',
+    'Recommendations for PR 26.2',
+  ]) {
+    assert.match(cardLayoutDocumentation, new RegExp(`^## ${section}$`, 'm'));
+  }
+
+  assert.match(cardLayoutDocumentation, /no se afirma paridad pixel-perfect/i);
+  assert.match(cardLayoutDocumentation, /CSS-only/);
+  assert.match(cardLayoutDocumentation, /bloqueó las capturas de localhost/i);
 });

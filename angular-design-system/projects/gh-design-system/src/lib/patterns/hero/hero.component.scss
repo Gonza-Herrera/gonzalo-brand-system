@@ -7,7 +7,9 @@
 }
 
 .gh-hero__section {
-  overflow: hidden;
+  // Hero does not own decorative clipping. Projected Glass visuals need their shadow and
+  // backdrop context to remain continuous with the surrounding ambient layout.
+  overflow: visible;
 }
 
 :host.gh-hero--surface-default .gh-hero__section {
@@ -87,7 +89,9 @@
 }
 
 .gh-hero__visual {
-  overflow: hidden;
+  // Individual media compositions may clip themselves; the layout wrapper must not clip Card
+  // shadows, focus rings or reflections.
+  overflow: visible;
   min-width: 0;
   max-width: 100%;
 }
